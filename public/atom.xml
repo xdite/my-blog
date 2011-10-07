@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Blog.XDite.net</title>
+  <link href="http://xdworks.github.com/atom.xml" rel="self"/>
+  <link href="http://xdworks.github.com/"/>
+  <updated>2011-10-07T17:56:52+08:00</updated>
+  <id>http://xdworks.github.com/</id>
+  <author>
+    <name>xdite</name>
+    
+  </author>
+
+  
+</feed>
