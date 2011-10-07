@@ -8,6 +8,9 @@ categories:
 
 [OctoPress](http://octopress.org/) 是一套Blog Framework。也是我這個 blog 正在用的系統。
 
+
+{% img http://octopress.org/images/logo.png %}
+
 用了這麼久的 Wordpress，突然放棄，你一定會好奇背後我轉換的原因。
 
 Wordpress 是一個很方便的 Blog 系統。
