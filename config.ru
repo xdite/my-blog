@@ -9,7 +9,7 @@ use Rack::Rewrite do
  # }
  #
  
- r301 %r{/\?p=(.*)?},  "http://wp.xdite.net/$1" # Works
+ r301 %r{/\?p=(.*)?},  "http://wp.xdite.net/?p=$1" # Works
  r301 %r{/\?feed=(.*)?}, "http://feeds.feedburner.com/xxddite" # Works
  
 end
