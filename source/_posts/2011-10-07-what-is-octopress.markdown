@@ -25,7 +25,7 @@ categories:
 
 * **程式排版很麻煩**。如果不裝一些 plugin，幾乎無法貼程式語法。但是通常 plugin 也需要你寫特殊語法排這些程式碼。生出來的東西也很差強人意。
 
-* **Hosting 很麻煩**。安裝 Wordpress 需要租一個 LAMP 的 stack 去停泊，沒事你還要害怕機器炸掉，沒有備份。上班摸一整天機器了，下班根本不想再弄...
+* **Hosting 很麻煩**。安裝 Wordpress 需要租一個 [LAMP](http://zh.wikipedia.org/zh-hant/LAMP) 的 stack 去停泊，沒事你還要害怕機器炸掉，沒有備份。上班摸一整天機器了，下班根本不想再弄…
 
 * **版本控制 很麻煩**。以前的 blog 系統沒有自動備份，視窗一炸掉，文章 99% 就是不見了。而雖然現在 Wordpress 還有一些其他 BSP 有自動儲存功能。但你我心知肚明那只是醫手殘。你只有辦法撈上最近幾個版本，去把文章存回來。若要看自己上次 **因為什麼理由，修訂了這篇文章的草稿** 根本辦不到。
 
@@ -56,7 +56,7 @@ categories:
 
 Octopress 背後是一套 Jekyll 的靜態網站產生引擎，可以輕鬆產生 static-file based 的網站，佈署出去。
 
-你可以選擇放到自己的機器，Heroku，甚至是 Github Page 上。
+你可以選擇放到自己的機器，[Heroku](http://heroku.com)，甚至是 Github Page 上。
 
 佈署簡單到只要一個指令 rake deploy 就出去了！
 
@@ -76,7 +76,7 @@ Octopress 本身不需使用任何 database，架構本身靠的是文字檔案�
 
 * 更改網站配置更方便
 
-Octopress 雖然基於 Jekyll，但用起來比 Jekyll 更方便，不少功能都是內建模組化，比如：社群功能（Twitter / Google plus）、留言功能（Disqus）、統計功能（Google Analytics），這些都簡單到只要改 _config.yml 就可以改一改，馬上就可以有一個 Blog 上線了。
+Octopress 雖然基於 Jekyll，但用起來比 Jekyll 更方便，不少功能都是內建模組化，比如：社群功能（Twitter / Google plus）、留言功能（[DISQUS](http://disqus.com/)）、統計功能（Google Analytics），這些都簡單到只要改 _config.yml 就可以改一改，馬上就可以有一個 Blog 上線了。
 
 
 * 對 Ruby Developer very very very friendly

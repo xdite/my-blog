@@ -4,7 +4,7 @@
   <title>Blog.XDite.net</title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-10-07T20:10:43+08:00</updated>
+  <updated>2011-10-07T20:11:57+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name>xdite</name>
@@ -36,7 +36,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;貼圖很麻煩&lt;/strong&gt;。（我們有潔癖，不喜歡直接傳圖直接上 Wordpres，通常會傳上 flickr 再 embd script)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;程式排版很麻煩&lt;/strong&gt;。如果不裝一些 plugin，幾乎無法貼程式語法。但是通常 plugin 也需要你寫特殊語法排這些程式碼。生出來的東西也很差強人意。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Hosting 很麻煩&lt;/strong&gt;。安裝 Wordpress 需要租一個 LAMP 的 stack 去停泊，沒事你還要害怕機器炸掉，沒有備份。上班摸一整天機器了，下班根本不想再弄&amp;#8230;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Hosting 很麻煩&lt;/strong&gt;。安裝 Wordpress 需要租一個 &lt;a href=&quot;http://zh.wikipedia.org/zh-hant/LAMP&quot;&gt;LAMP&lt;/a&gt; 的 stack 去停泊，沒事你還要害怕機器炸掉，沒有備份。上班摸一整天機器了，下班根本不想再弄…&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;版本控制 很麻煩&lt;/strong&gt;。以前的 blog 系統沒有自動備份，視窗一炸掉，文章 99% 就是不見了。而雖然現在 Wordpress 還有一些其他 BSP 有自動儲存功能。但你我心知肚明那只是醫手殘。你只有辦法撈上最近幾個版本，去把文章存回來。若要看自己上次 &lt;strong&gt;因為什麼理由，修訂了這篇文章的草稿&lt;/strong&gt; 根本辦不到。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;改 theme 很麻煩&lt;/strong&gt;。如果需要自己訂一些 tips 等方塊，要自己另寫 CSS，但是改 wp-theme 再生效實在是很麻煩的一件事。而且可不可以讓我改寫 &lt;a href=&quot;http://sass-lang.com&quot;&gt;SCSS&lt;/a&gt;？&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;寫作 很麻煩&lt;/strong&gt;。雖然這一點寫出來算有點雞蛋挑骨頭。但是使用 &lt;a href=&quot;http://markdown.tw&quot;&gt;Markdown&lt;/a&gt; 書寫文章，實在遠比用黏膩膩的 HTML 語法快多了。&lt;/p&gt;&lt;/li&gt;
@@ -72,7 +72,7 @@
 
 &lt;p&gt;Octopress 背後是一套 Jekyll 的靜態網站產生引擎，可以輕鬆產生 static-file based 的網站，佈署出去。&lt;/p&gt;
 
-&lt;p&gt;你可以選擇放到自己的機器，Heroku，甚至是 Github Page 上。&lt;/p&gt;
+&lt;p&gt;你可以選擇放到自己的機器，&lt;a href=&quot;http://heroku.com&quot;&gt;Heroku&lt;/a&gt;，甚至是 Github Page 上。&lt;/p&gt;
 
 &lt;p&gt;佈署簡單到只要一個指令 rake deploy 就出去了！&lt;/p&gt;
 
@@ -101,7 +101,7 @@
 &lt;/ul&gt;
 
 
-&lt;p&gt;Octopress 雖然基於 Jekyll，但用起來比 Jekyll 更方便，不少功能都是內建模組化，比如：社群功能（Twitter / Google plus）、留言功能（Disqus）、統計功能（Google Analytics），這些都簡單到只要改 _config.yml 就可以改一改，馬上就可以有一個 Blog 上線了。&lt;/p&gt;
+&lt;p&gt;Octopress 雖然基於 Jekyll，但用起來比 Jekyll 更方便，不少功能都是內建模組化，比如：社群功能（Twitter / Google plus）、留言功能（&lt;a href=&quot;http://disqus.com/&quot;&gt;DISQUS&lt;/a&gt;）、統計功能（Google Analytics），這些都簡單到只要改 _config.yml 就可以改一改，馬上就可以有一個 Blog 上線了。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;對 Ruby Developer very very very friendly&lt;/li&gt;
