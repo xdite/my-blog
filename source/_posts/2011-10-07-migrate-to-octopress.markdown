@@ -14,7 +14,7 @@ categories:
 
 後來考慮到要支援舊 blog 上的文章。所以最後還是放在 [Heroku](http://heroku.com) 上，用 [rack-rewrite](https://github.com/jtrupiano/rack-rewrite) 對所有舊文章轉址。
 
-舊文章會通通放在 <http://wp.xdite.net>。這邊的文章我就不繼續再更新了。feed 應該不受影響，本來就放在 feedburner 上。
+舊文章會通通放在 <http://wp.xdite.net>。舊站的文章我就不繼續再更新了。feed 應該不受影響，本來就放在 feedburner 上。
 
 至於迴響也會轉放在 disqus 上。
 

@@ -4,7 +4,7 @@
   <title>Blog.XDite.net</title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-10-07T18:38:06+08:00</updated>
+  <updated>2011-10-07T18:51:22+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name>xdite</name>
@@ -27,7 +27,7 @@
 
 &lt;p&gt;後來考慮到要支援舊 blog 上的文章。所以最後還是放在 &lt;a href=&quot;http://heroku.com&quot;&gt;Heroku&lt;/a&gt; 上，用 &lt;a href=&quot;https://github.com/jtrupiano/rack-rewrite&quot;&gt;rack-rewrite&lt;/a&gt; 對所有舊文章轉址。&lt;/p&gt;
 
-&lt;p&gt;舊文章會通通放在 &lt;a href=&quot;http://wp.xdite.net&quot;&gt;http://wp.xdite.net&lt;/a&gt;。這邊的文章我就不繼續再更新了。feed 應該不受影響，本來就放在 feedburner 上。&lt;/p&gt;
+&lt;p&gt;舊文章會通通放在 &lt;a href=&quot;http://wp.xdite.net&quot;&gt;http://wp.xdite.net&lt;/a&gt;。舊站的文章我就不繼續再更新了。feed 應該不受影響，本來就放在 feedburner 上。&lt;/p&gt;
 
 &lt;p&gt;至於迴響也會轉放在 disqus 上。&lt;/p&gt;
 
