@@ -4,7 +4,7 @@
   <title>Blog.XDite.net</title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-10-07T18:30:38+08:00</updated>
+  <updated>2011-10-07T18:38:06+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name>xdite</name>
@@ -32,6 +32,14 @@
 &lt;p&gt;至於迴響也會轉放在 disqus 上。&lt;/p&gt;
 
 &lt;p&gt;大概就這樣&amp;#8230;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;本來曾經考慮要連內容都轉過來，連中文亂碼都搞定了，不過排版要重弄就有點懶了。&lt;/p&gt;
+
+&lt;p&gt;再來是 compile 的速度，我在舊站寫了大概約 850 篇文章。轉過來每 compile 一次對我來說就是一次折磨。&lt;/p&gt;
+
+&lt;p&gt;算了 :Q&lt;/p&gt;
 </content>
   </entry>
   
