@@ -2,14 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title>Blog.XDite.net</title>
-  <link href="http://xdworks.github.com/atom.xml" rel="self"/>
-  <link href="http://xdworks.github.com/"/>
-  <updated>2011-10-07T17:56:52+08:00</updated>
-  <id>http://xdworks.github.com/</id>
+  <link href="http://blog.xdite.net/atom.xml" rel="self"/>
+  <link href="http://blog.xdite.net/"/>
+  <updated>2011-10-07T18:28:40+08:00</updated>
+  <id>http://blog.xdite.net/</id>
   <author>
     <name>xdite</name>
     
+      <email>xdite@about.me</email>
+    
   </author>
 
+  
+  <entry>
+    <title>Migrate to Octopress</title>
+    <link href="http://blog.xdite.net/blog/2011/10/07/migrate-to-octopress/"/>
+    <updated>2011-10-07T18:19:00+08:00</updated>
+    <id>http://blog.xdite.net/blog/2011/10/07/migrate-to-octopress</id>
+    <content type="html">&lt;p&gt;&lt;a href=&quot;http://wordpress.org/&quot;&gt;Wordpress&lt;/a&gt; 用到今年，也第五年了。發現越來越不敷我的需求。&lt;/p&gt;
+
+&lt;p&gt;決定轉戰 &lt;a href=&quot;http://octopress.org/&quot;&gt;Octopress&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;原本是打算 host 在 Github 上，這樣比較炫（？）&lt;/p&gt;
+
+&lt;p&gt;後來考慮到要支援舊 blog 上的文章。所以最後還是放在 &lt;a href=&quot;http://heroku.com&quot;&gt;Heroku&lt;/a&gt; 上，用 &lt;a href=&quot;https://github.com/jtrupiano/rack-rewrite&quot;&gt;rack-rewrite&lt;/a&gt; 對所有舊文章轉址。&lt;/p&gt;
+
+&lt;p&gt;舊文章會通通放在 &lt;a href=&quot;http://wp.xdite.net&quot;&gt;http://wp.xdite.net&lt;/a&gt;。這邊的文章我就不繼續再更新了。feed 應該不受影響，本來就放在 feedburner 上。&lt;/p&gt;
+
+&lt;p&gt;至於迴響也會轉放在 disqus 上。&lt;/p&gt;
+
+&lt;p&gt;大概就這樣&amp;#8230;&lt;/p&gt;
+</content>
+  </entry>
   
 </feed>
