@@ -353,3 +353,17 @@ task :list do
   puts "Tasks: #{(Rake::Task.tasks - [Rake::Task[:list]]).join(', ')}"
   puts "(type rake -T for more detail)\n\n"
 end
+
+desc "deploy basic rack app to heroku"
+multitask :heroku do
+  puts "## Deploying to Heroku "
+    system "git add ."
+    system "git add -u"
+    puts "\n## Commiting: Site updated at #{Time.now.utc}"
+    message = "Site updated at #{Time.now.utc}"
+    system "git commit -m '#{message}'"
+    puts "\n## Pushing generated website"
+    system "git push heroku #{deploy_branch}"
+    puts "\n## Heroku deploy complete"
+end
+  
