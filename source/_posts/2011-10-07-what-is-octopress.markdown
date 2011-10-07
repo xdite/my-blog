@@ -54,7 +54,7 @@ categories:
 
 * 輕鬆佈署
 
-Octopress 背後是一套 Jekyll 的靜態網站產生引擎，可以輕鬆產生 static-file based 的網站，佈署出去。
+Octopress 背後是一套叫 Jekyll 的靜態網站產生引擎，可以輕鬆產生 static-file based 的網站，佈署出去。
 
 你可以選擇放到自己的機器，[Heroku](http://heroku.com)，甚至是 Github Page 上。
 
