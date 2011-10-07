@@ -100,15 +100,15 @@ Octopress 是 Ruby-based 的。自然許多 feature 是取用 Ruby Ecosystem 熱
 
 Wordpress 爛歸爛，但如果不挑的話，還算是可以用。一直以來，我都認為自己寫文章的速度，若不被平台和工具綁住的話，其實寫作速度還可以更快，寫作興致還可以更高昂。
 
-想歸想，但實際還是無法解決問題。
+想歸想，但實際上找不出解法去解決問題。
 
 這件事，一直到了我漸漸接觸到了 Markdown 、 [iAWriter](www.iawriter.com) / [Mou](http://mouapp.com) 、 [Jekyll](https://github.com/mojombo/jekyll) / Octopress，慢慢被改變了。
 
-加上我本身的職業就是 Ruby Developer，要 **Hack** 這個系統根本不是什麼難事。這個職業反而有加分作用。
-
-後來實際用 Octopress 也架了一個關於 「[Upgred2Rails31](http://upgrade2rails31.com/)」 的教學網站，放置升級到 Rails 3.1 的教學筆記。
+後來實際用了 Octopress 認真架了一個關於 「[Upgred2Rails31](http://upgrade2rails31.com/)」 的教學網站，放置升級到 Rails 3.1 的教學筆記。
 
 寫著寫著，更加深了我這樣的信念。我寫作的速度，文章的長度，還有文章的有趣度，無一不被提高了！
+
+加上我本身的職業就是 Ruby Developer，要 **Hack** 這個系統根本不是什麼難事。這個職業反而有加分作用。
 
 最後，就是你看到的：我終於鼓起勇氣把用了五年的 Wordpress 扔掉了 XD
 
