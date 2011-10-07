@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://xdworks.github.com
+url: http://blog.xdite.net
 title: Blog.XDite.net
 subtitle: Ruby / Rails / Web Development
 author: xdite
@@ -12,7 +12,7 @@ simple_search: http://google.com/search
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email: xdite@about.me
 
 # ----------------------- #
 #    Jekyll & Plugins     #
