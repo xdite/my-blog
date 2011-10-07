@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://blog.xdite.net/blog/2011/10/07/migrate-to-octopress/</loc>
+        <loc>http://blog.xdite.net/posts/2011/10/07/migrate-to-octopress/</loc>
         <lastmod>2011-10-07T18:51:06+08:00</lastmod>
     </url>
     <url>
-        <loc>http://blog.xdite.net/blog/2011/10/07/what-is-octopress/</loc>
+        <loc>http://blog.xdite.net/posts/2011/10/07/what-is-octopress/</loc>
         <lastmod>2011-10-07T20:11:50+08:00</lastmod>
     </url>
     <url>

@@ -4,7 +4,7 @@
   <title>Blog.XDite.net</title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-10-07T20:11:57+08:00</updated>
+  <updated>2011-10-07T20:13:27+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name>xdite</name>
@@ -16,9 +16,9 @@
   
   <entry>
     <title>Why Octopress?</title>
-    <link href="http://blog.xdite.net/blog/2011/10/07/what-is-octopress/"/>
+    <link href="http://blog.xdite.net/posts/2011/10/07/what-is-octopress/"/>
     <updated>2011-10-07T19:05:00+08:00</updated>
-    <id>http://blog.xdite.net/blog/2011/10/07/what-is-octopress</id>
+    <id>http://blog.xdite.net/posts/2011/10/07/what-is-octopress</id>
     <content type="html">&lt;p&gt;&lt;a href=&quot;http://octopress.org/&quot;&gt;OctoPress&lt;/a&gt; 是一套Blog Framework。也是我這個 blog 正在用的系統。&lt;/p&gt;
 
 &lt;p&gt;&lt;img class=&#8221; src=&#8217;http://octopress.org/images/logo.png&#8217; width=&#8221; height=&#8221; alt=&#8221; title=&#8221;&gt;&lt;/p&gt;
@@ -146,9 +146,9 @@
   
   <entry>
     <title>Migrate to Octopress</title>
-    <link href="http://blog.xdite.net/blog/2011/10/07/migrate-to-octopress/"/>
+    <link href="http://blog.xdite.net/posts/2011/10/07/migrate-to-octopress/"/>
     <updated>2011-10-07T18:19:00+08:00</updated>
-    <id>http://blog.xdite.net/blog/2011/10/07/migrate-to-octopress</id>
+    <id>http://blog.xdite.net/posts/2011/10/07/migrate-to-octopress</id>
     <content type="html">&lt;p&gt;&lt;a href=&quot;http://wordpress.org/&quot;&gt;Wordpress&lt;/a&gt; 用到今年，也第五年了。發現越來越不敷我的需求。&lt;/p&gt;
 
 &lt;p&gt;決定轉戰 &lt;a href=&quot;http://octopress.org/&quot;&gt;Octopress&lt;/a&gt;。&lt;/p&gt;
