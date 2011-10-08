@@ -13,11 +13,23 @@
         <lastmod>2011-10-08T00:41:57+08:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.xdite.net/about/</loc>
+        <lastmod>2011-10-08T23:42:13+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.xdite.net/author/</loc>
+        <lastmod>2011-10-08T23:42:27+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.xdite.net/blog/archives/</loc>
         <lastmod>2011-10-08T00:41:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/</loc>
         <lastmod>2011-10-08T00:41:57+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.xdite.net/talks/</loc>
+        <lastmod>2011-10-08T23:42:45+08:00</lastmod>
     </url>
 </urlset>
