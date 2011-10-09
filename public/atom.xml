@@ -4,7 +4,7 @@
   <title>Blog.XDite.net</title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-10-08T23:47:11+08:00</updated>
+  <updated>2011-10-09T13:42:14+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name>xdite</name>
@@ -13,6 +13,192 @@
     
   </author>
 
+  
+  <entry>
+    <title>十個 Ruby Web Developer 應該熟悉的工具</title>
+    <link href="http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools/"/>
+    <updated>2011-10-09T05:30:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools</id>
+    <content type="html">&lt;p&gt;原本是承諾讀者要整理一篇我常用的工具集，後來想想其實應該要改成來寫一篇：「十個 Ruby Web Developer 應該熟悉的工具」。&lt;/p&gt;
+
+&lt;h3&gt;1. Git&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://git-scm.com/&quot;&gt;Git&lt;/a&gt; 是進入 Ruby 這個生態圈首先最應該學會的工具。幾乎所有以 Ruby 開發出來的套件都放在 &lt;a href=&quot;http://github.com&quot;&gt;Github&lt;/a&gt; 上。也就是不管你要下載或修改協作都需要透過 Git。&lt;/p&gt;
+
+&lt;h3&gt;2. RVM&lt;/h3&gt;
+
+&lt;p&gt;Ruby 有很多種 implementation，比較多人在使用的有&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;標準的 MRI Ruby 1.8.7&lt;/li&gt;
+&lt;li&gt;標準的 MRI Ruby 1.9.2&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.rubyenterpriseedition.com/&quot;&gt;REE&lt;/a&gt; ( Ruby Enterprise Edition)&lt;/li&gt;
+&lt;li&gt;JRuby 等等&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;其實你用哪一種版本開發都無所謂，不過目前有一些 project 只能在 Ruby 1.9.2 上執行。切換 Ruby 環境跑實驗 project 在之前的時代是一件很痛苦的事。&lt;/p&gt;
+
+&lt;p&gt;所以有人發明了 &lt;a href=&quot;http://beginrescueend.com/&quot;&gt;RVM&lt;/a&gt;，讓開發者可以無痛的可以切換各種 Ruby 環境，甚至透過 RVM 製造出獨立的 Gemset 環境，無負擔的盡情實驗新工具。&lt;/p&gt;
+
+&lt;h3&gt;3. Mac&lt;/h3&gt;
+
+&lt;p&gt;不可否認的開發 Ruby 程式，&lt;a href=&quot;http://www.apple.com/tw/mac/&quot;&gt;Mac&lt;/a&gt; 是第一首選環境。&lt;/p&gt;
+
+&lt;p&gt;最初的原因是撰寫 Ruby / Rails 的利器: &lt;a href=&quot;http://marcomates.com&quot;&gt;TextMate&lt;/a&gt; ，是 Mac 上的軟體。而後來使用 Mac 開發 Ruby 程式的開發者越來越多，更加深這種情況，
+造成一些實戰 best practices 以及友善的開發工具，幾乎都以 Mac 為優先或唯一平台發佈，如：Pow 與 Homebrew。&lt;/p&gt;
+
+&lt;h3&gt;4. Homebrew&lt;/h3&gt;
+
+&lt;p&gt;原先在 Mac 上，套件管理幾乎是 Macports 與 Fink 的天下。但這兩者因為 dependency 處理不佳，加上需要 sudo 執行。某些時候會造成套件管理上的災難。
+在 OSX 10.6 之後的時代，就逐漸被後起之秀 Homebrew 取代。&lt;/p&gt;
+
+&lt;p&gt;Homebrew 有兩大極優秀之點：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;by user，不需 sudo 就可以安裝套件。不會把檔案權限搞得一團髒。&lt;/li&gt;
+&lt;li&gt;更新迅速以及乾淨。Homebrew 是 git-based 的 fomula sets，透過預設的 fomula 安裝程式。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;安裝時如果發現有錯誤，可以自行修改，並透過 Github 的功能發 pull request 要求管理者 patch。用 Homebrew 建置出來的 Rails 開發環境通常極為乾淨且無惱人的套件 bug。&lt;/p&gt;
+
+&lt;p&gt;（ Rails developer 最常會撞雷的兩大套件：MySQL 與 ImageMagick 在 brew 上裝，幾乎沒什麼問題&amp;#8230;）[註1]&lt;/p&gt;
+
+&lt;h3&gt;5. Pow&lt;/h3&gt;
+
+&lt;p&gt;這是由 &lt;a href=&quot;http://37signals.com&quot;&gt;37signals&lt;/a&gt; 所開發出來的網頁伺服器，可以跑任何 Rack Based 的網頁程式。特點是，你可以把某個開發中的 project，如：wiki，symlink 到自己的家目錄底下的 .pow/ 資料夾。&lt;/p&gt;
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/.pow
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ln -s ~/projects/wiki
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;再打開瀏覽器上的 http://wiki.dev/，就可以把 projects 掛起來了。&lt;/p&gt;
+
+&lt;p&gt;(原理是攔截對 port 80 上的 request 導回 Pow)&lt;/p&gt;
+
+&lt;p&gt;在從前，如果你要掛上 projects，通常得自己改 local 的 apache conf 和 /etc/hosts 加上設定。掛起、移除、重開都非常麻煩。&lt;/p&gt;
+
+&lt;p&gt;而 &lt;a href=&quot;http://pow.cx&quot;&gt;Pow&lt;/a&gt; 的誕生，讓常常追許多新玩意的開發者，實驗的成本變得極度低廉。&lt;/p&gt;
+
+&lt;h3&gt;6. Rack&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rack/rack/wiki/List-of-Middleware&quot;&gt;Rack&lt;/a&gt; 是一個 Ruby 套件，也同時是 Ruby 界的網頁程式標準 interface。背後的想法與原理可以參考我以前寫的一篇舊文 &lt;a href=&quot;http://wp.xdite.net/?p=1557&quot;&gt;Rack 與 Rack middleware&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;現在只要看以 Ruby 開發的網站程式，幾乎都支援 Rack。不會再有以前哪一套框架，推薦獨家使用哪一套 web server 跑的亂象。&lt;/p&gt;
+
+&lt;p&gt;而因為有了 Pow，掛起 Rack-based 的網站實驗程式成本也很低廉。&lt;/p&gt;
+
+&lt;p&gt;同時因為採用 Rack 架構開發的緣故，開發者可以透過 Rack middleware 外掛實作一些框架或程式沒有的功能。&lt;/p&gt;
+
+&lt;p&gt;比如說：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/logicaltext/rack-no-www&quot;&gt;rack-now-www&lt;/a&gt; 硬是幹掉網址的 www&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/jtrupiano/rack-rewrite&quot;&gt;rack-rewrite&lt;/a&gt; 在不支援 .htaccess 的環境下，直接使用 rack 硬 rewrite routing&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;也很自然而然的會知道：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;想惡搞，改 config.ru&lt;/li&gt;
+&lt;li&gt;想重開，touch tmp/restart.txt&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;這些潛規則。&lt;/p&gt;
+
+&lt;h3&gt;7. Bundler&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://gembundler.com/&quot;&gt;Bundler&lt;/a&gt; 原先是 Rails3 架構師 Yehuda Katz 開發出來解決 Rails 中 package dependency 的工具（ 在開發 Merb 這個 framework 時，Katz 就開始嘗試實作了）。&lt;/p&gt;
+
+&lt;p&gt;package dependency 一直是相當麻煩的問題。解不開，就無法將程式 boot 起來。&lt;/p&gt;
+
+&lt;p&gt;原先大家也只有拿 Bundler 搭配 Rails 使用。&lt;/p&gt;
+
+&lt;p&gt;而後來 Bundler 也逐漸變成一般 Ruby 程式中預設的套件 dependency 管理程式。&lt;/p&gt;
+
+&lt;p&gt;Bundler 中的 Gemfile 設計，不只能讓開發者能夠輕易的解決套件相依問題，並且可以直接引入「開發中」套件，解決 3rd gem 版本更新過慢，卡住自己開發進度的問題。&lt;/p&gt;
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;Gemfile&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;3&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;4&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;ruby&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;nokogiri&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;git://github.com/tenderlove/nokogiri.git&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;nokogiri&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;git://github.com/tenderlove/nokogiri.git&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:branch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;stable-2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;nokogiri&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;git://github.com/tenderlove/nokogiri.git&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tag-2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;nokogiri&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;git://github.com/tenderlove/nokogiri.git&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ref&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;23456&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;h3&gt;8. Guard&lt;/h3&gt;
+
+&lt;p&gt;在開發網頁程式時，開發者很常重複這樣的動作：寫一寫 -&gt; run test -&gt; refresh web browser -&gt; 繼續修改 -&gt; run test -&gt; refresh browser&lt;/p&gt;
+
+&lt;p&gt;這些都是很機械式的行為，非常煩人。&lt;/p&gt;
+
+&lt;p&gt;有沒有辦法只要「檔案變更，就自動作事」呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/guard/guard&quot;&gt;Guard&lt;/a&gt; 就是這樣的一套工具。&lt;/p&gt;
+
+&lt;p&gt;有趣的是，Guard 剛推出時，其實也只單純是一套監視檔案工具變動的工具，你可以透過寫 Guardfile，去自由監視需要監視的資料夾，再 do something。而因為 Guard 架構算設計的不錯，後來許多開發者更基於 Guard
+做出更多其他的 rubygems。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/guard/guard-livereload&quot;&gt;guard-livereload&lt;/a&gt; 就是一個例子。&lt;/p&gt;
+
+&lt;h3&gt;9. LiveReload&lt;/h3&gt;
+
+&lt;p&gt;修改網頁 =&gt; refresh browser 是剛剛所提到的煩人事之一。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/mockko/livereload&quot;&gt;LiveReload&lt;/a&gt; 提供了監視檔案變動，並通知 browser reload 的功能。&lt;/p&gt;
+
+&lt;p&gt;開發者如果螢幕夠大的話，可以同時開著文字編輯器與 browser，修改的任何變動馬上即時顯示在 browser 上。&lt;/p&gt;
+
+&lt;p&gt;值得一提的是，LiveReload 在 10.7 以後是 broken 的。因此後來有人利用 guard 實作出了 guard-livereload 作為替代品。&lt;/p&gt;
+
+&lt;p&gt;以前寫過舊文一篇：&lt;a href=&quot;http://wp.xdite.net/?p=1791&quot;&gt;LiveReload：你的套版好幫手！&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;10. Sass / SCSS / Compass&lt;/h3&gt;
+
+&lt;p&gt;自從 Rails 3.1 引入 &lt;a href=&quot;http://sass-lang.com/&quot;&gt;SCSS&lt;/a&gt; 作為 &lt;a href=&quot;http://upgrade2rails31.com/asset-pipeline&quot;&gt;Asset Pipeline&lt;/a&gt; 當中的選項之後，這套本來沒多少開發者知道的 CSS framework 就開始瘋狂走紅。&lt;/p&gt;
+
+&lt;p&gt;SCSS 的原理是透過寫編寫「巢狀」的 style，取代原本需要寫 CSS 時需要一直複製 DOM 結構名稱的動作。並且支援變數、數學、繼承、mixin 等功能&amp;#8230;&lt;/p&gt;
+
+&lt;p&gt;如：&lt;/p&gt;
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;SCSS&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;3&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;4&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;5&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;6&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;scss&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;   &lt;span class=&quot;na&quot;&gt;$border-color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#3bbfce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;   &lt;span class=&quot;na&quot;&gt;$link-color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#3bbfcf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;   &lt;span class=&quot;nc&quot;&gt;.content&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;border-color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$border-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;        &lt;span class=&quot;nt&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$link-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;可以生成&lt;/p&gt;
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;CSS&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;css&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;  &lt;span class=&quot;nc&quot;&gt;.content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;border-color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#3bbfce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;  &lt;span class=&quot;nc&quot;&gt;.content&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#3bbfcf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;而 &lt;a href=&quot;http://compass-style.org/&quot;&gt;Comass&lt;/a&gt; 是基於 SCSS 的 Framework。提供了更進一步的許多暴力 feature。&lt;/p&gt;
+
+&lt;p&gt;有些人可能會搞不清楚 SASS / SCSS / Compass 的關係。如果你有興趣的話，可以參考我在 &lt;a href=&quot;http://upgrade2rails31.com&quot;&gt;Upgrade2Rails31&lt;/a&gt; 這個 project 中寫的兩篇文章：&lt;a href=&quot;http://upgrade2rails31.com/sass-scss&quot;&gt;Sass/SCSS&lt;/a&gt; 以及 &lt;a href=&quot;http://upgrade2rails31.com/compass&quot;&gt;Compass&lt;/a&gt;。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>五年寫了 230 萬字</title>
