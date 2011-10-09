@@ -27,7 +27,8 @@
 {% else %}
 <div class="entry-content">
   {% if site.facebook_like == true %}
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+    <div class="FacebookLikeButton"><iframe src="http://www.facebook.com/plugins/like.php?href={{ root_url }}{{ post.url }}&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;locale=zh_TW" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height: 30px"></iframe></div>
+    
   {% endif %}
   {{ content }}
 </div>
