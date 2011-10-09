@@ -9,5 +9,5 @@ source.old
 source/_stash
 source/stylesheets/screen.css
 vendor
-
 tmp/
+node_modules
