@@ -26,13 +26,13 @@
   {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
   {% if excerpted == 'true' %}
     <footer>
-      <a rel="full-article" href="{{ root_url }}{{ post.url }}">{{ site.excerpt_link }}</a>
+      <a rel="full-article" href="{{ site.url }}{{ post.url }}">{{ site.excerpt_link }}</a>
     </footer>
   {% endif %}
 {% else %}
 <div class="entry-content">
   {% if site.facebook_like == true %}
-    <div class="FacebookLikeButton"><iframe src="http://www.facebook.com/plugins/like.php?href={{ root_url }}{{ post.url }}&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;locale=zh_TW" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height: 30px"></iframe></div>
+    <div class="FacebookLikeButton"><iframe src="http://www.facebook.com/plugins/like.php?href={{ site.url }}{{ post.url }}&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;locale=zh_TW" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height: 30px"></iframe></div>
   {% endif %}
   {{ content }}
 </div>
