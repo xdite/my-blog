@@ -18,7 +18,9 @@
 {% endunless %}
 {% if index %}
   <div class="entry-content">
-
+    {% if site.facebook_like == true %}
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="{{ site.url }}{{ post.url }}" data-show-faces="false"></div></div>
+    {% endif %}
     {{ content | excerpt }}
   </div>
   {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
