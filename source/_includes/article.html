@@ -17,7 +17,12 @@
   </header>
 {% endunless %}
 {% if index %}
-  <div class="entry-content">{{ content | excerpt }}</div>
+  <div class="entry-content">
+    {% if site.facebook_like == true %}
+      <div class="FacebookLikeButton"><iframe src="http://www.facebook.com/plugins/like.php?href={{ root_url }}{{ post.url }}&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;locale=zh_TW" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height: 30px"></iframe></div>
+    {% endif %}
+    {{ content | excerpt }}
+  </div>
   {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
   {% if excerpted == 'true' %}
     <footer>
@@ -28,7 +33,6 @@
 <div class="entry-content">
   {% if site.facebook_like == true %}
     <div class="FacebookLikeButton"><iframe src="http://www.facebook.com/plugins/like.php?href={{ root_url }}{{ post.url }}&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;locale=zh_TW" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height: 30px"></iframe></div>
-    
   {% endif %}
   {{ content }}
 </div>
