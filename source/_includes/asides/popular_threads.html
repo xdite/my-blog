@@ -1,0 +1,6 @@
+{% if site.disqus_short_name && site.disqus_show_popular_threads=="true" %}
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://{{site.disqus_short_name}}.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+{% endif %}
