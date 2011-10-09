@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="    文章轉換如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。使用 Jekyll Convertor我改了一支 convertor，可以從 Wordpress XML 匯入文章，並解決中文問題。（是的，老外才不管 UTF8 死活。）（有問題我不負責保固，請...">
+  <meta name="description" content="          文章轉換如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。使用 Jekyll Convertor我改了一支 convertor，可以從 Wordpress XML 匯入文章，並解決中文問題。（是的，老外才不管 UTF8 死活。）（有問題我不...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,6 +91,8 @@
 
 
 <div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
   <h3>文章轉換</h3>
 
@@ -215,6 +217,8 @@
   <div class="g-plusone" data-size="medium"></div>
   
   
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
 
     
@@ -258,24 +262,10 @@
   </ul>
 </section>
 
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("xdite", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/xdite" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @xdite</a>
-  
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
 </section>
-
-
 
   
 </aside>
@@ -309,6 +299,15 @@
 </script>
 
 
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
   <script type="text/javascript">

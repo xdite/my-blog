@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="    這是我現在拿來寫 Blog 的 Editor。原先是使用付費軟體 iA Writer，後來九月底在 twitter 上看到朋友推薦使用 Mou，毫不猶豫就放棄了原來的 solution，現在越寫越上手。如果你是 Markdown 愛好者，一定會愛死它的。不多說，直接來一張截圖。CJK ...">
+  <meta name="description" content="          這是我現在拿來寫 Blog 的 Editor。原先是使用付費軟體 iA Writer，後來九月底在 twitter 上看到朋友推薦使用 Mou，毫不猶豫就放棄了原來的 solution，現在越寫越上手。如果你是 Markdown 愛好者，一定會愛死它的。不多說，直接來一張截...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,17 +92,19 @@
 
 <div class="entry-content">
   
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
   <p>這是我現在拿來寫 Blog 的 Editor。原先是使用付費軟體 <a href="http://www.iawriter.com/">iA Writer</a>，後來九月底在 twitter 上看到朋友推薦使用 <a href="http://mouapp.com">Mou</a>，毫不猶豫就放棄了原來的 solution，現在越寫越上手。</p>
 
 <p>如果你是 Markdown 愛好者，一定會愛死它的。</p>
 
 <p>不多說，直接來一張截圖。</p>
 
-<p><img class='' src='http://mouapp.com/images/Mou_Screenshot_1.png' width='' height='' alt='' title=''></p>
+<p><img src="http://mouapp.com/images/Mou_Screenshot_1.png"></p>
 
 <p>CJK 也是沒問題的</p>
 
-<p><img class='' src='http://mouapp.com/images/Mou_Screenshot_3.png' width='' height='' alt='' title=''></p>
+<p><img src="http://mouapp.com/images/Mou_Screenshot_3.png"></p>
 
 <p>知道為何我狂更新 blog 的原因吧&#8230;.XD</p>
 
@@ -142,6 +144,8 @@
   
   <div class="g-plusone" data-size="medium"></div>
   
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
   
 </div>
 
@@ -186,24 +190,10 @@
   </ul>
 </section>
 
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("xdite", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/xdite" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @xdite</a>
-  
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
 </section>
-
-
 
   
 </aside>
@@ -237,6 +227,15 @@
 </script>
 
 
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
   <script type="text/javascript">
