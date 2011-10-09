@@ -10,7 +10,7 @@ categories:
 
 如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。
 
-* 使用 Jekyll Convetor
+* 使用 Jekyll Convertor
 
 我改了一支 [convertor](https://gist.github.com/1273518)，可以從 Wordpress XML 匯入文章，並解決中文問題。
 
@@ -42,7 +42,7 @@ DISQUS 與 Wordpress 與 Octopress 都有良好的整合。你可以把 Woordpre
 ### 使用舊有網址
 
 * 如果你之前的 網址是使用 ?p=XXX 作為永久網址，目前此題無解。
-* 如果你是之前有已經定義好的 permalinks，你可以使用修改 Jekyll Convetor，將 permalink 加入轉換選項裡
+* 如果你是之前有已經定義好的 permalinks，你可以使用修改 Jekyll Convertor，將 permalink 加入轉換選項裡
 
 <https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter>
 

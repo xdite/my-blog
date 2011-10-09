@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-10-09T18:37:18+08:00</updated>
+  <updated>2011-10-09T22:39:34+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -23,7 +23,7 @@
 <p>如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。</p>
 
 <ul>
-<li>使用 Jekyll Convetor</li>
+<li>使用 Jekyll Convertor</li>
 </ul>
 
 
@@ -61,7 +61,7 @@
 
 <ul>
 <li>如果你之前的 網址是使用 ?p=XXX 作為永久網址，目前此題無解。</li>
-<li>如果你是之前有已經定義好的 permalinks，你可以使用修改 Jekyll Convetor，將 permalink 加入轉換選項裡</li>
+<li>如果你是之前有已經定義好的 permalinks，你可以使用修改 Jekyll Convertor，將 permalink 加入轉換選項裡</li>
 </ul>
 
 
