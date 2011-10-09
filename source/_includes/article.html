@@ -11,6 +11,7 @@
         {% if site.disqus_short_name and page.comments != false and site.disqus_show_comment_count == true %}
          | <a href="{% if index %}{{ root_url }}{{ post.url }}{% endif %}#disqus_thread">Comments</a>
         {% endif %}
+
       </p>
     {% endunless %}
   </header>
@@ -24,5 +25,10 @@
     </footer>
   {% endif %}
 {% else %}
-<div class="entry-content">{{ content }}</div>
+<div class="entry-content">
+  {% if site.facebook_like == true %}
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  {% endif %}
+  {{ content }}
+</div>
 {% endif %}
