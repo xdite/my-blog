@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          OctoPress 是一套Blog Framework。也是我這個 blog 正在用的系統。用了這麼久（5 年）的 Wordpress，突然放棄，你一定會好奇背後真正轉換的原因。Wordpress 是一個很方便的 Blog 系統。但很可惜的，一直以來它一直是一個給文字書寫者...">
+  <meta name="description" content="    OctoPress 是一套Blog Framework。也是我這個 blog 正在用的系統。用了這麼久（5 年）的 Wordpress，突然放棄，你一定會好奇背後真正轉換的原因。Wordpress 是一個很方便的 Blog 系統。但很可惜的，一直以來它一直是一個給文字書寫者用的部落格系...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,11 +92,9 @@
 
 <div class="entry-content">
   
-    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
-  
   <p><a href="http://octopress.org/">OctoPress</a> 是一套Blog Framework。也是我這個 blog 正在用的系統。</p>
 
-<p><img src="http://octopress.org/images/logo.png"></p>
+<p><img class='' src='http://octopress.org/images/logo.png' width='' height='' alt='' title=''></p>
 
 <p>用了這麼久（5 年）的 Wordpress，突然放棄，你一定會好奇背後真正轉換的原因。</p>
 
@@ -252,8 +250,6 @@
   <div class="g-plusone" data-size="medium"></div>
   
   
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
 </div>
 
     
@@ -297,10 +293,24 @@
   </ul>
 </section>
 
-<section id="popularthreads" class="dsq-widget">
-  <h2 class="dsq-widget-title">Popular Threads</h2>
-  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("xdite", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/xdite" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @xdite</a>
+  
 </section>
+
+
 
   
 </aside>
@@ -334,15 +344,6 @@
 </script>
 
 
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
   <script type="text/javascript">
