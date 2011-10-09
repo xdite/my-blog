@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          文章轉換如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。使用 Jekyll Convetor我改了一支 convertor，可以從 Wordpress XML 匯入文章，並解決中文問題。（是的，老外才不管 UTF8 死活。）（有問題我不負...">
+  <meta name="description" content="    文章轉換如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。使用 Jekyll Convetor我改了一支 convertor，可以從 Wordpress XML 匯入文章，並解決中文問題。（是的，老外才不管 UTF8 死活。）（有問題我不負責保固，請自...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,8 +92,6 @@
 
 <div class="entry-content">
   
-    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
-  
   <h3>文章轉換</h3>
 
 <p>如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。</p>
@@ -145,13 +143,12 @@
 
 <h2>大絕招</h2>
 
-<p>如果你是像我一樣，覺得轉換成本代價過高，只是想另起爐灶而已。</p>
+<p>如果你是像我一樣，覺得轉換成本代價過高，只是想另起爐灶而已。就不要管之前的 Blog 怎樣了，改個網址做 301 重新導向就好。</p>
 
 <h3>301 轉址</h3>
 
-<p>這招只適合使用在自己 hosting 或 heroku 之上。因為 Github pages 不支援 .htacess 設定，只能放置靜態檔案。</p>
-
-<p>我是放在 Heroku 上，使用 <a href="https://github.com/jtrupiano/rack-rewrite">rack-rewrite </a> 做到對過去的網址 301 轉址。</p>
+<p>這招只適合使用在自己 hosting 或 heroku 之上。因為 Github pages 不支援 .htacess 設定，只能放置靜態檔案。
+我是放在 Heroku 上，使用 <a href="https://github.com/jtrupiano/rack-rewrite">rack-rewrite </a> 做到對過去的網址 301 轉址。</p>
 
 <figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;rack-rewrite&quot;</span>
@@ -217,8 +214,6 @@
   
   <div class="g-plusone" data-size="medium"></div>
   
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
   
 </div>
 
@@ -314,15 +309,6 @@
 </script>
 
 
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
   <script type="text/javascript">
