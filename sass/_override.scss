@@ -1,0 +1,42 @@
+$h1size: 473px;
+
+html, body {
+  overflow-x: hidden;
+}
+
+body > header {
+  h1 {
+    display: block;
+    margin-left: -5px;
+    a {
+      display: block;
+      img {
+        display: block;
+        width: $h1size;
+      }
+    }
+  }
+  h2 {
+    margin-top: -.5em;
+  }
+}
+@media only screen and (max-width: 992px) {
+  body > header {
+    h1 a img {
+      width: $h1size / 1.5;
+    }
+    h2 {
+      font-size: 12px;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  body > header {
+    h1 a img {
+      width: $h1size / 2;
+    }
+    h2 {
+      font-size: 12px;
+    }
+  }
+}
