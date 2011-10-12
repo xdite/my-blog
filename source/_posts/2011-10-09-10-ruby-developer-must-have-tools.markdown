@@ -30,7 +30,7 @@ Ruby 有很多種 implementation，比較多人在使用的有
 
 不可否認的開發 Ruby 程式，[Mac](http://www.apple.com/tw/mac/) 是第一首選環境。
 
-最初的原因是撰寫 Ruby / Rails 的利器: [TextMate](http://marcomates.com) ，是 Mac 上的軟體。而後來使用 Mac 開發 Ruby 程式的開發者越來越多，更加深這種情況，
+最初的原因是撰寫 Ruby / Rails 的利器: [TextMate](http://macromates.com) ，是 Mac 上的軟體。而後來使用 Mac 開發 Ruby 程式的開發者越來越多，更加深這種情況，
 造成一些實戰 best practices 以及友善的開發工具，幾乎都以 Mac 為優先或唯一平台發佈，如：Pow 與 Homebrew。
 
 
