@@ -78,7 +78,9 @@ gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails'
 
 而不是像之前的作法，掛上 gem 之後，還得用 generator 把當時版本的 asset copy （算是半自動）到目錄資料夾裡！
 
-夠**震撼**你的心靈了吧？
+不僅是這兩個 CSS framework，將來只要是有組織的 asset 套件，如 CSS Framework / jQuery plugin，都有可能可以這樣搞。
+
+這樣夠**震撼**你的心靈了嗎？
 
 ## 「萃取」 / 「打包」 / 「版本控制」core asset 的好處
 
@@ -125,8 +127,8 @@ gem "some-js-plugin", "0.5.7"
 
 為什麼我這麼豬頭，都沒想到過啊…繼續往下想，就 blow my mind 了。
 
-因為既然這樣可以 work，那就表示以後只要是 asset，就可以打包。CSS framework 和 jQuery plugin 到處都是，那就表示將來一定會出現更多更變態的玩法。不禁讓人越來越期待接下來的發展了。
+因為既然這樣可以 work，那就表示以後只要是 asset，就可以打包。CSS framework 和 jQuery plugin 市面上滿山滿谷，那就表示將來一定會出現更多更變態的玩法。不禁讓人越來越期待接下來的發展了。
 
-身為一個 Rails Developer 真是相當幸福快樂的事啊！
+越來越覺得身為一個 Rails Developer 是相當幸福快樂的事啊！
 
 
