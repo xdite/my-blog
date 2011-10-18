@@ -16,6 +16,9 @@ Asset Pipeline 是 Rails 3.1 引入的重大 feature。
 * [Compass](http://upgrade2rails31.com/compass)
 * [CoffeeScript](http://upgrade2rails31.com/coffee-script)
 
+
+今天我要談的是 Assetp pipeline 帶來的另一個震撼："Asset as rubygem"
+
 ## Asset as rubygem
 
 其實這個設計在 Rails 3.1 的蠻早期就有了，而且就藏在官方範例中。只是我初看時完全沒意識到這個設計背後的原理、哲學以及它的重大意義。而多數的鎂光燈也集中在 Asset Pipeline 可大幅獲益於 Compass 與 CoffeeScript 中，沒多少人提起這件事。
