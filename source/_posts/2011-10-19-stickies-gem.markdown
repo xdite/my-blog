@@ -14,7 +14,7 @@ stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，�
 
 這套 plugin 我自己還蠻喜歡用的。T 客邦內部也用了很多，不過因為內部有 Gem （認證系統）預設訊息就綁 stickies，每次開新專案裝完認證，就要手動 copy plugin 到 vendor/ 和手動 copy assets 到 public/，有夠麻煩...
 
-今天進公司大概跟同事聊了一下昨天寫的用 Asset Pipeline 掛 Asset(http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/) 的概念。
+今天進公司大概跟同事聊了一下昨天寫的用 [Asset Pipeline 掛 Asset](http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/) 的概念。
 
 [vincent](http://twitter.com/v1nc3ntlaw) 就覺得 stickies 應該要首先被拔出去，每次 copy asset 實在太麻煩了，將來最好還可以放在認證系統的 Gemfile dependency 上。於是剛剛我就接下來作了。
 
