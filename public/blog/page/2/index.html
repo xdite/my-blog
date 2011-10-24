@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Talks - Blog.XDite.net</title>
+  <title>Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="        Talks      Sep 26th, 2011      2011/09/17 HTML5 語意標籤理論與實戰( 投影片）2011/08/27 Rubyconf TW 2011 Essential Rails Design Pattern for Beginners2011...">
+  <meta name="description" content="                  Wordpress 用到今年，也第五年了。發現越來越不敷我的需求。決定轉戰 Octopress。原本是打算 host 在 Github 上，這樣比較炫（？）後來考慮到要支援舊 blog 上的文章。所以最後還是放在 Heroku 上，用 rack-rewrit...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.xdite.net/talks/">
+  <link rel="canonical" href="http://blog.xdite.net/blog/page/2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -61,42 +61,19 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
-    <h1 class="entry-title">Talks</h1>
-    <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-09-26T05:29:00+08:00" pubdate  data-updated="true" >Sep 26<span>th</span>, 2011</time></p>
-  </header>
-  
-  <ul>
-<li>2011/09/17 <a href="http://html5-practices.heroku.com/">HTML5 語意標籤理論與實戰( 投影片）</a></li>
-<li>2011/08/27 Rubyconf TW 2011 <a href="http://essential-rails-pattern.heroku.com/">Essential Rails Design Pattern for Beginners</a></li>
-<li>2011/03/22 OSDC TW 2011<a href="http://www.slideshare.net/xuitejoke/rapid-development-with-rails-7394238">Rapid Development with Rails ( OSDC 演講）</a></li>
-<li>2010/08/18 Ruby Tuesday #13 <a href="http://www.slideshare.net/xuitejoke/upgrading-to-rails3-4997117">Upgrading to Rails 3</a></li>
-<li>2010/04/25 Rubyconf TW 2010 <a href="http://www.slideshare.net/xuitejoke/ship-it-with-ruby-rails-ecosystem">Ship It! with Ruby &amp; Rails ecosystem</a></li>
-<li>2010/03/20 Ruby Tuesday #10 <a href="http://www.slideshare.net/xuitejoke/scaling-rails-sites-by-default">Scaling Rails Sites by Default</a></li>
-<li>2009/08/16 COSCUP 2009 <a href="http://blog.xdite.net/?p=1369">莫拉克颱風災情支援網</a></li>
-<li>2009/06/30 Ruby Tuesday #5 <a href="http://www.slideshare.net/xuitejoke/sinatra-introduction-1661103">Sinatra introduction</a></li>
-<li>2008/11/25 Ruby Tuesday #1 <a href="http://blog.xdite.net/?p=821">EC2 on rails</a></li>
-</ul>
-
-
-  
-    <footer>
+    
+      <h1 class="entry-title"><a href="/posts/2011/10/07/migrate-to-octopress/">Migrate to Octopress</a></h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -106,36 +83,59 @@
 
 
 
-<time datetime="2011-09-26T05:29:00+08:00" pubdate  data-updated="true" >Sep 26<span>th</span>, 2011</time>
+<time datetime="2011-10-07T18:19:00+08:00" pubdate  data-updated="true" >Oct 7<span>th</span>, 2011</time>
         
+         | <a href="/posts/2011/10/07/migrate-to-octopress/#disqus_thread">Comments</a>
+        
+
       </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/07/migrate-to-octopress/" data-show-faces="false"></div></div>
+    
+    <p><a href="http://wordpress.org/">Wordpress</a> 用到今年，也第五年了。發現越來越不敷我的需求。</p>
+
+<p>決定轉戰 <a href="http://octopress.org/">Octopress</a>。</p>
+
+<p>原本是打算 host 在 Github 上，這樣比較炫（？）</p>
+
+<p>後來考慮到要支援舊 blog 上的文章。所以最後還是放在 <a href="http://heroku.com">Heroku</a> 上，用 <a href="https://github.com/jtrupiano/rack-rewrite">rack-rewrite</a> 對所有舊文章轉址。</p>
+
+<p>舊文章會通通放在 <a href="http://wp.xdite.net">http://wp.xdite.net</a>。舊站的文章我就不繼續再更新了。feed 應該不受影響，本來就放在 feedburner 上。</p>
+
+<p>至於迴響也會轉放在 disqus 上。</p>
+
+<p>大概就這樣&#8230;</p>
+
+<hr />
+
+<p>本來曾經考慮要連內容都轉過來，連中文亂碼都搞定了，不過排版要重弄就有點懶了。</p>
+
+<p>再來是 compile 的速度，我在舊站寫了大概約 850 篇文章。轉過來每 compile 一次對我來說就是一次折磨。</p>
+
+<p>算了 :Q</p>
+
+  </div>
+  
+  
+
+
+    </article>
+  
+  <nav class="pagination">
+    <div>
       
-        <div class="sharing">
-
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/talks/index.html" data-via="xdite" data-counturl="http://blog.xdite.net/talks/index.html" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+      <a href="/blog/archives">Blog Archives</a>
       
-    </footer>
-  
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a class="next" href="/">Newer &rarr;</a>
+      
+    </div>
+  </nav>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -165,11 +165,21 @@
   </ul>
 </section>
 
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+<section id="recentcomments" class="dsq-widget">
+  <h2 class="dsq-widget-title">Recent Comments</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=24&excerpt_length=50"></script>
+</section>
+
 
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -183,10 +193,8 @@
 </section>
 
 
-
   
 </aside>
-
 
     </div>
   </div>
@@ -203,10 +211,7 @@
       var disqus_shortname = 'xdite-wp-blog';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/talks/index.html';
-        var disqus_url = 'http://blog.xdite.net/talks/index.html';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
