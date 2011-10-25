@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-10-25T18:00:14+08:00</updated>
+  <updated>2011-10-25T18:00:58+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -54,6 +54,17 @@
 <p>「將中文放在 URL 裡且是在數字之前」的設計，會造成在某些網站社群穿透力為 0，因為貼的連結會被自動 parse 成為根本不能動的連結。</p>
 
 <p>不知道為什麼這個問題沒被測到，這應該在 beta 測試就要被檢驗出來了&#8230;</p>
+
+<p>===</p>
+
+<p>網友 <a href="https://twitter.com/fauzty/status/128770619771850752">@fauzty</a> 說：</p>
+
+<blockquote>
+Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇摩新聞。Opera Mini 倒是可以，應該是 url encode 問題
+</blockquote>
+
+
+
 ]]></content>
   </entry>
   
@@ -334,7 +345,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#x77;&#x61;&#x6e;&#x67;&#100;&#105;&#110;&#103;&#x77;&#x65;&#105;&#x38;&#50;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#109;">&#x77;&#x61;&#110;&#x67;&#x64;&#x69;&#x6e;&#103;&#x77;&#101;&#105;&#56;&#x32;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#111;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#119;&#97;&#x6e;&#103;&#100;&#x69;&#110;&#x67;&#x77;&#x65;&#105;&#56;&#x32;&#64;&#x67;&#109;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#109;">&#119;&#97;&#x6e;&#103;&#100;&#105;&#110;&#x67;&#119;&#101;&#105;&#56;&#50;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 

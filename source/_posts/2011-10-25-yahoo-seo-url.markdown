@@ -38,3 +38,11 @@ categories:
 
 不知道為什麼這個問題沒被測到，這應該在 beta 測試就要被檢驗出來了...
 
+===
+
+網友 [@fauzty](https://twitter.com/fauzty/status/128770619771850752) 說：
+
+<blockquote>
+Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇摩新聞。Opera Mini 倒是可以，應該是 url encode 問題
+</blockquote>
+
