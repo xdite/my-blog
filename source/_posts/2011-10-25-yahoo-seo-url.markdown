@@ -19,7 +19,7 @@ categories:
 
 但 Yahoo 的網址是這樣的： /SEO藏在網址裡-7890.html。
 
-看的出設計者應該覺得這是個 **獨樹一格** **別出心裁** 的設計。
+看的出設計者應該覺得這是個 **獨樹一格** **別出心裁** 的設計。因為全世界幾乎沒有人這樣幹啊 =_=|||
 
 <a href="http://www.flickr.com/photos/xdite/6279632106/" title="螢幕快照 2011-10-25 下午5.25.23 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6215/6279632106_86d70297c7.jpg" width="324" height="130" alt="螢幕快照 2011-10-25 下午5.25.23"></a>
 
