@@ -22,14 +22,14 @@ categories:
 
 人們最敬佩也想了解的是 Jobs 的熱情、Vision、和推動他持續創造出偉大產品背後的秘密。而 Steve Jobs 會希望作者幫他作傳，也是基於他想讓「他的孩子」們知道他「所做的一切」、還有「這一切背後的想法與意義」。
 
-但是 Walter Isaacson，他真的不理解 Jobs，這也就是我認為可惜的地方。我在書中只見作者一直不斷的描述周遭人覺得他多詭異、多暴君，而雖然看得出來作者試圖為 Jobs 說話解套，但是一直失敗。He just don't get it.。
+但是 Walter Isaacson，他真的不理解 Jobs，這也就是我認為可惜的地方。我在書中只見作者一直不斷的描述周遭人覺得他多詭異、多暴君，而雖然看得出來作者試圖為 Jobs 說話解套，但是一直失敗。He just doesn't get it.。
 
-我想這也是 Jobs 這輩子始終為什麼認為別人為什麼愚蠢的原因：「He just don't get it.」
+我想這也是 Jobs 這輩子始終為什麼認為別人為什麼愚蠢的原因：「He just doesn't get it.」
 
 如果你曾新創過某個事業，並 fell in love with it。你就能從書中就會看見閃閃發光的 Jobs。他能夠夠持續偉大的原因很簡單 --- 那就是他熱愛自己的公司，熱愛持續打造偉大的成品。Willing to die for it，而他最後也作到了…
 
 
-我想這也許是因為傳記作者始終是個作家。而不是個 some business funder。只要你是個 bussiness owner，曾經熱愛過某個事業，用盡了全力打造你深信的偉大的產品。你就能夠了解 Steve Jobs 的行為和心理模式。這是領人薪水，覺得別人家資金花不完的上班族很難領悟到的事：
+我想這也許是因為傳記作者始終是個作家。而不是個 some business funders。只要你是個 bussiness owner，曾經熱愛過某個事業，用盡了全力打造你深信的偉大的產品。你就能夠了解 Steve Jobs 的行為和心理模式。這是領人薪水，覺得別人家資金花不完的上班族很難領悟到的事：
 
 It's simple，**只要你覺得這是別人的事業。你就不會想要 -- 「做到最好」**。反之亦然。
 
@@ -39,10 +39,10 @@ Steve 會有那麼大的動力打造產品，力求瘋狂的完美，講話時�
 
 因為他走在世界最前端，這更加格外的辛苦。
 
-We do want see things behind these. 我們不是要看瘋子傳。
+We do want to see things behind these. 我們不是要看瘋子傳。
 
-He just don't get it. 
+He just doesn't get it. 
 
 ===
 
-Reed Jobs 都可能比 Water Issacson 懂 Steve Jobs 在想什麼（ according some piece of this book ）。真是可惜了，這麼好的材料，這麼平淡的一本八卦書….
+Reed Jobs 都可能比 Water Issacson 懂 Steve Jobs 在想什麼（ according to some piece of this book ）。真是可惜了，這麼好的材料，這麼平淡的一本八卦書….
