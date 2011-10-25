@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-10-25T10:59:35+08:00</updated>
+  <updated>2011-10-25T17:30:13+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Yahoo News 的 SEO 網址所帶來的問題]]></title>
+    <link href="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/"/>
+    <updated>2011-10-25T17:08:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url</id>
+    <content type="html"><![CDATA[<p>我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature <strong>畫虎不成反類犬</strong>了。</p>
+
+<p>在為網站實作 SEO 改善工程時，我們通常會使用一個技巧：<strong>在 permalink 裡面塞關鍵字</strong>。</p>
+
+<p>這樣的設計你可以在 <a href="htt://www.techbang.com.tw">T 客邦</a> 看到，也可以在 <a href="http://www.pixnet.net">PIXNET</a> 看到。</p>
+
+<ul>
+<li>T 客邦的設計是 /1234-seo-in-url</li>
+<li>PIXNET 的設計是 /5678-SEO藏在網址裡</li>
+</ul>
+
+
+<p>中文是否適合塞在網址裡面，還是個見仁見智的問題，畢竟每一家處理 URL ENCODE 的方法不一樣。但</p>
+
+<p>但 Yahoo 的網址是這樣的： /SEO藏在網址裡-7890.html。</p>
+
+<p>看的出設計者應該覺得這是個 <strong>獨樹一格</strong> <strong>別出心裁</strong> 的設計。</p>
+
+<p><a href="http://www.flickr.com/photos/xdite/6279632106/" title="螢幕快照 2011-10-25 下午5.25.23 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6215/6279632106_86d70297c7.jpg" width="324" height="130" alt="螢幕快照 2011-10-25 下午5.25.23"></a></p>
+
+<p><a href="http://www.flickr.com/photos/xdite/6279633244/" title="螢幕快照 2011-10-25 下午5.26.29 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6054/6279633244_4951092121_z.jpg" width="530" height="71" alt="螢幕快照 2011-10-25 下午5.26.29"></a></p>
+
+<p>這樣你應該看出問題了吧。</p>
+
+<p>各家縮網址和 auto-link 的 library 不認得中文字。因此</p>
+
+<ul>
+<li>/1234-seo-in-url => 不會有問題</li>
+<li><p>/5678-SEO藏在網址裡 => 會被 parse 成 /5678 ，但因為是動態網頁，所以還是沒問題</p></li>
+<li><p>/SEO藏在網址裡-7890.html => 被 parse 成 / ，就算輸入 /7890.html 還是連不到。</p></li>
+</ul>
+
+
+<p>「將中文放在 URL 裡且是在數字之前」的設計，會造成在某些網站社群穿透力為 0，因為貼的連結會被自動 parse 成為根本不能動的連結。不知道為什麼這個問題沒被測到，這應該在 beta 測試就要被檢驗出來了&#8230;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我讀 Steve Jobs 傳 - 我不是要看瘋子傳]]></title>
@@ -290,7 +332,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#x77;&#97;&#x6e;&#103;&#100;&#x69;&#x6e;&#x67;&#119;&#x65;&#x69;&#56;&#x32;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;">&#119;&#x61;&#110;&#103;&#100;&#105;&#110;&#103;&#119;&#101;&#x69;&#56;&#50;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#x77;&#97;&#110;&#x67;&#100;&#x69;&#110;&#103;&#119;&#101;&#105;&#56;&#50;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#119;&#x61;&#110;&#x67;&#100;&#105;&#110;&#103;&#x77;&#101;&#105;&#56;&#x32;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
