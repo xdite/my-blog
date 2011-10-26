@@ -18,3 +18,5 @@ I am also a [well-known blogger](http://blog.xdite.net) (5500 feedburn subscribe
 This site is my playbook. I will place all my experiences here.
 
 If you want to know more about me, please check [Author](/author) page.
+
+My email is <mailto:xdite@about.me>
