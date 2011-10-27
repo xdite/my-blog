@@ -23,7 +23,7 @@ categories:
 
 ### CoffeeScript meets NodeJS
 
-更精確的來說，Hubot 是用 [NodeJS](http://nodejs.org/) 架構作出來的一套機器人框架，而 Github 並非直接使用 JavaScript，他們是直接使用 CoffeeScript。整個專案的原始碼都只有 .coffee 而已。
+更精確的來說，Hubot 是用 [NodeJS](http://nodejs.org/) 架構作出來的一套機器人框架，而 Github 並非直接撰寫 JavaScript，他們是直接使用 CoffeeScript。整個專案的原始碼都只有 .coffee 而已。
 
 ### Support Campfire 與 IRC
 
