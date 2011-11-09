@@ -23,7 +23,7 @@ Rails Developer 要有骨氣一點，要繼續秉持著懶的寫 HTML 的精神�
 
 寫一般 HTML Helper 還算簡單，基本上也是拿 [前輩寫過的 Helper](https://github.com/techbang/handicraft_helper) 改一改 DOM 結構扔進去包成 Gem。
 
-但是寫 Form Helper 就很麻煩了。因為表單元件除了 text_field 與 text_area 這兩個選項外的，實在千奇百怪，什麼鬼 case 都有。本來之前也想秉著硬幹魂硬幹到底，折騰兩個小時以後我就決定砍掉放棄了。
+但是寫 Form Helper 就很麻煩了。因為表單元件除了 text_field 與 text_area 這兩個選項外的，實在千奇百怪，什麼鬼 case 都有。本來之前也想秉著硬幹魂硬幹到底，折騰兩個小時以後就決定砍掉放棄了。
 
 本來想說跑去看看其他 Form Gem 如何設計，自己也來寫一套 Form Helper。結果看完第一套 Gem [simple_form](https://github.com/plataformatec/simple_form) 我就投降了。simple_form 考慮得**很周全，幾乎什麼 case 都考慮到了**。
 
@@ -33,7 +33,7 @@ Rails Developer 要有骨氣一點，要繼續秉持著懶的寫 HTML 的精神�
 
 本來最初的想法也是直接 override helper method，這樣最快。因為 simple form 自己產生出來的表單欄位，外面還是會產生出來一堆包覆用的 styling div。
 
-後來看完 source 繞了一大圈才發現，README 上面就有說明，simple_form 提供你直接「抽換」template 的選項。
+後來看完 source 繞了一大圈才發現，README 上面就有說明，simple_form 提供直接「抽換」template 的選項。
 
 也就是可以透過 override `def input` 這個 method，可以達到改變 styling div 的目的。
 
@@ -58,7 +58,7 @@ module Bootstrap
   end
 end
 ```
-和 [override input helper](https://github.com/xdite/bootstrap-rails/blob/master/lib/bootstrap-rails/form_inputs/collection_input.rb)
+和 [override input helper](https://github.com/xdite/bootstrap-rails/blob/master/lib/bootstrap-rails/form_inputs/collection_input.rb) 再包進自己的 Helper Gem 內。
 
 ``` ruby
 class CollectionInput < SimpleForm::Inputs::CollectionInput

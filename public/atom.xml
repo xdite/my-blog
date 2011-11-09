@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-11-10T02:58:34+08:00</updated>
+  <updated>2011-11-10T03:03:18+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -34,7 +34,7 @@
 
 <p>寫一般 HTML Helper 還算簡單，基本上也是拿 <a href="https://github.com/techbang/handicraft_helper">前輩寫過的 Helper</a> 改一改 DOM 結構扔進去包成 Gem。</p>
 
-<p>但是寫 Form Helper 就很麻煩了。因為表單元件除了 text_field 與 text_area 這兩個選項外的，實在千奇百怪，什麼鬼 case 都有。本來之前也想秉著硬幹魂硬幹到底，折騰兩個小時以後我就決定砍掉放棄了。</p>
+<p>但是寫 Form Helper 就很麻煩了。因為表單元件除了 text_field 與 text_area 這兩個選項外的，實在千奇百怪，什麼鬼 case 都有。本來之前也想秉著硬幹魂硬幹到底，折騰兩個小時以後就決定砍掉放棄了。</p>
 
 <p>本來想說跑去看看其他 Form Gem 如何設計，自己也來寫一套 Form Helper。結果看完第一套 Gem <a href="https://github.com/plataformatec/simple_form">simple_form</a> 我就投降了。simple_form 考慮得<strong>很周全，幾乎什麼 case 都考慮到了</strong>。</p>
 
@@ -44,7 +44,7 @@
 
 <p>本來最初的想法也是直接 override helper method，這樣最快。因為 simple form 自己產生出來的表單欄位，外面還是會產生出來一堆包覆用的 styling div。</p>
 
-<p>後來看完 source 繞了一大圈才發現，README 上面就有說明，simple_form 提供你直接「抽換」template 的選項。</p>
+<p>後來看完 source 繞了一大圈才發現，README 上面就有說明，simple_form 提供直接「抽換」template 的選項。</p>
 
 <p>也就是可以透過 override <code>def input</code> 這個 method，可以達到改變 styling div 的目的。</p>
 
@@ -87,7 +87,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>和 <a href="https://github.com/xdite/bootstrap-rails/blob/master/lib/bootstrap-rails/form_inputs/collection_input.rb">override input helper</a></p>
+<p>和 <a href="https://github.com/xdite/bootstrap-rails/blob/master/lib/bootstrap-rails/form_inputs/collection_input.rb">override input helper</a> 再包進自己的 Helper Gem 內。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -516,7 +516,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x77;&#97;&#x6e;&#103;&#100;&#105;&#110;&#103;&#x77;&#x65;&#x69;&#x38;&#x32;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x77;&#97;&#110;&#103;&#x64;&#x69;&#x6e;&#x67;&#119;&#x65;&#x69;&#x38;&#x32;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#119;&#97;&#x6e;&#103;&#x64;&#x69;&#110;&#x67;&#x77;&#101;&#105;&#x38;&#50;&#64;&#x67;&#x6d;&#97;&#x69;&#108;&#46;&#x63;&#111;&#x6d;">&#119;&#97;&#x6e;&#x67;&#x64;&#x69;&#110;&#x67;&#x77;&#101;&#105;&#x38;&#x32;&#x40;&#103;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
