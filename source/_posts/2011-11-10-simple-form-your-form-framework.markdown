@@ -79,9 +79,9 @@ end
 <% end %>
 ```
 
-如此一來，以後我 bootstrap 就可以直接引入自己寫的 [xdite-bootstrap-rails](https://github.com/xdite/bootstrap-rails) 這個 gem，一次搞定 Form , HTML , CSS , JavaScript 的問題。
+如此一來，以後我 bootstrap 任何 project 就可以直接引入自己寫的 [xdite-bootstrap-rails](https://github.com/xdite/bootstrap-rails) 這個 gem，一次搞定 Form , HTML , CSS , JavaScript 的問題。
 
-繼續懶惰下去。
+繼續懶惰下去。甚至可能乾脆寫成 rails template，因為也許 template 可能才 3 行而已？
 
 寫完這個 gem，我突然間理解為什麼 simple_form 打遍天下無敵手，因為它本身就是一套 Form Framework。其他人實在沒有再造一套輪子的必要，透過 override template，你幾乎可以造出各式各樣的表單欄位....
 
