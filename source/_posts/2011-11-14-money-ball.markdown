@@ -63,6 +63,8 @@ Billy Beane 的故事相信大家都耳熟能詳。Mr. Jamie 整理了五段摘�
 
 這不是在影射任何一家網路公司，而是幾乎所有倒掉的網路公司都是類似的劇本。只是誰的口袋比較淺，誰先死。
 
+### 從網路上賺到錢的秘密：「charge for your products.」
+
 37 Signals 的 DHH 曾經在 [2008 的 Startup School](http://37signals.com/speaks#startupschool) 給過一場 Talk。這場 Talk 當時曾經震撼當時的矽谷，當時這個影片還在網路上傳來傳去好一陣子，蔚為風潮。
 
 因為在這場 Talk 中，他講出 37signals 賺錢真正的秘密，這個秘密真的非常非常簡單：簡單到這個言論當時造成矽谷一陣騷動，那就是：「**charge for your products.**」
