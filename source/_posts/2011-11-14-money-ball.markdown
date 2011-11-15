@@ -11,7 +11,7 @@ categories:
 
 電影《[魔球 (Moneyball)](http://tw.movie.yahoo.com/movieinfo_main.html/id=3981)》終於在台灣上映了，一樣的我也還沒去看。但我同樣的也要說，就算你沒有要進電影院看故事，我也推薦你一定要去買[魔球](http://www.books.com.tw/exep/prod/booksfile.php?item=0010522666 )這本書。
 
-但我要推薦的理由跟 inside 的 [fOx](http://www.inside.com.tw/2011/11/13/moneyball-startups) 和 [Jamie](http://www.inside.com.tw/2011/11/13/moneyball-startups) 都不一樣。我推薦的原因是，他是一本告訴你「要成為產業贏家就必須搞清楚競賽重點」的書。
+但我要推薦的理由跟 inside 的 [fOx](http://www.inside.com.tw/2011/11/13/moneyball-startups) 和 [Jamie](http://www.inside.com.tw/2011/11/13/moneyball-startups) 都不一樣。我推薦的原因是，它是一本告訴你「要成為產業贏家就必須搞清楚競賽重點」的書。
 
 魔球是一本 2002 年出版的書，現在這個版本是因應電影上映重新出過的書。中文書第一版出的時候，我正念大二。
 
