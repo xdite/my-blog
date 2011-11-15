@@ -9,9 +9,9 @@ categories:
 
 今天下班回家，看到 Mr. Jamie 寫了這一篇 [魔球 (Moneyball)：一個 Hack Everything 的棒球故事](http://mrjamie.cc/2011/11/14/moneyball/)
 
-電影《[魔球 (Moneyball)](http://tw.movie.yahoo.com/movieinfo_main.html/id=3981)》終於在台灣上映了，一樣的我也還沒去看。但我同樣的也要說，就算你沒有要進電影院看故事，我也推薦一定你買[魔球](http://www.books.com.tw/exep/prod/booksfile.php?item=0010522666 )這本書。
+電影《[魔球 (Moneyball)](http://tw.movie.yahoo.com/movieinfo_main.html/id=3981)》終於在台灣上映了，一樣的我也還沒去看。但我同樣的也要說，就算你沒有要進電影院看故事，我也推薦你一定要去買[魔球](http://www.books.com.tw/exep/prod/booksfile.php?item=0010522666 )這本書。
 
-但我要推薦的理由跟 inside 的 [fOX](http://www.inside.com.tw/2011/11/13/moneyball-startups) 和 [Jamie](http://www.inside.com.tw/2011/11/13/moneyball-startups) 都不一樣。我推薦的原因是，他是一本告訴你「要成為產業贏家就必須搞清楚競賽重點」的書。
+但我要推薦的理由跟 inside 的 [fOx](http://www.inside.com.tw/2011/11/13/moneyball-startups) 和 [Jamie](http://www.inside.com.tw/2011/11/13/moneyball-startups) 都不一樣。我推薦的原因是，他是一本告訴你「要成為產業贏家就必須搞清楚競賽重點」的書。
 
 魔球是一本 2002 年出版的書，現在這個版本是因應電影上映重新出過的書。中文書第一版出的時候，我正念大二。
 
@@ -29,7 +29,7 @@ Billy Beane 的故事相信大家都耳熟能詳。Mr. Jamie 整理了五段摘�
 
 我就不重新寫了。
 
-而 Billy Beane 的故事，讓我所領悟到很清楚的一件事是： Billy Beane 並不是個 Game Hacker，而是找到了這場金錢遊戲的本質。
+而 Billy Beane 的故事，讓我所領悟到很清楚的一件事是： Billy Beane 並不是個 Game Hacker，而他的成功，是因找到了這場金錢遊戲的本質。
 
 （也許是我念數學系的關係，教授平常要求我們的不是去練各種技巧，而是去挖出問題本質，以自身累積出的理論與實力見題解題、見招拆招）
 
@@ -65,9 +65,9 @@ Billy Beane 的故事相信大家都耳熟能詳。Mr. Jamie 整理了五段摘�
 
 ### 從網路上賺到錢的秘密：「charge for your products.」
 
-37 Signals 的 DHH 曾經在 [2008 的 Startup School](http://37signals.com/speaks#startupschool) 給過一場 Talk。這場 Talk 當時曾經震撼當時的矽谷，當時這個影片還在網路上傳來傳去好一陣子，蔚為風潮。
+37 Signals 的 DHH 曾經在 [2008 的 Startup School](http://37signals.com/speaks#startupschool) 給過一場 Talk。這場 Talk 曾經震撼當時的矽谷，這個影片那時還在網路上傳來傳去好一陣子，蔚為風潮。
 
-因為在這場 Talk 中，他講出 37signals 賺錢真正的秘密，這個秘密真的非常非常簡單：簡單到這個言論當時造成矽谷一陣騷動，那就是：「**charge for your products.**」
+因為在這場 Talk 中，他講出 37signals 賺錢真正的秘方，這個秘方真的非常非常簡單：簡單到這個言論當時造成矽谷一陣騷動，那就是：「**charge for your products.**」
 
 想從網路上「賺錢」？很簡單，那就是先「收錢」啊！
 
