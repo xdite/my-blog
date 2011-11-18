@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>OmniAuth - 實作多方認證的最佳實踐 (2) - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          OmniAuth  本身並不是一套被限於特定框架、特定認註冊系統上的認證方案，而是一個基於 Rack 的「認證策略提供者」。主要架構ProviderOmniAuth 將所有的提供認證方，通通視為不同的 Provider，每一種 Provider 有一個 Strategy。不...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">OmniAuth - 實作多方認證的最佳實踐 (2)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-11-19T03:33:00+08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <p><a href="https://github.com/intridea/omniauth">OmniAuth</a>  本身並不是一套被限於特定框架、特定認註冊系統上的認證方案，而是一個基於 Rack 的「認證策略提供者」。</p>
+
+<h2>主要架構</h2>
+
+<h3>Provider</h3>
+
+<p>OmniAuth 將所有的提供認證方，通通視為不同的 Provider，每一種 Provider 有一個 Strategy。不管你是 Facebook、還是 LDAP，通通擁有各自的 Strategy。</p>
+
+<h3>Strategy</h3>
+
+<p>每一個 Strategy 分為兩個 Phase：</p>
+
+<ul>
+<li>request phase</li>
+<li>callback phase</li>
+</ul>
+
+
+<p>而 Omniauth 提供了兩個主要的 url</p>
+
+<ul>
+<li>/auth/:provider</li>
+<li>/auth/:provider/callback</li>
+</ul>
+
+
+<p>當使用者 visit /auth/github 時，OmniAuth 會將你導到 Github 去作認證。而認證成功之後，會 redirect 到 callback 網址。通常我們會在 callback 網址作 session create 動作（透過拿回來的資料 find_or_create user）</p>
+
+<h4>使用 Strategy 的好處</h4>
+
+<p>使用 Strategy 的好處很多。最明顯的我覺得有幾點：</p>
+
+<h5>1.能夠將 routhing 切得很乾淨。</h5>
+
+<p>這點顯而易見。</p>
+
+<h5>2.能夠在網路不通下繼續實作認證。</h5>
+
+<p>有時候開發中，可能正用本機網址，無法實作 callback。有時候是網路不通。OmniAuth 可以讓我們使用一套 developer strategy 去 &#8220;fake&#8221;。</p>
+
+<p>所以在開發過程中，即便網路不通，我們還是可以透過寫 developer strategy 的方式，拿到同格式的假資料，完成假認證、假 callback。</p>
+
+<figure class='code'><figcaption><span>lib/developer_straegy.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;omniauth/core&#39;</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">OmniAuth</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">Straegies</span>
+</span><span class='line'>    <span class="k">class</span> <span class="nc">Developer</span>
+</span><span class='line'>      <span class="kp">include</span> <span class="no">OmniAuth</span><span class="o">::</span><span class="no">Strategy</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">supper</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="ss">:developer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">request_phase</span>
+</span><span class='line'>        <span class="no">OmniAuth</span><span class="o">::</span><span class="no">Form</span><span class="o">.</span><span class="n">build</span> <span class="n">url</span><span class="ss">:callback_url</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;Hello developer&quot;</span> <span class="k">do</span>
+</span><span class='line'>          <span class="n">text_field</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span>
+</span><span class='line'>          <span class="n">text_field</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span>
+</span><span class='line'>          <span class="n">text_field</span> <span class="s2">&quot;Nickname&quot;</span><span class="p">,</span> <span class="s2">&quot;nickname&quot;</span>
+</span><span class='line'>        <span class="k">end</span><span class="o">.</span><span class="n">to_response</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">auth_hash</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>          <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;twitter&#39;</span>
+</span><span class='line'>          <span class="s1">&#39;uid&#39;</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">[</span><span class="s1">&#39;email&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;user_info&#39;</span> <span class="o">=&gt;</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">[</span><span class="s1">&#39;email&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;nickname&#39;</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">[</span><span class="s1">&#39;nickname&#39;</span><span class="o">]</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>（ 這是 0.3 範例，出處為 <a href="http://cn.intridea.com/2011/07/omniauth-intro/">OmniAuth, 昨天今天明天</a>）</p>
+
+<p>而新的 1.0 Strategy Guide 已經 <a href="https://github.com/intridea/omniauth/wiki/Strategy-Contribution-Guide">釋出</a>，一個 Strategy 需要完成的部分大致上有這三個：</p>
+
+<ol>
+<li>request phase 如何完成</li>
+<li>callback phase 如何完成</li>
+<li>定義回傳需拿到的資料：如 provider name、uid、email、以及 extra info</li>
+</ol>
+
+
+<h3>User Info</h3>
+
+<p>在 0.3 版的範例裡面，可以看到回傳的資訊是使用 auth_hash 去包。這也導致了另一個混亂的局面，各種不同的 Strategy 寫了不同的 auth_hash，把 auth_hash 拉回來時，create User 的介面相當混亂與醜陋。</p>
+
+<p>而自 1.0 版起，這些使用者資訊將會切成四種 DSL methos : <code>info</code>, <code>uid</code>, <code>extra</code>, 和 <code>credentials</code>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">OmniAuth</span><span class="o">::</span><span class="no">Strategies</span><span class="o">::</span><span class="no">MyStrategy</span> <span class="o">&lt;</span> <span class="no">OmniAuth</span><span class="o">::</span><span class="no">Strategies</span><span class="o">::</span><span class="no">OAuth</span>
+</span><span class='line'>  <span class="n">uid</span> <span class="p">{</span> <span class="n">access_token</span><span class="o">.</span><span class="n">params</span><span class="o">[</span><span class="s1">&#39;user_id&#39;</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">info</span> <span class="k">do</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="n">raw_info</span><span class="o">[</span><span class="s1">&#39;firstName&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="n">raw_info</span><span class="o">[</span><span class="s1">&#39;lastName&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">raw_info</span><span class="o">[</span><span class="s1">&#39;email&#39;</span><span class="o">]</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">extra</span> <span class="k">do</span>
+</span><span class='line'>    <span class="p">{</span><span class="s1">&#39;raw_info&#39;</span> <span class="o">=&gt;</span> <span class="n">raw_info</span><span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">raw_info</span>
+</span><span class='line'>    <span class="n">access_token</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/info&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>把基本資訊的存取切分的更清楚。</p>
+
+<p>讓我把各家新版的 Strategy 翻出來介紹給大家吧：</p>
+
+<p>看完這些 example，相信你可以更了解這些資訊架構後面的想法是什麼。</p>
+
+<ul>
+<li><a href="https://github.com/arunagw/omniauth-twitter/blob/master/lib/omniauth/strategies/twitter.rb">omniauth-twitter</a></li>
+<li><a href="https://github.com/mkdynamic/omniauth-facebook/blob/master/lib/omniauth/strategies/facebook.rb">omniauth-facebook</a></li>
+<li><a href="https://github.com/intridea/omniauth-github/blob/master/lib/omniauth/strategies/github.rb">omniauth-githuib</a></li>
+</ul>
+
+
+<h2>小結</h2>
+
+<p>而因為 OmniAuth 是 rack-middleware，且介面單純的緣故（ 兩組統一 url），因此可以接在各種任何支援 Rack 的任何 Ruby Web Framework 上，在這一層之上就完成握手交換資訊的互動。<strong>於是整個認證過程就可以「框架」和「框架上的傳統認證方案」完全切割分離</strong>，開發者可以透過這兩組介面完成傳送與接收資訊的動作，而不需像傳統實作，必須大幅客製 controller 與 routing 遷就 provider。</p>
+
+<p>下一節我將繼續介紹，為何 OmniAuth 要自 0.3 大幅改版至 1.0 。</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-11-19T03:33:00+08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2011/11/19/omniauth-clean-auth-provider-2/">OmniAuth - 實作多方認證的最佳實踐 (2)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/11/19/omniauth-clean-auth-provider-1/">OmniAuth - 實作多方認證的最佳實踐 (1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/11/14/money-ball/">魔球，一個搞清楚產業重點的棒球故事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/11/10/simple-form-your-form-framework/">Simple Form - 你的 Form Framework</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/10/27/coffeescript-nodejs-hubot/">CoffeeScript 還可以用來做什麼？ -- Hubot</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/';
+        var disqus_url = 'http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
