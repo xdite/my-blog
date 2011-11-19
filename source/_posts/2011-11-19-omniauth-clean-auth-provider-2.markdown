@@ -14,7 +14,7 @@ categories:
 
 ### Provider
 
-OmniAuth 將所有的提供認證方，通通視為不同的 Provider，每一種 Provider 有一個 Strategy。不管你是 Facebook、還是 LDAP，通通擁有各自的 Strategy。
+OmniAuth 將所有的認證提供方，通通視為不同的 Provider，每一種 Provider 有一個 Strategy。不管你是 Facebook、還是 LDAP，通通擁有各自的 Strategy。
 
 ### Strategy
 
