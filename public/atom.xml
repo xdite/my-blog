@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-11-19T19:32:18+08:00</updated>
+  <updated>2011-11-19T19:36:05+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -180,7 +180,7 @@
 <li>流暢 (UI / Network Latency)、低耗能、高效率</li>
 <li>支援標準</li>
 <li>Native 與 HTML 技術混搭</li>
-<li>Fix Screen</li>
+<li>固定螢幕尺寸</li>
 <li>符合 <a href="http://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/Introduction/Introduction.html">HIG</a> 標竿的工藝</li>
 <li>可以賺到錢</li>
 </ol>
@@ -1188,7 +1188,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#119;&#97;&#x6e;&#103;&#x64;&#x69;&#110;&#103;&#x77;&#x65;&#105;&#56;&#50;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#46;&#x63;&#111;&#109;">&#x77;&#97;&#110;&#103;&#x64;&#105;&#110;&#103;&#x77;&#x65;&#x69;&#x38;&#50;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#119;&#97;&#110;&#103;&#x64;&#x69;&#x6e;&#x67;&#x77;&#101;&#x69;&#x38;&#x32;&#x40;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;">&#119;&#x61;&#110;&#x67;&#100;&#x69;&#x6e;&#x67;&#119;&#101;&#x69;&#56;&#x32;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 

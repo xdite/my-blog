@@ -158,7 +158,7 @@ Desktop 瀏覽器視窗放大縮小造成破版的問題，使用者不會 Care�
 1. 流暢 (UI / Network Latency)、低耗能、高效率
 2. 支援標準
 3. Native 與 HTML 技術混搭
-4. Fix Screen
+4. 固定螢幕尺寸
 5. 符合 [HIG](http://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/Introduction/Introduction.html) 標竿的工藝
 5. 可以賺到錢
 
