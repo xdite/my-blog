@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-11-19T20:14:56+08:00</updated>
+  <updated>2011-11-19T22:14:35+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -126,19 +126,21 @@
 
 <h3>Responsive Design 不是終點</h3>
 
-<p>我手上有兩個以上採 Responsive design 的 websites。還有一個採 Responsive design 的 mobile app。</p>
+<p>對於螢幕尺寸造成的 render 效果差異，有人提出了「Responsive Design」這個概念。</p>
 
-<p>Responsive design 是一個新的設計概念，可以使用 CSS3 的 media query ，去對不同 device 的寬度去對 HTML 作出不同的 styling。</p>
+<p>Responsive design 是一個全新的設計概念，開發者可以使用 CSS3 的 media query ，去對不同 device 的寬度去對 HTML 作出不同的 styling。</p>
 
 <p>很理想對吧？</p>
 
-<p>實作出來進行維護（可以看 <a href="http://www.techbang.com.tw">T客邦</a> 和 <a href="http://digiphoto.techbang.com.tw">Digiphoto</a> ）才發現這也只是個理想國的概念。</p>
+<p>我手上有兩個以上採 Responsive design 的 websites。還有一個採 Responsive design 的 mobile app。</p>
+
+<p>實際開發出來進行維護（可以看 <a href="http://www.techbang.com.tw">T客邦</a> 和 <a href="http://digiphoto.techbang.com.tw">Digiphoto</a> ）才發現這也只是個理想國的概念。</p>
 
 <p><strong>Responsive design 在 iPhone / iPad App 上的確很威，只要寫四套 CSS 就可以解決所有的問題。（iphone 直排/橫排, iPad 直排/橫排）</strong></p>
 
 <p>有些開發者說，Mobile Web 上面沒有惡魔 IE6 了 YA!</p>
 
-<p>錯了，我來告訴你真正的惡魔是什麼。</p>
+<p>錯了，真正的惡魔是 Android。</p>
 
 <h4>Mobile 開發上的大惡魔：不同尺寸的 Android 手機與 Android 平板</h4>
 
@@ -148,7 +150,9 @@
 
 <p>今天在 Samsung 平版上看可能沒有問題，但是在 HTC 平板上，menu bar 可能就爆掉了。</p>
 
-<p>使用者只會要求在它的 device 上的體驗要是完美的。當然，PM 也不是沒有好心的告訴我一些他認為「可能」可以解決這樣問題的方案。比如砍字！</p>
+<p>使用者只會要求在它的 device 上的體驗要是完美的。</p>
+
+<p>當然，PM 也不是沒有好心的告訴我一些他認為「可能」可以解決這樣問題的方案。比如砍字！</p>
 
 <p>在 Flyer 上 menu 可以是「拍攝技法」、「哈燒新品」。但在 Sensation 上 menu 可以變成是「技法」、「新品」！</p>
 
@@ -158,7 +162,7 @@
 
 <p>Desktop 瀏覽器視窗放大縮小造成破版的問題，使用者不會 Care，完全不是問題。但在 Mobile 瀏覽器上，這就是 Bug！</p>
 
-<h2>智慧型手機的戰場在軟體生態圈</h2>
+<h2>螢幕的尺寸不一破壞了軟體生態圈</h2>
 
 <p>這個世界已經漸漸告訴我們，智慧型手機的戰場不在於硬體規格，也不在於 OS 威不威。因為硬體和 OS 系統商「不可能自己做完任何事」。所以拼的就是軟體生態圈的品質。</p>
 
@@ -186,9 +190,13 @@
 </ol>
 
 
+<p>HTML5 可以解決這當中的一些事情，如 (1) (2) (3)。但要做到「Write Once, Run Anywhere !」，跨越「手機、平板、筆電、桌電」等裝置的限制。看看目前的 Android 機海（4吋,7吋,10吋）情況，只能說算了吧…</p>
+
+<p>而且這四種 Device 的需求原本就不同，HTML5 不是大靈丹。</p>
+
 <p><a href="http://ccckmit.wikidot.com/in:htc">HTC 最需要的軟體能力</a> 是什麼？</p>
 
-<p>我想絕對不會是往 HTML5 WebOS 這樣的方向。</p>
+<p>我想絕對不會是往 HTML5 「微型伺服器」 這樣的方向，何況我也聽不太懂這是什麼東西。</p>
 ]]></content>
   </entry>
   
@@ -1188,7 +1196,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#119;&#x61;&#x6e;&#x67;&#x64;&#x69;&#x6e;&#x67;&#x77;&#101;&#x69;&#56;&#x32;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#x77;&#97;&#x6e;&#103;&#100;&#105;&#110;&#103;&#119;&#x65;&#x69;&#56;&#x32;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x77;&#x61;&#x6e;&#x67;&#x64;&#105;&#110;&#x67;&#119;&#x65;&#x69;&#56;&#x32;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#109;">&#x77;&#x61;&#110;&#103;&#100;&#x69;&#110;&#x67;&#119;&#101;&#105;&#x38;&#x32;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 

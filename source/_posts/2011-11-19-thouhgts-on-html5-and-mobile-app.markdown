@@ -102,19 +102,21 @@ Again：問題在於螢幕尺寸造成的 render 效果差異，和 device 不�
 
 ### Responsive Design 不是終點
 
-我手上有兩個以上採 Responsive design 的 websites。還有一個採 Responsive design 的 mobile app。
+對於螢幕尺寸造成的 render 效果差異，有人提出了「Responsive Design」這個概念。
 
-Responsive design 是一個新的設計概念，可以使用 CSS3 的 media query ，去對不同 device 的寬度去對 HTML 作出不同的 styling。
+Responsive design 是一個全新的設計概念，開發者可以使用 CSS3 的 media query ，去對不同 device 的寬度去對 HTML 作出不同的 styling。
 
 很理想對吧？
 
-實作出來進行維護（可以看 [T客邦](http://www.techbang.com.tw) 和 [Digiphoto](http://digiphoto.techbang.com.tw) ）才發現這也只是個理想國的概念。
+我手上有兩個以上採 Responsive design 的 websites。還有一個採 Responsive design 的 mobile app。
+
+實際開發出來進行維護（可以看 [T客邦](http://www.techbang.com.tw) 和 [Digiphoto](http://digiphoto.techbang.com.tw) ）才發現這也只是個理想國的概念。
 
 **Responsive design 在 iPhone / iPad App 上的確很威，只要寫四套 CSS 就可以解決所有的問題。（iphone 直排/橫排, iPad 直排/橫排）**
 
 有些開發者說，Mobile Web 上面沒有惡魔 IE6 了 YA! 
 
-錯了，我來告訴你真正的惡魔是什麼。
+錯了，真正的惡魔是 Android。
 
 #### Mobile 開發上的大惡魔：不同尺寸的 Android 手機與 Android 平板
 
@@ -122,21 +124,21 @@ Responsive design 是一個新的設計概念，可以使用 CSS3 的 media quer
 
 而不同尺寸的 Android 手機 / 平板，給開發者的惡夢就是：「無論你怎麼排版，View 就是會爆炸。」
 
-
 今天在 Samsung 平版上看可能沒有問題，但是在 HTC 平板上，menu bar 可能就爆掉了。
 
-使用者只會要求在它的 device 上的體驗要是完美的。當然，PM 也不是沒有好心的告訴我一些他認為「可能」可以解決這樣問題的方案。比如砍字！
+使用者只會要求在它的 device 上的體驗要是完美的。
+
+當然，PM 也不是沒有好心的告訴我一些他認為「可能」可以解決這樣問題的方案。比如砍字！
 
 在 Flyer 上 menu 可以是「拍攝技法」、「哈燒新品」。但在 Sensation 上 menu 可以變成是「技法」、「新品」！
 
 這是解法嗎？不是。Responsive 是提供 CSS styling 的問題，而這個解法是要求我偵測 Agent 用程式去砍字。(我知道可以用 responsive design 去另包元素作 display none; 我不可能配合，這是改動結構。因為使用者提出的需求不僅是這樣而已，還有加字、改 bar、改設計。簡直是瘋了。這樣偵測 Agent 重寫一版網頁版程式還比較快)
 
-
 簡而言之，Responsive Design 遇到 device 的直排/橫排的情況是很棒的解法，但是它無法解決內容一直在變動，Device 尺寸不一的問題。
 
 Desktop 瀏覽器視窗放大縮小造成破版的問題，使用者不會 Care，完全不是問題。但在 Mobile 瀏覽器上，這就是 Bug！
 
-## 智慧型手機的戰場在軟體生態圈
+## 螢幕的尺寸不一破壞了軟體生態圈
 
 這個世界已經漸漸告訴我們，智慧型手機的戰場不在於硬體規格，也不在於 OS 威不威。因為硬體和 OS 系統商「不可能自己做完任何事」。所以拼的就是軟體生態圈的品質。
 
@@ -150,7 +152,6 @@ Desktop 瀏覽器視窗放大縮小造成破版的問題，使用者不會 Care�
 
 如果把開發者搞得半死不活，絕大精力都在處理硬體和 OS 製造出的愚蠢 bug。開發者也要吃飯，也要領錢，沒有人會願意餓著肚子陪你辦家家酒的。
 
-
 ## 小結
 
 其實不難規結，開發 Mobile App 的重點是什麼：
@@ -160,11 +161,15 @@ Desktop 瀏覽器視窗放大縮小造成破版的問題，使用者不會 Care�
 3. Native 與 HTML 技術混搭
 4. 固定螢幕尺寸
 5. 符合 [HIG](http://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/Introduction/Introduction.html) 標竿的工藝
-5. 可以賺到錢
+6. 可以賺到錢
+
+HTML5 可以解決這當中的一些事情，如 (1) (2) (3)。但要做到「Write Once, Run Anywhere !」，跨越「手機、平板、筆電、桌電」等裝置的限制。看看目前的 Android 機海（4吋,7吋,10吋）情況，只能說算了吧…
+
+而且這四種 Device 的需求原本就不同，HTML5 不是大靈丹。
 
 [HTC 最需要的軟體能力](http://ccckmit.wikidot.com/in:htc) 是什麼？
 
-我想絕對不會是往 HTML5 WebOS 這樣的方向。
+我想絕對不會是往 HTML5 「微型伺服器」 這樣的方向，何況我也聽不太懂這是什麼東西。
 
 
 
