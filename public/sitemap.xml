@@ -68,7 +68,11 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/</loc>
-        <lastmod>2011-11-19T12:10:25+08:00</lastmod>
+        <lastmod>2011-11-19T12:11:10+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-3/</loc>
+        <lastmod>2011-11-19T13:38:43+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/about/</loc>
@@ -80,11 +84,11 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/blog/archives/</loc>
-        <lastmod>2011-11-19T12:10:25+08:00</lastmod>
+        <lastmod>2011-11-19T13:38:43+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/</loc>
-        <lastmod>2011-11-19T12:10:25+08:00</lastmod>
+        <lastmod>2011-11-19T13:38:43+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/talks/</loc>

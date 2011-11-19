@@ -40,9 +40,9 @@ OmniAuth 將所有的認證提供方，通通視為不同的 Provider，每一�
 
 ##### 2.能夠在網路不通下繼續實作認證。
 
-有時候開發中，可能正用本機網址，無法實作 callback。有時候是網路不通。OmniAuth 可以讓我們使用一套 developer strategy 去 "fake"。
+有時候開發中，可能正用本機網址，無法實作 callback。有時候則是網路不通。OmniAuth 可以讓我們使用一套 developer strategy 去 "fake"。
 
-所以在開發過程中，即便網路不通，我們還是可以透過寫 developer strategy 的方式，拿到同格式的假資料，完成假認證、假 callback。
+所以在開發過程中，即便遇到網路問題，我們還是可以透過寫 developer strategy 的方式，拿到同格式的假資料，完成假認證、假 callback。
 
 ``` ruby lib/developer_straegy.rb
 
