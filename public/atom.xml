@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-11-20T05:24:56+08:00</updated>
+  <updated>2011-11-20T05:29:19+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -22,7 +22,7 @@
 
 <p>坦白說，我真的覺得這是一篇相當天真的文章。</p>
 
-<p>[在看下去之前，先警告讀者這是一篇 TL;DR 的文章。]</p>
+<p>[在看下去之前，先警告讀者本文是一篇 TL;DR 的文章。]</p>
 
 <h2>Thouhts on Flash</h2>
 
@@ -1198,7 +1198,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#119;&#97;&#x6e;&#x67;&#x64;&#x69;&#x6e;&#x67;&#119;&#x65;&#105;&#x38;&#x32;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#x77;&#97;&#110;&#x67;&#100;&#105;&#110;&#x67;&#119;&#101;&#105;&#x38;&#x32;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#119;&#x61;&#x6e;&#x67;&#x64;&#x69;&#x6e;&#103;&#119;&#101;&#105;&#56;&#50;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">&#x77;&#97;&#x6e;&#x67;&#x64;&#105;&#x6e;&#x67;&#119;&#101;&#x69;&#x38;&#x32;&#64;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
