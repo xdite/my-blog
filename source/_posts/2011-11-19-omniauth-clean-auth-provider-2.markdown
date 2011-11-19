@@ -93,7 +93,7 @@ end
 
 ### User Info
 
-在 0.3 版的範例裡面，可以看到回傳的資訊是使用 auth_hash 去包。這也導致了另一個混亂的局面，各種不同的 Strategy 寫了不同的 auth_hash，把 auth_hash 拉回來時，create User 的介面相當混亂與醜陋。
+在 0.3 版的範例裡面，可以看到回傳的資訊是使用 auth_hash 去包。這也導致了另一個混亂的情形，各種不同的 Strategy 寫了不同的 auth_hash，把 auth_hash 拉回來時，create User 的介面相當混亂與醜陋。
 
 而自 1.0 版起，這些使用者資訊將會切成四種 DSL methos : `info`, `uid`, `extra`, 和 `credentials`。
 
