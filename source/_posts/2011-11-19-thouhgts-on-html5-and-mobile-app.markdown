@@ -11,6 +11,10 @@ categories:
 
 坦白說，我真的覺得這是一篇相當天真的文章。
 
+==
+在看下去之前，先警告讀者這是一篇 TL;DR 的文章。
+==
+
 ## Thouhts on Flash
 
 上個禮拜網路界的熱門是，Adobe 宣布放棄了繼續在 Mobile Browser 上 Flash 的繼續開發（見 36kr 的 [有关Flash移动浏览器插件，Flash平台和Flash未来的几点澄清](http://www.36kr.com/p/59728.html) ）。這篇文章提到幾件重要的事：
