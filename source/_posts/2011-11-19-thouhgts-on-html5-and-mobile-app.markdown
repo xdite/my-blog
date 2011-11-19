@@ -62,13 +62,13 @@ mobile flash 是個 container（iOS） 中的 container ( flash ) 這件事，�
 2. HTML 上累積的解決方夠多。在 mobile apps 上介面上實作一段很絢麗的跳出框或特效，用 Native API 可能要刻上一週甚至更久。但是如果使用 jQuery 在 HTML 上實作就不用。
 3. 使用 HTML 的開發者夠多。撰寫 HTML 的門檻比起 Native API 門檻實在太低了，開發者容易培養訓練。
 
-### 實質的解決方案：Tatinum
+### 實質的解決方案：Titanium
 
-[Tatinum](http://www.appcelerator.com/) 就是這樣的解決方案，簡介可見 [跨平台移動應用程式的解決方案 – Titanium](http://www.inside.com.tw/2011/03/30/titanium-cross-platform-mobile-application-solution)。
+[Titanium](http://www.appcelerator.com/) 就是這樣的解決方案，簡介可見 [跨平台移動應用程式的解決方案 – Titanium](http://www.inside.com.tw/2011/03/30/titanium-cross-platform-mobile-application-solution)。
 
-多數的開發者的策略轉變成，以 Tatinum 寫出符合 HIG 或者是 Mobile App Best Pratices 的原生介面（按鈕、流程），但媒體內容卻全以 HTML5 實作。
+多數的開發者的策略轉變成，以 Titanium 寫出符合 HIG 或者是 Mobile App Best Pratices 的原生介面（按鈕、流程），但媒體內容卻全以 HTML5 實作。
 
-Tatinum 主要的開發語言是 JavaScript，開發者可以透過 JavaScript 撰寫 function，交由 Tatinum 轉換編譯成平台上的原生原始碼。
+Titanium 主要的開發語言是 JavaScript，開發者可以透過 JavaScript 撰寫 function，交由 Titanium 轉換編譯成平台上的原生原始碼。
 
 好處是：JavaScript 原本就是 Web Developer 平日使用的工具之一。開發者只要專心與 JavaScript / HTML / CSS 打交道即可，而它們都是「標準」。
 
@@ -127,7 +127,7 @@ Responsive design 是一個新的設計概念，可以使用 CSS3 的 media quer
 
 使用者只會要求在它的 device 上的體驗要是完美的。當然，PM 也不是沒有好心的告訴我一些他認為「可能」可以解決這樣問題的方案。比如砍字！
 
-在 Flyer 上 menu 可以是「拍攝技法」、「哈燒新品」。但在 Sansation 上 menu 可以變成是「技法」、「新品」！
+在 Flyer 上 menu 可以是「拍攝技法」、「哈燒新品」。但在 Sensation 上 menu 可以變成是「技法」、「新品」！
 
 這是解法嗎？不是。Responsive 是提供 CSS styling 的問題，而這個解法是要求我偵測 Agent 用程式去砍字。(我知道可以用 responsive design 去另包元素作 display none; 我不可能配合，這是改動結構。因為使用者提出的需求不僅是這樣而已，還有加字、改 bar、改設計。簡直是瘋了。這樣偵測 Agent 重寫一版網頁版程式還比較快)
 
