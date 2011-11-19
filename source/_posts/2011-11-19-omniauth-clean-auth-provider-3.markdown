@@ -81,7 +81,7 @@ gem "omniauth-twitter"
 
 [這個目錄](https://github.com/intridea/omniauth/tree/3aff8a3d71a5c968f558172750a2a20165d77bc5/oa-oauth/lib/omniauth/strategies/oauth) 含蓋了所有目前 OmniAuth 0.3 支援的 Strategy，可以看到大家的 auth_hash 通通都寫的不一樣，也是各自為政。
 
-所以在 1.0 版，OmniAuth 將強迫大家走同樣的規格回來，這些使用者資訊將會切成四種 DSL methos : `info`, `uid`, `extra`, 和 `credentials`。
+所以在 1.0 版，OmniAuth 將強迫大家走同樣的規格回來，這些使用者資訊將會切成四種 DSL methods : `info`, `uid`, `extra`, 和 `credentials`。
 
 這個部分在[上一篇](http://dev-xdworks.dev/posts/2011/11/19/omniauth-clean-auth-provider-2/)談架構時已經寫過，就不再重寫一遍了。
 
