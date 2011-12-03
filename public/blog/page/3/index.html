@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Yahoo News 的 SEO 網址所帶來的問題 - Blog.XDite.net</title>
+  <title>Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature 畫虎不成反類犬了。在為網站實作 SEO 改善工程時，我們通常會使用一個技巧：在 permalink 裡面塞關鍵字。這樣的設計你可以在 T 客邦 看到，也可以在 PIXNET 看到。T 客邦...">
+  <meta name="description" content="                  Wordpress 用到今年，也第五年了。發現越來越不敷我的需求。決定轉戰 Octopress。原本是打算 host 在 Github 上，這樣比較炫（？）後來考慮到要支援舊 blog 上的文章。所以最後還是放在 Heroku 上，用 rack-rewrit...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/">
+  <link rel="canonical" href="http://blog.xdite.net/blog/page/3/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -62,12 +62,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Yahoo News 的 SEO 網址所帶來的問題</h1>
+      <h1 class="entry-title"><a href="/posts/2011/10/07/migrate-to-octopress/">Migrate to Octopress</a></h1>
     
     
       <p class="meta">
@@ -81,9 +84,9 @@
 
 
 
-<time datetime="2011-10-25T17:08:00+08:00" pubdate  data-updated="true" >Oct 25<span>th</span>, 2011</time>
+<time datetime="2011-10-07T18:19:00+08:00" pubdate  data-updated="true" >Oct 7<span>th</span>, 2011</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/posts/2011/10/07/migrate-to-octopress/#disqus_thread">Comments</a>
         
 
       </p>
@@ -91,114 +94,68 @@
   </header>
 
 
-<div class="entry-content">
-  
-    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
-  
-  <p>我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature <strong>畫虎不成反類犬</strong>了。</p>
-
-<p>在為網站實作 SEO 改善工程時，我們通常會使用一個技巧：<strong>在 permalink 裡面塞關鍵字</strong>。</p>
-
-<p>這樣的設計你可以在 <a href="htt://www.techbang.com.tw">T 客邦</a> 看到，也可以在 <a href="http://www.pixnet.net">PIXNET</a> 看到。</p>
-
-<ul>
-<li>T 客邦的設計是 /1234-seo-in-url</li>
-<li>PIXNET 的設計是 /5678-SEO藏在網址裡</li>
-</ul>
-
-
-<p>中文是否適合塞在網址裡面，還是個見仁見智的問題，畢竟每一家處理 URL ENCODE 的方法不一樣。但</p>
-
-<p>Yahoo 的網址是這樣的： /SEO藏在網址裡-7890.html。</p>
-
-<p>看的出設計者應該覺得這是個 <strong>獨樹一格</strong> <strong>別出心裁</strong> 的設計。因為全世界幾乎沒有人這樣幹啊 =_=|||</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6279632106/" title="螢幕快照 2011-10-25 下午5.25.23 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6215/6279632106_86d70297c7.jpg" width="324" height="130" alt="螢幕快照 2011-10-25 下午5.25.23"></a></p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6279633244/" title="螢幕快照 2011-10-25 下午5.26.29 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6054/6279633244_4951092121_z.jpg" width="530" height="71" alt="螢幕快照 2011-10-25 下午5.26.29"></a></p>
-
-<p>這樣你應該看出問題了吧。</p>
-
-<p>各家縮網址和 auto-link 的 library 不認得中文字。因此</p>
-
-<ul>
-<li>/1234-seo-in-url => 不會有問題</li>
-<li><p>/5678-SEO藏在網址裡 => 會被 parse 成 /5678 ，但因為是動態網頁，所以還是沒問題</p></li>
-<li><p>/SEO藏在網址裡-7890.html => 被 parse 成 / ，就算輸入 /7890.html 還是連不到。</p></li>
-</ul>
-
-
-<p>「將中文放在 URL 裡且是在數字之前」的設計，會造成在某些網站社群穿透力為 0，因為貼的連結會被自動 parse 成為根本不能動的連結。</p>
-
-<p>不知道為什麼這個問題沒被測到，這應該在 beta 測試就要被檢驗出來了&#8230;</p>
-
-<p>===</p>
-
-<p><em>後續 update</em></p>
-
-<p>網友 <a href="https://twitter.com/fauzty/status/128770619771850752">@fauzty</a> 說：</p>
-
-<blockquote>
-Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇摩新聞。Opera Mini 倒是可以，應該是 url encode 問題
-</blockquote>
-
-
-
-
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
-
-      
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-10-25T17:08:00+08:00" pubdate  data-updated="true" >Oct 25<span>th</span>, 2011</time>
-      
-
-
-    </p>
+  <div class="entry-content">
     
-      <div class="sharing">
-
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/07/migrate-to-octopress/" data-show-faces="false"></div></div>
     
-  </footer>
-</article>
+    <p><a href="http://wordpress.org/">Wordpress</a> 用到今年，也第五年了。發現越來越不敷我的需求。</p>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<p>決定轉戰 <a href="http://octopress.org/">Octopress</a>。</p>
+
+<p>原本是打算 host 在 Github 上，這樣比較炫（？）</p>
+
+<p>後來考慮到要支援舊 blog 上的文章。所以最後還是放在 <a href="http://heroku.com">Heroku</a> 上，用 <a href="https://github.com/jtrupiano/rack-rewrite">rack-rewrite</a> 對所有舊文章轉址。</p>
+
+<p>舊文章會通通放在 <a href="http://wp.xdite.net">http://wp.xdite.net</a>。舊站的文章我就不繼續再更新了。feed 應該不受影響，本來就放在 feedburner 上。</p>
+
+<p>至於迴響也會轉放在 disqus 上。</p>
+
+<p>大概就這樣&#8230;</p>
+
+<hr />
+
+<p>本來曾經考慮要連內容都轉過來，連中文亂碼都搞定了，不過排版要重弄就有點懶了。</p>
+
+<p>再來是 compile 的速度，我在舊站寫了大概約 850 篇文章。轉過來每 compile 一次對我來說就是一次折磨。</p>
+
+<p>算了 :Q</p>
+
+  </div>
+  
+  
+
+
+    </article>
+  
+  <nav class="pagination">
+    <div>
+      
+      <a href="/blog/archives">Blog Archives</a>
+      
+      <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+      
+    </div>
+  </nav>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
+  <h1> About</h1>
+  
+  <p>
+    I am <a href="/author">xdite</a>, specialized in Ruby on Rails.
+    
+  </p>
+  
+  <p><a href="http://feeds.feedburner.com/xxddite"><img src="http://feeds.feedburner.com/~fc/xxddite?bg=99CCFF&amp;fg=444444&amp;anim=1" height="26" width="88" style="border:0" alt="" /></a></p>
+  
+
+  <p><a href="http://twitter.com/xdite" class="twitter-follow-button">Follow @xdite</a><br />
+  </p>
+  
+  <p><img src="/images/xdite-email.png"></p>
+  
+</section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -230,9 +187,31 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
   <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
 </section>
 
+<section id="recentcomments" class="dsq-widget">
+  <h2 class="dsq-widget-title">Recent Comments</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=24&excerpt_length=50"></script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("xdite", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/xdite" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @xdite</a>
+  
+</section>
+
+
   
 </aside>
-
 
     </div>
   </div>
@@ -249,10 +228,7 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
       var disqus_shortname = 'xdite-wp-blog';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
