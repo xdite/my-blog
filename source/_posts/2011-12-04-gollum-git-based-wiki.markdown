@@ -62,7 +62,6 @@ gollum 提供了一套 API，可以存取，版本控制，搜尋，自動將特
 
 gollum 的介面頂多是勉強堪「自用」，所以在我自己的 Mac 上，我的確是用 gollum + Pow 架起來寫私人程式筆記的。但是 gollum 的 wiki 介面，我自己覺得連易用都摸不上邊...（更別提 1.3.x , web preview 介面是爛的 …）
 
-
 再來是 gollum 並沒有權限與使用者概念，如果是用 web interface 發表，走的都是 local git config 的 user name…
 
 ## 終極 solution
@@ -138,3 +137,5 @@ gollum 的介面頂多是勉強堪「自用」，所以在我自己的 Mac 上�
 非常神經病的列表…
 
 不過出來的架構和最後呈現算是令人滿意...:D
+
+歡迎用看看吧 <http://ruby-taiwan.org/wiki>
