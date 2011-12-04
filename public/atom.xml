@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-12-04T02:24:51+08:00</updated>
+  <updated>2011-12-04T13:49:33+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,258 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[對於使用 Render Partial 的一些誤解]]></title>
+    <link href="http://blog.xdite.net/posts/2011/12/04/misunderstanding-about-render/"/>
+    <updated>2011-12-04T11:30:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2011/12/04/misunderstanding-about-render</id>
+    <content type="html"><![CDATA[<p><a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a> 是從 <a href="https://github.com/huacnlee/ruby-china">ruby-china</a> 這個專案 fork 出來改的。</p>
+
+<p>====</p>
+
+<p>本文章經過 <a href="https://github.com/huacnlee/ruby-china">ruby-china</a> 作者 <a href="http://twitter.com/huacnlee">huacnlee</a> 同意後進行寫作。</p>
+
+<p>===</p>
+
+<p>坦白說，最初會開始把玩這個專案，是因為覺得想法和介面上做的不錯，想 clone 下來玩玩看。不過這個 project 當時的狀態可以說是「unmaintainable」。</p>
+
+<p>造成 unmaintainable 的因素主要有兩個：</p>
+
+<ul>
+<li>使用不好的寫法 implement 連結。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&lt;%= posts_path %&gt;&quot;</span><span class="o">&gt;</span> <span class="no">ALL</span> <span class="no">POST</span> <span class="o">&lt;</span><span class="sr">/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>view 裡面充滿 LOGIC。</li>
+</ul>
+
+
+<p>這是當時的 <a href="https://github.com/huacnlee/ruby-china/blob/1e3359a26dd71ece872c5f4adfcabc054f5b9c83/app/views/topics/index.html.erb">app/views/topics/index.html.erb</a> 和 <a href="https://github.com/huacnlee/ruby-china/blob/1e3359a26dd71ece872c5f4adfcabc054f5b9c83/app/views/topics/_sidebar.html.erb">app/views/topics/_sidebar.html.erb</a></p>
+
+<p>在我 join 這個專案之後，第一件事就是清 code，把 project 翻修到大家都改的動&#8230;.</p>
+
+<h2>對於 render :partial 的誤解</h2>
+
+<p>會產生這樣的 code，是有原因的。主要是因為作者</p>
+
+<ul>
+<li>想要複用 index 與 sidebar</li>
+<li>不想使用人人都「覺得」慢的 render :partial，所以才用 LOGIC 判斷，要吐哪一些內容出來。</li>
+</ul>
+
+
+<p>而「被覺得慢的 partial」，也是促使我想寫這篇文章的主要原因。</p>
+
+<h3>聰明反被聰明誤</h3>
+
+<p>造成這個 project unmaintainable 的兩大主要原因，背後的想法是</p>
+
+<ol>
+<li>「覺得」使用 Ruby 去產生 link 會產生 extra function call，拖累效能。所以乾脆只取用 path_helper</li>
+<li>「覺得」使用 partial 會變慢，所以刻意使用 LOGIC in View 去控制顯示的內容。</li>
+</ol>
+
+
+<p>而第一點造成了 連結 unmaintainable，第二點造成 View 不僅 unmaintainable，還 ULTRA SLOW。</p>
+
+<p>而這也不怪作者，幾乎我認識的一些 Rails Developer，都帶著這樣的偏見。</p>
+
+<p>(我自己以前對 partial 也是能閃就閃，只是我還是為了 code 乾淨度維護問題，繼續使用，然後再對緩慢的 partial 上 cache。)</p>
+
+<h3>Partial 真正緩慢的原因 ：eval</h3>
+
+<p>Partial 真正緩慢的原因是這樣：ERB 裡面能夠「跑」 code 的原因，是因為用 eval 去執行裡面 code 的內容。而一旦牽扯到「eval」，view 巨慢無比就是很正常的事。</p>
+
+<p>你可以動手作個小實驗，render 一個 partial。裡面分別放入這樣的內容：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">12345</span> <span class="no">Hello</span> <span class="no">World</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="vi">@post</span><span class="o">.</span><span class="n">id</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% Post.first </span><span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>也在這個 case 裡，如果直接拆成 partial，分塊呼叫的話，其實效率是非常高的，而且在維護上也非常直觀。而<code>原本為了避免採用 partial 造成效率低落所作的 LOGIC in View，反而是把這一頁效能完全拖垮的最大兇手</code>。</p>
+
+<h3>Follow MVC : Never LOGIC in View</h3>
+
+<p>不只是別在 Partial 裡面寫 LOGIC，更進一步的，其實你也應該儘量避免在 View 裡面寫任何 LOGIC。</p>
+
+<p>follow MVC 在 Rails 的意義，不僅是因為遵循 MVC pattern 精神而已。更重要的是，<code>在 view 中 LOGIC 會直接帶來嚴重的效能低落</code>。</p>
+
+<h3>How to organize code?</h3>
+
+<p>接下來衍生出來一個常常被問到的問題：「如何區別使用 Helper 與 Partial 的時機？」</p>
+
+<h4>Helper</h4>
+
+<p>我建議的判斷準則是這樣的。如果只有三行 HTML 以內的 View，而這一段 code 常常會被使用到。應該將他翻修成 Helper。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;a</span> <span class="na">hre=</span><span class="s">&quot;/posts/1&quot;</span><span class="nt">&gt;</span> POST TITLE <span class="nt">&lt;/a&gt;</span> <span class="nt">&lt;/h1&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>翻修成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="k">def</span> <span class="nf">render_post_title</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">content_tag</span><span class="p">(</span><span class="ss">:h1</span><span class="p">,</span> <span class="n">link_to</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">post_path</span><span class="p">(</span><span class="n">post</span><span class="p">)),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;title&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">&lt;%=</span> <span class="n">render_post_title</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者是這樣的情形</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if current_user <span class="err">&amp;&amp;</span> (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>翻修成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if edittable?(post) %&gt;
+</span><span class='line'>     <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> html</p>
+
+<h4>Partial</h4>
+
+<p>而使用 Partial 適當的時機是「大塊的 HTML 需要被複用」，所謂的大塊，是指 3 行以上的 HTML。千萬不要逞強使用 Helper 硬幹。用 Helper 包裹複雜的 HTML DOM 也會讓程式碼變得無法維護。</p>
+
+<p>以前就曾經改到一段 code：Developer 根本不知道有 partial 可用，只知道有 helper。他覺得 helper 很棒，因此就拿來包一段 20 多行的 HTML。</p>
+
+<p>結果美術的版不是 final，DOM 要大改重調位置，結果現場包含他自己，根本沒人看得懂 / 改的動這一段 code。</p>
+
+<p>我自己個人蠻常使用的技巧則是<code>helper 與 partial</code>混用，比如說</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if edittable?(post) %&gt;
+</span><span class='line'>     <span class="err">&lt;</span>%= render :tool_bar %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>被迫得在 View 中 LOGIC 或 Query 怎麼辦？</h3>
+
+<p>但有的時候，我們還是會被迫在 View 中寫程式，比如說跑迴圈 query…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% sites.each do |site| %&gt;
+</span><span class='line'>    <span class="err">&lt;</span>% site.categories.each do |category| %&gt;
+</span><span class='line'>      <span class="err">&lt;</span>% category.popular_posts.each do |post| %&gt;
+</span><span class='line'>         <span class="err">&lt;</span>%= post.title %&gt;
+</span><span class='line'>         <span class="err">&lt;</span>%= post.content %&gt;
+</span><span class='line'>      <span class="err">&lt;</span>% end %&gt;
+</span><span class='line'>    <span class="err">&lt;</span>% end %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>常見的想法是，整片 <code>打 cache</code>。</p>
+
+<p>但打 cache 其實沒有真正解決問題，當 cache expire 時，還是要有一個倒楣鬼，去負責 heat cache。就看哪個 user 倒楣囉。</p>
+
+<p>這時候我會推薦你使用一套 gem : <a href="http://cells.rubyforge.org/">Cells - Components For Rails</a>。去取代 partial 的架構。</p>
+
+<p>Cells 的架構，有些不一樣。它提出的概念是 <code>mini-controller</code> &amp; <code>partial</code>。也就是如果在 View 中 query 是昂貴的，你可以使用 Cells 提供的 mini-controller 把 query 拆上去。多層也沒問題，因為可以一直 render_cell 上去。</p>
+
+<p>而 Cells 也是 cachable 的架構。</p>
+
+<h2>Don&#8217;t use MVP &amp; Drapper</h2>
+
+<p>近年比較熱的包裝手法是 MVP 和 Drapper，很不巧的都剛好是同一個作者 Jeff Casimir。</p>
+
+<p>Rails 的 MVP 是他在 <a href="http://blip.tv/rubynation/jeff-casimir-fat-models-aren-t-enough-5562605">Fat Models Aren&#8217;t Euough</a> 倡導的。</p>
+
+<p>MVP 其實並沒有解決 View 的問題，而更糟的是，把片段的邏輯拆出去變成一層 Presentor，讓 code 變得其實更難維護了。</p>
+
+<p>而 <a href="http://railscasts.com/episodes/286-draper">Drapper</a> 更糟，玩的是 Decorater 手法。本來 Controller 與 View 混在一起就已經很糟了。而 Drapper 實作的手法，反而把整件事情帶往又更糟的方向…<code>Model 與 View 混在一起</code>。</p>
+
+<p>更別提它的效能問題了…</p>
+
+<p>-_-|||</p>
+
+<p>難道只有我覺得他是害人精嗎？</p>
+
+<h2>Conculsion</h2>
+
+<p>怎麼寫出好的 Code? 其實一般人對於我的感覺是：看我談這麼多 Rails 寫作技巧，我一定對同事很要求。</p>
+
+<p>很多人都有一個很大誤解：好的 Code 等於寫法漂亮的 Code，效能很高的 Code。所以一開始就給自己很大的壓力，第一次就要寫到漂亮，第一次就要寫到效能很棒，第一次就要用上很多技巧。</p>
+
+<p>這是錯誤的想法。其實寫 Code 只有兩件事需要注意：</p>
+
+<ol>
+<li>別寫蠢 Code。有一些禁忌是絕對不能犯的。比如說
+
+<ul>
+<li>SLOW SQL (QUERY|REQUEST) in View。</li>
+<li>wrap everything, 20 行的 HTML Helper</li>
+</ul>
+</li>
+<li>寫出乾淨易懂的 code。
+
+<ul>
+<li>笨拙但直觀的 code 別人多半是可以勉強接受的。</li>
+<li>直觀好維護的 code 才可以讓人看出你的意圖，從而改善。</li>
+<li>一段好 code 也通常是經過這樣幾次的 refactor，才到達最後的水準…</li>
+</ul>
+</li>
+</ol>
+
+
+<p>我也只有執行這兩個原則而已。</p>
+
+<p>一般實作功能，真正的效能瓶解往往不在於那多出來的幾個 function call。多半會在於你意想不到的地方，或者反而是你以為 optimize (效能/寫法)的地方。</p>
+
+<p>好好運用內建的機制，不要嘗試用 Cache 硬隱藏原有的問題，其實這樣就夠了…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[gollum : Git-backend Wiki]]></title>
@@ -1423,7 +1675,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x77;&#x61;&#110;&#103;&#x64;&#x69;&#110;&#x67;&#119;&#x65;&#105;&#x38;&#x32;&#64;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;">&#119;&#97;&#110;&#x67;&#100;&#105;&#110;&#x67;&#x77;&#x65;&#105;&#x38;&#50;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#x3a;&#119;&#97;&#110;&#103;&#x64;&#105;&#110;&#x67;&#119;&#101;&#x69;&#x38;&#x32;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;">&#x77;&#x61;&#x6e;&#x67;&#100;&#x69;&#x6e;&#x67;&#x77;&#101;&#105;&#x38;&#x32;&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
@@ -1760,136 +2012,6 @@ LOGO 和背景色有做了一點小調整。</p>
 <p>這個數字跑出來我自己也嚇了一跳，因為實在是遠超乎自己的想像。</p>
 
 <p>這件事也在某種程度上提醒和鼓勵了自己：<strong>持續做一件微小的事，時日一久也可以匯集巨大成果</strong>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why Octopress?]]></title>
-    <link href="http://blog.xdite.net/posts/2011/10/07/what-is-octopress/"/>
-    <updated>2011-10-07T19:05:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2011/10/07/what-is-octopress</id>
-    <content type="html"><![CDATA[<p><a href="http://octopress.org/">OctoPress</a> 是一套Blog Framework。也是我這個 blog 正在用的系統。</p>
-
-<p><img src="http://octopress.org/images/logo.png"></p>
-
-<p>用了這麼久（5 年）的 Wordpress，突然放棄，你一定會好奇背後真正轉換的原因。</p>
-
-<p><a href="http://wordpress.org">Wordpress</a> 是一個很方便的 Blog 系統。</p>
-
-<p>但很可惜的，一直以來它一直是一個給文字書寫者用的部落格系統。</p>
-
-<p>怎麼說呢？若你是一個專門談論技術的 blogger，用 Wordpress 寫一篇技術文帶給你的感覺通常是無比…麻煩。</p>
-
-<h2>樣樣麻煩</h2>
-
-<ul>
-<li><p><strong>貼圖很麻煩</strong>。（我們有潔癖，不喜歡直接傳圖直接上 Wordpres，通常會傳上 flickr 再 embd script)</p></li>
-<li><p><strong>程式排版很麻煩</strong>。如果不裝一些 plugin，幾乎無法貼程式語法。但是通常 plugin 也需要你寫特殊語法排這些程式碼。生出來的東西也很差強人意。</p></li>
-<li><p><strong>Hosting 很麻煩</strong>。安裝 Wordpress 需要租一個 <a href="http://zh.wikipedia.org/zh-hant/LAMP">LAMP</a> 的 stack 去停泊，沒事你還要害怕機器炸掉，沒有備份。上班摸一整天機器了，下班根本不想再弄…</p></li>
-<li><p><strong>版本控制 很麻煩</strong>。以前的 blog 系統沒有自動備份，視窗一炸掉，文章 99% 就是不見了。而雖然現在 Wordpress 還有一些其他 BSP 有自動儲存功能。但你我心知肚明那只是醫手殘。你只有辦法撈上最近幾個版本，去把文章存回來。若要看自己上次 <strong>因為什麼理由，修訂了這篇文章的草稿</strong> 根本辦不到。</p></li>
-<li><p><strong>改 theme 很麻煩</strong>。如果需要自己訂一些 tips 等方塊，要自己另寫 CSS，但是改 wp-theme 再生效實在是很麻煩的一件事。而且可不可以讓我直接寫 <a href="http://sass-lang.com">SCSS</a>就好？</p></li>
-<li><p><strong>寫作 很麻煩</strong>。雖然這一點寫出來算有點雞蛋挑骨頭。但是使用 <a href="http://markdown.tw">Markdown</a> 書寫文章，實在遠比用黏膩膩的 HTML 語法快多了。</p></li>
-</ul>
-
-
-<p>樣樣都煩啊！想到就懶！！</p>
-
-<h2>Developer Blogger 的需求</h2>
-
-<p>其實我們的需求也不多。若是可以：</p>
-
-<ul>
-<li>輕鬆的撰寫 Markdown</li>
-<li>輕鬆的貼圖</li>
-<li>輕鬆的貼程式碼</li>
-<li>改 CSS 超容易</li>
-<li>不用煩惱佈署問題</li>
-<li>檢視草稿變化，甚至是站台更動變化。</li>
-</ul>
-
-
-<p>這樣就很開心了！</p>
-
-<h2>Octopress</h2>
-
-<p>而 Octopress 就是這樣一套會讓人開心的 Blog Framework。</p>
-
-<ul>
-<li>輕鬆佈署</li>
-</ul>
-
-
-<p>Octopress 背後是一套叫 Jekyll 的靜態網站產生引擎，可以輕鬆產生 static-file based 的網站，佈署出去。</p>
-
-<p>你可以選擇放到自己的機器，<a href="http://heroku.com">Heroku</a>，甚至是 Github Page 上。</p>
-
-<p>佈署簡單到只要一個指令 rake deploy 就出去了！</p>
-
-<ul>
-<li>輕鬆撰寫文章</li>
-</ul>
-
-
-<p>Octopress 支援 Markdown，直接解決了寫作和貼圖的問題。</p>
-
-<p>而程式碼的排版更不用煩惱，可以直接使用 Markdown 原先的 block 貼程式碼，只要註記語言種類，就會自動排版上色。（格式也與 Markdown 語法完全相容）</p>
-
-<p>更令人讚嘆的是可以內嵌 <a href="http://gist.github.com">Gist</a>。這不知道有多酷啊…</p>
-
-<ul>
-<li>使用 Git 版本控制</li>
-</ul>
-
-
-<p>Octopress 本身不需使用任何 database，架構本身靠的是文字檔案以及版本控制系統。可以透過使用 Git 觀看站體與文章的修改變化。</p>
-
-<p>而我現在寫文章還常使用進階的招數：開 Git branch 把 TODO 扔進 TODO branch，這樣就算我還有文章沒有寫好，或者是日後需要補充，都不需要另外管理以及害怕被人看見。</p>
-
-<ul>
-<li>更改網站配置更方便</li>
-</ul>
-
-
-<p>Octopress 雖然基於 Jekyll，但用起來比 Jekyll 更方便，不少功能都是內建模組化，比如：社群功能（Twitter / Google plus）、留言功能（<a href="http://disqus.com/">DISQUS</a>）、統計功能（Google Analytics），這些都簡單到只要改 _config.yml 就可以改一改，馬上就可以有一個 Blog 上線了。</p>
-
-<ul>
-<li>對 Ruby Developer very very very friendly</li>
-</ul>
-
-
-<p>Octopress 是 Ruby-based 的。自然許多 feature 是取用 Ruby Ecosystem 熱門架構與套件打造的。</p>
-
-<p>熟悉 Ruby 的開發者，可以透過：</p>
-
-<ul>
-<li>Rack</li>
-<li>Rake</li>
-<li>SCSS</li>
-<li>Guard</li>
-<li>LiveReload</li>
-<li>Heroku</li>
-</ul>
-
-
-<p>就玩出更多花樣。</p>
-
-<p>寫出 Octopress plugin 更不是什麼難事。</p>
-
-<h2>小結</h2>
-
-<p>Wordpress 爛歸爛，但如果不挑的話，還算是可以用。一直以來，我都認為自己寫文章的速度，若不被平台和工具綁住的話，其實寫作速度還可以更快，寫作興致還可以更高昂。</p>
-
-<p>想歸想，但實際上找不出解法去解決問題。</p>
-
-<p>這件事，一直到了我漸漸接觸到了 Markdown 、 <a href="www.iawriter.com">iAWriter</a> / <a href="http://mouapp.com">Mou</a> 、 <a href="https://github.com/mojombo/jekyll">Jekyll</a> / Octopress，慢慢被改變了。</p>
-
-<p>後來實際用了 Octopress 認真架了一個關於 「<a href="http://upgrade2rails31.com/">Upgred2Rails31</a>」 的教學網站，放置升級到 Rails 3.1 的教學筆記。</p>
-
-<p>寫著寫著，更加深了我這樣的信念。我寫作的速度，文章的長度，還有文章的有趣度，無一不被提高了！</p>
-
-<p>加上我本身的職業就是 Ruby Developer，要 <strong>Hack</strong> 這個系統根本不是什麼難事。這個職業反而有加分作用。</p>
-
-<p>最後，就是你看到的：我終於鼓起勇氣把用了五年的 Wordpress 扔掉了 XD</p>
 ]]></content>
   </entry>
   
