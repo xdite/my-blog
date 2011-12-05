@@ -9,7 +9,7 @@ categories:
 
 
 
-兩週前談到 OmniAuth，還剩下最後一篇欠稿：實作篇。
+兩週前談到 OmniAuth，還剩下最後一篇欠稿：實作篇。來還債了...
 
 * [OmniAuth - 實作多方認證的最佳實踐 (1)](http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-1/)
 * [OmniAuth - 實作多方認證的最佳實踐 (2)](http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/)
