@@ -210,11 +210,11 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="k">def</span> <span class="nf">render_post_title</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">content_tag</span><span class="p">(</span><span class="ss">:h1</span><span class="p">,</span> <span class="n">link_to</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">post_path</span><span class="p">(</span><span class="n">post</span><span class="p">)),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;title&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">render_post_title</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">content_tag</span><span class="p">(</span><span class="ss">:h1</span><span class="p">,</span> <span class="n">link_to</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">post_path</span><span class="p">(</span><span class="n">post</span><span class="p">)),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;title&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="o">&lt;%=</span> <span class="n">render_post_title</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="o">%&gt;</span>
+</span><span class='line'><span class="o">&lt;%=</span> <span class="n">render_post_title</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="o">%&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -223,9 +223,9 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if current_user <span class="err">&amp;&amp;</span> (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %&gt;
-</span><span class='line'>  <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
-</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</pre></td><td class='code'><pre><code class='rhtml'><span class='line'>  <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">current_user</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">current_user</span> <span class="o">||</span> <span class="n">current</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_forum_admin?</span> <span class="o">||</span> <span class="n">current</span><span class="o">.</span><span class="n">user_is_admin?</span> <span class="p">)</span> <span class="cp">%&gt;</span>
+</span><span class='line'>  <span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">edit_post_path</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="p">)</span> <span class="cp">%&gt;</span>
+</span><span class='line'>  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -234,9 +234,9 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if edittable?(post) %&gt;
-</span><span class='line'>     <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
-</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</pre></td><td class='code'><pre><code class='rhtml'><span class='line'>  <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">editable?</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="cp">%&gt;</span>
+</span><span class='line'>     <span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">edit_post_path</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="p">)</span> <span class="cp">%&gt;</span>
+</span><span class='line'>  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -255,7 +255,7 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if edittable?(post) %&gt;
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if editable?(post) %&gt;
 </span><span class='line'>     <span class="err">&lt;</span>%= render :tool_bar %&gt;
 </span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
 </span></code></pre></td></tr></table></div></figure>

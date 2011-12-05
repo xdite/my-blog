@@ -95,7 +95,7 @@ follow MVC 在 Rails 的意義，不僅是因為遵循 MVC pattern 精神而已�
 翻修成
 
 ``` ruby
-	def render_post_title(post)
+    def render_post_title(post)
       content_tag(:h1, link_to(post.title, post_path(post)), :class => "title")
     end
 
@@ -104,15 +104,15 @@ follow MVC 在 Rails 的意義，不僅是因為遵循 MVC pattern 精神而已�
 
 或者是這樣的情形
 
-``` html
+``` rhtml
   <% if current_user && (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %>
 	<%= link_to("Edit", edit_post_path(post) ) %>
   <% end %>
 ```
 翻修成
 
-``` html
-  <% if edittable?(post) %>
+``` rhtml
+  <% if editable?(post) %>
      <%= link_to("Edit", edit_post_path(post) ) %>
   <% end %>
 ``` html
@@ -128,7 +128,7 @@ follow MVC 在 Rails 的意義，不僅是因為遵循 MVC pattern 精神而已�
 我自己個人蠻常使用的技巧則是` helper 與 partial `混用，比如說
 
 ``` html
-  <% if edittable?(post) %>
+  <% if editable?(post) %>
      <%= render :tool_bar %>
   <% end %>
 ```
