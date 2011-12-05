@@ -15,11 +15,11 @@ categories:
 * [OmniAuth - 實作多方認證的最佳實踐 (2)](http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/)
 * [OmniAuth - 實作多方認證的最佳實踐 (3)](http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-3/)
 
-本來還在煩惱怎樣給出一個 demo app。剛好最近幫忙翻修 <http://ruby-taiwan.org>。網站的 0.3 => 1.0 的升級就是出於本人之手。
+本來還在煩惱怎樣給出一個 demo app。剛好最近幫忙翻修 <http://ruby-taiwan.org>。網站的 0.3 => 1.0 的升級就是出於筆者之手。
 
 乾脆拿這個網站直接來講...
 
-若最後還是看不懂示範的可以直接 clone 專案下來直接 copy。
+若最後還是看不懂示範的可以直接 [clone 專案](git://github.com/rubytaiwan/ruby-taiwan.git)下來直接 copy。
 
 ## Install Devise
 
