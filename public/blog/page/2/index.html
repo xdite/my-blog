@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature 畫虎不成反類犬了。在為網站實作 SEO 改善工程時，我們通常會使用一個技巧：在 permalink 裡面塞關鍵字。這樣的設計你可以在 T 客邦 看到，也可以在 PIXNET...">
+  <meta name="description" content="                  Github 內部自用的機器人 Hubot 一直是個神秘的產品，常常看到內部員工在投影片內炫耀 Hubot 多麼的屌：但往往只是聞其聲，不見其蹤。不過要是按照 Github 內部慣例，常常在員工投影片出現的東西，往往就是下一個 release 的標的。因此大...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/10/27/coffeescript-nodejs-hubot/">CoffeeScript 還可以用來做什麼？ &#8211; Hubot</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-10-27T16:44:00+08:00" pubdate  data-updated="true" >Oct 27<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/10/27/coffeescript-nodejs-hubot/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/27/coffeescript-nodejs-hubot/" data-show-faces="false"></div></div>
+    
+    <p><a href="http://github.com">Github</a> 內部自用的機器人 Hubot 一直是個神秘的產品，常常看到內部員工在<a href="http://speakerdeck.com/u/holman/p/how-github-uses-github-to-build-github">投影片</a>內炫耀 Hubot 多麼的屌：</p>
+
+<p><a href="http://www.flickr.com/photos/xdite/6285733326/" title="Hubot1 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6031/6285733326_5754b16968.jpg" width="500" height="375" alt="Hubot1"></a></p>
+
+<p><a href="http://www.flickr.com/photos/xdite/6285212725/" title="Hubot2 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6110/6285212725_7255bbcabc.jpg" width="500" height="374" alt="Hubot2"></a></p>
+
+<p>但往往只是聞其聲，不見其蹤。</p>
+
+<p>不過要是按照 Github 內部慣例，常常在員工投影片出現的東西，往往就是下一個 release 的標的。因此大家也都是迫不及待在等 Hubot 的釋出。按照大家的假想，Hubot 應該是某種 Perl 或 Ruby 的 client，而且 Ruby 的機率可能還大的多。</p>
+
+<p>但 Github 官方 blog 貼的這篇<a href="https://github.com/blog/968-say-hello-to-hubot">公告文</a>章讓大家下巴掉下來：<a href="http://hubot.github.com/">Hubot</a> 是 <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> 寫的&#8230;&#8230;.XDDDDD</p>
+
+<p>(註：以防你不知道什麼是 <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a>，或者是它能帶來的好處，我曾經寫過這麼一篇<a href="http://upgrade2rails31.com/coffee-script">文章</a> 解釋原理以及用途 )</p>
+
+<h3>CoffeeScript meets NodeJS</h3>
+
+<p>更精確的來說，Hubot 是用 <a href="http://nodejs.org/">NodeJS</a> 架構作出來的一套機器人框架，而 Github 並非直接撰寫 JavaScript，他們是直接使用 CoffeeScript。整個專案的原始碼都只有 .coffee 而已。</p>
+
+<h3>Support Campfire 與 IRC</h3>
+
+<p>目前 Hubot 支援兩種 chatroom，預設是 <a href="http://37signals.com">37signals</a> 的產品 <a href="http://campfirenow.com">Campfire</a>，也有提供 <a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a> 的 adapter。</p>
+
+<h3>Provide tons of hubot-scripts example</h3>
+
+<p>為了避免大家不知道怎樣擴展 Hubot 的功能，Github 在專案內提供了大概十支左右的 example，也另開了一個專案 <a href="https://github.com/github/hubot-scripts">hubot-scripts</a>，讓大家交流和 contribute。</p>
+
+<h3>Hosted on Heroku</h3>
+
+<p>你會覺得，要跑起這樣一隻 bot，也許又要找一台機器把 bot 跑起來？</p>
+
+<p>Well，這次你錯了…</p>
+
+<p>Hubot 的架構被設計為可以透過 <a href="http://heroku.com">Heroku</a> 的 <a href="http://devcenter.heroku.com/articles/node-js">Procfile 架構</a>掛起來，也就是可以把這一隻 Bot 養在雲端 XD （ Hubot 的文件有教你怎麼作 ）</p>
+
+<h2>小結</h2>
+
+<p>昨天晚上在 Twitter 上看到幾個 Rails core team member 在講 hubot-scripts 時，才突然發現 Hubot 竟然已經釋出了。早上認真想玩時，發現整個架構竟然是 CoffeeScript + NodeJS 時，內心其實有小震撼…</p>
+
+<p>目前看到的幾個是 feature project 的 network program 都是以這樣的方式誕生，如 <a href="http://pow.cx">Pow</a>、Hubot。看來 network program 應該會越來越往 NodeJS 方向傾斜過去。</p>
+
+<p>BTW，今天在玩 Hubot 時，有發現幾個比較值得注意的地方。</p>
+
+<ol>
+<li><p>請使用 trunk 版。雖然官方請你直接下載有版本號的打包檔，不過大概是剛釋出，bug 有一點點多，但社群都積極的在修補，這些修補檔目前都還在 master branch 上，還沒被 tag 成 release 版本。所以跑 master 通常會比較沒問題。</p></li>
+<li><p>扔上 Heroku 時，要記得寫 Procfile，不然是不會動的。Procfile 的 sample 在 src/templates 下。記得一定要寫，然後再開 <code>heroku ps:scale app=1</code>。完整 Heroku 教學放在 <code>src/templates/README.md</code> 下。</p></li>
+</ol>
+
+
+<p>Good Luck!</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -592,7 +682,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#x77;&#x61;&#110;&#103;&#100;&#105;&#x6e;&#x67;&#x77;&#x65;&#x69;&#x38;&#x32;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#119;&#97;&#x6e;&#x67;&#x64;&#x69;&#110;&#x67;&#119;&#x65;&#105;&#56;&#50;&#64;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x77;&#x61;&#x6e;&#x67;&#x64;&#105;&#110;&#x67;&#x77;&#x65;&#105;&#56;&#x32;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#x77;&#97;&#x6e;&#103;&#100;&#x69;&#x6e;&#103;&#119;&#101;&#x69;&#x38;&#50;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
@@ -1010,65 +1100,6 @@ LOGO 和背景色有做了一點小調整。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/">五年寫了 230 萬字</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-10-08T00:17:00+08:00" pubdate  data-updated="true" >Oct 8<span>th</span>, 2011</time>
-        
-         | <a href="/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/" data-show-faces="false"></div></div>
-    
-    <p>這兩天因為本來嘗試要將 Wordpress 轉成 Octopress 的緣故。寫了不少 script。而壓出來的 MySQL 備份檔大概也有 11 M。原本以為是 spam 佔了很多份量。沒想到去掉 comment，還是足足有 10 多 M&#8230;</p>
-
-<p>才發現自己好像還真的寫了不少字。</p>
-
-<p>好奇用 wc 跑自己的文章目錄夾，得出一些有趣的數字：</p>
-
-<p>文章：840 篇
-字數：2312404 字。</p>
-
-<p>歷時 1902 days</p>
-
-<p>平均 2.23 天寫一篇文章</p>
-
-<p>平均每篇文章長 2752 字。</p>
-
-<p>這個數字跑出來我自己也嚇了一跳，因為實在是遠超乎自己的想像。</p>
-
-<p>這件事也在某種程度上提醒和鼓勵了自己：<strong>持續做一件微小的事，時日一久也可以匯集巨大成果</strong>。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1104,6 +1135,10 @@ LOGO 和背景色有做了一點小調整。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2011/12/05/omniauth-clean-auth-provider-4/">OmniAuth - 實作多方認證的最佳實踐 (4)</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2011/12/04/misunderstanding-about-render/">對於使用 Render Partial 的一些誤解</a>
       </li>
     
@@ -1117,10 +1152,6 @@ LOGO 和背景色有做了一點小調整。</p>
     
       <li class="post">
         <a href="/posts/2011/11/19/thouhgts-on-html5-and-mobile-app/">Thoughts on HTML5 & Mobile App</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2011/11/19/omniauth-clean-auth-provider-3/">OmniAuth - 實作多方認證的最佳實踐 (3)</a>
       </li>
     
   </ul>
