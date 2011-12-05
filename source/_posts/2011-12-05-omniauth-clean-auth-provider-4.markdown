@@ -114,8 +114,8 @@ class User < ActiveRecord::Base
 
 如果你是使用 ruby-taiwan 這個 project 的話
 
-網址填 http://ruby-china.dev/
-Call 網址填 http://ruby-china.dev/account/auth/github/callback
+* 網址填 http://ruby-china.dev/
+* Call 網址填 http://ruby-china.dev/account/auth/github/callback
 
 ** 一定得這樣填，亂改炸掉別怪我.. **
 
