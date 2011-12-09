@@ -30,7 +30,7 @@ View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如
 
 一個 view 若有著很多 if / else / elsif , query_some_data。又有著 if / else / elsif , change some css class ?
 
-人的大腦不是 Ruby Interperator，很難腦內想像這麼複雜的 code 會長什麼樣子，沒多久就會當機的....
+`人的大腦不是 Ruby Interperator，很難腦內想像這麼複雜的 code 會長什麼樣子，沒多久就會當機的....`
 
 ### 其二：讓 View 更加直觀好維護。
 
