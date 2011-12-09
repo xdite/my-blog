@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How-to-design-helpers-2"
+title: "如何運用 / 設計 Rails Helper (2)"
 date: 2011-12-09 16:36
 comments: true
 categories: 
