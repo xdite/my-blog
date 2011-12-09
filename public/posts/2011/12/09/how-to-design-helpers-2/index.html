@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How-to-design-helpers-2 - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          本系列第一篇：如何運用 / 設計 Rails Helper (1)===為什麼在專案中我們要撰寫「自用」 Helper？其一：在 View 裡面實作 LOGIC 是不好的。造成效能低落在 對於使用 Render Partial 的一些誤解 一文中。我有解釋過一部分的原因：「...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/posts/2011/12/09/how-to-design-helpers-2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How-to-design-helpers-2</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-12-09T16:36:00+08:00" pubdate  data-updated="true" >Dec 9<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <p>本系列第一篇：</p>
+
+<p><a href="http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/">如何運用 / 設計 Rails Helper (1)</a></p>
+
+<p>===</p>
+
+<h2>為什麼在專案中我們要撰寫「自用」 Helper？</h2>
+
+<h3>其一：在 View 裡面實作 LOGIC 是不好的。</h3>
+
+<h4>造成效能低落</h4>
+
+<p>在 <a href="http://blog.xdite.net/posts/2011/12/04/misunderstanding-about-render/">對於使用 Render Partial 的一些誤解</a> 一文中。我有解釋過一部分的原因：「效能低落」。原因是 ERB 是用 eval 實作 執行 Ruby code 的。在 View 裡面穿插大量的 LOGIC 會造成 render 的效率低落。</p>
+
+<h4>造成程式碼混亂難讀</h4>
+
+<p>View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如果有程式邏輯，或者是資料查詢，應該挪到 Controller 或 Model 去做。</p>
+
+<p>這通常在 PHP 出身轉過來的 Programmer，比較能找到這樣的問題。原因是在 PHP 寫作，這樣是很天經地義的作法。但眾所週知的，PHP 的 project 也特別容易藏汙納垢。</p>
+
+<p>如果你拿到一個 Project，View 一打開來都 7-8 頁以上，別懷疑，肯定都是 LOGIC in View 造成的。而根據經驗，有長 View 問題的 project，往往比長 controller 的 project 還要難纏。</p>
+
+<p>一個 view 若有著很多 if / else / elsif , query_some_data。又有著 if / else / elsif , change some css class ?</p>
+
+<p>人的大腦不是 Ruby Interperator，很難腦內想像這麼複雜的 code 會長什麼樣子，沒多久就會當機的&#8230;.</p>
+
+<h3>其二：讓 View 更加直觀好維護。</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if current_user <span class="err">&amp;&amp;</span> (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看的懂這段 code 的意圖嗎？</p>
+
+<p>這段還算簡單，我想你應該猜的到。不過如果這一段 code 再經過兩三輪的維護，我想應該就面目全非了。</p>
+
+<p>其實應該要這樣做，把邏輯拆出來，放在 Helper 裡。就像這樣：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if can_edit?(post) %&gt;
+</span><span class='line'>     <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>後續維護者就知道，這一段程式碼就是在表示：<strong>如果當前使用者有權限編輯，就應該顯示編輯頁面的連結。</strong></p>
+
+<h3>其三：給 Code 取名字，複用成果。</h3>
+
+<p>上面一段 Code 其實還不算好，這一段 code 只說了：<strong>如果當前使用者有權限編輯，就應該顯示編輯頁面的連結。</strong>。它還是沒有自己的意思。但其實這一塊原始碼的意圖是，若有編輯權限，這裡應該應顯示一塊 Toolbar。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>%= render_tool_bar %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>包裝成 Toolbar 後，這一塊程式碼就變得有名字了，下次你在某個頁面要寫到類似的功能時，就只要呼叫 render_too_bar 就可以了。</p>
+
+<p>而最重要的，是你以後再維護這一塊程式碼時，完全不必再猜測程式意圖了。</p>
+
+<h3>其四： 不會被以前寫的 Code 害死。</h3>
+
+<p>像這種 code 在網站初期建設時沒有什麼不好。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if current_user <span class="err">&amp;&amp;</span> (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但是一旦接近完工就要儘快 refactor 掉它。這種 code 一旦越來越多，網站就會更難維護。</p>
+
+<p>像是我的 Team 或專案都有一個慣例，一旦專案開發快到尾聲。我一定會開始整理 code，把重複的 code 包成有名字的 Helper。</p>
+
+<p>有什麼好處呢？</p>
+
+<ol>
+<li><p>網站以後要進行結構重整時，只要調整已定義好的 Helper 內部架構就好了。如果還是東一個西一個到處亂放，同樣的東西重複貼 10 個地方，將來想要調整就要改 10 遍。相信我，你不喜歡在「改版時期」改 code 改 10 遍。就算 git grep 還是會改漏掉…</p></li>
+<li><p>painless 升級 Rails 版本。有很多人好奇我手上的每個專案，為何可以一路從 2.3.x 一路升升升到3.1.x 去。卻還是輕鬆愉快？</p></li>
+</ol>
+
+
+<p>中間不是有令人抓狂的 html_escape API 問題？asset_pipeline 架構調整？這些都是很 painful 的過程。不少人都在升版過程中放棄了。為什麼我們還是寫意的辦到了。</p>
+
+<p>這不是有沒有寫 test 的關係，是在於有沒有定期整理 code 的習慣。</p>
+
+<p>不管是 helper / partial / controller / model ，只要是重複的 code ，定期都會進行封裝整理。就算有東西爆炸，也只要調整一下 helper 或者是 model 的輸出，就辦到了。</p>
+
+<p>所以就算 Rails 要升版，精力也都是集中在處理幾個 decrapteed method 或 imcompatiable API 的調整。就算 view 爆掉，也只要改一個地方，10 個地方都會生效。自然寫意無比。</p>
+
+<h3>其五：容易複用並開創專案打下來的 best practices</h3>
+
+<p>在進行專案過程中，也會漸漸的養出自己的一套 HTML 架構 與 CSS (SCSS)。很多元件在不同專案中都是共通的，比如說自己用來 bootstrap （非 twitter）專案的 view 和 helper。</p>
+
+<p>navgation_bar, user_bar, breadcrumb, menu list, table, button,gravator 這些都是專案必備。</p>
+
+<p>這是前東家 <a href="http://handlino.com">Handlino</a> 設計的一套 helper
+<a href="https://github.com/handlino/handicraft_helper">https://github.com/handlino/handicraft_helper</a></p>
+
+<p>可以很方便就寫出 menu, table, body class with browser type, breadcrumb…etc.</p>
+
+<p>而我作網站還會多上幾套自己養出來的標準 Helper</p>
+
+<ul>
+<li>SEO 最佳化實踐</li>
+<li>Social Media Share-Friendly</li>
+<li>Content Site 常用功能最佳實踐</li>
+</ul>
+
+
+<p>專案越寫越多，後期越來越輕鬆，但不管之後再寫什麼新網站，依舊是幾乎都預設含有以前維護舊網站時打下的 Best Practices.</p>
+
+<p>// 最近的目標換在整理 SCSS …</p>
+
+<p>===</p>
+
+<p>接下來幾章將會介紹：</p>
+
+<p>什麼是不好的 Helper Pattern 應儘量避免、自用 Helper 的設計整理原則、如何將常用 Helper 抽取出來可以複用。</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-12-09T16:36:00+08:00" pubdate  data-updated="true" >Dec 9<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/12/09/how-to-design-helpers-2/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/12/09/how-to-design-helpers-2/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2011/12/09/how-to-design-helpers-2/">How-to-design-helpers-2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/12/08/how-to-design-helpers/">如何運用 / 設計 Rails Helper (1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/12/05/omniauth-clean-auth-provider-4/">OmniAuth - 實作多方認證的最佳實踐 (4)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/12/04/misunderstanding-about-render/">對於使用 Render Partial 的一些誤解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/12/04/gollum-git-based-wiki/">gollum : Git-backend Wiki</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/posts/2011/12/09/how-to-design-helpers-2/';
+        var disqus_url = 'http://blog.xdite.net/posts/2011/12/09/how-to-design-helpers-2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

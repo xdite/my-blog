@@ -86,7 +86,7 @@ Rails 最令其他 Ruby Web Framework 羨慕的，就是內建的很多方便 He
  <%= stylesheet_link_tag "abc", "def", :cache => true %>
 ```
 
-這一行，可以在 production 環境時，自動幫你將兩支 CSS 自動壓縮成一支 all.css 。直接實現了 Yahoo [Best Practices for Speeding Up Your Web Site]（http://developer.yahoo.com/performance/rules.html）中，minify HTTP reqesut 的建議。而在 Rails 3.1 之後，甚至還會自動幫你 trim 與 gzip。
+這一行，可以在 production 環境時，自動幫你將兩支 CSS 自動壓縮成一支 all.css 。直接實現了 Yahoo [Best Practices for Speeding Up Your Web Site](http://developer.yahoo.com/performance/rules.html)中，minify HTTP reqesut 的建議。而在 Rails 3.1 之後，甚至還會自動幫你 trim 與 gzip。
 
 完全不需要去在 deploy process 中 hook 另外的 compressor 就可以達到。
 
