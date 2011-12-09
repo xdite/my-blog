@@ -18,7 +18,7 @@ categories:
 
 #### 造成效能低落
 
-在 [對於使用 Render Partial 的一些誤解](http://blog.xdite.net/posts/2011/12/04/misunderstanding-about-render/) 一文中。我有解釋過一部分的原因：「效能低落」。原因是 ERB 是用 eval 實作 執行 Ruby code 的。在 View 裡面穿插大量的 LOGIC 會造成 render 的效率低落。
+在 [對於使用 Render Partial 的一些誤解](http://blog.xdite.net/posts/2011/12/04/misunderstanding-about-render/) 一文中。我有解釋過在 View 裡面實作 LOGIC 的影響：「效能低落」。原因是 ERB 是用 eval 實作 執行 Ruby code 的。在 View 裡面穿插大量的 LOGIC 會造成 render 的效率低落。
 
 #### 造成程式碼混亂難讀
 
