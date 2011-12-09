@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-12-10T04:55:43+08:00</updated>
+  <updated>2011-12-10T04:57:59+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -116,7 +116,7 @@
 
 <p>不管是 helper / partial / controller / model ，只要是重複的 code ，定期都會進行封裝整理。就算有東西爆炸，也只要調整一下 helper 或者是 model 的輸出，就辦到了。</p>
 
-<p>所以就算 Rails 要升版，精力也都是集中在處理幾個 decrapteed method 或 imcompatiable API 的調整。就算 view 爆掉，也只要改一個地方，10 個地方都會生效。自然寫意無比。</p>
+<p>所以就算 Rails 要升版，精力也都是集中在處理幾個 deprecated method 或 incompatible API 的調整。就算 view 爆掉，也只要改一個地方，10 個地方都會生效。自然寫意無比。</p>
 
 <h3>其五：容易複用並開創專案打下來的 best practices</h3>
 
@@ -2146,7 +2146,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#x3a;&#119;&#x61;&#110;&#x67;&#x64;&#x69;&#x6e;&#103;&#119;&#101;&#x69;&#56;&#50;&#64;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;">&#x77;&#97;&#x6e;&#x67;&#x64;&#x69;&#x6e;&#103;&#x77;&#101;&#105;&#56;&#x32;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#x77;&#97;&#110;&#x67;&#100;&#105;&#x6e;&#x67;&#x77;&#x65;&#105;&#56;&#50;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">&#x77;&#97;&#x6e;&#x67;&#x64;&#x69;&#x6e;&#103;&#x77;&#x65;&#105;&#56;&#50;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 

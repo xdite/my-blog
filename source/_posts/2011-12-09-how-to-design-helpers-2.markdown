@@ -93,7 +93,7 @@ View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如
 
 不管是 helper / partial / controller / model ，只要是重複的 code ，定期都會進行封裝整理。就算有東西爆炸，也只要調整一下 helper 或者是 model 的輸出，就辦到了。
 
-所以就算 Rails 要升版，精力也都是集中在處理幾個 decrapteed method 或 imcompatiable API 的調整。就算 view 爆掉，也只要改一個地方，10 個地方都會生效。自然寫意無比。
+所以就算 Rails 要升版，精力也都是集中在處理幾個 deprecated method 或 incompatible API 的調整。就算 view 爆掉，也只要改一個地方，10 個地方都會生效。自然寫意無比。
 
 
 ### 其五：容易複用並開創專案打下來的 best practices
