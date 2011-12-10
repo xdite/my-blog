@@ -30,7 +30,7 @@ View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如
 
 一個 view 若有著很多 if / else / elsif , query_some_data。又有著 if / else / elsif , change some css class ?
 
-`人的大腦不是 Ruby Interperator，很難腦內想像這麼複雜的 code 會長什麼樣子，沒多久就會當機的....`
+`人的大腦不是 Ruby Interpreter，很難腦內想像這麼複雜的 code 會長什麼樣子，沒多久就會當機的....`
 
 ### 其二：讓 View 更加直觀好維護。
 
@@ -98,7 +98,7 @@ View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如
 
 中間不是有令人抓狂的 html_escape API 行為改變問題？asset_pipeline 架構調整？這些都是很 painful 的過程。不少人都在升版過程中放棄了。為什麼我們還是寫意的辦到了。
 
-關鍵不在於有沒有寫 test 的關係，是在於有沒有定期整理 code 的習慣。
+關鍵不在於有沒有寫 test 的關係，而是在於「有沒有擁有定期整理 code 的習慣」。
 
 不管是 helper / partial / controller / model ，只要是重複的 code ，定期都會進行封裝整理。就算有東西爆炸，也只要調整一下 helper 或者是 model 的輸出，就辦到了。
 
