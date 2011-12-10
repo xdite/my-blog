@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-12-10T10:31:32+08:00</updated>
+  <updated>2011-12-10T10:33:09+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -93,7 +93,7 @@
 
 <h3>其四： 不會被以前寫的 Code 害死。</h3>
 
-<p>這種 code 在網站初期建設需要高速開發時沒有什麼不好。</p>
+<p>下面所說的這種 code 在網站初期建設需要高速開發時沒有什麼不好。其實也還算讓人看得懂&#8230;</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -104,11 +104,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>但是一旦接近完工狀態就要儘快 refactor 掉它。一旦這種 code 越來越多，網站就會更難維護。</p>
+<p>但我建議：一旦接近完工狀態就要儘快 refactor 掉它。</p>
 
-<p>像是我的 Team 或專案都有一個慣例，一旦專案開發快到尾聲，我一定會開始整理 code，把重複的 code 包成有名字的 Helper。</p>
+<p>這種 code 一旦越來越多，網站就會越來越難維護。累積到一個程度，網站就會變成 unmaintainable&#8230;</p>
 
-<p>有什麼好處？</p>
+<p>像是我的 Team 或專案都有一個慣例，一旦專案開發快到尾聲，一定會開始整理 code，把重複的 code 包成有名字的 Helper。</p>
+
+<p>這樣作有什麼好處？</p>
 
 <ol>
 <li><p>網站以後要進行結構重整時，只要調整已定義好的 Helper 內部架構就好了。如果還是東一個西一個到處亂放，同樣的東西重複貼 10 個地方，將來想要調整就要改 10 遍。相信我，你不喜歡在「改版時期」改 code 改 10 遍。就算 git grep 還是會改漏掉…</p></li>
@@ -2152,7 +2154,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x77;&#x61;&#x6e;&#x67;&#100;&#105;&#110;&#x67;&#x77;&#x65;&#105;&#56;&#x32;&#64;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#119;&#97;&#110;&#103;&#x64;&#105;&#x6e;&#103;&#x77;&#x65;&#105;&#56;&#x32;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#119;&#97;&#x6e;&#x67;&#x64;&#105;&#x6e;&#103;&#x77;&#x65;&#x69;&#x38;&#x32;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#x6f;&#x6d;">&#x77;&#x61;&#110;&#x67;&#100;&#x69;&#110;&#x67;&#x77;&#101;&#105;&#x38;&#x32;&#64;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
