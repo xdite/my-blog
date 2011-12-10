@@ -59,7 +59,7 @@ Github 是這樣做的，當它們在建造 <http://github.com> 時，因為 Git
 
 和 
 
-proxymachine <https://github.com/mojombo/proxymachine>
+* proxymachine <https://github.com/mojombo/proxymachine>
 
 保持連線平穩
 
