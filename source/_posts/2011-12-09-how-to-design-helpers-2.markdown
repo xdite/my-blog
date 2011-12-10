@@ -24,7 +24,7 @@ categories:
 
 View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如果有程式邏輯，或者是資料查詢，應該挪到 Controller 或 Model 去做。
 
-這通常在 PHP 出身轉過來的 Programmer，比較能找到這樣的問題。原因是在 PHP 寫作，這樣是很天經地義的作法。但眾所週知的，PHP 的 project 也特別容易藏汙納垢。
+這通常在 PHP 出身轉過來的 Programmer 身上，比較能找到這樣的問題。原因是在 PHP 寫作，這樣是很天經地義的作法。但眾所週知的，PHP 的 project 也特別容易藏汙納垢。
 
 如果你拿到一個 Project，View 一打開來都 7-8 頁以上，別懷疑，肯定都是 LOGIC in View 造成的。而根據經驗，有長 View 問題的 project，往往比長 controller 的 project 還要難纏。
 
@@ -69,7 +69,7 @@ View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如
 
 ### 其四： 不會被以前寫的 Code 害死。
 
-像這種 code 在網站初期建設時沒有什麼不好。
+這種 code 在網站初期建設需要高速開發時沒有什麼不好。
 
 ``` html
   <% if current_user && (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %>
@@ -77,9 +77,9 @@ View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如
   <% end %>
 ```
 
-但是一旦接近完工就要儘快 refactor 掉它。這種 code 一旦越來越多，網站就會更難維護。
+但是一旦接近完工狀態就要儘快 refactor 掉它。一旦這種 code 越來越多，網站就會更難維護。
 
-像是我的 Team 或專案都有一個慣例，一旦專案開發快到尾聲。我一定會開始整理 code，把重複的 code 包成有名字的 Helper。
+像是我的 Team 或專案都有一個慣例，一旦專案開發快到尾聲，我一定會開始整理 code，把重複的 code 包成有名字的 Helper。
 
 有什麼好處？
 
