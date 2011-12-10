@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2011-12-10T04:57:59+08:00</updated>
+  <updated>2011-12-10T10:26:03+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -74,14 +74,14 @@
 
 <h3>其三：給 Code 取名字，容易尋找並複用成果。</h3>
 
-<p>上面一段 Code 其實還不算好，這一段 code 只說了：<strong>如果當前使用者有權限編輯，就應該顯示編輯頁面的連結。</strong>。它還是沒有自己的意思。但其實這一塊原始碼的意圖是，若有編輯權限，這裡應該應顯示一塊 Toolbar。</p>
+<p>上面一段 Code 其實還不算好，這一段 code 只表明了：<strong>如果當前使用者有權限編輯，就應該顯示編輯頁面的連結。</strong>。它還是沒有正確闡述自己的作用。但其實這一塊原始碼的意圖是，若有編輯權限，這裡應該應顯示一塊 Toolbar。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>%= render_tool_bar %&gt;
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>包裝成 Toolbar 後，這一塊程式碼就變得有名字了，下次你在某個頁面要寫到類似的功能時，就只要呼叫 render_too_bar 就可以了。</p>
+<p>包裝成 Toolbar 後，這一塊程式碼就變得有名字了，下次你在某個頁面要寫到類似的功能時，就只要呼叫 render_tool_bar 就可以了。</p>
 
 <p>而最重要的，是你以後再維護這一塊程式碼時，完全不必再猜測程式意圖，也很容易找當初亂丟在哪裡了。</p>
 
@@ -2146,7 +2146,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#x77;&#97;&#110;&#x67;&#100;&#105;&#x6e;&#x67;&#x77;&#x65;&#105;&#56;&#50;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">&#x77;&#97;&#x6e;&#x67;&#x64;&#x69;&#x6e;&#103;&#x77;&#x65;&#105;&#56;&#50;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x77;&#x61;&#x6e;&#103;&#100;&#x69;&#x6e;&#103;&#x77;&#101;&#x69;&#x38;&#50;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#119;&#97;&#x6e;&#x67;&#x64;&#x69;&#x6e;&#x67;&#x77;&#101;&#105;&#x38;&#50;&#x40;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
