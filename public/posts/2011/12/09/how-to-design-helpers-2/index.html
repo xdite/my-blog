@@ -123,6 +123,8 @@
 
 <h3>其二：讓 View 更加直觀好維護。</h3>
 
+<p>看的懂這段 code 的意圖嗎？</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -132,11 +134,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>看的懂這段 code 的意圖嗎？</p>
+<p>我想這段還算簡單，應該不難讓人猜到。</p>
 
-<p>這段還算簡單，我想你應該猜的到。不過如果這一段 code 再經過兩三輪的維護，我想應該就面目全非了。</p>
+<p>不過如果這一段 code 再經過兩三輪的維護，應該就會變得超難維護了。</p>
 
-<p>其實應該要這樣做，把邏輯拆出來，放在 Helper 裡。就像這樣：</p>
+<p>正確的寫法其實應該要把邏輯拆出來，放在 Helper 裡。</p>
+
+<p>就像這樣：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

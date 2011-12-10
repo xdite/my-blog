@@ -34,17 +34,22 @@ View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如
 
 ### 其二：讓 View 更加直觀好維護。
 
+
+看的懂這段 code 的意圖嗎？
+
 ``` html
   <% if current_user && (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %>
 	<%= link_to("Edit", edit_post_path(post) ) %>
   <% end %>
 ```
 
-看的懂這段 code 的意圖嗎？
+我想這段還算簡單，應該不難讓人猜到。
 
-這段還算簡單，我想你應該猜的到。不過如果這一段 code 再經過兩三輪的維護，我想應該就面目全非了。
+不過如果這一段 code 再經過兩三輪的維護，應該就會變得超難維護了。
 
-其實應該要這樣做，把邏輯拆出來，放在 Helper 裡。就像這樣：
+正確的寫法其實應該要把邏輯拆出來，放在 Helper 裡。
+
+就像這樣：
 
 ``` html
   <% if can_edit?(post) %>
