@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Yahoo News 的 SEO 網址所帶來的問題 - Blog.XDite.net</title>
+  <title>Rails 101 聖誕限時特價 - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature 畫虎不成反類犬了。在為網站實作 SEO 改善工程時，我們通常會使用一個技巧：在 permalink 裡面塞關鍵字。這樣的設計你可以在 T 客邦 看到，也可以在 PIXNET 看到。T 客邦...">
+  <meta name="description" content="          Rails 101 - 火速學會 Ruby on Rails因為聖誕節，所以再度特價 XDUSD $4.99 限時一週 2011/12/19~2011/12/26http://rails-101.logdown.com/">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2011/12/19/rails-101-xmas/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Yahoo News 的 SEO 網址所帶來的問題</h1>
+      <h1 class="entry-title">Rails 101 聖誕限時特價</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-10-25T17:08:00+08:00" pubdate  data-updated="true" >Oct 25<span>th</span>, 2011</time>
+<time datetime="2011-12-19T11:55:00+08:00" pubdate  data-updated="true" >Dec 19<span>th</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,55 +98,15 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature <strong>畫虎不成反類犬</strong>了。</p>
+  <p>Rails 101 - 火速學會 Ruby on Rails</p>
 
-<p>在為網站實作 SEO 改善工程時，我們通常會使用一個技巧：<strong>在 permalink 裡面塞關鍵字</strong>。</p>
+<p>因為聖誕節，所以再度特價 XD</p>
 
-<p>這樣的設計你可以在 <a href="htt://www.techbang.com.tw">T 客邦</a> 看到，也可以在 <a href="http://www.pixnet.net">PIXNET</a> 看到。</p>
+<p>USD $4.99 限時一週 2011/12/19~2011/12/26</p>
 
-<ul>
-<li>T 客邦的設計是 /1234-seo-in-url</li>
-<li>PIXNET 的設計是 /5678-SEO藏在網址裡</li>
-</ul>
+<p><img src="http://rails-101.logdown.com/images/rails-101-cover.png" alt="Rails-101" /></p>
 
-
-<p>中文是否適合塞在網址裡面，還是個見仁見智的問題，畢竟每一家處理 URL ENCODE 的方法不一樣。但</p>
-
-<p>Yahoo 的網址是這樣的： /SEO藏在網址裡-7890.html。</p>
-
-<p>看的出設計者應該覺得這是個 <strong>獨樹一格</strong> <strong>別出心裁</strong> 的設計。因為全世界幾乎沒有人這樣幹啊 =_=|||</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6279632106/" title="螢幕快照 2011-10-25 下午5.25.23 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6215/6279632106_86d70297c7.jpg" width="324" height="130" alt="螢幕快照 2011-10-25 下午5.25.23"></a></p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6279633244/" title="螢幕快照 2011-10-25 下午5.26.29 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6054/6279633244_4951092121_z.jpg" width="530" height="71" alt="螢幕快照 2011-10-25 下午5.26.29"></a></p>
-
-<p>這樣你應該看出問題了吧。</p>
-
-<p>各家縮網址和 auto-link 的 library 不認得中文字。因此</p>
-
-<ul>
-<li>/1234-seo-in-url => 不會有問題</li>
-<li><p>/5678-SEO藏在網址裡 => 會被 parse 成 /5678 ，但因為是動態網頁，所以還是沒問題</p></li>
-<li><p>/SEO藏在網址裡-7890.html => 被 parse 成 / ，就算輸入 /7890.html 還是連不到。</p></li>
-</ul>
-
-
-<p>「將中文放在 URL 裡且是在數字之前」的設計，會造成在某些網站社群穿透力為 0，因為貼的連結會被自動 parse 成為根本不能動的連結。</p>
-
-<p>不知道為什麼這個問題沒被測到，這應該在 beta 測試就要被檢驗出來了&#8230;</p>
-
-<p>===</p>
-
-<p><em>後續 update</em></p>
-
-<p>網友 <a href="https://twitter.com/fauzty/status/128770619771850752">@fauzty</a> 說：</p>
-
-<blockquote>
-Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇摩新聞。Opera Mini 倒是可以，應該是 url encode 問題
-</blockquote>
-
-
-
+<p><a href="http://rails-101.logdown.com/">http://rails-101.logdown.com/</a></p>
 
 </div>
 
@@ -168,7 +128,7 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
 
 
 
-<time datetime="2011-10-25T17:08:00+08:00" pubdate  data-updated="true" >Oct 25<span>th</span>, 2011</time>
+<time datetime="2011-12-19T11:55:00+08:00" pubdate  data-updated="true" >Dec 19<span>th</span>, 2011</time>
       
 
 
@@ -177,7 +137,7 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/12/19/rails-101-xmas/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/12/19/rails-101-xmas/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -253,8 +213,8 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2011/12/19/rails-101-xmas/';
+        var disqus_url = 'http://blog.xdite.net/posts/2011/12/19/rails-101-xmas/';
         var disqus_script = 'embed.js';
       
     (function () {
