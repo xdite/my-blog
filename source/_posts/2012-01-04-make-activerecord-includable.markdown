@@ -142,7 +142,7 @@ end
 
 這是一個 ORM 行為為主的 model，不是 Bussiness Logic 為主的 Model 啊 XD。真正的主角好像被趕走了，被趕到 lib/ 去。
 
-podcast 中 30:00 - 33:00 主要討論的議題意題就是：
+podcast 中 30:00 - 33:00 主要討論的議題就是：
 
 
 ```
