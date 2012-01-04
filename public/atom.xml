@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-04T18:17:08+08:00</updated>
+  <updated>2012-01-04T18:18:38+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -210,10 +210,9 @@
 
 <p>podcast 中 30:00 - 33:00 主要討論的議題就是：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">你將</span> <span class="no">Bussiness</span> <span class="no">Logic</span> <span class="err">放在哪裡？你稱</span> <span class="no">Bussiness</span> <span class="no">Model</span> <span class="err">為</span> <span class="no">Model</span> <span class="err">還是</span> <span class="no">SuperModel</span><span class="err">。然後</span> <span class="no">James</span> <span class="no">Edward</span> <span class="no">Gray</span> <span class="err">在這裡回答他放在</span> <span class="n">lib</span> <span class="err">下，就被電了</span> <span class="no">XDDDDD</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>===</p>
 
+<h1>你將 Bussiness Logic 放在哪裡？你稱 Bussiness Model 為 Model 還是 SuperModel。然後 James Edward Gray 在這裡回答他放在 lib 下，就被電了 XDDDDD</h1>
 
 <p>事實上正確的寫法應該通通都是要放在 <code>app/models</code> 下。</p>
 
