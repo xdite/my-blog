@@ -168,6 +168,19 @@
 
 <p>Rails Core Team member 「Josh Peek」曾經在 Rails 官方 blog 寫過一篇文章 <a href="http://weblog.rubyonrails.org/2009/9/1/gem-packaging-best-practices">Gem Packaging: Best Practices</a> 講解如何寫出比較乾淨正確的 Gem。</p>
 
+<h2>如何在專案中使用開發中的 gem</h2>
+
+<p>以往的想法可能都是打包之後，在 local 安裝開發中的 gem 版本，或者是直接先放在 vendor/plugins 中測試。在有了 Bundler 的時代其實不需要這麼麻煩。</p>
+
+<p>只要在 Gemfile 內加入這樣一行</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;my_plugin&#39;</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;~/projects/exp/my_plugin&quot;</span>  <span class="c1"># your local gem path </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就可以引用開發中的 gem，等到真的開發完。再換成 git repo 或 rubygems.org 上的版本。</p>
+
 <p>=====</p>
 
 <p>現在我每週都固定有在回答一些問題，發現不少人對 Ruby / Rails 的一些問題，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>

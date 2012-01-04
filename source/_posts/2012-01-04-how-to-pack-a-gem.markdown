@@ -63,6 +63,18 @@ Bundler 基本上算是提供半自動的打包，只提供非常基本的三個
 
 Rails Core Team member 「Josh Peek」曾經在 Rails 官方 blog 寫過一篇文章 [Gem Packaging: Best Practices](http://weblog.rubyonrails.org/2009/9/1/gem-packaging-best-practices) 講解如何寫出比較乾淨正確的 Gem。
 
+## 如何在專案中使用開發中的 gem
+
+以往的想法可能都是打包之後，在 local 安裝開發中的 gem 版本，或者是直接先放在 vendor/plugins 中測試。在有了 Bundler 的時代其實不需要這麼麻煩。
+
+
+只要在 Gemfile 內加入這樣一行
+
+``` ruby
+gem 'my_plugin', :path => "~/projects/exp/my_plugin"  # your local gem path 
+```
+
+就可以引用開發中的 gem，等到真的開發完。再換成 git repo 或 rubygems.org 上的版本。
 
 =====
 
