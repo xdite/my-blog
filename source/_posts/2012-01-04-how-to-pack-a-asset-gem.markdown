@@ -71,7 +71,7 @@ verdor 是「供應商」的意思，也就是 「別人寫的」assets 都應�
 
 <https://github.com/xdite/compass-ggs-framework/tree/rails-engine>
 
-作法是將 assets 扔到 vendor/assets 裡，再宣告一個「空的」Rails Engine Class 讓 Rails 可以將這個 gem 視為網站的一部分「掛起來」裡面的 vendor/assets。
+作法是將你整理好的 lib/assets 扔到 vendor/assets 裡，再宣告一個「空的」Rails Engine Class 讓 Rails 可以將這個 gem 視為網站的一部分「掛起來」裡面的 vendor/assets。
 
 沒錯，就是這麼簡單。
 
