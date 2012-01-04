@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-04T18:08:52+08:00</updated>
+  <updated>2012-01-04T18:09:20+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -206,7 +206,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>這是一個 ORM 行為主的 model，不是 Bussiness Logic 的 Model 啊 XD。真正的主角好像被趕走了，被趕到 lib/ 去。</p>
+<p>這是一個 ORM 行為為主的 model，不是 Bussiness Logic 為主的 Model 啊 XD。真正的主角好像被趕走了，被趕到 lib/ 去。</p>
 
 <p>podcast 中 30:00 - 33:00 主要討論的議題意題就是：</p>
 
