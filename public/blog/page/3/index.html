@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  Asset Pipeline 是 Rails 3.1 引入的重大 feature。之前我曾經為文撰寫過背後設計的意義以及哲學。若你有興趣的話可以觀看這一系列的文章：Asset PipelineSass / SCSSCompassCoffeeScript今天我...">
+  <meta name="description" content="                  stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 ihower 在 和多 時把這個 pl...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/10/19/stickies-gem/">Stickies Gem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-10-19T14:38:00+08:00" pubdate  data-updated="true" >Oct 19<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/10/19/stickies-gem/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/19/stickies-gem/" data-show-faces="false"></div></div>
+    
+    <p>stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。</p>
+
+<p><img src="http://farm7.static.flickr.com/6114/6259519683_ae8e1d15b6.jpg"></p>
+
+<p>stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 <a href="http://ihower.tw">ihower</a> 在 <a href="http://handlino.com">和多</a> 時把這個 plugin 翻成 jQuery 版本。</p>
+
+<p>這套 plugin 我自己還蠻喜歡用的。T 客邦內部也用了很多，不過因為內部有 Gem （認證系統）預設訊息就綁 stickies，每次開新專案裝完認證，就要手動 copy plugin 到 vendor/ 和手動 copy assets 到 public/，有夠麻煩&#8230;</p>
+
+<p>今天進公司大概跟同事聊了一下昨天寫的用 <a href="http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/">Asset Pipeline 掛 Asset</a> 的概念。</p>
+
+<p><a href="http://twitter.com/v1nc3ntlaw">vincent</a> 就覺得 stickies 應該要首先被拔出去，每次 copy asset 實在太麻煩了，將來最好還可以放在認證系統的 Gemfile dependency 上。於是剛剛我就接下來作了。</p>
+
+<p>本來以為只是掛 asset 而已，小事一樁。不巧的我發現它還是 Rails 2.x 時代的 Rails Plugin。於是剛剛索性將架構作了一番重構。</p>
+
+<p>（重寫 generator，用 Railtie / Engine 作 gem )</p>
+
+<p>目前 stickies 已經被我包裝成 rubygems，並支援 Rails 3.0 / 3.1。
+而且 3.1 版本可以直接用 asset pipeline 掛 assets。不需要再跑 copy tasks )</p>
+
+<p>code 放在這裡：<a href="https://github.com/techbang/stickies">https://github.com/techbang/stickies</a></p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -364,7 +425,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x77;&#97;&#110;&#103;&#100;&#x69;&#110;&#103;&#x77;&#101;&#105;&#x38;&#50;&#64;&#x67;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">&#119;&#x61;&#x6e;&#x67;&#100;&#105;&#x6e;&#103;&#x77;&#x65;&#105;&#x38;&#x32;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#x77;&#97;&#110;&#x67;&#100;&#x69;&#x6e;&#103;&#119;&#x65;&#x69;&#56;&#50;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#x77;&#x61;&#x6e;&#103;&#x64;&#105;&#110;&#x67;&#119;&#x65;&#105;&#x38;&#x32;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
@@ -1099,6 +1160,10 @@ LOGO 和背景色有做了一點小調整。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/01/04/make-activerecord-includable/">[進階] Make ActiveRecord includable</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/01/04/how-to-pack-a-asset-gem/">[Ruby][教學] 如何打包一個 Asset Gem </a>
       </li>
     
@@ -1112,10 +1177,6 @@ LOGO 和背景色有做了一點小調整。</p>
     
       <li class="post">
         <a href="/posts/2011/12/10/github-flavored-ruby/">Github Flavored Ruby - by Tom Preston-Werner (1)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2011/12/09/how-to-design-helpers-2/">如何運用 / 設計 Rails Helper (2)</a>
       </li>
     
   </ul>
