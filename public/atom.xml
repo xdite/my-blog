@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-04T09:09:44+08:00</updated>
+  <updated>2012-01-04T09:49:41+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[Ruby][教學] 如何打包一個 Asset Gem ]]></title>
+    <link href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/"/>
+    <updated>2012-01-04T09:10:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem</id>
+    <content type="html"><![CDATA[<h2>What is Asset Gem</h2>
+
+<p><a href="http://upgrade2rails31.heroku.com/asset-pipeline/">Asset Pipeline</a>的概念興起，不只是推動了 SASS 與 CoffeeScript 的廣泛流行。其實造成更重大的影響是 assets ( CSS / JavaScript / Images ) 不再被視為專案中難以「整理」與「管理」的頭痛元件。透過 Asset Pipeline 的架構，我們可以把 assets 包裝成一個 gem ，在其他專案中重複使用。</p>
+
+<p>在以往，如果想使用 <a href="http://twitter.github.com/bootstrap/">bootstrap</a> 這個 CSS / JS Framework，我們必須將所有靜態檔案 COPY 一份到專案的靜態目錄中。當專案使用到大量 3rd party vendor assets，整個靜態目錄就會被這種拷貝行為弄得髒亂不堪，難以整理。</p>
+
+<p>而透過 Asset Pipeline 的架構，開發者就可以停止這種草率但不得不為之的動作。要引用 3rd party vendor assets，只要在 application.css 或者 application.js 進行 require 就可以輕鬆使用了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//= require jquery
+</span><span class='line'>//= require bootstrap
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>引用 asset gem 很簡單，但不少人想知道的是：<code>如何把手上想整理的 asset 包裝成一個 gem 進行使用</code>。</p>
+
+<h2>Asset Pipeline 的 mount 位置</h2>
+
+<p>談到這裡，就要稍微提一下 Asset Pipeline 對於 assets 位置的定義。by default，你可以把 assets 放在以下三個資料夾內：</p>
+
+<ul>
+<li>app/assets</li>
+<li>lib/assets</li>
+<li>vendor/assets</li>
+</ul>
+
+
+<p>理論上，你把 assets 丟在這三個資料夾內，在 application.cs|js 內 require 都可以動。</p>
+
+<h3>如何整理目前專案中的 assets</h3>
+
+<p>這其實是另外一個主題，不過我在這裡也順便整理出來。</p>
+
+<p>如何整理歸類現在手頭上的 assets 呢？</p>
+
+<ul>
+<li>app/assets</li>
+</ul>
+
+
+<p>在 Rails 3.1.x 之後的版本，rails g controler posts，會自動在 assets/styelsheets/ 和 assets/javascripts/ 中產生對應的 scss 與 coffeescript 檔案。</p>
+
+<p>所以 app/assets 是讓開發者放「自己為專案手寫的 assets」的地方。</p>
+
+<ul>
+<li>lib/assets</li>
+</ul>
+
+
+<p>lib 是 library 的簡寫，這裡是放 LIBRARY 的地方。所以如果你為專案手寫的 assets 漸漸形成了 library 規模，比如說 mixin 或者是自己為專案整理了簡單的 bootstrap，應該放在 lib/ 下。</p>
+
+<ul>
+<li>vendor/assets</li>
+</ul>
+
+
+<p>verdor 是「供應商」的意思，也就是 「別人寫的」assets 都應該放在這裡。比如說:</p>
+
+<ul>
+<li>jquery.*.js</li>
+<li>fanfanfan icons</li>
+<li>tinymce / ckeditor</li>
+</ul>
+
+
+<p>等等…</p>
+
+<h2>透過 Rails Engine 機制實作</h2>
+
+<p>為什麼剛剛要扯這麼大一圈去解釋如何整理手頭的 assets 呢？</p>
+
+<p>因為 asset gem 其實就是透過 Rails Engine 的機制去實作出來的。</p>
+
+<p>拿一個前幾個月幫 <a href="http://twitter.com/evenwu">@evenwu</a> 寫的 asset gem 作為示範好了。</p>
+
+<p><a href="https://github.com/xdite/compass-ggs-framework/tree/rails-engine">https://github.com/xdite/compass-ggs-framework/tree/rails-engine</a></p>
+
+<p>作法是將 assets 扔到 vendor/assets 裡，再宣告一個「空的」Rails Engine Class 讓 Rails 可以將這個 gem 視為網站的一部分「掛起來」裡面的 vendor/assets。</p>
+
+<p>沒錯，就是這麼簡單。</p>
+
+<p>而宣告自己是一個 Rails Engine 的方式也很簡單：只要把 Rails Engine 塞進自定義的 module 就好了。
+（還是看不懂的可以看我的 code…）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Ggs</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">Rails</span>
+</span><span class='line'>    <span class="k">class</span> <span class="nc">Engine</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">Rails</span><span class="o">::</span><span class="no">Engine</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>剩下來的流程就跟<a href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/">一般包 Gem 的流程</a>差不多了。</p>
+
+<p>=====</p>
+
+<p>現在我每週都固定有在回答一些問題，發現不少朋友對 Ruby / Rails 的一些疑惑，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
+
+<p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 http://ruby-taiwan.org。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[Ruby][教學] 如何打包一個 Gem ]]></title>
@@ -2332,147 +2449,6 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
 而且 3.1 版本可以直接用 asset pipeline 掛 assets。不需要再跑 copy tasks )</p>
 
 <p>code 放在這裡：<a href="https://github.com/techbang/stickies">https://github.com/techbang/stickies</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Asset Pipeline 的重大意義：Version Control Your Asset Package]]></title>
-    <link href="http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/"/>
-    <updated>2011-10-18T23:51:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets</id>
-    <content type="html"><![CDATA[<p>Asset Pipeline 是 Rails 3.1 引入的重大 feature。</p>
-
-<p>之前我曾經為文撰寫過背後設計的意義以及哲學。若你有興趣的話可以觀看這一系列的文章：</p>
-
-<ul>
-<li><a href="http://upgrade2rails31.com/asset-pipeline">Asset Pipeline</a></li>
-<li><a href="http://upgrade2rails31.com/sass-scss">Sass / SCSS</a></li>
-<li><a href="http://upgrade2rails31.com/compass">Compass</a></li>
-<li><a href="http://upgrade2rails31.com/coffee-script">CoffeeScript</a></li>
-</ul>
-
-
-<p>今天我要談的是 Assetp pipeline 帶來的另一個震撼：&#8221;Asset as rubygem&#8221;</p>
-
-<h2>Asset as rubygem</h2>
-
-<p>其實這個設計在 Rails 3.1 的蠻早期就有了，而且就藏在官方範例中。只是我初看時完全沒意識到這個設計背後的原理、哲學以及它的重大意義。而多數的鎂光燈也集中在 Asset Pipeline 可大幅獲益於 Compass 與 CoffeeScript 中，沒多少人提起這件事。</p>
-
-<p>Rails 的 application.js 裡面有著這麼一段：</p>
-
-<figure class='code'><figcaption><span>application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//= require jquery</span>
-</span><span class='line'><span class="c1">//= require jquery_ujs</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而這是由 Gemfile 中的這個 gem : <a href="http://blog.xdite.net/todo">jquery-rails</a> 所提供的</p>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;jquery-rails&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>看得出來奧妙嗎？</p>
-
-<h3>結合 Rails Engine 提供 asset 掛載</h3>
-
-<p>yes。現在你可以透過結合 Rails Engine 把 gem 中的 asset 掛起來。所以 application.js 中</p>
-
-<figure class='code'><figcaption><span>application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//= require jquery</span>
-</span><span class='line'><span class="c1">//= require jquery_ujs</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>的 jquery 以及 jquery_ujs 都是 jquery-rails 這個 gem 中的 javascript。</p>
-
-<h3>Boost you project</h3>
-
-<p>還看不出來意義嗎？讓我再給你一個例子吧：<a href="https://github.com/anjlab/bootstrap-rails">bootstrap-rails</a></p>
-
-<p><a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 是 Twitter 近期所推出的一個 CSS Framework opensource project，它能夠讓程式設計師，在做 project 的初期（設計師還沒把畫面設計好時），或者是在做小 project （不需要複雜 Style）時，很快的就把一些簡單的版面元素搞定，簡單大方。</p>
-
-<p>但是在 Rails project 中 setup 還是小麻煩，因為你必須手動把 asset 搬到指定位址才行。</p>
-
-<p>若是我跟你說，如果用這個 gem，你只要在 Gemfile 裡 require</p>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;anjlab-bootstrap-rails&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;bootstrap-rails&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然後再到 application.css 中</p>
-
-<figure class='code'><figcaption><span>application.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//=</span> <span class="nt">require</span> <span class="nt">bootstrap</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>接著即刻就可以寫 HTML，Bootstrap 馬上就生效了呢？</p>
-
-<p>另一個程式設計師最愛的 <a href="https://github.com/pilu/web-app-theme">web-app-theme</a>，在 Rails 3.1 後的版本，也可以用同樣的方法，把 CSS 直接掛起來，馬上寫！</p>
-
-<p>而不是像之前的作法，掛上 gem 之後，還得用 generator 把當時版本的 asset copy （算是半自動）到目錄資料夾裡！</p>
-
-<p>不僅是這兩個 CSS framework，將來只要是有組織的 asset 套件，如 CSS Framework / jQuery plugin，都有可能可以這樣搞。</p>
-
-<p>這樣夠<strong>震撼</strong>你的心靈了嗎？</p>
-
-<h2>「萃取」 / 「打包」 / 「版本控制」core asset 的好處</h2>
-
-<p>在從前，若我們同時維護多個系列 project，都會有 asset 其實都長得差不多，但是會有只要一份發現要更新，其他份沒有同步更新，就會相當麻煩的痛處。但是作這些更新，都必須要手動去調整。而且 asset 的 version control log 會與專案程式的 version control log 混在一起。若沒有馬上一併處理更新，時日一久，當你要更新其他 project 時，就會忘記自己需要改哪裡。</p>
-
-<p>使用 SCSS 並沒有改變: 「你還是要 copy 好幾份 SCSS 到多個 project 」的事實。</p>
-
-<p>但是如果你的 core SCSS / core JavaScript plugin 是一份 Gem 呢？</p>
-
-<p><strong> 維護的方式可以變成只需要維護 Gemfile 中的版本號，複雜度幾乎趨近於 0。</strong></p>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;some-css-plugin&quot;</span><span class="p">,</span> <span class="s2">&quot;0.0.2&quot;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;some-js-plugin&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5.7&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>你不需要再對「一包」檔案作版本控制，而是對「一個數字」作版本控制。</p>
-
-<h3>使用 git submodule 不行嗎？</h3>
-
-<p>當然你也會問，使用 git submodule 管理 asset 不行嗎？ 這當然也是一種作法。但問題在於</p>
-
-<ul>
-<li>git submodule 不管修改、刪除、更新都要特殊的步驟，否則就會弄爛你的 project</li>
-<li>git submodule 是依 commit id</li>
-<li>git submodule 沒有處理 dependency 問題</li>
-</ul>
-
-
-<p>而且當你想把 asset revert 到某一版本時，可能就會讓你的耐性爆炸 ….</p>
-
-<h2>小結</h2>
-
-<p>因為今天在練習寫 Generator 還有 Rails Engine。寫著寫著就有鬼點子，不知道 Rails 3.1 之後，Rails Engine 支不支援掛 asset。當然也沒有一股就栽下去，當然先去找找有沒人已經作過這件事，想想 Bootstrap 最近很紅，應該會變成大家練習的對象。沒想到真的就有人寫出來&#8230;.而且還有一堆。</p>
-
-<p>看了別人有實作出來，就隨便找了一套 CSS 當練習包 Gem 的對象，熟悉一下結構。沒想到門檻也沒有說很高。既然 CSS 成功了，就開始繼續亂想 JavaScript 可不可以惡搞，這一想，才意識到 Rails 範例的</p>
-
-<figure class='code'><figcaption><span>application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//= require jquery</span>
-</span><span class='line'><span class="c1">//= require jquery_ujs</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就是在講這件事啊 XDDDDDD。</p>
-
-<p>為什麼我這麼豬頭，都沒想到過啊…繼續往下想，就 blow my mind 了。</p>
-
-<p>因為既然這樣可以 work，那就表示以後只要是 asset，就可以打包。CSS framework 和 jQuery plugin 市面上滿山滿谷，那就表示將來一定會出現更多更變態的玩法。不禁讓人越來越期待接下來的發展了。</p>
-
-<p>越來越覺得身為一個 Rails Developer 是相當幸福快樂的事啊！</p>
 ]]></content>
   </entry>
   

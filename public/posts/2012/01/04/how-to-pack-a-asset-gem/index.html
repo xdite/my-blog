@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>我讀 Steve Jobs 傳 - 我不是要看瘋子傳 - Blog.XDite.net</title>
+  <title>[Ruby][教學] 如何打包一個 Asset Gem  - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          先聲明，這一篇純粹是個人讀後感而已。不是什麼嚴肅的 Book Review。今天 賈伯斯傳 上市了。身為一個蘋果愛用者，自然是蠻高興這件事的。因此就花了「一點時間」把這本書讀完了。但是讀完之後，坦白說我真的算蠻失望的。若要我形容這本書的讀後感，我會說 &#8211; 去把 ...">
+  <meta name="description" content="          What is Asset GemAsset Pipeline的概念興起，不只是推動了 SASS 與 CoffeeScript 的廣泛流行。其實造成更重大的影響是 assets ( CSS / JavaScript / Images ) 不再被視為專案中難以「整理」與「管理...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/24/i-read-steve-jobs/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">我讀 Steve Jobs 傳 - 我不是要看瘋子傳</h1>
+      <h1 class="entry-title">[Ruby][教學] 如何打包一個 Asset Gem</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-10-24T23:52:00+08:00" pubdate  data-updated="true" >Oct 24<span>th</span>, 2011</time>
+<time datetime="2012-01-04T09:10:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,45 +98,115 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>先聲明，這一篇純粹是個人讀後感而已。不是什麼嚴肅的 Book Review。</p>
+  <h2>What is Asset Gem</h2>
 
-<p>今天 <a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010522255">賈伯斯傳</a> 上市了。身為一個蘋果愛用者，自然是蠻高興這件事的。因此就花了「一點時間」把這本書讀完了。</p>
+<p><a href="http://upgrade2rails31.heroku.com/asset-pipeline/">Asset Pipeline</a>的概念興起，不只是推動了 SASS 與 CoffeeScript 的廣泛流行。其實造成更重大的影響是 assets ( CSS / JavaScript / Images ) 不再被視為專案中難以「整理」與「管理」的頭痛元件。透過 Asset Pipeline 的架構，我們可以把 assets 包裝成一個 gem ，在其他專案中重複使用。</p>
 
-<p>但是讀完之後，坦白說我真的算蠻失望的。若要我形容這本書的讀後感，我會說 &#8211; 去把 2 L 悅氏礦泉水 一飲而盡，你就知道讀這本書的滋味了。</p>
+<p>在以往，如果想使用 <a href="http://twitter.github.com/bootstrap/">bootstrap</a> 這個 CSS / JS Framework，我們必須將所有靜態檔案 COPY 一份到專案的靜態目錄中。當專案使用到大量 3rd party vendor assets，整個靜態目錄就會被這種拷貝行為弄得髒亂不堪，難以整理。</p>
 
-<p>這麼好的題材，被這樣烹調實在很可惜。</p>
+<p>而透過 Asset Pipeline 的架構，開發者就可以停止這種草率但不得不為之的動作。要引用 3rd party vendor assets，只要在 application.css 或者 application.js 進行 require 就可以輕鬆使用了。</p>
 
-<p>沒有人說傳記「必須」要有趣，但我覺得「Jobs 傳」這本書平淡到過於異常。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//= require jquery
+</span><span class='line'>//= require bootstrap
+</span></code></pre></td></tr></table></div></figure>
 
-<p>怎麼說呢？也許你是 Jobs 的反對者，那麼你可能會覺得這本書 &#8212; 很有趣。因為裡面不少八卦小故事，關於他詭異作風、負面人格描述，關於不屑別人的行為的大量描述。</p>
 
-<p>但有營養的呢？我覺得很少。如果這是採訪一百多個親友、同事、仇敵得出來的樣貌，我真的非常失望。</p>
+<p></p>
 
-<p>人們最敬佩也想了解的是 Jobs 的熱情、Vision、和推動他持續創造出偉大產品背後的秘密。而 Steve Jobs 會希望作者幫他作傳，也是基於他想讓「他的孩子」們知道他「所做的一切」、還有「這一切背後的想法與意義」。</p>
+<p>引用 asset gem 很簡單，但不少人想知道的是：<code>如何把手上想整理的 asset 包裝成一個 gem 進行使用</code>。</p>
 
-<p>但是 Walter Isaacson，他真的不理解 Jobs，這也就是我認為可惜的地方。我在書中只見作者一直不斷的描述周遭人覺得他多詭異、多暴君，而雖然看得出來作者試圖為 Jobs 說話解套，但是一直失敗。He just doesn&#8217;t get it.。</p>
+<h2>Asset Pipeline 的 mount 位置</h2>
 
-<p>我想這也是 Jobs 這輩子始終為什麼認為別人為什麼愚蠢的原因：「He just doesn&#8217;t get it.」</p>
+<p>談到這裡，就要稍微提一下 Asset Pipeline 對於 assets 位置的定義。by default，你可以把 assets 放在以下三個資料夾內：</p>
 
-<p>如果你曾新創過某個事業，並 fell in love with it。你就能從書中就會看見閃閃發光的 Jobs。他能夠夠持續偉大的原因很簡單 &#8212; 那就是他熱愛自己的公司，熱愛持續打造偉大的成品。Willing to die for it，而他最後也作到了…</p>
+<ul>
+<li>app/assets</li>
+<li>lib/assets</li>
+<li>vendor/assets</li>
+</ul>
 
-<p>我想這也許是因為傳記作者始終是個作家。而不是個 some business founders。只要你是個 bussiness owner，曾經熱愛過某個事業，用盡了全力打造你深信的偉大的產品。你就能夠了解 Steve Jobs 的行為和心理模式。這是領人薪水，覺得別人家資金花不完的上班族很難領悟到的事：</p>
 
-<p>It&#8217;s simple，<strong>只要你覺得這是別人的事業。你就不會想要 &#8211; 「做到最好」</strong>。反之亦然。</p>
+<p>理論上，你把 assets 丟在這三個資料夾內，在 application.cs|js 內 require 都可以動。</p>
 
-<p>Steve 會有那麼大的動力打造產品，力求瘋狂的完美，講話時不時散發著令人攝服的現實扭曲場。這些都不是因為它是一個詭異瘋子，而是因為他真心相信且瘋狂熱愛它的事業。</p>
+<h3>如何整理目前專案中的 assets</h3>
 
-<p>用盡一切的氣力去熱愛作某一件事，去把產品打造到最好是很累的。有過這樣經驗的人，就會更敬佩  Steve Jobs，他真的夠厲害，遠遠不是熱情覺得讓人可敬而已。這也不只是熱情而已，當中還要有不動趨鞭自己進步的動力。</p>
+<p>這其實是另外一個主題，不過我在這裡也順便整理出來。</p>
 
-<p>因為他走在世界最前端，這更加格外的辛苦。</p>
+<p>如何整理歸類現在手頭上的 assets 呢？</p>
 
-<p>We do want to see things behind these. 我們不是要看瘋子傳。</p>
+<ul>
+<li>app/assets</li>
+</ul>
 
-<p>He just doesn&#8217;t get it.</p>
 
-<p>===</p>
+<p>在 Rails 3.1.x 之後的版本，rails g controler posts，會自動在 assets/styelsheets/ 和 assets/javascripts/ 中產生對應的 scss 與 coffeescript 檔案。</p>
 
-<p>Reed Jobs 都可能比 Water Issacson 懂 Steve Jobs 在想什麼（ according to some piece of this book ）。真是可惜了，這麼好的材料，這麼平淡的一本八卦書….</p>
+<p>所以 app/assets 是讓開發者放「自己為專案手寫的 assets」的地方。</p>
+
+<ul>
+<li>lib/assets</li>
+</ul>
+
+
+<p>lib 是 library 的簡寫，這裡是放 LIBRARY 的地方。所以如果你為專案手寫的 assets 漸漸形成了 library 規模，比如說 mixin 或者是自己為專案整理了簡單的 bootstrap，應該放在 lib/ 下。</p>
+
+<ul>
+<li>vendor/assets</li>
+</ul>
+
+
+<p>verdor 是「供應商」的意思，也就是 「別人寫的」assets 都應該放在這裡。比如說:</p>
+
+<ul>
+<li>jquery.*.js</li>
+<li>fanfanfan icons</li>
+<li>tinymce / ckeditor</li>
+</ul>
+
+
+<p>等等…</p>
+
+<h2>透過 Rails Engine 機制實作</h2>
+
+<p>為什麼剛剛要扯這麼大一圈去解釋如何整理手頭的 assets 呢？</p>
+
+<p>因為 asset gem 其實就是透過 Rails Engine 的機制去實作出來的。</p>
+
+<p>拿一個前幾個月幫 <a href="http://twitter.com/evenwu">@evenwu</a> 寫的 asset gem 作為示範好了。</p>
+
+<p><a href="https://github.com/xdite/compass-ggs-framework/tree/rails-engine">https://github.com/xdite/compass-ggs-framework/tree/rails-engine</a></p>
+
+<p>作法是將 assets 扔到 vendor/assets 裡，再宣告一個「空的」Rails Engine Class 讓 Rails 可以將這個 gem 視為網站的一部分「掛起來」裡面的 vendor/assets。</p>
+
+<p>沒錯，就是這麼簡單。</p>
+
+<p>而宣告自己是一個 Rails Engine 的方式也很簡單：只要把 Rails Engine 塞進自定義的 module 就好了。
+（還是看不懂的可以看我的 code…）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Ggs</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">Rails</span>
+</span><span class='line'>    <span class="k">class</span> <span class="nc">Engine</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">Rails</span><span class="o">::</span><span class="no">Engine</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>剩下來的流程就跟<a href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/">一般包 Gem 的流程</a>差不多了。</p>
+
+<p>=====</p>
+
+<p>現在我每週都固定有在回答一些問題，發現不少朋友對 Ruby / Rails 的一些疑惑，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
+
+<p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 http://ruby-taiwan.org。</p>
 
 </div>
 
@@ -158,7 +228,7 @@
 
 
 
-<time datetime="2011-10-24T23:52:00+08:00" pubdate  data-updated="true" >Oct 24<span>th</span>, 2011</time>
+<time datetime="2012-01-04T09:10:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
       
 
 
@@ -167,7 +237,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/24/i-read-steve-jobs/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/24/i-read-steve-jobs/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -243,8 +313,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/24/i-read-steve-jobs/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/24/i-read-steve-jobs/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/';
         var disqus_script = 'embed.js';
       
     (function () {
