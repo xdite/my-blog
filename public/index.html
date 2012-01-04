@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  Rails 101 - 火速學會 Ruby on Rails因為聖誕節，所以再度特價 XDUSD $4.99 限時一週 2011/12/19~2011/12/26http://rails-101.logdown.com/  ">
+  <meta name="description" content="                  What is GemRubyGems 是 Ruby 的 Package 管理系統。它的作用類似 Linux 系統下的 apt-get 或者是 yum。不同的是：RubyGems 是提供「打包」好的 Ruby Library 讓開發者能夠重複利用別人已造好的...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,122 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/01/04/how-to-pack-a-gem/">[Ruby][教學] 如何打包一個 Gem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-01-04T08:53:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/01/04/how-to-pack-a-gem/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/" data-show-faces="false"></div></div>
+    
+    <h2>What is Gem</h2>
+
+<p>RubyGems 是 Ruby 的 Package 管理系統。它的作用類似 Linux 系統下的 apt-get 或者是 yum。不同的是：RubyGems 是提供「打包」好的 Ruby Library 讓開發者能夠重複利用別人已造好的輪子，提高開發效率。</p>
+
+<p>而目前 Rails 3.0+ 起，幾乎都也推薦使用 RubyGems 的方式，將 Plugin 打包成 Gem 的方式搭配 Bundler 使用。</p>
+
+<h2>打包 Gem</h2>
+
+<p>隨著時代進步，打包和發佈 Gem 的方式一直在進步。</p>
+
+<p>最早以前大家都是手工製造 ( <a href="http://railscasts.com/episodes/135-making-a-gem">RailsCast #135</a> )，後來 Jeweler( <a href="http://railscasts.com/episodes/183-gemcutter-jeweler">RailsCast #183</a> ) 被發明出來，讓打包變得非常容易。</p>
+
+<p>而到最後，更演變成了 Bundler 內建 ( <a href="http://asciicasts.com/episodes/245-new-gem-with-bundler">Rails 245</a> )。</p>
+
+<p>包裝一個 Gem 變得越來越容易。</p>
+
+<h2>Gem 的基本結構</h2>
+
+<p>若以 Bundler 內建的指令 <code>bundle gem GEM_NAME</code> 自動生出來的檔案。其實 Gem 的結構也相當簡單。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    [~/projects/exp] $ bundle gem my_plugin
+</span><span class='line'>          create  my_plugin/Gemfile
+</span><span class='line'>          create  my_plugin/Rakefile
+</span><span class='line'>          create  my_plugin/.gitignore
+</span><span class='line'>          create  my_plugin/my_plugin.gemspec
+</span><span class='line'>          create  my_plugin/lib/my_plugin.rb
+</span><span class='line'>          create  my_plugin/lib/my_plugin/version.rb
+</span><span class='line'>    Initializating git repo in /Users/xdite/projects/exp/my_plugin</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>Gemfile</code> # 描述 dependency</li>
+<li><code>Rakefile</code> # 發佈和打包的 rake tasks</li>
+<li><code>GEM_NAME.gemspec</code> # gem 的 spec</li>
+<li><code>GEM_NAME/lib/GEM_NAME.rb</code> 與 <code>GEM_NAME/lib/GEMNAME/</code> # gem 裡的 library</li>
+<li><code>GEM_NAME/lib/GEM_NAME/version.rb</code> # 版本紀錄</li>
+</ul>
+
+
+<p>主要的 Library 需放置在 lib/ 底下。</p>
+
+<p>若需使用到相依套件的話，需在 Gemfile 以及 .gemsepc 定義。</p>
+
+<h3>Bundler 提供的基本 Task</h3>
+
+<p>Bundler 基本上算是提供半自動的打包，只提供非常基本的三個 Task：</p>
+
+<ul>
+<li><code>rake build</code>    # Build my_plugin-0.0.1.gem into the pkg directory</li>
+<li><code>rake install</code>  # Build and install my_plugin-0.0.1.gem into system gems</li>
+<li><code>rake release</code>  # Create tag v0.0.1 and build and push my_plugin-0.0.1.gem to Rubygems</li>
+</ul>
+
+
+<h2>Jeweler</h2>
+
+<p>若你有更多懶人需求，不妨 check <a href="https://github.com/technicalpickles/jeweler">Jeweler</a> 這個 gem，它提供了更多 rake tasks 讓打包更加方便。</p>
+
+<h2>Best Practices</h2>
+
+<p>Rails Core Team member 「Josh Peek」曾經在 Rails 官方 blog 寫過一篇文章 <a href="http://weblog.rubyonrails.org/2009/9/1/gem-packaging-best-practices">Gem Packaging: Best Practices</a> 講解如何寫出比較乾淨正確的 Gem。</p>
+
+<p>=====</p>
+
+<p>現在我每週都固定有在回答一些問題，發現不少人對 Ruby / Rails 的一些問題，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
+
+<p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1797,146 +1913,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2011/11/19/omniauth-clean-auth-provider-3/">OmniAuth - 實作多方認證的最佳實踐 (3)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-11-19T12:43:00+08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
-        
-         | <a href="/posts/2011/11/19/omniauth-clean-auth-provider-3/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-3/" data-show-faces="false"></div></div>
-    
-    <p>OmniAuth 是在 2011/11/2 正式釋出 v1.0 版的，其實也就是不久之前而已…</p>
-
-<p>這個大改版也讓我吃足苦頭，因為 0.3 與 1.0 的架構差太多，網路上 Google 到的文件反而會打爆我的 application，除錯了很久。</p>
-
-<p>不過也因為這件事情，逼我在幾個小時之內認真看了不少關於認證的想法與文件，才從而理解這些架構，寫出這些文章&#8230;。</p>
-
-<h2>0.3 與 1.0 的差異</h2>
-
-<p>0.3 與 1.0 的差異，在於 1.0 的架構更直覺、更乾淨。主要改變有二：</p>
-
-<ul>
-<li>Strategy as Gem</li>
-<li>標準的資料介面</li>
-</ul>
-
-
-<h3>Strategy as Gem</h3>
-
-<p>在 0.3 版，如果開發者想在 Rails project 內使用 Twitter 的認證。除了必須在 Gemfile 內宣告使用 OmniAuth</p>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;omniauth&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>還必須使用一個 initializer 去 claim 他要使用 Twitter 認證</p>
-
-<figure class='code'><figcaption><span>config/initializers/omniauth.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">use</span> <span class="no">OmniAuth</span><span class="o">::</span><span class="no">Builder</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">provider</span> <span class="ss">:twitter</span><span class="p">,</span> <span class="s1">&#39;CONSUMER_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;CONSUMER_SECRET&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而在 1.0 中</p>
-
-<p>開發者只需要這樣作，在 Gemfile 裡面宣稱他要使用 OmniAuth 和 OmniAuth-Twitter</p>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;omniauth&quot;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;omniauth-twitter&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>注意事項</h4>
-
-<p>其實也是這個細微的差異，害我誤入歧途，我按照網路上找到的方案，也在 1.0 版乖乖多寫了一個 initializer 去宣告使用，反而造成 invalid credential。</p>
-
-<h4>OAuth 惡夢</h4>
-
-<p>當然將 Strategy 抽出來當成 Gem 是一件好事，這樣就不用因為某一個認證方 API 改版，就必須 fork 整個 OmniAuth 出來使用。</p>
-
-<p>不過促使 OmniAuth 改版最痛的問題可能是 OAuth 的問題。</p>
-
-<p>我也是因為實作 Github 的認證才發現到這個令人憤怒的 issue。</p>
-
-<p>[BTW: <strong>講個不好笑的笑話，開發與 Github 結合的產品真的很令人困擾，因為你無法使用 &#8220;xxx github&#8221; 這樣的關鍵字在搜尋引擎找答案，因為結果一定會出現 xxx 在 Github 上的 repo。翻桌！=_=||| </strong>]</p>
-
-<p>這是 OmniAuth 0.3 版當時的 <a href="https://github.com/intridea/omniauth/tree/3aff8a3d71a5c968f558172750a2a20165d77bc5/oa-oauth/lib/omniauth/strategies">oa-oauth</a> 目錄夾。你可以各家看到關於 OAuth 的認證實作多麼的混亂，逼得開發者只好寫出超多不同的 solution 去應對！</p>
-
-<p>而 Github 雖然號稱已經<a href="https://github.com/blog/656-github-oauth2-support">支援 OAuth 2.0</a> (賀!?)，但令人崩潰的是，它也不是標準的。<a href="http://www.manning.com/katz/">Rails in Action</a> 作者 Ryan Bigg 在寫作此本書範例程式的認證部分時，曾經憤怒的發現這一個事實，並把故事始末紀錄在這篇文章「<a href="http://ryanbigg.com/2011/04/whodunit-devise-omniauth-oauth-or-github/">Whodunit: Devise, OmniAuth, OAuth or GitHub?
-</a>」</p>
-
-<p><strong>OAuth 2.0 的規格說，token param 必須命名為 oauth_token，而 Github 的卻叫作 access_token。</strong></p>
-
-<p>而且 Github 不打算修這個問題…</p>
-
-<p>所以如果在 0.3 版的 OmniAuth，你必須要 hack OAuth2 這個 gem 才能支援 Github&#8230;。而如果你同時要想支援 Facebook 認證，那就哭哭了 T_T</p>
-
-<h4>小結</h4>
-
-<p>而既然大家都這麼亂搞，不如把 Strategy 通通抽出來讓開發者在自己的黑箱內惡搞，可能還是比較快的一個方式&#8230;.</p>
-
-<h3>標準的資料介面</h3>
-
-<p>在 OmniAuth 拿資料的方式是存取 <code>env["omniauth.auth"]</code> 這個變數，裡面會回傳認證需要的參數與資訊。</p>
-
-<p><a href="https://github.com/intridea/omniauth/tree/3aff8a3d71a5c968f558172750a2a20165d77bc5/oa-oauth/lib/omniauth/strategies/oauth">這個目錄</a> 含蓋了所有目前 OmniAuth 0.3 支援的 Strategy，可以看到大家的 auth_hash 通通都寫的不一樣，也是各自為政。</p>
-
-<p>所以在 1.0 版，OmniAuth 將強迫大家走同樣的規格回來，這些使用者資訊將會切成四種 DSL methods : <code>info</code>, <code>uid</code>, <code>extra</code>, 和 <code>credentials</code>。</p>
-
-<p>這個部分在<a href="http://dev-xdworks.dev/posts/2011/11/19/omniauth-clean-auth-provider-2/">上一篇</a>談架構時已經寫過，就不再重寫一遍了。</p>
-
-<h2>小結</h2>
-
-<p>經過這一番折騰，最後我還是成功用 OmniAuth 1.0 實作了 Github 認證。我將在下一節中示範如何整合。</p>
-
-<p>但如果你還是想要用 0.3 實作 OmniAuth + Github 。我推薦你可以參考這篇 Stackoverflow 上的 <a href="http://stackoverflow.com/questions/5611023/github-oauth-using-devise-omniauth">GitHub OAuth using Devise + OmniAuth</a> 討論。</p>
-
-<ul>
-<li><p>Ryan Bigg 有個 <a href="http://github.com/rails3book/ticketee">ticketee</a> 的 project 可以參考。（我不保證它能動）</p></li>
-<li><p>Markus Proske 也有個 <a href="http://github.com/markusproske/omniauth_pure">omniauth_pure</a> 的 project 可以看。</p></li>
-</ul>
-
-
-<p>Good Luck!</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1970,6 +1946,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/01/04/how-to-pack-a-gem/">[Ruby][教學] 如何打包一個 Gem </a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2011/12/19/rails-101-xmas/">Rails 101 聖誕限時特價</a>
       </li>
     
@@ -1983,10 +1963,6 @@
     
       <li class="post">
         <a href="/posts/2011/12/08/how-to-design-helpers/">如何運用 / 設計 Rails Helper (1)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2011/12/05/omniauth-clean-auth-provider-4/">OmniAuth - 實作多方認證的最佳實踐 (4)</a>
       </li>
     
   </ul>
@@ -2026,7 +2002,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - xdite -
+  Copyright &copy; 2012 - xdite -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
