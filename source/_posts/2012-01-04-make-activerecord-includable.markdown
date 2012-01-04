@@ -33,7 +33,7 @@ end
 
 ## Ruby Rogues Podcast
 
-Ruby Rogues 是這幾個月才興起的一個新的 Ruby Podcast，與較知名的 [Ruby 5] 或 [The Ruby Show] 這兩個 podcast，性質很不同。後兩者著重於介紹本週有什麼 Ruby / Rails 的新消息，或者亮點 gem。Ruby Rouges 的則是每周邀請五個 Ruby 大師，上來針對一個特定主題，無盡的喇賽亂鬥 XD
+[Ruby Rogues](http://rubyrogues.com/) 是這幾個月才興起的一個新的 Ruby Podcast，與較知名的 [Ruby 5](http://ruby5.envylabs.com/) 或 [The Ruby Show](http://rubyshow.com) 這兩個 podcast，性質很不同。後兩者著重於介紹本週有什麼 Ruby / Rails 的新消息，或者亮點 gem。Ruby Rouges 的則是每周邀請五個 Ruby 大師，上來針對一個特定主題，無盡的喇賽亂鬥 XD
 
 當然這些大師也不是在講廢話，從他們的喇賽中可以學到不少觀念，甚至是有的時候你還可以聽到有的大師現場被其他人電：「什麼，你不知道可以這樣用？」「什麼，你一直用錯誤的觀念寫 code？」….XD
 
