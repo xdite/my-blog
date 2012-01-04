@@ -144,11 +144,10 @@ end
 
 podcast 中 30:00 - 33:00 主要討論的議題意題就是：
 
-<pre>
-你將 Bussiness Logic 放在哪裡？你稱 Bussiness Model 為 Model 還是 SuperModel。然後 James Edward Gray 在這裡回答他放在 lib 下，就被電了 XDDDDD
-</pre>
 
-事實上正確的寫法應該通通都是要放在 app/models 下。
+	你將 Bussiness Logic 放在哪裡？你稱 Bussiness Model 為 Model 還是 SuperModel。然後 James Edward Gray 在這裡回答他放在 lib 下，就被電了 XDDDDD
+
+事實上正確的寫法應該通通都是要放在 `app/models` 下。
 
 而設計手法應該是
 
