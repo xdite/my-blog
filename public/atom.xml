@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-04T18:12:36+08:00</updated>
+  <updated>2012-01-04T18:17:08+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -221,8 +221,6 @@
 
 <p>class Post 本身就放自己的 bussiness logic，然後去 claim 自己有用 ORM。至於過多複雜的邏輯就整理起來放在 Module 裡。</p>
 
-<p>而寫測試應該就是測 model 本身的商業邏輯而不是測 DB !!</p>
-
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -240,17 +238,19 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Rails 原生的機制讓開發者非常容易以為 Model 與 ORM 是一對一的關係。並且在此架構中，要將 code 整理得乾淨，就會無可避免的演變到反客為主的寫法。</p>
+<p>而寫測試應該就是測 model 本身的商業邏輯而不是測 DB !!</p>
 
 <h2>小結</h2>
+
+<p>Rails 原生的機制讓開發者非常容易以為 Model 與 ORM 是一對一的關係。並且在此架構中，要將 code 整理得乾淨，就會無可避免的演變到反客為主的寫法。</p>
 
 <p>這個 commit 其實只是剛起步，還沒有能夠完全避免一定要測到 DB 的問題。不過至少邁開了一大步。</p>
 
 <p>聽完了這集 podcast，讓我完全看懂這個 commit 和下面的留言，還順便澄清了一個錯誤觀念…</p>
 
-<p>（不過對現狀沒什麼幫助，因為這個 interface 目前還是不能用的 XD，開發者還是只能按照舊的寫法繼續當鴕鳥）</p>
+<p>（不過對現狀沒什麼幫助，因為這是 4.0 feature，所以目前還是不能用的 XD，開發者還是只能按照舊的寫法繼續當鴕鳥）</p>
 
-<p>有空還是要多聽大師喇賽啊&#8230;</p>
+<p>有空還是要多聽大師喇賽才能進步啊&#8230;</p>
 ]]></content>
   </entry>
   
