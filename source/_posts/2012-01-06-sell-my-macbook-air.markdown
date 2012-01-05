@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[出售] Macbook Air 贈 NDSL XL"
+title: "[出售] Macbook Air 攻頂款另贈 NDSi XL"
 date: 2012-01-06 00:30
 comments: true
 categories: 
@@ -21,7 +21,7 @@ HDD: 256 GB SSD
 
 還在 Apple Care 中。沒有貼紙在上面，保護得還算不錯。
 
-當時台灣售價是 $ 62000，我從香港買進花了 $52000。
+當時台灣售價是 $ 62000，我從香港買進花了 $52xxx。
 
 我打算賣 NT $41000。賣了之後會幫你還原到 10.6 出廠預設。
 
