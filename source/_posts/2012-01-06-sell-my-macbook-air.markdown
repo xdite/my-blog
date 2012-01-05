@@ -17,7 +17,7 @@ categories:
 CPU: Intel Core2 Duo 2.13GHZ
 RAM: 4G
 HDD: 256 GB SSD
-鍵盤: 無注音刻印
+鍵盤: 全英文鍵盤
 
 還在 Apple Care 中。沒有貼紙在上面，保護得還算不錯。
 
