@@ -41,3 +41,8 @@ categories:
 
 有興趣的朋友歡迎跟我聯絡。如果你已經是我 FB 好友的話，可以少收你 1000 元。
 
+===
+用 iPhone 4S 拍的現況圖，不知道解析度夠不夠
+
+<http://www.flickr.com/photos/xdite/sets/72157628733737777/>
+
