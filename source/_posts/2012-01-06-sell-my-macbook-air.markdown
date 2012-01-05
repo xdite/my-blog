@@ -37,7 +37,7 @@ HDD: 256 GB SSD
 <a href="http://www.flickr.com/photos/xdite/6642193481/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7164/6642193481_dfde9ce8b5.jpg" width="500" height="375" alt=""></a>
 
 
-如果你想購買這台 Air 的話，這台 NDSi XL 就送你啦。看你要拿去換現金還是收起來自用。
+如果你購買這台 Air 的話，這台 NDSi XL 就也順便送你啦。看你要拿去換現金還是收起來自用。
 
 有興趣的朋友歡迎跟我聯絡。如果你已經是我 FB 好友的話，可以少收你 1000 元。
 
