@@ -8,6 +8,8 @@ categories:
 
 蘋果今天在大特賣，我也打算特賣我的 Macbook Air。
 
+<a href="http://www.flickr.com/photos/xdite/6642182625/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7024/6642182625_d32456e871.jpg" width="500" height="375" alt=""></a>
+
 打算在過年前把手上這一臺 Macbook Air 13" 賣掉換新的。
 
 這台是 2011/03 從香港買的攻頂款。
@@ -31,6 +33,9 @@ HDD: 256 GB SSD
 
 因為之前手上玩具不小心買太多了，有一臺也是當時買的，但是後來沒玩幾次的 NDSi XL 放在家裡沒在打…
 應該也還值個幾千塊（這台在美國買的時候也花了 6-7000）。
+
+<a href="http://www.flickr.com/photos/xdite/6642193481/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7164/6642193481_dfde9ce8b5.jpg" width="500" height="375" alt=""></a>
+
 
 如果你想購買這台 Air 的話，這台 NDSi XL 就送你啦。看你要拿去換現金還是收起來自用。
 
