@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Stickies Gem - Blog.XDite.net</title>
+  <title>關於 Essential Rails Pattern 這本書的近況 - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 ihower 在 和多 時把這個 plugin 翻成 ...">
+  <meta name="description" content="          最近看到不少讀者都在「委婉」的催我最新這一本書「Essential Rails Pattern」的近況。跟大家報告一下這本書的近況，其實我每個禮拜都還是有在持續撰寫這本書。但是這本書寫著寫著，我越發現一件可怕的事情，內容太大了，大到比我當初想象中的還大概長五倍。到現在我已經...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/19/stickies-gem/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/01/06/about-erp/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Stickies Gem</h1>
+      <h1 class="entry-title">關於 Essential Rails Pattern 這本書的近況</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-10-19T14:38:00+08:00" pubdate  data-updated="true" >Oct 19<span>th</span>, 2011</time>
+<time datetime="2012-01-06T18:09:00+08:00" pubdate  data-updated="true" >Jan 6<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,26 +98,29 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。</p>
+  <p>最近看到不少讀者都在「委婉」的催我最新這一本書「<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">Essential Rails Pattern</a>」的近況。</p>
 
-<p><img src="http://farm7.static.flickr.com/6114/6259519683_ae8e1d15b6.jpg"></p>
+<p>跟大家報告一下這本書的近況，其實我每個禮拜都還是有在持續撰寫這本書。但是這本書寫著寫著，我越發現一件可怕的事情，內容太大了，大到比我當初想象中的還大概長五倍。到現在我已經為這本書寫超過 10 萬字了。可是還是看不到盡頭。</p>
 
-<p>stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 <a href="http://ihower.tw">ihower</a> 在 <a href="http://handlino.com">和多</a> 時把這個 plugin 翻成 jQuery 版本。</p>
+<p>而且在當初安排初版結構時，在前三章的結構上安排得有些錯誤。原本是要寫 Ruby / Rails 的設計技巧，卻岔遠路去撰寫基本的程式設計技巧。</p>
 
-<p>這套 plugin 我自己還蠻喜歡用的。T 客邦內部也用了很多，不過因為內部有 Gem （認證系統）預設訊息就綁 stickies，每次開新專案裝完認證，就要手動 copy plugin 到 vendor/ 和手動 copy assets 到 public/，有夠麻煩&#8230;</p>
+<p>草稿的字是累積不少，但是還不能見人，於是就一直放著。改先出零散的文章，所以最近各位可能看到我在撰寫一些回歸基本的教學，其實也是為這本書在做準備。</p>
 
-<p>今天進公司大概跟同事聊了一下昨天寫的用 <a href="http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/">Asset Pipeline 掛 Asset</a> 的概念。</p>
+<p>這幾天，我想了很久，預購的讀者每次抓下來都只有空白頁，等久了也會生氣 XD。</p>
 
-<p><a href="http://twitter.com/v1nc3ntlaw">vincent</a> 就覺得 stickies 應該要首先被拔出去，每次 copy asset 實在太麻煩了，將來最好還可以放在認證系統的 Gemfile dependency 上。於是剛剛我就接下來作了。</p>
+<p>終於我做了一個決定，原先的目錄結構太爛了，不砍掉重寫可能就會永遠斷頭了XD。</p>
 
-<p>本來以為只是掛 asset 而已，小事一樁。不巧的我發現它還是 Rails 2.x 時代的 Rails Plugin。於是剛剛索性將架構作了一番重構。</p>
+<p>於是我將原本寫好的幾章全部打散重排，所有已經寫好的內容，可以抽成章的就先整理出來。目前的草稿雖然有點多，但還算整理的完的。我會將草稿放在這裡: <a href="http://erp-book.heroku.com">http://erp-book.heroku.com</a>。</p>
 
-<p>（重寫 generator，用 Railtie / Engine 作 gem )</p>
+<p>這次也算釋出正式版的全部大綱。我希望可以在今年二月，釋出現在手頭上絕大部分的 beta 內容。</p>
 
-<p>目前 stickies 已經被我包裝成 rubygems，並支援 Rails 3.0 / 3.1。
-而且 3.1 版本可以直接用 asset pipeline 掛 assets。不需要再跑 copy tasks )</p>
+<p>如果有「等的不耐煩」的讀者，或者是「看完大綱覺得這本書不是你想要的」，或者是「這本書覺得不值得這個價錢的」，或者是「就是不爽 xdite 你這個大騙子」的，都可以寫信給我要求退錢。</p>
 
-<p>code 放在這裡：<a href="https://github.com/techbang/stickies">https://github.com/techbang/stickies</a></p>
+<p>再次為進度的緩慢，致上我深深的歉意。</p>
+
+<p>===</p>
+
+<p>不過如果你看完這本書的大綱和目前進度，還滿意這樣的內容和主題，想支持我繼續寫作的(其實寫這麼多字也是很累的..orz)，也歡迎加入<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">預購</a>支持我的作品，謝謝。</p>
 
 </div>
 
@@ -139,7 +142,7 @@
 
 
 
-<time datetime="2011-10-19T14:38:00+08:00" pubdate  data-updated="true" >Oct 19<span>th</span>, 2011</time>
+<time datetime="2012-01-06T18:09:00+08:00" pubdate  data-updated="true" >Jan 6<span>th</span>, 2012</time>
       
 
 
@@ -148,7 +151,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/19/stickies-gem/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/19/stickies-gem/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/01/06/about-erp/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/01/06/about-erp/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -224,8 +227,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/19/stickies-gem/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/19/stickies-gem/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/01/06/about-erp/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/01/06/about-erp/';
         var disqus_script = 'embed.js';
       
     (function () {
