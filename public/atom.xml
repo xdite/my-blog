@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-09T20:36:22+08:00</updated>
+  <updated>2012-01-09T20:38:24+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -254,7 +254,7 @@
 
 <p>其實不是這些測試框架寫的爛造成「寫測試很麻煩」、「執行測試超級久」。而是另有其他因素。</p>
 
-<p>許多資深開發者逐漸意識到，真正的主因是在於目前 Rails 的 model 的設計，耦合度太高了。只要沾到 db 就慢，偏偏 db 是世界的中心。</p>
+<p>許多資深開發者逐漸意識到，真正的主因是在於目前 Rails 的 model 的設計，耦合度太高了。只要沾到 db 就慢，偏偏 db 是世界的中心。只是測某些邏輯，搞到不小心觸發其他不需要測的東西。</p>
 
 <p>ActiveRecord 的問題在於，讓開發者太誤以為 ORM = model。其實開發者真正要寫的測試應該是對商業邏輯的測試，不是對 db 進行測試。</p>
 
