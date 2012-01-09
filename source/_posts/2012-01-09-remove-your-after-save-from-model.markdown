@@ -184,5 +184,7 @@ MVC 其實有其不足的部份。坦白說，Rails 也不是真正的 MVC，而
 
 一直到最近，James Copelin 提出了：[DCI](http://en.wikipedia.org/wiki/Data,_Context,_and_Interaction) 去補充了現有的 MVC 的不足，才算勉強解決了目前浮現的這些問題。
 
+DCI ，與本篇談到的 Facade Pattern 算是頗類似的手法。
+
 有關於 DCI ( Data, Context, Interaction ) 的文章，我會在之後發表。我同時也推薦各位去看這方面的主題。這個方向應該會是 Rails 專案設計上未來演化的方向之一。
 

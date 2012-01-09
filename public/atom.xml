@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-09T20:33:44+08:00</updated>
+  <updated>2012-01-09T20:36:22+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -279,6 +279,8 @@
 <p>不適合的原因是：這是一個「商業購買行為」。不是所有人都會購物啊。這應該是一個商業購買邏輯。但是&#8230;.也不知道要放在哪啊。</p>
 
 <p>一直到最近，James Copelin 提出了：<a href="http://en.wikipedia.org/wiki/Data,_Context,_and_Interaction">DCI</a> 去補充了現有的 MVC 的不足，才算勉強解決了目前浮現的這些問題。</p>
+
+<p>DCI ，與本篇談到的 Facade Pattern 算是頗類似的手法。</p>
 
 <p>有關於 DCI ( Data, Context, Interaction ) 的文章，我會在之後發表。我同時也推薦各位去看這方面的主題。這個方向應該會是 Rails 專案設計上未來演化的方向之一。</p>
 ]]></content>
