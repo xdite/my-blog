@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-06T18:32:30+08:00</updated>
+  <updated>2012-01-09T20:33:44+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,277 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[進階]使用 Facade Pattern 取代 Model callbacks]]></title>
+    <link href="http://blog.xdite.net/posts/2012/01/09/remove-your-after-save-from-model/"/>
+    <updated>2012-01-09T18:56:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/01/09/remove-your-after-save-from-model</id>
+    <content type="html"><![CDATA[<h2>What is &#8220;callbacks&#8221;?</h2>
+
+<p>Rails 的 ActiveRecord 提供了相當方便的 callbacks，能讓開發者在寫 Controller 時，能夠寫出更加 DRY 的程式碼：</p>
+
+<ul>
+<li>before_crearte</li>
+<li>before_save</li>
+<li>after_create</li>
+<li>after_save</li>
+<li>…</li>
+</ul>
+
+
+<p>在從前，在 Controller 裡面想要再 object 儲存之後 do_something，直觀的思路會是這樣：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">do_something</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>當時的最佳模式：通常是建議開發者改用 callbacks 或者是 Observer 模式實作。避免 controller 的髒亂。</p>
+
+<ul>
+<li>callbacks : after_create</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="err"></span><span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:do_something</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">protected</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">do_something</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者是使用 Observer</p>
+
+<ul>
+<li>Observer</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">PostObserver</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Observer</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">after_create</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">do_something</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="err"></span><span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">protected</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">do_something</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>使用 callbacks 所產生的問題</h2>
+
+<p>callbacks 雖然很方便，但也產生一些其他的問題。若這個 do_something 是很輕量的 db update，那這個問題還好。但如果是很 heavy 的 hit_3rd_party_api 呢？</p>
+
+<p>在幾個情形下，開發者會遇到不小的麻煩。</p>
+
+<ul>
+<li>Model 測試：每次在測試時都會被這個 3rd_party_api 整到，因為外部通訊很慢。</li>
+<li>do_something_api 是很 heavy 的操作：每次寫測試還是會被很慢的 db query 整到。</li>
+<li>do_something_api 是很輕微的 update：但是綁定 after_save 操作，在要掃描資料庫，做大規模的某欄位修改時，會不小心觸發到不希望引發的 callbacks，造成不必要的效能問題。</li>
+</ul>
+
+
+<p>當然，開發者還是可以用其他招數去閃開：</p>
+
+<p>比如說若綁定 after_save 。</p>
+
+<p>可以在 do_somehting 內加入對 dirty object 的偵測，避免被觸發：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">do_somthing</span>
+</span><span class='line'>  <span class="c1"># 資料存在，且變動的欄位包括 content</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">presisited?</span> <span class="o">&amp;&amp;</span> <span class="n">changed</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">the_real_thing</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但這一招並不算理想，原因有幾：</p>
+
+<ol>
+<li>每次儲存還是需要被掃描一次，可能有效能問題。</li>
+<li>寫測試時還是會呼叫到可能不需要引發的 do_somehting。</li>
+<li>if xxx ＆＆ yyy 這個 condiction chain 可能會無限延伸下去。</li>
+</ol>
+
+
+<h2>Facade Pattern</h2>
+
+<p>那麼要怎樣才能解決這個問題呢？其實我們應該用 Facade Pattern 解決這個問題。</p>
+
+<p>設計模式裡面有一招 Facade Pattern，這一招其實是沒有被寫進 <a href="http://designpatternsinruby.com/">Design Pattern in Ruby</a> 中的。Russ Olson 有寫了<a href="http://designpatternsinruby.com/section02/facade.html">一篇文章</a>解釋沒有收錄的原因：因為在 Ruby 中，這一招太簡單太直觀，所以不想收錄 XDDD。但他還是在網站上提供當時寫的草稿，供人參考。</p>
+
+<h3>What is Facade Pattern?</h3>
+
+<p>Facade Pattern 的目的是「將複雜的介面簡化，將複雜與瑣碎的步驟封裝起來，對外開放簡單的介面，讓客戶端能夠藉由呼叫簡單的介面而完成原本複雜的程式演算。」（<a href="http://www.dotblogs.com.tw/jameswu/archive/2008/06/26/4382.aspx">來源</a>）</p>
+
+<p>延伸閱讀: <a href="http://www.cnblogs.com/oomusou/archive/2007/04/24/725714.html">(原創) 我的Design Pattern之旅[5]：Facade Pattern (OO) (Design Pattern) (C/C++)</a></p>
+
+<h3>實際舉例：</h3>
+
+<p>在上述的例子中，其實 do_something 有可能只會在 PostController 用到，而非所有的 model 操作都「需要」用到。所以我們 <strong>不應該將 do_somehting 丟進 callbacks（等於全域觸發），再一一寫 case 去閃避執行</strong></p>
+
+<p>與其寫在 callbacks 裡。我們更應該寫的是一個 Service Class 將這一系列複雜昂貴的行為包裝起來，以簡單的介面執行。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="no">CreatePostService</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CreatePostService</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">do_something_a</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">do_something_b</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">do_something_c</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而在寫測試，只需要對 PostCreateService 這個商業邏輯 class 寫測試即可。而 PostController 和 Post Model 就不會被殃及到。</p>
+
+<h2>小結</h2>
+
+<p>不少開發者討厭測試的原因，不只是「因為」寫測試很麻煩的原因，「跑一輪測試超級久」也是讓大家很不爽的主因之一。</p>
+
+<p>其實不是這些測試框架寫的爛造成「寫測試很麻煩」、「執行測試超級久」。而是另有其他因素。</p>
+
+<p>許多資深開發者逐漸意識到，真正的主因是在於目前 Rails 的 model 的設計，耦合度太高了。只要沾到 db 就慢，偏偏 db 是世界的中心。</p>
+
+<p>ActiveRecord 的問題在於，讓開發者太誤以為 ORM = model。其實開發者真正要寫的測試應該是對商業邏輯的測試，不是對 db 進行測試。</p>
+
+<p>所以才會出現了用 Facade Pattern 取代 callbacks 的手法。</p>
+
+<h2>其他</h2>
+
+<p>MVC 其實有其不足的部份。坦白說，Rails 也不是真正的 MVC，而是 <a href="http://andrzejonsoftware.blogspot.com/2011/09/rails-is-not-mvc.html">Model2</a></p>
+
+<p>目前 MVC 其實是不足的，演化下來，開發者會發現 User class 裡面會開始出現這些東西：</p>
+
+<ul>
+<li>current_user.buy_book(book)</li>
+<li>current_user.add_creadit_point(point)</li>
+</ul>
+
+
+<p>這屬於 User 裡面應該放的 method 嗎？well，你也可以說適合，也可以說不適合。</p>
+
+<p>適合的原因是：其實你也不知道應該放哪裡，這好像是 User 執行的事，跟他有關，那就放這裡好了！不然也不知道要擺哪裡。</p>
+
+<p>不適合的原因是：這是一個「商業購買行為」。不是所有人都會購物啊。這應該是一個商業購買邏輯。但是&#8230;.也不知道要放在哪啊。</p>
+
+<p>一直到最近，James Copelin 提出了：<a href="http://en.wikipedia.org/wiki/Data,_Context,_and_Interaction">DCI</a> 去補充了現有的 MVC 的不足，才算勉強解決了目前浮現的這些問題。</p>
+
+<p>有關於 DCI ( Data, Context, Interaction ) 的文章，我會在之後發表。我同時也推薦各位去看這方面的主題。這個方向應該會是 Rails 專案設計上未來演化的方向之一。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[關於 Essential Rails Pattern 這本書的近況]]></title>
@@ -2582,63 +2853,6 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
 <p>繼續懶惰下去。甚至可能乾脆寫成 rails template，因為也許 template 可能才 3 行而已？</p>
 
 <p>寫完這個 gem，我突然間理解為什麼 simple_form 打遍天下無敵手，因為它本身就是一套 Form Framework。其他人實在沒有再造一套輪子的必要，透過 override template，你幾乎可以造出各式各樣的表單欄位&#8230;.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CoffeeScript 還可以用來做什麼？ -- Hubot]]></title>
-    <link href="http://blog.xdite.net/posts/2011/10/27/coffeescript-nodejs-hubot/"/>
-    <updated>2011-10-27T16:44:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2011/10/27/coffeescript-nodejs-hubot</id>
-    <content type="html"><![CDATA[<p><a href="http://github.com">Github</a> 內部自用的機器人 Hubot 一直是個神秘的產品，常常看到內部員工在<a href="http://speakerdeck.com/u/holman/p/how-github-uses-github-to-build-github">投影片</a>內炫耀 Hubot 多麼的屌：</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6285733326/" title="Hubot1 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6031/6285733326_5754b16968.jpg" width="500" height="375" alt="Hubot1"></a></p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6285212725/" title="Hubot2 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6110/6285212725_7255bbcabc.jpg" width="500" height="374" alt="Hubot2"></a></p>
-
-<p>但往往只是聞其聲，不見其蹤。</p>
-
-<p>不過要是按照 Github 內部慣例，常常在員工投影片出現的東西，往往就是下一個 release 的標的。因此大家也都是迫不及待在等 Hubot 的釋出。按照大家的假想，Hubot 應該是某種 Perl 或 Ruby 的 client，而且 Ruby 的機率可能還大的多。</p>
-
-<p>但 Github 官方 blog 貼的這篇<a href="https://github.com/blog/968-say-hello-to-hubot">公告文</a>章讓大家下巴掉下來：<a href="http://hubot.github.com/">Hubot</a> 是 <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> 寫的&#8230;&#8230;.XDDDDD</p>
-
-<p>(註：以防你不知道什麼是 <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a>，或者是它能帶來的好處，我曾經寫過這麼一篇<a href="http://upgrade2rails31.com/coffee-script">文章</a> 解釋原理以及用途 )</p>
-
-<h3>CoffeeScript meets NodeJS</h3>
-
-<p>更精確的來說，Hubot 是用 <a href="http://nodejs.org/">NodeJS</a> 架構作出來的一套機器人框架，而 Github 並非直接撰寫 JavaScript，他們是直接使用 CoffeeScript。整個專案的原始碼都只有 .coffee 而已。</p>
-
-<h3>Support Campfire 與 IRC</h3>
-
-<p>目前 Hubot 支援兩種 chatroom，預設是 <a href="http://37signals.com">37signals</a> 的產品 <a href="http://campfirenow.com">Campfire</a>，也有提供 <a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a> 的 adapter。</p>
-
-<h3>Provide tons of hubot-scripts example</h3>
-
-<p>為了避免大家不知道怎樣擴展 Hubot 的功能，Github 在專案內提供了大概十支左右的 example，也另開了一個專案 <a href="https://github.com/github/hubot-scripts">hubot-scripts</a>，讓大家交流和 contribute。</p>
-
-<h3>Hosted on Heroku</h3>
-
-<p>你會覺得，要跑起這樣一隻 bot，也許又要找一台機器把 bot 跑起來？</p>
-
-<p>Well，這次你錯了…</p>
-
-<p>Hubot 的架構被設計為可以透過 <a href="http://heroku.com">Heroku</a> 的 <a href="http://devcenter.heroku.com/articles/node-js">Procfile 架構</a>掛起來，也就是可以把這一隻 Bot 養在雲端 XD （ Hubot 的文件有教你怎麼作 ）</p>
-
-<h2>小結</h2>
-
-<p>昨天晚上在 Twitter 上看到幾個 Rails core team member 在講 hubot-scripts 時，才突然發現 Hubot 竟然已經釋出了。早上認真想玩時，發現整個架構竟然是 CoffeeScript + NodeJS 時，內心其實有小震撼…</p>
-
-<p>目前看到的幾個是 feature project 的 network program 都是以這樣的方式誕生，如 <a href="http://pow.cx">Pow</a>、Hubot。看來 network program 應該會越來越往 NodeJS 方向傾斜過去。</p>
-
-<p>BTW，今天在玩 Hubot 時，有發現幾個比較值得注意的地方。</p>
-
-<ol>
-<li><p>請使用 trunk 版。雖然官方請你直接下載有版本號的打包檔，不過大概是剛釋出，bug 有一點點多，但社群都積極的在修補，這些修補檔目前都還在 master branch 上，還沒被 tag 成 release 版本。所以跑 master 通常會比較沒問題。</p></li>
-<li><p>扔上 Heroku 時，要記得寫 Procfile，不然是不會動的。Procfile 的 sample 在 src/templates 下。記得一定要寫，然後再開 <code>heroku ps:scale app=1</code>。完整 Heroku 教學放在 <code>src/templates/README.md</code> 下。</p></li>
-</ol>
-
-
-<p>Good Luck!</p>
 ]]></content>
   </entry>
   
