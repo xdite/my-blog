@@ -237,5 +237,5 @@ Helper 是 Rails Developer 時常在接觸的工具。但可惜的是，多數�
 
 自用 Helper 的設計整理原則、如何將常用 Helper 抽取出來可以複用。
 
-本篇文章將會收錄在 [Essential Rails Pattern](http://rails-101.logdown.com/books/3-essential-rails-pattern)，目前已有部分章節已可[預覽](http://erp-book.heroku.com)，歡迎預購支持我的寫作，謝謝！
+本篇文章將會收錄在 [Essential Rails Pattern](http://rails-101.logdown.com/books/3-essential-rails-pattern)，目前已有部分章節已可[預覽](http://erp-book.heroku.com)，歡迎[預購](http://rails-101.logdown.com/books/3-essential-rails-pattern)支持我的寫作，謝謝！
 
