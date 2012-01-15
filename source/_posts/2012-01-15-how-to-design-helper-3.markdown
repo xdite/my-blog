@@ -209,7 +209,7 @@ end
 
 ``` ruby
 <% @posts.each do |post| %>
-  <%= post_tags_tag(post) %>
+  <%= post_tags_tag(post, post.tags) %>
 <% end %>
 ```
 
