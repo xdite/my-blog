@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-15T18:32:46+08:00</updated>
+  <updated>2012-01-15T18:34:00+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -264,7 +264,7 @@
 
 <h4>常用你可能不知道的 Helper</h4>
 
-<p>限於篇幅，直接介紹幾個因為使用機率高，所以被重造輪子的 Helper。開發者會寫出的相關 AntiPattern 部分就跳過了。</p>
+<p>限於篇幅，直接介紹幾個因為使用機率高，所以很容易被重造輪子的 Helper。開發者會寫出的相關 AntiPattern 部分就跳過了。</p>
 
 <ul>
 <li><a href="http://apidock.com/rails/ActionView/Helpers/TextHelper/truncate">truncate</a></li>

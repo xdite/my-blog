@@ -169,7 +169,7 @@ Rails 已內建許多實用 Helper，開發者卻以較糟的方式重造輪子�
 
 #### 常用你可能不知道的 Helper
 
-限於篇幅，直接介紹幾個因為使用機率高，所以被重造輪子的 Helper。開發者會寫出的相關 AntiPattern 部分就跳過了。
+限於篇幅，直接介紹幾個因為使用機率高，所以很容易被重造輪子的 Helper。開發者會寫出的相關 AntiPattern 部分就跳過了。
 
 * [truncate](http://apidock.com/rails/ActionView/Helpers/TextHelper/truncate)
 * [auto_link](http://apidock.com/rails/ActionView/Helpers/TextHelper/auto_link)
