@@ -94,7 +94,7 @@ def green_notice(message)
   return content_tag(:span,message, :style => "font-color: green;")
 end
 ```
-有一些開發者不熟悉 unobtrusive 的設計，直接就把 design 就綁上了 Ruby Helper。造成將來有例外時，難以變更設計或擴充。
+開發者不熟悉 unobtrusive 的設計手法，直接就把 design 就綁上了 Ruby Helper。造成將來有例外時，難以變更設計或擴充。
 
 #### 正確
 
@@ -133,7 +133,7 @@ Rails 已內建許多實用 Helper，開發者卻以較糟的方式重造輪子�
 <% end %>
 </table>
 ```
-一般的想法會是使用兩種 class : event 與 odd 上不同的顏色。
+一般的想法會是使用兩種不同 HTML class : event 與 odd，上不同的顏色。
 
 
 #### 劣 
@@ -152,7 +152,7 @@ Rails 已內建許多實用 Helper，開發者卻以較糟的方式重造輪子�
 <% end %>
 </table>
 ```
-這是一般 Ruby / Rails 初心者會犯的錯誤。實際上 Ruby 中有 `each_with_index`，不需要另外需要宣告一個 count。
+這是一般初心者會犯的錯誤。實際上 Ruby 中有 `each_with_index`，不需要另外需要宣告一個 count。
 
 #### 優
 
@@ -178,7 +178,7 @@ Rails 已內建許多實用 Helper，開發者卻以較糟的方式重造輪子�
 
 ## 5. Ask, Not Tell
 
-這也是在 View 中會常出現的問題，直接違反了 Law of Demeter 原則，而造成了效能問題。十之八九某個 View 緩慢無比，最後抓出來背後幾乎是這樣的原因。
+這也是在 View 中會常出現的問題，直接違反了 Law of Demeter 原則，而造成了效能問題。十之八九某個 View 緩慢無比，最後抓出來背後幾乎都是這樣的原因。
 
 不少開發者會設計出這樣的 helper：
 
@@ -227,7 +227,7 @@ end
 
 
 
-Helper 是 Rails Developer 時常在接觸的工具。但可惜的是，多數開發者卻無法將此利器使得稱手，反而造成了更多問題。在我所曾經參與的幾十個 Rails 專案中，很多設計和效能問題幾乎都是因為寫的不好的 View / Helper 中的 slow query 或大量物件造成的 memory bloat 所導致的。但參與專案的開發者並沒有那麼多的經驗，能夠抓出確切的病因，卻將矛頭直接是 Rails 的效能問題，或者是沒打上 Cache 的關係。這樣的說法只是把問題掩蓋起來治標，而非治本。
+Helper 是 Rails Developer 時常在接觸的工具。但可惜的是，多數開發者卻無法將此利器使得稱手，反而造成了更多問題。在我所曾經參與的幾十個 Rails 專案中，很多設計和效能問題幾乎都是因為寫的不好的 View / Helper 中的 slow query 或伴隨產生的大量 object 所造成的 memory bloat 導致的。但參與專案的開發者並沒有那麼多的經驗，能夠抓出確切的病因，卻都將矛頭直接是 Rails 的效能問題，或者是沒打上 Cache 的關係。這樣的說法只是把問題掩蓋起來治標，而非治本。
 
 下次若有遇到 performance issue，請先往 View 中瞧看看是不是裡面出現了問題。也許你很快就可以找到解答。
 
