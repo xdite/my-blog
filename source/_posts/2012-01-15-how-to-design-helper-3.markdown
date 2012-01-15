@@ -187,7 +187,7 @@ Rails 已內建許多實用 Helper，開發者卻以較糟的方式重造輪子�
 ``` ruby
 def post_tags_tag(post, opts = {})
   tags = post.tags
-  raw tags.collect { |tag| link_to(tag,posts_path(:tag => tag)) }.join(", ")
+  tags.collect { |tag| link_to(tag,posts_path(:tag => tag)) }.join(", ")
 end
 ```
 
@@ -203,7 +203,7 @@ end
 
 ``` ruby
 def post_tags_tag(post, tags, opts = {})
-  raw tags.collect { |tag| link_to(tag,posts_path(:tag => tag)) }.join(", ")
+  tags.collect { |tag| link_to(tag,posts_path(:tag => tag)) }.join(", ")
 end
 ```
 
