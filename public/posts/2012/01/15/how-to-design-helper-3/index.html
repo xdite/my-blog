@@ -214,11 +214,11 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">red_alert</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">span</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s2">&quot;font-color: red;&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span><span class="n">message</span><span class="p">,</span> <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s2">&quot;font-color: red;&quot;</span><span class="p">)</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">def</span> <span class="nf">green_notice</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">span</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s2">&quot;font-color: green;&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span><span class="n">message</span><span class="p">,</span> <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s2">&quot;font-color: green;&quot;</span><span class="p">)</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -233,7 +233,7 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">stickies</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">message_type</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">span</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">message_type</span><span class="o">.</span><span class="n">to_sym</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span><span class="n">message</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">message_type</span><span class="o">.</span><span class="n">to_sym</span><span class="p">)</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert&quot;</span><span class="o">&gt;</span> <span class="no">Please</span> <span class="no">Login</span><span class="o">!!</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>

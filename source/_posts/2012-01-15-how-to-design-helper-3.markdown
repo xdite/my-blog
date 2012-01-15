@@ -87,11 +87,11 @@ end
 
 ``` ruby
 def red_alert(message)
-  return span(message, :style => "font-color: red;")
+  return content_tag(:span,message, :style => "font-color: red;")
 end
 
 def green_notice(message)
-  return span(message, :style => "font-color: green;")
+  return content_tag(:span,message, :style => "font-color: green;")
 end
 ```
 有一些開發者不熟悉 unobtrusive 的設計，直接就把 design 就綁上了 Ruby Helper。造成將來有例外時，難以變更設計或擴充。
@@ -100,7 +100,7 @@ end
 
 ``` ruby 
 def stickies(message, message_type)
-  span(message, :class => message_type.to_sym)
+  content_tag(:span,message, :class => message_type.to_sym)
 end
 
 <span class="alert"> Please Login!! </span>
