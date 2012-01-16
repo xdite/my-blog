@@ -98,7 +98,7 @@ categories:
 
 兩年多前寫的感觸，放到目前還是一點沒變…
 
-其實關於「創業」主題的桌遊，我還寫過一篇 [相當歡樂的桌上遊戲「Burn Rate](http://wp.xdite.net/?p=894)。比較偏向人力資源使用的。
+其實關於「創業」主題的桌遊，我還寫過一篇 [相當歡樂的桌上遊戲「Burn Rate」](http://wp.xdite.net/?p=894)。比較偏向人力資源使用的。
 
 Burnrate 這篇文章遠遠比 Agricola 那篇文章有名，我也不懂為什麼。大概是因為所謂的 [Lean Startup](http://en.wikipedia.org/wiki/Lean_Startup) 這個概念最近才比較紅吧。
 
