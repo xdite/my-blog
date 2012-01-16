@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  Helper 與 Partial 一直是初學者比較容易迷路的主題之一。迷路的原因有幾個：不知道有 Rails 提供了許多好用的 Helper 可以用不知道 Helper 與 Partial 他們各自的使用時機。擔心使用 Helper 會造成效能下降。以不好的...">
+  <meta name="description" content="                  本系列第一篇：如何運用 / 設計 Rails Helper (1)===為什麼在專案中我們要撰寫「自用」 Helper？其一：在 View 裡面實作 LOGIC 是不好的。造成效能低落在 對於使用 Render Partial 的一些誤解 一文中。我有解釋過...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,184 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/12/09/how-to-design-helpers-2/">如何運用 / 設計 Rails Helper (2)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-12-09T16:36:00+08:00" pubdate  data-updated="true" >Dec 9<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/12/09/how-to-design-helpers-2/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/12/09/how-to-design-helpers-2/" data-show-faces="false"></div></div>
+    
+    <p>本系列第一篇：</p>
+
+<p><a href="http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/">如何運用 / 設計 Rails Helper (1)</a></p>
+
+<p>===</p>
+
+<h2>為什麼在專案中我們要撰寫「自用」 Helper？</h2>
+
+<h3>其一：在 View 裡面實作 LOGIC 是不好的。</h3>
+
+<h4>造成效能低落</h4>
+
+<p>在 <a href="http://blog.xdite.net/posts/2011/12/04/misunderstanding-about-render/">對於使用 Render Partial 的一些誤解</a> 一文中。我有解釋過在 View 裡面實作 LOGIC 的影響：「效能低落」。原因是 ERB 是用 eval 實作 執行 Ruby code 的。在 View 裡面穿插大量的 LOGIC 會造成 render 的效率低落。</p>
+
+<h4>造成程式碼混亂難讀</h4>
+
+<p>View 在 MVC 的模式中，原本就是只為了做 UI 輸出的功用的。如果有程式邏輯，或者是資料查詢，應該挪到 Controller 或 Model 去做。</p>
+
+<p>這通常在 PHP 出身轉過來的 Programmer 身上，比較能找到這樣的問題。原因是在 PHP 寫作，這樣是很天經地義的作法。但眾所週知的，PHP 的 project 也特別容易藏汙納垢。</p>
+
+<p>如果你拿到一個 Project，View 一打開來都 7-8 頁以上，別懷疑，肯定都是 LOGIC in View 造成的。而根據經驗，有長 View 問題的 project，往往比長 controller 的 project 還要難纏。</p>
+
+<p>一個 view 若有著很多 if / else / elsif , query_some_data。又有著 if / else / elsif , change some css class ?</p>
+
+<p><code>人的大腦不是 Ruby Interpreter，很難腦內想像這麼複雜的 code 會長什麼樣子，沒多久就會當機的....</code></p>
+
+<h3>其二：讓 View 更加直觀好維護。</h3>
+
+<p>看的懂這段 code 的意圖嗎？</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if current_user <span class="err">&amp;&amp;</span> (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我想這段還算簡單，應該不難讓人猜到。</p>
+
+<p>不過如果這一段 code 再經過兩三輪的維護，應該就會變得超難維護了。</p>
+
+<p>正確的寫法其實應該要把邏輯拆出來，放在 Helper 裡。</p>
+
+<p>就像這樣：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if can_edit?(post) %&gt;
+</span><span class='line'>     <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>後續維護者就知道，這一段程式碼就是在表示：<strong>如果當前使用者有權限編輯，就應該顯示編輯頁面的連結。</strong></p>
+
+<h3>其三：給 Code 取名字，容易尋找並複用成果。</h3>
+
+<p>上面那一段範例的程式碼寫得還不算好，因為它只表明了：<strong>如果當前使用者有權限編輯，就應該顯示編輯頁面的連結。</strong>。並沒達到正確闡述自己存在的的意義。</p>
+
+<p>而這一塊原始碼的意圖是，若有編輯權限，這裡應該應顯示一塊 Toolbar。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>%= render_tool_bar %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>包裝成 Toolbar 後，這一塊程式碼就變得有名字了，下次你在某個頁面要寫到類似的功能時，就只要呼叫 render_tool_bar 就可以了。</p>
+
+<p>而最重要的，是你以後再維護這一塊程式碼時，完全不必再猜測程式意圖，也很容易找當初亂丟在哪裡了。</p>
+
+<h3>其四： 不會被以前寫的 Code 害死。</h3>
+
+<p>下面所說的這種 code 在網站初期建設需要高速開發時沒有什麼不好。其實也還算讓人看得懂&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>% if current_user <span class="err">&amp;&amp;</span> (post.user == current_user || current.user.is_forum_admin? || current.user_is_admin? ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>%= link_to(&quot;Edit&quot;, edit_post_path(post) ) %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但我建議：一旦接近完工狀態就要儘快 refactor 掉它。</p>
+
+<p>這種 code 一旦越來越多，網站就會越來越難維護。累積到一個程度，網站就會變成 unmaintainable&#8230;</p>
+
+<p>像是我的 Team 或專案都有一個慣例，一旦專案開發快到尾聲，一定會開始整理 code，把重複的 code 包成有名字的 Helper。</p>
+
+<p>這樣作有什麼好處？</p>
+
+<ol>
+<li><p>網站以後要進行結構重整時，只要調整已定義好的 Helper 內部架構就好了。如果還是東一個西一個到處亂放，同樣的東西重複貼 10 個地方，將來想要調整就要改 10 遍。相信我，你不喜歡在「改版時期」改 code 改 10 遍。就算 git grep 還是會改漏掉…</p></li>
+<li><p>painless 升級 Rails 版本。有很多人好奇我手上的每個專案，為何可以一路從 2.3.x 一路升升升到3.1.x 去。卻還是輕鬆愉快？</p></li>
+</ol>
+
+
+<p>中間不是有令人抓狂的 html_escape API 行為改變問題？asset_pipeline 架構調整？這些都是很 painful 的過程。不少人都在升版過程中放棄了。為什麼我們還是寫意的辦到了。</p>
+
+<p>關鍵不在於有沒有寫 test 的關係，而是在於「有沒有擁有定期整理 code 的習慣」。</p>
+
+<p>不管是 helper / partial / controller / model ，只要是重複的 code ，定期都會進行封裝整理。就算有東西爆炸，也只要調整一下 helper 或者是 model 的輸出，就辦到了。</p>
+
+<p>所以就算 Rails 要升版，精力也都是集中在處理幾個 deprecated method 或 incompatible API 的調整。就算 view 爆掉，也只要改一個地方，10 個地方都會生效。自然寫意無比。</p>
+
+<h3>其五：容易複用並開創專案打下來的 best practices</h3>
+
+<p>在進行專案過程中，也會漸漸的養出自己的一套 HTML 架構 與 CSS (SCSS)。很多元件在不同專案中都是共通的，比如說自己用來 bootstrap （非 twitter）專案的 view 和 helper。</p>
+
+<p>navgation_bar, user_bar, breadcrumb, menu list, table, button,gravator 這些都是專案必備。</p>
+
+<p>這是前東家 <a href="http://handlino.com">Handlino</a> 設計的一套 helper
+<a href="https://github.com/handlino/handicraft_helper">https://github.com/handlino/handicraft_helper</a></p>
+
+<p>可以很方便就寫出 menu, table, body class with browser type, breadcrumb…etc.</p>
+
+<p>而我作網站還會多上幾套自己養出來的標準 Helper</p>
+
+<ul>
+<li>SEO 最佳化實踐</li>
+<li>Social Media Share-Friendly</li>
+<li>Content Site 常用功能最佳實踐</li>
+</ul>
+
+
+<p>專案越寫越多，後期越來越輕鬆，但不管之後再寫什麼新網站，依舊是幾乎都預設含有以前維護舊網站時打下的 Best Practices.</p>
+
+<p>// 最近的目標換在整理 SCSS …</p>
+
+<p>===</p>
+
+<p>接下來幾章將會介紹：</p>
+
+<p>什麼是不好的 Helper Pattern 應儘量避免、自用 Helper 的設計整理原則、如何將常用 Helper 抽取出來可以複用。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1756,141 +1934,6 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2011/11/14/money-ball/">魔球，一個搞清楚產業重點的棒球故事</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-11-14T23:56:00+08:00" pubdate  data-updated="true" >Nov 14<span>th</span>, 2011</time>
-        
-         | <a href="/posts/2011/11/14/money-ball/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/11/14/money-ball/" data-show-faces="false"></div></div>
-    
-    <p>今天下班回家，看到 Mr. Jamie 寫了這一篇 <a href="http://mrjamie.cc/2011/11/14/moneyball/">魔球 (Moneyball)：一個 Hack Everything 的棒球故事</a></p>
-
-<p>電影《<a href="http://tw.movie.yahoo.com/movieinfo_main.html/id=3981">魔球 (Moneyball)</a>》終於在台灣上映了，一樣的我也還沒去看。但我同樣的也要說，就算你沒有要進電影院看故事，我也推薦你一定要去買<a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010522666">魔球</a>這本書。</p>
-
-<p>但我要推薦的理由跟 inside 的 <a href="http://www.inside.com.tw/2011/11/13/moneyball-startups">fOx</a> 和 <a href="http://www.inside.com.tw/2011/11/13/moneyball-startups">Jamie</a> 都不一樣。我推薦的原因是，它是一本告訴你「要成為產業贏家就必須搞清楚競賽重點」的書。</p>
-
-<p>魔球是一本 2002 年出版的書，現在這個版本是因應電影上映重新出過的書。中文書第一版出的時候，我正念大二。</p>
-
-<p>而閱讀這本書，從此改變了我對經營事業的看法。</p>
-
-<h2>不是 Hack ，而是抓住遊戲的重點</h2>
-
-<p>Billy Beane 的故事相信大家都耳熟能詳。Mr. Jamie 整理了五段摘要：</p>
-
-<ul>
-<li>一個老產業 + 一支窮球隊</li>
-<li>勝場數 = 營收</li>
-<li>最珍貴的資源: 27 Outs</li>
-<li>數字 > 天賦</li>
-<li>第二年</li>
-</ul>
-
-
-<p>我就不重新寫了。</p>
-
-<p>而 Billy Beane 的故事，讓我所領悟到很清楚的一件事是： Billy Beane 並不是個 Game Hacker，而他的成功，是因找到了這場金錢遊戲的本質。</p>
-
-<p>（也許是我念數學系的關係，教授平常要求我們的不是去練各種技巧，而是去挖出問題本質，以自身累積出的理論與實力見題解題、見招拆招）</p>
-
-<h3>在大聯盟賺到很多錢的方法？</h3>
-
-<ul>
-<li>如何賺大錢？勝場數 = 營收</li>
-<li>如何贏球？在 27 個出局數中得到最多分</li>
-<li>如何得到最多分？提高上壘率</li>
-<li>如何提高上壘率？找出厲害的球員</li>
-<li>沒那麼多錢買明星球員怎麼辦？找出上壘率高，但有其他缺陷導致薪水被嚴重低估的球員。</li>
-</ul>
-
-
-<p>而 Billy 所作的也很單純，就是：「用一分錢實實在在的買下一分錢的勝利」。想辦法讓他的錢花的有價值。</p>
-
-<p>而其他人的手段卻是「買明星」，而說穿了也是用「用十塊錢去賭賺一塊錢的機會。」</p>
-
-<p>所有人都能靠賭博賺錢，但是真正賺到錢的機率很低，所以絕大多數的球隊也幾乎都是花了大錢，但票房勝場慘兮兮。</p>
-
-<h2>要從網路上賺錢，第一天就要作能有實質收入的生意</h2>
-
-<p>本來我也覺得大聯盟的砸錢遊戲，荒謬可笑。</p>
-
-<p>直到我踏入了網路界才發現，原來這樣的劇本在各個領域內無時無刻都在上演。只是賭博遊戲變成了：</p>
-
-<ul>
-<li>如何在網路上賺錢？做出 PV 幾百萬的網站。</li>
-<li>網站如何長成 PV 幾百萬？ =>  做出很酷的網站 => 花大錢 Hire 明星團隊</li>
-<li>網站如何長成 PV 幾百萬？ =>   生出很棒的內容 => 花很多錢找人產生內容、經營社群</li>
-<li>PV 沒有成長怎麼辦 => 改版增加更多更屌的實驗新 feature => RD 不夠 => Hire 更多的 RD</li>
-<li>PV 沒有成長怎麼辦 => 砸錢養更多的編輯生更多的 content => 編輯不夠 => Hire 更多的編輯</li>
-</ul>
-
-
-<p>一年半載下來。準備的幾千萬資本額不夠燒，就算有幾百萬 PV。等到你做到幾百萬 PV 的那一天，你才發現因為 PV 不能吃，轉換率太低，回收的利潤根本不夠龐大的人事費用，然後因為你的帳面太難看，又沒有 VC 想投你，最後就只能黯然收攤。</p>
-
-<p>這不是在影射任何一家網路公司，而是幾乎所有倒掉的網路公司都是類似的劇本。只是誰的口袋比較淺，誰先死。</p>
-
-<h3>從網路上賺到錢的秘密：「charge for your products.」</h3>
-
-<p>37 Signals 的 DHH 曾經在 <a href="http://37signals.com/speaks#startupschool">2008 的 Startup School</a> 給過一場 Talk。這場 Talk 曾經震撼當時的矽谷，這個影片那時還在網路上傳來傳去好一陣子，蔚為風潮。</p>
-
-<p>因為在這場 Talk 中，他講出 37signals 賺錢真正的秘方，這個秘方真的非常非常簡單：簡單到這個言論當時造成矽谷一陣騷動，那就是：「<strong>charge for your products.</strong>」</p>
-
-<p>想從網路上「賺錢」？很簡單，那就是先「收錢」啊！</p>
-
-<p>很好笑對吧？沒想到大家都在作「慈善」，做到忘記其實公司成立的目的，其實就是要「賺錢」。</p>
-
-<h2>小結</h2>
-
-<p>更有趣的是，這分別是 2002 以及 2008 的兩個故事。至今你還可以在各行各業中看到，大家還是拼了命的在下大注賭博：拿自己的老底賭，去借大錢賭。</p>
-
-<p>很多程式設計師總打趣，若寫程式賺不到錢，那就應該回家賣雞排。</p>
-
-<p>若你打算開雞排店，就算你炸的雞排很難吃，你會有可能從開業第一天，就每天雞排都免費，送到有人開始覺得你炸的雞排很好吃，然後你才決定開始賣 40 塊嗎？</p>
-
-<p>你不會，因為如果你這樣作，店開一個月就會倒了。</p>
-
-<p>為什麼你覺得你在網路上這樣送免費雞排不會倒？</p>
-
-<p>從雞排銷售數字分析廚師手藝？Hack 雞排香料祕方？</p>
-
-<p>我想我從這些故事裡，領悟到的是：「你要靠賣雞排賺錢就不要免費；你要靠賣雞排賺大錢就應該努力去把雞排炸的很好吃，讓更多人主動衝來買; 而租個豪華大攤位，挖個五星級廚師、開發榴槤雞排口味，客人不一定會更多，但更有可能的是會讓你虧到死而已&#8230;」。</p>
-
-<p>我不知道你會在<a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010522666">魔球這本書</a> 和 <a href="http://37signals.com/speaks#startupschool">這場 Talk</a> 裡看到什麼。</p>
-
-<p>希望有機會看到你想追求的答案。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1926,6 +1969,10 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/01/17/lean-startup-should-play-agricola/">農家樂 (Agricola) - 創業者都應該玩過的一套 Lean Startup 桌遊</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/01/15/how-to-design-helper-3/">如何運用 / 設計 Rails Helper (3)</a>
       </li>
     
@@ -1939,10 +1986,6 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
     
       <li class="post">
         <a href="/posts/2012/01/06/sell-my-macbook-air/">[出售] Macbook Air 攻頂款另贈 NDSi XL</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/01/04/make-activerecord-includable/">[進階] Make ActiveRecord includable</a>
       </li>
     
   </ul>
