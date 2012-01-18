@@ -202,14 +202,14 @@ end
 #### 優
 
 ``` ruby
-def post_tags_tag(post, tags, opts = {})
+def post_tags_tag(tags, opts = {})
   tags.collect { |tag| link_to(tag,posts_path(:tag => tag)) }.join(", ")
 end
 ```
 
 ``` ruby
 <% @posts.each do |post| %>
-  <%= post_tags_tag(post, post.tags) %>
+  <%= post_tags_tag(post.tags) %>
 <% end %>
 ```
 
