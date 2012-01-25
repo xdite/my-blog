@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>五年寫了 230 萬字 - Blog.XDite.net</title>
+  <title>Rails 3.2 新的 Route recognition 引擎 ： Jounery - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          這兩天因為本來嘗試要將 Wordpress 轉成 Octopress 的緣故。寫了不少 script。而壓出來的 MySQL 備份檔大概也有 11 M。原本以為是 spam 佔了很多份量。沒想到去掉 comment，還是足足有 10 多 M&#8230;才發現自己好像還真的...">
+  <meta name="description" content="          Rails 3.2 四天前 Release 了。這次主要的改進幾乎都在效能部分。最大的改版應該屬於 Route recognition 這部分。原本這部分是由 rack-mount 擔綱，Aaron Patterson (a.k.a. @tenderlove) 將之抽換成他...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">五年寫了 230 萬字</h1>
+      <h1 class="entry-title">Rails 3.2 新的 Route Recognition 引擎 ： Jounery</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-10-08T00:17:00+08:00" pubdate  data-updated="true" >Oct 8<span>th</span>, 2011</time>
+<time datetime="2012-01-25T20:55:00+08:00" pubdate  data-updated="true" >Jan 25<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,24 +98,24 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>這兩天因為本來嘗試要將 Wordpress 轉成 Octopress 的緣故。寫了不少 script。而壓出來的 MySQL 備份檔大概也有 11 M。原本以為是 spam 佔了很多份量。沒想到去掉 comment，還是足足有 10 多 M&#8230;</p>
+  <p>Rails 3.2 四天前 Release 了。這次主要的改進幾乎都在效能部分。</p>
 
-<p>才發現自己好像還真的寫了不少字。</p>
+<p>最大的改版應該屬於 Route recognition 這部分。原本這部分是由 <a href="http://rubygems.org/gems/rack-mount">rack-mount</a> 擔綱，Aaron Patterson (a.k.a. <a href="http://twitter.com/tenderlove">@tenderlove</a>) 將之抽換成他自己寫的 Gem : <a href="https://github.com/rails/journey">jounery</a>。速度快了非常多倍。</p>
 
-<p>好奇用 wc 跑自己的文章目錄夾，得出一些有趣的數字：</p>
+<p>但相關的原理並沒有 <a href="https://github.com/rails/journey">jounery</a> 的 About 頁面並沒有被詳加敘述，</p>
 
-<p>文章：840 篇
-字數：2312404 字。</p>
+<blockquote><p>SYNOPSIS: Too complex right now. :(</p></blockquote>
 
-<p>歷時 1902 days</p>
+<p>不過根據有限的線索，我還是從 @tenderlove 的 slideshare 上挖出來了。</p>
 
-<p>平均 2.23 天寫一篇文章</p>
+<p>jounery 的原理是用 FSM ( <a href="http://en.wikipedia.org/wiki/Finite-state_machine">Fininte State Machine</a> ) 實做的。有興趣的可以從投影片裡面繼續挖。</p>
 
-<p>平均每篇文章長 2752 字。</p>
+<div style="width:425px" id="__ss_10090654"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/tenderlove/rubyconf-argentina-2011" title="RubyConf Argentina 2011" target="_blank">RubyConf Argentina 2011</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10090654" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/tenderlove" target="_blank">Aaron Patterson</a> </div> </div>
 
-<p>這個數字跑出來我自己也嚇了一跳，因為實在是遠超乎自己的想像。</p>
 
-<p>這件事也在某種程度上提醒和鼓勵了自己：<strong>持續做一件微小的事，時日一久也可以匯集巨大成果</strong>。</p>
+<h3>其他豆知識：</h3>
+
+<p>ActiveRecord 背後的 SQL 生成引擎 <a href="https://github.com/rails/arel">Arel</a> 背後原理是用 <a href="http://en.wikipedia.org/wiki/Relational_algebra">Relational Algerbra</a> 生成的，可以生成非常複雜的 SQL Query 但又兼顧到效能問題。</p>
 
 </div>
 
@@ -137,7 +137,7 @@
 
 
 
-<time datetime="2011-10-08T00:17:00+08:00" pubdate  data-updated="true" >Oct 8<span>th</span>, 2011</time>
+<time datetime="2012-01-25T20:55:00+08:00" pubdate  data-updated="true" >Jan 25<span>th</span>, 2012</time>
       
 
 
@@ -146,7 +146,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -222,8 +222,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery/';
         var disqus_script = 'embed.js';
       
     (function () {

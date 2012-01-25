@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  今天看到 Techorange 的 創投包心菜-vc-專欄：創投最害怕的那些人-1 引用了我之前寫的一篇關於創業資金與創業策略的文章： Startup 需不需要一開始注意資金的問題？。剛好晚上香港推友要來台灣一遊，問我家裡有沒有 農家樂 (Agricola)...">
+  <meta name="description" content="                  Rails 3.2 四天前 Release 了。這次主要的改進幾乎都在效能部分。最大的改版應該屬於 Route recognition 這部分。原本這部分是由 rack-mount 擔綱，Aaron Patterson (a.k.a. @tenderlove...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/01/25/rails-3-2-jounery/">Rails 3.2 新的 Route Recognition 引擎 ： Jounery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-01-25T20:55:00+08:00" pubdate  data-updated="true" >Jan 25<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/01/25/rails-3-2-jounery/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery/" data-show-faces="false"></div></div>
+    
+    <p>Rails 3.2 四天前 Release 了。這次主要的改進幾乎都在效能部分。</p>
+
+<p>最大的改版應該屬於 Route recognition 這部分。原本這部分是由 <a href="http://rubygems.org/gems/rack-mount">rack-mount</a> 擔綱，Aaron Patterson (a.k.a. <a href="http://twitter.com/tenderlove">@tenderlove</a>) 將之抽換成他自己寫的 Gem : <a href="https://github.com/rails/journey">jounery</a>。速度快了非常多倍。</p>
+
+<p>但相關的原理並沒有 <a href="https://github.com/rails/journey">jounery</a> 的 About 頁面並沒有被詳加敘述，</p>
+
+<blockquote><p>SYNOPSIS: Too complex right now. :(</p></blockquote>
+
+<p>不過根據有限的線索，我還是從 @tenderlove 的 slideshare 上挖出來了。</p>
+
+<p>jounery 的原理是用 FSM ( <a href="http://en.wikipedia.org/wiki/Finite-state_machine">Fininte State Machine</a> ) 實做的。有興趣的可以從投影片裡面繼續挖。</p>
+
+<div style="width:425px" id="__ss_10090654"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/tenderlove/rubyconf-argentina-2011" title="RubyConf Argentina 2011" target="_blank">RubyConf Argentina 2011</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/10090654" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/tenderlove" target="_blank">Aaron Patterson</a> </div> </div>
+
+
+<h3>其他豆知識：</h3>
+
+<p>ActiveRecord 背後的 SQL 生成引擎 <a href="https://github.com/rails/arel">Arel</a> 背後原理是用 <a href="http://en.wikipedia.org/wiki/Relational_algebra">Relational Algerbra</a> 生成的，可以生成非常複雜的 SQL Query 但又兼顧到效能問題。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1644,309 +1703,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2011/12/10/github-flavored-ruby/">Github Flavored Ruby - by Tom Preston-Werner (1)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-12-10T11:23:00+08:00" pubdate  data-updated="true" >Dec 10<span>th</span>, 2011</time>
-        
-         | <a href="/posts/2011/12/10/github-flavored-ruby/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/" data-show-faces="false"></div></div>
-    
-    <p>這是我近期裡面看到算比較有趣的演講，是 Github CTO Tom Preston-Werner 給的 talk</p>
-
-<p>影片在這裡：
-<a href="http://confreaks.net/videos/712-rubyconf2011-github-flavored-ruby">http://confreaks.net/videos/712-rubyconf2011-github-flavored-ruby</a></p>
-
-<p>投影片在這裡：
-<a href="http://speakerdeck.com/u/mojombo/p/github-flavored-ruby">http://speakerdeck.com/u/mojombo/p/github-flavored-ruby</a></p>
-
-<p>本來先貼在社群內 <a href="http://ruby-taiwan.org/topics/69">http://ruby-taiwan.org/topics/69</a>。現在來補充貼我自己的筆記…</p>
-
-<p>裡面提到非常多有趣的東西。</p>
-
-<p>提到五個 Github 的開發哲學：</p>
-
-<ul>
-<li>Relentless Modularization</li>
-<li>Readme Driven Development</li>
-<li>Rake Gem</li>
-<li>TomDoc</li>
-<li>Semantic Version</li>
-</ul>
-
-
-<p>雖然這個 talk 長度不到一個小時，但是從中不少學到知識。</p>
-
-<h2>Relentless Modularization</h2>
-
-<p>當專案越來越大，身處其中的開發者就會越來越感覺到 codebase 帶來的壓力， code 會變得越來越 messay 和 tightly coupled。牽一髮而動全身。</p>
-
-<p>把一些元件 modularize 應該會是好的解法。但我們總會困惑，那什麼東西應該是應該被 modularize ？</p>
-
-<p>TOM 給出的答案：<strong>EVERYTHING</strong>。</p>
-
-<p>Github 是這樣做的，當它們在建造 <a href="http://github.com">http://github.com</a> 時，因為 Github 是個 git services。
-於是他們造了</p>
-
-<ul>
-<li>grit <a href="https://github.com/mojombo/grit">https://github.com/mojombo/grit</a></li>
-</ul>
-
-
-<p>接著他們為了要 scale up，造了</p>
-
-<ul>
-<li>smoke，讓 frontend 可以直接跟 backend 溝通。</li>
-</ul>
-
-
-<p><code>We then replace Grit::Git with a stub that makes RPC calls to our Smoke service. Smoke has direct disk access to the repositories and essentially presents Grit::Git as a service. It’s called Smoke because Smoke is just Grit in the cloud. Get it?</code></p>
-
-<p><a href="https://github.com/blog/530-how-we-made-github-fast">https://github.com/blog/530-how-we-made-github-fast</a>
-<a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath</a></p>
-
-<p>而 smoke 又用了 bertrpc</p>
-
-<ul>
-<li>bertrpc <a href="https://github.com/mojombo/bertrpc">https://github.com/mojombo/bertrpc</a></li>
-</ul>
-
-
-<p><code>For our data serialization and RPC protocol we are using BERT and BERT-RPC.</code></p>
-
-<p>和</p>
-
-<ul>
-<li>proxymachine <a href="https://github.com/mojombo/proxymachine">https://github.com/mojombo/proxymachine</a></li>
-</ul>
-
-
-<p>保持連線平穩</p>
-
-<p><code>ProxyMachine is my content aware (layer 7) TCP routing proxy that lets us write the routing logic in Ruby.</code></p>
-
-<p><code>Each frontend runs four ProxyMachine instances behind HAProxy that act as routing proxies for Smoke calls.</code></p>
-
-<p>再使用 chimney 控制 route</p>
-
-<ul>
-<li>chimney</li>
-</ul>
-
-
-<p><code>Chimney finds the route by making a call to Redis. Redis runs on the database servers. We use Redis as a persistent key/value store for the routing information and a variety of other data.</code></p>
-
-<p>而每台 Fileserver 上面跑了兩組 Ernie Server。Erine 是 BERT-RPC server implementation that uses an Erlang server to accept incoming connections。</p>
-
-<ul>
-<li>ernine <a href="http://github.com/mojombo/ernie">http://github.com/mojombo/ernie</a></li>
-</ul>
-
-
-<p><code>Every file server runs two Ernie RPC servers behind HAProxy. Each Ernie spawns 15 Ruby workers. These workers take the RPC call and reconstitute and perform the Grit call. The response is sent back through the Smoke proxy to the Rails app where the Grit stub returns the expected Grit response.</code></p>
-
-<p>當事情出錯了，用 Failbot 去掌握災情..</p>
-
-<ul>
-<li>failbot <a href="https://gist.github.com/1162437">https://gist.github.com/1162437</a></li>
-</ul>
-
-
-<p>===</p>
-
-<ul>
-<li>gerve</li>
-</ul>
-
-
-<p>用 Gerve 去管控 identity</p>
-
-<p><code>GitHub user and this information is sent along with the original command and arguments to our proprietary script called Gerve (Git sERVE). Think of Gerve as a super smart version of git-shell.</code></p>
-
-<p><code>Gerve verifies that your user has access to the repository specified in the arguments. If you are the owner of the repository, no database lookups need to be performed, otherwise several SQL queries are made to determine permissions</code></p>
-
-<ul>
-<li>resque <a href="https://github.com/defunkt/resque">https://github.com/defunkt/resque</a></li>
-</ul>
-
-
-<p>用 resque 實作 job queue</p>
-
-<p><code>Resque (pronounced like "rescue") is a Redis-backed library for creating background jobs, placing those jobs on multiple queues, and processing them later.</code></p>
-
-<ul>
-<li>rock-queue <a href="https://github.com/grzegorzkazulak/rock-queue">https://github.com/grzegorzkazulak/rock-queue</a></li>
-</ul>
-
-
-<p>RockQueue 是用來把東西丟進 resque</p>
-
-<p><code>Rock Queue is a simple, yet powerful unified interface for various messaging queues. In other words it allows you to swap your queuing back-end without making any modification to your application except changing the configuration parameters.</code></p>
-
-<ul>
-<li>jekyll <a href="https://github.com/mojombo/jekyll">https://github.com/mojombo/jekyll</a></li>
-</ul>
-
-
-<p>jekyll 用來生靜態檔案</p>
-
-<p><code>Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile or Markdown and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server.</code></p>
-
-<ul>
-<li>nodeload <a href="https://github.com/blog/678-meet-nodeload-the-new-download-server">https://github.com/blog/678-meet-nodeload-the-new-download-server</a></li>
-</ul>
-
-
-<p>nodeload 是拿來 handling download files</p>
-
-<ul>
-<li>albino <a href="https://github.com/github/albino">https://github.com/github/albino</a></li>
-</ul>
-
-
-<p>albino 拿來處理 pygments 上色</p>
-
-<p><code>Albino: a ruby wrapper for pygmentize</code></p>
-
-<ul>
-<li>markup <a href="https://github.com/github/markup">https://github.com/github/markup</a></li>
-</ul>
-
-
-<p>markup 用來處理不同 format 文檔的 rendering</p>
-
-<p><code>We use this library on GitHub when rendering your README or any other rich text file.</code></p>
-
-<ul>
-<li>camo <a href="https://github.com/atmos/camo">https://github.com/atmos/camo</a></li>
-</ul>
-
-
-<p>camo 用來作 SSL proxy</p>
-
-<p><code>Camo is all about making insecure assets look secure. This is an SSL image proxy to prevent mixed content warnings on secure pages served from GitHub.</code></p>
-
-<ul>
-<li>gollum <a href="https://github.com/github/gollum">https://github.com/github/gollum</a></li>
-</ul>
-
-
-<p>gollum 作 wiki-backend</p>
-
-<p><code>Gollum wikis are simply Git repositories that adhere to a specific format. Gollum pages may be written in a variety of formats and can be edited in a number of ways depending on your needs. You can edit your wiki locally</code></p>
-
-<ul>
-<li>stratocaster <a href="https://github.com/technoweenie/allofthestars/tree/master/vendor/stratocaster">https://github.com/technoweenie/allofthestars/tree/master/vendor/stratocaster</a></li>
-</ul>
-
-
-<p>stratocaster 拿來作 event timeline</p>
-
-<p><code>Stratocaster is a system for storing and retrieving messages on feeds. A message can contain any arbitrary payload. A feed is a filtered stream of messages. Complex querying is replaced in favor of creating multiple feeds as filters for the messages. Stratocaster uses abstract adapters to persist the data, instead of being bound to any one type of data store.</code></p>
-
-<ul>
-<li>amen</li>
-</ul>
-
-
-<p>amen is for graphing ( 我找不到資料 )</p>
-
-<ul>
-<li>heaven 用來作 deploy</li>
-</ul>
-
-
-<p><a href="http://bloggitation.appspot.com/entry/rubykaigi-2001-notes-day-1">http://bloggitation.appspot.com/entry/rubykaigi-2001-notes-day-1</a>
-<a href="https://github.com/holman/feedback/issues/38">https://github.com/holman/feedback/issues/38</a></p>
-
-<p>`Heaven - wrapper around capistrano for easy branch deployments:</p>
-
-<p>heaven -a github -e production -h fe -b my_branch`</p>
-
-<ul>
-<li>haystack 拿來收集 Failbot 傳回來的 Exception log</li>
-</ul>
-
-
-<p><a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath</a> # 173</p>
-
-<p><code>We use in-house app called Haystack to monitor abitrary information treacked as JSON</code></p>
-
-<ul>
-<li>hubot</li>
-</ul>
-
-
-<p>就是…bot XD</p>
-
-<p><a href="http://hubot.github.com/">http://hubot.github.com/</a></p>
-
-<ul>
-<li>github-services</li>
-</ul>
-
-
-<p><a href="https://github.com/github/github-services">https://github.com/github/github-services</a></p>
-
-<p><code>Official GitHub Services Integration - You can set these up in your repo admin screen under Service Hooks</code></p>
-
-<ul>
-<li>help.github.com</li>
-</ul>
-
-
-<p><a href="https://github.com/github/help.github.com">https://github.com/github/help.github.com</a></p>
-
-<p><code>opensource GitHub help guides</code></p>
-
-<p>這一段只有七分鐘，但蒐集到的資料太多了…</p>
-
-<p>開下一篇等等再接著寫。</p>
-
-<h2>其他</h2>
-
-<p>在翻一些相關資料時，還找到不少好東西</p>
-
-<ul>
-<li><a href="https://github.com/blog/530-how-we-made-github-fast">https://github.com/blog/530-how-we-made-github-fast</a></li>
-<li><a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath</a></li>
-</ul>
-
-
-<p>這兩篇也給了蠻多其他的 detail 的&#8230;</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1980,6 +1736,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/01/25/rails-3-2-jounery/">Rails 3.2 新的 Route recognition 引擎 ： Jounery</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/01/17/lean-startup-should-play-agricola/">農家樂 (Agricola) - 創業者都應該玩過的一套 Lean Startup 桌遊</a>
       </li>
     
@@ -1993,10 +1753,6 @@
     
       <li class="post">
         <a href="/posts/2012/01/06/about-erp/">關於 Essential Rails Pattern 這本書的近況</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/01/06/sell-my-macbook-air/">[出售] Macbook Air 攻頂款另贈 NDSi XL</a>
       </li>
     
   </ul>
