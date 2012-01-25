@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-Rails 3.2 四天前 Release 了。這次主要的改進幾乎都在效能部分。
+Rails 3.2 四天前 [Release](http://edgeguides.rubyonrails.org/3_2_release_notes.html) 了。這次主要的改進幾乎都在效能部分。
 
 最大的改版應該屬於 Route recognition 這部分。原本這部分是由 [rack-mount](http://rubygems.org/gems/rack-mount) 擔綱，Aaron Patterson (a.k.a. [@tenderlove](http://twitter.com/tenderlove)) 將之抽換成他自己寫的 Gem : [jounery](https://github.com/rails/journey)。速度快了非常多倍。
 

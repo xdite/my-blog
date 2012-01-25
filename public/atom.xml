@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-25T21:28:01+08:00</updated>
+  <updated>2012-01-25T21:29:36+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery/"/>
     <updated>2012-01-25T20:55:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery</id>
-    <content type="html"><![CDATA[<p>Rails 3.2 四天前 Release 了。這次主要的改進幾乎都在效能部分。</p>
+    <content type="html"><![CDATA[<p>Rails 3.2 四天前 <a href="http://edgeguides.rubyonrails.org/3_2_release_notes.html">Release</a> 了。這次主要的改進幾乎都在效能部分。</p>
 
 <p>最大的改版應該屬於 Route recognition 這部分。原本這部分是由 <a href="http://rubygems.org/gems/rack-mount">rack-mount</a> 擔綱，Aaron Patterson (a.k.a. <a href="http://twitter.com/tenderlove">@tenderlove</a>) 將之抽換成他自己寫的 Gem : <a href="https://github.com/rails/journey">jounery</a>。速度快了非常多倍。</p>
 
