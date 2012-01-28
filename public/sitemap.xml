@@ -2,33 +2,33 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/07/migrate-to-octopress/</loc>
-        <lastmod>2011-10-10T04:46:32+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:39+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/07/what-is-octopress/</loc>
-        <lastmod>2011-10-10T04:46:32+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/</loc>
-        <lastmod>2011-10-10T04:46:32+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools/</loc>
-        <lastmod>2011-10-13T00:13:33+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/09/mou-the-missing-markdown-editor/</loc>
-        <lastmod>2011-10-10T04:46:32+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/
         </loc>
-        <lastmod>2011-10-10T04:46:32+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/12/learn-ruby-the-hard-way/</loc>
-        <lastmod>2011-10-13T00:09:05+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/13/using-pull-request-to-merge-design/</loc>
@@ -147,23 +147,27 @@
         <lastmod>2012-01-25T21:29:23+08:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.xdite.net/posts/2012/01/29/cycle-and-nth-child/</loc>
+        <lastmod>2012-01-29T00:21:08+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.xdite.net/about/</loc>
         <lastmod>2011-10-26T11:07:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/author/</loc>
-        <lastmod>2011-10-10T04:46:32+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/blog/archives/</loc>
-        <lastmod>2012-01-25T21:29:23+08:00</lastmod>
+        <lastmod>2012-01-29T00:21:08+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/</loc>
-        <lastmod>2012-01-25T21:29:23+08:00</lastmod>
+        <lastmod>2012-01-29T00:21:08+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/talks/</loc>
-        <lastmod>2011-10-10T04:46:32+08:00</lastmod>
+        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
     </url>
 </urlset>
