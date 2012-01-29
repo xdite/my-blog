@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-前幾天 Code School 的 [CSS Cross Country](http://www.codeschool.com/courses/css-cross-country) 課程釋出了。這一集是我相當期待的一集，練完也高度符合原來的期待，整理和澄清了非常多「非常基礎但如果觀念不好」就會搞得一塌糊塗的觀念。
+前幾天 Code School 的 [CSS Cross Country](http://www.codeschool.com/courses/css-cross-country) 課程釋出了。這一集是我相當期待的一集，整理和澄清了非常多「非常基礎但如果觀念不好」就會搞得一塌糊塗的觀念。
 
 看完把筆記整理在這裡，不過相較於原網站，我寫的算是非常簡陋的版本。
 
