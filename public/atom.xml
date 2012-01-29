@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-01-29T17:04:50+08:00</updated>
+  <updated>2012-01-29T17:06:17+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.xdite.net/posts/2012/01/29/css-tricks-summary/"/>
     <updated>2012-01-29T14:24:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/01/29/css-tricks-summary</id>
-    <content type="html"><![CDATA[<p>前幾天 Code School 的 <a href="http://www.codeschool.com/courses/css-cross-country">CSS Cross Country</a> 課程釋出了。這一集是我相當期待的一集，整理和澄清了非常多「非常基礎但如果觀念不好」就會搞得一塌糊塗的觀念。</p>
+    <content type="html"><![CDATA[<p>前幾天 Code School 的 <a href="http://www.codeschool.com/courses/css-cross-country">CSS Cross Country</a> 課程釋出了。這一集是我相當期待的一集，整理和澄清了非常多「非常基礎但如果觀念不好」就會搞得一塌糊塗的 CSS 知識。</p>
 
 <p>看完把筆記整理在這裡，不過相較於原網站，我寫的算是非常簡陋的版本。</p>
 
