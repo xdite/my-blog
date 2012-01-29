@@ -161,7 +161,7 @@ p { color: #fff !important; }
 
 越大的可以把祖先蓋掉。
 
-延伸閱讀：Don’t use ID selectors in CSS[http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/]
+延伸閱讀：[Don’t use ID selectors in CSS]http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/
 
 ## Ch3
 
@@ -176,7 +176,7 @@ p { color: #fff !important; }
 
 寬度計算
 
-box width content width + padding width + border width
+box width =  content width + padding width + border width
 
 ### overflow
 
