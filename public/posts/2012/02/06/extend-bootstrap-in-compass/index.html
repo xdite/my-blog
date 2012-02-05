@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>如何運用 / 設計 Rails Helper (1) - Blog.XDite.net</title>
+  <title>使用 SCSS 的 extend 重複利用 Bootstrap 的 style - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          Helper 與 Partial 一直是初學者比較容易迷路的主題之一。迷路的原因有幾個：不知道有 Rails 提供了許多好用的 Helper 可以用不知道 Helper 與 Partial 他們各自的使用時機。擔心使用 Helper 會造成效能下降。以不好的方式使用 Hel...">
+  <meta name="description" content="          Twitter 的 Bootstrap 是一套很好用的 CSS Framework。可以讓開發者加上工具類 CSS 如 .btn，就設計出一個按鈕。但有時候這東西也像 inline style 一樣討厭，比如說我要設計一排「按鈕] link，就非得每行都加個 class =...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">如何運用 / 設計 Rails Helper (1)</h1>
+      <h1 class="entry-title">使用 SCSS 的 Extend 重複利用 Bootstrap 的 Style</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-12-08T21:40:00+08:00" pubdate  data-updated="true" >Dec 8<span>th</span>, 2011</time>
+<time datetime="2012-02-06T02:20:00+08:00" pubdate  data-updated="true" >Feb 6<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,144 +98,91 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>Helper 與 Partial 一直是初學者比較容易迷路的主題之一。迷路的原因有幾個：</p>
+  <p>Twitter 的 <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 是一套很好用的 CSS Framework。可以讓開發者加上工具類 CSS 如 <code>.btn</code>，就設計出一個按鈕。</p>
 
-<ol>
-<li>不知道有 Rails 提供了許多好用的 Helper 可以用</li>
-<li>不知道 Helper 與 Partial 他們各自的使用時機。</li>
-<li>擔心使用 Helper 會造成效能下降。</li>
-<li>以不好的方式使用 Helper 反而使維護性降低。</li>
-</ol>
-
-
-<p>因此，一直以來這也是我比較想寫的一個主題…</p>
-
-<h2>Helper 與 Partial</h2>
-
-<h3>Partial</h3>
-
-<p>Partial 指的是局部樣板。而 Helper 指的卻是在樣板中的一些幫助方法（Ruby Method）。這兩種都是整理又臭又長的 HTML 版面時的好工具。</p>
-
-<p>一般而言，我們會使用 Partial 去處理大段且重複的程式碼。或者是經常使用到的局部程式碼。</p>
-
-<ul>
-<li>大段程式碼：（如 new / edit 會複用到的表單）</li>
-</ul>
-
+<p>但有時候這東西也像 <strong>inline style</strong> 一樣討厭，比如說我要設計一排「按鈕] link，就非得每行都加個 <code>class = "btn"</code>。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= form_for @post do |f| %&gt;</span>
-</span><span class='line'><span class="sx">    &lt;%=</span> <span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:f</span> <span class="o">=&gt;</span> <span class="n">f</span><span class="p">}</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;job-options&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;option-title&quot;</span><span class="o">&gt;</span> <span class="err">工作類別：</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;網站設計師&quot;, jobs_path+&quot;?m_type=1&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;美術設計師&quot;, jobs_path+&quot;?m_type=2&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;手機APP開發&quot;, jobs_path+&quot;?m_type=3&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;市場行銷&quot;, jobs_path+&quot;?m_type=4&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;社群管理&quot;, jobs_path+&quot;?m_type=5&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;其他&quot;, jobs_path+&quot;?m_type=0&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li>經常使用到的局部程式碼：（如 sidebar 內的區塊）</li>
-</ul>
+<p>我在開發時並不是使用 Twitter 自己提供的 LESS 版本，而是採用人家拆好的 SCSS 版本 <a href="https://github.com/anjlab/bootstrap-rails">anjlab/bootstrap-rails</a>。</p>
+
+<p>如何翻修這樣的 code 呢？我使用了 SCSS 的 @extend。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nc">.job-options</span><span class="p">{</span>
+</span><span class='line'>   <span class="na">padding-bottom</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span class='line'>   <span class="nt">a</span><span class="p">{</span>
+</span><span class='line'>      <span class="k">@extend</span> <span class="nc">.btn</span><span class="o">;</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;sidebar&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="err">&lt;</span>%= render :partial =&gt; &quot;recent_posts&quot; %&gt;
-</span><span class='line'>  <span class="err">&lt;</span>%= render :partial =&gt; &quot;recent_comments&quot; %&gt;
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;job-options&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;option-title&quot;</span><span class="o">&gt;</span> <span class="err">工作類別：</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;網站設計師&quot;, jobs_path+&quot;?m_type=1&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;美術設計師&quot;, jobs_path+&quot;?m_type=2&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;手機APP開發&quot;, jobs_path+&quot;?m_type=3&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;市場行銷&quot;, jobs_path+&quot;?m_type=4&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;社群管理&quot;, jobs_path+&quot;?m_type=5&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;其他&quot;, jobs_path+&quot;?m_type=0&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>…etc.</p>
+<p>這樣就可以把 .btn 從 HTML 裡面拿掉了。</p>
 
-<h4>Partial 的優點</h4>
+<h3>其他</h3>
 
-<ul>
-<li>Don&#8217;t repeat yourself（DRY）程式碼不重複</li>
-<li>程式修改會比較清楚</li>
-<li>Partial 樣板比較容易被重複使用</li>
-</ul>
-
-
-<h3>Helper</h3>
-
-<p>Partial 的定位多半是被用來處理「大片 HTML 」的工具，而 Helper 卻是比較屬於需要邏輯性輸出 HTML 時用的整理工具。</p>
-
-<p>一般我們學 Rails 常見的</p>
-
-<ul>
-<li>stylsheet_link_tag</li>
-<li>link_to</li>
-<li>image_tag</li>
-<li>form_for 中的 f.text_field…etc</li>
-</ul>
-
-
-<p>都屬於 Helper 的範疇。</p>
-
-<h2>為什麼在專案中我們要使用內建 Helper 開發？</h2>
-
-<h3>其一：為了省力</h3>
-
-<p>Rails 最令其他 Ruby Web Framework 羨慕的，就是內建的很多方便 Helper。</p>
-
-<p>舉幾個其實很方便，但大家其實不太知道它們存在的 Helper 好了。</p>
-
-<ul>
-<li><a href="http://apidock.com/rails/ActionView/Helpers/TextHelper/simple_format">simple_format</a> : 可以處理使用者的內容中 \r\n 自動轉 br 和 p 的工作</li>
-<li><a href="http://apidock.com/rails/ActionView/Helpers/TextHelper/auto_link">auto_link</a> :可以處理使用者的內容中，若有連結，就自動 link 的工作。</li>
-<li><a href="http://apidock.com/rails/ActionView/Helpers/TextHelper/truncate">truncate</a>: 使用者輸入的內容，若過長，可以指定多少字後就自動砍掉，並加入 &#8220;….&#8221;</li>
-<li><a href="http://apidock.com/rails/ERB/Util/html_escape/class">html_escape</a>: 使用者輸入的內容，若有 html tag，為了怕使用者輸入惡意 tag 進行 hack。自動過濾。（以前要手動加 h 過濾，現在 Rails 預設 escape，不想被 escape 才手動指定 raw 閃掉 escape）</li>
-</ul>
-
-
-<p>這些東西若自己寫 parser 處理，不知道要花費多少精力，還不一定濾的徹底。卻都是 Rails 預設內建 Helper。</p>
-
-<h3>其二：為了跟 Rails 內建的其他更棒的基礎建設整合</h3>
-
-<ul>
-<li>stylesheet_link_tag 與 image_tag</li>
-</ul>
-
-
-<p>有些人也覺得，這東西還要用 Helper 嗎？直接貼 HTML 不是也一樣會動嗎？有什麼差別。差別可大了。</p>
+<p>其實表格也可以比較辦理&#8230;</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="o">&lt;</span><span class="sx">%= stylesheet_link_tag &quot;abc&quot;, &quot;def&quot;, :cache =</span><span class="o">&gt;</span> <span class="kp">true</span> <span class="o">%&gt;</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nn">#feeds-list</span><span class="p">{</span>
+</span><span class='line'>   <span class="k">@extend</span> <span class="nc">.zebra-striped</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>這一行，可以在 production 環境時，自動幫你將兩支 CSS 自動壓縮成一支 all.css 。直接實現了 Yahoo <a href="http://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Web Site</a>中，minify HTTP reqesut 的建議。而在 Rails 3.1 之後，甚至還會自動幫你 trim 與 gzip。</p>
+<p>====</p>
 
-<p>完全不需要去在 deploy process 中 hook 另外的 compressor 就可以達到。</p>
-
-<p>至於 image_tag 有什麼特別的地方？</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="o">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">&quot;xxx.jpg&quot;</span><span class="p">)</span> <span class="o">%&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Rails 可以幫你的 asset 自動在後面上 query string，如：xxx.jpg?12345</p>
-
-<p>這樣在網站若有整合 CDN 架構時，可以自動處理 invalid cache 的問題。</p>
-
-<p>而 Rails 也有選項可以實作 asset parallel download 的機制，一旦打開，站上的 asset 也會配合你的設定，亂數吐不同來源的 asset host 實做平行下載。</p>
-
-<p>輕鬆就可以把網站 Scale 上去。</p>
-
-<ul>
-<li>form_for</li>
-</ul>
-
-
-<p>這也是 Rails 相當為人稱讚的一個利器。Rails 的表單欄位是綁 model (db 欄位的)，除了開發方便（ <code>Post.new(params[:post])</code> 直接收參數做 mapping）之外，也內建了防 CSRF (<code>protect_from_forgery</code>)的防禦措施。</p>
-
-<p>===</p>
-
-<p>可以在一眨眼的工夫，實作出業界（performace /security）最佳實踐。而你卻不需要是架構大師。</p>
+<p>不過不能 span2 這種定位的 class 不能 @extend。@extend bootstrap 這招只能用在與「位置」無關的 style 上。</p>
 
 </div>
 
@@ -257,7 +204,7 @@
 
 
 
-<time datetime="2011-12-08T21:40:00+08:00" pubdate  data-updated="true" >Dec 8<span>th</span>, 2011</time>
+<time datetime="2012-02-06T02:20:00+08:00" pubdate  data-updated="true" >Feb 6<span>th</span>, 2012</time>
       
 
 
@@ -266,7 +213,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -342,8 +289,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/';
         var disqus_script = 'embed.js';
       
     (function () {

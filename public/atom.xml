@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-02-06T01:13:15+08:00</updated>
+  <updated>2012-02-06T02:33:57+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,99 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用 SCSS 的 extend 重複利用 Bootstrap 的 style]]></title>
+    <link href="http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/"/>
+    <updated>2012-02-06T02:20:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass</id>
+    <content type="html"><![CDATA[<p>Twitter 的 <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 是一套很好用的 CSS Framework。可以讓開發者加上工具類 CSS 如 <code>.btn</code>，就設計出一個按鈕。</p>
+
+<p>但有時候這東西也像 <strong>inline style</strong> 一樣討厭，比如說我要設計一排「按鈕] link，就非得每行都加個 <code>class = "btn"</code>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;job-options&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;option-title&quot;</span><span class="o">&gt;</span> <span class="err">工作類別：</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;網站設計師&quot;, jobs_path+&quot;?m_type=1&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;美術設計師&quot;, jobs_path+&quot;?m_type=2&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;手機APP開發&quot;, jobs_path+&quot;?m_type=3&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;市場行銷&quot;, jobs_path+&quot;?m_type=4&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;社群管理&quot;, jobs_path+&quot;?m_type=5&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;其他&quot;, jobs_path+&quot;?m_type=0&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我在開發時並不是使用 Twitter 自己提供的 LESS 版本，而是採用人家拆好的 SCSS 版本 <a href="https://github.com/anjlab/bootstrap-rails">anjlab/bootstrap-rails</a>。</p>
+
+<p>如何翻修這樣的 code 呢？我使用了 SCSS 的 @extend。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nc">.job-options</span><span class="p">{</span>
+</span><span class='line'>   <span class="na">padding-bottom</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span class='line'>   <span class="nt">a</span><span class="p">{</span>
+</span><span class='line'>      <span class="k">@extend</span> <span class="nc">.btn</span><span class="o">;</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;job-options&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;option-title&quot;</span><span class="o">&gt;</span> <span class="err">工作類別：</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;網站設計師&quot;, jobs_path+&quot;?m_type=1&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;美術設計師&quot;, jobs_path+&quot;?m_type=2&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;手機APP開發&quot;, jobs_path+&quot;?m_type=3&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;市場行銷&quot;, jobs_path+&quot;?m_type=4&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;社群管理&quot;, jobs_path+&quot;?m_type=5&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;其他&quot;, jobs_path+&quot;?m_type=0&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣就可以把 .btn 從 HTML 裡面拿掉了。</p>
+
+<h3>其他</h3>
+
+<p>其實表格也可以比較辦理&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nn">#feeds-list</span><span class="p">{</span>
+</span><span class='line'>   <span class="k">@extend</span> <span class="nc">.zebra-striped</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>====</p>
+
+<p>不過不能 span2 這種定位的 class 不能 @extend。@extend bootstrap 這招只能用在與「位置」無關的 style 上。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在 Rails 中如何設計 Select]]></title>
@@ -3535,62 +3628,6 @@
 <p>不過出來的架構和最後呈現算是令人滿意&#8230;:D</p>
 
 <p>歡迎用看看吧 <a href="http://ruby-taiwan.org/wiki">http://ruby-taiwan.org/wiki</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[http://ruby-taiwan.org 開張]]></title>
-    <link href="http://blog.xdite.net/posts/2011/11/28/ruby-taiwan-org/"/>
-    <updated>2011-11-28T01:46:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2011/11/28/ruby-taiwan-org</id>
-    <content type="html"><![CDATA[<p>上禮拜看到對岸弄了一個 <a href="http://ruby-china.org">http://ruby-china.org</a>，看樣子蠻好玩的，介面也設計的不錯。而且這個網站還是 opensource 的，就抓下來玩了一下。</p>
-
-<p>不過大概是程式碼加的太快，當時的程式碼不是很「乾淨」，抓下來一般人是改不太動的，加上沒有 test。所以我想一般人也沒人敢「翻修」。</p>
-
-<p>為了想玩玩這個 project，我也想說投資一天來試看看翻不翻得動（因為在公司翻修同事的 code 有過非常豐富的經驗了，大概都知道 bad smell 在哪裡，如何在低 cost 狀態，把 code 整理到容易維護）。結論：翻修起來也不算是什麼難事，只是有點繁瑣而已。</p>
-
-<p>總之，最後我終於把 code 整理的算差強人意，算讓人能容易加功能上去了…</p>
-
-<p>看著看著總覺得又少點東西。想想大概是沒有 production data，要幫忙一些功能總是不知道要從哪裡起頭，加上這個站又沒有 test，幫忙翻修還是容易弄爛 master…</p>
-
-<p>後來乾脆就決定了，來作一個 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>！</p>
-
-<p>這個決定在推特宣布後，似乎有嚇到人，對岸朋友好幾個過來道德勸說我放棄這種行為 XDXD</p>
-
-<p>其實不是什麼眼紅別人，自己也想搞一個多紅火的社群，而是說真的，我覺得台灣雖然玩 Ruby 的人開始變多，但會主動跑去大陸的論壇進行太熱烈的討論的機率太低了。加上用語、想法、習慣多多少少會有差距。現在台灣 Ruby 社群也算有點規模了…</p>
-
-<p>沒想到我寶刀未老，原本只是隨便屁屁（我這個人的習慣是，有什麼新想法，就會先投資自己一點時間，可能是 1 天、3 天、1 週，先寫個 prototype 出來…如果寫不完，就是這個想法我並沒有想的清楚，或是我的技術不夠純熟到可以實作這個 idea。我必須馬上放棄這個想法，等待以後有機會再執行。反之，我就適合作這件事。）</p>
-
-<p>一個晚上我竟然就搞定 deploy + i18n 翻修了。於是 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a> 就誕生了！</p>
-
-<p>為了怕初期沒什麼資料，怕沒人想用也沒人要發言。我在這個網站上有預先準備了自己以前從來沒有 release 出去過的一些教學文件。</p>
-
-<p>…之後也會持續釋出更多東西。</p>
-
-<p>首先是</p>
-
-<ul>
-<li><a href="http://wp.xdite.net/?p=2525">邁向 Rails 高級新手 – 你所需要知道的一些知識</a></li>
-</ul>
-
-
-<p>這篇提到的所有 topic 已經在 <a href="http://ruby-taiwan.org/wiki/essential-ruby-rails-knowledge">http://ruby-taiwan.org/wiki/essential-ruby-rails-knowledge</a> 這裡釋出了。（這裡面的內容是 <a href="http://www.techbang.com.tw">T 客邦</a> 技術部讓新人在訓練期寫的東西，主要是透過 Topic 導向讓新手知道怎樣使用這些東西，而且這裡選的 Topic 幾乎都已經是練完 Rails 101 之後接續開發產品，會碰到的各種基本知識）。大概有 30 幾篇文件。</p>
-
-<ul>
-<li><p>接下來是兩篇我以前沒公開放過的教學:</p>
-
-<ul>
-<li><a href="http://ruby-taiwan.org/wiki/custom-generators">Custom Generators</a></li>
-<li><a href="http://ruby-taiwan.org/wiki/packing-gems">Packing Gems</a></li>
-</ul>
-</li>
-<li><p>最後是 <a href="http://rails-101.logdown.com">Rails 101</a> 的第七章 <a href="http://ruby-taiwan.org/wiki/deploy_to_production_practice">遠端佈署最佳實踐</a>。教大家如何完美的佈署遠端 production server。</p></li>
-</ul>
-
-
-<p>歡迎大家有空上去<a href="http://ruby-taiwan.org/topics">多多交流</a>和完善補充自己的 pratices。以後我還會繼續把一些沒分享過的 pratices 繼續 release 出來。（相信我，多到嚇死人&#8230;）</p>
-
-<p>最後，似乎是我改用 <a href="http://octopress.org">Octopress</a> 並撰文介紹這套 blogging system 後，引起非常熱烈的迴響，現在大家似乎都開始搬家轉用 Octopress…在這當中也出現了不少問題，我在 twitter 和社群聚會答了非常多相關問題。現在也決定在 Ruby Taiwan 上開一個 <a href="http://ruby-taiwan.org/topics/node24">Octopress 的節點主題</a> ，歡迎大家如果在用 Octopress 上如果遇到任何問題，都上來問，謝謝！</p>
 ]]></content>
   </entry>
   
