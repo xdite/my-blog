@@ -289,7 +289,7 @@
 
 <p><code>{"other"=&gt;0, "web_developer"=&gt;1, "designer"=&gt;2, "app_developer"=&gt;3, "marketing_sales"=&gt;4, "web_social_manager"=&gt;5}</code></p>
 
-<p>要造出 <code>[["其他職缺", 0],["網站設計師",1]]</code> 這樣的 Array，再用 map 去對 I18n 求職。</p>
+<p>但 select 要吃的是： <code>[["其他職缺", 0],["網站設計師",1]]</code> 這樣的 Array。所以我們再用 map 去對 I18n 求值包裝。</p>
 
 <figure class='code'><figcaption><span>app/modesl/job.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

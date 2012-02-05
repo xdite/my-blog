@@ -120,7 +120,7 @@ JobData.job_categories 拉出來會是這樣的內容：
 
 `{"other"=>0, "web_developer"=>1, "designer"=>2, "app_developer"=>3, "marketing_sales"=>4, "web_social_manager"=>5} `
 
-要造出 `[["其他職缺", 0],["網站設計師",1]]` 這樣的 Array，再用 map 去對 I18n 求職。
+但 select 要吃的是： `[["其他職缺", 0],["網站設計師",1]]` 這樣的 Array。所以我們再用 map 去對 I18n 求值包裝。
 
 ``` ruby app/modesl/job.rb
 class Job < ActiveRecord::Base
