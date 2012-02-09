@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-02-09T16:37:49+08:00</updated>
+  <updated>2012-02-09T17:10:59+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Don't Name Your Ruby Project With Underscore on Github]]></title>
+    <title type="html"><![CDATA[Don’t name your Ruby project with underscore on Github]]></title>
     <link href="http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/"/>
     <updated>2012-02-09T16:15:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github</id>

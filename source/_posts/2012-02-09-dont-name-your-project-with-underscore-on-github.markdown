@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Don't Name Your Ruby Project With Underscore on Github"
+title: "Don’t name your Ruby project with underscore on Github"
 date: 2012-02-09 16:15
 comments: true
 categories: 
