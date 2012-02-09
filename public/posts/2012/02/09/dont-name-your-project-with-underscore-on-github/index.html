@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Stickies Gem - Blog.XDite.net</title>
+  <title>Don't Name Your Ruby Project With Underscore on Github - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 ihower 在 和多 時把這個 plugin 翻成 ...">
+  <meta name="description" content="          I had a ruby project named &#8221;bootstrap_helper&#8221;, which has 43 watchers on Github.I thought having 43 watchers is sort of popula...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/19/stickies-gem/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Stickies Gem</h1>
+      <h1 class="entry-title">Don't Name Your Ruby Project With Underscore on Github</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-10-19T14:38:00+08:00" pubdate  data-updated="true" >Oct 19<span>th</span>, 2011</time>
+<time datetime="2012-02-09T16:15:00+08:00" pubdate  data-updated="true" >Feb 9<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,26 +98,19 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。</p>
+  <p>I had a ruby project named &#8221;<a href="https://github.com/xdite/bootstrap_helper">bootstrap_helper</a>&#8221;, which has 43 watchers on Github.</p>
 
-<p><img src="http://farm7.static.flickr.com/6114/6259519683_ae8e1d15b6.jpg"></p>
+<p><a href="http://www.flickr.com/photos/xdite/6845375847/" title="螢幕快照 2012-02-09 下午4.09.51 by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7026/6845375847_0eed10698d.jpg" width="500" height="100" alt="螢幕快照 2012-02-09 下午4.09.51"></a></p>
 
-<p>stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 <a href="http://ihower.tw">ihower</a> 在 <a href="http://handlino.com">和多</a> 時把這個 plugin 翻成 jQuery 版本。</p>
+<p>I thought having 43 watchers is sort of popular. But there is a weired thing:  when I search keyword : &#8220;bootstrap helper&#8221;, my gem is not in first page result.</p>
 
-<p>這套 plugin 我自己還蠻喜歡用的。T 客邦內部也用了很多，不過因為內部有 Gem （認證系統）預設訊息就綁 stickies，每次開新專案裝完認證，就要手動 copy plugin 到 vendor/ 和手動 copy assets 到 public/，有夠麻煩&#8230;</p>
+<p><a href="http://www.flickr.com/photos/xdite/6845392075/" title="螢幕快照 2012-02-09 下午3.59.56 by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7045/6845392075_cfcd2676c5.jpg" width="500" height="485" alt="螢幕快照 2012-02-09 下午3.59.56"></a></p>
 
-<p>今天進公司大概跟同事聊了一下昨天寫的用 <a href="http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/">Asset Pipeline 掛 Asset</a> 的概念。</p>
+<p>Then I found I made a hugh mistake: Ruby naming convention told Ruby developer to name everything with underscore. So every developer names their projects with underscore.</p>
 
-<p><a href="http://twitter.com/v1nc3ntlaw">vincent</a> 就覺得 stickies 應該要首先被拔出去，每次 copy asset 實在太麻煩了，將來最好還可以放在認證系統的 Gemfile dependency 上。於是剛剛我就接下來作了。</p>
+<p>But it&#8217;s a giant SEO mistake: Search Engine treats snake_keywords as CamelKeywords. If your project&#8217;s name contains  meaningful keywords, it won&#8217;t be matched. Because &#8220;snake_keywords&#8221; means &#8220;SnakeKeyword&#8221; not &#8220;snake keywords&#8221;.</p>
 
-<p>本來以為只是掛 asset 而已，小事一樁。不巧的我發現它還是 Rails 2.x 時代的 Rails Plugin。於是剛剛索性將架構作了一番重構。</p>
-
-<p>（重寫 generator，用 Railtie / Engine 作 gem )</p>
-
-<p>目前 stickies 已經被我包裝成 rubygems，並支援 Rails 3.0 / 3.1。
-而且 3.1 版本可以直接用 asset pipeline 掛 assets。不需要再跑 copy tasks )</p>
-
-<p>code 放在這裡：<a href="https://github.com/techbang/stickies">https://github.com/techbang/stickies</a></p>
+<p>It&#8217;s really bad for SEO.</p>
 
 </div>
 
@@ -139,7 +132,7 @@
 
 
 
-<time datetime="2011-10-19T14:38:00+08:00" pubdate  data-updated="true" >Oct 19<span>th</span>, 2011</time>
+<time datetime="2012-02-09T16:15:00+08:00" pubdate  data-updated="true" >Feb 9<span>th</span>, 2012</time>
       
 
 
@@ -148,7 +141,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/19/stickies-gem/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/19/stickies-gem/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -224,8 +217,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/19/stickies-gem/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/19/stickies-gem/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/';
         var disqus_script = 'embed.js';
       
     (function () {
