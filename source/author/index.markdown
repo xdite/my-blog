@@ -23,7 +23,7 @@ I specialized in Ruby / Rails and many other othings :
 * SEO / Online Marketing 
 * Online Publishing ( HTM5 / Responsive Design )
 
-My Résumé is at [LinkedIn](http://www.linkedin.com/profile/view?id=47215094).
+My Résumé at [LinkedIn](http://www.linkedin.com/profile/view?id=47215094).
 
 ## Used to work for
 
