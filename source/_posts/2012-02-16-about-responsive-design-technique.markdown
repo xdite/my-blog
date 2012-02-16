@@ -23,3 +23,6 @@ categories:
 
 P.S. 如果你對 Responsive Web Design 好奇，可以用手機打開 [T 客邦](http://www.techbang.com.tw) 以及 [Digiphoto](http://digiphoto.techbang.com.tw) ，這個站都是用此技巧設計的…
 
+＝＝＝
+
+廣告：二月份 [xdite 家桌遊團](http://registrano.com/events/xdbg-1202) 又開放了，限八人，請儘速報名。
