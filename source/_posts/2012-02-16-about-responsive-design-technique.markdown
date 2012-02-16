@@ -21,5 +21,5 @@ categories:
 
 4. 我個人還是認為 Responsive 的用途比較適合用在 Tablet 的 Portrait / Landscape 的用途上。畢竟 Responsive Web Design 的想法，是讓 Desktop / Mobile 擠在同一個版面上，用同一份 code。再 conditional override 或者 remove。在需要「持續維護」的產品上，容易搞死 Developer…
 
-Responsive Web Design 真的不是什麼萬靈丹啊 -_-|||。
+P.S. 如果你對 Responsive Web Design 好奇，可以用手機打開 [T 客邦](http://www.techbang.com.tw) 以及 [Digiphoto](http://digiphoto.techbang.com.tw) ，這個站都是用此技巧設計的…
 
