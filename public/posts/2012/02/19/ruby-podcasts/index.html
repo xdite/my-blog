@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[Ruby][教學] 如何打包一個 Gem  - Blog.XDite.net</title>
+  <title>Ruby Podcast / Screencast / Issue 推薦清單 - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          What is GemRubyGems 是 Ruby 的 Package 管理系統。它的作用類似 Linux 系統下的 apt-get 或者是 yum。不同的是：RubyGems 是提供「打包」好的 Ruby Library 讓開發者能夠重複利用別人已造好的輪子，提高開發效...">
+  <meta name="description" content="          有些人問我平常日常怎麼補充知識，稍微整理一下我平常看的一些東西分享出來。我看很多東西的，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…不過看完之後當然還要練習，東西才會變自己的就是了&#8230;PODCASTRuby5The R...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">[Ruby][教學] 如何打包一個 Gem</h1>
+      <h1 class="entry-title">Ruby Podcast / Screencast / Issue 推薦清單</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2012-01-04T08:53:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
+<time datetime="2012-02-19T06:02:00+08:00" pubdate  data-updated="true" >Feb 19<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,94 +98,41 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <h2>What is Gem</h2>
+  <p>有些人問我平常日常怎麼補充知識，稍微整理一下我平常看的一些東西分享出來。我看很多東西的，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…</p>
 
-<p>RubyGems 是 Ruby 的 Package 管理系統。它的作用類似 Linux 系統下的 apt-get 或者是 yum。不同的是：RubyGems 是提供「打包」好的 Ruby Library 讓開發者能夠重複利用別人已造好的輪子，提高開發效率。</p>
+<p>不過看完之後當然還要練習，東西才會變自己的就是了&#8230;</p>
 
-<p>而目前 Rails 3.0+ 起，幾乎都也推薦使用 RubyGems 的方式，將 Plugin 打包成 Gem 的方式搭配 Bundler 使用。</p>
-
-<h2>打包 Gem</h2>
-
-<p>隨著時代進步，打包和發佈 Gem 的方式一直在進步。</p>
-
-<p>最早以前大家都是手工製造 ( <a href="http://railscasts.com/episodes/135-making-a-gem">RailsCast #135</a> )，後來 Jeweler( <a href="http://railscasts.com/episodes/183-gemcutter-jeweler">RailsCast #183</a> ) 被發明出來，讓打包變得非常容易。</p>
-
-<p>而到最後，更演變成了 Bundler 內建 ( <a href="http://asciicasts.com/episodes/245-new-gem-with-bundler">Rails 245</a> )。</p>
-
-<p>包裝一個 Gem 變得越來越容易。</p>
-
-<h2>Gem 的基本結構</h2>
-
-<p>若以 Bundler 內建的指令 <code>bundle gem GEM_NAME</code> 自動生出來的檔案。其實 Gem 的結構也相當簡單。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>    [~/projects/exp] $ bundle gem my_plugin
-</span><span class='line'>          create  my_plugin/Gemfile
-</span><span class='line'>          create  my_plugin/Rakefile
-</span><span class='line'>          create  my_plugin/.gitignore
-</span><span class='line'>          create  my_plugin/my_plugin.gemspec
-</span><span class='line'>          create  my_plugin/lib/my_plugin.rb
-</span><span class='line'>          create  my_plugin/lib/my_plugin/version.rb
-</span><span class='line'>    Initializating git repo in /Users/xdite/projects/exp/my_plugin</span></code></pre></td></tr></table></div></figure>
-
+<h2>PODCAST</h2>
 
 <ul>
-<li><code>Gemfile</code> # 描述 dependency</li>
-<li><code>Rakefile</code> # 發佈和打包的 rake tasks</li>
-<li><code>GEM_NAME.gemspec</code> # gem 的 spec</li>
-<li><code>GEM_NAME/lib/GEM_NAME.rb</code> 與 <code>GEM_NAME/lib/GEMNAME/</code> # gem 裡的 library</li>
-<li><code>GEM_NAME/lib/GEM_NAME/version.rb</code> # 版本紀錄</li>
+<li><a href="http://ruby5.envylabs.com/">Ruby5</a></li>
+<li><a href="http://rubyshow.com/">The Ruby Show</a></li>
+<li><a href="http://rubyrogues.com/">Ruby Rogues</a></li>
+<li><a href="http://rubyfreelancers.com/">Ruby FreeLancers</a></li>
+<li><a href="http://javascriptjabber.com/">Javascript Jabber</a></li>
+<li><a href="http://www.thisweekinstartups.com/">This Week in Startups</a></li>
+<li><a href="http://mixergy.com/">Mixergy</a></li>
 </ul>
 
 
-<p>主要的 Library 需放置在 lib/ 底下。</p>
-
-<p>若需使用到相依套件的話，需在 Gemfile 以及 .gemsepc 定義。</p>
-
-<h3>Bundler 提供的基本 Task</h3>
-
-<p>Bundler 基本上算是提供半自動的打包，只提供非常基本的三個 Task：</p>
+<h2>Screencast</h2>
 
 <ul>
-<li><code>rake build</code>    # Build my_plugin-0.0.1.gem into the pkg directory</li>
-<li><code>rake install</code>  # Build and install my_plugin-0.0.1.gem into system gems</li>
-<li><code>rake release</code>  # Create tag v0.0.1 and build and push my_plugin-0.0.1.gem to Rubygems</li>
+<li><a href="http://railscasts.com/">Railscast</a></li>
+<li><a href="http://www.codeschool.com/code_tv">CodeTV</a></li>
+<li><a href="https://www.destroyallsoftware.com/screencasts">Destroy All Software</a></li>
+<li><a href="http://www.cleancoders.com/">The Clean Coders</a></li>
 </ul>
 
 
-<h2>Jeweler</h2>
+<h2>Weekly issue</h2>
 
-<p>若你有更多懶人需求，不妨 check <a href="https://github.com/technicalpickles/jeweler">Jeweler</a> 這個 gem，它提供了更多 rake tasks 讓打包更加方便。</p>
+<ul>
+<li><a href="http://rubyweekly.com/">Ruby Weekly</a></li>
+<li><a href="http://javascriptweekly.com/">JavaScript Weekly</a></li>
+<li><a href="http://html5weekly.com/">HTML5 Weekly</a></li>
+</ul>
 
-<h2>Best Practices</h2>
-
-<p>Rails Core Team member 「Josh Peek」曾經在 Rails 官方 blog 寫過一篇文章 <a href="http://weblog.rubyonrails.org/2009/9/1/gem-packaging-best-practices">Gem Packaging: Best Practices</a> 講解如何寫出比較乾淨正確的 Gem。</p>
-
-<h2>如何在專案中使用開發中的 gem</h2>
-
-<p>以往的想法可能都是打包之後，在 local 安裝開發中的 gem 版本，或者是直接先放在 vendor/plugins 中測試。在有了 Bundler 的時代其實不需要這麼麻煩。</p>
-
-<p>只要在 Gemfile 內加入這樣一行</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;my_plugin&#39;</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;~/projects/exp/my_plugin&quot;</span>  <span class="c1"># your local gem path </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就可以引用開發中的 gem，等到真的開發完。再換成 git repo 或 rubygems.org 上的版本。</p>
-
-<p>=====</p>
-
-<p>現在我每週都固定有在回答一些問題，發現不少人對 Ruby / Rails 的一些疑惑，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
-
-<p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>。</p>
 
 </div>
 
@@ -207,7 +154,7 @@
 
 
 
-<time datetime="2012-01-04T08:53:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
+<time datetime="2012-02-19T06:02:00+08:00" pubdate  data-updated="true" >Feb 19<span>th</span>, 2012</time>
       
 
 
@@ -216,7 +163,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -292,8 +239,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/';
-        var disqus_url = 'http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/';
         var disqus_script = 'embed.js';
       
     (function () {
