@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-02-19T06:19:03+08:00</updated>
+  <updated>2012-02-19T06:20:53+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -18,30 +18,30 @@
     <link href="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/"/>
     <updated>2012-02-19T06:02:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/02/19/ruby-podcasts</id>
-    <content type="html"><![CDATA[<p>有些人問我平常日常怎麼補充知識，稍微整理一下我平常看的一些東西分享出來。我看很多東西的，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…</p>
+    <content type="html"><![CDATA[<p>有些人問我平常日常怎麼補充知識，所以稍微整理一下我平常看的一些東西分享出來。我平常蠻常到處亂看東西，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…</p>
 
 <p>不過看完之後當然還要練習，東西才會變自己的就是了&#8230;</p>
 
 <h2>PODCAST</h2>
 
 <ul>
-<li><a href="http://ruby5.envylabs.com/">Ruby5</a></li>
-<li><a href="http://rubyshow.com/">The Ruby Show</a></li>
-<li><a href="http://rubyrogues.com/">Ruby Rogues</a></li>
-<li><a href="http://rubyfreelancers.com/">Ruby FreeLancers</a></li>
-<li><a href="http://javascriptjabber.com/">Javascript Jabber</a></li>
-<li><a href="http://www.thisweekinstartups.com/">This Week in Startups</a></li>
-<li><a href="http://mixergy.com/">Mixergy</a></li>
+<li>Ruby <a href="http://ruby5.envylabs.com/">Ruby5</a></li>
+<li>Ruby <a href="http://rubyshow.com/">The Ruby Show</a></li>
+<li>Ruby <a href="http://rubyrogues.com/">Ruby Rogues</a></li>
+<li>Ruby <a href="http://rubyfreelancers.com/">Ruby FreeLancers</a></li>
+<li>JS <a href="http://javascriptjabber.com/">Javascript Jabber</a></li>
+<li>Startup <a href="http://www.thisweekinstartups.com/">This Week in Startups</a></li>
+<li>Startup <a href="http://mixergy.com/">Mixergy</a></li>
 </ul>
 
 
 <h2>Screencast</h2>
 
 <ul>
-<li><a href="http://railscasts.com/">Railscast</a></li>
-<li><a href="http://www.codeschool.com/code_tv">CodeTV</a></li>
-<li><a href="https://www.destroyallsoftware.com/screencasts">Destroy All Software</a></li>
-<li><a href="http://www.cleancoders.com/">The Clean Coders</a></li>
+<li>Rails <a href="http://railscasts.com/">Railscast</a></li>
+<li>Rails / CSS <a href="http://www.codeschool.com/code_tv">CodeTV</a></li>
+<li>Rails <a href="https://www.destroyallsoftware.com/screencasts">Destroy All Software</a></li>
+<li>General <a href="http://www.cleancoders.com/">The Clean Coders</a></li>
 </ul>
 
 
