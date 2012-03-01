@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-我創業了。從 2012/03/01 開始，我跟我的好友：國內頂尖的視覺設計師 [@evenwu](http://twitter.com/evenwu) 合組了一間新公司 [Rocodev](http://rocodev.com)。
+我創業了。從 2012/03/01 開始，我跟我的好友：國內頂尖的視覺設計師 [@evenwu](http://twitter.com/evenwu) 合組了一間新公司 [RocoDev](http://rocodev.com)。
 
 我們專營：
 
