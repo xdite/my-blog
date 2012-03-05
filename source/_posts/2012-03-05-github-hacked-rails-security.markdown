@@ -78,7 +78,7 @@ end
 
 ### 知名認證 Plugin 皆內建 attr_accesible
 
-也因為 user.is_admin 幾乎是所有懶惰開發者會寫出來的 code。因此長久的歷史演變下來，許多知名認證 plugin，如 [devise] ，restful-authentication 等等…，在 User model 裡都會加上 attr_accesible（你可能沒有察覺到，因為可能是透過 include Module 塞進來的功能）。
+也因為 user.is_admin 幾乎是所有懶惰開發者會寫出來的 code。因此長久的歷史演變下來，許多知名認證 plugin，如 [devise](https://github.com/plataformatec/devise) ，restful-authentication 等等…，在 User model 裡都會加上 attr_accesible（你可能沒有察覺到，因為可能是透過 include Module 塞進來的功能）。
 
 因為是隱藏的內建防禦，很多不夠經驗的開發者，反而會被這道自動防禦整到，在設計修改使用者資訊這個功能時，常常標單明明沒問題，但就是修改不了除了密碼和 email 以外的欄位 XDDD
 
