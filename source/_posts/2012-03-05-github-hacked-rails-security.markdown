@@ -125,3 +125,4 @@ XSS 的原因肇因是讓開發者開放讓使用者自行輸入內容，然後�
 
 國外鄉民懶人包：[GitHub and Rails: You have let us all down.](http://chrisacky.posterous.com/github-you-have-let-us-all-down)
 
+DHH 給出的 37Signals 的作法：<https://gist.github.com/1975644>
