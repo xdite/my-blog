@@ -84,7 +84,7 @@ end
 
 ### User model 自動防禦，那其他 model 呢？
 
-好問題！這就是這次 Github 發生的問題。嚴格來說，根本不是 rails/rails 的錯，**而是 Github 內某個被罵 mid/junior level 的 developer 的錯**。他根本沒有對其他 model 作上保護，才被 hacker 有機可稱。
+好問題！這就是這次 Github 發生的問題。嚴格來說，根本不是 rails/rails 的錯，**而是 Github 內某個被罵 mid/junior level 的 developer 的錯**。他根本沒有對其他 model 作上保護，才被 hacker 有機可趁。
 
 Hacker 也是想要證明連 Github 都會犯這種錯，才會鬧出這種事件
 

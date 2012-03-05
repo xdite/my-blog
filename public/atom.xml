@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-05T12:31:28+08:00</updated>
+  <updated>2012-03-05T12:32:01+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -117,7 +117,7 @@
 
 <h3>User model 自動防禦，那其他 model 呢？</h3>
 
-<p>好問題！這就是這次 Github 發生的問題。嚴格來說，根本不是 rails/rails 的錯，<strong>而是 Github 內某個被罵 mid/junior level 的 developer 的錯</strong>。他根本沒有對其他 model 作上保護，才被 hacker 有機可稱。</p>
+<p>好問題！這就是這次 Github 發生的問題。嚴格來說，根本不是 rails/rails 的錯，<strong>而是 Github 內某個被罵 mid/junior level 的 developer 的錯</strong>。他根本沒有對其他 model 作上保護，才被 hacker 有機可趁。</p>
 
 <p>Hacker 也是想要證明連 Github 都會犯這種錯，才會鬧出這種事件</p>
 
