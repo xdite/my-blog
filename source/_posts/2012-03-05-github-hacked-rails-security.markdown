@@ -16,9 +16,9 @@ categories:
 
 有個俄羅斯 Hacker : [homakov](homakov) 到 Rails 的 Github issue 頁，report 了一個 [issue](https://github.com/rails/rails/issues/5228)。
 
-聲稱他發現很多「中等程度以下的」Rails 開發者開發任何網站，都沒有在 model 內作上任何  [attr_accesible] 的防護，這樣會引起很多安全性的問題。
+聲稱他發現很多「中等程度以下的」Rails 開發者開發任何網站，都沒有在 model 內作上任何 [attr_accesible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 的防護，這樣會引起很多安全性的問題。
 
-Rails 官方應該設計一個機制強迫大家一定得「使用」[attr_accesible]。
+Rails 官方應該設計一個機制強迫大家一定得「使用」[attr_accesible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible)。
 
 因為寫 code 要塞 attr_accesible 被多數開發者認為是根本是一個「常識」。所以這個 issue 很快就被 Rails core team 關掉了。他的意見是這不是 Rails 的問題，而是開發者的問題。（正常人都會做出這樣的反應）
 
