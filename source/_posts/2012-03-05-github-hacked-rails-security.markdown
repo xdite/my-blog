@@ -74,7 +74,7 @@ class Post < ActiveRecord::Base
   attr_accesible :title, :content
 end
 ```
-而 [attr_protected](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected)
+而 [attr_protected](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected) 是完全相反地機制。
 
 ### 知名認證 Plugin 皆內建 attr_accesible
 
