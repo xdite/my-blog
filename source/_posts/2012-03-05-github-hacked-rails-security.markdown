@@ -115,7 +115,7 @@ Hacker 也是想要證明連 Github 都會犯這種錯，才會鬧出這種事�
 
 後來睡醒以後才發現不對，其實這東西應該要被拿來跟 auto escape 相比：XSS 是一般設計 Web Application 最容易中招的攻擊。
 
-XSS 的原因肇因是讓開發者開放讓使用者自行輸入內容，然後無保護的讀出來，Hacker 會利用這種漏洞，寫進有害的 JavaScript 讓使用者中招。正確的方式應該是，讀出來之後，都要利用 html_escape 濾掉。
+XSS 的原因肇因是讓開發者開放讓使用者自行輸入內容，然後無保護的讀出來，Hacker 會利用這種漏洞，寫進有害的 JavaScript 讓使用者中招。正確的方式應該是：內容讀出來之後，都要利用 html_escape 濾掉。
 
 問題是，html_escape 濾不勝濾，沒有開發者能夠那麼神，寫任何一段 code 都會自律的加上 h(content)。最後 Rails core 痛定思痛，在 Rails 3.0 後效法 Django 的設計，在讀出 content 時，一律先 escape。除非有必要，才另行設定不需 escape。
 
