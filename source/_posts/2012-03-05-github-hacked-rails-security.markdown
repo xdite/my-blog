@@ -16,11 +16,11 @@ categories:
 
 有個俄羅斯 Hacker : [homakov](homakov) 到 Rails 的 Github issue 頁，report 了一個 [issue](https://github.com/rails/rails/issues/5228)。
 
-聲稱他發現很多「中等程度以下的」Rails 開發者開發任何網站，都沒有在 model 內作上任何 [attr_accesible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 的防護，這樣會引起很多安全性的問題。
+聲稱他發現很多「中等程度以下的」Rails 開發者開發任何網站，都沒有在 model 內作上任何 [attr_accessible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 的防護，這樣會引起很多安全性的問題。
 
-Rails 官方應該設計一個機制強迫大家一定得「使用」[attr_accesible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible)。
+Rails 官方應該設計一個機制強迫大家一定得「使用」[attr_accessible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible)。
 
-因為寫 code 要塞 attr_accesible 被多數開發者認為是根本是一個「常識」。所以這個 issue 很快就被 Rails core team 關掉了。他的意見是這不是 Rails 的問題，而是開發者的問題。（正常人都會做出這樣的反應）
+因為寫 code 要塞 attr_accessible 被多數開發者認為是根本是一個「常識」。所以這個 issue 很快就被 Rails core team 關掉了。他的意見是這不是 Rails 的問題，而是開發者的問題。（正常人都會做出這樣的反應）
 
 這個 Hacker 覺得他好心來報告，但是卻被忽視，感到很生氣。
 
@@ -65,20 +65,20 @@ end
 
 ### Rails 內建的安全防禦措施
 
-Rails 也不是沒有針對這件事設計出防禦措施，有兩組 model API ：[attr_accesible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 與 [attr_protected](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected)。其實也就是 白名單、黑名單設計。
+Rails 也不是沒有針對這件事設計出防禦措施，有兩組 model API ：[attr_accessible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 與 [attr_protected](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected)。其實也就是 白名單、黑名單設計。
 
-把 [attr_accesible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 加在 model 裡，可以擋掉所有 massive assignement 傳進來的值，只開放你想讓使用填寫的欄位。
+把 [attr_accessible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 加在 model 裡，可以擋掉所有 massive assignement 傳進來的值，只開放你想讓使用填寫的欄位。
 
 ``` ruby
 class Post < ActiveRecord::Base
-  attr_accesible :title, :content
+  attr_accessible :title, :content
 end
 ```
 而 [attr_protected](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected) 是完全相反地機制。
 
-### 知名認證 Plugin 皆內建 attr_accesible
+### 知名認證 Plugin 皆內建 attr_accessible
 
-也因為 user.is_admin 幾乎是所有懶惰開發者會寫出來的 code。因此長久的歷史演變下來，許多知名認證 plugin，如 [devise](https://github.com/plataformatec/devise) ，restful-authentication 等等…，在 User model 裡都會加上 attr_accesible（你可能沒有察覺到，因為可能是透過 include Module 塞進來的功能）。
+也因為 user.is_admin 幾乎是所有懶惰開發者會寫出來的 code。因此長久的歷史演變下來，許多知名認證 plugin，如 [devise](https://github.com/plataformatec/devise) ，restful-authentication 等等…，在 User model 裡都會加上 attr_accessible（你可能沒有察覺到，因為可能是透過 include Module 塞進來的功能）。
 
 因為是隱藏的內建防禦，很多不夠經驗的開發者，反而會被這道自動防禦整到，在設計修改使用者資訊這個功能時，常常表單明明沒問題，但就是修改不了除了密碼和 email 以外的欄位 XDDD
 
@@ -90,7 +90,7 @@ Hacker 也是想要證明連 Github 都會犯這種錯，才會鬧出這種事�
 
 ## 看到 Github 的事件，我該做什麼？
 
-請回家讀這兩組 model API ：[attr_accesible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 與 [attr_protected](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected) 的作用。
+請回家讀這兩組 model API ：[attr_accessible](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible) 與 [attr_protected](http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected) 的作用。
 
 並檢查你的 project 內是否有類似問題：一般來說，容易被攻擊的點都跟 relation 比較有關係。也就是 xxxxx_id 的部分都要清查。
 

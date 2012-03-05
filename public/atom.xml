@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-05T12:51:03+08:00</updated>
+  <updated>2012-03-05T13:06:28+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -28,11 +28,11 @@
 
 <p>有個俄羅斯 Hacker : <a href="homakov">homakov</a> 到 Rails 的 Github issue 頁，report 了一個 <a href="https://github.com/rails/rails/issues/5228">issue</a>。</p>
 
-<p>聲稱他發現很多「中等程度以下的」Rails 開發者開發任何網站，都沒有在 model 內作上任何 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accesible</a> 的防護，這樣會引起很多安全性的問題。</p>
+<p>聲稱他發現很多「中等程度以下的」Rails 開發者開發任何網站，都沒有在 model 內作上任何 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a> 的防護，這樣會引起很多安全性的問題。</p>
 
-<p>Rails 官方應該設計一個機制強迫大家一定得「使用」<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accesible</a>。</p>
+<p>Rails 官方應該設計一個機制強迫大家一定得「使用」<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a>。</p>
 
-<p>因為寫 code 要塞 attr_accesible 被多數開發者認為是根本是一個「常識」。所以這個 issue 很快就被 Rails core team 關掉了。他的意見是這不是 Rails 的問題，而是開發者的問題。（正常人都會做出這樣的反應）</p>
+<p>因為寫 code 要塞 attr_accessible 被多數開發者認為是根本是一個「常識」。所以這個 issue 很快就被 Rails core team 關掉了。他的意見是這不是 Rails 的問題，而是開發者的問題。（正常人都會做出這樣的反應）</p>
 
 <p>這個 Hacker 覺得他好心來報告，但是卻被忽視，感到很生氣。</p>
 
@@ -94,24 +94,24 @@
 
 <h3>Rails 內建的安全防禦措施</h3>
 
-<p>Rails 也不是沒有針對這件事設計出防禦措施，有兩組 model API ：<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accesible</a> 與 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected">attr_protected</a>。其實也就是 白名單、黑名單設計。</p>
+<p>Rails 也不是沒有針對這件事設計出防禦措施，有兩組 model API ：<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a> 與 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected">attr_protected</a>。其實也就是 白名單、黑名單設計。</p>
 
-<p>把 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accesible</a> 加在 model 裡，可以擋掉所有 massive assignement 傳進來的值，只開放你想讓使用填寫的欄位。</p>
+<p>把 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a> 加在 model 裡，可以擋掉所有 massive assignement 傳進來的值，只開放你想讓使用填寫的欄位。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">attr_accesible</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:content</span>
+</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:content</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>而 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected">attr_protected</a> 是完全相反地機制。</p>
 
-<h3>知名認證 Plugin 皆內建 attr_accesible</h3>
+<h3>知名認證 Plugin 皆內建 attr_accessible</h3>
 
-<p>也因為 user.is_admin 幾乎是所有懶惰開發者會寫出來的 code。因此長久的歷史演變下來，許多知名認證 plugin，如 <a href="https://github.com/plataformatec/devise">devise</a> ，restful-authentication 等等…，在 User model 裡都會加上 attr_accesible（你可能沒有察覺到，因為可能是透過 include Module 塞進來的功能）。</p>
+<p>也因為 user.is_admin 幾乎是所有懶惰開發者會寫出來的 code。因此長久的歷史演變下來，許多知名認證 plugin，如 <a href="https://github.com/plataformatec/devise">devise</a> ，restful-authentication 等等…，在 User model 裡都會加上 attr_accessible（你可能沒有察覺到，因為可能是透過 include Module 塞進來的功能）。</p>
 
 <p>因為是隱藏的內建防禦，很多不夠經驗的開發者，反而會被這道自動防禦整到，在設計修改使用者資訊這個功能時，常常表單明明沒問題，但就是修改不了除了密碼和 email 以外的欄位 XDDD</p>
 
@@ -123,7 +123,7 @@
 
 <h2>看到 Github 的事件，我該做什麼？</h2>
 
-<p>請回家讀這兩組 model API ：<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accesible</a> 與 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected">attr_protected</a> 的作用。</p>
+<p>請回家讀這兩組 model API ：<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a> 與 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected">attr_protected</a> 的作用。</p>
 
 <p>並檢查你的 project 內是否有類似問題：一般來說，容易被攻擊的點都跟 relation 比較有關係。也就是 xxxxx_id 的部分都要清查。</p>
 
