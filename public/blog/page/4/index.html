@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  今天下班回家，看到 Mr. Jamie 寫了這一篇 魔球 (Moneyball)：一個 Hack Everything 的棒球故事電影《魔球 (Moneyball)》終於在台灣上映了，一樣的我也還沒去看。但我同樣的也要說，就算你沒有要進電影院看故事，我也推薦...">
+  <meta name="description" content="                  這幾天在寫一個小玩具，因為要用到 Github 認證，於是採取了 OmniAuth  + Devise 這組作法。因為適逢 OmniAuth 在十月底一舉從 v0.3 大改版，直衝到 v1.0。版號大躍進，整個架構與 API 也幾乎全都不一樣了，網路上的教學...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,128 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/11/19/omniauth-clean-auth-provider-1/">OmniAuth - 實作多方認證的最佳實踐 (1)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-11-19T02:16:00+08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/11/19/omniauth-clean-auth-provider-1/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-1/" data-show-faces="false"></div></div>
+    
+    <p>這幾天在寫一個小玩具，因為要用到 Github 認證，於是採取了 <a href="https://github.com/intridea/omniauth">OmniAuth</a>  + <a href="https://github.com/plataformatec/devise">Devise</a> 這組作法。因為適逢 OmniAuth 在十月底一舉從 v0.3 大改版，直衝到 v1.0。版號大躍進，整個架構與 API 也幾乎全都不一樣了，網路上的教學幾乎等於作廢，加上 Github 原本實作的 OAuth 2.0 本來就不太標準，吃了幾個小時苦頭，終於才把認證搞定。不過也拜這一晚的折騰，讓我把 OmniAuth 架構摸個更加透徹。</p>
+
+<h2>多方認證的需求</h2>
+
+<p>現在作網站，使用者的要求比以往的高。在過往，幾乎都是站方的姿態較高，使用者要試用一個網站前，無不是必須填一堆資料，勾完一堆囉哩八縮的選項，才能加入這個網站。</p>
+
+<p>但隨著時代的改變，Facebook Connect 的普及，現在網路生態卻跟以前完全相反，如果你的網站不提供傳統帳號密碼以外的方案（諸如 Facebook Connect、Google ID …etc.）使用者二話不說，絕對馬上就閃人。反正網站那麼多，不差哪一個…</p>
+
+<p>於是提供傳統帳號密碼以外的註冊方案，對一個新創網站就顯得格外重要。</p>
+
+<h2>實作上的困難</h2>
+
+<p>話雖如此，但是實作上是真的有很大的困難的。就拿 Rails 生態圈好了，<a href="https://www.ruby-toolbox.com/categories/rails_authentication">傳統帳號密碼方案</a> 有非常多套：Devise、Authlogic、Restful-authenication 等等。而實作第三方認證的功能也是相當多元的，你可以拿 Facebook API 的 gem 或者是 Google OAuth 的 gem 直接硬幹整合這些方案，也是做的出來。</p>
+
+<p>理想的境界應該是一個網站最好只要提供一個 3rd Party 的認證，而且認證 Library 與 API 存取機制，不能要有太大的變化。</p>
+
+<p>但這真的只是理想而已，現實上你會遇到三類大挑戰：</p>
+
+<h3>1. PM 亂開規格</h3>
+
+<p>PM 不會管你死活，硬是要你同時既提供 Facebook / OpenID / Yahoo Auth / Google OpenID。天知道這些網站認證和存取 API 的規格完全都不一樣。</p>
+
+<p>硬是把這些方案一起塞到一個 controller 和同一個 model，瞬間就會無法維護。不…很可能是 code 亂到讓自己狂跌倒，直接作不出來</p>
+
+<h3>2. OAuth 版本規格間的問題</h3>
+
+<p>理想的境界應該是大家都走 <a href="http://zh.wikipedia.org/wiki/OAuth">OAuth</a> 就能夠解決問題，但是 OAuth 1.0 推出時，鬧了一個大笑話：被發現有 security issue。於是 OAuth 推出了 1.0a 的修補方案，但這又衍生出另外一個問題：每一家解決 security issue 機制完全不一樣。</p>
+
+<p>因為 service provider 的機制完全不一樣，就造成了已經上路使用 OAuth 的網站大囧。因為 1.0a 那步要變成客製。其實大家做的調整都差不多，但當時有一家是來亂的：Yahoo ….</p>
+
+<p>因為 Yahoo 實在太特例，還造成當時 OAuth 這個 rubygem 的作者，拒絕支援 Yahoo（因為要做的修改不只是「小」修改而已）。</p>
+
+<p>這件事實在是太囧了，於是 OAuth 在不久後，又提供了一個解決方案：直接提出 OAuth 2.0!</p>
+
+<p>鬧劇到這裡就結束了嗎？</p>
+
+<p>沒有。</p>
+
+<p>因為 OAuth 2.0 不相容 1.0a 及 1.0 …</p>
+
+<p>好吧，那算了，大家還是繼續裝死使用 1.0x …</p>
+
+<p>還沒有結束喔！</p>
+
+<p>原本完全不鳥 OAuth 的 Facebook 這時候宣布即將放棄自己的 Facebook Connect 架構，宣布未來直接擁抱 OAuth 2.0。</p>
+
+<p>崩潰。一個專案上跑 n 種 OAuth library 是什麼鬼&#8230;.</p>
+
+<p>[<strong> 如果你是沒什麼信念的 Web Developer，看到這裡我建議你可以轉行 </strong>]</p>
+
+<h3>3. 大網站本身直接的 API 改版以及認證機制的改變</h3>
+
+<p>一個網站只要還沒倒，就不可能一直停滯不前。更尤有甚者如 Facebook，它的 API 更是三天一小改，五天一大改。而 FB 的 認證架構 和 API 一改，相對的 library wrapper 就一定會跟著改。</p>
+
+<p>這就苦到那一些直接使用 library 接認證的開發者。</p>
+
+<p>而 FB 改版就已經夠令人苦惱，其他網站不可能也像一攤死水，Google 也改很大&#8230;.。從之前只是
+OpenID + API 存取，改成直接走 OAuth &#8230;</p>
+
+<p>你也許會問，為何要使用 library 直接接認證呢？那是不用獨立 library 接認證有時候也不太行得通，因為每一家提供使用者資訊的「方式」和「資料格式」幾乎不一樣。有時候還要分好幾步才能拿到令人滿意的結果</p>
+
+<h2>理想的解決方案</h2>
+
+<p>當 Web Developer 實在太苦了，賣雞排真的比較輕鬆 :/</p>
+
+<p>理想中 Developer 們需要的解決方案應該是這樣的：</p>
+
+<ol>
+<li>開發者不需管最底層的傳統認證方案是哪一套 solution，甚至是不只局限於 Rails 這個框架</li>
+<li>開發者不需管提供認證方使用的是哪一套協定</li>
+<li>開發者拿到的使用者資料格式應該是接近一致的</li>
+</ol>
+
+
+<p>這套方案存在嗎？</p>
+
+<p>存在，它就是 <a href="https://github.com/intridea/omniauth">OmniAuth</a> 。</p>
+
+<h2>小結</h2>
+
+<p>前言歷史寫太長了，決定拆成幾篇寫完。下集待續。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -965,141 +1087,13 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#119;&#97;&#110;&#x67;&#100;&#x69;&#110;&#103;&#119;&#x65;&#105;&#56;&#50;&#64;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;">&#119;&#x61;&#x6e;&#x67;&#x64;&#105;&#110;&#x67;&#119;&#101;&#105;&#x38;&#x32;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#119;&#x61;&#x6e;&#x67;&#x64;&#x69;&#110;&#103;&#119;&#x65;&#105;&#x38;&#50;&#x40;&#103;&#109;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#x77;&#97;&#110;&#103;&#x64;&#x69;&#x6e;&#103;&#x77;&#101;&#x69;&#x38;&#50;&#64;&#x67;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
 <p>如果你對 LRTHW 的翻譯有任何意見和建議，請在這個 <a href="https://github.com/lrthw/lrthw.github.com">project</a> 的 Github issue 頁發 issue 給我，或者是直接 pull request 也行。</p>
 
 <p>你也可以上 LRTHW <a href="http://ruby.learncodethehardway.org/">官網</a>購買本書正版，這也是對 Zed Shaw 的支持。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/">如何從 Wordpress Migrate 到 Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-10-09T18:09:00+08:00" pubdate  data-updated="true" >Oct 9<span>th</span>, 2011</time>
-        
-         | <a href="/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/" data-show-faces="false"></div></div>
-    
-    <h3>文章轉換</h3>
-
-<p>如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。</p>
-
-<ul>
-<li>使用 Jekyll Convertor</li>
-</ul>
-
-
-<p>我改了一支 <a href="https://gist.github.com/1273518">convertor</a>，可以從 Wordpress XML 匯入文章，並解決中文問題。</p>
-
-<p>（是的，老外才不管 UTF8 死活。）
-（有問題我不負責保固，請自行修理）</p>
-
-<h3>留言轉換</h3>
-
-<ul>
-<li>把 Comment 倒進 DISQUS</li>
-</ul>
-
-
-<p>DISQUS 與 Wordpress 與 Octopress 都有良好的整合。你可以把 Woordpress XML 先 import 進 DISQUS 引擎，處理完後可以對應回剛剛轉的 markdown（裡面會有記 wordpress_id）。</p>
-
-<h3>圖片轉換</h3>
-
-<p>我個人習慣很好，平日貼圖都貼在 Flickr 上，沒有這樣的問題。</p>
-
-<p>（有這樣問題的人，請自行解決。）</p>
-
-<h3>RSS Feed</h3>
-
-<p>我個人習慣很好，幾年前就將 feed 代管在 <a href="http://feedburner.com/">feedburner</a> 之上。</p>
-
-<p>（有這樣問題的人，請自行解決。）</p>
-
-<h3>Facebook Likes 數</h3>
-
-<p>你瘋了嗎？</p>
-
-<h3>使用舊有網址</h3>
-
-<ul>
-<li>如果你之前的 網址是使用 ?p=XXX 作為永久網址，目前此題無解。</li>
-<li>如果你是之前有已經定義好的 permalinks，你可以使用修改 Jekyll Convertor，將 permalink 加入轉換選項裡</li>
-</ul>
-
-
-<p><a href="https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter">https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter</a></p>
-
-<h2>大絕招</h2>
-
-<p>如果你是像我一樣，覺得轉換成本代價過高，只是想另起爐灶而已。就不要管之前的 Blog 怎樣了，改個網址做 301 重新導向就好。</p>
-
-<h3>301 轉址</h3>
-
-<p>這招只適合使用在自己 hosting 或 heroku 之上。因為 Github pages 不支援 .htacess 設定，只能放置靜態檔案。
-我是放在 Heroku 上，使用 <a href="https://github.com/jtrupiano/rack-rewrite">rack-rewrite </a> 做到對過去的網址 301 轉址。</p>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;rack-rewrite&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>config.ru</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rack/rewrite&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
-</span><span class='line'>
-</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?p=(.*)?}</span><span class="p">,</span>  <span class="s2">&quot;http://wp.xdite.net/?p=$1&quot;</span>
-</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?s=(.*)?}</span><span class="p">,</span>  <span class="s2">&quot;http://wp.xdite.net/?s=$1&quot;</span>
-</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?feed=(.*)?}</span><span class="p">,</span> <span class="s2">&quot;http://feeds.feedburner.com/xxddite&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這簡單三行我可是琢磨了好幾個小時啊 :/</p>
 
   </div>
   
@@ -1142,6 +1136,10 @@ LOGO 和背景色有做了一點小調整。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/03/06/iphone4s/">iPhone 4S 進洗衣機洗還是有救</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/03/05/github-hacked-rails-security/">從 Github 被 hack，談 Rails 的安全性（ mass-assignment ）</a>
       </li>
     
@@ -1155,10 +1153,6 @@ LOGO 和背景色有做了一點小調整。</p>
     
       <li class="post">
         <a href="/posts/2012/02/16/about-responsive-design-technique/">Responsive Web Design 的一些技巧和想法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/">Don’t name your Ruby project with underscore on Github</a>
       </li>
     
   </ul>

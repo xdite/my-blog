@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  這是我現在拿來寫 Blog 的 Editor。原先是使用付費軟體 iA Writer，後來九月底在 twitter 上看到朋友推薦使用 Mou，毫不猶豫就放棄了原來的 solution，現在越寫越上手。如果你是 Markdown 愛好者，一定會愛死它的。不多...">
+  <meta name="description" content="                  文章轉換如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。使用 Jekyll Convertor我改了一支 convertor，可以從 Wordpress XML 匯入文章，並解決中文問題。（是的，老外才不管 UTF8 死活...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,134 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/">如何從 Wordpress Migrate 到 Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-10-09T18:09:00+08:00" pubdate  data-updated="true" >Oct 9<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/" data-show-faces="false"></div></div>
+    
+    <h3>文章轉換</h3>
+
+<p>如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。</p>
+
+<ul>
+<li>使用 Jekyll Convertor</li>
+</ul>
+
+
+<p>我改了一支 <a href="https://gist.github.com/1273518">convertor</a>，可以從 Wordpress XML 匯入文章，並解決中文問題。</p>
+
+<p>（是的，老外才不管 UTF8 死活。）
+（有問題我不負責保固，請自行修理）</p>
+
+<h3>留言轉換</h3>
+
+<ul>
+<li>把 Comment 倒進 DISQUS</li>
+</ul>
+
+
+<p>DISQUS 與 Wordpress 與 Octopress 都有良好的整合。你可以把 Woordpress XML 先 import 進 DISQUS 引擎，處理完後可以對應回剛剛轉的 markdown（裡面會有記 wordpress_id）。</p>
+
+<h3>圖片轉換</h3>
+
+<p>我個人習慣很好，平日貼圖都貼在 Flickr 上，沒有這樣的問題。</p>
+
+<p>（有這樣問題的人，請自行解決。）</p>
+
+<h3>RSS Feed</h3>
+
+<p>我個人習慣很好，幾年前就將 feed 代管在 <a href="http://feedburner.com/">feedburner</a> 之上。</p>
+
+<p>（有這樣問題的人，請自行解決。）</p>
+
+<h3>Facebook Likes 數</h3>
+
+<p>你瘋了嗎？</p>
+
+<h3>使用舊有網址</h3>
+
+<ul>
+<li>如果你之前的 網址是使用 ?p=XXX 作為永久網址，目前此題無解。</li>
+<li>如果你是之前有已經定義好的 permalinks，你可以使用修改 Jekyll Convertor，將 permalink 加入轉換選項裡</li>
+</ul>
+
+
+<p><a href="https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter">https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter</a></p>
+
+<h2>大絕招</h2>
+
+<p>如果你是像我一樣，覺得轉換成本代價過高，只是想另起爐灶而已。就不要管之前的 Blog 怎樣了，改個網址做 301 重新導向就好。</p>
+
+<h3>301 轉址</h3>
+
+<p>這招只適合使用在自己 hosting 或 heroku 之上。因為 Github pages 不支援 .htacess 設定，只能放置靜態檔案。
+我是放在 Heroku 上，使用 <a href="https://github.com/jtrupiano/rack-rewrite">rack-rewrite </a> 做到對過去的網址 301 轉址。</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;rack-rewrite&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>config.ru</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rack/rewrite&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?p=(.*)?}</span><span class="p">,</span>  <span class="s2">&quot;http://wp.xdite.net/?p=$1&quot;</span>
+</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?s=(.*)?}</span><span class="p">,</span>  <span class="s2">&quot;http://wp.xdite.net/?s=$1&quot;</span>
+</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?feed=(.*)?}</span><span class="p">,</span> <span class="s2">&quot;http://feeds.feedburner.com/xxddite&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這簡單三行我可是琢磨了好幾個小時啊 :/</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -659,6 +787,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/03/06/iphone4s/">iPhone 4S 進洗衣機洗還是有救</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/03/05/github-hacked-rails-security/">從 Github 被 hack，談 Rails 的安全性（ mass-assignment ）</a>
       </li>
     
@@ -672,10 +804,6 @@
     
       <li class="post">
         <a href="/posts/2012/02/16/about-responsive-design-technique/">Responsive Web Design 的一些技巧和想法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/">Don’t name your Ruby project with underscore on Github</a>
       </li>
     
   </ul>
