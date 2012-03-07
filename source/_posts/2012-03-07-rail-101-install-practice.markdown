@@ -8,7 +8,7 @@ categories:
 
 Hi, 各位讀者好。
 
-因為 Apple 一直在改變 XCode 的編譯套件位置，所以 [Rails 101](http://rails-101.logdown.com) 的裝機實務已經不適用了。
+因為 Apple 一直在改變 XCode 的編譯套件位置，所以 [Rails 101](http://rails-101.logdown.com) 內附的裝機實務已經過期了。
 
 我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。
 

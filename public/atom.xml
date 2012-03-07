@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-07T17:06:27+08:00</updated>
+  <updated>2012-03-07T17:09:01+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice</id>
     <content type="html"><![CDATA[<p>Hi, 各位讀者好。</p>
 
-<p>因為 Apple 一直在改變 XCode 的編譯套件位置，所以 <a href="http://rails-101.logdown.com">Rails 101</a> 的裝機實務已經不適用了。</p>
+<p>因為 Apple 一直在改變 XCode 的編譯套件位置，所以 <a href="http://rails-101.logdown.com">Rails 101</a> 內附的裝機實務已經過期了。</p>
 
 <p>我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。</p>
 
