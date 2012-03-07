@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Rails on Mac Best Practices - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="        Rails on Mac Best Practices      Mar 7th, 2012      Rails on Mac 安裝最佳實務強烈警告：請絕對不要跳著裝！如果疏漏步驟有可能導致無法復原需要重灌。系統套件進行 Mac 系統更新Install osx-gcc-ins...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+-->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Rails on Mac Best Practices</h1>
+    <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-07T16:57:00+08:00" pubdate  data-updated="true" >Mar 7<span>th</span>, 2012</time></p>
+  </header>
+  
+  <h2>Rails on Mac 安裝最佳實務</h2>
+
+<p><code>強烈警告：請絕對不要跳著裝！如果疏漏步驟有可能導致無法復原需要重灌。</code></p>
+
+<h2>系統套件</h2>
+
+<ol>
+<li>進行 Mac 系統更新</li>
+<li>Install <a href="https://github.com/kennethreitz/osx-gcc-installer">osx-gcc-installer</a>，裝完請重開機（保險起見）。</li>
+<li>Install Homebrew</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   $ ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+</span><span class='line'>   $ brew install git
+</span><span class='line'>   $ brew update</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ImageMagick / MySQL</h3>
+
+<ul>
+<li>安裝 Imagemagick</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   $ brew install imagemagick</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>安裝 MySQL</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ brew install mysql
+</span><span class='line'>$ unset TMPDIR
+</span><span class='line'>$ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+</span><span class='line'>$ mysql.server start
+</span><span class='line'>$ mysqladmin -u root password '123456'
+</span><span class='line'>$ mkdir -p ~/Library/LaunchAgents
+</span><span class='line'>$ cp /usr/local/Cellar/mysql/5.5.19/com.mysql.mysqld.plist ~/Library/LaunchAgents/
+</span><span class='line'>$ launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若無法順利進行安裝，可換下載 <a href="http://dev.mysql.com/downloads/mysql/">MySQL官網</a> 上的 Mac OS X ver. 10.6 (x86, 64-bit), DMG Archive 來安裝 MySQL。</p>
+
+<h3>安裝 RVM 與 Ruby 1.9.2</h3>
+
+<p>在建制 Rails 環境的時候，我們可能會有跑不同版本的 Ruby 或者不同的 getsemt 的需求。<a href="https://rvm.beginrescueend.com/">Ruby Version Manager</a> 是一個能夠讓我們用很優雅的方式切換 Ruby 版本的工具。同時使用系統 Ruby，其實很容易弄髒環境和產生一些靈異現象的 bug。於是我們在建制環境時，通常第一時間就會裝起 RVM。</p>
+
+<h4>安裝 RVM</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+</span><span class='line'>$ . ~/.profile
+</span><span class='line'>$ source ~/.profile</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>安裝 Ruby 1.9.2</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.2
+</span><span class='line'>$ rvm 1.9.2 --default 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>注意</h4>
+
+<p>使用 RVM 安裝 gem 和 passenger-install-apache2-module 不需要加上 sudo , 因為使用 sudo 會使用非 RVM 的 ruby 環境, 安裝目錄也不一樣.)</p>
+
+<h3>安裝必要 Ruby gems</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem install rails -v=3.2.2
+</span><span class='line'>$ gem install mysql2
+</span><span class='line'>$ gem install passenger
+</span><span class='line'>$ gem install nokogiri
+</span><span class='line'>$ gem install capistrano
+</span><span class='line'>$ gem install capistrano-ext
+</span><span class='line'>$ gem install delayed_job
+</span><span class='line'>$ gem install hoptoad_notifier
+</span><span class='line'>$ gem install facebooker2
+</span><span class='line'>$ gem install factory_girl</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>設定 HTTP Server</h2>
+
+<h3>使用 Pow</h3>
+
+<h4>使用 Pow 作為 HTTP Server</h4>
+
+<p><a href="http://pow.cx">Pow</a> 是 <a href="http://37signals.com/">37 Signals</a> open-source 出來的一套 Rack Server。其標榜的就是 Zero Config。</p>
+
+<p>Pow 的原理原理是攔截 routing，導到 Pow 上。所以新增 project 不需要更改 /etc/hosts 就會生效。也因為 Pow 是 rack-based，支援 <a href="http://rack.rubyforge.org/">rack</a> 的 framework 掛了就能跑。</p>
+
+<p>相較起來，以往的 <a href="http://www.modrails.com/">Passenger</a> 搭配 Mac 本機端的 apache 的 solution 就顯得太笨重了。</p>
+
+<h4>Installation</h4>
+
+<p><a href="http://pow.cx">Pow</a> 的安裝相當簡單。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl get.pow.cx | sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>即完成安裝。</p>
+
+<h4>Setting</h4>
+
+<p><a href="http://pow.cx">Pow</a> 預設的目錄是在 ~/.pow 下。</p>
+
+<p>因此若要讓 project 跑在 Pow 之下。以我的 wiki 為例 ：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd ~/.pow/
+</span><span class='line'>$ ln -s ~/projects/wiki</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>打開瀏覽器，輸入 <a href="http://wiki.dev">http://wiki.dev</a> 就完成了。以往的 <a href="http://localhost:3000/">http://localhost:3000/</a> 實在太噁心了，別再用它了！</p>
+
+<h5>Note</h5>
+
+<p>或者是直接在 project/wiki 下打 <code>powder link</code> 也可以。</p>
+
+<h4>使用 Powder 管理 Pow</h4>
+
+<p><a href="https://github.com/Rodreegez/powder">Powder</a>  是後來衍生出來的一套管理工具。</p>
+
+<p>因為 Pow 的管理有點不易，所有有人寫了這個工具把一些常用的功能包裝起來。</p>
+
+<p>安裝方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem install powder</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>通常我只拿來做 <code>powder restart</code> 和 <code>powder log</code> 而已。</p>
+
+<h5>注意事項</h5>
+
+<p>若電腦預設非使用系統 Ruby 的開發者需注意此點。Pow 很可能會抓到系統 Ruby 及其  gemset 而無法啓動。我個人的解法是安裝 RVM 管控 Ruby，再在欲使用 Pow 之 project 目錄放置 .rvmrc 即可。</p>
+
+<p>.rvmrc 內容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm 1.9.2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解決使用 Pow 後，無法掛上 PHP project 的問題</p>
+
+<p>請參考 <a href="http://stuff-things.net/2011/05/16/legacy-development-with-pow/">Legacy development with Pow</a> 一文。原理是利用 rack-legacy 以及 rack-rewrite。</p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-07T16:57:00+08:00" pubdate  data-updated="true" >Mar 7<span>th</span>, 2012</time>
+        
+      </p>
+      
+        <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/index.html" data-via="xdite" data-counturl="http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/03/07/rail-101-install-practice/">Rail 101 裝機實務以及改版通知</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/03/06/iphone4s/">iPhone 4S 進洗衣機洗還是有救</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/03/05/github-hacked-rails-security/">從 Github 被 hack，談 Rails 的安全性（ mass-assignment ）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/03/02/my-start-up/">我創業了，我的公司 RocoDev</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/02/19/ruby-podcasts/">Ruby Podcast / Screencast / Issue 推薦清單</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("xdite", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/xdite" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @xdite</a>
+  
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/index.html';
+        var disqus_url = 'http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/index.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

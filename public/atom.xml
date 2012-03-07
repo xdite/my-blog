@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-06T23:17:07+08:00</updated>
+  <updated>2012-03-07T17:06:27+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rail 101 裝機實務以及改版通知]]></title>
+    <link href="http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/"/>
+    <updated>2012-03-07T17:01:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice</id>
+    <content type="html"><![CDATA[<p>Hi, 各位讀者好。</p>
+
+<p>因為 Apple 一直在改變 XCode 的編譯套件位置，所以 <a href="http://rails-101.logdown.com">Rails 101</a> 的裝機實務已經不適用了。</p>
+
+<p>我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。</p>
+
+<p>不過因為裝機實務這個步驟比較會卡到大家，所以我先放這個章節: <a href="http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/">Rails on Mac 安裝最佳實務</a> 出來改大家使用。</p>
+
+<p>若您在裝機上還碰到什麼問題，請至 <a href="http://ruby-taiwan.org/">Ruby Taiwan Group</a> 上面回報。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iPhone 4S 進洗衣機洗還是有救]]></title>
@@ -2730,23 +2747,6 @@
 <p>現在我每週都固定有在回答一些問題，發現不少人對 Ruby / Rails 的一些疑惑，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
 
 <p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails 101 聖誕限時特價]]></title>
-    <link href="http://blog.xdite.net/posts/2011/12/19/rails-101-xmas/"/>
-    <updated>2011-12-19T11:55:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2011/12/19/rails-101-xmas</id>
-    <content type="html"><![CDATA[<p>Rails 101 - 火速學會 Ruby on Rails</p>
-
-<p>因為聖誕節，所以再度特價 XD</p>
-
-<p>USD $4.99 限時一週 2011/12/19~2011/12/26</p>
-
-<p><img src="http://rails-101.logdown.com/images/rails-101-cover.png" alt="Rails-101" /></p>
-
-<p><a href="http://rails-101.logdown.com/">http://rails-101.logdown.com/</a></p>
 ]]></content>
   </entry>
   
