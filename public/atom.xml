@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-07T17:09:01+08:00</updated>
+  <updated>2012-03-07T17:09:52+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -24,7 +24,7 @@
 
 <p>我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。</p>
 
-<p>不過因為裝機實務這個步驟比較會卡到大家，所以我先放這個章節: <a href="http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/">Rails on Mac 安裝最佳實務</a> 出來改大家使用。</p>
+<p>不過因為裝機實務這個步驟比較會卡到大家，所以我先放這個章節: <a href="http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/">Rails on Mac 安裝最佳實務</a> 出來給大家使用。</p>
 
 <p>若您在裝機上還碰到什麼問題，請至 <a href="http://ruby-taiwan.org/">Ruby Taiwan Group</a> 上面回報。</p>
 ]]></content>
