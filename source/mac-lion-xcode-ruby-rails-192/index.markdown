@@ -11,11 +11,10 @@ footer: true
 
 `強烈警告：請絕對不要跳著裝！如果疏漏步驟有可能導致無法復原需要重灌。`
 
-
 ## 系統套件
 
 1. 進行 Mac 系統更新
-2. Install [osx-gcc-installer](https://github.com/kennethreitz/osx-gcc-installer)，裝完請重開機（保險起見）。
+2. 上 <https://developer.apple.com/downloads/index.action> 找 Command Line Tools for Xcode （須先註冊為 Developer，註冊不用錢 ) 安裝，裝完請重開機（保險起見）。
 3. Install Homebrew
    
 ```
