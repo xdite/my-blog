@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-18T00:05:27+08:00</updated>
+  <updated>2012-03-18T00:24:50+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.xdite.net/posts/2012/03/17/website-online-todo</id>
     <content type="html"><![CDATA[<p>很多人知道如何實作網站功能。但是卻不知道如何將網站成功的完工，並且如期上線。往往明明專案開始之初有不少的工期，有不錯結果的卻很少。上線前後總是一團慌亂。</p>
 
-<p>其實「上線」這件事情完全是可以被掌控的。這當中有不少眉角，只是很多人疏於控制，導致風險橫生。</p>
+<p>其實「上線」這件事情完全是可以被掌控的。這當中有不少眉角，只是多半被疏於控制，導致風險橫生。</p>
 
 <p>在回答別人幾次這樣的問題之後，我決定把我的經驗分享整理出來：</p>
 
