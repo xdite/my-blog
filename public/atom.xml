@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-18T01:31:20+08:00</updated>
+  <updated>2012-03-18T02:54:35+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,99 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[網站程式上線前需要準備的事 （三）]]></title>
+    <link href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/"/>
+    <updated>2012-03-18T02:48:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/03/18/website-online-todo-3</id>
+    <content type="html"><![CDATA[<h2>第 3 件事：制定 Art / RD 都遵守的開發 convention</h2>
+
+<p>在傳統的開發過程中，作法多半都是：規劃 => UI / 畫面設計 => 程式設計。</p>
+
+<p>其實若專案規劃階段結束的早（也就是實作類似最低可行產品產品的概念），並非需要等待 UI / 畫面設計 完工，才可以進行到「套版」（程式設計）的階段。</p>
+
+<p>一直以來，我都認為「套版」是一個非常不好的說法，造成了偏差的印象。因為一個網站實際上是「一整套」的「軟體」，並非是「畫面」設計的出來，程式就配合寫的出來。雙方必須都要是可以執行實作的部分才行。</p>
+
+<p>程式一定要實際的「美術畫面」被設計出來才能夠被接著實作嗎？其實不是這樣的：只要有 wireframe，RD 往往就可以先行動工。</p>
+
+<p>但問題來了：若雙方各自進行自己的部分，那最後要怎麼組起來？</p>
+
+<p>這其實還不是最大的問題。</p>
+
+<p>最大的問題，其實是 Art 切出來的「版」，多半是不能夠被「套」的。</p>
+
+<h2>畫面不是切得出來就能「套」</h2>
+
+<p>這個問題其實不能夠怪 Art，它們有的是藝術細胞，並非邏輯細胞。而：</p>
+
+<ul>
+<li><p>能夠熟練 Photoshop，並 <code>不代表</code> 能夠寫出良好結構的 HTML 與 CSS code。</p>
+
+<ul>
+<li>這需要一定的經驗以及技術實力。</li>
+</ul>
+</li>
+<li><p>能夠切出 HTML 與 CSS，並 <code>不代表</code> 這一份原始碼，可以被實際使用。</p>
+
+<ul>
+<li>有一些 Art 只懂得 PSD to table，整個畫面毫無結構可言，讓人頭痛萬分。</li>
+<li>有一些 Art 專精製作單頁的活動頁面，但 application 需要整套的 DOM 能夠重複利用，CSS 一旦被重疊使用時大爆炸。</li>
+</ul>
+</li>
+</ul>
+
+
+<p>在傳統的專案進行到「套版」階段，程式開發進度會難以掌控的其中一個原因。也是因為：RD 面對著一套爛 HTML，完全不知從何下手「套」進去。不改結構無法讓程式運作，或者程式運作效率會很低；但一改結構，就別肖想 Art 再幫你調整細部 style 和追加細節了。（東西被改的不爽情緒或原始結構被改變）</p>
+
+<p><strong>「套版」這個過程中無端被追加浪費了大量時間</strong>，這也是一個上線前的隱藏變因。</p>
+
+<h3>解決方法：製作一套 HTML / CSS 設計準則</h3>
+
+<p>多數的 application 有固定結構的 DOM。差異在於  &lt;div id=&quot;contant&quot;&gt; &lt;/div&gt; 內的不同。
+至於</p>
+
+<ul>
+<li>header</li>
+<li>sidebar</li>
+<li>warning</li>
+<li>form</li>
+<li>footer</li>
+<li>etc&#8230;</li>
+</ul>
+
+
+<p>其實多半是相同的。</p>
+
+<p>與其抱怨 Art 切出來的東西不能被套，不如設計一套 general 的實際準則可以被大家遵守學習。</p>
+
+<p>不僅僅是 HTML 設計規則，其實開發當中會花很多時間的還包含一些常見的 CSS hack / IE hack，這些也可以被整理起來，加速開發。</p>
+
+<h2>平行開發互動：解決多人團隊的偏好歧異問題</h2>
+
+<p>剛剛有一個問題我們沒有回答到：就是個人偏好如何「組合」？</p>
+
+<p>比如說美術的版裡面有這樣的 DOM &lt;div class=&quot;article&quot;&gt; &lt;/div&gt;，class 是 <code>article</code>。</p>
+
+<p>但是 RD 實際的程式碼卻是 <code>post</code> 這樣的物件名稱。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;% @posts.each do |post| %&gt;
+</span><span class='line'>  &lt;%= post.title %&gt;
+</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣「套」起來不是很有問題嗎？如何實現所謂我說的「平行開發」？</p>
+
+<p>其實 Art / RD 雙軌平行開發，才可以有效的為專案爭取到時間。</p>
+
+<p>其實之前的所謂「套」，因為有完工的時間壓力，DOM 往往不能夠被更改。但是不改 DOM 又不能讓專案繼續被執行下去。</p>
+
+<p>若是雙方平行開發，又有一個 deployable 的 application 讓進度透明，所有的修改和溝通調整，只是一下子的功夫(article 與 post 的不同，可以在很早期就被抓出來修掉），不但不會打亂開發節奏，反而會加速專案的進行。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[網站程式上線前需要準備的事 （二）]]></title>
@@ -2431,248 +2524,6 @@
 用 iPhone 4S 拍的現況圖，不知道解析度夠不夠</p>
 
 <p><a href="http://www.flickr.com/photos/xdite/sets/72157628733737777/">http://www.flickr.com/photos/xdite/sets/72157628733737777/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[進階] Make ActiveRecord includable]]></title>
-    <link href="http://blog.xdite.net/posts/2012/01/04/make-activerecord-includable/"/>
-    <updated>2012-01-04T16:58:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/01/04/make-activerecord-includable</id>
-    <content type="html"><![CDATA[<p>[警告] 這一篇是進階的文章，如果你看不懂可以跳過。</p>
-
-<p>前幾天在 Twitter 看到一條值得慶賀的消息（印象已模糊，忘記誰慶賀，也不知慶賀的原因），是關於 Rails core 上的一串 commit，大意是 ActiveRecord::Base 已經從傳統的繼承使用，變成了可以用 include 的 ActvieRecord::Model。</p>
-
-<p><a href="https://github.com/rails/rails/compare/58f69ba...00318e9#diff-0">https://github.com/rails/rails/compare/58f69ba&#8230;00318e9#diff-0</a></p>
-
-<p>也就是從開始有 Rails 以來，傳統的使用方式</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以後將變成</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Model</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>坦白說，我看不懂這一串的意義是什麼。而 commit 下面的留言也有人說他看不懂&#8230;.XDDDD</p>
-
-<p>所以我就把這則收入記憶倉庫了。直到今天聽 podcast 時不小心觸發…</p>
-
-<h2>Ruby Rogues Podcast</h2>
-
-<p><a href="http://rubyrogues.com/">Ruby Rogues</a> 是這幾個月才興起的一個新的 Ruby Podcast，與較知名的 <a href="http://ruby5.envylabs.com/">Ruby 5</a> 或 <a href="http://rubyshow.com">The Ruby Show</a> 這兩個 podcast，性質很不同。後兩者著重於介紹本週有什麼 Ruby / Rails 的新消息，或者亮點 gem。Ruby Rouges 的則是每周邀請五個 Ruby 大師，上來針對一個特定主題，無盡的喇賽亂鬥 XD</p>
-
-<p>當然這些大師也不是在講廢話，從他們的喇賽中可以學到不少觀念，甚至是有的時候你還可以聽到有的大師現場被其他人電：「什麼，你不知道可以這樣用？」「什麼，你一直用錯誤的觀念寫 code？」….XD</p>
-
-<p>到目前為止一共有 35 集，每集大概 1 小時。這麼多&#8230;.所以當然我…沒有聽完 XDDDD</p>
-
-<p>今天找資料時，翻到第 20 集 <a href="http://rubyrogues.com/object-oriented-programming-in-rails-with-jim-weirich/">RR Object Oriented Programming in Rails with Jim Weirich</a></p>
-
-<p>為了要找其中的一段資料，就耐心的下載了這集，開始聽。結果原先的資料沒找到，倒是意外聽到一段重要的寫 code 觀念，讓我理解 Make ActiveRecord includable 的意義。</p>
-
-<h2>Rails 誤導大家的觀念 : Model = DB</h2>
-
-<p>這一段觀念可以從 <a href="http://rubyrogues.com/object-oriented-programming-in-rails-with-jim-weirich/">podcast</a> 中的大約 30:00 左右開始聽。</p>
-
-<p>Rails 誕生以來，model 的設計就是長這樣，從 ActiveRecord::Base 繼承。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:comments</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>當專案長大了，開發者免不了會往裡面塞一些 Business Logic，所以會變成這樣。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:comments</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">aaa</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">bbb</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">ccc</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但是 class 再繼續長大之後，大家可能就會受不了了。developer 開始把一些 method ( 所謂的 bussiness logic 抽出去)，用 include 的方式去做，然後把這些 logic 放在 lib/ 下。</p>
-
-<p>變成</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:comments</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">AAA</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">BBB</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CCC</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>儘量讓這個 model class 只保持著 db 的 association，logic 抽出去保持整潔。</p>
-
-<p>寫到這裡看起來都沒問題？</p>
-
-<h2>繼承自 ActiveRecord::Base 帶來的問題</h2>
-
-<p>錯了，問題可大了。</p>
-
-<p>這樣的設計導致了一個現象：因為繼承自 ActivRecord::Base，無可避免的寫測試一定要扯到 DB，於是就帶來了其他頭痛的問題</p>
-
-<ol>
-<li><p>寫測試變成在測試 query 和 ORM。寫測試的重點是在測 Business  Logic，其實應該要與 DB 資料與 DB 連線無關，結果測試都在測這個…</p></li>
-<li><p>因為一定要過 DB，於是 model 測試很慢。</p></li>
-</ol>
-
-
-<h2>ORM 是配角，被誤以為主角，反客為主！！！</h2>
-
-<p>在 MVC 裡面，Model 的定義－主要負責應用程式中的商業邏輯(Business Logic)。</p>
-
-<p>看看這個範例，你覺得這個 model 寫法是正確的嗎！？</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:comments</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">AAA</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">BBB</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CCC</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這是一個 ORM 行為為主的 model，不是 Bussiness Logic 為主的 Model 啊 XD。真正的主角好像被趕走了，被趕到 lib/ 去。</p>
-
-<p>podcast 中 30:00 - 33:00 主要討論的議題就是：</p>
-
-<p>===</p>
-
-<p>你將 Bussiness Logic 放在哪裡？你稱 Bussiness Model 為 Model 還是 SuperModel。然後 James Edward Gray 在這裡回答他放在 lib 下，就被電了 XDDDDD</p>
-
-<p>===</p>
-
-<p>事實上正確的寫法應該通通都是要放在 <code>app/models</code> 下。</p>
-
-<p>而設計手法應該是</p>
-
-<p>class Post 本身就放自己的 bussiness logic，然後去 claim 自己有用 ORM。至於過多複雜的邏輯就整理起來放在 Module 裡。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Model</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">AAA</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">BBB</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CCC</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而寫測試應該就是測 model 本身的商業邏輯而不是測 DB !!</p>
-
-<h2>小結</h2>
-
-<p>Rails 原生的機制讓開發者非常容易以為 Model 與 ORM 是一對一的關係。並且在此架構中，要將 code 整理得乾淨，就會無可避免的演變到反客為主的寫法。</p>
-
-<p>這個 commit 其實只是剛起步，還沒有能夠完全避免一定要測到 DB 的問題。不過至少邁開了一大步。</p>
-
-<p>聽完了這集 podcast，讓我完全看懂這個 commit 和下面的留言，還順便澄清了一個錯誤觀念…</p>
-
-<p>（不過對現狀沒什麼幫助，因為這是 4.0 feature，所以目前還是不能用的 XD，開發者還是只能按照舊的寫法繼續當鴕鳥）</p>
-
-<p>有空還是要多聽大師喇賽才能進步啊&#8230;</p>
 ]]></content>
   </entry>
   
