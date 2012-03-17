@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-18T00:24:50+08:00</updated>
+  <updated>2012-03-18T01:31:20+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[網站程式上線前需要準備的事 （二）]]></title>
+    <link href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/"/>
+    <updated>2012-03-18T01:24:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/03/18/website-online-todo-2</id>
+    <content type="html"><![CDATA[<h2>第 2 件事：application deployable from day 1</h2>
+
+<p>在進入開發階段後，我會做的第一件事： <strong> make application deployable</strong></p>
+
+<p>也就是：專案開始第一天，就必須要有個 production 直接可運行（可以鎖密碼，當作測試 server）才行。（我在 <a href="http://rails-101.logdown.com">Rails 101</a> 這本書最後一章，加入 capistano 與裝機為必練技能，就是這個緣故。）</p>
+
+<p>為什麼專案需要 deployable？</p>
+
+<h2>提前控制風險：開發環境與線上環境的不同</h2>
+
+<p>在一般的經驗中，往往在在專案進行到尾聲快上線之時，才會注意到一個可能使專案時程大爆炸的事情：<strong> 開發端與線上端的環境通通不一樣 </strong>。</p>
+
+<p>在開發過程中，所有人只專注在自己的機器上能不能動，這是常態。專注在實現功能，東西有缺就先在 local 上塞假資料。在最短時間內將 feature 盡可能寫完絕對是第一要務。</p>
+
+<p>但很可惜的，寫完並 <code>不等於</code> 放到正式環境上可以動。</p>
+
+<p>網站上其實非常多功能需要實際被「真人」測試，才會知道到底有沒有問題。有一些設定，甚至開發環境與上線完完全全不一樣。（以 Rails 來說，其實就差很多。比如說程式 class 會不會被 cache，asset 有沒有 optimize，上傳路徑以及與第三方接軌的設定等等&#8230;）</p>
+
+<p>如果拖到最後一個月才作 deploy 的這件事，因為「到底有多少東西不一樣」，變成了一個完全的未知數。原本夠用的一個月測試期，被這樣一壓縮可能完完全全就不夠用了。而且因為專案截止日已進，隨之而來的壓力更加大了犯錯的可能性。</p>
+
+<h2>一個透明的已知進度</h2>
+
+<p>Day1 就有一個可以直接實際測試的站台，還有一個很大的好處，能夠確保專案中所有人都知道現在進度，與規格書上的東西到底差多少。如果有重大瑕疵，或者是絕對不可行的功能，就可以早早會提出修改，下架等等。節省大家寶貴的開發精力。</p>
+
+<p>如果專案截止日最後十五天，大家才知道很多東西原來根本是作不出來的，或者是跟原本想像差太多的，這時候鐵定陷入交相指責，一遍慌亂的狀況。</p>
+
+<h3>絕對注意：捍衛進度</h3>
+
+<p>不過這一招的使用，專案經理或者是 RD 主管要特別注意。因為 Day 1 就有一個直接可以看的站台，不少完全不懂「技術」的專案參與者（通常是企劃或老闆），會對網站的「裸站」狀態感到極度的恐慌，他們會挑剔 UI，會不滿 implement 細節，進而想要實際插手進度修改內容。請務必堅持住，堅持到進入最後一個階段：測試修飾期才可以讓他們修改（通常進入準完工階段，裸站狀態其實也消失了，當初挑剔的東西幾乎在這個階段不復存在，故也沒有修改的必要。）</p>
+
+<p>P.S. 可以架設一個 issue tracking system，把他們提出的修改事項先通通記起來，但通通不實作。等到接近測試期，再來看看這些當初的「建議」到底還有哪些實際需要被執行。</p>
+
+<p>只有「完全不合實際應用」的東西，或者是「變更會讓實作方式更合理」的東西可以在整個開發期，被丟入排程中。</p>
+
+<p>否則，他們的驚慌，會害這個專案完全結不了案。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[網站程式上線前需要準備的事 （一）]]></title>
@@ -2630,123 +2673,6 @@
 <p>（不過對現狀沒什麼幫助，因為這是 4.0 feature，所以目前還是不能用的 XD，開發者還是只能按照舊的寫法繼續當鴕鳥）</p>
 
 <p>有空還是要多聽大師喇賽才能進步啊&#8230;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Ruby][教學] 如何打包一個 Asset Gem ]]></title>
-    <link href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/"/>
-    <updated>2012-01-04T09:10:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem</id>
-    <content type="html"><![CDATA[<h2>What is Asset Gem</h2>
-
-<p><a href="http://upgrade2rails31.heroku.com/asset-pipeline/">Asset Pipeline</a>的概念興起，不只是推動了 SASS 與 CoffeeScript 的廣泛流行。其實造成更重大的影響是 assets ( CSS / JavaScript / Images ) 不再被視為專案中難以「整理」與「管理」的頭痛元件。透過 Asset Pipeline 的架構，我們可以把 assets 包裝成一個 gem ，在其他專案中重複使用。</p>
-
-<p>在以往，如果想使用 <a href="http://twitter.github.com/bootstrap/">bootstrap</a> 這個 CSS / JS Framework，我們必須將所有靜態檔案 COPY 一份到專案的靜態目錄中。當專案使用到大量 3rd party vendor assets，整個靜態目錄就會被這種拷貝行為弄得髒亂不堪，難以整理。</p>
-
-<p>而透過 Asset Pipeline 的架構，開發者就可以停止這種草率但不得不為之的動作。要引用 3rd party vendor assets，只要在 application.css 或者 application.js 進行 require 就可以輕鬆使用了。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>//= require jquery
-</span><span class='line'>//= require bootstrap
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>引用 asset gem 很簡單，但不少人想知道的是：<code>如何把手上想整理的 asset 包裝成一個 gem 進行使用</code>。</p>
-
-<h2>Asset Pipeline 的 mount 位置</h2>
-
-<p>談到這裡，就要稍微提一下 Asset Pipeline 對於 assets 位置的定義。by default，你可以把 assets 放在以下三個資料夾內：</p>
-
-<ul>
-<li>app/assets</li>
-<li>lib/assets</li>
-<li>vendor/assets</li>
-</ul>
-
-
-<p>理論上，你把 assets 丟在這三個資料夾內，在 application.cs|js 內 require 都可以動。</p>
-
-<h3>如何整理目前專案中的 assets</h3>
-
-<p>這其實是另外一個主題，不過我在這裡也順便整理出來。</p>
-
-<p>如何整理歸類現在手頭上的 assets 呢？</p>
-
-<ul>
-<li>app/assets</li>
-</ul>
-
-
-<p>在 Rails 3.1.x 之後的版本，rails g controler posts，會自動在 assets/styelsheets/ 和 assets/javascripts/ 中產生對應的 scss 與 coffeescript 檔案。</p>
-
-<p>所以 app/assets 是讓開發者放「自己為專案手寫的 assets」的地方。</p>
-
-<ul>
-<li>lib/assets</li>
-</ul>
-
-
-<p>lib 是 library 的簡寫，這裡是放 LIBRARY 的地方。所以如果你為專案手寫的 assets 漸漸形成了 library 規模，比如說 mixin 或者是自己為專案整理了簡單的 bootstrap，應該放在 lib/ 下。</p>
-
-<ul>
-<li>vendor/assets</li>
-</ul>
-
-
-<p>verdor 是「供應商」的意思，也就是 「別人寫的」assets 都應該放在這裡。比如說:</p>
-
-<ul>
-<li>jquery.*.js</li>
-<li>fanfanfan icons</li>
-<li>tinymce / ckeditor</li>
-</ul>
-
-
-<p>等等…</p>
-
-<h2>透過 Rails Engine 機制實作</h2>
-
-<p>為什麼剛剛要扯這麼大一圈去解釋如何整理手頭的 assets 呢？</p>
-
-<p>因為 asset gem 其實就是透過 Rails Engine 的機制去實作出來的。</p>
-
-<p>拿一個前幾個月幫 <a href="http://twitter.com/evenwu">@evenwu</a> 寫的 asset gem 作為示範好了。</p>
-
-<p><a href="https://github.com/xdite/compass-ggs-framework/tree/rails-engine">https://github.com/xdite/compass-ggs-framework/tree/rails-engine</a></p>
-
-<p>作法是將你整理好的 lib/assets 扔到 vendor/assets 裡(你寫的給別人用，你就變成 vendor 了)，再宣告一個「空的」Rails Engine Class 讓 Rails 可以將這個 gem 視為網站的一部分「掛起來」裡面的 vendor/assets。</p>
-
-<p>沒錯，就是這麼簡單。</p>
-
-<p>而宣告自己是一個 Rails Engine 的方式也很簡單：只要把 Rails Engine 塞進自定義的 module 就好了。
-（還是看不懂的可以看我的 code…）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Ggs</span>
-</span><span class='line'>  <span class="k">module</span> <span class="nn">Rails</span>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">Engine</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">Rails</span><span class="o">::</span><span class="no">Engine</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>剩下來的流程就跟<a href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/">一般包 Gem 的流程</a>差不多了。</p>
-
-<p>=====</p>
-
-<p>現在我每週都固定有在回答一些問題，發現不少朋友對 Ruby / Rails 的一些疑惑，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
-
-<p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>。</p>
 ]]></content>
   </entry>
   
