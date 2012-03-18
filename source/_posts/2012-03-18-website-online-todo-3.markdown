@@ -38,7 +38,7 @@ categories:
 
 ### 解決方法：製作一套 HTML / CSS 設計準則
 
-多數的 application 有固定結構的 DOM。差異在於  &lt;div id=&quot;contant&quot;&gt; &lt;/div&gt; 內的不同。
+多數的 application 有固定結構的 DOM。差異在於  &lt;div id=&quot;content&quot;&gt; &lt;/div&gt; 內的不同。
 至於
 
 * header
