@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-19T03:43:33+08:00</updated>
+  <updated>2012-03-19T03:44:36+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -85,7 +85,7 @@
 
 <h3>Performance Tuning 與 Website Optimized （一週）</h3>
 
-<p>我在開發時，最常向 RD 強調的事情是：我不想管你這個功能怎麼寫出來，但我要你準時交出來。（但最少要符合內部寫程式規範，有辦法讀懂）</p>
+<p>我在開發階段時，最常向 RD 宣導的事情是：我不想管你這個功能怎麼寫出來，但我要你準時交出來。（但最少要符合內部寫程式規範，有辦法讀懂）</p>
 
 <p>原因是：網站最重要的是 Deliver 上線。而不是站上的 feature 用了多屌的技術，用了多棒的 best practices，沒有用戶會在意這件事。而「貪玩」「遲交」會砸了一切。</p>
 
