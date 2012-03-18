@@ -101,5 +101,5 @@ Email + Excel 其實很不夠用...
 
 
 * 註 2: 切票示範 (已取得授權)
-  - Nested Ticket Sample : <http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/>
-  - Milestone Sample: <http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/>
+  - Redmine Nested Ticket Sample : <http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/>
+  - Redmine Milestone Sample: <http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/>
