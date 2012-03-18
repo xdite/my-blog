@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-19T02:12:22+08:00</updated>
+  <updated>2012-03-19T03:43:33+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,188 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[網站程式上線前需要準備的事 （五）]]></title>
+    <link href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/"/>
+    <updated>2012-03-19T02:13:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/03/19/website-online-todo-5</id>
+    <content type="html"><![CDATA[<h2>第 5 件事：Close Alpha Test、Close Open Test</h2>
+
+<p>終於談到跟這個系列標題比較吻合的內容了！最後一個月上線前該做些什麼事？</p>
+
+<p>在 本系列<a href="http://blog.xdite.net/posts/2012/03/17/website-online-todo-1/">（一）</a> ，我提到了無論如何最後一個月是測試期。這一個月又分成</p>
+
+<ul>
+<li>close alpha</li>
+<li>close beta</li>
+</ul>
+
+
+<h3>Close Alpha 內測 (一週)</h3>
+
+<p>close alpha 的對象是開發組以及營運組人員。也就是與核心較為相關的組別。此時針對的測試目標是這個 project 業務上應該被「實作」的 functionalty。比如說是食譜網站，就應該可以</p>
+
+<ul>
+<li>上傳食物照片</li>
+<li>新增烹飪步驟</li>
+<li>站方精選</li>
+<li>有熱門食譜、新進食譜</li>
+<li>分享到社群網路 &#8230;etc</li>
+</ul>
+
+
+<p>如果是討論區，要應該可以</p>
+
+<ul>
+<li>可以發表文章</li>
+<li>可以回應文章</li>
+<li>可以貼圖</li>
+<li>可以收藏</li>
+<li>可以搜尋</li>
+<li>編輯器運作正常 &#8230;etc.</li>
+</ul>
+
+
+<p>另外測試時要擬定使用「未登入會員」、「登入會員」、「營運權限」、「Admin 權限」各測過一次。</p>
+
+<p>因為開發組成員在撰寫功能時，為了方便，幾乎都是以 admin 帳號在開發，如果不制定測試步驟和角色，很容易沒測到死角。</p>
+
+<p>此時的修復重點放在 feature complete ( 或取捨 ) 以及 functionaly 是否正常運作。</p>
+
+<p><strong> 請不要在此時進行任何 UI 動線調整 </strong>。</p>
+
+<h3>Close Beta 半公測 (二週+)</h3>
+
+<p>close beta 的對象是全公司所有人，公司員工的親朋好友，可以信賴的死忠會員等等&#8230;etc. 此時針對的測試目標是這個 project 的 UI 動線。</p>
+
+<p>如果是討論區：</p>
+
+<ul>
+<li>發表的動線是否順暢</li>
+<li>是否 UI 的暗示容易讓使用者 miss 掉上傳照片步驟</li>
+<li>回應文章的動線是否流暢</li>
+<li>網站新訊息的流動是否不夠快速，容易造成網站看起來一片死城。</li>
+</ul>
+
+
+<p>此時已經是視同準上線了（所以 Close Alpha 階段的資料會清掉），所有營運組的人必須視同營運狀態一樣運營站務，以避免正式開站遇到狀況時手忙腳亂。</p>
+
+<p>（這一招是從參訪壹電視時學到的。當時壹電視快開台時有受邀去內部參訪，當時聽到他們已經內部試 run 報新聞 run 了一年時，震撼非常&#8230;XD）</p>
+
+<p>此時的修復重點放在 UI 動線的調整，以及運營方針、步驟的調整，避免開站之後網站就變成死城。</p>
+
+<h3>Performance Tuning 與 Website Optimized （一週）</h3>
+
+<p>我在開發時，最常向 RD 強調的事情是：我不想管你這個功能怎麼寫出來，但我要你準時交出來。（但最少要符合內部寫程式規範，有辦法讀懂）</p>
+
+<p>原因是：網站最重要的是 Deliver 上線。而不是站上的 feature 用了多屌的技術，用了多棒的 best practices，沒有用戶會在意這件事。而「貪玩」「遲交」會砸了一切。</p>
+
+<p>直到 Open Beta 期，Optimized 這件事都不會被提到。因為在網站稍微 stable 之前，所有的 optimized 都毫無意義，做了也是白作。因為會發生效能瓶頸的地方，永遠在你設計時意想不到的地方。</p>
+
+<h4>Backend Performance Tuning</h4>
+
+<p>如何作 Performance Tuning？</p>
+
+<ul>
+<li>抓出最慢的地方 Refactor 掉</li>
+</ul>
+
+
+<p>幸運的是，我的專案都是 Rails Project，有<a href="http://newrelic.com/">New Relic</a> 這套軟體可以用。它可以幫你找出你的網站哪一段 Ruby Code 特別沒效率，哪一段 code 製造出來的 SQL query 特別 slow。</p>
+
+<p>其他技巧請看：<a href="http://www.slideshare.net/xuitejoke/rapid-development-with-rails-7394238">Rapid development with Rails</a> P.54- P.59</p>
+
+<ul>
+<li><a href="http://wp.xdite.net/?p=1597">Scaling Rails Site：Reading Material # 1</a></li>
+<li><a href="http://wp.xdite.net/?p=1617">Scaling Rails Site：Reading Material # 2</a></li>
+<li><a href="http://wp.xdite.net/?p=1664">Scaling Rails Site：Reading Material # 3</a></li>
+<li><a href="http://wp.xdite.net/?p=1682">Scaling Rails Site：Reading Material # 4</a></li>
+<li><a href="http://wp.xdite.net/?p=1704">Scaling Rails Site：Reading Material # 5</a></li>
+</ul>
+
+
+<p>這是其他題目了。有空我會再整理 update 一篇 Rails Performance Tuning 的文章。</p>
+
+<ul>
+<li>找出最常造訪的頁面壓力測試</li>
+</ul>
+
+
+<p>既然已經進入 Open Beta 期了，這時候手上應該可以拿到這個網站最常造訪和效率最差的頁面。</p>
+
+<p>可以使用 <a href="http://httpd.apache.org/docs/2.0/programs/ab.html">ab</a> 去對網站進行壓力測試。</p>
+
+<p>再決定是要 refactor slow code 或者是先上 cache 檔著先。</p>
+
+<h4>Frotend Performance Tuning</h4>
+
+<p>影響網站使用者感受最大的其實不是 backend 的效率，而是 Browser side 的效率。上線前我會</p>
+
+<ul>
+<li>按照 <a href="http://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Web Site</a> 調整</li>
+</ul>
+
+
+<p>其他技巧請看：</p>
+
+<ol>
+<li><a href="http://www.slideshare.net/xuitejoke/rapid-development-with-rails-7394238">Rapid development with Rails</a> P.42- P.53</li>
+<li><a href="http://www.slideshare.net/xuitejoke/scaling-rails-sites-by-default">Scaling Rais Site by default</a></li>
+</ol>
+
+
+<h4>Website Optimized</h4>
+
+<p>以上說的都只是 Performance。但是這跟實際運營沒有那麼大的正關係。我擅長開發的是「內容網站」以及「社群網站」，這一類的網站重點其實是 SEO 以及社群穿透力。</p>
+
+<ul>
+<li>SEO 以及 Facebook OpenGraph</li>
+</ul>
+
+
+<p>比如說：這是在 T 客邦累積出來的兩套 gem。</p>
+
+<ul>
+<li><a href="https://github.com/techbang/seo_helper">seo_helper</a></li>
+<li><a href="https://github.com/techbang/open_graph_helper">open_graph_helper</a></li>
+</ul>
+
+
+<p>網站的每一個頁面都會確保分享至社群網站是正常的。</p>
+
+<ul>
+<li>Advertising</li>
+</ul>
+
+
+<p>靠廣告賺錢，所以要調整廣告板位</p>
+
+<ul>
+<li>RSS / Email Subscribe / 粉絲團活動經營操作</li>
+</ul>
+
+
+<p>跟 user 的互動&#8230;etc.</p>
+
+<h3>開站</h3>
+
+<p>這些都確認沒什麼問題了，然後才是開站。然而開站不是這一切的結束，還有其他事情需要作&#8230;</p>
+
+<p>＝＝＝＝</p>
+
+<p>系列文章：</p>
+
+<ul>
+<li><a href="http://blog.xdite.net/posts/2012/03/17/website-online-todo-1/">網站程式上線前需要準備的事 （一）</a></li>
+<li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/">網站程式上線前需要準備的事 （二）</a></li>
+<li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a></li>
+<li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></li>
+<li><a href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[網站程式上線前需要準備的事 （四）]]></title>
@@ -123,12 +305,13 @@
 
 <ul>
 <li>Redmine Nested Ticket Sample : <a href="http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/">http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/</a></li>
-<li>Redmine Milestone Sample: <a href="http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/">http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/</a>
-＝＝＝＝</li>
+<li>Redmine Milestone Sample: <a href="http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/">http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/</a></li>
 </ul>
 </li>
 </ul>
 
+
+<p>＝＝＝＝</p>
 
 <p>系列文章：</p>
 
@@ -137,7 +320,7 @@
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/">網站程式上線前需要準備的事 （二）</a></li>
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a></li>
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></li>
-<li>[網站程式上線前需要準備的事 （五）]</li>
+<li><a href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
 </ul>
 
 ]]></content>
@@ -243,7 +426,7 @@
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/">網站程式上線前需要準備的事 （二）</a></li>
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a></li>
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></li>
-<li>[網站程式上線前需要準備的事 （五）]</li>
+<li><a href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
 </ul>
 
 ]]></content>
@@ -299,7 +482,7 @@
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/">網站程式上線前需要準備的事 （二）</a></li>
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a></li>
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></li>
-<li>[網站程式上線前需要準備的事 （五）]</li>
+<li><a href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
 </ul>
 
 ]]></content>
@@ -408,7 +591,7 @@
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/">網站程式上線前需要準備的事 （二）</a></li>
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a></li>
 <li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></li>
-<li>[網站程式上線前需要準備的事 （五）]</li>
+<li><a href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
 </ul>
 
 ]]></content>
@@ -2613,37 +2796,6 @@
 <p>DCI ，與本篇談到的 Facade Pattern 算是頗類似的手法。</p>
 
 <p>有關於 DCI ( Data, Context, Interaction ) 的文章，我會在之後發表。我同時也推薦各位去看這方面的主題。這個方向應該會是 Rails 專案設計上未來演化的方向之一。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[關於 Essential Rails Pattern 這本書的近況]]></title>
-    <link href="http://blog.xdite.net/posts/2012/01/06/about-erp/"/>
-    <updated>2012-01-06T18:09:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/01/06/about-erp</id>
-    <content type="html"><![CDATA[<p>最近看到不少讀者都在「委婉」的催我最新這一本書「<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">Essential Rails Pattern</a>」的近況。</p>
-
-<p>跟大家報告一下這本書的近況，其實我每個禮拜都還是有在持續撰寫這本書。但是這本書寫著寫著，我越發現一件可怕的事情，內容太大了，大到比我當初想象中的還大概長五倍。到現在我已經為這本書寫超過 10 萬字了。可是還是看不到盡頭。</p>
-
-<p>而且在當初安排初版結構時，在前三章的結構上安排得有些錯誤。原本是要寫 Ruby / Rails 的設計技巧，卻岔遠路去撰寫基本的程式設計技巧。</p>
-
-<p>草稿的字是累積不少，但是還不能見人，於是就一直放著。改先出零散的文章，所以最近各位可能看到我在撰寫一些回歸基本的教學，其實也是為這本書在做準備。</p>
-
-<p>這幾天，我想了很久，預購的讀者每次抓下來都只有空白頁，等久了也會生氣 XD。</p>
-
-<p>終於我做了一個決定，原先的目錄結構太爛了，不砍掉重寫可能就會永遠斷頭了XD。</p>
-
-<p>於是我將原本寫好的幾章全部打散重排，所有已經寫好的內容，可以抽成章的就先整理出來。目前的草稿雖然有點多，但還算整理的完的。我會將草稿放在這裡: <a href="http://erp-book.heroku.com">http://erp-book.heroku.com</a>。</p>
-
-<p>這次也算釋出正式版的全部大綱。我希望可以在今年二月，釋出現在手頭上絕大部分的 beta 內容。</p>
-
-<p>如果有「等的不耐煩」的讀者，或者是「看完大綱覺得這本書不是你想要的」，或者是「這本書覺得不值得這個價錢的」，或者是「就是不爽 xdite 你這個大騙子」的，都可以寫信給我要求退錢。</p>
-
-<p>再次為進度的緩慢，致上我深深的歉意。</p>
-
-<p>===</p>
-
-<p>不過如果你看完這本書的大綱和目前進度，還滿意這樣的內容和主題，想支持我繼續寫作的(其實寫這麼多字也是很累的..orz)，也歡迎加入<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">預購</a>支持我的作品，謝謝。</p>
 ]]></content>
   </entry>
   

@@ -84,6 +84,7 @@ categories:
 * [網站程式上線前需要準備的事 （二）](/posts/2012/03/18/website-online-todo-2/)
 * [網站程式上線前需要準備的事 （三）](/posts/2012/03/18/website-online-todo-3/)
 * [網站程式上線前需要準備的事 （四）](/posts/2012/03/18/website-online-todo-4/)
-* [網站程式上線前需要準備的事 （五）]
+* [網站程式上線前需要準備的事 （五）](/posts/2012/03/19/website-online-todo-5/)
+
 
 

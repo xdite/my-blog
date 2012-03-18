@@ -103,6 +103,7 @@ Email + Excel 其實很不夠用...
 * 註 2: 切票示範 (已取得授權)
   - Redmine Nested Ticket Sample : <http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/>
   - Redmine Milestone Sample: <http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/>
+  
 ＝＝＝＝
 
 系列文章：
@@ -111,4 +112,4 @@ Email + Excel 其實很不夠用...
 * [網站程式上線前需要準備的事 （二）](/posts/2012/03/18/website-online-todo-2/)
 * [網站程式上線前需要準備的事 （三）](/posts/2012/03/18/website-online-todo-3/)
 * [網站程式上線前需要準備的事 （四）](/posts/2012/03/18/website-online-todo-4/)
-* [網站程式上線前需要準備的事 （五）]
+* [網站程式上線前需要準備的事 （五）](/posts/2012/03/19/website-online-todo-5/)
