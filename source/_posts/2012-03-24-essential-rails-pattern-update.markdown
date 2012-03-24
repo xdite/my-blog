@@ -17,11 +17,11 @@ categories:
 ===
 
 樣章
-線上[預覽](https://www.dropbox.com/sh/ueha9xsjw6ybwye/JzNGR_VIr7/ERP-preview.pdf)。
+線上[預覽](https://www.dropbox.com/sh/ueha9xsjw6ybwye/JzNGR_VIr7/ERP-preview.pdf?dl=1)。
 
 目錄
 
-線上[預覽](https://www.dropbox.com/sh/5hytcw56xcr86zk/f_Racu5xw3/ERP-toc.pdf)
+線上[預覽](https://www.dropbox.com/sh/5hytcw56xcr86zk/f_Racu5xw3/ERP-toc.pdf?dl=1)
 
 如果有任何書籍內容錯誤，和 Billing 上的問題，請透過[聯絡表單](http://xdite.wufoo.com/forms/ce-billing-support/) 通知我，協助我改善產品。
 
