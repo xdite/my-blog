@@ -14,6 +14,15 @@ categories:
 
 這本書絕對不會讓你們失望。
 
+===
+
+樣章
+線上[預覽](https://www.dropbox.com/sh/ueha9xsjw6ybwye/JzNGR_VIr7/ERP-preview.pdf)。
+
+目錄
+
+線上[預覽](https://www.dropbox.com/sh/5hytcw56xcr86zk/f_Racu5xw3/ERP-toc.pdf)
+
 如果有任何書籍內容錯誤，和 Billing 上的問題，請透過[聯絡表單](http://xdite.wufoo.com/forms/ce-billing-support/) 通知我，協助我改善產品。
 
 如果你有任何學習 Rails 上的問題，請不要害羞，直接上 [Ruby Taiwan Group](http://ruby-taiwan.org) 詢問。
