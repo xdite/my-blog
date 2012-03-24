@@ -10,9 +10,9 @@ footer: true
 
 My name is Xdite Cheng (<a href="http://www.audioname.com/xdite">audioname</a>). I’m a a developer, blogger and author living in Taiwan. I also run <a href="http://ruby-taiwan.org">RubyTaiwan</a> and <a href="http://registrano.com/group/rubytaiwan">Rail Tuesday </a>.  If you are on Twitter, you can follow me at <a href="http://twitter.com/xdite">@xdite</a>.
 
-I am the proprietor of <a href="http://rocodev.com">Rocodev</a>, a web development company. If you want to hire someone to development websites or train Rails developer for you, please <a href="mailto:xdite@rocodev.com">get in touch</a>.
+I am the proprietor of <a href="http://rocodev.com">Rocodev</a>, a web development company. If you want to hire someone to develop websites or train Rails developer for you, please <a href="mailto:xdite@rocodev.com">get in touch</a>.
 
-I specialized in Ruby / Rails and many other othings : 
+I specialize in Ruby / Rails and many other othings : 
 
 ## Specialties
 
