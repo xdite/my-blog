@@ -152,3 +152,12 @@ no kidding。
 
 <a href="http://www.flickr.com/photos/xdite/7014948309/" title="Untitled by xdite, on Flickr"><img src="http://farm7.staticflickr.com/6091/7014948309_52e099ec27.jpg" width="375" height="500" alt=""></a>
 
+
+＝＝＝＝
+
+#### 廣告：Essential Rails Pattern 開始 update 了
+
+[Essntial Rails Pattern](http://rails-101.logdown.com/books/3-essential-rails-pattern) 這本書已經進入排版階段。
+詳情請看[這篇文章](http://blog.xdite.net/posts/2012/03/24/essential-rails-pattern-update/)
+
+
