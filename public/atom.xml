@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-26T03:24:40+08:00</updated>
+  <updated>2012-03-26T03:25:58+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -125,6 +125,9 @@
 </ul>
 </li>
 </ul>
+
+
+<hr>
 
 
 <p>同時，專案最好能夠搭配舉行每日的 Standup Meeting，確保每個人正在進行的方向是正確的，以及確保專案資源沒有被浪費的跡象。</p>
