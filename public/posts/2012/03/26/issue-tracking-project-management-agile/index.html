@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>為什麼必須使用 Issue Tracking System 管理專案？ - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          我在 網站程式上線前需要準備的事 （四） 提到了為了順利進行專案，一個好的專案管理系統絕對是必備的。專案管理系統背後運作的邏輯何在，就是這篇文章主要的重點。What is issue tracking (project management) system ?Issue T...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+-->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">為什麼必須使用 Issue Tracking System 管理專案？</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-26T03:14:00+08:00" pubdate  data-updated="true" >Mar 26<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <p>我在 <a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a> 提到了為了順利進行專案，一個好的專案管理系統絕對是必備的。</p>
+
+<p>專案管理系統背後運作的邏輯何在，就是這篇文章主要的重點。</p>
+
+<h2>What is issue tracking (project management) system ?</h2>
+
+<p>Issue Tracking system ，顧名思義就是<code>紀錄</code>、<code>追蹤</code> 問題的系統。<a href="http://www.bugzilla.org/">BugZilla</a>、<a href="trac.edgewall.org">Trac</a>、<a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://lighthouseapp.com/">lighthoustapp</a>、<a href="http://basecamp.com/">Basecamp</a> &#8230;等等這幾套軟體，都是知名的 Issue Tracking system。</p>
+
+<p>一套合格的 Issue Tracking system 的 Issue 至少要可以紀錄這些內容：</p>
+
+<ul>
+<li>Issue 的主題</li>
+<li>Issue 的內容</li>
+<li>Issue 現在的狀態 (新建立、已指派、已解決、已回應、已結束、已擱置…etc)</li>
+<li>Issue 優先權 (正常、重要、緊急、輕微、會擋路…etc.)</li>
+<li>Issue 發生日期</li>
+<li>Issue 希望解決日期</li>
+<li>Issue 實際解決日期</li>
+<li>Issue 被分派給誰</li>
+<li>Issue 的附件</li>
+<li>Isuue 的觀察者有誰</li>
+</ul>
+
+
+<h3>Project Management Tool</h3>
+
+<p>其中 <a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://basecamp.com/">Basecamp</a>  並不僅止是 Issue Tracking System，更精確的來說，它們應該被稱為「專案管理工具」。</p>
+
+<p>它們多半能夠提供以下作用：</p>
+
+<ul>
+<li>一個地方可以透明的列出所有需要被執行的項目 (Issue List)</li>
+<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且具有「permalink」、「權限控管」，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+<li>可以 cross reference 或具有子票功能</li>
+<li>一個地方可以整理統合專案現在所有的相關資訊。( Wiki 功能)</li>
+<li>一個地方可以看到自己今天需要 Focus 進行哪些項目（Issue Personal Dashboard)</li>
+<li>一個地方能讓 Manager 可以看到自己的 Member 正在進行哪些項目，這些項目目前的狀態是什麼。（Issue Query)</li>
+</ul>
+
+
+<h2>背後運作的原理</h2>
+
+<p><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a> 這篇文章刊出後，得到不少的迴響。其中我看到的絕大多數的回應多是多半抱怨 PM 根本不稱職不盡責，只顧著畫規格，然後只按照自己寫出來的無法執行ㄉ的天才（？）規格的催進度。所謂的 M 不是 Management，而是 Magic。即使成員賣了命的加班，專案還是得不到好的結果：超時，品質粗糙，成本
+過高，scope 過大無法完成。</p>
+
+<p>在我進行開發軟體專案時，也發現所謂的其實絕對多數的 PM，其實職稱與進行的事務完全不合。它們的工作內容往往只有 Project Planning，應該被稱作是 Planner，而不是 Project Manager。</p>
+
+<p>一個軟體開發專案，最重要的變數有四：成本、品質、時間和規模。真正的 Project Management，是能夠準確 Manage 這四項變因，在可以接受的與變動差異下，完成整個專案，產出預期的成果。</p>
+
+<h3>規模管理</h3>
+
+<p>專案會無限膨脹，主要多半是因為規模的掌控不佳。而規模掌控不佳，時間和成本就會隨之膨脹。</p>
+
+<p>規模之所以膨脹，有幾個原因：</p>
+
+<ul>
+<li>沒有人知道，到底「總共」有多少事情需要完成。</li>
+<li>離目前的時間表，「還有」多少事情需要完成，還有多少時間可以用。這些事情裡面有沒有可以被「調整縮減」的餘地。</li>
+</ul>
+
+
+<p>所以，專案需要一個工具能提供以下功能：</p>
+
+<ul>
+<li>一個地方可以透明的列出所有需要被執行的項目 (Issue List)</li>
+<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、分派者、執行者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+</ul>
+
+
+<h3>時間管理</h3>
+
+<p>一個專案中，最寶貴的資源是「時間」。什麼東西都可以用「錢」買到，唯獨時間不能。
+在專案中時間最容易被浪費的地方在：</p>
+
+<ul>
+<li>使用信件往來，交涉的互相等待時間。</li>
+<li>沒有被壓定「完成日期」，「詳細需求品質」的工作細項。（陷入不必要的完美，或者是悠哉的怠惰）</li>
+<li>不符合期待，修改的來回時間。（沒有達到良好溝通，導致方向錯誤）</li>
+<li>類似的事情，重複消耗資源。（沒有 SOP，每次都要花費一定以上的資源去解決）</li>
+</ul>
+
+
+<p>所以，專案需要一個工具能提供以下功能：</p>
+
+<ul>
+<li>一個可以記載 內容，狀態、優先權、預計完成日期、分派者、執行者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)
+
+<ul>
+<li>可以平行討論，而不是信件順序往來</li>
+<li>明確的完成時間</li>
+</ul>
+</li>
+<li>一個地方可以整理統合專案現在所有的相關資訊。( Wiki 功能)
+
+<ul>
+<li>提供專案相關的資訊以及 SOP</li>
+</ul>
+</li>
+</ul>
+
+
+<p>同時，專案最好能夠搭配舉行每日的 Standup Meeting，確保每個人正在進行的方向是正確的，以及確保專案資源沒有被浪費的跡象。</p>
+
+<h3>團隊工作管理</h3>
+
+<p>一個專案，成員至少會有兩人以上。兩個人以上，就會有溝通與工作協調安排的問題。專案的工作項目往往是有 related 的，少有獨支。
+比如說 Planner 沒有把規格寫完，RD 和 Art 就不太容易先動工。沒有把 Database schema 規劃好，後續就很難繼續開發程式。</p>
+
+<p>這也是專案當中最傷資源的狀況：優先權等級為：「block」票。因為 A 方沒有交付，導致 B 方不能交付，連帶導致 C 不能開始。</p>
+
+<p>而專案當中也有很多工作項目分別是「對最終專案目標很重要，但當下不重要」、「對當下 milestone 很重要，對最終目標沒那麼重要」，「只對合作同事很重要」&#8230;etc</p>
+
+<p>如果工作項目不能夠按照當下狀況調整正確的優先等級分派給團隊成員。就很容易會造成所有的人雖然很努力，整體工作效益卻非常低的情形。</p>
+
+<p>當然，不只是 Project Manager 知道全部的人今天要做什麼。而被分派到工作項目的工作，也需要明白當下當天所需要執行的項目依序是哪些，按照優先狀況完成。如果優先狀況有錯誤，可以及早告知資源協調者 (Manager) 。</p>
+
+<p>所以，專案需要一個工具能提供以下功能：</p>
+
+<ul>
+<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+<li>可以 cross reference 或具有子票功能</li>
+<li>一個地方可以看到自己今天需要 Focus 進行哪些項目（Issue Personal Dashboard)</li>
+<li>一個地方能讓 Manager 可以看到自己的 Member 正在進行哪些項目，這些項目目前的狀態是什麼。（Issue Query)</li>
+</ul>
+
+
+<h3>資源調配管理</h3>
+
+<p>Project Management，並不是在專案的一開始設下「完成時間」，切出所有「工作項目」，列出「完成目標」這麼簡單。隨著專案的進行，開始會有很多變因出現，造成資源不足，需求改變，規模追加，人力減少&#8230;等等的挑戰障礙出現。</p>
+
+<p>都在考驗著專案經理對於資源調配的管理能力。能不能在預定的時間、預定的預算、預定的人力資源內，如期完成當初設立的目標以及交付達到品質要求的產品。</p>
+
+<p>如果不能，當下必須作出取捨、做出決定，而非死板的捍衛規則與命令。</p>
+
+<p>所以，專案需要一個工具能提供以下功能：</p>
+
+<ul>
+<li>一個地方可以列出階段內需要被執行的項目，並可以移動改變階段項目。 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+</ul>
+
+
+<h2>Agile Method</h2>
+
+<p>若讀者對於專案管理有興趣的話，研究過一些「敏捷開發」的 method，不管是 XP、Scrum、Kanban&#8230;，你會發現到這些工作方法都在傳達幾件類似的事：</p>
+
+<ul>
+<li>專案必須透明，進行局勢一目了然</li>
+<li>專案要能拆分成可執行的階段</li>
+<li>溝通、溝通再溝通</li>
+<li>不斷的消除浪費</li>
+<li>不斷的 deliver</li>
+</ul>
+
+
+<p>而一個好的 Project Management Tool 能夠輔助專案具備以上的特徵。</p>
+
+<h2>小結</h2>
+
+<p>還是老話一句：真正的 Project Management，是要能夠準確管理，成本、品質、時間和規模這四項變因，在可以接受的與變動差異下，完成整個專案，產出預期的成果。</p>
+
+<p>「Project Manager」必須要做到的事，也就是要在動態的環境下，利用種種手段盡力讓這件事發生。</p>
+
+<p>所謂的「Project Management」其實可以用很科學的手段達成，因為事實上這本身就是一門科學。</p>
+
+<p>一般所謂的 PM 很常誤以為 Project Management 就是用 mail+excel、口頭分配任務，得到專案成員的口頭回覆，接著只要坐著回去發呆或無時無刻的跑到座位上催專案成員作事，整件事情就會發生。
+如果你真的一直這樣想，我想可能最後程式設計師可能做的事：就是直接用 shell script 換掉你。</p>
+
+<p>no kidding。</p>
+
+<h3>Thinkgeek : Go away or I will replace you with a very small shell script</h3>
+
+<p><a href="http://www.thinkgeek.com/tshirts-apparel/unisex/frustrations/374d/"><img src="http://www.thinkgeek.com/images/products/frontsquare/lg-go-away-tshirt.jpg" alt="Go away or I will replace you with a very small shell script"></a></p>
+
+<h2>推薦書單</h2>
+
+<p><a href="http://www.flickr.com/photos/xdite/7014948309/" title="Untitled by xdite, on Flickr"><img src="http://farm7.staticflickr.com/6091/7014948309_52e099ec27.jpg" width="375" height="500" alt=""></a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-26T03:14:00+08:00" pubdate  data-updated="true" >Mar 26<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/03/26/issue-tracking-project-management-agile/">為什麼必須使用 Issue Tracking System 管理專案？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/03/24/essential-rails-pattern-update/">Essential Rails Pattern 開始 update</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

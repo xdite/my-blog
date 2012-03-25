@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-03-24T19:09:31+08:00</updated>
+  <updated>2012-03-26T03:20:30+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,194 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[為什麼必須使用 Issue Tracking System 管理專案？]]></title>
+    <link href="http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/"/>
+    <updated>2012-03-26T03:14:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile</id>
+    <content type="html"><![CDATA[<p>我在 <a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a> 提到了為了順利進行專案，一個好的專案管理系統絕對是必備的。</p>
+
+<p>專案管理系統背後運作的邏輯何在，就是這篇文章主要的重點。</p>
+
+<h2>What is issue tracking (project management) system ?</h2>
+
+<p>Issue Tracking system ，顧名思義就是<code>紀錄</code>、<code>追蹤</code> 問題的系統。<a href="http://www.bugzilla.org/">BugZilla</a>、<a href="trac.edgewall.org">Trac</a>、<a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://lighthouseapp.com/">lighthoustapp</a>、<a href="http://basecamp.com/">Basecamp</a> &#8230;等等這幾套軟體，都是知名的 Issue Tracking system。</p>
+
+<p>一套合格的 Issue Tracking system 的 Issue 至少要可以紀錄這些內容：</p>
+
+<ul>
+<li>Issue 的主題</li>
+<li>Issue 的內容</li>
+<li>Issue 現在的狀態 (新建立、已指派、已解決、已回應、已結束、已擱置…etc)</li>
+<li>Issue 優先權 (正常、重要、緊急、輕微、會擋路…etc.)</li>
+<li>Issue 發生日期</li>
+<li>Issue 希望解決日期</li>
+<li>Issue 實際解決日期</li>
+<li>Issue 被分派給誰</li>
+<li>Issue 的附件</li>
+<li>Isuue 的觀察者有誰</li>
+</ul>
+
+
+<h3>Project Management Tool</h3>
+
+<p>其中 <a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://basecamp.com/">Basecamp</a>  並不僅止是 Issue Tracking System，更精確的來說，它們應該被稱為「專案管理工具」。</p>
+
+<p>它們多半能夠提供以下作用：</p>
+
+<ul>
+<li>一個地方可以透明的列出所有需要被執行的項目 (Issue List)</li>
+<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且具有「permalink」、「權限控管」，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+<li>可以 cross reference 或具有子票功能</li>
+<li>一個地方可以整理統合專案現在所有的相關資訊。( Wiki 功能)</li>
+<li>一個地方可以看到自己今天需要 Focus 進行哪些項目（Issue Personal Dashboard)</li>
+<li>一個地方能讓 Manager 可以看到自己的 Member 正在進行哪些項目，這些項目目前的狀態是什麼。（Issue Query)</li>
+</ul>
+
+
+<h2>背後運作的原理</h2>
+
+<p><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a> 這篇文章刊出後，得到不少的迴響。其中我看到的絕大多數的回應多是多半抱怨 PM 根本不稱職不盡責，只顧著畫規格，然後只按照自己寫出來的無法執行ㄉ的天才（？）規格的催進度。所謂的 M 不是 Management，而是 Magic。即使成員賣了命的加班，專案還是得不到好的結果：超時，品質粗糙，成本
+過高，scope 過大無法完成。</p>
+
+<p>在我進行開發軟體專案時，也發現所謂的其實絕對多數的 PM，其實職稱與進行的事務完全不合。它們的工作內容往往只有 Project Planning，應該被稱作是 Planner，而不是 Project Manager。</p>
+
+<p>一個軟體開發專案，最重要的變數有四：成本、品質、時間和規模。真正的 Project Management，是能夠準確 Manage 這四項變因，在可以接受的與變動差異下，完成整個專案，產出預期的成果。</p>
+
+<h3>規模管理</h3>
+
+<p>專案會無限膨脹，主要多半是因為規模的掌控不佳。而規模掌控不佳，時間和成本就會隨之膨脹。</p>
+
+<p>規模之所以膨脹，有幾個原因：</p>
+
+<ul>
+<li>沒有人知道，到底「總共」有多少事情需要完成。</li>
+<li>離目前的時間表，「還有」多少事情需要完成，還有多少時間可以用。這些事情裡面有沒有可以被「調整縮減」的餘地。</li>
+</ul>
+
+
+<p>所以，專案需要一個工具能提供以下功能：</p>
+
+<ul>
+<li>一個地方可以透明的列出所有需要被執行的項目 (Issue List)</li>
+<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、分派者、執行者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+</ul>
+
+
+<h3>時間管理</h3>
+
+<p>一個專案中，最寶貴的資源是「時間」。什麼東西都可以用「錢」買到，唯獨時間不能。
+在專案中時間最容易被浪費的地方在：</p>
+
+<ul>
+<li>使用信件往來，交涉的互相等待時間。</li>
+<li>沒有被壓定「完成日期」，「詳細需求品質」的工作細項。（陷入不必要的完美，或者是悠哉的怠惰）</li>
+<li>不符合期待，修改的來回時間。（沒有達到良好溝通，導致方向錯誤）</li>
+<li>類似的事情，重複消耗資源。（沒有 SOP，每次都要花費一定以上的資源去解決）</li>
+</ul>
+
+
+<p>所以，專案需要一個工具能提供以下功能：</p>
+
+<ul>
+<li>一個可以記載 內容，狀態、優先權、預計完成日期、分派者、執行者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)
+
+<ul>
+<li>可以平行討論，而不是信件順序往來</li>
+<li>明確的完成時間</li>
+</ul>
+</li>
+<li>一個地方可以整理統合專案現在所有的相關資訊。( Wiki 功能)
+
+<ul>
+<li>提供專案相關的資訊以及 SOP</li>
+</ul>
+</li>
+</ul>
+
+
+<p>同時，專案最好能夠搭配舉行每日的 Standup Meeting，確保每個人正在進行的方向是正確的，以及確保專案資源沒有被浪費的跡象。</p>
+
+<h3>團隊工作管理</h3>
+
+<p>一個專案，成員至少會有兩人以上。兩個人以上，就會有溝通與工作協調安排的問題。專案的工作項目往往是有 related 的，少有獨支。
+比如說 Planner 沒有把規格寫完，RD 和 Art 就不太容易先動工。沒有把 Database schema 規劃好，後續就很難繼續開發程式。</p>
+
+<p>這也是專案當中最傷資源的狀況：優先權等級為：「block」票。因為 A 方沒有交付，導致 B 方不能交付，連帶導致 C 不能開始。</p>
+
+<p>而專案當中也有很多工作項目分別是「對最終專案目標很重要，但當下不重要」、「對當下 milestone 很重要，對最終目標沒那麼重要」，「只對合作同事很重要」&#8230;etc</p>
+
+<p>如果工作項目不能夠按照當下狀況調整正確的優先等級分派給團隊成員。就很容易會造成所有的人雖然很努力，整體工作效益卻非常低的情形。</p>
+
+<p>當然，不只是 Project Manager 知道全部的人今天要做什麼。而被分派到工作項目的工作，也需要明白當下當天所需要執行的項目依序是哪些，按照優先狀況完成。如果優先狀況有錯誤，可以及早告知資源協調者 (Manager) 。</p>
+
+<p>所以，專案需要一個工具能提供以下功能：</p>
+
+<ul>
+<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+<li>可以 cross reference 或具有子票功能</li>
+<li>一個地方可以看到自己今天需要 Focus 進行哪些項目（Issue Personal Dashboard)</li>
+<li>一個地方能讓 Manager 可以看到自己的 Member 正在進行哪些項目，這些項目目前的狀態是什麼。（Issue Query)</li>
+</ul>
+
+
+<h3>資源調配管理</h3>
+
+<p>Project Management，並不是在專案的一開始設下「完成時間」，切出所有「工作項目」，列出「完成目標」這麼簡單。隨著專案的進行，開始會有很多變因出現，造成資源不足，需求改變，規模追加，人力減少&#8230;等等的挑戰障礙出現。</p>
+
+<p>都在考驗著專案經理對於資源調配的管理能力。能不能在預定的時間、預定的預算、預定的人力資源內，如期完成當初設立的目標以及交付達到品質要求的產品。</p>
+
+<p>如果不能，當下必須作出取捨、做出決定，而非死板的捍衛規則與命令。</p>
+
+<p>所以，專案需要一個工具能提供以下功能：</p>
+
+<ul>
+<li>一個地方可以列出階段內需要被執行的項目，並可以移動改變階段項目。 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+</ul>
+
+
+<h2>Agile Method</h2>
+
+<p>若讀者對於專案管理有興趣的話，研究過一些「敏捷開發」的 method，不管是 XP、Scrum、Kanban&#8230;，你會發現到這些工作方法都在傳達幾件類似的事：</p>
+
+<ul>
+<li>專案必須透明，進行局勢一目了然</li>
+<li>專案要能拆分成可執行的階段</li>
+<li>溝通、溝通再溝通</li>
+<li>不斷的消除浪費</li>
+<li>不斷的 deliver</li>
+</ul>
+
+
+<p>而一個好的 Project Management Tool 能夠輔助專案具備以上的特徵。</p>
+
+<h2>小結</h2>
+
+<p>還是老話一句：真正的 Project Management，是要能夠準確管理，成本、品質、時間和規模這四項變因，在可以接受的與變動差異下，完成整個專案，產出預期的成果。</p>
+
+<p>「Project Manager」必須要做到的事，也就是要在動態的環境下，利用種種手段盡力讓這件事發生。</p>
+
+<p>所謂的「Project Management」其實可以用很科學的手段達成，因為事實上這本身就是一門科學。</p>
+
+<p>一般所謂的 PM 很常誤以為 Project Management 就是用 mail+excel、口頭分配任務，得到專案成員的口頭回覆，接著只要坐著回去發呆或無時無刻的跑到座位上催專案成員作事，整件事情就會發生。
+如果你真的一直這樣想，我想可能最後程式設計師可能做的事：就是直接用 shell script 換掉你。</p>
+
+<p>no kidding。</p>
+
+<h3>Thinkgeek : Go away or I will replace you with a very small shell script</h3>
+
+<p><a href="http://www.thinkgeek.com/tshirts-apparel/unisex/frustrations/374d/"><img src="http://www.thinkgeek.com/images/products/frontsquare/lg-go-away-tshirt.jpg" alt="Go away or I will replace you with a very small shell script"></a></p>
+
+<h2>推薦書單</h2>
+
+<p><a href="http://www.flickr.com/photos/xdite/7014948309/" title="Untitled by xdite, on Flickr"><img src="http://farm7.staticflickr.com/6091/7014948309_52e099ec27.jpg" width="375" height="500" alt=""></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Essential Rails Pattern 開始 update]]></title>
@@ -2205,352 +2393,6 @@
 <p>Burnrate 這篇文章遠遠比 Agricola 那篇文章有名，我也不懂為什麼。大概是因為所謂的 <a href="http://en.wikipedia.org/wiki/Lean_Startup">Lean Startup</a> 這個概念最近才比較紅吧。</p>
 
 <p>廣告一下：大年初五我在我家開桌遊團，限八人。歡迎<a href="http://registrano.com/events/35a6a1">報名</a>。打桌遊和大食團。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[如何運用 / 設計 Rails Helper (3)]]></title>
-    <link href="http://blog.xdite.net/posts/2012/01/15/how-to-design-helper-3/"/>
-    <updated>2012-01-15T16:08:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/01/15/how-to-design-helper-3</id>
-    <content type="html"><![CDATA[<p>本系列其他文章：</p>
-
-<ul>
-<li><a href="http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/">如何運用 / 設計 Rails Helper (1)</a></li>
-<li><a href="http://blog.xdite.net/posts/2011/12/09/how-to-design-helpers-2/">如何運用 / 設計 Rails Helper (2)</a></li>
-</ul>
-
-
-<p>===</p>
-
-<h2>Helper AntiPatterns</h2>
-
-<p>Helper （輔助方法）的存在目的是用來輔助整理 View 中內嵌的複雜 Ruby 程式碼。設計得當的 Helper 可以加速專案的開發，以及增進程式的可讀性。然而設計不好的 Helper 卻可能造成嚴重的反效果。</p>
-
-<p>以下列舉常見的幾種糟糕的 Helper 設計模式：</p>
-
-<h3>1. 矯往過正：用 Helper 作 partial 該做的事</h3>
-
-<p>有些開發者以為 partial 效率是低下的，刻意不使用 partial，而使用 Helper 完成所有的動作。就將需要重複使用的 HTML 通通寫成了 Ruby code，串接成 HTML：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">show_index_block</span><span class="p">(</span><span class="n">block_name</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">is_show_game</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">block_title</span> <span class="o">=</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:h3</span><span class="p">,</span> <span class="n">block_name</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">section_header</span> <span class="o">=</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">block_title</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;section-header&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">game_name</span> <span class="o">=</span> <span class="n">is_show_game</span> <span class="p">?</span> <span class="s2">&quot;【 </span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">games</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> 】&quot;</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span>
-</span><span class='line'>  <span class="n">title</span> <span class="o">=</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:h4</span><span class="p">,</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">game_name</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">post_path</span><span class="p">(</span><span class="n">post</span><span class="p">)))</span>
-</span><span class='line'>  <span class="n">image</span> <span class="o">=</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">render_post_image</span><span class="p">(</span><span class="n">post</span><span class="p">),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;thumbnail&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">content</span> <span class="o">=</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:p</span><span class="p">,</span> <span class="n">truncate</span><span class="p">(</span> <span class="n">post</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="ss">:length</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">))</span>
-</span><span class='line'>  <span class="n">section_content</span> <span class="o">=</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">title</span><span class="si">}#{</span><span class="n">image</span><span class="si">}#{</span><span class="n">content</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;section-content&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">section_footer</span> <span class="o">=</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;閱讀全文&quot;</span><span class="p">,</span> <span class="n">post_path</span><span class="p">(</span><span class="n">post</span><span class="p">)),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;section-footer&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">section_header</span><span class="si">}#{</span><span class="n">section_content</span><span class="si">}#{</span><span class="n">section_footer</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;article-teaser&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Helper 的作用只是協助整理 HTML 中的邏輯程式碼，若有大片 HTML 需要重複使用，應該需要利用 partial 機制進行 HTML 的重複利用。這樣的寫法，非但效率低下（可以用 HTML 產生，卻使用 Ruby 呼叫 Tag Helper，且製造大量 Ruby Object），而且更降低程式的可讀性，其他維護者將難以對這樣的 DOM 進行後續的維護翻修。</p>
-
-<h3>2. 容易混淆：在 Helper 裡面穿插 HTML tag</h3>
-
-<p>這也是另外一個矯枉過正的例子，不過剛好相反，因為覺得使用 Ruby code 產生 HTML tag 可能浪費效能，而直接插入 HTML 在 Helper 裡面與 Ruby Code 混雜。結果造成維護上的困難。因為 Ruby 中的字串是使用雙引號<code>"</code>，而 HTML 也是使用雙引號<code>"</code>，，所以就必須特別加入 <code>\"</code> 跳脫，否則就可能造成 syntax error。</p>
-
-<h4>錯誤</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">post_tags_tag</span><span class="p">(</span><span class="n">post</span><span class="p">,</span> <span class="n">opts</span> <span class="o">=</span> <span class="p">{})</span>
-</span><span class='line'>  <span class="c1"># ....</span>
-</span><span class='line'>   <span class="n">raw</span> <span class="n">tags</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">tag</span><span class="o">|</span>  <span class="s2">&quot;&lt;a href=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">posts_path</span><span class="p">(</span><span class="ss">:tag</span> <span class="o">=&gt;</span> <span class="n">tag</span><span class="p">)</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> class=</span><span class="se">\&quot;</span><span class="s2">tag</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="si">#{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>大量的 <code>"</code> 混雜在程式碼裡面，嚴重造成程式的可閱讀性，而且發生 syntax error 時難以 debug。</p>
-
-<h4>錯誤</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">post_tags_tag</span><span class="p">(</span><span class="n">post</span><span class="p">,</span> <span class="n">opts</span> <span class="o">=</span> <span class="p">{})</span>
-</span><span class='line'>  <span class="c1"># ....</span>
-</span><span class='line'>  <span class="n">raw</span> <span class="n">tags</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">tag</span><span class="o">|</span> <span class="s2">&quot;&lt;a href=&#39;</span><span class="si">#{</span><span class="n">posts_path</span><span class="p">(</span><span class="ss">:tag</span> <span class="o">=&gt;</span> <span class="n">tag</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; class=&#39;tag&#39;&gt;</span><span class="si">#{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>即便換成 <code>'</code> 單引號，狀況並沒有好上多少。</p>
-
-<h4>正確</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">post_tags_tag</span><span class="p">(</span><span class="n">post</span><span class="p">,</span> <span class="n">opts</span> <span class="o">=</span> <span class="p">{})</span>
-</span><span class='line'><span class="c1"># ...</span>
-</span><span class='line'>  <span class="n">raw</span> <span class="n">tags</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">tag</span><span class="o">|</span> <span class="n">link_to</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="n">posts_path</span><span class="p">(</span><span class="ss">:tag</span> <span class="o">=&gt;</span> <span class="n">tag</span><span class="p">))</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>正確的作法應該是妥善使用 Rails 內建的 Helper，使 Helper 裡面維持著都是 Ruby code 的狀態，並且具有高可讀性。</p>
-
-<h3>3. 強耦合：把 CSS 應該做的事綁在 Ruby Helper 上。</h3>
-
-<h4>錯誤</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">red_alert</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span><span class="n">message</span><span class="p">,</span> <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s2">&quot;font-color: red;&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">green_notice</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span><span class="n">message</span><span class="p">,</span> <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s2">&quot;font-color: green;&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>開發者不熟悉 unobtrusive 的設計手法，直接就把 design 就綁上了 Ruby Helper。造成將來有例外時，難以變更設計或擴充。</p>
-
-<h4>正確</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">stickies</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">message_type</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span><span class="n">message</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">message_type</span><span class="o">.</span><span class="n">to_sym</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert&quot;</span><span class="o">&gt;</span> <span class="no">Please</span> <span class="no">Login</span><span class="o">!!</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>樣式應該由 CSS 決定，使用 HTML class 控制，而非強行綁在 Helper 上。</p>
-
-<h3>4. 重複發明輪子</h3>
-
-<p>Rails 已內建許多實用 Helper，開發者卻以較糟的方式重造輪子。在此舉幾個比較經典的案例：</p>
-
-<ul>
-<li><a href="http://apidock.com/rails/ActionView/Helpers/TextHelper/cycle">cycle</a></li>
-</ul>
-
-
-<p>如何設計 table 的雙色效果？</p>
-
-<h4>劣</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% count </span><span class="o">=</span> <span class="mi">0</span> <span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% if count % 2 == 0 %&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% css_class </span><span class="o">=</span> <span class="s2">&quot;even &quot;</span><span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% else %&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% css_class </span><span class="o">=</span> <span class="s2">&quot;odd&quot;</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">tr</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;&lt;%= css_class %&gt;&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="n">item</span><span class="o">&lt;</span><span class="sr">/td&gt;</span>
-</span><span class='line'><span class="sr">  &lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% count </span><span class="o">+=</span> <span class="mi">1</span><span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sr">/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>一般的想法會是使用兩種不同 HTML class : event 與 odd，上不同的顏色。</p>
-
-<h4>劣</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each_with_index </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% if count % 2 == 0 %&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% css_class </span><span class="o">=</span> <span class="s2">&quot;even &quot;</span><span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% else %&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% css_class </span><span class="o">=</span> <span class="s2">&quot;odd&quot;</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">tr</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;&lt;%= css_class %&gt;&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="n">item</span><span class="o">&lt;</span><span class="sr">/td&gt;</span>
-</span><span class='line'><span class="sr">  &lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% count </span><span class="o">+=</span> <span class="mi">1</span><span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sr">/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這是一般初心者會犯的錯誤。實際上 Ruby 中有 <code>each_with_index</code>，不需要另外需要宣告一個 count。</p>
-
-<h4>優</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;tr class=&quot;&lt;%= cycle(&quot;odd&quot;, &quot;even&quot;) %&gt;</span><span class="s2">&quot;&gt;</span>
-</span><span class='line'><span class="s2">    &lt;td&gt;item&lt;/td&gt;</span>
-</span><span class='line'><span class="s2">  &lt;/tr&gt;</span>
-</span><span class='line'><span class="s2">&lt;% end %&gt;</span>
-</span><span class='line'><span class="s2">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但 Rails 其實內建了 <code>cycle</code> 這個 Helper。實際上只要這樣寫就好了&#8230;</p>
-
-<h4>常用你可能不知道的 Helper</h4>
-
-<p>限於篇幅，直接介紹幾個因為使用機率高，所以很容易被重造輪子的 Helper。開發者會寫出的相關 AntiPattern 部分就跳過了。</p>
-
-<ul>
-<li><a href="http://apidock.com/rails/ActionView/Helpers/TextHelper/truncate">truncate</a></li>
-<li><a href="http://apidock.com/rails/ActionView/Helpers/TextHelper/auto_link">auto_link</a></li>
-<li><a href="http://apidock.com/rails/ActionView/Helpers/RecordTagHelper/div_for">div_for</a> &amp; <a href="http://apidock.com/rails/ActionController/RecordIdentifier/dom_id">dom_id</a></li>
-<li><a href="http://apidock.com/rails/ActionView/Helpers/TextHelper/simple_format">simple_format</a></li>
-</ul>
-
-
-<h2>5. Ask, Not Tell</h2>
-
-<p>這也是在 View 中會常出現的問題，直接違反了 Law of Demeter 原則，而造成了效能問題。十之八九某個 View 緩慢無比，最後抓出來背後幾乎都是這樣的原因。</p>
-
-<p>不少開發者會設計出這樣的 helper：</p>
-
-<h4>劣</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">post_tags_tag</span><span class="p">(</span><span class="n">post</span><span class="p">,</span> <span class="n">opts</span> <span class="o">=</span> <span class="p">{})</span>
-</span><span class='line'>  <span class="n">tags</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">tags</span>
-</span><span class='line'>  <span class="n">tags</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">tag</span><span class="o">|</span> <span class="n">link_to</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="n">posts_path</span><span class="p">(</span><span class="ss">:tag</span> <span class="o">=&gt;</span> <span class="n">tag</span><span class="p">))</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @posts.each </span><span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;%= post_tags_tag(post) %&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這種寫法會造成在 View 中，執行迴圈時，造成不必要的大量 query (n+1)，以及在 View 中製造不確定數量的大量物件。View 不僅效率低落也無法被 optimized。</p>
-
-<h4>優</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">post_tags_tag</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="n">opts</span> <span class="o">=</span> <span class="p">{})</span>
-</span><span class='line'>  <span class="n">tags</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">tag</span><span class="o">|</span> <span class="n">link_to</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="n">posts_path</span><span class="p">(</span><span class="ss">:tag</span> <span class="o">=&gt;</span> <span class="n">tag</span><span class="p">))</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @posts.each </span><span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;%= post_tags_tag(post.tags) %&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
-</span><span class='line'>    <span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">recent</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="ss">:tags</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>正確的方法是使用 <a href="http://pragprog.com/articles/tell-dont-ask">Tell, dont ask</a> 原則，主動告知會使用的物件，而非讓 Helper 去猜。並配合 ActiveRecord 的 includes 減少不必要的 query（ includes 可以製造 join query ，一次把需要的 posts 和 tags 撈出來）。</p>
-
-<p>且在 controller query 有 object cache 效果，在 view 中則無。</p>
-
-<h2>小結</h2>
-
-<p>Helper 是 Rails Developer 時常在接觸的工具。但可惜的是，多數開發者卻無法將此利器使得稱手，反而造成了更多問題。在我所曾經參與的幾十個 Rails 專案中，很多設計和效能問題幾乎都是因為寫的不好的 View / Helper 中的 slow query 或伴隨產生的大量 object 所造成的 memory bloat 導致的。但參與專案的開發者並沒有那麼多的經驗，能夠抓出確切的病因，卻都將矛頭直接是 Rails 的效能問題，或者是沒打上 Cache 的關係。這樣的說法只是把問題掩蓋起來治標，而非治本。</p>
-
-<p>下次若有遇到 performance issue，請先往 View 中瞧看看是不是裡面出現了問題。也許你很快就可以找到解答。</p>
-
-<p>===</p>
-
-<p>接下來兩章我將會介紹：</p>
-
-<p>自用 Helper 的設計整理原則、如何將常用 Helper 抽取出來可以複用。</p>
-
-<p>本篇文章將會收錄在 <a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">Essential Rails Pattern</a>，目前已有部分章節已可<a href="http://erp-book.heroku.com">預覽</a>，歡迎<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">預購</a>支持我的寫作，謝謝！</p>
 ]]></content>
   </entry>
   
