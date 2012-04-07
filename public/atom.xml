@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-04-07T21:59:49+08:00</updated>
+  <updated>2012-04-07T22:01:38+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -126,7 +126,7 @@
 
 <p>不追求效能實在是一句非常不可思議的話。</p>
 
-<p>不可否認有些開發者效能和 Fancy 技術實在追求過頭，比如說甚至一開始就用 Backbone 寫整個網站，或者是從頭到尾使用 Nodejs 寫網站。這都是一開始就打算寫 mobile 版 web service 給 mobile phone 使用才需要做的事。因為 3G 的 Latency 實在太大，要盡力的壓縮頻寬使用量和追求頁面 response time。</p>
+<p>不可否認有些開發者效能和 Fancy 技術實在追求過頭，比如說甚至一開始就用 <a href="http://documentcloud.github.com/backbone/">Backbone</a> 寫整個網站，或者是從頭到尾使用 Node.js 寫網站。這都是一開始就打算寫 mobile 版 web service 給 mobile phone 使用才需要做的事。因為 3G 的 Latency 實在太大，要盡力的壓縮頻寬使用量和追求頁面 response time。</p>
 
 <p>但實作一個 Desktop 版網站完全沒必要。而在 website performance tuning 的時候，優先調整的也是 Frontend Performance，因為 C/P 值高很多，壓縮一下 CSS 也許就可以省 3 秒。db 或程式語言 tune 的要死可能才省 0.1 秒。</p>
 
