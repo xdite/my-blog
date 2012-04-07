@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-借用 [新創網站這樣開發才夠快](http://www.kuobrothers.com/article-124.htm) 這篇格式，希望不要介意。我主要是想闡述以前在 [T客邦] 的經驗方法。
+借用 [新創網站這樣開發才夠快](http://www.kuobrothers.com/article-124.htm) 這篇格式，希望不要介意。我主要是想闡述以前在 [T客邦](http://techbang.com) 的經驗方法。
 
 [T客邦](http://techbang.com)在一年半裡面，就從台灣 Alexa 400 名以外，衝進台灣 Alexa 100 名內。這一年半時間技術團隊開發出了四個大網站，十數個子網站，和背後一群深厚的基礎建設（HA, backup, PV stat, advertising system...etc.)。[T17](http://t17.techbang.com) 實際開發的工時在 2.5 個月以內。
 
@@ -24,7 +24,7 @@ categories:
 
 Rails 沒有這樣的狀況嗎？這是我覺得 Rails 優勢的地方，它是一個非常熱門的 Framework（只有在台灣你可能沒有感覺到他很熱門）。因為這是一套 Framework，也就是它本身有很強的約束性，至少 MVC 和 routing 規則，一般就算新手也不會亂放的太離譜。寫 code 有一定的潛規則存在。
 
-開發中遇到任何東西發生錯誤了以後，開法者乎你可以用 Google 找到任何可能發生的原因，修復完畢。而這幾乎不是一般自建 Framework 可以比的上的地方，如果你在公司自建一套 Framework，基本上發生任何問題，最後幾乎都得去煩當初設計的 Architect 才行。（這也是很浪費錢的地方，因為 Architect 的薪水都很貴）。
+開發中遇到任何東西發生錯誤了以後，開發者幾乎可以用 Google 找到任何可能發生的原因，修復完畢。而這幾乎不是一般自建 Framework 可以比的上的地方，如果你在公司自建一套 Framework，基本上發生任何問題，最後幾乎都得去煩當初設計的 Architect 才行。（這也是很浪費錢的地方，因為 Architect 的薪水都很貴）。
 
 學習曲線過高，我也不覺得這件事真的存在。Rails 高手是難尋沒有錯，但是 Rails 中低手只要訓練得當，生產力也是非常驚人。因此只要把重心放在如何協助一般想入門者，可以快速克服入門幾大門檻（搞定開發環境，RESTful，Plugin，Debug，Deploy），剩下的部分就可以靠網路教材和實戰訓練出來。這也是我發明[Rails 101](http://rails-101.logdown.com) 的原因。
 
