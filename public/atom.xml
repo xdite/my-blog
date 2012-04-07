@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-04-07T22:01:38+08:00</updated>
+  <updated>2012-04-07T22:02:50+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -137,7 +137,7 @@
 
 <h2>9. 少用 Fancy 的東西，實作前先估算成本與效益</h2>
 
-<p>身為開發者，世界上每天會冒出很多新的好東西，這些不去玩玩看手實在會手癢。但是其實每引入一項其實都會有一定的成本，而且效益/成本比不見得是你當初想的那樣。</p>
+<p>身為開發者，世界上每天會冒出很多新的好東西，這些不去玩玩看手實在會手癢。但是其實每引入一項都會有一定的成本的成本在，而且效益/成本比不見得是你當初想的那樣。</p>
 
 <p>比如說一直追 Rails 新版，換上效能很好的 Ruby 1.9.2，改用 SCSS 去寫 CSS，改用 CoffeeScript 寫 JavaScript。Apply 新發明的 Asset Pipeline 架構。這些都是很新很棒的東西。（T 客邦都有，架構從最早的 2.3.2 一直 upgrade 到 3.1.3，內行人才知道這樣工程有多大）</p>
 
