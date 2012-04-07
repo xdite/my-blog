@@ -24,18 +24,18 @@ categories:
 
 Rails 沒有這樣的狀況嗎？這是我覺得 Rails 優勢的地方，它是一個非常熱門的 Framework（只有在台灣你可能沒有感覺到他很熱門）。因為這是一套 Framework，也就是它本身有很強的約束性，至少 MVC 和 routing 規則，一般就算新手也不會亂放的太離譜。寫 code 有一定的潛規則存在。
 
-開發中遇到任何東西發生錯誤了以後，幾乎你可以用 Google 找到任何可能發生的原因，修復完畢。而這不是一般自建 Framework 比擬的地方，如果你在公司自建一套 Framework，基本上發生任何問題，你幾乎都得去煩當初設計的 Architect 才行。（這也是很浪費錢的地方，因為 Architect 的薪水都很貴）。
+開發中遇到任何東西發生錯誤了以後，開法者乎你可以用 Google 找到任何可能發生的原因，修復完畢。而這幾乎不是一般自建 Framework 可以比的上的地方，如果你在公司自建一套 Framework，基本上發生任何問題，最後幾乎都得去煩當初設計的 Architect 才行。（這也是很浪費錢的地方，因為 Architect 的薪水都很貴）。
 
 學習曲線過高，我也不覺得這件事真的存在。Rails 高手是難尋沒有錯，但是 Rails 中低手只要訓練得當，生產力也是非常驚人。因此只要把重心放在如何協助一般想入門者，可以快速克服入門幾大門檻（搞定開發環境，RESTful，Plugin，Debug，Deploy），剩下的部分就可以靠網路教材和實戰訓練出來。這也是我發明[Rails 101](http://rails-101.logdown.com) 的原因。
 
 我設計這一套教材的目的是要讓所有新進的開發者，在最長兩週時間內要學完基本 Linux 指令、Git、Rails 所有基礎的知識、佈署、SCSS 撰寫等等，一個月之內就能上戰場跟我們一起開發功能開發新網站。這樣的進度很誇張嗎？
-不，不誇張。這裡的每一個開發者都有這樣的程度，他們有些人應徵時是連 Rails 都不會寫的。你能相信連 T 客邦的 PM 和 ART 他們也會寫 Rails 嗎？
+不，不誇張。這裡的每一個開發者都有這樣的程度，他們有些人應徵時是連 Rails 都不會寫的。你能相信連 T 客邦的 PM 和 ART 他們也會寫 Rails 嗎？( no kidding)
 
-寫 Code 規則怎麼規範？同事和我從社群中吸收了很多 Best Pratices，我們把這些東西整理出來變成新手指南、最佳實踐，甚至是包裝成 Gem 和 Generator，越後進的開發者能花越少的時間追上前輩，在短時間他們的作品也能跟前輩一樣預先搭載 Best Practices。我最近也開始在撰寫另外一本書 [Essential Rails Pattern for Beginners](http://rails-101.logdown.com/books/3-essential-rails-pattern)
+寫 Code 規則怎麼規範？同事和我從社群中吸收了很多 Best Practices，我們把這些東西整理出來變成新手指南、最佳實踐，甚至是包裝成 Gem 和 Generator，越後進的開發者能花越少的時間追上前輩，在短時間他們的作品也能跟前輩一樣預先搭載 Best Practices。我最近也開始在撰寫另外一本書 [Essential Rails Pattern for Beginners](http://rails-101.logdown.com/books/3-essential-rails-pattern)
 
 Rails 本身還有豐富的 Ecosystem，和預設的架構最佳實踐就更不用說了。
 
-新創團隊資源很少，人事預算沒有這麼夠，反而要巧妙的運用天然資源並且加成戰力才行。
+新創團隊資源很少，人事預算沒有這麼夠，反而要巧妙的運用天然資源並讓團體戰力*3才行。
 
 ## 2. 功能設計給當下使用，考慮一定程度的擴充性：
 
