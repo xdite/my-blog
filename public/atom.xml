@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-04-07T19:46:38+08:00</updated>
+  <updated>2012-04-07T19:47:29+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -47,7 +47,7 @@
 
 <p>Rails 本身還有豐富的 Ecosystem，和預設的架構最佳實踐就更不用說了。</p>
 
-<p>新創團隊資源很少，人事預算沒有這麼夠，反而要巧妙的運用天然資源並且加成戰力才行。</p>
+<p>新創團隊資源很少，人事預算沒有這麼夠，反而要巧妙的運用天然資源並讓團體戰力*3才行。</p>
 
 <h2>2. 功能設計給當下使用，考慮一定程度的擴充性：</h2>
 
