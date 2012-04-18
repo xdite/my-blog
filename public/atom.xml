@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-04-19T03:45:36+08:00</updated>
+  <updated>2012-04-19T04:01:08+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -124,7 +124,7 @@
 
 <p>台灣的人會跑去租美國的 Dedicated Hosting 多半是拿來作需要高輸出流量但品質不需要那麼好（高 ping 值）的 Service &#8230;.如影音之類的 streaming server 。</p>
 
-<p>因為美國頻寬非常便宜，大概是 700TWD - 900 TWD / Mbps 上下（看你的量，遠低於這個數字到非常誇張的地步的都有&#8230;）。而「反應」比較慢的這件事在「影音服務」上面相對是可以被接受的。</p>
+<p>因為美國頻寬非常便宜，大概是 400TWD - 900 TWD / Mbps 上下（看你的量，遠低於這個數字到非常誇張的地步的都有&#8230;）。而「反應」比較慢的這件事在「影音服務」上面相對是可以被接受的。</p>
 
 <h3>AWS : EC2</h3>
 
@@ -224,6 +224,8 @@
 <p>只是看到一些張飛打岳飛的討論有感 …</p>
 
 <p>BTW，如果你有興趣談更多這方面的話題的話，歡迎 <a href="http://rocodev.com/contact/">寫信聯絡</a> 我。</p>
+
+<p>如果你想研究更多美國的 hosting plan，可以上<a href="http://www.webhostingtalk.com/">webhostingtalk.com</a> 這個網站，這裡有很多討論。</p>
 ]]></content>
   </entry>
   

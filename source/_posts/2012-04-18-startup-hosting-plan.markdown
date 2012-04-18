@@ -107,7 +107,7 @@ Dedicated Hosting 的優點當然是整台機器資源是你的，而且換算�
 
 台灣的人會跑去租美國的 Dedicated Hosting 多半是拿來作需要高輸出流量但品質不需要那麼好（高 ping 值）的 Service ....如影音之類的 streaming server 。
 
-因為美國頻寬非常便宜，大概是 700TWD - 900 TWD / Mbps 上下（看你的量，遠低於這個數字到非常誇張的地步的都有...）。而「反應」比較慢的這件事在「影音服務」上面相對是可以被接受的。
+因為美國頻寬非常便宜，大概是 400TWD - 900 TWD / Mbps 上下（看你的量，遠低於這個數字到非常誇張的地步的都有...）。而「反應」比較慢的這件事在「影音服務」上面相對是可以被接受的。
 
 ### AWS : EC2
 
@@ -205,4 +205,6 @@ AWS 對一般 Startup 是友善，也是 pay as you go，只是千萬不要誤�
 只是看到一些張飛打岳飛的討論有感 …
 
 BTW，如果你有興趣談更多這方面的話題的話，歡迎 [寫信聯絡](http://rocodev.com/contact/) 我。
+
+如果你想研究更多美國的 hosting plan，可以上[webhostingtalk.com](http://www.webhostingtalk.com/) 這個網站，這裡有很多討論。
 
