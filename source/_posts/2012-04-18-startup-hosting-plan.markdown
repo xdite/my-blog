@@ -12,8 +12,12 @@ categories:
 
 ## Hosting Plan
 
-* Simple CMS + Facebook Pages
-* Shared Hosting* VPS* Cloud Hosting* Dedicated Hosting* Amazon EC2
+* Simple CMS and Facebook Pages
+* Shared Hosting
+* VPS
+* Cloud Hosting
+* Dedicated Hosting
+* Amazon EC2
 
 不少創業者談到開網站，始除了最原始的技術支出之外，一開始最令人覺得恐怖的就是頻寬的支出了。然後談到頻寬這個議題，接下來就會陷入 panic 。
 

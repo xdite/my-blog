@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-04-19T02:09:27+08:00</updated>
+  <updated>2012-04-19T02:11:21+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -25,8 +25,12 @@
 <h2>Hosting Plan</h2>
 
 <ul>
-<li>Simple CMS + Facebook Pages</li>
-<li>Shared Hosting<em> VPS</em> Cloud Hosting<em> Dedicated Hosting</em> Amazon EC2</li>
+<li>Simple CMS and Facebook Pages</li>
+<li>Shared Hosting</li>
+<li>VPS</li>
+<li>Cloud Hosting</li>
+<li>Dedicated Hosting</li>
+<li>Amazon EC2</li>
 </ul>
 
 
