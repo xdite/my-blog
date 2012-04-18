@@ -57,7 +57,7 @@ Shared Hosting 大概的價錢都在 $10/month 以下。比較好的 Solution �
 
 不過 Shared Hosting 就如同字面上的意思，是跟人 Shared 的。Hosting 廠商，將一台機器切成幾十份資源，租給大家。如果你有爛鄰居（spam site）或者是胖鄰居(heavy site)，很容易被連帶牽連倒站。
 
-說人胖鄰居其實也不公平，7000/daily 的 content site 基本上就會讓超過 Shared Hosting 廠商提供的 CPU limit 了（超過也是倒站）。
+說人胖鄰居其實也不公平，7000/daily 的 content site 基本上就會超過 Shared Hosting 廠商提供的 CPU limit 了（超過也是倒站）。
 
 
 ### VPS
