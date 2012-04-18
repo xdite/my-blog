@@ -96,7 +96,10 @@ Heroku 的模式是開發者必須按照 Heroku 規定的架構設計程式，�
 
 Dedicated Hosting 就是租整台機器給你用，然後贈送一定 quota 的流量（大概是給個幾 T 的 free 流量，超過另算）。[@gslin](http://blog.gslin.org) 在他以前的文章裡面有推薦幾家外國品質比較穩定的廠商：
 
-* <http://www.egihosting.com/>* <http://www.hostgator.com/>* <http://www.layeredtech.com/>* <http://www.limestonenetworks.com/>
+* <http://www.egihosting.com/>
+* <http://www.hostgator.com/>
+* <http://www.layeredtech.com/>
+* <http://www.limestonenetworks.com/>
 
 當然，國內當然是…沒有推薦的廠商 XDD
 
