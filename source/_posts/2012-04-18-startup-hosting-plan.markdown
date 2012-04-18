@@ -142,7 +142,7 @@ Dedicated Hosting 的優點當然是整台機器資源是你的，而且換算�
 
 「軟體」「雲」其實不是萬能。
 
-有一些特殊的服務和需求，不買硬體 Solution 丟在 IDC 裡面，用軟體自己幹反而會很昂貴。比如說 [F5](http://www.f5.com.tw/)、[NetApp](http://www.netapp.com/us/)、[Bluecoat](http://www.bluecoat.com/)，這些東西自己幹就會很貴。所以才會有自己買 Server 放在機房的需求。
+有一些特殊的服務和需求，不買硬體 Solution 丟在 IDC 裡面，用軟體自己幹反而會很昂貴。比如說 [F5](http://www.f5.com.tw/)、[NetApp](http://www.netapp.com/us/)、[Bluecoat](http://www.bluecoat.com/)，這些東西自己幹就會很貴。所以才會有自己買設備放在機房的需求。
 
 再來是 EC2 始終是虛擬機，而且有一些 Web services 因為業務型態，需要訂製的 Server 才能達到需求。
 
