@@ -8,7 +8,7 @@ categories:
 
 這個議題在今年創業潮之前算是比較冷門，沒看到什麼人在討論。最近大概是大家瘋創業，有實際上的頻寬需求，所以看到網路上又開始吵頻寬的價格，一些討論串看起來讓人都有股張飛打岳飛的錯覺。
 
-這個主題我在[三年前](http://wp.xdite.net/?p=1130)其實寫過類似的內容，現在環境當然有點不一樣了，被 Fox 拱出來寫一篇 2012 版的。
+這個主題我在[三年前](http://wp.xdite.net/?p=1130)其實寫過類似的內容，現在環境當然有點不一樣了，被 [Fox](http://twitter.com/pirrer) 拱出來寫一篇 2012 版的。
 
 ## Hosting Plan
 
@@ -23,9 +23,9 @@ categories:
 
 在過去，作內容網站要直接養一批內容觀眾是困難的。創業者必須先架起一個內容網站（也許是 Wordpress 或者是 Customized CMS），探尋適合的 Hosting Plan，接下來每日寫文，做好 SEO…etc.
 
-於是一開始會糾纏於到底要選用那種 Share Hosting 比較便宜（Blehoust? Dreaㄩhost?）…
+於是一開始會糾纏於到底要選用那種 Share Hosting 比較便宜（Blehoust? Dreamhost?）…
 
-2009 與 2012 年，創業狀況很不一樣的地方在於，現在我們有了 Tumblr、成熟的 Facebook 行銷工具、完整的 Amazon Web Services 以及地區配套。
+2009 與 2012 年，創業狀況很不一樣的地方在於，現在我們有了 [Tumblr](http://tumblr.com)、成熟的 Facebook 行銷工具、完整的 Amazon Web Services 以及地區配套。
 
 現今，一般的內容網站最主要的流量來源龍頭，不再是 Search Engine，而是 Facebook。一個網站若做好 facebook-optimized，成效往往會比投注在 SEO 上更加的驚人。
 
@@ -43,13 +43,13 @@ categories:
 
 若網站經營者本身不具備 Performance Tuning 能力，大概到 daily 10000 PV 規模開始，就會開始力不從心。每到當日的尖峰時段（10:00, 15:00, 22:00 ），就會倒站。
 
-而 [Tumblr] / [Wordpress.com] 這種 vendor CMS，雖然修改彈性是比較小一點點，但是背後的 scaling 能力卻是完全不用擔心。就算養到數十萬 PV /daily …也不用擔心倒站。
+而 [Tumblr](http://tumblr.com) / [Wordpress.com](http://wordpress.com) 這種 vendor CMS，雖然修改彈性是比較小一點點，但是背後的 scaling 能力卻是完全不用擔心。就算養到數十萬 PV /daily …也不用擔心倒站。
 
 ### Shared Hosting
 
 Shared Hosting 在幾年前比較流行，主要是因為大多數的 Open source Application 還是以 PHP 為主。`上傳`了就能開始使用。俗稱的「空間」大部分是指這樣的方案。
 
-Shared Hosting 大概的價錢都在 $10/month 以下。比較好的 Solution 像是 Media Temple 大概會在 $20/month 以上。
+Shared Hosting 大概的價錢都在 $10/month 以下。比較好的 Solution 像是 [Media Temple](http://mediatemple.net/) 大概會在 $20/month 以上。
 
 不過 Shared Hosting 就如同字面上的意思，是跟人 Shared 的。Hosting 廠商，將一台機器切成幾十份資源，租給大家。如果你有爛鄰居（spam site）或者是胖鄰居(heavy site)，很容易被連帶牽連倒站。
 
@@ -58,7 +58,7 @@ Shared Hosting 大概的價錢都在 $10/month 以下。比較好的 Solution �
 
 ### VPS
 
-VPS 也是這三年來變得比較成熟的 solution，主要是因為虛擬機技術的成熟 (ex. Xen) 和 PHP 以外的 Language Framework 變得很熱門（Ruby on Rails / Python …etc)
+VPS 也是這三年來變得比較成熟的 solution，主要是因為虛擬機技術的成熟 (ex. [Xen](http://www.xen.org/)) 和 PHP 以外的 Language Framework 變得很熱門（Ruby on Rails / Python …etc)
 
 會佈署上 VPS 的 Application 共通特徵是，佈署時通常需要自訂客製整塊 stack。也就是開發者自己要搞定 MySQL、HTTP Server、Mail Server 、 Memcached Server 等等。
 
@@ -74,7 +74,7 @@ VPS 市場在這幾年也有比較大勢底定的走向。一般來說，如果�
 
 ### Cloud Hosting (單指 PaaS )
 
-雖然這樣講有點傷害到人。但是這個市場自從 GAE 改變收費模式而 Heroku 開始支援除了 Ruby 以外的其他語言之後。這個市場就變成了....Cloud Hosting = 「Heroku 與其他」。
+雖然這樣講有點傷害到人。但是這個市場自從 GAE 改變收費模式而 Heroku 開始支援除了 Ruby 以外的其他語言之後。這個市場就變成了....Cloud Hosting = 「[Heroku](http://heroku.com) 與其他」。
 
 Heroku 的模式是開發者必須按照 Heroku 規定的架構設計程式，然後把網站上傳即可。而 Heroku 本身也會提供一些基礎措施方便讓開發者銜接而不需要自幹（ex. memchaced, mail, MySQL, DNS, backup…etc.）
 
@@ -110,7 +110,7 @@ Dedicated Hosting 的優點當然是整台機器資源是你的，而且換算�
 
 但別以為 AWS 真的其實很便宜，它只是對一般入門者門檻很低而已（不需要保證 commit 量，「牌價」比較令人有辦法親近）。真要比較起來，東京 AWS 的流量其實比台灣 IDC 的價格還要「貴」。
 
-在 [@deduce] 這篇 [iCook 圖片費用的討論](https://www.facebook.com/yiru.lin/posts/10150695440498300?comment_id=22685170)。
+在 [@deduce](http://twitter.com/deduce) 這篇 [iCook 圖片費用的討論](https://www.facebook.com/yiru.lin/posts/10150695440498300?comment_id=22685170)。
 
 提到在 S3+ Cloudfront 上 250GB 的流量只要花費台幣 1500。不知道在台灣要花多少錢？
 
@@ -138,7 +138,7 @@ Dedicated Hosting 的優點當然是整台機器資源是你的，而且換算�
 
 「軟體」「雲」其實不是萬能。
 
-有一些特殊的服務和需求，不買硬體 Solution 丟在 IDC 裡面，用軟體自己幹反而會很昂貴。比如說 [F5](http://www.f5.com.tw/)、NetApp、Bluecoat，這些東西自己幹就會很貴。所以才會有自己買 Server 放在機房的需求。
+有一些特殊的服務和需求，不買硬體 Solution 丟在 IDC 裡面，用軟體自己幹反而會很昂貴。比如說 [F5](http://www.f5.com.tw/)、[NetApp](http://www.netapp.com/us/)、Bluecoat(http://www.bluecoat.com/)，這些東西自己幹就會很貴。所以才會有自己買 Server 放在機房的需求。
 
 再來是 EC2 始終是虛擬機，而且有一些 Web services 因為業務型態，需要訂製的 Server 才能達到需求。
 
@@ -156,7 +156,7 @@ Dedicated Hosting 的優點當然是整台機器資源是你的，而且換算�
 
 ### HiCloud 
 
-我個人對 HiCloud 並沒有什麼喜歡和討厭。因為 HiCloud 實際在我的生意模型裡面從來不是個選項。HiCloud 的模型比較像是 Hinet 提供你一個可以用「低於牌價」的機會租到優質頻寬+一小台機器資源的選項。
+我個人對 [HiCloud](http://hicloud.hinet.net/) 並沒有什麼喜歡和討厭。因為 HiCloud 實際在我的生意模型裡面從來不是個選項。HiCloud 的模型比較像是 Hinet 提供你一個可以用「低於牌價」的機會租到優質頻寬+一小台機器資源的選項。
 
 這是一般 Startup 在沒有向固網業者有議價能力時的其中一個選擇。
 

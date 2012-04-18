@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-04-19T02:05:36+08:00</updated>
+  <updated>2012-04-19T02:09:27+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.xdite.net/posts/2012/04/18/startup-hosting-plan</id>
     <content type="html"><![CDATA[<p>這個議題在今年創業潮之前算是比較冷門，沒看到什麼人在討論。最近大概是大家瘋創業，有實際上的頻寬需求，所以看到網路上又開始吵頻寬的價格，一些討論串看起來讓人都有股張飛打岳飛的錯覺。</p>
 
-<p>這個主題我在<a href="http://wp.xdite.net/?p=1130">三年前</a>其實寫過類似的內容，現在環境當然有點不一樣了，被 Fox 拱出來寫一篇 2012 版的。</p>
+<p>這個主題我在<a href="http://wp.xdite.net/?p=1130">三年前</a>其實寫過類似的內容，現在環境當然有點不一樣了，被 <a href="http://twitter.com/pirrer">Fox</a> 拱出來寫一篇 2012 版的。</p>
 
 <h2>Hosting Plan</h2>
 
@@ -38,9 +38,9 @@
 
 <p>在過去，作內容網站要直接養一批內容觀眾是困難的。創業者必須先架起一個內容網站（也許是 Wordpress 或者是 Customized CMS），探尋適合的 Hosting Plan，接下來每日寫文，做好 SEO…etc.</p>
 
-<p>於是一開始會糾纏於到底要選用那種 Share Hosting 比較便宜（Blehoust? Dreaㄩhost?）…</p>
+<p>於是一開始會糾纏於到底要選用那種 Share Hosting 比較便宜（Blehoust? Dreamhost?）…</p>
 
-<p>2009 與 2012 年，創業狀況很不一樣的地方在於，現在我們有了 Tumblr、成熟的 Facebook 行銷工具、完整的 Amazon Web Services 以及地區配套。</p>
+<p>2009 與 2012 年，創業狀況很不一樣的地方在於，現在我們有了 <a href="http://tumblr.com">Tumblr</a>、成熟的 Facebook 行銷工具、完整的 Amazon Web Services 以及地區配套。</p>
 
 <p>現今，一般的內容網站最主要的流量來源龍頭，不再是 Search Engine，而是 Facebook。一個網站若做好 facebook-optimized，成效往往會比投注在 SEO 上更加的驚人。</p>
 
@@ -58,13 +58,13 @@
 
 <p>若網站經營者本身不具備 Performance Tuning 能力，大概到 daily 10000 PV 規模開始，就會開始力不從心。每到當日的尖峰時段（10:00, 15:00, 22:00 ），就會倒站。</p>
 
-<p>而 [Tumblr] / [Wordpress.com] 這種 vendor CMS，雖然修改彈性是比較小一點點，但是背後的 scaling 能力卻是完全不用擔心。就算養到數十萬 PV /daily …也不用擔心倒站。</p>
+<p>而 <a href="http://tumblr.com">Tumblr</a> / <a href="http://wordpress.com">Wordpress.com</a> 這種 vendor CMS，雖然修改彈性是比較小一點點，但是背後的 scaling 能力卻是完全不用擔心。就算養到數十萬 PV /daily …也不用擔心倒站。</p>
 
 <h3>Shared Hosting</h3>
 
 <p>Shared Hosting 在幾年前比較流行，主要是因為大多數的 Open source Application 還是以 PHP 為主。<code>上傳</code>了就能開始使用。俗稱的「空間」大部分是指這樣的方案。</p>
 
-<p>Shared Hosting 大概的價錢都在 $10/month 以下。比較好的 Solution 像是 Media Temple 大概會在 $20/month 以上。</p>
+<p>Shared Hosting 大概的價錢都在 $10/month 以下。比較好的 Solution 像是 <a href="http://mediatemple.net/">Media Temple</a> 大概會在 $20/month 以上。</p>
 
 <p>不過 Shared Hosting 就如同字面上的意思，是跟人 Shared 的。Hosting 廠商，將一台機器切成幾十份資源，租給大家。如果你有爛鄰居（spam site）或者是胖鄰居(heavy site)，很容易被連帶牽連倒站。</p>
 
@@ -72,7 +72,7 @@
 
 <h3>VPS</h3>
 
-<p>VPS 也是這三年來變得比較成熟的 solution，主要是因為虛擬機技術的成熟 (ex. Xen) 和 PHP 以外的 Language Framework 變得很熱門（Ruby on Rails / Python …etc)</p>
+<p>VPS 也是這三年來變得比較成熟的 solution，主要是因為虛擬機技術的成熟 (ex. <a href="http://www.xen.org/">Xen</a>) 和 PHP 以外的 Language Framework 變得很熱門（Ruby on Rails / Python …etc)</p>
 
 <p>會佈署上 VPS 的 Application 共通特徵是，佈署時通常需要自訂客製整塊 stack。也就是開發者自己要搞定 MySQL、HTTP Server、Mail Server 、 Memcached Server 等等。</p>
 
@@ -88,7 +88,7 @@
 
 <h3>Cloud Hosting (單指 PaaS )</h3>
 
-<p>雖然這樣講有點傷害到人。但是這個市場自從 GAE 改變收費模式而 Heroku 開始支援除了 Ruby 以外的其他語言之後。這個市場就變成了&#8230;.Cloud Hosting = 「Heroku 與其他」。</p>
+<p>雖然這樣講有點傷害到人。但是這個市場自從 GAE 改變收費模式而 Heroku 開始支援除了 Ruby 以外的其他語言之後。這個市場就變成了&#8230;.Cloud Hosting = 「<a href="http://heroku.com">Heroku</a> 與其他」。</p>
 
 <p>Heroku 的模式是開發者必須按照 Heroku 規定的架構設計程式，然後把網站上傳即可。而 Heroku 本身也會提供一些基礎措施方便讓開發者銜接而不需要自幹（ex. memchaced, mail, MySQL, DNS, backup…etc.）</p>
 
@@ -127,7 +127,7 @@
 
 <p>但別以為 AWS 真的其實很便宜，它只是對一般入門者門檻很低而已（不需要保證 commit 量，「牌價」比較令人有辦法親近）。真要比較起來，東京 AWS 的流量其實比台灣 IDC 的價格還要「貴」。</p>
 
-<p>在 [@deduce] 這篇 <a href="https://www.facebook.com/yiru.lin/posts/10150695440498300?comment_id=22685170">iCook 圖片費用的討論</a>。</p>
+<p>在 <a href="http://twitter.com/deduce">@deduce</a> 這篇 <a href="https://www.facebook.com/yiru.lin/posts/10150695440498300?comment_id=22685170">iCook 圖片費用的討論</a>。</p>
 
 <p>提到在 S3+ Cloudfront 上 250GB 的流量只要花費台幣 1500。不知道在台灣要花多少錢？</p>
 
@@ -155,7 +155,7 @@
 
 <p>「軟體」「雲」其實不是萬能。</p>
 
-<p>有一些特殊的服務和需求，不買硬體 Solution 丟在 IDC 裡面，用軟體自己幹反而會很昂貴。比如說 F5、NetApp、Bluecoat，這些東西自己幹就會很貴。所以才會有自己買 Server 放在機房的需求。</p>
+<p>有一些特殊的服務和需求，不買硬體 Solution 丟在 IDC 裡面，用軟體自己幹反而會很昂貴。比如說 <a href="http://www.f5.com.tw/">F5</a>、<a href="http://www.netapp.com/us/">NetApp</a>、Bluecoat(http://www.bluecoat.com/)，這些東西自己幹就會很貴。所以才會有自己買 Server 放在機房的需求。</p>
 
 <p>再來是 EC2 始終是虛擬機，而且有一些 Web services 因為業務型態，需要訂製的 Server 才能達到需求。</p>
 
@@ -175,7 +175,7 @@
 
 <h3>HiCloud</h3>
 
-<p>我個人對 HiCloud 並沒有什麼喜歡和討厭。因為 HiCloud 實際在我的生意模型裡面從來不是個選項。HiCloud 的模型比較像是 Hinet 提供你一個可以用「低於牌價」的機會租到優質頻寬+一小台機器資源的選項。</p>
+<p>我個人對 <a href="http://hicloud.hinet.net/">HiCloud</a> 並沒有什麼喜歡和討厭。因為 HiCloud 實際在我的生意模型裡面從來不是個選項。HiCloud 的模型比較像是 Hinet 提供你一個可以用「低於牌價」的機會租到優質頻寬+一小台機器資源的選項。</p>
 
 <p>這是一般 Startup 在沒有向固網業者有議價能力時的其中一個選擇。</p>
 
