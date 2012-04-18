@@ -47,6 +47,8 @@ categories:
 
 若網站經營者本身不具備 Performance Tuning 能力，大概到 daily 10000 PV 規模開始，就會開始力不從心。每到當日的尖峰時段（10:00, 15:00, 22:00 ），就會倒站。
 
+像[重灌狂人](http://briian.com) 這樣等級的 Blog，都要租到不錯的 Dedicated Hosting 機器才擋得住。一個月要花上一兩百塊美金跑不掉…
+
 而 [Tumblr](http://tumblr.com) / [Wordpress.com](http://wordpress.com) 這種 vendor CMS，雖然修改彈性是比較小一點點，但是背後的 scaling 能力卻是完全不用擔心。就算養到數十萬 PV /daily …也不用擔心倒站。
 
 ### Shared Hosting
