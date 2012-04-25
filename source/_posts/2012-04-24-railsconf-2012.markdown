@@ -10,7 +10,7 @@ categories:
 
 往年(2006-2011) Railsconf 都是由 O'reilly 承辦。今年則由 Ruby 組織 Ruby Central 自己接回來主辦。在開場之前，其實很少人知道為何今年為何要換主辦單位，主辦人 Chad Fowler 開場就直接先招了：之前在籌組第一屆 Railsconf 時，其實他不知道怎樣辦這麼大型的活動（一次舉辦超過 1000 人，來自世界各地）。而 O'reilly 說它們有辦法承接，於是接下來幾年就都是O'reilly 在弄了…
 
-不過隨著世界各地 Rubyconf 舉辦的越成熟，社群靠北 O'reilly 的聲音也就越來越大。多數都是靠北 Conf 地點很鳥，也幾乎沒有議程影片釋出（對比其他 Rubyconf 都有 confreak 專業錄製）。所以今年乾脆 RubyCentral 就自己接回來辦。Chad Fowler 也說接回來自己也嚇死了，也不知道今年會不會辦到爛掉…
+不過隨著世界各地 Rubyconf 舉辦的越成熟，社群靠北 O'reilly 的聲音也就越來越大。多數都是靠北 Conf 地點很鳥，也幾乎沒有議程影片釋出（對比其他 Rubyconf 都有 [confreaks](http://www.confreaks.com) 專業錄製）。所以今年乾脆 RubyCentral 就自己接回來辦。Chad Fowler 也說接回來自己也嚇死了，也不知道今年會不會辦到爛掉…
 
 參加過 conf 籌辦的人都知道，一個 conf 的舉辦期間會出現各式各樣超多的鳥意外，很多事情都不是能夠預先料知的。如果會場有更多外國講者和外國參加者，那局面會更混亂。兩天下來，我真的覺得主辦單位真的超屌的，不管是廠商講者和參加者都顧得穩穩的，幾乎沒看到 twitter 上在靠北一般 conf 上面常發生的鳥事…
 
@@ -34,7 +34,7 @@ Austin 也跟美國其他小鎮不太一樣的地方是，這裡算是不夜城�
 
 四樓租了兩個房間 ( for BOHConf )。
 
-這是詳細的[議程表](http://railsconf.austinonrails.org/ignite))。
+這是詳細的[議程表](http://railsconf.austinonrails.org/ignite)。
 
 
 ### 演講廳安排
