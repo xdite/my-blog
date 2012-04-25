@@ -1,3 +1,4 @@
+---
 layout: post
 title: "Railsconf 2012 - 國際性 conference 是這樣辦的 （上）"
 date: 2012-04-24 17:31
