@@ -28,7 +28,7 @@ categories:
 * Stay with a Local : 讓 Austion 本地開發者登記家裡開放借住。預算緊的開發者可以來這裡看有沒有人願意收留。
 * Talk with A Local : 提供很多本地吃的建議。最神奇的還是有本地熱線。本地熱線是由 [Pocket Hotline](http://pockethotline.com) 提供。本地人可以志願登記接電話，如果有人需要幫助，打這隻電話就可以得到幫助。
 
-<a href="http://www.flickr.com/photos/xdite/6967337078/" title="螢幕快照 2012-04-25 上午10.57.34 by xdite, on Flickr"><http://farm8.staticflickr.com/7102/6967337078_7b318a4c20_m.jpg" width="75" height="75" alt="螢幕快照 2012-04-25 上午10.57.34"></a>
+<a href="http://www.flickr.com/photos/xdite/7112974713/" title="螢幕快照 2012-04-25 上午10.52.47 by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7067/7112974713_b2320df8b8.jpg" width="500" height="487" alt="螢幕快照 2012-04-25 上午10.52.47"></a>
 
 至於網站語言當然都是英文的。不只是因為這是美國的 Conf ，也是國際的 Conf。
 
