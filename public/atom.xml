@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-04-24T23:17:06-05:00</updated>
+  <updated>2012-04-24T23:24:33-05:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.xdite.net/posts/2012/04/24/railsconf-2012/"/>
     <updated>2012-04-24T17:31:00-05:00</updated>
     <id>http://blog.xdite.net/posts/2012/04/24/railsconf-2012</id>
-    <content type="html"><![CDATA[<p>Railsconf 2012 今年在 Austin, Texas 舉辦。這是一場超過 1000 人的大型開發者盛會。今年終於存夠了錢，終於能一舉飛到德州參加。這次的旅行讓我看到 / 學到不少遠超過在台灣能摸到的東西，有些部分很值得寫下來。技術的部分我以後會慢慢整理。不過軟性的部分，我倒想可以趁記憶猶新寫下來。光是 Conf 運行的部分，不少地方和細節都讓我覺得十分專業值得學習。</p>
+    <content type="html"><![CDATA[<p><a href="http://railsconf2012.com/sessions">Railsconf 2012</a> 今年在 Austin, Texas 舉辦。這是一場超過 1000 人的大型開發者盛會。今年終於存夠了錢，終於能一舉飛到德州參加。這次的旅行讓我看到 / 學到不少遠超過在台灣能摸到的東西，有些部分很值得寫下來。技術的部分我以後會慢慢整理。不過軟性的部分，我倒想可以趁記憶猶新寫下來。光是 Conf 運行的部分，不少地方和細節都讓我覺得十分專業值得學習。</p>
 
 <p>往年(2006-2011) Railsconf 都是由 O&#8217;reilly 承辦。今年則由 Ruby 組織 Ruby Central 自己接回來主辦。在開場之前，其實很少人知道為何今年為何要換主辦單位，主辦人 Chad Fowler 開場就直接先招了：之前在籌組第一屆 Railsconf 時，其實他不知道怎樣辦這麼大型的活動（一次舉辦超過 1000 人，來自世界各地）。而 O&#8217;reilly 說它們有辦法承接，於是接下來幾年就都是O&#8217;reilly 在弄了…</p>
 
@@ -44,7 +44,9 @@
 
 <p>大會租下了六樓幾乎整層。總共有 4 個大會議室（ Main Ballroom, Salon H J K )，2 個小的會議室 ( 615,616 )。</p>
 
-<p>四樓租了兩個房間 ( for BOHConf )</p>
+<p>四樓租了兩個房間 ( for BOHConf )。</p>
+
+<p>這是詳細的<a href="http://railsconf.austinonrails.org/ignite">議程表</a>)。</p>
 
 <h3>演講廳安排</h3>
 
@@ -82,7 +84,7 @@
 
 <h2>4. 報到 / 提早報到</h2>
 
-<p>在正式會議前一天的晚上六點，社群有舉辦了一個 Ignite Railsconf，大概是 10 個 5 分鐘 lighting talk，也在旅館裡的同個場地。門票只要 7 元美金。因為參加者幾乎都是同一批人，所以大會就在那個時段也同時開放預先報到，紓解隔天的人潮壓力。</p>
+<p>在正式會議前一天的晚上六點，社群有舉辦了一個 <a href="http://railsconf.austinonrails.org/ignite">Ignite Railsconf</a>，大概是 10 個 5 分鐘 lighting talk，也在旅館裡的同個場地。門票只要 7 元美金。因為參加者幾乎都是同一批人，所以大會就在那個時段也同時開放預先報到，紓解隔天的人潮壓力。</p>
 
 <p>我是前一天就提前報到，大會是用 Eventribe (大會售票系統）的 iphone app  查好姓名，然後直接發名牌。然後只有一個窗口。</p>
 
@@ -96,7 +98,7 @@
 
 <h2>5. 都聽不懂議程的人或新手的安排</h2>
 
-<p>大會 talk 很多，基本上有三條主要 track 在跑。不過雖然是這種大又貴的 conf，還是有初學者會參加。大會有獨立開了一條線作 workshop，請 codeschool 團隊帶兩天基本的 Rails 開發。休息時間我有跑去看一下，人還真不少，大概 50 的人廳幾乎坐滿。除了教學之外，也有一些是講 Rails 基本工具的 talk 也會排在這個廳。而且講的人其實都算職業等級教學者。</p>
+<p>大會 talk 很多，基本上有三條主要 track 在跑。不過雖然是這種大又貴的 conf，還是有初學者會參加。大會有<a href="http://railsconf2012.busyconf.com/schedule/full">獨立開了一條線</a>作 workshop，請 codeschool 團隊帶兩天基本的 Rails 開發。休息時間我有跑去看一下，人還真不少，大概 50 的人廳幾乎坐滿。除了教學之外，也有一些是講 Rails 基本工具的 talk 也會排在這個廳。而且講的人其實都算職業等級教學者。</p>
 
 <h2>6. 贊助廠商的議程的安排</h2>
 
@@ -108,7 +110,7 @@
 
 <p>====</p>
 
-<p>明天補圖還有更多細節（太晚要睡了）。下集寫的部分是 after party, 網站, 手冊, local 接待, 名牌, 廠商贈品, 社群告示板, hiring</p>
+<p>明天補圖還有更多細節（太晚要睡了）。下集寫的部分是 after party, 網站, 手冊, local 接待, 名牌, 廠商贈品, 社群告示板, hiring, cfs, panel discussion, podcast, 工作人員等等&#8230;</p>
 ]]></content>
   </entry>
   
