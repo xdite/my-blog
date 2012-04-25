@@ -55,9 +55,9 @@ Hiring 的部分幾乎都是在社群白板上進行。
 
 贈品有哪些？就我有拿到的部分:
 
-(1) Heroku : T-shirt!!!
-(2) Engine Yard : 經典 LOGO 貼紙和 Engine Yard 玻璃杯。
-(3) Cookpad: 環保袋以及筷子。
+* (1) Heroku : T-shirt!!!
+* (2) Engine Yard : 經典 LOGO 貼紙和 Engine Yard 玻璃杯。
+* (3) Cookpad: 環保袋以及筷子。
 
 (這些部分有空再補圖）
 
