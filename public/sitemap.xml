@@ -2,254 +2,258 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/07/migrate-to-octopress/</loc>
-        <lastmod>2011-10-13T14:48:39+08:00</lastmod>
+        <lastmod>2011-10-13T01:48:39-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/07/what-is-octopress/</loc>
-        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
+        <lastmod>2011-10-13T01:48:40-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/08/wu-nian-xie-liao-230-wan-zi/</loc>
-        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
+        <lastmod>2011-10-13T01:48:40-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools/</loc>
-        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
+        <lastmod>2011-10-13T01:48:40-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/09/mou-the-missing-markdown-editor/</loc>
-        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
+        <lastmod>2011-10-13T01:48:40-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/
         </loc>
-        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
+        <lastmod>2011-10-13T01:48:40-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/12/learn-ruby-the-hard-way/</loc>
-        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
+        <lastmod>2011-10-13T01:48:40-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/13/using-pull-request-to-merge-design/</loc>
-        <lastmod>2011-10-13T14:55:12+08:00</lastmod>
+        <lastmod>2011-10-13T01:55:12-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/</loc>
-        <lastmod>2011-10-19T01:32:50+08:00</lastmod>
+        <lastmod>2011-10-18T12:32:50-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/19/stickies-gem/</loc>
-        <lastmod>2011-10-19T14:55:06+08:00</lastmod>
+        <lastmod>2011-10-19T01:55:06-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/24/i-read-steve-jobs/</loc>
-        <lastmod>2011-10-25T10:55:54+08:00</lastmod>
+        <lastmod>2011-10-24T21:55:54-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/</loc>
-        <lastmod>2011-10-25T18:02:40+08:00</lastmod>
+        <lastmod>2011-10-25T05:02:40-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/10/27/coffeescript-nodejs-hubot/</loc>
-        <lastmod>2011-12-19T11:55:20+08:00</lastmod>
+        <lastmod>2011-12-18T21:55:20-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/11/10/simple-form-your-form-framework/</loc>
-        <lastmod>2011-11-10T03:04:54+08:00</lastmod>
+        <lastmod>2011-11-09T13:04:54-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/11/14/money-ball/</loc>
-        <lastmod>2011-11-15T11:31:58+08:00</lastmod>
+        <lastmod>2011-11-14T21:31:58-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-1/</loc>
-        <lastmod>2011-11-19T03:26:54+08:00</lastmod>
+        <lastmod>2011-11-18T13:26:54-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/</loc>
-        <lastmod>2011-11-19T12:11:10+08:00</lastmod>
+        <lastmod>2011-11-18T22:11:10-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-3/</loc>
-        <lastmod>2011-11-19T13:57:52+08:00</lastmod>
+        <lastmod>2011-11-18T23:57:52-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/11/19/thouhgts-on-html5-and-mobile-app/</loc>
-        <lastmod>2011-11-20T14:25:14+08:00</lastmod>
+        <lastmod>2011-11-20T00:25:14-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/11/28/ruby-taiwan-org/</loc>
-        <lastmod>2011-11-28T02:22:52+08:00</lastmod>
+        <lastmod>2011-11-27T12:22:52-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/12/04/gollum-git-based-wiki/</loc>
-        <lastmod>2011-12-04T02:24:40+08:00</lastmod>
+        <lastmod>2011-12-03T12:24:40-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/12/04/misunderstanding-about-render/</loc>
-        <lastmod>2011-12-04T14:12:07+08:00</lastmod>
+        <lastmod>2011-12-04T00:12:07-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/12/05/omniauth-clean-auth-provider-4/</loc>
-        <lastmod>2011-12-05T22:40:01+08:00</lastmod>
+        <lastmod>2011-12-05T08:40:01-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/12/08/how-to-design-helpers/</loc>
-        <lastmod>2011-12-09T16:37:12+08:00</lastmod>
+        <lastmod>2011-12-09T02:37:12-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/12/09/how-to-design-helpers-2/</loc>
-        <lastmod>2011-12-10T10:36:03+08:00</lastmod>
+        <lastmod>2011-12-09T20:36:03-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/</loc>
-        <lastmod>2011-12-10T12:42:01+08:00</lastmod>
+        <lastmod>2011-12-09T22:42:01-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2011/12/19/rails-101-xmas/</loc>
-        <lastmod>2011-12-19T11:58:31+08:00</lastmod>
+        <lastmod>2011-12-18T21:58:31-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/</loc>
-        <lastmod>2012-01-04T09:09:40+08:00</lastmod>
+        <lastmod>2012-01-03T19:09:40-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/</loc>
-        <lastmod>2012-01-04T09:52:15+08:00</lastmod>
+        <lastmod>2012-01-03T19:52:15-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/04/make-activerecord-includable/</loc>
-        <lastmod>2012-01-04T18:21:05+08:00</lastmod>
+        <lastmod>2012-01-04T04:21:05-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/06/sell-my-macbook-air/</loc>
-        <lastmod>2012-01-06T01:58:43+08:00</lastmod>
+        <lastmod>2012-01-05T11:58:43-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/06/about-erp/</loc>
-        <lastmod>2012-01-06T18:32:13+08:00</lastmod>
+        <lastmod>2012-01-06T04:32:13-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/09/remove-your-after-save-from-model/</loc>
-        <lastmod>2012-01-09T20:38:19+08:00</lastmod>
+        <lastmod>2012-01-09T06:38:19-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/15/how-to-design-helper-3/</loc>
-        <lastmod>2012-01-18T10:13:27+08:00</lastmod>
+        <lastmod>2012-01-17T20:13:27-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/17/lean-startup-should-play-agricola/</loc>
-        <lastmod>2012-01-17T02:53:55+08:00</lastmod>
+        <lastmod>2012-01-16T12:53:55-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/25/rails-3-2-jounery/</loc>
-        <lastmod>2012-01-25T21:29:23+08:00</lastmod>
+        <lastmod>2012-01-25T07:29:23-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/29/cycle-and-nth-child/</loc>
-        <lastmod>2012-01-29T00:21:08+08:00</lastmod>
+        <lastmod>2012-01-28T10:21:08-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/01/29/css-tricks-summary/</loc>
-        <lastmod>2012-01-29T17:06:12+08:00</lastmod>
+        <lastmod>2012-01-29T03:06:12-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/02/06/how-to-design-select-in-rails/</loc>
-        <lastmod>2012-02-06T01:13:07+08:00</lastmod>
+        <lastmod>2012-02-05T11:13:07-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/</loc>
-        <lastmod>2012-02-06T02:33:20+08:00</lastmod>
+        <lastmod>2012-02-05T12:33:20-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/
         </loc>
-        <lastmod>2012-02-09T16:42:04+08:00</lastmod>
+        <lastmod>2012-02-09T02:42:04-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/02/16/about-responsive-design-technique/</loc>
-        <lastmod>2012-02-16T14:23:34+08:00</lastmod>
+        <lastmod>2012-02-16T00:23:34-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/</loc>
-        <lastmod>2012-03-02T02:02:58+08:00</lastmod>
+        <lastmod>2012-02-18T16:20:48-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/02/my-start-up/</loc>
-        <lastmod>2012-03-02T02:18:03+08:00</lastmod>
+        <lastmod>2012-03-01T12:18:03-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/</loc>
-        <lastmod>2012-03-05T13:06:20+08:00</lastmod>
+        <lastmod>2012-03-04T23:06:20-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/06/iphone4s/</loc>
-        <lastmod>2012-03-06T23:16:59+08:00</lastmod>
+        <lastmod>2012-03-06T09:16:59-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/</loc>
-        <lastmod>2012-03-07T17:09:44+08:00</lastmod>
+        <lastmod>2012-03-07T03:09:44-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/17/website-online-todo/</loc>
-        <lastmod>2012-03-19T03:39:58+08:00</lastmod>
+        <lastmod>2012-03-18T14:39:58-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/</loc>
-        <lastmod>2012-03-19T03:39:55+08:00</lastmod>
+        <lastmod>2012-03-18T14:39:55-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/</loc>
-        <lastmod>2012-03-19T03:39:51+08:00</lastmod>
+        <lastmod>2012-03-18T14:39:51-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/</loc>
-        <lastmod>2012-03-19T03:41:55+08:00</lastmod>
+        <lastmod>2012-03-18T14:39:42-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/</loc>
-        <lastmod>2012-03-19T03:44:36+08:00</lastmod>
+        <lastmod>2012-03-18T14:44:36-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/24/essential-rails-pattern-update/</loc>
-        <lastmod>2012-03-24T19:09:05+08:00</lastmod>
+        <lastmod>2012-03-24T06:09:05-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/</loc>
-        <lastmod>2012-03-26T11:05:42+08:00</lastmod>
+        <lastmod>2012-03-25T22:05:42-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/04/07/startup-rapid-development/</loc>
-        <lastmod>2012-04-07T22:09:31+08:00</lastmod>
+        <lastmod>2012-04-07T09:09:31-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/04/18/startup-hosting-plan/</loc>
-        <lastmod>2012-04-19T04:01:02+08:00</lastmod>
+        <lastmod>2012-04-18T15:01:02-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.xdite.net/posts/2012/04/24/railsconf-2012/</loc>
+        <lastmod>2012-04-24T23:14:48-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/about/</loc>
-        <lastmod>2012-02-09T17:10:35+08:00</lastmod>
+        <lastmod>2012-02-09T03:10:35-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/author/</loc>
-        <lastmod>2012-03-24T18:44:44+08:00</lastmod>
+        <lastmod>2012-03-24T05:44:44-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/blog/archives/</loc>
-        <lastmod>2012-04-19T04:01:02+08:00</lastmod>
+        <lastmod>2012-04-24T23:14:48-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/</loc>
-        <lastmod>2012-04-19T04:01:02+08:00</lastmod>
+        <lastmod>2012-04-24T23:14:48-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/</loc>
-        <lastmod>2012-03-08T17:46:35+08:00</lastmod>
+        <lastmod>2012-03-08T03:46:35-06:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/talks/</loc>
-        <lastmod>2011-10-13T14:48:40+08:00</lastmod>
+        <lastmod>2011-10-13T01:48:40-05:00</lastmod>
     </url>
 </urlset>
