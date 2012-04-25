@@ -1,0 +1,117 @@
+---
+layout: post
+title: "Railsconf 2012 - 國際性 Conference 是這樣辦的 （下）"
+date: 2012-04-25 14:40
+comments: true
+categories: 
+---
+
+
+## 11.  售票 / 大會網站 / Schedule / 贈品
+
+### 售票
+
+大會是大概半年前公布時間，然後就開始售票，使用的是 Eventribe 這套系統。
+
+行前幾天大會也會透過這個系統寄通知過來。
+
+### 大會網站
+
+[大會網站](http://railsconf2012.com)其實很簡陋。但真正威的是 austinrails 做的這個[相關網站](http://railsconf.austinonrails.org)。
+
+裡面提供了很多相關資訊，我覺得對旅人和開發者都相當有用：
+
+* BOHConf / Ignite Railsconf : 提供大會議程外的選擇
+* Rails5k : 最後一天的早晨大家一起起床去跑五公里馬拉松
+* Happyhour: 議程結束後去喝酒
+* Visiting Usergroups : 提供世界各地來的 Ruby User Group 代表登記，在大會期間可以去找他們聊。（ 我見到不少當地代表穿著當地 RUG T-shirt 在 Happyhour 期間歡迎大家搭訕）
+* Stay with a Local : 讓 Austion 本地開發者登記家裡開放借住。預算緊的開發者可以來這裡看有沒有人願意收留。
+* Talk with A Local : 提供很多本地吃的建議。最神奇的還是有本地熱線。本地熱線是由 [Pocket Hotline](http://pockethotline.com) 提供。本地人可以志願登記接電話，如果有人需要幫助，打這隻電話就可以得到幫助。
+
+<a href="http://www.flickr.com/photos/xdite/6967337078/" title="螢幕快照 2012-04-25 上午10.57.34 by xdite, on Flickr"><http://farm8.staticflickr.com/7102/6967337078_7b318a4c20_m.jpg" width="75" height="75" alt="螢幕快照 2012-04-25 上午10.57.34"></a>
+
+至於網站語言當然都是英文的。不只是因為這是美國的 Conf ，也是國際的 Conf。
+
+
+### 議程表
+
+大會手冊裡面只有議程介紹。[議程時間表](http://railsconf2012.busyconf.com/schedule/full) 是大會前幾天才公布的。使用的是 [Busyconf](http://busyconf.com) 這個服務。還算不錯用。支援離線瀏覽，iPhone Client。點議程會顯示更多關於議程的以及講者簡介。
+
+<a href="http://www.flickr.com/photos/xdite/6966910996/" title="螢幕快照 2012-04-25 上午10.57.34 by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7232/6966910996_06d235f0f6.jpg" width="500" height="259" alt="螢幕快照 2012-04-25 上午10.57.34"></a>
+
+### 贈品
+
+報到時大會會發一個已經印刷好的 badge，一本大會手冊（手冊裡面有贊助商夾頁），還有一件 Railsconf 紀念 T-shirt。
+
+大會手冊裡面基本上印到就是議程簡介和贊助商廣告。看得出來 Cookpad 今年砸了不少錢贊助…不僅贊助商夾頁品是他們的，手冊裡面別人都是小方塊，他們的竟然是跨頁精美廣告。
+
+## 12. 大會贊助商贈品與交流
+
+大會贊助商有 Engine Yard 、New Relic、Cookpad、Heroku 等等知名大廠商。基本上這些廠商都還蠻夠大氣的。
+
+不僅送的贈品都讓人搶著要，而且就算只想拿贈品，工作人員也幾乎不囉唆，也不會強迫你填什麼問卷或硬是要跟他們聊天。他們反而比較像駐場代表，讓大家問平常沒機會問的問題的。
+
+Hiring 的部分幾乎都是在社群白板上進行。
+
+贈品有哪些？就我有拿到的部分:
+
+(1) Heroku : T-shirt!!!
+(2) Engine Yard : 經典 LOGO 貼紙和 Engine Yard 玻璃杯。
+(3) Cookpad: 環保袋以及筷子。
+
+(這些部分有空再補圖）
+
+基本上攤位都是一補貨瞬間就空了。贊助廠商也不小氣，一準備幾乎都是幾十一百份。然後兩天都有在補貨…
+
+職員都會穿著公司 T-shirt。而 Heroku 大概是因為贈品都送 T-shirt。為了避免造成誤會。他們 T-shirt 後面還會印著「職員 Staff」兩排字。
+
+## 13. 大會工作人員
+
+大會工作人員幾乎都是 Ruby Central 的人。老實說其實看到的 Staff 不多。
+
+我不知道是不是真的人很少，還是因為現場其實也便利到其實很少需要真正跑去找大會解決的 issue。
+
+值得挑出來講的是大會經理，是 Leah Silber 。Leah Silber 之前是 Engine Yard 的社群經理，之前在 Engine Yard 就是在做社群經營這一塊。她也策劃幫忙了不少 Rubyconf。Railsconf 這次的不少東西上上下下都是她在張羅的，甚至在報名處負責發名牌的也是她。
+
+不過真正八卦的是，Leah 是 Rails 3 架構師 Yehuda Katz 的[老婆](http://www.onlysimchas.com/v4/index.cfm/fuseaction:simcha.view/simchaid:31333).....XD
+
+而大會租用旅館當場地其實也算聰明，很多工作負擔(如準備餐點、收拾餐點、收拾場地、指點方向）就讓 Hotel 的工作人員就擔掉了。這也是我猜測其實沒有需要那麼多人力的關係…
+
+## 14. Call for Sponser
+
+在宣布售票的時候，大會同時也公布了 Call for sponser 的[贊助書](http://railsconf2012.com/assets/prospectus2012.pdf)
+
+這本贊助書直接是**對外公開**的。
+
+第一頁的內容是：
+
+* 會議簡介
+* 預計參加者
+* 過往 speaker 
+* 會議時間
+* 去年 sponser list
+
+第二頁的內容是：
+
+* 各個 Sponser 的牌價以及待遇等級。
+
+這份贊助書是我有史以來看過的贊助書寫的最詳細精美的。
+很值得想辦 conf 的人參考。
+
+## 15. 其他感想
+
+最後一天的 keynote，主辦人有上來講話，並宣布明年的 Railsconf 時間、和今年的 Rubyconf 時間。
+
+另外他提到，今年很多人都跑來稱讚，說今年的 Railsconf 是他們參加過有史以來一屆最好的 conf。除了中午食物真的很難吃之外…XD
+
+我在 4 年前寫過一篇文章[辦出人人滿意的網路聚會之黃金三點](http://wp.xdite.net/?p=564)提到過，conf 的三大重點其實就是：「網路、美女、食物」。這次 Railsconf 只有網路達到標準而已。不過同時間，我也發現一件新的事情：「**會場有沒有美女根本不重要！！！**」這次大會根本沒有提供美女這項「服務」，但是也根本沒有人靠北這件事情。主要也是因為會議真的非常緊湊，而且滿山滿谷的新朋友，大家忙著選主題和交流已經忙不過來了，根本沒人有空管這件事。而且就算食物難吃也幾乎沒被放大…
+
+結論也是回到最基本: conf 最重要的還是內容內容內容。只要內容充實，網路、美女、食物就會顯得一點都不重要了....
+
+近年來真是有很深的感觸啊。有些 event 真是玩到完全本末倒置了。
+
+===
+
+以前我沒參加過選在旅館舉辦這種形式的 conf。這次下來的感想也覺得很棒，是因為這麼有張力的 schedule，聽完整天大概體力就垮了。而中場就已經沒體力的話，電梯一按也是可以直接回房間睡覺。參加這種等級的 event 才深深覺得辦在旅館真好....
+
+
