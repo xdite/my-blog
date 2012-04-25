@@ -40,6 +40,15 @@ Aaron 的主題則是他從現在的 Rails stack 中看到什麼爛的東西，�
 
 不過光看 Aaron Patterson 和 Yehuda Katz 吵架就真的超有趣的，值回票價。Yehuda 真人講話跟網路上文章（很有禮貌）差很多，語調都超挑釁的。而且最機車的是他每次都吵贏（看他戰幾個主題感覺他真的很熟 Ruby / Rails，Aaron 還戰輸他）。
 
+<a href="http://www.flickr.com/photos/xdite/7112444863/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7199/7112444863_d5c848186b.jpg" width="500" height="374" alt="Untitled"></a>
+
+現場還有辦著色比賽。發給大家一本著色簿。贏的人可以跟 Railscore team 合照。而且可以指定姿勢。Aaron Patterson 馬上慘叫：「I'm not signup for this」
+他覺得大家一定會找他拍超過 PG13 的照片。
+
+<a href="http://www.flickr.com/photos/xdite/7112961327/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7084/7112961327_d86d81d6bc.jpg" width="500" height="375" alt="Untitled"></a>
+
+（左邊是著色簿，右邊是蠟筆）
+
 ### Ruby Rogues Live
 
 RubyRogues 是這一年來比較新的 Podcast，每週主題都很不錯，主要在深度的討論 Ruby / Rails 周邊的哲學、工具、語言框架特性…etc.
