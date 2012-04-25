@@ -1,0 +1,81 @@
+---
+layout: post
+title: "Railsconf 2012 - 國際性 conference 是這樣辦的 （中）"
+date: 2012-04-25 10:32
+comments: true
+categories: 
+---
+
+## 7. Keynote
+
+大會準備的 Keynote 都蠻有趣和有意義。
+
+基本上 DHH (Rails creator) 和 Aaron Patterson （Ruby core, Rails core）每年都會給 talk。
+
+### Rails core: DHH 
+
+DHH 的主題大概會是他會想硬幹什麼（現在進行式），2011 是 Asset Pipeline，今年是… Rails 4 將會讓你的 project 爛一堆東西，但爛什麼他沒說（抖 XD）
+
+### Rails core: Aaron Patterson
+
+Aaron 的主題則是他從現在的 Rails stack 中看到什麼爛的東西，他今年會重寫哪一部分的底層（都是 Conf 結束後才會開始）。去年他是靠北 rack 實在太多層了嚴重影響 performance，於是他決定重寫 rack。但今年他坦承工程太大最後他放棄…XD。今年則是靠北每套 Queue 的介面和實作方式不一樣，他想要寫 ActiveQueue 這種東西。
+
+### Entrepreneurship
+
+自 2010 起，都有一個 keynote 會講創業。2010 年請到 Gary Vaynerchuk，2011 年請到 Eric Ries。今年則請到 Techstar 的 David Cohen（VC)。
+
+不過今年 David Cohen 的場次真是無聊到爆炸…講的都是老生常談的東西。2010 的 Gary 就熱血許多，大概也許他是創業家的關係。
+
+### Ruby Hero Award
+
+每年大會都會頒發 Ruby Hero Award 給對社群有重大貢獻的開發者。有一些人通常你只有在網路上見過 id，能看到作者真的都還蠻有趣的。
+
+### Panel Discussion
+
+每年都會有 Rails core team panel discussion。會邀請今年在場的 Rails core team 現場接受提問然後大亂鬥。基本上每年都會有 DHH 在場，不過今年他沒有參加。今年現場的 Panelist 跟往年的成員組成成分都不太一樣。成員有 Aaron Patterson, Yehuda Katz, Santiago Pastorino, Jim Weirich(大師倒楣被抓來充數)。
+
+不過光看 Aaron Patterson 和 Yehuda Katz 吵架就真的超有趣的，值回票價。Yehuda 真人講話跟網路上文章（很有禮貌）差很多，語調都超挑釁的。而且最機車的是他每次都吵贏（看他戰幾個主題感覺他真的很熟 Ruby / Rails，Aaron 還戰輸他）。
+
+### Ruby Rogues Live
+
+RubyRogues 是這一年來比較新的 Podcast，每週主題都很不錯，主要在深度的討論 Ruby / Rails 周邊的哲學、工具、語言框架特性…etc.
+
+大會這次準備了現場版。有趣程度直逼 panel discussion，主要是現場大戰互酸開玩笑都很 high。
+
+## 8. After Party 
+
+我不是講者，所以不知道大會有沒有講者晚餐。但是參加的這幾天，幾乎每天都有 HappyHour 或者是 After Party。這些都是大會贊助廠商贊助的，如 Engine Yard、New Relic、Bluebox。基本上就是租下超大的一整層 bar，讓 developer hangout。在 conf 後能有地方可以免費喝酒、聽樂團、有地方聊天。
+
+場地真的無敵大。大概可以塞下 500 人左右。我在這裡認識不少新朋友。
+
+## 9. 現場白板
+
+大會現場準備了三大塊白板。主要用途是公布議程、社群告示板（ hiring , contest, announcement…etc)
+
+這些白板不到一天就被塗的滿滿了。
+
+## 10. 講者 （講題） / 錄影 / Slides / 筆記
+
+### 講者（講題）
+
+基本上講者和講題都算專業和有深度的，主 track 不小心出現初學 101 等級的 talk 的機率很低。因為已經有一條主要的 track 是專門排給 101 等級的，而且都是平常的職業教學者在講。
+
+不過還是有幾個講者是雷。題目很吸引人，結果在講 101，**這一些題目就被開發者在 twitter 上幹很兇。因為都(繳了這麼多錢)參加 conf 了，就是要學新 / 深的東西，竟然還講一些回家在網站上看 Turtorial 就可以知道的東西，浪費大家時間 =_=||||**。
+
+不過我後來發現一個鑑定手法，只要是主題還在 Rails / Ruby Ecosystem 本身的，幾乎都有一定水準。但講其他搭配語言或技術的幾乎都是超級大雷…
+
+而大概是 conf 本身等級很高，講者台風都有一定等級，看得出來都有稍微排練過。（雖然還是可以看到他們現場在狂改投影片，我剛好恰巧有幾次坐在講者旁邊看他們一直在改 XD）
+
+複述觀眾問題：**觀眾問問題的時候，都會用麥克風重新複述一遍問題，讓全場可以聽到和讓錄影團隊收到音**。
+
+### 錄影
+
+現場有雇用專業的 confreaks 團隊，錄下整場的影片。通常會在大會結束的一個月左右，上傳公布。
+
+### 投影片網址
+
+講者在 **Slides 第一張，或是最後一張，都會放 Slide 網址。**
+
+### 社群共筆筆記
+
+共筆筆記：而這次最誇張的，是竟然有人在 Github 上開 [Wiki Repo](https://github.com/newhavenrb/railsconf2012/wiki) 讓大家上傳。每天 conf 結束之後，上面就滿滿的更新了！

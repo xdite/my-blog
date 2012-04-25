@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Stickies Gem - Blog.XDite.net</title>
+  <title>Railsconf 2012 - 國際性 conference 是這樣辦的 （中） - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 ihower 在 和多 時把這個 plugin 翻成 ...">
+  <meta name="description" content="          7. Keynote大會準備的 Keynote 都蠻有趣和有意義。基本上 DHH (Rails creator) 和 Aaron Patterson （Ruby core, Rails core）每年都會給 talk。Rails core: DHHDHH 的主題大概會是他會...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/19/stickies-gem/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Stickies Gem</h1>
+      <h1 class="entry-title">Railsconf 2012 - 國際性 Conference 是這樣辦的 （中）</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-10-19T14:38:00-05:00" pubdate  data-updated="true" >Oct 19<span>th</span>, 2011</time>
+<time datetime="2012-04-25T10:32:00-05:00" pubdate  data-updated="true" >Apr 25<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,26 +98,79 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。</p>
+  <h2>7. Keynote</h2>
 
-<p><img src="http://farm7.static.flickr.com/6114/6259519683_ae8e1d15b6.jpg"></p>
+<p>大會準備的 Keynote 都蠻有趣和有意義。</p>
 
-<p>stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 <a href="http://ihower.tw">ihower</a> 在 <a href="http://handlino.com">和多</a> 時把這個 plugin 翻成 jQuery 版本。</p>
+<p>基本上 DHH (Rails creator) 和 Aaron Patterson （Ruby core, Rails core）每年都會給 talk。</p>
 
-<p>這套 plugin 我自己還蠻喜歡用的。T 客邦內部也用了很多，不過因為內部有 Gem （認證系統）預設訊息就綁 stickies，每次開新專案裝完認證，就要手動 copy plugin 到 vendor/ 和手動 copy assets 到 public/，有夠麻煩&#8230;</p>
+<h3>Rails core: DHH</h3>
 
-<p>今天進公司大概跟同事聊了一下昨天寫的用 <a href="http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/">Asset Pipeline 掛 Asset</a> 的概念。</p>
+<p>DHH 的主題大概會是他會想硬幹什麼（現在進行式），2011 是 Asset Pipeline，今年是… Rails 4 將會讓你的 project 爛一堆東西，但爛什麼他沒說（抖 XD）</p>
 
-<p><a href="http://twitter.com/v1nc3ntlaw">vincent</a> 就覺得 stickies 應該要首先被拔出去，每次 copy asset 實在太麻煩了，將來最好還可以放在認證系統的 Gemfile dependency 上。於是剛剛我就接下來作了。</p>
+<h3>Rails core: Aaron Patterson</h3>
 
-<p>本來以為只是掛 asset 而已，小事一樁。不巧的我發現它還是 Rails 2.x 時代的 Rails Plugin。於是剛剛索性將架構作了一番重構。</p>
+<p>Aaron 的主題則是他從現在的 Rails stack 中看到什麼爛的東西，他今年會重寫哪一部分的底層（都是 Conf 結束後才會開始）。去年他是靠北 rack 實在太多層了嚴重影響 performance，於是他決定重寫 rack。但今年他坦承工程太大最後他放棄…XD。今年則是靠北每套 Queue 的介面和實作方式不一樣，他想要寫 ActiveQueue 這種東西。</p>
 
-<p>（重寫 generator，用 Railtie / Engine 作 gem )</p>
+<h3>Entrepreneurship</h3>
 
-<p>目前 stickies 已經被我包裝成 rubygems，並支援 Rails 3.0 / 3.1。
-而且 3.1 版本可以直接用 asset pipeline 掛 assets。不需要再跑 copy tasks )</p>
+<p>自 2010 起，都有一個 keynote 會講創業。2010 年請到 Gary Vaynerchuk，2011 年請到 Eric Ries。今年則請到 Techstar 的 David Cohen（VC)。</p>
 
-<p>code 放在這裡：<a href="https://github.com/techbang/stickies">https://github.com/techbang/stickies</a></p>
+<p>不過今年 David Cohen 的場次真是無聊到爆炸…講的都是老生常談的東西。2010 的 Gary 就熱血許多，大概也許他是創業家的關係。</p>
+
+<h3>Ruby Hero Award</h3>
+
+<p>每年大會都會頒發 Ruby Hero Award 給對社群有重大貢獻的開發者。有一些人通常你只有在網路上見過 id，能看到作者真的都還蠻有趣的。</p>
+
+<h3>Panel Discussion</h3>
+
+<p>每年都會有 Rails core team panel discussion。會邀請今年在場的 Rails core team 現場接受提問然後大亂鬥。基本上每年都會有 DHH 在場，不過今年他沒有參加。今年現場的 Panelist 跟往年的成員組成成分都不太一樣。成員有 Aaron Patterson, Yehuda Katz, Santiago Pastorino, Jim Weirich(大師倒楣被抓來充數)。</p>
+
+<p>不過光看 Aaron Patterson 和 Yehuda Katz 吵架就真的超有趣的，值回票價。Yehuda 真人講話跟網路上文章（很有禮貌）差很多，語調都超挑釁的。而且最機車的是他每次都吵贏（看他戰幾個主題感覺他真的很熟 Ruby / Rails，Aaron 還戰輸他）。</p>
+
+<h3>Ruby Rogues Live</h3>
+
+<p>RubyRogues 是這一年來比較新的 Podcast，每週主題都很不錯，主要在深度的討論 Ruby / Rails 周邊的哲學、工具、語言框架特性…etc.</p>
+
+<p>大會這次準備了現場版。有趣程度直逼 panel discussion，主要是現場大戰互酸開玩笑都很 high。</p>
+
+<h2>8. After Party</h2>
+
+<p>我不是講者，所以不知道大會有沒有講者晚餐。但是參加的這幾天，幾乎每天都有 HappyHour 或者是 After Party。這些都是大會贊助廠商贊助的，如 Engine Yard、New Relic、Bluebox。基本上就是租下超大的一整層 bar，讓 developer hangout。在 conf 後能有地方可以免費喝酒、聽樂團、有地方聊天。</p>
+
+<p>場地真的無敵大。大概可以塞下 500 人左右。我在這裡認識不少新朋友。</p>
+
+<h2>9. 現場白板</h2>
+
+<p>大會現場準備了三大塊白板。主要用途是公布議程、社群告示板（ hiring , contest, announcement…etc)</p>
+
+<p>這些白板不到一天就被塗的滿滿了。</p>
+
+<h2>10. 講者 （講題） / 錄影 / Slides / 筆記</h2>
+
+<h3>講者（講題）</h3>
+
+<p>基本上講者和講題都算專業和有深度的，主 track 不小心出現初學 101 等級的 talk 的機率很低。因為已經有一條主要的 track 是專門排給 101 等級的，而且都是平常的職業教學者在講。</p>
+
+<p>不過還是有幾個講者是雷。題目很吸引人，結果在講 101，<strong>這一些題目就被開發者在 twitter 上幹很兇。因為都(繳了這麼多錢)參加 conf 了，就是要學新 / 深的東西，竟然還講一些回家在網站上看 Turtorial 就可以知道的東西，浪費大家時間 =_=||||</strong>。</p>
+
+<p>不過我後來發現一個鑑定手法，只要是主題還在 Rails / Ruby Ecosystem 本身的，幾乎都有一定水準。但講其他搭配語言或技術的幾乎都是超級大雷…</p>
+
+<p>而大概是 conf 本身等級很高，講者台風都有一定等級，看得出來都有稍微排練過。（雖然還是可以看到他們現場在狂改投影片，我剛好恰巧有幾次坐在講者旁邊看他們一直在改 XD）</p>
+
+<p>複述觀眾問題：<strong>觀眾問問題的時候，都會用麥克風重新複述一遍問題，讓全場可以聽到和讓錄影團隊收到音</strong>。</p>
+
+<h3>錄影</h3>
+
+<p>現場有雇用專業的 confreaks 團隊，錄下整場的影片。通常會在大會結束的一個月左右，上傳公布。</p>
+
+<h3>投影片網址</h3>
+
+<p>講者在 <strong>Slides 第一張，或是最後一張，都會放 Slide 網址。</strong></p>
+
+<h3>社群共筆筆記</h3>
+
+<p>共筆筆記：而這次最誇張的，是竟然有人在 Github 上開 <a href="https://github.com/newhavenrb/railsconf2012/wiki">Wiki Repo</a> 讓大家上傳。每天 conf 結束之後，上面就滿滿的更新了！</p>
 
 </div>
 
@@ -139,7 +192,7 @@
 
 
 
-<time datetime="2011-10-19T14:38:00-05:00" pubdate  data-updated="true" >Oct 19<span>th</span>, 2011</time>
+<time datetime="2012-04-25T10:32:00-05:00" pubdate  data-updated="true" >Apr 25<span>th</span>, 2012</time>
       
 
 
@@ -148,7 +201,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/19/stickies-gem/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/19/stickies-gem/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -224,8 +277,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/19/stickies-gem/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/19/stickies-gem/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2/';
         var disqus_script = 'embed.js';
       
     (function () {

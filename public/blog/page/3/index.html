@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  在設計需要顏色循環的表格時你會怎麼作？Rails初入門者使用兩種不同 HTML class : even 與 odd，上不同的顏色12345678910111213141516&lt;% count = 0 %&gt;&lt;table&gt;&lt;% @...">
+  <meta name="description" content="                  前幾天 Code School 的 CSS Cross Country 課程釋出了。這一集是我相當期待的一集，整理和澄清了非常多「非常基礎但如果觀念不好」就會搞得一塌糊塗的 CSS 知識。看完把筆記整理在這裡，不過相較於原網站，我寫的算是非常簡陋的版本。我相...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,679 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/01/29/css-tricks-summary/">[讀書筆記] CSS 基礎技巧懶人包</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-01-29T14:24:00-06:00" pubdate  data-updated="true" >Jan 29<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/01/29/css-tricks-summary/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/29/css-tricks-summary/" data-show-faces="false"></div></div>
+    
+    <p>前幾天 Code School 的 <a href="http://www.codeschool.com/courses/css-cross-country">CSS Cross Country</a> 課程釋出了。這一集是我相當期待的一集，整理和澄清了非常多「非常基礎但如果觀念不好」就會搞得一塌糊塗的 CSS 知識。</p>
+
+<p>看完把筆記整理在這裡，不過相較於原網站，我寫的算是非常簡陋的版本。</p>
+
+<p>我相當強烈推薦大家購買回去和練習，相信會對自己的 CSS 掌握能力有高度的提升。</p>
+
+<h2>Ch1</h2>
+
+<h3>Style 生效的位置</h3>
+
+<ul>
+<li>inline style</li>
+<li>在 <code>&lt;head&gt; &lt;/head&gt;</code> 裡面</li>
+<li>external link: 如 <code>link rel="stylesheet" href="style.css"</code></li>
+</ul>
+
+
+<h3>Selectos</h3>
+
+<ul>
+<li>Element selector</li>
+<li>Class selector</li>
+<li>ID selector</li>
+<li>Compound selector : <code>h1#header</code></li>
+</ul>
+
+
+<h3>Advanced Selector</h3>
+
+<p>ref: <a href="http://coding.smashingmagazine.com/2009/08/17/taming-advanced-css-selectors/">Taming Advanced CSS Selectors</a></p>
+
+<ul>
+<li><code>#sidebar h2</code>— 0, 1, 0, 1</li>
+<li><code>h2.title</code> — 0, 0, 1, 1</li>
+<li><code>h2 + p</code> — 0, 0, 0, 2</li>
+<li><code>#sidebar p:first-line</code> — 0, 1, 0, 2</li>
+</ul>
+
+
+<h3>cascade order</h3>
+
+<p>優先權照</p>
+
+<ul>
+<li>external <code>&lt;link&gt;</code></li>
+<li><code>&lt;head&gt;</code></li>
+<li>inline style</li>
+<li>!important</li>
+<li>相同的 selector 重複的屬性，後寫的會覆蓋前面的。沒有重複的則會合併。</li>
+</ul>
+
+
+<h3>Float</h3>
+
+<h4>定義</h4>
+
+<ul>
+<li>把元素從傳統的 document flow 中移除，然後浮動掛在指定的邊界上。</li>
+<li>其他在 parent 元素的內容會繞著這個 float 的元素排列。</li>
+</ul>
+
+
+<h4>種類</h4>
+
+<ul>
+<li>float: left</li>
+<li>float: right</li>
+<li>float: none</li>
+</ul>
+
+
+<h4>Stacking order</h4>
+
+<ul>
+<li>浮動的元素從 parent 的左/右邊界開始排，不夠放的話會找另下一個可以停泊的邊界繼續排</li>
+<li>如果浮動的元素高度不同，例如左邊的特別長，旁邊的元素的比他短，則下一個停泊的不會是左邊界，而是會停在左邊元素的右邊。（下一個可以停泊的邊界原則）</li>
+</ul>
+
+
+<h4>floating left &amp; right</h4>
+
+<p>同時使用 float:left 與 float:right，寬度夠的話，會分列兩邊。如果寬度不夠，以先 claim 的會是第一排(靠右），後 claim 的會被扔到下一排（靠左）去。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;content1&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;content2&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.content1</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">float</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.content2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">float</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ch2</h2>
+
+<h3>clearfix</h3>
+
+<h4>為什麼要使用  cleafix</h4>
+
+<ul>
+<li>狀況一：float 元素可能比旁邊的非 float 元素高。（因為 float 沒有高度）所以下一段會黏上來。</li>
+<li>狀況二：所有的 children 都是 float。（因為 float 沒有高度）所以 container 看起來會太短。</li>
+</ul>
+
+
+<h5>常用  clearfix 技巧</h5>
+
+<h6>clear with a subsequent elemet ( 在下面的元素放 <code>clear: both</code> )</h6>
+
+<ul>
+<li>但這一招移動 div 順序就會爆炸</li>
+<li>背景和邊界不會被展延</li>
+</ul>
+
+
+<p>失敗！</p>
+
+<h6>manual clearing （手動在下面塞一個空的 div，對它下 <code>clear: both</code>)</h6>
+
+<ul>
+<li>需要塞一個空的 element</li>
+<li>看起來很礙眼</li>
+</ul>
+
+
+<h4>正解技巧 ( self-cleared )</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'>
+</span><span class='line'><span class="nc">.group</span><span class="nd">:before</span><span class="o">,</span> <span class="nc">.group</span><span class="nd">:after</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">content</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>   <span class="k">display</span><span class="o">:</span> <span class="n">table</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.group</span><span class="nd">:after</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">clear</span><span class="o">:</span> <span class="k">both</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.group</span> <span class="p">{</span>
+</span><span class='line'>   <span class="n">zoom</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span> <span class="c">/* IE6&amp;7 */</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>.group 要下在 parent node</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;float-left&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;p&gt;</span> blah <span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Inheritance &amp; Specificity</h3>
+
+<ul>
+<li>巢狀元素會自動繼承 parent 的 style</li>
+<li>可以 override parent 的 style</li>
+<li>id 比 class 的優先權高</li>
+</ul>
+
+
+<h4>優先權算法</h4>
+
+<p>0,0,0,0</p>
+
+<ul>
+<li>第一個數字：inline style</li>
+<li>第二個數字：of ID selectors</li>
+<li>第三個數字：of class selectors</li>
+<li>第四個數字：of element seletors</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>p { color: #fff; }  # 0,0,0,1
+</span><span class='line'>.intro { color: #98c7d4; } # 0,0,1,0
+</span><span class='line'>#header { color: #444245; } # 0,1,0,0
+</span><span class='line'><span class="nt">&lt;h1</span> <span class="na">style=</span><span class="s">&quot;color: #000;&quot;</span><span class="nt">&gt;</span>Mogul<span class="nt">&lt;/h1&gt;</span> # 1,0,0,0
+</span><span class='line'>p { color: #fff !important; }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>越大的可以把祖先蓋掉。</p>
+
+<p>延伸閱讀：[Don’t use ID selectors in CSS]http://screwlewse.com/2010/07/dont-use-id-selectors-in-css/</p>
+
+<h2>Ch3</h2>
+
+<h3>box model</h3>
+
+<p>由內往外是</p>
+
+<ul>
+<li>content area</li>
+<li>padding area</li>
+<li>border area</li>
+<li>margin area</li>
+</ul>
+
+
+<p>寬度計算</p>
+
+<p>box width =  content width + padding width + border width</p>
+
+<h3>overflow</h3>
+
+<ul>
+<li>visible: the default value, which allows content to extend beyond container boundaries</li>
+<li>auto:  adds a scrollbar as needed when content overflows</li>
+<li>hidden: hides content that extends beyond the container</li>
+<li>scroll:  adds a scrollbar at all times, even if unneeded</li>
+</ul>
+
+
+<h3>positioning</h3>
+
+<p>有四種</p>
+
+<ul>
+<li>static</li>
+<li>relative</li>
+<li>absolute</li>
+<li>fixed</li>
+</ul>
+
+
+<p>定義</p>
+
+<ul>
+<li>Elements have a position value of static by default</li>
+<li>Using a value other than static causes an object to become a positioned element</li>
+<li>Positioned elements may use the top, left, bottom, and right properties for placement</li>
+</ul>
+
+
+<h4>Relative positioning</h4>
+
+<p>Renders in the normal flow, then shifted via positioning properties</p>
+
+<h4>Absolute positioning</h4>
+
+<p>Takes an element out of the normal flow for manual positioning</p>
+
+<h4>定位技巧</h4>
+
+<p>parent element 下 relative，內部需要定位的元素下 absolute，就不會超過邊界。</p>
+
+<h4>Fixed positioning</h4>
+
+<p>Affixes an element to a specific place in the window, where it will stay regardless of scrolling。（在螢幕上永遠保持不動，釘住）</p>
+
+<h3>z-index</h3>
+
+<ul>
+<li>No z-index or equal z-index = overlap determined by placement in DOM （後放的疊在先放的上面）</li>
+<li>Higher values appear above lower values（ z-index 比較大的在比較上面）</li>
+<li>Elements must be positioned for z-index to take effect. Use relative if you&#8217;re not interested in moving the object （必須先被「定位」，才能使用 z-index)</li>
+</ul>
+
+
+<p>延伸閱讀： <a href="https://developer.mozilla.org/en/Understanding_CSS_z-index">Understanding CSS z-index</a></p>
+
+<h2>Ch4</h2>
+
+<h3>整理 CSS code</h3>
+
+<h4>用 <code>,</code></h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>p .content h3{
+</span><span class='line'>   color: red;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>padding/margin 上右下左</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>.content {
+</span><span class='line'>   margin: 15px 10px 0 20px; /* top right bottom left */ }
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>其他綜合</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'>   <span class="nt">font</span><span class="o">:</span> <span class="nt">16px</span><span class="o">/</span><span class="nt">18px</span> <span class="nt">bold</span> <span class="nt">italic</span> <span class="nt">sans-serif</span><span class="o">;</span> <span class="c">/* size/line-height weight style family */</span>
+</span><span class='line'>   <span class="nt">background</span><span class="o">:</span> <span class="nf">#000</span> <span class="nt">url</span><span class="o">(</span><span class="nt">image</span><span class="nc">.jpg</span><span class="o">)</span> <span class="nt">no-repeat</span> <span class="nt">center</span> <span class="nt">top</span><span class="o">;</span> <span class="c">/* color image repeat x-pos y-pos */</span>
+</span><span class='line'>   <span class="nt">list-style</span><span class="o">:</span> <span class="nt">disc</span> <span class="nt">inside</span> <span class="nt">none</span><span class="o">;</span> <span class="c">/* style position image */</span>
+</span><span class='line'>   <span class="nt">margin</span> <span class="nt">or</span> <span class="nt">padding</span><span class="o">:</span> <span class="nt">0</span> <span class="nt">10px</span> <span class="nt">0</span> <span class="nt">10px</span> <span class="o">/</span> <span class="nt">0</span> <span class="nt">10px</span> <span class="nt">0</span> <span class="o">/</span> <span class="nt">0</span> <span class="nt">10px</span><span class="o">;</span> <span class="c">/* top right bottom left / top right&amp;left bottom / top&amp;bottom right&amp;left */</span>
+</span><span class='line'>   <span class="nt">border</span><span class="o">:</span> <span class="nt">3px</span> <span class="nt">solid</span> <span class="nf">#ccc</span><span class="o">;</span> <span class="c">/* width style color */</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Display types</h3>
+
+<h4>block</h4>
+
+<ul>
+<li>Stretch the full width of their container ( container 有多寬就延伸到多寬)</li>
+<li>Behave as though there is a line break before and after the element （有斷行效果）</li>
+<li>Full box model can be manipulated￼￼Display Types</li>
+</ul>
+
+
+<p>Block elements: Tags that are block-level by default: <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul</code>>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code> and <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>.</p>
+
+<h4>inline</h4>
+
+<ul>
+<li>Typically found within block-level elements (通常可以在 block 元素裡找到)</li>
+<li>Only take up the space of the content inside （只有內容的寬度）</li>
+<li>Do not generate a line break before and after the content （沒有斷行效果）</li>
+</ul>
+
+
+<p>Tags that are inline by default include <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;img&gt;</code></p>
+
+<h4>inline-block</h4>
+
+<ul>
+<li>Same flow as an inline element but behave as a block element (可以玩 box model)</li>
+</ul>
+
+
+<h3>水平置中技巧</h3>
+
+<h4>Centering a block-level element</h4>
+
+<ul>
+<li>Define a width, and the element width must be less than that of the parent container</li>
+<li>margin: 0 auto;</li>
+</ul>
+
+
+<h3>Centering inline and inline-block elements</h3>
+
+<ul>
+<li>text-align: center</li>
+</ul>
+
+
+<h2>Ch5</h2>
+
+<h3>margin 重疊問題</h3>
+
+<p>多個 margin 疊在一起，會有 margin 重疊問題（ margin 會合併計算，取最大的。假設第一個 div margin-bottom: 40px，第二個 div margin-top: 20px。則他們的距離會是 40px ，而不是 60px）。</p>
+
+<h4>解決重疊技巧：</h4>
+
+<p>Collapsing margins will not occur when one or more block element has:</p>
+
+<ul>
+<li>Padding or border</li>
+<li>Relative or absolute positioning</li>
+<li>A float left or right</li>
+</ul>
+
+
+<p>延伸閱讀： <a href="http://www.w3.org/TR/CSS2/box.html#collapsing-margins">Collapsing margins</a></p>
+
+<h3>rest &amp; normalize</h3>
+
+<p><a href="http://meyerweb.com/eric/tools/css/reset/">Eric Meyer&#8217;s Reset CSS</a>
+<a href="http://necolas.github.com/normalize.css/">Normalize.css</a></p>
+
+<h2>Ch6</h2>
+
+<h3>Content Image 與 Layout image</h3>
+
+<ul>
+<li>Content should be marked up as inline images</li>
+<li>Layout elements should be defined as background images</li>
+</ul>
+
+
+<h3>Image Cropping</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;crop&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;snowboard.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;Snowboard&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/li&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">crop</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">height</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">400px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.crop</span> <span class="nt">img</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">height</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其實沒有多少好的方法，建議取代方案：</p>
+
+<ul>
+<li>Resize images to a square &lt; height and width of all of your images</li>
+<li>Resize them server-side</li>
+<li>Provide image-uploading instructions in your CMS</li>
+</ul>
+
+
+<p>延伸閱讀：<a href="http://clagnut.com/sandbox/imagetest">Experiments with wide images</a></p>
+
+<h2>Ch7</h2>
+
+<h3>圖片取代文字技巧</h3>
+
+<p>使用 text-indent: -9999px;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.logo</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background</span><span class="o">:</span> <span class="sx">url(logo.png)</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">height</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">text-indent</span><span class="o">:</span> <span class="m">-9999px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>css spirite 技巧</h3>
+
+<h4>為什麼要使用 CSS spirite</h4>
+
+<p>Issues with swapping background images:</p>
+
+<ul>
+<li>Adds an extra HTTP request</li>
+<li>Image is not preloaded （網路不夠快時，hover 感覺畫面會閃一下）</li>
+</ul>
+
+
+<p>Advantages to the sprite approach:</p>
+
+<ul>
+<li>Reduces number of HTTP image requests</li>
+<li>Removes loading flash / need for preload</li>
+</ul>
+
+
+<h4>使用方法</h4>
+
+<p>Multiple images &amp; states:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'> <span class="nc">.twitter</span><span class="o">,</span> <span class="nc">.github</span> <span class="p">{</span>
+</span><span class='line'>     <span class="k">background</span><span class="o">:</span> <span class="sx">url(social.png)</span><span class="p">;</span>
+</span><span class='line'>     <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span>
+</span><span class='line'>     <span class="k">height</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span>
+</span><span class='line'>     <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span>
+</span><span class='line'>     <span class="k">text-indent</span><span class="o">:</span> <span class="m">-9999px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.github</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">background-position</span><span class="o">:</span> <span class="m">-100px</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.twitter</span><span class="nd">:hover</span><span class="o">,</span> <span class="nc">.twitter</span><span class="nd">:focus</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">background-position</span><span class="o">:</span> <span class="m">0</span> <span class="m">-100px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.github</span><span class="nd">:hover</span><span class="o">,</span> <span class="nc">.github</span><span class="nd">:focus</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">background-position</span><span class="o">:</span> <span class="m">-100px</span> <span class="m">-100px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>延伸閱讀: <a href="http://www.spritecow.com/">Spritecow</a></p>
+
+<h2>Ch8</h2>
+
+<h2>psuedo class</h2>
+
+<p>Allow you to conditionally select an element based on state or position</p>
+
+<ul>
+<li>last-child</li>
+<li>nth-child (an+b)</li>
+</ul>
+
+
+<p>延伸閱讀：</p>
+
+<ul>
+<li><a href="http://css-tricks.com/pseudo-class-selectors/">Meet the Pseudo Class Selectors</a></li>
+<li><a href="https://developer.mozilla.org/en/CSS_Reference">CSS Reference</a> # 支援瀏覽器列表</li>
+</ul>
+
+
+<h2>psuedo element</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;article&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;p&gt;</span>Coffee? Hah! Our cocoa is far better.<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;p&gt;</span>Visit from 4-5 for cocoa happy hour!<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/article&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">article</span> <span class="nt">p</span><span class="nd">:last-child:after</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">content</span><span class="o">:</span> <span class="s1">&#39;\2744&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>利用 before, after 技巧</h3>
+
+<h4>取代掉無用 element</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;blockquote&gt;</span>
+</span><span class='line'>Coffee? Hah! Our cocoa is far better.
+</span><span class='line'><span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;/blockquote&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原本是對 <code>blockquote span</code> 下 styling。</p>
+
+<p>改成對 <code>blockquote:before</code> 下 styling。</p>
+
+<p>html 可以砍成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;blockquote&gt;</span>
+</span><span class='line'>Coffee? Hah! Our cocoa is far better.
+</span><span class='line'><span class="nt">&lt;/blockquote&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>利用 before, after 實作縮排</h4>
+
+<p>延伸閱讀：<a href="http://css-tricks.com/pseudo-element-roundup/">A Whole Bunch of Amazing Stuff Pseudo Elements Can Do</a></p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1703,135 +2376,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/01/04/how-to-pack-a-gem/">[Ruby][教學] 如何打包一個 Gem</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-04T08:53:00-06:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/01/04/how-to-pack-a-gem/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/" data-show-faces="false"></div></div>
-    
-    <h2>What is Gem</h2>
-
-<p>RubyGems 是 Ruby 的 Package 管理系統。它的作用類似 Linux 系統下的 apt-get 或者是 yum。不同的是：RubyGems 是提供「打包」好的 Ruby Library 讓開發者能夠重複利用別人已造好的輪子，提高開發效率。</p>
-
-<p>而目前 Rails 3.0+ 起，幾乎都也推薦使用 RubyGems 的方式，將 Plugin 打包成 Gem 的方式搭配 Bundler 使用。</p>
-
-<h2>打包 Gem</h2>
-
-<p>隨著時代進步，打包和發佈 Gem 的方式一直在進步。</p>
-
-<p>最早以前大家都是手工製造 ( <a href="http://railscasts.com/episodes/135-making-a-gem">RailsCast #135</a> )，後來 Jeweler( <a href="http://railscasts.com/episodes/183-gemcutter-jeweler">RailsCast #183</a> ) 被發明出來，讓打包變得非常容易。</p>
-
-<p>而到最後，更演變成了 Bundler 內建 ( <a href="http://asciicasts.com/episodes/245-new-gem-with-bundler">Rails 245</a> )。</p>
-
-<p>包裝一個 Gem 變得越來越容易。</p>
-
-<h2>Gem 的基本結構</h2>
-
-<p>若以 Bundler 內建的指令 <code>bundle gem GEM_NAME</code> 自動生出來的檔案。其實 Gem 的結構也相當簡單。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>    [~/projects/exp] $ bundle gem my_plugin
-</span><span class='line'>          create  my_plugin/Gemfile
-</span><span class='line'>          create  my_plugin/Rakefile
-</span><span class='line'>          create  my_plugin/.gitignore
-</span><span class='line'>          create  my_plugin/my_plugin.gemspec
-</span><span class='line'>          create  my_plugin/lib/my_plugin.rb
-</span><span class='line'>          create  my_plugin/lib/my_plugin/version.rb
-</span><span class='line'>    Initializating git repo in /Users/xdite/projects/exp/my_plugin</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><code>Gemfile</code> # 描述 dependency</li>
-<li><code>Rakefile</code> # 發佈和打包的 rake tasks</li>
-<li><code>GEM_NAME.gemspec</code> # gem 的 spec</li>
-<li><code>GEM_NAME/lib/GEM_NAME.rb</code> 與 <code>GEM_NAME/lib/GEMNAME/</code> # gem 裡的 library</li>
-<li><code>GEM_NAME/lib/GEM_NAME/version.rb</code> # 版本紀錄</li>
-</ul>
-
-
-<p>主要的 Library 需放置在 lib/ 底下。</p>
-
-<p>若需使用到相依套件的話，需在 Gemfile 以及 .gemsepc 定義。</p>
-
-<h3>Bundler 提供的基本 Task</h3>
-
-<p>Bundler 基本上算是提供半自動的打包，只提供非常基本的三個 Task：</p>
-
-<ul>
-<li><code>rake build</code>    # Build my_plugin-0.0.1.gem into the pkg directory</li>
-<li><code>rake install</code>  # Build and install my_plugin-0.0.1.gem into system gems</li>
-<li><code>rake release</code>  # Create tag v0.0.1 and build and push my_plugin-0.0.1.gem to Rubygems</li>
-</ul>
-
-
-<h2>Jeweler</h2>
-
-<p>若你有更多懶人需求，不妨 check <a href="https://github.com/technicalpickles/jeweler">Jeweler</a> 這個 gem，它提供了更多 rake tasks 讓打包更加方便。</p>
-
-<h2>Best Practices</h2>
-
-<p>Rails Core Team member 「Josh Peek」曾經在 Rails 官方 blog 寫過一篇文章 <a href="http://weblog.rubyonrails.org/2009/9/1/gem-packaging-best-practices">Gem Packaging: Best Practices</a> 講解如何寫出比較乾淨正確的 Gem。</p>
-
-<h2>如何在專案中使用開發中的 gem</h2>
-
-<p>以往的想法可能都是打包之後，在 local 安裝開發中的 gem 版本，或者是直接先放在 vendor/plugins 中測試。在有了 Bundler 的時代其實不需要這麼麻煩。</p>
-
-<p>只要在 Gemfile 內加入這樣一行</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;my_plugin&#39;</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;~/projects/exp/my_plugin&quot;</span>  <span class="c1"># your local gem path </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就可以引用開發中的 gem，等到真的開發完。再換成 git repo 或 rubygems.org 上的版本。</p>
-
-<p>=====</p>
-
-<p>現在我每週都固定有在回答一些問題，發現不少人對 Ruby / Rails 的一些疑惑，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
-
-<p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1866,6 +2410,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/04/25/railsconf-2012-2/">Railsconf 2012 - 國際性 conference 是這樣辦的 （中）</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/04/24/railsconf-2012/">Railsconf 2012 - 國際性 conference 是這樣辦的 （上）</a>
       </li>
     
@@ -1879,10 +2427,6 @@
     
       <li class="post">
         <a href="/posts/2012/03/26/issue-tracking-project-management-agile/">為什麼必須使用 Issue Tracking System 管理專案？</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/03/24/essential-rails-pattern-update/">Essential Rails Pattern 開始 update</a>
       </li>
     
   </ul>
