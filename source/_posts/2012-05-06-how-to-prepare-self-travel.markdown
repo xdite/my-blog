@@ -64,7 +64,7 @@ Railsconf 是在 Hilton, Austin 舉辦的。因為大會有談到還蠻兇的 Di
 
 [Stratford](http://zh.hotels.com/hotel/details.html?destination=Hotel+Stratford%2C+a+C-Two+Hotel%2C+%E4%B8%89%E8%97%A9%E5%B8%82+%28%E8%88%8A%E9%87%91%E5%B1%B1%29%2C+%E5%8A%A0%E5%88%A9%E7%A6%8F%E5%B0%BC%E4%BA%9E%2C+%E7%BE%8E%E5%9C%8B&searchParams.arrivalDate=&searchParams.departureDate=&rooms_=1&searchParams.rooms%5B0%5D.numberOfAdults=2&children%5B0%5D=0&asaReport=HomePage%3A%3AHotel&searchParams.landmark=&hotelId=164155&roomno=1&arrivalDate=&departureDate=&rooms%5B0%5D.numberOfAdults=2&landmark=) 的房間比起來就算有點小了。但一樣交通很方便，櫃台也親切。優點是乾淨、整潔、明亮，網路也快。他跟 Powell 差了兩個 block，治安好一點。缺點是靠街的房間晚上很吵...-_-
 
-這兩家旅果我是透過 [Hotels.com](http://hotels.com) 訂的，都是信用卡 prepaid。
+這兩家旅館我是透過 [Hotels.com](http://hotels.com) 訂的，都是信用卡 prepaid。
 
 #### 機場旅館 (過夜班機建議訂)
 
