@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-04-25T15:29:15-05:00</updated>
+  <updated>2012-05-07T05:59:53+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -14,9 +14,147 @@
 
   
   <entry>
+    <title type="html"><![CDATA[如何準備美國自助旅行（行程準備篇）]]></title>
+    <link href="http://blog.xdite.net/posts/2012/05/06/how-to-prepare-self-travel/"/>
+    <updated>2012-05-06T20:10:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/05/06/how-to-prepare-self-travel</id>
+    <content type="html"><![CDATA[<p>這次去美國旅行接近三個禮拜（去參加研討會 + 旅遊）。這算是我第一次的美國自助旅行，機票、保險、飯店，景點的安排幾乎都是自己弄的，
+這次玩得非常開心，中間也幾乎沒出什麼大事。</p>
+
+<p>這次旅程橫跨好幾個點，所以就放棄請旅行社代為安排的計畫，因為即便有辦法請旅行社訂，價格也會超過預算。雖然剛開始有點手忙腳亂，
+但老實說在這過程中還學到不少東西的，</p>
+
+<p>趁記憶猶新，趕快寫下來，也方便其他人參考。</p>
+
+<hr>
+
+
+<h2>行程準備</h2>
+
+<h3>護照、美國簽證</h3>
+
+<p>去美國當然要先辦護照和美國簽證。這是有相依關係的：如果沒有護照，就辦不了美國簽證。沒有美國簽證，旅行社不會賣任何美國機票給你。</p>
+
+<p>機票建議是在 conf 開賣之後就訂下去（越晚訂，日期、位子、價格會越來越爛），所以最好那時候就要開始跑護照和美簽的事。因為光搞定護照和簽證最少就要大概花掉一週的時間。</p>
+
+<p>我手上的美簽是一年前在公司出差時申請到的 B1/B2 簽證，一般人大概是申請 B2。簽證攻略在 PTT 的 VISA 版上有很多，這邊我就不細述了。</p>
+
+<h3>機票</h3>
+
+<h4>去小城市就拆開訂</h4>
+
+<p>我的計畫原本只有打算到奧斯丁參加 Railsconf，去舊金山多玩兩週的行程是之後才決定的。</p>
+
+<p>比較麻煩的是奧斯丁不是直飛點，所以不管是向旅行社洽詢或者是上網到雄獅、燦星詢價，都得到非常爛的價格（大概都五萬多塊）。價格還是其次，比較大的問題是班次很少時間很爛，而且中間的美國轉機點只有洛杉磯可以選。這就跟預定行程完全衝突。</p>
+
+<p>偶然間跟教母 <a href="http://twitter.com/cjin">cjin</a> 靠北到這個問題之後，他建議我採取了另一種策略：「拆開訂」。</p>
+
+<p>於是後來我的機票就變成只跟雄獅訂 「台灣到舊金山」的來回機票。大概台幣 33000 上下。然後再上 <a href="http://priceline.com">Priceline</a> 上訂「舊金山到奧斯丁」的美國國內線來回機票。大概台幣 7-8000 。</p>
+
+<p>拆開訂好處很多，除了價格很明顯的變得非常便宜。最重要的是一把機票拆開訂，這兩段的時間和機位選擇就變得超級多的&#8230;機票瞬間就搞定了。</p>
+
+<h4>美國國內線機票價格不含行李托運費</h4>
+
+<p>這邊要注意的是台北到美國段，我坐國泰的航班，可以免費托運兩件行李各 23.5 kg。但要轉機到奧斯丁的時候，才發現原先我們買的 UA 國內線機票是不含行李托運的。第一件行李要 25 USD，第二件行李是
+ 35 USD，限重也是各 23.5 kg。</p>
+
+<p>重量的分配和額外的支出在這裡是要特別注意的。</p>
+
+<h3>旅館</h3>
+
+<h4>大會期間住宿</h4>
+
+<p>Railsconf 是在 Hilton, Austin 舉辦的。因為大會有談到還蠻兇的 Discount 價（便宜大概 50+ USD) ，而且聽累就可以直接回房間睡很方便。於是在買票的時候，我就順便訂下去了。不過即便有 discount 還是不便宜，打完稅之後還是要 200 USD 出頭一晚。</p>
+
+<h4>舊金山旅館</h4>
+
+<p>聽說舊金山的旅館大概是全美數一數二便宜的（我聽朋友講的），還算事實。120 USD 左右一晚就可以訂到不錯的旅館。當初是上 <a href="http://www.backpackers.com.tw/forum/">背包客棧</a> 作功課，找了幾家候選，最後
+排預算選出來的。我們是住 <a href="http://zh.hotels.com/hotel/details.html?destination=The+Powell+Hotel%2C+%E4%B8%89%E8%97%A9%E5%B8%82+%28%E8%88%8A%E9%87%91%E5%B1%B1%29%2C+%E5%8A%A0%E5%88%A9%E7%A6%8F%E5%B0%BC%E4%BA%9E%2C+%E7%BE%8E%E5%9C%8B&amp;searchParams.arrivalDate=&amp;searchParams.departureDate=&amp;rooms_=1&amp;searchParams.rooms%5B0%5D.numberOfAdults=2&amp;children%5B0%5D=0&amp;asaReport=HomePage%3A%3AHotel&amp;searchParams.landmark=&amp;hotelId=111932&amp;roomno=1&amp;arrivalDate=&amp;departureDate=&amp;rooms%5B0%5D.numberOfAdults=2&amp;landmark=">Powell</a> 和 <a href="http://zh.hotels.com/hotel/details.html?destination=Hotel+Stratford%2C+a+C-Two+Hotel%2C+%E4%B8%89%E8%97%A9%E5%B8%82+%28%E8%88%8A%E9%87%91%E5%B1%B1%29%2C+%E5%8A%A0%E5%88%A9%E7%A6%8F%E5%B0%BC%E4%BA%9E%2C+%E7%BE%8E%E5%9C%8B&amp;searchParams.arrivalDate=&amp;searchParams.departureDate=&amp;rooms_=1&amp;searchParams.rooms%5B0%5D.numberOfAdults=2&amp;children%5B0%5D=0&amp;asaReport=HomePage%3A%3AHotel&amp;searchParams.landmark=&amp;hotelId=164155&amp;roomno=1&amp;arrivalDate=&amp;departureDate=&amp;rooms%5B0%5D.numberOfAdults=2&amp;landmark=">Stratford</a> 這兩間。</p>
+
+<p>這兩家都離 Union Square 很近，靠近各種交通工具的起點，所以我蠻推薦住這一區的。但缺點是 Union Square 晚上超過九點以後，附近會變得比三重還要三重，治安很亂，這是唯一的擔憂。</p>
+
+<p><a href="http://zh.hotels.com/hotel/details.html?destination=The+Powell+Hotel%2C+%E4%B8%89%E8%97%A9%E5%B8%82+%28%E8%88%8A%E9%87%91%E5%B1%B1%29%2C+%E5%8A%A0%E5%88%A9%E7%A6%8F%E5%B0%BC%E4%BA%9E%2C+%E7%BE%8E%E5%9C%8B&amp;searchParams.arrivalDate=&amp;searchParams.departureDate=&amp;rooms_=1&amp;searchParams.rooms%5B0%5D.numberOfAdults=2&amp;children%5B0%5D=0&amp;asaReport=HomePage%3A%3AHotel&amp;searchParams.landmark=&amp;hotelId=111932&amp;roomno=1&amp;arrivalDate=&amp;departureDate=&amp;rooms%5B0%5D.numberOfAdults=2&amp;landmark=">Powell</a> 能給的房間算比較大，超靠近地鐵，櫃台幾乎什麼票都有在賣，而且櫃台阿伯都很親切，這算優點。缺點是網路 DNS 一天到晚掛掉，很讓人抓狂&#8230;</p>
+
+<p><a href="http://zh.hotels.com/hotel/details.html?destination=Hotel+Stratford%2C+a+C-Two+Hotel%2C+%E4%B8%89%E8%97%A9%E5%B8%82+%28%E8%88%8A%E9%87%91%E5%B1%B1%29%2C+%E5%8A%A0%E5%88%A9%E7%A6%8F%E5%B0%BC%E4%BA%9E%2C+%E7%BE%8E%E5%9C%8B&amp;searchParams.arrivalDate=&amp;searchParams.departureDate=&amp;rooms_=1&amp;searchParams.rooms%5B0%5D.numberOfAdults=2&amp;children%5B0%5D=0&amp;asaReport=HomePage%3A%3AHotel&amp;searchParams.landmark=&amp;hotelId=164155&amp;roomno=1&amp;arrivalDate=&amp;departureDate=&amp;rooms%5B0%5D.numberOfAdults=2&amp;landmark=">Stratford</a> 的房間比起來就算有點小了。但一樣交通很方便，櫃台也親切。優點是乾淨、整潔、明亮，網路也快。他跟 Powell 差了兩個 block，治安好一點。缺點是靠街的房間晚上很吵&#8230;-_-</p>
+
+<p>這兩家旅果我是透過 <a href="http://hotels.com">Hotels.com</a> 訂的，都是信用卡 prepaid。</p>
+
+<h4>機場旅館 (過夜班機建議訂)</h4>
+
+<p>抵達舊金山的時候大概是晚上 11:00。但是去奧斯丁的班機是隔天早上 8:00 多。剛開始我們傻傻的沒有訂機場旅館，直接睡在機場大廳。沒想到那感覺實在太爛了，不是因為機場不好睡。而是因為連續在機場和飛機上
+待了二十幾個小時沒洗澡，全身都快發綠光了。</p>
+
+<p>於是從奧斯丁飛往舊金山時，實在不想再當綠人的我就下決心訂下去了。也是上 <a href="http://hotels.com">Hotels.com</a> 找的，大概 100 美金一晚（ two queen bad )。機場旅館會有免費接駁車讓旅客來回機場。神秘的是，機場旅館的網路是我們這趟旅程遇到最快的&#8230;.orz</p>
+
+<h3>機場接駁車</h3>
+
+<p>機場到旅館會有很多 option，可以選擇租車、Taxi、Shuttle 或者是鐵路（如果該城市有蓋的話）。奧斯汀段我是在 Priceline 訂國內線機票時，有加錢訂 Shuttle 的選項，就順手訂下去了。到機場時拿著購票證明去 Shuttle 登記處 redeem 就可以了。回程票則是要在 24hr 前打電話去預約回程的時間。</p>
+
+<p>在舊金山段時，到舊金山市區我是搭 <a href="http://www.bart.gov/">BART</a>  ( 機場連著 BART )。而離開舊金山時我是請櫃台幫我訂 Shuttle （因為想看回程風景）。Shuttle 一段票大概都是 10 幾塊美金這樣。</p>
+
+<p>如果你是懶人的話我建議訂 Shuttle 會比較好，拖著一個 2-30 kg 重的行李跑來跑去並沒有很好玩 XD</p>
+
+<h3>手機門號</h3>
+
+<h4>有 3G 以上需求請選 AT＆T</h4>
+
+<p>手機 Sim 卡我是上 <a href="www.aerobile.com">Aerobile</a> 買的。這家服務算不錯，很多 plan 可以選。寄送速度也快，隔天到達。你準備要出發時，可以寫信請他幫你開門號（自己開很囉唆）。</p>
+
+<p>主要有兩家門號可以買：AT&amp;T 與 T-mobile。去年我在西雅圖出差時，用的是 AT&amp;T 的 3G，但是印象沒有很好。主要是因為鎖卡（iPhone)，自己繞路有點麻煩，加上不是吃到飽。</p>
+
+<p>所以這次就選 T-mobile 的 30 天吃到飽方案。沒想到還是 bad choice。原因是 T-mobile 的頻段 iPhone 只能跑到 edge 而已，速度會讓人很難過。但好處是插上去就 active 了。</p>
+
+<p>又會改建議用 AT&amp;T 是因為美國現在開始都在跑 4G 了，用 iPhone4+ 速度可以跑上去，而且現在 hack 也變得比較容易了。所以綜合來說商務族還是建議使用 AT&amp;T 4G。</p>
+
+<p>500 MB 的 plan 大概就夠一個人用大概 10 天了吧。</p>
+
+<h4>電話需求</h4>
+
+<p>我平常就有存一些 Skype credit。有時候在國外還是有需求打越洋電話，通常我是直接找有 Wifi 的地方上 Skype 打回去。其實若沒有 Wifi，用 Edge 網路其實勉強也能講一下 skype。省錢很多。建議出國前刷一點點數存進去。</p>
+
+<h3>保險</h3>
+
+<p>基本上現在用信用卡買機票都有含一些保險在裡面。但是險有很多種，基本上我們這種外行人也看不懂，好險網有整理了<a href="http://blog.insureme.com.tw/2011/12/blog-post_16.html">旅遊險懶人包</a>，可以讓你看完大概知道這些險的種類。但是我實在也太懶得一個一個去找險來保，最後是在網路上找到美商安達保險這個 <a href="https://www.ace-ina.com.tw/easygo/ssl/p9-content.asp">旅遊險懶人包</a>
+保下去，保了17天，保費大概是 2000 出頭，用信用卡就可以線上申辦了。</p>
+
+<h3>旅遊手冊</h3>
+
+<p>這次因為是自助旅行的關係，很多訂票訂房訂車的都是我自己在處理。Recipe 超多。所以這次也跟往常不一樣，我特地製作了一本旅遊手冊(一本紙本、iPad 又丟一份 pdf）把這些整理好收進去。裡面主要有放</p>
+
+<ul>
+<li>台灣 <-> 舊金山航班資訊</li>
+<li>舊金山 <-> 奧斯丁航班資訊</li>
+<li>奧斯丁 Shuttle 接送資訊 (reedem ticket)</li>
+<li>奧斯丁 旅館訂房資訊</li>
+<li>舊金山 旅館訂房資訊</li>
+<li>同行旅伴旅遊資訊</li>
+<li>航空公司、旅館、接駁車聯絡資訊</li>
+<li>美國友人會面與聯絡資訊</li>
+<li>Railsconf 及其他周邊會議入場卷</li>
+<li>Railsconf 議程表</li>
+<li>一些旅程注意事項以及 checklist</li>
+</ul>
+
+
+<p>這次會特別整理這本手冊，是基於過往幾次出差經驗，累積出來的。不得不說，使用經驗實在好極了。因為路上所有遇到的美國海關關員、航空櫃台、旅館櫃台、接駁巴士櫃台，都愛死這本手冊了。因為他們幾乎只要拿著這本手冊照著 key 就可以瞬間完成他們手上的作業。幫他們省不少時間也幫我省時間。</p>
+
+<h4>美國海關（拷問程度不下 AIT）</h4>
+
+<p>特別要提的是美國海關這一個關卡。之前幾次的出差經驗讓我發現，美國海關是個比 AIT 問話審查還要嚴格的地方。比如說像我就算去出差開會，官員還是會拷問你一大堆，把你當想跳機的犯人。所以過海關時，手上還是要準備一些資料才行。之前去出差時，我就有看到隊伍好一些人，因為英語說不輪轉，身上又沒什麼證明的人。被拒於門外或被請到小房間去&#8230;orz。</p>
+
+<p>這次單純只是去參加研討會想玩一玩，結果拿這本入境，老外隨口跟我聊一聊，看看裡面的內容就讓我過關了。</p>
+
+<p>======</p>
+
+<p>這些大致上就是出發前比較特別需要去申請和處理的部分。
+晚一點會換貼一些我當初寫在手冊裡面的物品 checklist，不少東西都是幾次出國下來累積出來的經驗&#8230;。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Railsconf 2012 - 國際性 Conference 是這樣辦的 （下）]]></title>
     <link href="http://blog.xdite.net/posts/2012/04/25/railsconf-2012-3/"/>
-    <updated>2012-04-25T14:40:00-05:00</updated>
+    <updated>2012-04-25T14:40:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/04/25/railsconf-2012-3</id>
     <content type="html"><![CDATA[<h2>11.  售票 / 大會網站 / Schedule / 贈品</h2>
 
@@ -151,7 +289,7 @@
   <entry>
     <title type="html"><![CDATA[Railsconf 2012 - 國際性 conference 是這樣辦的 （中）]]></title>
     <link href="http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2/"/>
-    <updated>2012-04-25T10:32:00-05:00</updated>
+    <updated>2012-04-25T10:32:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2</id>
     <content type="html"><![CDATA[<h2>7. Keynote</h2>
 
@@ -257,7 +395,7 @@
   <entry>
     <title type="html"><![CDATA[Railsconf 2012 - 國際性 conference 是這樣辦的 （上）]]></title>
     <link href="http://blog.xdite.net/posts/2012/04/24/railsconf-2012/"/>
-    <updated>2012-04-24T17:31:00-05:00</updated>
+    <updated>2012-04-24T17:31:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/04/24/railsconf-2012</id>
     <content type="html"><![CDATA[<p><a href="http://railsconf2012.com/sessions">Railsconf 2012</a> 今年在 Austin, Texas 舉辦。這是一場超過 1000 人的大型開發者盛會。今年終於存夠了錢，終於能一舉飛到德州參加。這次的旅行讓我看到 / 學到不少遠超過在台灣能摸到的東西，有些部分很值得寫下來。技術的部分我以後會慢慢整理。不過軟性的部分，我倒想可以趁記憶猶新寫下來。光是 Conf 運行的部分，不少地方和細節都讓我覺得十分專業值得學習。</p>
 
@@ -385,7 +523,7 @@
   <entry>
     <title type="html"><![CDATA[Startup : 如何挑選適合的 Hosting Plan?]]></title>
     <link href="http://blog.xdite.net/posts/2012/04/18/startup-hosting-plan/"/>
-    <updated>2012-04-18T22:46:00-05:00</updated>
+    <updated>2012-04-18T22:46:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/04/18/startup-hosting-plan</id>
     <content type="html"><![CDATA[<p>這個議題在今年創業潮之前算是比較冷門，沒看到什麼人在討論。最近大概是大家瘋創業，有實際上的頻寬需求，所以看到網路上又開始吵頻寬的價格，一些討論串看起來讓人都有股張飛打岳飛的錯覺。</p>
 
@@ -601,7 +739,7 @@
   <entry>
     <title type="html"><![CDATA[新創網站這樣開發才夠快]]></title>
     <link href="http://blog.xdite.net/posts/2012/04/07/startup-rapid-development/"/>
-    <updated>2012-04-07T19:37:00-05:00</updated>
+    <updated>2012-04-07T19:37:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/04/07/startup-rapid-development</id>
     <content type="html"><![CDATA[<p>借用 <a href="http://www.kuobrothers.com/article-124.htm">新創網站這樣開發才夠快</a> 這篇格式，希望不要介意。我主要是想闡述以前在 <a href="http://techbang.com">T客邦</a> 的經驗方法。</p>
 
@@ -754,7 +892,7 @@
   <entry>
     <title type="html"><![CDATA[為什麼必須使用 Issue Tracking System 管理專案？]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/"/>
-    <updated>2012-03-26T03:14:00-05:00</updated>
+    <updated>2012-03-26T03:14:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile</id>
     <content type="html"><![CDATA[<p>我在 <a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a> 提到了為了順利進行專案，一個好的專案管理系統絕對是必備的。</p>
 
@@ -966,7 +1104,7 @@
   <entry>
     <title type="html"><![CDATA[Essential Rails Pattern 開始 update]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/24/essential-rails-pattern-update/"/>
-    <updated>2012-03-24T18:33:00-05:00</updated>
+    <updated>2012-03-24T18:33:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/24/essential-rails-pattern-update</id>
     <content type="html"><![CDATA[<p><a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">Essntial Rails Pattern</a> 這本書已經進入排版階段。</p>
 
@@ -994,7 +1132,7 @@
   <entry>
     <title type="html"><![CDATA[網站程式上線前需要準備的事 （五）]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/"/>
-    <updated>2012-03-19T02:13:00-05:00</updated>
+    <updated>2012-03-19T02:13:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/19/website-online-todo-5</id>
     <content type="html"><![CDATA[<h2>第 5 件事：Close Alpha Test、Close Open Test</h2>
 
@@ -1176,7 +1314,7 @@
   <entry>
     <title type="html"><![CDATA[網站程式上線前需要準備的事 （四）]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/"/>
-    <updated>2012-03-18T16:12:00-05:00</updated>
+    <updated>2012-03-18T16:12:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/18/website-online-todo-4</id>
     <content type="html"><![CDATA[<h2>第 4 件事：架設一套 issue tracking system</h2>
 
@@ -1307,7 +1445,7 @@
   <entry>
     <title type="html"><![CDATA[網站程式上線前需要準備的事 （三）]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/"/>
-    <updated>2012-03-18T02:48:00-05:00</updated>
+    <updated>2012-03-18T02:48:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/18/website-online-todo-3</id>
     <content type="html"><![CDATA[<h2>第 3 件事：制定 Art / RD 都遵守的開發 convention</h2>
 
@@ -1413,7 +1551,7 @@
   <entry>
     <title type="html"><![CDATA[網站程式上線前需要準備的事 （二）]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/"/>
-    <updated>2012-03-18T01:24:00-05:00</updated>
+    <updated>2012-03-18T01:24:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/18/website-online-todo-2</id>
     <content type="html"><![CDATA[<h2>第 2 件事：application deployable from day 1</h2>
 
@@ -1469,7 +1607,7 @@
   <entry>
     <title type="html"><![CDATA[網站程式上線前需要準備的事 （一）]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/17/website-online-todo/"/>
-    <updated>2012-03-17T23:48:00-05:00</updated>
+    <updated>2012-03-17T23:48:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/17/website-online-todo</id>
     <content type="html"><![CDATA[<p>很多人知道如何實作網站功能。但是卻不知道如何將網站成功的完工，並且如期上線。往往明明專案開始之初有不少的工期，有不錯結果的卻很少。上線前後總是一團慌亂。</p>
 
@@ -1578,7 +1716,7 @@
   <entry>
     <title type="html"><![CDATA[Rail 101 裝機實務以及改版通知]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/"/>
-    <updated>2012-03-07T17:01:00-06:00</updated>
+    <updated>2012-03-07T17:01:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice</id>
     <content type="html"><![CDATA[<p>Hi, 各位讀者好。</p>
 
@@ -1595,7 +1733,7 @@
   <entry>
     <title type="html"><![CDATA[iPhone 4S 進洗衣機洗還是有救]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/06/iphone4s/"/>
-    <updated>2012-03-06T22:53:00-06:00</updated>
+    <updated>2012-03-06T22:53:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/06/iphone4s</id>
     <content type="html"><![CDATA[<p>一兩個禮拜之前因為太累，我回家時忘記把 iPhone 4S 從牛仔褲掏出來。洗完澡之後就恍神直接把髒衣服拿去洗衣機直接洗了。</p>
 
@@ -1616,7 +1754,7 @@
   <entry>
     <title type="html"><![CDATA[從 Github 被 hack，談 Rails 的安全性（ mass-assignment ）]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/"/>
-    <updated>2012-03-05T10:51:00-06:00</updated>
+    <updated>2012-03-05T10:51:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security</id>
     <content type="html"><![CDATA[<p>關於 Github 被入侵這件事，目前在國外開發圈傳的沸沸揚揚。看來中文圈還沒有消息，我來報導一下到底發生了什麼事好了。順便宣導一下開發 Rails 程式碼需要注意的其中一個觀念..</p>
 
@@ -1765,7 +1903,7 @@
   <entry>
     <title type="html"><![CDATA[我創業了，我的公司 RocoDev]]></title>
     <link href="http://blog.xdite.net/posts/2012/03/02/my-start-up/"/>
-    <updated>2012-03-02T01:59:00-06:00</updated>
+    <updated>2012-03-02T01:59:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/03/02/my-start-up</id>
     <content type="html"><![CDATA[<p>我創業了。從 2012/03/01 開始，我跟我的好友：國內頂尖的視覺設計師 <a href="http://twitter.com/evenwu">@evenwu</a> 合組了一間新公司 <a href="http://rocodev.com">RocoDev</a>。</p>
 
@@ -1789,7 +1927,7 @@
   <entry>
     <title type="html"><![CDATA[Ruby Podcast / Screencast / Issue 推薦清單]]></title>
     <link href="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/"/>
-    <updated>2012-02-19T06:02:00-06:00</updated>
+    <updated>2012-02-19T06:02:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/02/19/ruby-podcasts</id>
     <content type="html"><![CDATA[<p>有些人問我平常日常怎麼補充知識，所以稍微整理一下我平常看的一些東西分享出來。我平常蠻常到處亂看東西，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…</p>
 
@@ -1832,7 +1970,7 @@
   <entry>
     <title type="html"><![CDATA[Responsive Web Design 的一些技巧和想法]]></title>
     <link href="http://blog.xdite.net/posts/2012/02/16/about-responsive-design-technique/"/>
-    <updated>2012-02-16T13:16:00-06:00</updated>
+    <updated>2012-02-16T13:16:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/02/16/about-responsive-design-technique</id>
     <content type="html"><![CDATA[<p>昨天在 <a href="http://registrano.com/events/hdm5">Happy Designer 5</a> 上，有聊起了做 Responsive Web Design (特別是 mobile 版)的一些狀況。在這裡我提供一些自己的經驗和技巧：</p>
 
@@ -1863,7 +2001,7 @@
   <entry>
     <title type="html"><![CDATA[Don’t name your Ruby project with underscore on Github]]></title>
     <link href="http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/"/>
-    <updated>2012-02-09T16:15:00-06:00</updated>
+    <updated>2012-02-09T16:15:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github</id>
     <content type="html"><![CDATA[<p>I had a ruby project named &#8221;<a href="https://github.com/xdite/bootstrap_helper">bootstrap_helper</a>&#8221;, which has 43 watchers on Github.</p>
 
@@ -1878,99 +2016,6 @@
 <p>But it&#8217;s a giant SEO mistake: Search Engine treats snake_keywords as CamelKeywords. If your project&#8217;s name contains  meaningful keywords, it won&#8217;t be matched. Because &#8220;snake_keywords&#8221; means &#8220;SnakeKeyword&#8221; not &#8220;snake keywords&#8221;.</p>
 
 <p>It&#8217;s really bad for SEO.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[使用 SCSS 的 extend 重複利用 Bootstrap 的 style]]></title>
-    <link href="http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/"/>
-    <updated>2012-02-06T02:20:00-06:00</updated>
-    <id>http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass</id>
-    <content type="html"><![CDATA[<p>Twitter 的 <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 是一套很好用的 CSS Framework。可以讓開發者加上工具類 CSS 如 <code>.btn</code>，就設計出一個按鈕。</p>
-
-<p>但有時候這東西也像 <strong>inline style</strong> 一樣討厭，比如說我要設計一排「按鈕] link，就非得每行都加個 <code>class = "btn"</code>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;job-options&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;option-title&quot;</span><span class="o">&gt;</span> <span class="err">工作類別：</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;網站設計師&quot;, jobs_path+&quot;?m_type=1&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;美術設計師&quot;, jobs_path+&quot;?m_type=2&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;手機APP開發&quot;, jobs_path+&quot;?m_type=3&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;市場行銷&quot;, jobs_path+&quot;?m_type=4&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;社群管理&quot;, jobs_path+&quot;?m_type=5&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;其他&quot;, jobs_path+&quot;?m_type=0&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
-</span><span class='line'><span class="sr">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>我在開發時並不是使用 Twitter 自己提供的 LESS 版本，而是採用人家拆好的 SCSS 版本 <a href="https://github.com/anjlab/bootstrap-rails">anjlab/bootstrap-rails</a>。</p>
-
-<p>如何翻修這樣的 code 呢？我使用了 SCSS 的 @extend。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nc">.job-options</span><span class="p">{</span>
-</span><span class='line'>   <span class="na">padding-bottom</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-</span><span class='line'>   <span class="nt">a</span><span class="p">{</span>
-</span><span class='line'>      <span class="k">@extend</span> <span class="nc">.btn</span><span class="o">;</span>
-</span><span class='line'>   <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;job-options&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;option-title&quot;</span><span class="o">&gt;</span> <span class="err">工作類別：</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;網站設計師&quot;, jobs_path+&quot;?m_type=1&quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;美術設計師&quot;, jobs_path+&quot;?m_type=2&quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;手機APP開發&quot;, jobs_path+&quot;?m_type=3&quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;市場行銷&quot;, jobs_path+&quot;?m_type=4&quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;社群管理&quot;, jobs_path+&quot;?m_type=5&quot;) %&gt;</span>
-</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;其他&quot;, jobs_path+&quot;?m_type=0&quot;) %&gt;</span>
-</span><span class='line'><span class="sr">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這樣就可以把 .btn 從 HTML 裡面拿掉了。</p>
-
-<h3>其他</h3>
-
-<p>其實表格也可以比較辦理&#8230;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nn">#feeds-list</span><span class="p">{</span>
-</span><span class='line'>   <span class="k">@extend</span> <span class="nc">.zebra-striped</span><span class="o">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>====</p>
-
-<p>不過不能 span2 這種定位的 class 不能 @extend。@extend bootstrap 這招只能用在與「位置」無關的 style 上。</p>
 ]]></content>
   </entry>
   
