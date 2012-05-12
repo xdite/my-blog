@@ -98,12 +98,12 @@ New Product Introduction Model 的模式有非常大的機率，會讓一個 Sta
 1. Assuming "I Know What the Customer Wants"
 2. The "I Know What Features to Build" Flaw
 3. Focus on Launch Date
-4. Emphasis on Execution Instead of Hypothese, Testing, Learning, and Iteration
-5. Traditional Bussiness Plans Presume No Trial and No Errors
+4. Emphasis on Execution Instead of Hypotheses, Testing, Learning, and Iteration
+5. Traditional Business Plans Presume No Trial and No Errors
 6. Confusing Tradition Job Titles with What a Startup Needs to Accomplish
 7. Sales and Marketing Execute to a Plan
 8. Presumption of Success Leads to Premature Scaling
-9. Management by Crsis Leads to a Death Spiral
+9. Management by Crisis Leads to a Death Spiral
 
 
 我會在下一篇讀書心得中，仔細整理這九宗罪的詳細內容。這九宗罪又是如何搞垮一個 Startup 的。
