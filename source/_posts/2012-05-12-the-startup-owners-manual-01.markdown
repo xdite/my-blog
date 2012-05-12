@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Startup Owner's Manual 讀書心得（一）: 別再使用製造業思維搞 Startup"
+title: "The Startup Owner's Manual 讀書心得（1）: 別再使用製造業思維搞 Startup"
 date: 2012-05-12 12:34
 comments: true
 categories: 
