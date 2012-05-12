@@ -24,7 +24,7 @@ Webvan 做的生意是 online ordering and same-day door-to-door grocery deliver
 
 Webvan 的背景是讓人很羨慕的。在短短的時間內就募集了鉅量的資金，請到了很棒的 CEO。很多客戶也喜愛他們的服務。但是竟然在開業短短不到兩年的時間，就宣告破產倒閉了。到底發生什麼事？
 
-他們的問題不在於低落的執行能力，相反地 Webvan 一開始就打正規戰，使用了最普遍使用的 "new-product introduction model" 方式擴展執行，並且徹底的往多數投資者所樂見的方向去：「先行者優勢」、「快速變大」。
+他們的問題不在於低落的執行能力，相反地 Webvan 一開始就打正規戰，使用了最普遍使用的 「New-product introduction model」方式擴展執行，並且徹底的往多數投資者所樂見的方向去：「先行者優勢」、「快速變大」。
 
 那為什麼還會失敗呢？而且還是這麼迅速的倒閉呢？因為 Webvan 略掉了一件相當重要的事？直接為這個公司帶來了死亡。
 
@@ -32,7 +32,7 @@ Webvan 的背景是讓人很羨慕的。在短短的時間內就募集了鉅量�
 
 在二十世紀，每個公司要在市場上推出一個新產品，都會使用一種固定的 product management model。這套模式很常被用在製造業上。
 
-#### New product introduction model
+#### New-product introduction mode
 
 `Concept/ Seed` => `Product Development` => `Alpha/Beta Test` => `Launch / 1st Ship`
 
@@ -87,11 +87,11 @@ RD 團隊開始測試這套系統運作有沒有問題。行銷團隊忙著制�
 
 ### The 9 Deadly Sins of New Product Introduction Model
 
-作者從 Webvan 的故事中，整理歸納了九宗罪，點出 New Product Introduction Model 所隱含的致命風險。點出了一般 Startup 常犯的重大缺失。
+作者從 Webvan 的故事中，整理歸納了九宗罪，點出 「New-product introduction model」 所隱含的致命風險。點出了一般 Startup 常犯的重大缺失。
 
-他點出了很重要的一點，其實大多數的 Startup，特別是網路業，不應該使用  New Product Introduction Model 去推出自己的產品。而是必須要用 Customer Development Model 去穩固打下基礎，從 Startup 轉型成 Company。
+他點出了很重要的一點，其實大多數的 Startup，特別是網路業，不應該使用「New-product introduction model」去推出自己的產品。而是必須要用 Customer Development Model 去穩固打下基礎，從 Startup 轉型成 Company。
 
-New Product Introduction Model 的模式有非常大的機率，會讓一個 Startup 從車站一開始出發，終點就注定是地獄。
+「New-product introduction model」有非常大的機率，會讓一個 Startup 從車站一開始出發，終點就注定是地獄。
 
 這九宗罪是：
 
