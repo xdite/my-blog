@@ -217,7 +217,7 @@ Customer Development Model 分為四個階段：
 
 （待續…一個禮拜，已經讀完了但是寫出來要花很久的時間）
 
-[The Startup Owner’s Manual 讀書心得（1）: 別再使用製造業思維搞 Startup](http://blog.xdite.net/posts/2012/05/12/the-startup-owners-manual-01/)
-[The Startup Owner’s Manual 讀書心得（2）: New-product Introduction Model 致命的九宗罪](http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/)
+* [The Startup Owner’s Manual 讀書心得（1）: 別再使用製造業思維搞 Startup](http://blog.xdite.net/posts/2012/05/12/the-startup-owners-manual-01/)
+* [The Startup Owner’s Manual 讀書心得（2）: New-product Introduction Model 致命的九宗罪](http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/)
 
 
