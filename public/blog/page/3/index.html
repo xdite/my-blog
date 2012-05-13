@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  I had a ruby project named &#8221;bootstrap_helper&#8221;, which has 43 watchers on Github.I thought having 43 watchers is sort o...">
+  <meta name="description" content="                  昨天在 Happy Designer 5 上，有聊起了做 Responsive Web Design (特別是 mobile 版)的一些狀況。在這裡我提供一些自己的經驗和技巧：Mobile First：如果你要做 Desktop / Mobile 雙版本的網...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/02/16/about-responsive-design-technique/">Responsive Web Design 的一些技巧和想法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-02-16T13:16:00+08:00" pubdate  data-updated="true" >Feb 16<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/02/16/about-responsive-design-technique/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/02/16/about-responsive-design-technique/" data-show-faces="false"></div></div>
+    
+    <p>昨天在 <a href="http://registrano.com/events/hdm5">Happy Designer 5</a> 上，有聊起了做 Responsive Web Design (特別是 mobile 版)的一些狀況。在這裡我提供一些自己的經驗和技巧：</p>
+
+<ol>
+<li><p>Mobile First：如果你要做 Desktop / Mobile 雙版本的網站。先設計 Mobile 版的，而且要從最小的尺寸開始做。</p></li>
+<li><p>盡量讓 Mobile 的版本：大部分功能保持唯讀狀態。因為在 Mobile 上要將「輸入」這件事做得好，是很困難的，而且不少的寫入會牽涉到動線及頁面的跳轉，會大幅降低 user experience。雖然某些功能和元素幹掉很可惜，但要懂得「取捨」。</p></li>
+<li><p>不要過於迷信 Media Query: media query 只能解決 CSS 的問題。但是 mobile client 上需要解決的問題不只是這些：</p>
+
+<ul>
+<li>內圖的尺寸與傳輸速度：圖可能是用 Desktop version 的圖硬縮的。</li>
+<li>3rd party social plugin：3rd party social plugin 多半沒有考慮 mobile 版本的問題。所以在 mobile 版面上，幾乎都會有尺寸問題。而這些 social plugin 的 js 因為都是由放置在外國的原站提供，在 mobile 版上 loading 更加的緩慢。</li>
+</ul>
+
+
+<p>所以我會採取「偵測 agent 」與 media query 混合使用的招數進行開發。如果這個 agent 確定是手機，則直接移除掉 social 功能（直接從 server side 幹掉 DOM，而不是用 CSS 隱藏），並且吐尺寸較小的圖片。</p></li>
+<li><p>我個人還是認為 Responsive 的用途比較適合用在 Tablet 的 Portrait / Landscape 的用途上。畢竟 Responsive Web Design 的想法，是讓 Desktop / Mobile 擠在同一個版面上，用同一份 code。再 conditional override 或者 remove。在需要「持續維護」的產品上，容易搞死 Developer…</p></li>
+</ol>
+
+
+<p>P.S. 如果你對 Responsive Web Design 好奇，可以用手機打開 <a href="http://www.techbang.com.tw">T 客邦</a> 以及 <a href="http://digiphoto.techbang.com.tw">Digiphoto</a> ，這個站都是用此技巧設計的…</p>
+
+<p>＝＝＝</p>
+
+<p>廣告：二月份 <a href="http://registrano.com/events/xdbg-1202">xdite 家桌遊團</a> 又開放了，限八人，請儘速報名。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2282,70 +2346,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/01/06/about-erp/">關於 Essential Rails Pattern 這本書的近況</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-06T18:09:00+08:00" pubdate  data-updated="true" >Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/01/06/about-erp/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/06/about-erp/" data-show-faces="false"></div></div>
-    
-    <p>最近看到不少讀者都在「委婉」的催我最新這一本書「<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">Essential Rails Pattern</a>」的近況。</p>
-
-<p>跟大家報告一下這本書的近況，其實我每個禮拜都還是有在持續撰寫這本書。但是這本書寫著寫著，我越發現一件可怕的事情，內容太大了，大到比我當初想象中的還大概長五倍。到現在我已經為這本書寫超過 10 萬字了。可是還是看不到盡頭。</p>
-
-<p>而且在當初安排初版結構時，在前三章的結構上安排得有些錯誤。原本是要寫 Ruby / Rails 的設計技巧，卻岔遠路去撰寫基本的程式設計技巧。</p>
-
-<p>草稿的字是累積不少，但是還不能見人，於是就一直放著。改先出零散的文章，所以最近各位可能看到我在撰寫一些回歸基本的教學，其實也是為這本書在做準備。</p>
-
-<p>這幾天，我想了很久，預購的讀者每次抓下來都只有空白頁，等久了也會生氣 XD。</p>
-
-<p>終於我做了一個決定，原先的目錄結構太爛了，不砍掉重寫可能就會永遠斷頭了XD。</p>
-
-<p>於是我將原本寫好的幾章全部打散重排，所有已經寫好的內容，可以抽成章的就先整理出來。目前的草稿雖然有點多，但還算整理的完的。我會將草稿放在這裡: <a href="http://erp-book.heroku.com">http://erp-book.heroku.com</a>。</p>
-
-<p>這次也算釋出正式版的全部大綱。我希望可以在今年二月，釋出現在手頭上絕大部分的 beta 內容。</p>
-
-<p>如果有「等的不耐煩」的讀者，或者是「看完大綱覺得這本書不是你想要的」，或者是「這本書覺得不值得這個價錢的」，或者是「就是不爽 xdite 你這個大騙子」的，都可以寫信給我要求退錢。</p>
-
-<p>再次為進度的緩慢，致上我深深的歉意。</p>
-
-<p>===</p>
-
-<p>不過如果你看完這本書的大綱和目前進度，還滿意這樣的內容和主題，想支持我繼續寫作的(其實寫這麼多字也是很累的..orz)，也歡迎加入<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">預購</a>支持我的作品，謝謝。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -2380,6 +2380,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/05/13/the-startup-owners-manual-02/">The Startup Owner&#8217;s Manual 讀書心得（2）: New-product introduction model 致命的九宗罪</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/05/12/the-startup-owners-manual-01/">The Startup Owner&#8217;s Manual 讀書心得（1）: 別再使用製造業思維搞 Startup</a>
       </li>
     
@@ -2393,10 +2397,6 @@
     
       <li class="post">
         <a href="/posts/2012/04/25/railsconf-2012-2/">Railsconf 2012 - 國際性 conference 是這樣辦的 （中）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/04/24/railsconf-2012/">Railsconf 2012 - 國際性 conference 是這樣辦的 （上）</a>
       </li>
     
   </ul>
