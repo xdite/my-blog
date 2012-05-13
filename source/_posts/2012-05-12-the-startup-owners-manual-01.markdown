@@ -108,4 +108,7 @@ RD 團隊開始測試這套系統運作有沒有問題。行銷團隊忙著制�
 
 我會在下一篇讀書心得中，仔細整理這九宗罪的詳細內容。這九宗罪又是如何搞垮一個 Startup 的。
 
+[The Startup Owner’s Manual 讀書心得（1）: 別再使用製造業思維搞 Startup](http://blog.xdite.net/posts/2012/05/12/the-startup-owners-manual-01/)
+[The Startup Owner’s Manual 讀書心得（2）: New-product Introduction Model 致命的九宗罪](http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/)
+
 

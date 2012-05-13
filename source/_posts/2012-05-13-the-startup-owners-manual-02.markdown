@@ -7,7 +7,9 @@ categories:
 ---
 
 
-在上一篇。作者提到了 「New-product introduction model」有非常大的機率，會讓一個 Startup 從車站一開始出發，終點就注定是地獄。整理歸納了的九宗罪，多數 Startup 都是因為這九宗罪而死掉的。
+在[上一篇](http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/)。作者提到了 「New-product introduction model」有非常大的機率，會讓一個 Startup 從車站一開始出發，終點就注定是地獄。整理歸納了的九宗罪，多數 Startup 都是因為這九宗罪而死掉的。
+
+![pic](http://ecx.images-amazon.com/images/I/51t%2BbCeADNL._SL500_AA300_.jpg)
 
 ### 1. Assuming “I Know What the Customer Wants”
 
@@ -210,6 +212,12 @@ Customer Development Model 分為四個階段：
 
 我會在下一篇讀書心得中，整理這四個階段的內容。
 
+
+====
+
 （待續…一個禮拜，已經讀完了但是寫出來要花很久的時間）
+
+[The Startup Owner’s Manual 讀書心得（1）: 別再使用製造業思維搞 Startup](http://blog.xdite.net/posts/2012/05/12/the-startup-owners-manual-01/)
+[The Startup Owner’s Manual 讀書心得（2）: New-product Introduction Model 致命的九宗罪](http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/)
 
 
