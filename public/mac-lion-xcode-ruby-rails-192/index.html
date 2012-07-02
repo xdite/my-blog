@@ -99,7 +99,7 @@
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   $ ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+</pre></td><td class='code'><pre><code class=''><span class='line'>   $ /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
 </span><span class='line'>   $ brew install git
 </span><span class='line'>   $ brew update</span></code></pre></td></tr></table></div></figure>
 
@@ -134,8 +134,8 @@
 </span><span class='line'>$ mysql.server start
 </span><span class='line'>$ mysqladmin -u root password '123456'
 </span><span class='line'>$ mkdir -p ~/Library/LaunchAgents
-</span><span class='line'>$ cp /usr/local/Cellar/mysql/5.5.19/com.mysql.mysqld.plist ~/Library/LaunchAgents/
-</span><span class='line'>$ launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist
+</span><span class='line'>$ find /usr/local/Cellar/mysql/ -name "homebrew.mxcl.mysql.plist" -exec cp {} ~/Library/LaunchAgents/ \;
+</span><span class='line'>$ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -159,7 +159,7 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.2
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.2 --with-gcc=clang
 </span><span class='line'>$ rvm 1.9.2 --default 
 </span></code></pre></td></tr></table></div></figure>
 
