@@ -18,7 +18,7 @@ footer: true
 3. Install Homebrew
    
 ```
-   $ ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+   $ /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
    $ brew install git
    $ brew update
 ```
@@ -40,8 +40,8 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
 $ mysql.server start
 $ mysqladmin -u root password '123456'
 $ mkdir -p ~/Library/LaunchAgents
-$ cp /usr/local/Cellar/mysql/5.5.19/com.mysql.mysqld.plist ~/Library/LaunchAgents/
-$ launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist
+$ find /usr/local/Cellar/mysql/ -name "homebrew.mxcl.mysql.plist" -exec cp {} ~/Library/LaunchAgents/ \;
+$ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 
 ```
 
@@ -63,7 +63,7 @@ $ source ~/.profile
 #### 安裝 Ruby 1.9.2
 
 ```
-$ rvm install 1.9.2
+$ rvm install 1.9.2 --with-gcc=clang
 $ rvm 1.9.2 --default 
 
 ```
