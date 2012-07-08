@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  昨天在 Happy Designer 5 上，有聊起了做 Responsive Web Design (特別是 mobile 版)的一些狀況。在這裡我提供一些自己的經驗和技巧：Mobile First：如果你要做 Desktop / Mobile 雙版本的網...">
+  <meta name="description" content="                  有些人問我平常日常怎麼補充知識，所以稍微整理一下我平常看的一些東西分享出來。我平常蠻常到處亂看東西，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…不過看完之後當然還要練習，東西才會變自己的就是了&#8230;POD...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/02/19/ruby-podcasts/">Ruby Podcast / Screencast / Issue 推薦清單</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-02-19T06:02:00+08:00" pubdate  data-updated="true" >Feb 19<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/02/19/ruby-podcasts/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/" data-show-faces="false"></div></div>
+    
+    <p>有些人問我平常日常怎麼補充知識，所以稍微整理一下我平常看的一些東西分享出來。我平常蠻常到處亂看東西，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…</p>
+
+<p>不過看完之後當然還要練習，東西才會變自己的就是了&#8230;</p>
+
+<h2>PODCAST</h2>
+
+<ul>
+<li>Ruby <a href="http://ruby5.envylabs.com/">Ruby5</a></li>
+<li>Ruby <a href="http://rubyshow.com/">The Ruby Show</a></li>
+<li>Ruby <a href="http://rubyrogues.com/">Ruby Rogues</a></li>
+<li>Ruby <a href="http://rubyfreelancers.com/">Ruby FreeLancers</a></li>
+<li>JS <a href="http://javascriptjabber.com/">Javascript Jabber</a></li>
+<li>Startup <a href="http://www.thisweekinstartups.com/">This Week in Startups</a></li>
+<li>Startup <a href="http://mixergy.com/">Mixergy</a></li>
+</ul>
+
+
+<h2>Screencast</h2>
+
+<ul>
+<li>Rails <a href="http://railscasts.com/">Railscast</a></li>
+<li>Rails / CSS <a href="http://www.codeschool.com/code_tv">CodeTV</a></li>
+<li>Rails <a href="https://www.destroyallsoftware.com/screencasts">Destroy All Software</a></li>
+<li>General <a href="http://www.cleancoders.com/">The Clean Coders</a></li>
+</ul>
+
+
+<h2>Weekly issue</h2>
+
+<ul>
+<li><a href="http://rubyweekly.com/">Ruby Weekly</a></li>
+<li><a href="http://javascriptweekly.com/">JavaScript Weekly</a></li>
+<li><a href="http://html5weekly.com/">HTML5 Weekly</a></li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2040,312 +2116,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/01/09/remove-your-after-save-from-model/">[進階]使用 Facade Pattern 取代 Model Callbacks</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-09T18:56:00+08:00" pubdate  data-updated="true" >Jan 9<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/01/09/remove-your-after-save-from-model/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/09/remove-your-after-save-from-model/" data-show-faces="false"></div></div>
-    
-    <h2>What is &#8220;callbacks&#8221;?</h2>
-
-<p>Rails 的 ActiveRecord 提供了相當方便的 callbacks，能讓開發者在寫 Controller 時，能夠寫出更加 DRY 的程式碼：</p>
-
-<ul>
-<li>before_crearte</li>
-<li>before_save</li>
-<li>after_create</li>
-<li>after_save</li>
-<li>…</li>
-</ul>
-
-
-<p>在從前，在 Controller 裡面想要再 object 儲存之後 do_something，直觀的思路會是這樣：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">do_something</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>當時的最佳模式：通常是建議開發者改用 callbacks 或者是 Observer 模式實作。避免 controller 的髒亂。</p>
-
-<ul>
-<li>callbacks : after_create</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="err"></span><span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:do_something</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">protected</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">do_something</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者是使用 Observer</p>
-
-<ul>
-<li>Observer</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">PostObserver</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Observer</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">after_create</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">do_something</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="err"></span><span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">protected</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">do_something</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>使用 callbacks 所產生的問題</h2>
-
-<p>callbacks 雖然很方便，但也產生一些其他的問題。若這個 do_something 是很輕量的 db update，那這個問題還好。但如果是很 heavy 的 hit_3rd_party_api 呢？</p>
-
-<p>在幾個情形下，開發者會遇到不小的麻煩。</p>
-
-<ul>
-<li>Model 測試：每次在測試時都會被這個 3rd_party_api 整到，因為外部通訊很慢。</li>
-<li>do_something_api 是很 heavy 的操作：每次寫測試還是會被很慢的 db query 整到。</li>
-<li>do_something_api 是很輕微的 update：但是綁定 after_save 操作，在要掃描資料庫，做大規模的某欄位修改時，會不小心觸發到不希望引發的 callbacks，造成不必要的效能問題。</li>
-</ul>
-
-
-<p>當然，開發者還是可以用其他招數去閃開：</p>
-
-<p>比如說若綁定 after_save 。</p>
-
-<p>可以在 do_somehting 內加入對 dirty object 的偵測，避免被觸發：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">do_somthing</span>
-</span><span class='line'>  <span class="c1"># 資料存在，且變動的欄位包括 content</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">presisited?</span> <span class="o">&amp;&amp;</span> <span class="n">changed</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-</span><span class='line'>     <span class="n">the_real_thing</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但這一招並不算理想，原因有幾：</p>
-
-<ol>
-<li>每次儲存還是需要被掃描一次，可能有效能問題。</li>
-<li>寫測試時還是會呼叫到可能不需要引發的 do_somehting。</li>
-<li>if xxx ＆＆ yyy 這個 condiction chain 可能會無限延伸下去。</li>
-</ol>
-
-
-<h2>Facade Pattern</h2>
-
-<p>那麼要怎樣才能解決這個問題呢？其實我們應該用 Facade Pattern 解決這個問題。</p>
-
-<p>設計模式裡面有一招 Facade Pattern，這一招其實是沒有被寫進 <a href="http://designpatternsinruby.com/">Design Pattern in Ruby</a> 中的。Russ Olson 有寫了<a href="http://designpatternsinruby.com/section02/facade.html">一篇文章</a>解釋沒有收錄的原因：因為在 Ruby 中，這一招太簡單太直觀，所以不想收錄 XDDD。但他還是在網站上提供當時寫的草稿，供人參考。</p>
-
-<h3>What is Facade Pattern?</h3>
-
-<p>Facade Pattern 的目的是「將複雜的介面簡化，將複雜與瑣碎的步驟封裝起來，對外開放簡單的介面，讓客戶端能夠藉由呼叫簡單的介面而完成原本複雜的程式演算。」（<a href="http://www.dotblogs.com.tw/jameswu/archive/2008/06/26/4382.aspx">來源</a>）</p>
-
-<p>延伸閱讀: <a href="http://www.cnblogs.com/oomusou/archive/2007/04/24/725714.html">(原創) 我的Design Pattern之旅[5]：Facade Pattern (OO) (Design Pattern) (C/C++)</a></p>
-
-<h3>實際舉例：</h3>
-
-<p>在上述的例子中，其實 do_something 有可能只會在 PostController 用到，而非所有的 model 操作都「需要」用到。所以我們 <strong>不應該將 do_somehting 丟進 callbacks（等於全域觸發），再一一寫 case 去閃避執行</strong></p>
-
-<p>與其寫在 callbacks 裡。我們更應該寫的是一個 Service Class 將這一系列複雜昂貴的行為包裝起來，以簡單的介面執行。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="no">CreatePostService</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">CreatePostService</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">do_something_a</span>
-</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">do_something_b</span>
-</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">do_something_c</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而在寫測試，只需要對 PostCreateService 這個商業邏輯 class 寫測試即可。而 PostController 和 Post Model 就不會被殃及到。</p>
-
-<h2>小結</h2>
-
-<p>不少開發者討厭測試的原因，不只是「因為」寫測試很麻煩的原因，「跑一輪測試超級久」也是讓大家很不爽的主因之一。</p>
-
-<p>其實不是這些測試框架寫的爛造成「寫測試很麻煩」、「執行測試超級久」。而是另有其他因素。</p>
-
-<p>許多資深開發者逐漸意識到，真正的主因是在於目前 Rails 的 model 的設計，耦合度太高了。只要沾到 db 就慢，偏偏 db 是世界的中心。只是測某些邏輯，搞到不小心觸發其他不需要測的東西。</p>
-
-<p>ActiveRecord 的問題在於，讓開發者太誤以為 ORM = model。其實開發者真正要寫的測試應該是對商業邏輯的測試，不是對 db 進行測試。</p>
-
-<p>所以才會出現了用 Facade Pattern 取代 callbacks 的手法。</p>
-
-<h2>其他</h2>
-
-<p>MVC 其實有其不足的部份。坦白說，Rails 也不是真正的 MVC，而是 <a href="http://andrzejonsoftware.blogspot.com/2011/09/rails-is-not-mvc.html">Model2</a></p>
-
-<p>目前 MVC 其實是不足的，演化下來，開發者會發現 User class 裡面會開始出現這些東西：</p>
-
-<ul>
-<li>current_user.buy_book(book)</li>
-<li>current_user.add_creadit_point(point)</li>
-</ul>
-
-
-<p>這屬於 User 裡面應該放的 method 嗎？well，你也可以說適合，也可以說不適合。</p>
-
-<p>適合的原因是：其實你也不知道應該放哪裡，這好像是 User 執行的事，跟他有關，那就放這裡好了！不然也不知道要擺哪裡。</p>
-
-<p>不適合的原因是：這是一個「商業購買行為」。不是所有人都會購物啊。這應該是一個商業購買邏輯。但是&#8230;.也不知道要放在哪啊。</p>
-
-<p>一直到最近，James Copelin 提出了：<a href="http://en.wikipedia.org/wiki/Data,_Context,_and_Interaction">DCI</a> 去補充了現有的 MVC 的不足，才算勉強解決了目前浮現的這些問題。</p>
-
-<p>DCI ，與本篇談到的 Facade Pattern 算是頗類似的手法。</p>
-
-<p>有關於 DCI ( Data, Context, Interaction ) 的文章，我會在之後發表。我同時也推薦各位去看這方面的主題。這個方向應該會是 Rails 專案設計上未來演化的方向之一。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -2380,6 +2150,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/05/13/the-startup-owners-manual-02/">The Startup Owner&#8217;s Manual 讀書心得（2）: New-product introduction model 致命的九宗罪</a>
       </li>
     
@@ -2393,10 +2167,6 @@
     
       <li class="post">
         <a href="/posts/2012/04/25/railsconf-2012-3/">Railsconf 2012 - 國際性 Conference 是這樣辦的 （下）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/04/25/railsconf-2012-2/">Railsconf 2012 - 國際性 conference 是這樣辦的 （中）</a>
       </li>
     
   </ul>
