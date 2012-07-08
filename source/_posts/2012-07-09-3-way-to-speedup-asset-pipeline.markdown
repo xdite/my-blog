@@ -103,9 +103,9 @@ deploy 就會自動執行 assets precompile 的動作。由 [原始檔](https://
 //= require "product"
 ```
 
-這兩個結果是一樣的。但後者會比前者快。
+這兩個在 asset pipeline輸出結果是一樣的。但後者會比前者快。
 
-如果真的需要用到非得使用 partial 的技巧再使用即可，因為只要一牽涉到directory recursive compile 就會慢…
+如果真的需要用到非得使用 partial 的技巧（如需讀變數用 require 讀不到，@import 才讀得到）再使用即可，因為只要一牽涉到directory recursive compile 就會慢…
 
 ## 3. don't require .scss & .coffee for no reason
 
