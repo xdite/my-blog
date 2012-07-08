@@ -848,9 +848,9 @@ I think you should use an
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>這兩個結果是一樣的。但後者會比前者快。</p>
+<p>這兩個在 asset pipeline 輸出結果是一樣的。但後者會比前者快。</p>
 
-<p>如果真的需要用到非得使用 partial 的技巧再使用即可，因為只要一牽涉到directory recursive compile 就會慢…</p>
+<p>如果真的需要用到非得使用 partial 的技巧（如需讀變數用 require 讀不到，@import 才讀得到）再使用即可，因為只要一牽涉到directory recursive compile 就會慢…</p>
 
 <h2>3. don&#8217;t require .scss &amp; .coffee for no reason</h2>
 
