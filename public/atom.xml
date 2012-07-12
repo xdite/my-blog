@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-07-09T04:07:21+08:00</updated>
+  <updated>2012-07-13T03:57:58+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Asset Pipeline 加速：以 Zurb Foundation 為例]]></title>
+    <link href="http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/"/>
+    <updated>2012-07-13T03:28:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation</id>
+    <content type="html"><![CDATA[<p>前幾天貼了這一篇 <a href="http://blog.xdite.net/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>。</p>
+
+<p>順便去 <a href="https://github.com/rails/sass-rails/issues/67#issuecomment-6854291">sass-rails</a> 上面這個靠北 sass-rails 的 issue 回了一下 <a href="https://github.com/zurb/foundation">zurb/foundation</a> 主要的問題…</p>
+
+<p>我觀察 foundation 原先慢的原因是：幾乎所有的 library 都 <code>@import "base";</code>，然後 base 又 <code>@import "compass";</code>。所以導致只要 compile foundation 就無敵慢…</p>
+
+<p>不過不知道解掉這個問題可以實際上快多少。今天正打算抓下來 benchmark 時，就發現這篇靠么 zurb 的人應該收到了。他們 <a href="https://github.com/zurb/foundation/commit/b9c8d1d5ca29ceb89111084dfd530b68bfd65484">patch 掉</a>了，版本從 3.0.4 升到 3.0.5 。</p>
+
+<p>主要變更是把原先 <code>@import "compass";</code> 改成 <code>@import "compass/css3";</code>。然後把所有的 <code>@import "base";</code> 拿掉。</p>
+
+<h2>Benchmark</h2>
+
+<p>我就開了一個空的 Rails。實際用手上的機器去測 compile 時間。</p>
+
+<h4>iMac i5 2010 mid 款 8GB ram</h4>
+
+<ul>
+<li>Compiled application.css  (9516ms)  (pid 41169) # 3.0.4</li>
+<li>Compiled application.css  (2300ms)  (pid 41483) # 3.0.5</li>
+</ul>
+
+
+<h4>Linode 4096</h4>
+
+<ul>
+<li>Compiled application.css  (12518ms)  (pid 12585) # 3.0.4</li>
+<li>Compiled application.css  (3201ms)  (pid 12853) # 3.0.5</li>
+</ul>
+
+
+<h2>結論</h2>
+
+<ul>
+<li>… 拜託不要偷懶直接用 <code>@import "compass";</code> 啊 XD</li>
+<li>太慢有時候可能是 SCSS Framework 的問題</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[3 招實用 Asset Pipeline 加速術]]></title>
@@ -3070,30 +3115,6 @@ I think you should use an
 <p>國外鄉民懶人包：<a href="http://chrisacky.posterous.com/github-you-have-let-us-all-down">GitHub and Rails: You have let us all down.</a></p>
 
 <p>DHH 給出的 37Signals 的作法：<a href="https://gist.github.com/1975644">https://gist.github.com/1975644</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我創業了，我的公司 RocoDev]]></title>
-    <link href="http://blog.xdite.net/posts/2012/03/02/my-start-up/"/>
-    <updated>2012-03-02T01:59:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/03/02/my-start-up</id>
-    <content type="html"><![CDATA[<p>我創業了。從 2012/03/01 開始，我跟我的好友：國內頂尖的視覺設計師 <a href="http://twitter.com/evenwu">@evenwu</a> 合組了一間新公司 <a href="http://rocodev.com">RocoDev</a>。</p>
-
-<p>我們專營：</p>
-
-<ul>
-<li>Ruby on Rails Web Application 設計</li>
-<li>HTML5 / Responsive Design 視覺與網頁設計</li>
-<li>網站體質優化 ( SEO / HTML5 semantic / Alexa ranking)</li>
-</ul>
-
-
-<p>有興趣的朋友可以歡迎找我們洽談服務。</p>
-
-<p>至於我創業的原因，寫在這裡：「<a href="http://xdite-smalltalk.tumblr.com/post/18303489993">我為什麼想創業</a>」。</p>
-
-<p>這也是我另外的一個小部落格，我對於人生的感觸和一些沒有那麼硬的短文會放在這裡。</p>
 ]]></content>
   </entry>
   

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Yahoo News 的 SEO 網址所帶來的問題 - Blog.XDite.net</title>
+  <title>Asset Pipeline 加速：以 Zurb Foundation 為例 - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature 畫虎不成反類犬了。在為網站實作 SEO 改善工程時，我們通常會使用一個技巧：在 permalink 裡面塞關鍵字。這樣的設計你可以在 T 客邦 看到，也可以在 PIXNET 看到。T 客邦...">
+  <meta name="description" content="          前幾天貼了這一篇 3 招實用 Asset Pipeline 加速術。順便去 sass-rails 上面這個靠北 sass-rails 的 issue 回了一下 zurb/foundation 主要的問題…我觀察 foundation 原先慢的原因是：幾乎所有的 librar...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Yahoo News 的 SEO 網址所帶來的問題</h1>
+      <h1 class="entry-title">Asset Pipeline 加速：以 Zurb Foundation 為例</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-10-25T17:08:00+08:00" pubdate  data-updated="true" >Oct 25<span>th</span>, 2011</time>
+<time datetime="2012-07-13T03:28:00+08:00" pubdate  data-updated="true" >Jul 13<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,54 +98,42 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature <strong>畫虎不成反類犬</strong>了。</p>
+  <p>前幾天貼了這一篇 <a href="http://blog.xdite.net/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>。</p>
 
-<p>在為網站實作 SEO 改善工程時，我們通常會使用一個技巧：<strong>在 permalink 裡面塞關鍵字</strong>。</p>
+<p>順便去 <a href="https://github.com/rails/sass-rails/issues/67#issuecomment-6854291">sass-rails</a> 上面這個靠北 sass-rails 的 issue 回了一下 <a href="https://github.com/zurb/foundation">zurb/foundation</a> 主要的問題…</p>
 
-<p>這樣的設計你可以在 <a href="htt://www.techbang.com.tw">T 客邦</a> 看到，也可以在 <a href="http://www.pixnet.net">PIXNET</a> 看到。</p>
+<p>我觀察 foundation 原先慢的原因是：幾乎所有的 library 都 <code>@import "base";</code>，然後 base 又 <code>@import "compass";</code>。所以導致只要 compile foundation 就無敵慢…</p>
+
+<p>不過不知道解掉這個問題可以實際上快多少。今天正打算抓下來 benchmark 時，就發現這篇靠么 zurb 的人應該收到了。他們 <a href="https://github.com/zurb/foundation/commit/b9c8d1d5ca29ceb89111084dfd530b68bfd65484">patch 掉</a>了，版本從 3.0.4 升到 3.0.5 。</p>
+
+<p>主要變更是把原先 <code>@import "compass";</code> 改成 <code>@import "compass/css3";</code>。然後把所有的 <code>@import "base";</code> 拿掉。</p>
+
+<h2>Benchmark</h2>
+
+<p>我就開了一個空的 Rails。實際用手上的機器去測 compile 時間。</p>
+
+<h4>iMac i5 2010 mid 款 8GB ram</h4>
 
 <ul>
-<li>T 客邦的設計是 /1234-seo-in-url</li>
-<li>PIXNET 的設計是 /5678-SEO藏在網址裡</li>
+<li>Compiled application.css  (9516ms)  (pid 41169) # 3.0.4</li>
+<li>Compiled application.css  (2300ms)  (pid 41483) # 3.0.5</li>
 </ul>
 
 
-<p>中文是否適合塞在網址裡面，還是個見仁見智的問題，畢竟每一家處理 URL ENCODE 的方法不一樣。但</p>
-
-<p>Yahoo 的網址是這樣的： /SEO藏在網址裡-7890.html。</p>
-
-<p>看的出設計者應該覺得這是個 <strong>獨樹一格</strong> <strong>別出心裁</strong> 的設計。因為全世界幾乎沒有人這樣幹啊 =_=|||</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6279632106/" title="螢幕快照 2011-10-25 下午5.25.23 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6215/6279632106_86d70297c7.jpg" width="324" height="130" alt="螢幕快照 2011-10-25 下午5.25.23"></a></p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6279633244/" title="螢幕快照 2011-10-25 下午5.26.29 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6054/6279633244_4951092121_z.jpg" width="530" height="71" alt="螢幕快照 2011-10-25 下午5.26.29"></a></p>
-
-<p>這樣你應該看出問題了吧。</p>
-
-<p>各家縮網址和 auto-link 的 library 不認得中文字。因此</p>
+<h4>Linode 4096</h4>
 
 <ul>
-<li>/1234-seo-in-url => 不會有問題</li>
-<li><p>/5678-SEO藏在網址裡 => 會被 parse 成 /5678 ，但因為是動態網頁，所以還是沒問題</p></li>
-<li><p>/SEO藏在網址裡-7890.html => 被 parse 成 / ，就算輸入 /7890.html 還是連不到。</p></li>
+<li>Compiled application.css  (12518ms)  (pid 12585) # 3.0.4</li>
+<li>Compiled application.css  (3201ms)  (pid 12853) # 3.0.5</li>
 </ul>
 
 
-<p>「將中文放在 URL 裡且是在數字之前」的設計，會造成在某些網站社群穿透力為 0，因為貼的連結會被自動 parse 成為根本不能動的連結。</p>
+<h2>結論</h2>
 
-<p>不知道為什麼這個問題沒被測到，這應該在 beta 測試就要被檢驗出來了&#8230;</p>
-
-<p>===</p>
-
-<p><em>後續 update</em></p>
-
-<p>網友 <a href="https://twitter.com/fauzty/status/128770619771850752">@fauzty</a> 說：</p>
-
-<blockquote>
-Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇摩新聞。Opera Mini 倒是可以，應該是 url encode 問題
-</blockquote>
-
-
+<ul>
+<li>… 拜託不要偷懶直接用 <code>@import "compass";</code> 啊 XD</li>
+<li>太慢有時候可能是 SCSS Framework 的問題</li>
+</ul>
 
 
 </div>
@@ -168,7 +156,7 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
 
 
 
-<time datetime="2011-10-25T17:08:00+08:00" pubdate  data-updated="true" >Oct 25<span>th</span>, 2011</time>
+<time datetime="2012-07-13T03:28:00+08:00" pubdate  data-updated="true" >Jul 13<span>th</span>, 2012</time>
       
 
 
@@ -177,7 +165,7 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -253,8 +241,8 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/25/yahoo-seo-url/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/';
         var disqus_script = 'embed.js';
       
     (function () {

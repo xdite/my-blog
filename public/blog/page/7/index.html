@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  這兩天因為本來嘗試要將 Wordpress 轉成 Octopress 的緣故。寫了不少 script。而壓出來的 MySQL 備份檔大概也有 11 M。原本以為是 spam 佔了很多份量。沒想到去掉 comment，還是足足有 10 多 M&#8230;才發...">
+  <meta name="description" content="                  原本是承諾讀者要整理一篇我常用的工具集，後來想想其實應該要改成來寫一篇：「十個 Ruby Web Developer 應該熟悉的工具」。1. GitGit 是進入 Ruby 這個生態圈首先最應該學會的工具。幾乎所有以 Ruby 開發出來的套件都放在 Gith...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,225 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/10/09/10-ruby-developer-must-have-tools/">十個 Ruby Web Developer 應該熟悉的工具</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-10-09T05:30:00+08:00" pubdate  data-updated="true" >Oct 9<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/10/09/10-ruby-developer-must-have-tools/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools/" data-show-faces="false"></div></div>
+    
+    <p>原本是承諾讀者要整理一篇我常用的工具集，後來想想其實應該要改成來寫一篇：「十個 Ruby Web Developer 應該熟悉的工具」。</p>
+
+<h3>1. Git</h3>
+
+<p><a href="http://git-scm.com/">Git</a> 是進入 Ruby 這個生態圈首先最應該學會的工具。幾乎所有以 Ruby 開發出來的套件都放在 <a href="http://github.com">Github</a> 上。也就是不管你要下載或修改協作都需要透過 Git。</p>
+
+<h3>2. RVM</h3>
+
+<p>Ruby 有很多種 implementation，比較多人在使用的有</p>
+
+<ul>
+<li>標準的 MRI Ruby 1.8.7</li>
+<li>標準的 MRI Ruby 1.9.2</li>
+<li><a href="http://www.rubyenterpriseedition.com/">REE</a> ( Ruby Enterprise Edition)</li>
+<li>JRuby 等等</li>
+</ul>
+
+
+<p>其實你用哪一種版本開發都無所謂，不過目前有一些 project 只能在 Ruby 1.9.2 上執行。切換 Ruby 環境跑實驗 project 在之前的時代是一件很痛苦的事。</p>
+
+<p>所以有人發明了 <a href="http://beginrescueend.com/">RVM</a>，讓開發者可以無痛的可以切換各種 Ruby 環境，甚至透過 RVM 製造出獨立的 Gemset 環境，無負擔的盡情實驗新工具。</p>
+
+<h3>3. Mac</h3>
+
+<p>不可否認的開發 Ruby 程式，<a href="http://www.apple.com/tw/mac/">Mac</a> 是第一首選環境。</p>
+
+<p>最初的原因是撰寫 Ruby / Rails 的利器: <a href="http://macromates.com">TextMate</a> ，是 Mac 上的軟體。而後來使用 Mac 開發 Ruby 程式的開發者越來越多，更加深這種情況，
+造成一些實戰 best practices 以及友善的開發工具，幾乎都以 Mac 為優先或唯一平台發佈，如：Pow 與 Homebrew。</p>
+
+<h3>4. Homebrew</h3>
+
+<p>原先在 Mac 上，套件管理幾乎是 Macports 與 Fink 的天下。但這兩者因為 dependency 處理不佳，加上需要 sudo 執行。某些時候會造成套件管理上的災難。
+在 OSX 10.6 之後的時代，就逐漸被後起之秀 Homebrew 取代。</p>
+
+<p>Homebrew 有兩大極優秀之點：</p>
+
+<ol>
+<li>by user，不需 sudo 就可以安裝套件。不會把檔案權限搞得一團髒。</li>
+<li>更新迅速以及乾淨。Homebrew 是 git-based 的 fomula sets，透過預設的 fomula 安裝程式。</li>
+</ol>
+
+
+<p>安裝時如果發現有錯誤，可以自行修改，並透過 Github 的功能發 pull request 要求管理者 patch。用 Homebrew 建置出來的 Rails 開發環境通常極為乾淨且無惱人的套件 bug。</p>
+
+<p>（ Rails developer 最常會撞雷的兩大套件：MySQL 與 ImageMagick 在 brew 上裝，幾乎沒什麼問題&#8230;）[註1]</p>
+
+<h3>5. Pow</h3>
+
+<p>這是由 <a href="http://37signals.com">37signals</a> 所開發出來的網頁伺服器，可以跑任何 Rack Based 的網頁程式。特點是，你可以把某個開發中的 project，如：wiki，symlink 到自己的家目錄底下的 .pow/ 資料夾。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/.pow
+</span><span class='line'><span class="nv">$ </span>ln -s ~/projects/wiki
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再打開瀏覽器上的 http://wiki.dev/，就可以把 projects 掛起來了。</p>
+
+<p>(原理是攔截對 port 80 上的 request 導回 Pow)</p>
+
+<p>在從前，如果你要掛上 projects，通常得自己改 local 的 apache conf 和 /etc/hosts 加上設定。掛起、移除、重開都非常麻煩。</p>
+
+<p>而 <a href="http://pow.cx">Pow</a> 的誕生，讓常常追許多新玩意的開發者，實驗的成本變得極度低廉。</p>
+
+<h3>6. Rack</h3>
+
+<p><a href="https://github.com/rack/rack/wiki/List-of-Middleware">Rack</a> 是一個 Ruby 套件，也同時是 Ruby 界的網頁程式標準 interface。背後的想法與原理可以參考我以前寫的一篇舊文 <a href="http://wp.xdite.net/?p=1557">Rack 與 Rack middleware</a>。</p>
+
+<p>現在只要看以 Ruby 開發的網站程式，幾乎都支援 Rack。不會再有以前哪一套框架，推薦獨家使用哪一套 web server 跑的亂象。</p>
+
+<p>而因為有了 Pow，掛起 Rack-based 的網站實驗程式成本也很低廉。</p>
+
+<p>同時因為採用 Rack 架構開發的緣故，開發者可以透過 Rack middleware 外掛實作一些框架或程式沒有的功能。</p>
+
+<p>比如說：</p>
+
+<ul>
+<li><a href="https://github.com/logicaltext/rack-no-www">rack-now-www</a> 硬是幹掉網址的 www</li>
+<li><a href="https://github.com/jtrupiano/rack-rewrite">rack-rewrite</a> 在不支援 .htaccess 的環境下，直接使用 rack 硬 rewrite routing</li>
+</ul>
+
+
+<p>也很自然而然的會知道：</p>
+
+<ul>
+<li>想惡搞，改 config.ru</li>
+<li>想重開，touch tmp/restart.txt</li>
+</ul>
+
+
+<p>這些潛規則。</p>
+
+<h3>7. Bundler</h3>
+
+<p><a href="http://gembundler.com/">Bundler</a> 原先是 Rails3 架構師 Yehuda Katz 開發出來解決 Rails 中 package dependency 的工具（ 在開發 Merb 這個 framework 時，Katz 就開始嘗試實作了）。</p>
+
+<p>package dependency 一直是相當麻煩的問題。解不開，就無法將程式 boot 起來。</p>
+
+<p>原先大家也只有拿 Bundler 搭配 Rails 使用。</p>
+
+<p>而後來 Bundler 也逐漸變成一般 Ruby 程式中預設的套件 dependency 管理程式。</p>
+
+<p>Bundler 中的 Gemfile 設計，不只能讓開發者能夠輕易的解決套件相依問題，並且可以直接引入「開發中」套件，解決 3rd gem 版本更新過慢，卡住自己開發進度的問題。</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git://github.com/tenderlove/nokogiri.git&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git://github.com/tenderlove/nokogiri.git&#39;</span><span class="p">,</span><span class="ss">:branch</span> <span class="o">=&gt;</span> <span class="s1">&#39;stable-2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git://github.com/tenderlove/nokogiri.git&#39;</span><span class="p">,</span><span class="ss">:tag</span> <span class="o">=&gt;</span> <span class="s1">&#39;tag-2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git://github.com/tenderlove/nokogiri.git&#39;</span><span class="p">,</span><span class="ss">:ref</span> <span class="o">=&gt;</span> <span class="s1">&#39;23456&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>8. Guard</h3>
+
+<p>在開發網頁程式時，開發者很常重複這樣的動作：寫一寫 -> run test -> refresh web browser -> 繼續修改 -> run test -> refresh browser</p>
+
+<p>這些都是很機械式的行為，非常煩人。</p>
+
+<p>有沒有辦法只要「檔案變更，就自動作事」呢？</p>
+
+<p><a href="https://github.com/guard/guard">Guard</a> 就是這樣的一套工具。</p>
+
+<p>有趣的是，Guard 剛推出時，其實也只單純是一套監視檔案工具變動的工具，你可以透過寫 Guardfile，去自由監視需要監視的資料夾，再 do something。而因為 Guard 架構算設計的不錯，後來許多開發者更基於 Guard
+做出更多其他的 rubygems。</p>
+
+<p><a href="https://github.com/guard/guard-livereload">guard-livereload</a> 就是一個例子。</p>
+
+<h3>9. LiveReload</h3>
+
+<p>修改網頁 => refresh browser 是剛剛所提到的煩人事之一。</p>
+
+<p><a href="http://github.com/mockko/livereload">LiveReload</a> 提供了監視檔案變動，並通知 browser reload 的功能。</p>
+
+<p>開發者如果螢幕夠大的話，可以同時開著文字編輯器與 browser，修改的任何變動馬上即時顯示在 browser 上。</p>
+
+<p>值得一提的是，LiveReload 在 10.7 以後是 broken 的。因此後來有人利用 guard 實作出了 guard-livereload 作為替代品。</p>
+
+<p>以前寫過舊文一篇：<a href="http://wp.xdite.net/?p=1791">LiveReload：你的套版好幫手！</a></p>
+
+<h3>10. Sass / SCSS / Compass</h3>
+
+<p>自從 Rails 3.1 引入 <a href="http://sass-lang.com/">SCSS</a> 作為 <a href="http://upgrade2rails31.com/asset-pipeline">Asset Pipeline</a> 當中的選項之後，這套本來沒多少開發者知道的 CSS framework 就開始瘋狂走紅。</p>
+
+<p>SCSS 的原理是透過寫編寫「巢狀」的 style，取代原本需要寫 CSS 時需要一直複製 DOM 結構名稱的動作。並且支援變數、數學、繼承、mixin 等功能&#8230;</p>
+
+<p>如：</p>
+
+<figure class='code'><figcaption><span>SCSS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'>   <span class="na">$border-color</span><span class="o">:</span> <span class="mh">#3bbfce</span><span class="p">;</span>
+</span><span class='line'>   <span class="na">$link-color</span><span class="o">:</span> <span class="mh">#3bbfcf</span><span class="p">;</span>
+</span><span class='line'>   <span class="nc">.content</span>
+</span><span class='line'>      <span class="p">{</span> <span class="na">border-color</span><span class="o">:</span> <span class="nv">$border-color</span><span class="p">;</span>
+</span><span class='line'>        <span class="nt">a</span><span class="p">{</span><span class="na">color</span><span class="o">:</span> <span class="nv">$link-color</span><span class="p">}</span>
+</span><span class='line'>   <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以生成</p>
+
+<figure class='code'><figcaption><span>CSS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'>  <span class="nc">.content</span><span class="p">{</span> <span class="k">border-color</span><span class="o">:</span> <span class="m">#3bbfce</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nc">.content</span> <span class="nt">a</span><span class="p">{</span><span class="k">color</span><span class="o">:</span> <span class="m">#3bbfcf</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而 <a href="http://compass-style.org/">Comass</a> 是基於 SCSS 的 Framework。提供了更進一步的許多暴力 feature。</p>
+
+<p>有些人可能會搞不清楚 SASS / SCSS / Compass 的關係。如果你有興趣的話，可以參考我在 <a href="http://upgrade2rails31.com">Upgrade2Rails31</a> 這個 project 中寫的兩篇文章：<a href="http://upgrade2rails31.com/sass-scss">Sass/SCSS</a> 以及 <a href="http://upgrade2rails31.com/compass">Compass</a>。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -384,6 +603,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/07/13/speed-up-zurb-foundation/">Asset Pipeline 加速：以 Zurb Foundation 為例</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>
       </li>
     
@@ -397,10 +620,6 @@
     
       <li class="post">
         <a href="/posts/2012/05/06/how-to-prepare-self-travel/">如何準備美國自助旅行（行程準備篇）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/04/25/railsconf-2012-3/">Railsconf 2012 - 國際性 Conference 是這樣辦的 （下）</a>
       </li>
     
   </ul>
