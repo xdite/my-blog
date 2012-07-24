@@ -258,7 +258,11 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/</loc>
-        <lastmod>2012-07-13T03:57:36+08:00</lastmod>
+        <lastmod>2012-07-13T04:04:11+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.xdite.net/posts/2012/07/25/some-naming-tips/</loc>
+        <lastmod>2012-07-25T03:45:35+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/about/</loc>
@@ -270,11 +274,11 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/blog/archives/</loc>
-        <lastmod>2012-07-13T03:57:36+08:00</lastmod>
+        <lastmod>2012-07-25T03:45:35+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/</loc>
-        <lastmod>2012-07-13T03:57:36+08:00</lastmod>
+        <lastmod>2012-07-25T03:45:35+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/</loc>

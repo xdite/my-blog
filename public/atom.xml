@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-07-13T03:57:58+08:00</updated>
+  <updated>2012-07-25T03:45:55+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,195 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[一些 Ruby 命名的技巧]]></title>
+    <link href="http://blog.xdite.net/posts/2012/07/25/some-naming-tips/"/>
+    <updated>2012-07-25T01:17:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/07/25/some-naming-tips</id>
+    <content type="html"><![CDATA[<p>命名是 CS 中兩大<a href="http://martinfowler.com/bliki/TwoHardThings.html">難題</a>，（ref: 從 DK 週一在 <a href="http://blog.gslin.org/archives/2012/07/24/2931/%e5%9c%a8-passion-bean-%e5%88%86%e4%ba%ab%ef%bc%9asystem-operations-for-startup/">Passion Bean 的 Talk 上聽到的</a> ）。</p>
+
+<p>今天在公司批票，剛好稍微教了一下同事如何設計寫出好讀的 Ruby method 名稱，覺得蠻有價值的，就隨手整理了一下貼上來。</p>
+
+<h4>場景</h4>
+
+<p>手機需要驗證，需要寫一個 Class 包裝一個手機驗證碼的寄送與儲存。原始的寫法是使用 「auth_gsm」欄位儲存。</p>
+
+<h3>視狀況使用「能表達情境」的名詞設計欄位 : gsm_authcode</h3>
+
+<ul>
+<li><p>auth_gsm 的缺點在於讓人看不出來這個字的主題是 gsm 還是 auth。是 gsm 嗎？看起來也不是，只能從字面知道這是跟 gsm 相關的 auth 行為。</p></li>
+<li><p>auth_gsm 但這個 auth 到底是驗證的「狀態」，還是被驗證的「內容」？從名詞上看不出來。</p></li>
+<li><p>如果 User Story 是指這是應該傳送給使用者的驗證碼內容。應該被更具體的用名詞設計。</p></li>
+</ul>
+
+
+<h3>使用過去分詞 + &#8220;at&#8221; 或者是 &#8220;is&#8221; + 形容詞設計欄位</h3>
+
+<ul>
+<li><p>被驗證的時間不應該使用 activated_time 而應該使用 activated_at。因為 time 是表示時間（時間是指什麼時候還是花多久時間？），不是「什麼時候被驗證」。</p></li>
+<li><p>是否已被驗證可以使用「is_activated」配合 boolean （true / false）。</p></li>
+</ul>
+
+
+<h3>使用 ? 表示這個 method 預期會傳回來的值只會是 true/false。</h3>
+
+<ul>
+<li>ruby 允許 method 名稱有 <code>?</code>，若 method 名字內有 <code>?</code>，開發者會預期回傳值是 true/ false</li>
+<li><code>if post.is_hidden?</code> 比 <code>if post.is_hidden</code> 直觀</li>
+<li><code>if user.is_activated?</code> 比 <code>is_activated</code> 直觀</li>
+<li>加上 <code>?</code> 更強調了狀態，而非只是驗證欄位是否 true / false</li>
+<li>Array 也有類似用法  array_a.include?(element_a)</li>
+</ul>
+
+
+<p>通常會在 class 內再對作欄位作一層包裝</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Post &lt; AR
+</span><span class='line'>   def is_hidden?
+</span><span class='line'>     is_hidden
+</span><span class='line'>   end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>使用動詞與名詞如 generate_gsm_authcode 表示要做的事情</h3>
+
+<ul>
+<li>不要在 controller 裡面直接使用</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  user.gsm_authcode == "123456"
+</span><span class='line'>  user.save</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>應該在 User model 內設計一個可以敘述要作什麼事的 method 包裝起來</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class User &lt; AR
+</span><span class='line'>  def genetate_gsm_authcode
+</span><span class='line'>    update_attribute(:gsm_authocode, rand(10))
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>generate_gsm_authcode （動詞 + 名詞）只做事</li>
+</ul>
+
+
+<h3>名詞只是名詞</h3>
+
+<ul>
+<li>如果 method 只是名詞，不要偷偷動作，而且預期傳回來的要是純量如 String, Array, Hash, Set, Object</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class User &lt; AR
+</span><span class='line'>  def full_gsm_number
+</span><span class='line'>    "#{area_code}-#{gsm_number}"
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>使用 ! 表示這個 method會改變原先自身的狀態</h3>
+
+<ul>
+<li>String 的 gsub! 與 gsub 是不同的結果與作用。</li>
+<li>在 Ruby 中如果 method 加上! 通常會預期這個 method 會改變該 object 本身的狀態</li>
+<li>ActiveRecord 的 save 與 save! 會發生的事其實是不同的。</li>
+<li>save 遇到 validation 不過會儲存失敗，但不會 throw excecption。但是 save! 遇到 validation 會 throw exception。</li>
+<li>dalayed_job 還是哪一套 background job 的 gem。method 後面若被加上 ! 表示立即執行不進 queue。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class User &lt; AR
+</span><span class='line'>  def regenerate_authcode!
+</span><span class='line'>    # blah
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Library 的名稱應儘量為中性，並且貼近實際的責任。</h3>
+
+<p>如果這一支程式是拿來傳簡訊的函式，命名應考慮到這支程式應該要作什麼。</p>
+
+<ul>
+<li><p>TWSMS (twsms.rb) 是比較好的。原因是這隻程式負責把 API 呼叫「包裝」了起來。</p></li>
+<li><p>TWSMSWrapper (twsms_wrapper.rb) 是不好的。因為這隻程式並沒有實際「包裝」了什麼東西。它只是提供了一個介面讓其他人可以呼叫。</p></li>
+<li><p>TWSMSSender (twsms_sender.rb) 是不好的。因為這隻程式並沒有實際自己去「呼叫」了外部程式。如果有 twsms_sender.rb 這支程式，裡面應該是一支負責實際去「呼叫」的 services wrapper。就跟 Mailer 的作用一樣。</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>module SMSsedner
+</span><span class='line'>  def send_to_customer
+</span><span class='line'>    # blah
+</span><span class='line'>  end
+</span><span class='line'>  
+</span><span class='line'>  def send_to_vendor
+</span><span class='line'>    # blah
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>動作應該是中性的動詞，但不應該是保留字</h3>
+
+<p>這是安全的字</p>
+
+<ul>
+<li>request</li>
+<li>assign</li>
+<li>….</li>
+</ul>
+
+
+<p>這是不安全的字</p>
+
+<ul>
+<li>send</li>
+<li>save</li>
+<li>….</li>
+</ul>
+
+
+<h3>worker 這個字被視為 background worker 。而不是作事的 dispathcher。</h3>
+
+<p>worker 通常會負責被視為是去 background job queue 裡面取出來的人。而非 job dispatcher。</p>
+
+<h2>Summary</h2>
+
+<p>這是我目前整理出來的一些比較大的方向。如果照著這樣的原則走去寫程式碼，大致上都會蠻乾淨的…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Asset Pipeline 加速：以 Zurb Foundation 為例]]></title>
@@ -26,7 +215,7 @@
 
 <p>不過不知道解掉這個問題可以實際上快多少。今天正打算抓下來 benchmark 時，就發現這篇靠么 zurb 的人應該收到了。他們 <a href="https://github.com/zurb/foundation/commit/b9c8d1d5ca29ceb89111084dfd530b68bfd65484">patch 掉</a>了，版本從 3.0.4 升到 3.0.5 。</p>
 
-<p>主要變更是把原先 <code>@import "compass";</code> 改成 <code>@import "compass/css3";</code>。然後把所有的 <code>@import "base";</code> 拿掉。</p>
+<p>主要變更就是把原先 <code>@import "compass";</code> 改成 <code>@import "compass/css3";</code>。然後把所有的 <code>@import "base";</code> 拿掉。</p>
 
 <h2>Benchmark</h2>
 
@@ -47,6 +236,8 @@
 <li>Compiled application.css  (3201ms)  (pid 12853) # 3.0.5</li>
 </ul>
 
+
+<p>平均來說速度快了四倍&#8230;</p>
 
 <h2>結論</h2>
 
@@ -2966,155 +3157,6 @@ I think you should use an
 <p>感謝 <a href="https://www.facebook.com/MacLoveTaiwan">麥克愛愛</a> 幫我修好手機，所以特此寫這一篇文章推薦他們。如果你有蘋果電腦或者是 iPhone 手機的問題，歡迎找他們。服務真的相當專業到位。</p>
 
 <p>電話與聯絡方式在 <a href="https://www.facebook.com/MacLoveTaiwan">麥克愛愛的臉書專頁</a> 有，出發之前請先電話預約洽詢。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[從 Github 被 hack，談 Rails 的安全性（ mass-assignment ）]]></title>
-    <link href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/"/>
-    <updated>2012-03-05T10:51:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security</id>
-    <content type="html"><![CDATA[<p>關於 Github 被入侵這件事，目前在國外開發圈傳的沸沸揚揚。看來中文圈還沒有消息，我來報導一下到底發生了什麼事好了。順便宣導一下開發 Rails 程式碼需要注意的其中一個觀念..</p>
-
-<h2>到底發生了什麼事</h2>
-
-<p><a href="https://github.com/rails/rails">Rails</a> 的 master 被某個 hacker 塞上這一段 <a href="https://github.com/rails/rails/commit/b83965785db1eec019edf1fc272b1aa393e6dc57">commit</a>。以證明 Github 是可以被入侵的。</p>
-
-<h2>為什麼會發生這件事（糾紛起源）</h2>
-
-<p>有個俄羅斯 Hacker : <a href="homakov">homakov</a> 到 Rails 的 Github issue 頁，report 了一個 <a href="https://github.com/rails/rails/issues/5228">issue</a>。</p>
-
-<p>聲稱他發現很多「中等程度以下的」Rails 開發者開發任何網站，都沒有在 model 內作上任何 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a> 的防護，這樣會引起很多安全性的問題。</p>
-
-<p>Rails 官方應該設計一個機制強迫大家一定得「使用」<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a>。</p>
-
-<p>因為寫 code 要塞 attr_accessible 被多數開發者認為是根本是一個「常識」。所以這個 issue 很快就被 Rails core team 關掉了。他的意見是這不是 Rails 的問題，而是開發者的問題。（正常人都會做出這樣的反應）</p>
-
-<p>這個 Hacker 覺得他好心來報告，但是卻被忽視，感到很生氣。</p>
-
-<p>於是！他 Hack 了 Github 證明這件事情是真的。</p>
-
-<p>他不僅利用這個漏洞在 rails/rails 中塞了 <a href="https://github.com/rails/rails/commit/b83965785db1eec019edf1fc272b1aa393e6dc57">commit</a> ，連當初被關掉的 <a href="https://github.com/rails/rails/issues/5228">issue</a> ，也用同樣方法打開了。</p>
-
-<p>所以這下就鬧到舉世震驚了！…XDDDDD</p>
-
-<h2>為什麼會發生這件事（剖析 Rails ）</h2>
-
-<h3>從 Rails 表單機制談起</h3>
-
-<p>Rails 秉持著 Don&#8217;t Repeat Yourself 的精神，將 Form 表單 Helper 直接與 Model 欄位直接結合，節省不少開發者撰寫表單的時間，是一個很聰明的作法。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= form_for @post do |f| %&gt;</span>
-</span><span class='line'><span class="sx">  &lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:title</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;%= f.text_area :content %&gt;</span>
-</span><span class='line'>  <span class="o">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">sumbit</span> <span class="s2">&quot;Submit&quot;</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>當表單送出後，會被壓縮成一個 params[:post] 這樣的 Hash。controller 裡面透過 massive-assignment 的技巧直接 mapping 進 Model 裡。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>     <span class="vi">@post</span> <span class="o">=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">posts</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>     <span class="k">if</span> <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>       <span class="c1"># do something</span>
-</span><span class='line'>     <span class="k">else</span>
-</span><span class='line'>       <span class="c1"># do another thing</span>
-</span><span class='line'>     <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這是一個自 Rails 誕生以來就有的機制了，十分便手。</p>
-
-<p>有些不了解的 Rails 的其他 Developer 批評這是一個不安全設計，並因此拒絕使用 Rails。欄位暴露在外被人知道，讓他們感到非常不自在。</p>
-
-<p>萬一被人猜到 user 權限是用 user.is_admin 作為 boolean 值，這樣豈不是很危險嗎？在修改個人資訊頁時，假造 DOM 就不是可以把自己提升為 admin 了嗎？</p>
-
-<h3>Rails 內建的安全防禦措施</h3>
-
-<p>Rails 也不是沒有針對這件事設計出防禦措施，有兩組 model API ：<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a> 與 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected">attr_protected</a>。其實也就是 白名單、黑名單設計。</p>
-
-<p>把 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a> 加在 model 裡，可以擋掉所有 massive assignement 傳進來的值，只開放你想讓使用填寫的欄位。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:content</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected">attr_protected</a> 是完全相反地機制。</p>
-
-<h3>知名認證 Plugin 皆內建 attr_accessible</h3>
-
-<p>也因為 user.is_admin 幾乎是所有懶惰開發者會寫出來的 code。因此長久的歷史演變下來，許多知名認證 plugin，如 <a href="https://github.com/plataformatec/devise">devise</a> ，restful-authentication 等等…，在 User model 裡都會加上 attr_accessible（你可能沒有察覺到，因為可能是透過 include Module 塞進來的功能）。</p>
-
-<p>因為是隱藏的內建防禦，很多不夠經驗的開發者，反而會被這道自動防禦整到，在設計修改使用者資訊這個功能時，常常表單明明沒問題，但就是修改不了除了密碼和 email 以外的欄位 XDDD</p>
-
-<h3>User model 自動防禦，那其他 model 呢？</h3>
-
-<p>好問題！這就是這次 Github 發生的問題。嚴格來說，根本不是 rails/rails 的錯，<strong>而是 Github 內某個被罵 mid/junior level 的 developer 的錯</strong>。他根本沒有對其他 model 作上保護，才被 hacker 有機可趁。</p>
-
-<p>Hacker 也是想要證明連 Github 都會犯這種錯，才會鬧出這種事件</p>
-
-<h2>看到 Github 的事件，我該做什麼？</h2>
-
-<p>請回家讀這兩組 model API ：<a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_accessible">attr_accessible</a> 與 <a href="http://api.rubyonrails.org/classes/ActiveModel/MassAssignmentSecurity/ClassMethods.html#method-i-attr_protected">attr_protected</a> 的作用。</p>
-
-<p>並檢查你的 project 內是否有類似問題：一般來說，容易被攻擊的點都跟 relation 比較有關係。也就是 xxxxx_id 的部分都要清查。</p>
-
-<h3>Scoped Mass Assignment</h3>
-
-<p>這是 Rails 3.1 加入的新 feature : scoped mass assignment，
-<a href="http://enlightsolutions.com/articles/whats-new-in-edge-scoped-mass-assignment-in-rails-3-1">http://enlightsolutions.com/articles/whats-new-in-edge-scoped-mass-assignment-in-rails-3-1</a>。</p>
-
-<p>我也建議你閱讀。</p>
-
-<h2>Rails core team 目前的解法</h2>
-
-<p>大師 Yahuda Katz (wycats) 目前起草了一份新的 <a href="https://gist.github.com/1974187">proposal</a>，並且丟在 <a href="http://news.ycombinator.com/item?id=3664334">Hacker News</a> 讓鄉民討論。應該可能近期就會近 Rails core 或以 plugin 的方式釋出。</p>
-
-<h2>我個人的感想</h2>
-
-<p>其實昨晚睡前看到一堆人說 Github 被 Hacked 掉，然後追了幾篇討論串之後，覺得真的是沒什麼，因為就我來說，的確應該就是這個 hacker 覺得有必要提醒大家，但這對多數的 Rails Developer 來說，根本是超小的小事，不值得這麼大驚小怪。</p>
-
-<p>結果憤怒的 Hacker 攻擊了 Github，Github 真的還因為某個 developer 犯了低級錯誤中招。但我還是覺得沒什麼…</p>
-
-<h2>XSS V.S. Massive Assignment</h2>
-
-<p>後來睡醒以後才發現不對，其實這東西應該要被拿來跟 auto escape 相比：XSS 是一般設計 Web Application 最容易中招的攻擊。</p>
-
-<p>XSS 的原因肇因是讓開發者開放讓使用者自行輸入內容，然後無保護的讀出來，Hacker 會利用這種漏洞，寫進有害的 JavaScript 讓使用者中招。正確的方式應該是：內容讀出來之後，都要利用 html_escape 濾掉。</p>
-
-<p>問題是，html_escape 濾不勝濾，沒有開發者能夠那麼神，寫任何一段 code 都會自律的加上 h(content)。最後 Rails core 痛定思痛，在 Rails 3.0 後效法 Django 的設計，在讀出 content 時，一律先 escape。除非有必要，才另行設定不需 escape。</p>
-
-<p>我想這次的 massive assignment 問題應該也要比照辦理才對…</p>
-
-<h2>延伸閱讀：</h2>
-
-<p>國外鄉民懶人包：<a href="http://chrisacky.posterous.com/github-you-have-let-us-all-down">GitHub and Rails: You have let us all down.</a></p>
-
-<p>DHH 給出的 37Signals 的作法：<a href="https://gist.github.com/1975644">https://gist.github.com/1975644</a></p>
 ]]></content>
   </entry>
   

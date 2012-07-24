@@ -14,7 +14,7 @@ categories:
 
 不過不知道解掉這個問題可以實際上快多少。今天正打算抓下來 benchmark 時，就發現這篇靠么 zurb 的人應該收到了。他們 [patch 掉](https://github.com/zurb/foundation/commit/b9c8d1d5ca29ceb89111084dfd530b68bfd65484)了，版本從 3.0.4 升到 3.0.5 。
 
-主要變更是把原先 `@import "compass";` 改成 `@import "compass/css3";`。然後把所有的 `@import "base";` 拿掉。
+主要變更就是把原先 `@import "compass";` 改成 `@import "compass/css3";`。然後把所有的 `@import "base";` 拿掉。
 
 
 ## Benchmark
@@ -30,6 +30,9 @@ categories:
 
 * Compiled application.css  (12518ms)  (pid 12585) # 3.0.4
 * Compiled application.css  (3201ms)  (pid 12853) # 3.0.5
+
+平均來說速度快了四倍...
+
 
 ## 結論
 
