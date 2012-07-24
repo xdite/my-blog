@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-命名是 CS 中兩大[難題](http://martinfowler.com/bliki/TwoHardThings.html)，（ref: 從 DK 週一在 [Passion Bean 的 Talk 上聽到的](http://blog.gslin.org/archives/2012/07/24/2931/%e5%9c%a8-passion-bean-%e5%88%86%e4%ba%ab%ef%bc%9asystem-operations-for-startup/) ）。
+命名是 CS 中兩大[難題](http://martinfowler.com/bliki/TwoHardThings.html)，（ref: 在 DK 週一 [Passion Bean 的 Talk 上聽到的](http://blog.gslin.org/archives/2012/07/24/2931/%e5%9c%a8-passion-bean-%e5%88%86%e4%ba%ab%ef%bc%9asystem-operations-for-startup/) ）。
 
 今天在公司批票，剛好稍微教了一下同事如何設計寫出好讀的 Ruby method 名稱，覺得蠻有價值的，就隨手整理了一下貼上來。
 
@@ -139,5 +139,5 @@ worker 通常會負責被視為是去 background job queue 裡面取出來的人
 
 ## Summary
 
-這是我目前整理出來的一些比較大的方向。如果照著這樣的原則走去寫程式碼，大致上都會蠻乾淨的…
+這是我目前整理出來的一些比較大的方向。如果照著這樣的原則走去寫程式碼，大致上都會蠻乾淨好懂的…
 

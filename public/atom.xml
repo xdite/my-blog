@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-07-25T03:45:55+08:00</updated>
+  <updated>2012-07-25T03:48:45+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.xdite.net/posts/2012/07/25/some-naming-tips/"/>
     <updated>2012-07-25T01:17:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/07/25/some-naming-tips</id>
-    <content type="html"><![CDATA[<p>命名是 CS 中兩大<a href="http://martinfowler.com/bliki/TwoHardThings.html">難題</a>，（ref: 從 DK 週一在 <a href="http://blog.gslin.org/archives/2012/07/24/2931/%e5%9c%a8-passion-bean-%e5%88%86%e4%ba%ab%ef%bc%9asystem-operations-for-startup/">Passion Bean 的 Talk 上聽到的</a> ）。</p>
+    <content type="html"><![CDATA[<p>命名是 CS 中兩大<a href="http://martinfowler.com/bliki/TwoHardThings.html">難題</a>，（ref: 在 DK 週一 <a href="http://blog.gslin.org/archives/2012/07/24/2931/%e5%9c%a8-passion-bean-%e5%88%86%e4%ba%ab%ef%bc%9asystem-operations-for-startup/">Passion Bean 的 Talk 上聽到的</a> ）。</p>
 
 <p>今天在公司批票，剛好稍微教了一下同事如何設計寫出好讀的 Ruby method 名稱，覺得蠻有價值的，就隨手整理了一下貼上來。</p>
 
@@ -198,7 +198,7 @@
 
 <h2>Summary</h2>
 
-<p>這是我目前整理出來的一些比較大的方向。如果照著這樣的原則走去寫程式碼，大致上都會蠻乾淨的…</p>
+<p>這是我目前整理出來的一些比較大的方向。如果照著這樣的原則走去寫程式碼，大致上都會蠻乾淨好懂的…</p>
 ]]></content>
   </entry>
   
