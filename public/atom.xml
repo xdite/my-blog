@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-07-25T03:48:45+08:00</updated>
+  <updated>2012-07-30T02:16:06+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,202 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cancan 實作角色權限設計的最佳實踐(1)]]></title>
+    <link href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/"/>
+    <updated>2012-07-30T02:12:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1</id>
+    <content type="html"><![CDATA[<p>權限存取設計是在開發 Application 中相當讓人棘手的一個題目。</p>
+
+<p>在一個網站開始建設的初期，通常這樣的問題並不會浮現，畢竟一般人的需求大半只會有 user 和 admin 兩種角色。但是隨著網站長大，更多的生意需求浮現，第三種角色的出現，通常就會把原本乾淨的 code 弄得骯髒不堪。</p>
+
+<h2>多種角色的權限設計難題</h2>
+
+<p>當只有 user 和 admin 的情況下，你可以在 <code>view</code> 裡面單純的做出這樣的設計</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_admin</span> <span class="p">?</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;Admin Pannel&quot;</span><span class="p">,</span> <span class="n">admin_panel_path</span> <span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>並且在 controller 裡面加上權限判斷</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Admin</span><span class="o">::</span><span class="no">ArticleController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:require_is_admin</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但一段時間之後，User Story 被加進了這樣的需求:</p>
+
+<ul>
+<li>使用者可以被設定為「editor」</li>
+<li>擁有「editor」角色的使用者，可以進入 admin 後台發表、編輯文章</li>
+<li>擁有「edtior」角色的使用者，進入 admin 後台內的活動範圍僅限縮在文章後台內</li>
+<li>擁有「edtior」角色的使用者，進入 admin 後台內，不可以看到其他後台選項。</li>
+</ul>
+
+
+<p>身為開發者的你，要如何在現有後台內加入這樣的設計？</p>
+
+<p>不用實際動手寫也知道，若如以往使用 if / else 的設計，Helper / Controller / View 鐵定變成一團血肉模糊。</p>
+
+<p>抱怨不能解決問題，但世界上是否存在乾淨的解答？</p>
+
+<h2>Rule-engine based authorization library: Cancan</h2>
+
+<p>答案就是：「Rule Engine」。</p>
+
+<p>「針對多種條件執行多種動作」，此類的使用者需求，無論是使用 if / else，甚至是 case when，架構還是不免會一團混亂。與其承襲舊思路，不如啟用新想法「Rule Engine」實作：預先設計撰寫一套邏輯規則引擎，而後程式針對預設的規則進行邏輯判斷後執行。</p>
+
+<p>而「角色權限」的設計需求上，正特別適合用 Rule Engine 這樣的觀念去建構。這也是 Rails 界知名的 authorization library <a href="https://github.com/ryanb/cancan">cancan</a> 正是以此作為基礎。</p>
+
+<h3>Cancan 可以做到的：介面單純化</h3>
+
+<p>cancan 希望做到的是，把權限判定的處理部分從 Helper / Controller / View 裡面，全部移到 <code>app/models/ability.rb</code> 進行判定。也因此可以做到</p>
+
+<ul>
+<li>View 只需要判斷是否可以執行動作，而不必問是否有權限</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">can?</span> <span class="ss">:update</span><span class="p">,</span> <span class="vi">@article</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">edit_article_path</span><span class="p">(</span><span class="vi">@article</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Controller 不需要手動判斷是否具有權限</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">authorize_resource</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="c1"># @article is already loaded and authorized</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但驚人的是 <strong> view 的權限會是與 controller 的權限判定規則 </strong> 卻是一致的。（以往「自刻」權限判定，往往加了 view 卻會忘記 controller, 加了 controller 卻會忘記 view ）</p>
+
+<h3>Cancan 希望做到的：權限中心化管理</h3>
+
+<p>而是否有權限存取，則全交給 <code>app/models/ability.rb</code> 去判斷處理。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Ability</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">CanCan</span><span class="o">::</span><span class="no">Ability</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>      <span class="c1"># not logged in</span>
+</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
+</span><span class='line'>      <span class="n">basic_read_only</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
+</span><span class='line'>      <span class="c1"># admin</span>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:member</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:create</span><span class="p">,</span> <span class="no">Topic</span>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
+</span><span class='line'>        <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
+</span><span class='line'>         <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">basic_read_only</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="c1"># banned or unknown situation</span>
+</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
+</span><span class='line'>      <span class="n">basic_read_only</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">protected</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>小結</h2>
+
+<p><a href="https://github.com/ryanb/cancan">cancan</a> 是一套相當 powerful 的權限管理系統，但是它的文件卻相當不好讀，第一次想使用 cacan的 developer 很難從文件上找到自己想要的範例以及 api，或者了解其原理構造。如果沒有先給一些基礎範例，往往會是寸步難行。</p>
+
+<p>下一篇我會深入頗析 Cancan 更深的設計原理。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一些 Ruby 命名的技巧]]></title>
@@ -3136,27 +3332,6 @@ I think you should use an
 <p>不過因為裝機實務這個步驟比較會卡到大家，所以我先放這個章節: <a href="http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/">Rails on Mac 安裝最佳實務</a> 出來給大家使用。</p>
 
 <p>若您在裝機上還碰到什麼問題，請至 <a href="http://ruby-taiwan.org/">Ruby Taiwan Group</a> 上面回報。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iPhone 4S 進洗衣機洗還是有救]]></title>
-    <link href="http://blog.xdite.net/posts/2012/03/06/iphone4s/"/>
-    <updated>2012-03-06T22:53:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/03/06/iphone4s</id>
-    <content type="html"><![CDATA[<p>一兩個禮拜之前因為太累，我回家時忘記把 iPhone 4S 從牛仔褲掏出來。洗完澡之後就恍神直接把髒衣服拿去洗衣機直接洗了。</p>
-
-<p>一兩個小時，等我回神過來之後，要幫手機充電，才發現手機已經躺在洗衣機裡面被洗得亮晶晶了。這還不夠，手機還是在開機狀態進去洗的，跟一般只是掉到馬桶進水的狀況不一樣。</p>
-
-<p>Anyway，朋友建議我拿去 忠孝新生站 3 號出口的 <a href="https://www.facebook.com/MacLoveTaiwan">麥克愛愛</a> 碰運氣修看看。傳說中這是一間服務非常棒的水果商，他們也「兼修」iPhone 這樣&#8230;.</p>
-
-<p>賭賭運拿去麥克愛愛修幾天後，幾天店員回電說檢修後發現主機版、螢幕和無線網路模組都炸光光了。維修費用應該會是 ㊙（遠低於我的預算，反正在一萬以內），不過他想他還是可以幫我修看看。</p>
-
-<p>今天被通知修好了，所以就過去拿了。除了香噴噴（咦？）亮晶晶以外（開玩笑，我都用熊寶貝幫他洗澡了&#8230;），手機也跟新的一樣活跳跳的回到我手上了。</p>
-
-<p>感謝 <a href="https://www.facebook.com/MacLoveTaiwan">麥克愛愛</a> 幫我修好手機，所以特此寫這一篇文章推薦他們。如果你有蘋果電腦或者是 iPhone 手機的問題，歡迎找他們。服務真的相當專業到位。</p>
-
-<p>電話與聯絡方式在 <a href="https://www.facebook.com/MacLoveTaiwan">麥克愛愛的臉書專頁</a> 有，出發之前請先電話預約洽詢。</p>
 ]]></content>
   </entry>
   

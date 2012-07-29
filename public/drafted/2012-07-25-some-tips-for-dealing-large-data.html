@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>一些在 Rails 上處理大量資料的技巧 - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          這個主題也是我最近常被問到的答案集合包。Rails Developer 在使用內建工具開發網站時，若是由小做起，通常不會踩到這些雷。但是若一開始開站資料就預計會有 10 萬筆、甚至 100 萬筆資料。執行 db 的 rake task 通常往往會令人痛苦不堪。在這篇文章內，...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/drafted/2012-07-25-some-tips-for-dealing-large-data.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+-->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">一些在 Rails 上處理大量資料的技巧</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-25T23:56:00+08:00" pubdate  data-updated="true" >Jul 25<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <p>這個主題也是我最近常被問到的答案集合包。</p>
+
+<p>Rails Developer 在使用內建工具開發網站時，若是由小做起，通常不會踩到這些雷。但是若一開始開站資料就預計會有 10 萬筆、甚至 100 萬筆資料。執行 db 的 rake task 通常往往會令人痛苦不堪。</p>
+
+<p>在這篇文章內，我整理了一些處理巨量資料必須注意的細節，應該可以有效解決大家常遇到的問題：</p>
+
+<p>另外不要再說 10 萬筆資料是巨量資料了啊 -_-|||。這個數字講巨量會被人家偷笑幼幼班啊 orz</p>
+
+<h3>1. 盡量避免使用 ActiveRecord Object</h3>
+
+<p>ActiveRecord 有點肥，如果你只是要作一些簡單的資料操作，請直接下 SQL，不要沾到任何 ActiveRecord。</p>
+
+<p>（但大多數開發者直覺都是會開 ActiveRecord 下了條件就直接跑迴圈，忘記 MySQL 是可以直接拿來下指令的）</p>
+
+<p>如果你覺得沒有抽象一點的工具可以用，直接下指令很痛苦，有 <a href="http://sequel.rubyforge.org/">sequel</a> 這套工具可以用。</p>
+
+<p>避免用 ActiveRecord + 內建的 rake task 原因是，你會把整套的 Rails 環境都載進來跑，其慢無比是正常的…</p>
+
+<h3>2. 有 update_all 可以用，少用 for / each。</h3>
+
+<p>通常有問題的 code 都是長這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>posts = Post.where(:board_id =&gt; 5)
+</span><span class='line'>
+</span><span class='line'>post.each do |post|
+</span><span class='line'>  post.board_id = 1
+</span><span class='line'>  post.save
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這段 code 非常直觀，但會造成的問題超級多。如果符合的條件有 10 萬筆，大概你跑一天都跑不完&#8230;.</p>
+
+<p>先提供快速解法。Rails 提供了 <a href="http://apidock.com/rails/ActiveRecord/Base/update_all/class">update_all</a> 可以下。可以改成這樣</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Post.update_all({:board_id =&gt; 1}, {:board_id =&gt; 5})</span></code></pre></td></tr></table></div></figure>
+
+
+<p>基本上就是等於直接幫你下 update 的 SQL 啦。同樣資料量跑下去大概只要 10 秒秒以下左右吧。</p>
+
+<h3>3. 不要傻傻的直接 Post.all.each，可以用 find_in_batches</h3>
+
+<p>直接叫出所有符合的資料（Array) 是一件危險的事。如果符合條件的資料是 10 萬筆，全拉出來有高達 10G 的大小，嗯…我想你的機器應該沒裝 10 G 的記憶體，指令下去機器直接跑到死掉有極大的可能性…</p>
+
+<p>Rails 提供了 find_in_batches</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Post.find_in_batches(:conditions =&gt; "board_id = 5", :batch_size =&gt; 1000) do |posts|
+</span><span class='line'>  posts.each do |post|
+</span><span class='line'>    post.board_id = 1
+</span><span class='line'>    post.save
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果沒下 batch_size 預設一次是拉 2000 筆。你可以一次指定小一點的數目，如一次 500 筆去跑。</p>
+
+<h3>4. 使用 transaction 跳過每次都要 BEGIN COMMIT 的過程，一次做完 1000 筆，然後再 COMMIT。</h3>
+
+<p>如果你打開 Rails 的 development.log，這樣的 LOG 你應該不陌生。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   (0.3ms)  BEGIN
+</span><span class='line'>   (0.5ms)  COMMIT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rails 開發時，為了確保每比資料正確性，儲存的時候都會過一次 transaction，於是即使已經照 <code>3</code> 這樣的解法，還是要過 10 萬次 COMMIT BEGIN。很浪費時間。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Post.find_in_batches(:conditions =&gt; "board_id = 5", :batch_size =&gt; 1000) do |posts|
+</span><span class='line'>  Post.transaction do 
+</span><span class='line'>    posts.each do |post|
+</span><span class='line'>      post.board_id = 1
+</span><span class='line'>      post.save
+</span><span class='line'>    end
+</span><span class='line'>  end 
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你只是要 update 少量欄位，而且資料處於離線狀態，可以使用 <a href="http://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html">Transactions</a> 搭配 find_in_batches，做完兩千筆再一次 commit，而不是每次做完就 commit 一次，在資料量很大的狀況下也可以節省不少時間。</p>
+
+<h3>5. 使用 sneacky-save 而非原生 save</h3>
+
+<p>用原生 <code>save</code> 會有什麼問題呢？原生的 <code>save</code> 在資料儲存時，會經過一堆 <code>validator</code> 和 <code>callbacks</code>，即使你只是要簡單 update 一個欄位，會觸發到一狗票東西（假設 10 道 hook），那 10 萬筆就是過 100 萬道 hook 了啊。天啊 /_\，機器死掉不意外。</p>
+
+<p>如果你想要閃掉 hook 的話，可以使用 <a href="https://github.com/partyearth/sneaky-save">sneacky-save</a> 這套 gem。如其名，就是偷偷儲存不會勾動任何天雷地火。</p>
+
+<h3>6. 可以的話使用 Post.select(&#8220;column 1, colum2&#8221;).where</h3>
+
+<p>很多人會忽略一件事，<code>Post.where("id &lt; 10")</code>，其實是把這 10 個 object 拉出 database。Post 裡面有什麼呢？會有幾千字的 <code>content</code> 啊。所以當你下了這道 comment 後，拉出來的是這些內容</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Post Load (18.8ms)  SELECT `posts`.* FROM `posts` WHERE (id &lt; 10)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>拉出 10 萬筆會發生什麼事呢？(炸)</p>
+
+<p>所以這也是我建議如果你不是要作複雜操作（高度 model 邏輯）的話，千萬別碰 ActiveRecord，因為你不會知道哪按下哪一顆核蛋按鈕。</p>
+
+<h3>7. 無法避免的昂貴操作丟到 background job 去操作。</h3>
+
+<p>使用 <code>posts.each</code> 是一個昂貴的線性操作。這個 process 會無限的膨脹及 block 資源。</p>
+
+<p>所以可以改用一個作法，使用 <a href="https://github.com/collectiveidea/delayed_job">delayed_job</a> 或者是 <a href="https://github.com/defunkt/resque/">resque</a> 把昂貴的操作包成獨立事件。塞進 queue 裡面，丟到背景跑，然後開 10 支 worker，十箭其發，速度可以快不少。</p>
+
+<h3>8. 使用 truncate 而非 destroy_all 與 delete_all</h3>
+
+<ul>
+<li><a href="http://apidock.com/rails/ActiveRecord/Base/destroy_all/class">destroy_all</a></li>
+</ul>
+
+
+<p>找到符合特徵的紀錄，然後呼叫 destroy method。在這個動作中會引發 <code>callbacks</code> ….orz</p>
+
+<ul>
+<li><a href="http://apidock.com/rails/ActiveRecord/Base/delete_all/class">deletea_all</a></li>
+</ul>
+
+
+<p>找到符合特徵的紀錄，刪掉，但不觸發 <code>callbacks</code>。</p>
+
+<ul>
+<li>TRUNCATE TABLE</li>
+</ul>
+
+
+<p>不過 <code>DELETE</code> 在 MySQL 裡面還是慢的，如果你要清整個 db，直接下 <code>TRUNCATE</code> 的 SQL command 吧…</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table_name}")</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>9. 與其用刪的 (DELETE) 不如用 塞的 (INSERT)</h3>
+
+<p>DELETE 真的很慢，如果你的資料要作大量的刪除動作，不如開一個新的 TABLE 用塞的&#8230;。</p>
+
+<p>DELETE 涉及到會 update index，所以會…很慢。<a href="http://stackoverflow.com/questions/4020240/in-mysql-is-it-faster-to-delete-and-then-insert-or-is-it-faster-to-update-exist">http://stackoverflow.com/questions/4020240/in-mysql-is-it-faster-to-delete-and-then-insert-or-is-it-faster-to-update-exist</a></p>
+
+<h3>10. 操作資料前，別忘記打 INDEX</h3>
+
+<p>舉凡操作資料，多半是至少會先下個 condition。再看是直接用 SQL 處理掉還是跑迴圈。不過一般開發者最會中地雷的部分就是</p>
+
+<ul>
+<li>忘記打 index</li>
+</ul>
+
+
+<p>忘記打 index 下 condition 當然會很慢啊 /_\</p>
+
+<ul>
+<li>對 varchar(255) 直接打 index</li>
+</ul>
+
+
+<p>使用 Rails 產生的 varchar，多半是 varchar(255)，很少有人會直接去改長度的。而且使用 Rails 直接打的 index，也就是全長的 index 打下去了。效率爛到炸掉。</p>
+
+<p>可以用 <a href="http://blog.gslin.org/archives/2012/07/17/2911/%e5%b0%8d-mysql-%e7%9a%84-varchar-%e6%ac%84%e4%bd%8d%e4%bd%bf%e7%94%a8-index-%e6%99%82%e5%8f%af%e4%bb%a5%e5%a2%9e%e5%8a%a0%e6%95%88%e7%8e%87%e7%9a%84%e6%96%b9%e6%b3%95/">index 可以指定只取前面 n chars</a> 的方式增進效率</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ALTER TABLE post DROP INDEX PTitle, ADD INDEX(PTitle(13));</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>結論</h2>
+
+<p>如果你手上的資料量大到一個程度，能儘量回歸基本(SQL command)就回歸基本。你不知道你什麼時候會按下核爆彈的按鈕啊…</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-25T23:56:00+08:00" pubdate  data-updated="true" >Jul 25<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    Liquid error: undefined method `sort!' for nil:NilClass
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/drafted/2012-07-25-some-tips-for-dealing-large-data.html" data-via="xdite" data-counturl="http://blog.xdite.net/drafted/2012-07-25-some-tips-for-dealing-large-data.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/25/some-naming-tips/">一些 Ruby 命名的技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/13/speed-up-zurb-foundation/">Asset Pipeline 加速：以 Zurb Foundation 為例</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/05/13/the-startup-owners-manual-02/">The Startup Owner's Manual 讀書心得（2）: New-product introduction model 致命的九宗罪</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/drafted/2012-07-25-some-tips-for-dealing-large-data.html';
+        var disqus_url = 'http://blog.xdite.net/drafted/2012-07-25-some-tips-for-dealing-large-data.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
