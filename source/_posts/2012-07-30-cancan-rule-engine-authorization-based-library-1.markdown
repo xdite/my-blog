@@ -73,7 +73,7 @@ class ArticlesController < ApplicationController
   authorize_resource
 
   def show
-    # @article is already loaded and authorized
+    # @article is already authorized
   end
 end
 ```
