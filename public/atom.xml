@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-07-30T12:28:39+08:00</updated>
+  <updated>2012-07-30T18:54:45+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -128,6 +128,8 @@
 
 
 <p>有好處也有壞處，好處是…你不需要自己打一行 code，壞處就是不熟 cancan 的人，找不到 @article 在哪裡會驚慌失措…</p>
+
+<p><code>load_resource</code> 還有一些其他進階用法，在 <a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_additions.rb">controller_additions.rb</a> 裡面有不少說明&#8230;</p>
 
 <h3>authorize_resource</h3>
 

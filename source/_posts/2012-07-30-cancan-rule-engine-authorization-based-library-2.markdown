@@ -81,6 +81,8 @@ end
 
 有好處也有壞處，好處是…你不需要自己打一行 code，壞處就是不熟 cancan 的人，找不到 @article 在哪裡會驚慌失措…
 
+`load_resource` 還有一些其他進階用法，在 [controller_additions.rb](https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_additions.rb) 裡面有不少說明...
+
 
 ### authorize_resource
 
