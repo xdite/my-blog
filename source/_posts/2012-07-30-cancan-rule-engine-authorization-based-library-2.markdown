@@ -138,3 +138,11 @@ Cancan 吃的是 resource，而且自作聰明的假設了大家「應該」都�
 ## 小結
 
 這一節解釋了開發者認為最難懂的 `load_and_authorize_resource`、`authorize_resource`。下一節我們要來講 ability 要如何設計…
+
+## 系列連結
+
+
+* [Cancan 實作角色權限設計的最佳實踐(1)](http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/)
+* [Cancan 實作角色權限設計的最佳實踐(2)](http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/)
+* [Cancan 實作角色權限設計的最佳實踐(3)](http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/)
+

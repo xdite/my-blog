@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Cancan 實作角色權限設計的最佳實踐(3) - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          角色判斷 current_ability這是一段普通的 ability.rb 權限範例 code。123456789101112131415161718192021222324class Ability  include CanCan::Ability  def initi...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+-->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Cancan 實作角色權限設計的最佳實踐(3)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-30T23:03:00+08:00" pubdate  data-updated="true" >Jul 30<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <h3>角色判斷 current_ability</h3>
+
+<p>這是一段普通的 <code>ability.rb</code> 權限範例 code。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Ability</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">CanCan</span><span class="o">::</span><span class="no">Ability</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>      <span class="c1"># not logged in</span>
+</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
+</span><span class='line'>      <span class="n">basic_read_only</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
+</span><span class='line'>      <span class="c1"># admin</span>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">protected</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一般開發者最有疑問的是 <code>def initialize(user)</code> 這一段程式碼中的 user 到底是怎麼來的？怎麼會沒頭沒尾的天外飛來一個 user，然後對這個 user 進行角色判斷就可以動了？</p>
+
+<p>這一段要追溯到&#8230;<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_additions.rb">lib/controller_additions.rb</a> 中的這一段 current_ability。</p>
+
+<p>cancan 裡面去判斷是否有權限的一直是 <code>current_abibilty</code>，而 <code>current_abibilty</code> initialize 的方式就是塞 current_user 進去。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">current_ability</span>
+</span><span class='line'>  <span class="vi">@current_ability</span> <span class="o">||=</span> <span class="o">::</span><span class="no">Ability</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>所以 <code>initialize(user)</code> 裡的 <code>if user.blank?</code> 其實就等於 <code>if current_user.blank?</code>（若沒登入）。</p>
+
+<p>這樣去解讀程式碼，看起來就好理解很多了…</p>
+
+<h3>權限類別解說 :manage, :all, ..etc.</h3>
+
+<p>cancan 裡面用了一堆自定義縮寫，如 <code>:manage</code>、<code>:read</code>、<code>:update</code>、<code>:all</code>，讓人不是很了解在做什麼。</p>
+
+<ul>
+<li>:manage: 是指這個 controller 內所有的 action</li>
+<li>:read : 指 :index 和 :show</li>
+<li>:update: 指 :edit 和 :update</li>
+<li>:destroy: 指 :destroy</li>
+<li>:create: 指 :new 和 :crate</li>
+</ul>
+
+
+<p>而 :all 是指所有 object (resource)</p>
+
+<p>當然，不只是 CRUD 的 method 才可以被列上去，如果你有其他非 RESTful 的 method 如 :search，也是可以寫上去..，只是要一條一條列上去，有點麻煩就是了。</p>
+
+<h4>組合技：alias_action</h4>
+
+<p>cancan 還提供了組合技，要是嫌原先的 :update, :read 這種組合包不夠用。還可以用 <code>alias_action</code> 自己另外再組。例如把 :update 和 :destroy 組成 :modify。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="n">alias_action</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="ss">:modify</span>
+</span><span class='line'>   <span class="n">can</span> <span class="ss">:modify</span><span class="p">,</span> <span class="no">Comment</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>組合技: 自訂 method</h4>
+
+<p>要是你嫌每個角色都要一條一條把權限列上去，超麻煩。可以把一些共通的權限包成 method。用疊加 method 上去的方式列舉。比如把基礎權限都包成 <code>basic_read_only</code>、<code>account_manager_only</code>, etc…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>針對物件狀態控管</h3>
+
+<p>在 User story 中，使用者固然 <code>can :update, Topic</code>，但還是讓人覺得覺得哪裡有點怪怪的？</p>
+
+<p>是的。使用者應該只能編輯和修改屬於自己的文章，<code>can :update, Topic</code> 只有說使用者可以「修改文章」啊（等於可以修改所有文章） XD</p>
+
+<p>所以 <code>ability.rb</code> 就要這樣設計了</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
+</span><span class='line'>    <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">can</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
+</span><span class='line'>     <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以玩的更加進階：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">can</span> <span class="ss">:publish</span><span class="p">,</span> <span class="no">Post</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">(</span> <span class="n">post</span><span class="o">.</span><span class="n">draft?</span> <span class="o">||</span> <span class="n">post</span><span class="o">.</span><span class="n">submitted?</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">post</span><span class="o">.</span><span class="n">published?</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>其他</h2>
+
+<p>cancan 還有其他進階主題可以繼續探討，讀者可以自行研究：</p>
+
+<ul>
+<li><a href="https://github.com/ryanb/cancan/wiki/Nested-Resources">Nested Resources</a></li>
+<li><a href="https://github.com/ryanb/cancan/wiki/Exception-Handling">Exception Handling</a></li>
+<li><a href="https://github.com/ryanb/cancan/wiki/Ensure-Authorization">Ensure Authorization</a></li>
+</ul>
+
+
+<p>不過關於「難懂」和「難用」的部分，我想我應該講的差不多了…</p>
+
+<h2>小結</h2>
+
+<p>在寫這一系列文章時，我發現 cancan 的作者，其實把大部分的文件與範例，都寫在 lib/ 下的 RDOC 裡面了，光看 code comment 其實就可以瞭解大半流程。</p>
+
+<p>不過我覺得 cancan 讓人覺得難讀的最大原因，可能還是官方缺乏一個 example <code>ability.rb</code>，對於被隱藏的自動完成部分也缺乏解釋，所以才造成大家覺得 cancan 是個難用的 magic library。事實上如果你開始搞懂 cancan 怎麼撰寫的話，它是可以幫你把網站的權限 code 處理的非常漂亮又易懂的。</p>
+
+<p>這系列就寫到這邊，如果你對 cancan 還有什麼使用上的問題，歡迎到 <a href="http://www.meetup.com/Ruby-Taiwan-Group/">Rails Tuesday</a> 來找我討論。</p>
+
+<h2>系列連結</h2>
+
+<ul>
+<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a></li>
+<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a></li>
+<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a></li>
+</ul>
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-30T23:03:00+08:00" pubdate  data-updated="true" >Jul 30<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/25/some-naming-tips/">一些 Ruby 命名的技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/13/speed-up-zurb-foundation/">Asset Pipeline 加速：以 Zurb Foundation 為例</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

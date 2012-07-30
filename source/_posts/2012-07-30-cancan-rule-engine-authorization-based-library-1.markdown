@@ -136,3 +136,11 @@ end
 
 下一篇我會深入頗析 Cancan 更深的設計原理，讓大家更看得懂 cancan 的 API 到底想幹什麼....。
 
+## 系列連結
+
+
+* [Cancan 實作角色權限設計的最佳實踐(1)](http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/)
+* [Cancan 實作角色權限設計的最佳實踐(2)](http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/)
+* [Cancan 實作角色權限設計的最佳實踐(3)](http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/)
+
+
