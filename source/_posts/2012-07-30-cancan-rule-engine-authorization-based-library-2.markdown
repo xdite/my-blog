@@ -12,10 +12,10 @@ categories:
 
 這是因為 cancan 並沒有明顯的在 README 上做出說明：**cancan 在使用上是有架構的限制**：
 
-#### 必須為 RESTful resource
+#### * 必須為 RESTful resource
 （cancan 直接假設了你一定使用 RESTful，畢竟這年頭誰還在寫 non-RESTful …?）
 
-#### resource 必須與 Controller 同名 
+#### * resource 必須與 Controller 同名 
 （@article 與 ArticlesController）
 
 使用過 cancan 的人，大概都「猜到」規則好像是這樣？

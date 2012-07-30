@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-07-30T12:10:50+08:00</updated>
+  <updated>2012-07-30T12:28:39+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -24,11 +24,11 @@
 
 <p>這是因為 cancan 並沒有明顯的在 README 上做出說明：<strong>cancan 在使用上是有架構的限制</strong>：</p>
 
-<h4>必須為 RESTful resource</h4>
+<h4>* 必須為 RESTful resource</h4>
 
 <p>（cancan 直接假設了你一定使用 RESTful，畢竟這年頭誰還在寫 non-RESTful …?）</p>
 
-<h4>resource 必須與 Controller 同名</h4>
+<h4>* resource 必須與 Controller 同名</h4>
 
 <p>（@article 與 ArticlesController）</p>
 
