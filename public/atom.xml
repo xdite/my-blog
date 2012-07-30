@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-07-30T02:33:29+08:00</updated>
+  <updated>2012-07-30T12:10:50+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,200 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cancan 實作角色權限設計的最佳實踐(2)]]></title>
+    <link href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/"/>
+    <updated>2012-07-30T12:07:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2</id>
+    <content type="html"><![CDATA[<h2>使用Cancan 的限制：RESTful controller （resource）</h2>
+
+<p>一般新進開發者會被  cancan 這兩個 API 搞得七葷八素：<code>load_and_authorize_resource</code>、<code>authorize_resource</code>。</p>
+
+<p>這是因為 cancan 並沒有明顯的在 README 上做出說明：<strong>cancan 在使用上是有架構的限制</strong>：</p>
+
+<h4>必須為 RESTful resource</h4>
+
+<p>（cancan 直接假設了你一定使用 RESTful，畢竟這年頭誰還在寫 non-RESTful …?）</p>
+
+<h4>resource 必須與 Controller 同名</h4>
+
+<p>（@article 與 ArticlesController）</p>
+
+<p>使用過 cancan 的人，大概都「猜到」規則好像是這樣？</p>
+
+<p>其實不必猜，<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_resource.rb">source code</a> 裡面就寫的很清楚。</p>
+
+<h3>load_and_authorize_resource</h3>
+
+<p>load_and_authorized_resource 做了兩件事：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">load_and_authorize_resource</span>
+</span><span class='line'>      <span class="n">load_resource</span>
+</span><span class='line'>      <span class="n">authorize_resource</span>
+</span><span class='line'>    <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<ul>
+<li>load_resource</li>
+<li>authorize_resource</li>
+</ul>
+
+
+<p>load_resource 作什麼呢？: loard_resource => load_resource_instance</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">load_resource_instance</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">!</span><span class="n">parent?</span> <span class="o">&amp;&amp;</span> <span class="n">new_actions</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="vi">@params</span><span class="o">[</span><span class="ss">:action</span><span class="o">].</span><span class="n">to_sym</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">build_resource</span>
+</span><span class='line'>  <span class="k">elsif</span> <span class="n">id_param</span> <span class="o">||</span> <span class="vi">@options</span><span class="o">[</span><span class="ss">:singleton</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">find_resource</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>okay，這段的作用等於如果你在 Controller 裡面下了 load_resource，cancan 會<strong>自作聰明</strong>的幫你 <strong>自動</strong> 在每一個 action 塞一個 instance 下去</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">lass</span> <span class="no">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">load_resource</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="c1"># @article is already loaded</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>如果是 new 這個 action，效果會等於</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>     <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>   <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果是 show 這個 action，效果會等於</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>     <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>   <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>有好處也有壞處，好處是…你不需要自己打一行 code，壞處就是不熟 cancan 的人，找不到 @article 在哪裡會驚慌失措…</p>
+
+<h3>authorize_resource</h3>
+
+<p>authorize_resource 就是對 resource 判斷權限（根據 CanCan::Ability 裡的權限表）。</p>
+
+<p>而這個 resource 必定是與同名的 instance。</p>
+
+<p>如果是 ArticlesController 對應的必然是 @article。</p>
+
+<p>但是你會想說這樣慘了？萬一我在 ArticlesController 裡面要用 @post 怎麼辦呢？</p>
+
+<p>你可以在 controller 裡面指定 resource instance 的 name 要用什麼名字: <code>authorize_resource :post</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">lass</span> <span class="no">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">authorize_resource</span> <span class="ss">:post</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Ability 裡面要這樣下</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span> <span class="no">Post</span>
+</span><span class='line'>  <span class="n">can</span> <span class="ss">:create</span><span class="p">,</span> <span class="no">Post</span>
+</span><span class='line'>  <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Post</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>resource 規則小結</h3>
+
+<p>所以 cancan 裡面的 resource 第一個會去吃 controller 的名稱當成 resource name，如果是 <code>ArticlesController</code>，instance 就會是 <code>@article</code>，而在 ability 裡面就會是 <code>can :read, Article</code>。這是在假設你已經使用同名設計 resource &amp; controller 的情況下。</p>
+
+<p>如果非同名。你可以做出指定：<code>authorize_resource :post</code>，雖然是 ArticlesController，但是這一組的 resource 名稱為 <code>post</code>，所以 instance 就會是 <code>@post</code>，而在 ability 裡面就會是 <code>can :read, Post</code>。</p>
+
+<p>一般開發者常會誤會的是</p>
+
+<ul>
+<li>ability 會綁到 model，實際上不是</li>
+<li>controller 名稱要與 @instance 名稱相同，實際上不一定</li>
+<li>@instance 要與 model 同名，實際上不用</li>
+<li>ability 吃的應該是 controller name，實際上不一定（吃的是 resource name，且可以被指定）。</li>
+</ul>
+
+
+<p>Cancan 吃的是 resource，而且自作聰明的假設了大家「應該」都同名，而且 README example 也是使用「同名」，才會造成了這麼多的誤解…</p>
+
+<p>如果你有更多疑問，可以直接看 source code 裡面的 這一支<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_resource.rb">controller_resource.rb</a>，相信會讓你對整個架構更加的清楚&#8230;</p>
+
+<h2>小結</h2>
+
+<p>這一節解釋了開發者認為最難懂的 <code>load_and_authorize_resource</code>、<code>authorize_resource</code>。下一節我們要來講 ability 要如何設計…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cancan 實作角色權限設計的最佳實踐(1)]]></title>
@@ -3315,23 +3509,6 @@ I think you should use an
 <li><a href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rail 101 裝機實務以及改版通知]]></title>
-    <link href="http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/"/>
-    <updated>2012-03-07T17:01:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice</id>
-    <content type="html"><![CDATA[<p>Hi, 各位讀者好。</p>
-
-<p>因為 Apple 一直在改變 XCode 的編譯套件位置，所以 <a href="http://rails-101.logdown.com">Rails 101</a> 內附的裝機實務已經過期了。</p>
-
-<p>我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。</p>
-
-<p>不過因為裝機實務這個步驟比較會卡到大家，所以我先放這個章節: <a href="http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/">Rails on Mac 安裝最佳實務</a> 出來給大家使用。</p>
-
-<p>若您在裝機上還碰到什麼問題，請至 <a href="http://ruby-taiwan.org/">Ruby Taiwan Group</a> 上面回報。</p>
 ]]></content>
   </entry>
   

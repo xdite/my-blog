@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Cancan 實作角色權限設計的最佳實踐(2) - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          使用Cancan 的限制：RESTful controller （resource）一般新進開發者會被  cancan 這兩個 API 搞得七葷八素：load_and_authorize_resource、authorize_resource。這是因為 cancan 並沒有...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+-->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Cancan 實作角色權限設計的最佳實踐(2)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-30T12:07:00+08:00" pubdate  data-updated="true" >Jul 30<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <h2>使用Cancan 的限制：RESTful controller （resource）</h2>
+
+<p>一般新進開發者會被  cancan 這兩個 API 搞得七葷八素：<code>load_and_authorize_resource</code>、<code>authorize_resource</code>。</p>
+
+<p>這是因為 cancan 並沒有明顯的在 README 上做出說明：<strong>cancan 在使用上是有架構的限制</strong>：</p>
+
+<h4>必須為 RESTful resource</h4>
+
+<p>（cancan 直接假設了你一定使用 RESTful，畢竟這年頭誰還在寫 non-RESTful …?）</p>
+
+<h4>resource 必須與 Controller 同名</h4>
+
+<p>（@article 與 ArticlesController）</p>
+
+<p>使用過 cancan 的人，大概都「猜到」規則好像是這樣？</p>
+
+<p>其實不必猜，<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_resource.rb">source code</a> 裡面就寫的很清楚。</p>
+
+<h3>load_and_authorize_resource</h3>
+
+<p>load_and_authorized_resource 做了兩件事：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">load_and_authorize_resource</span>
+</span><span class='line'>      <span class="n">load_resource</span>
+</span><span class='line'>      <span class="n">authorize_resource</span>
+</span><span class='line'>    <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<ul>
+<li>load_resource</li>
+<li>authorize_resource</li>
+</ul>
+
+
+<p>load_resource 作什麼呢？: loard_resource => load_resource_instance</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">load_resource_instance</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">!</span><span class="n">parent?</span> <span class="o">&amp;&amp;</span> <span class="n">new_actions</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="vi">@params</span><span class="o">[</span><span class="ss">:action</span><span class="o">].</span><span class="n">to_sym</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">build_resource</span>
+</span><span class='line'>  <span class="k">elsif</span> <span class="n">id_param</span> <span class="o">||</span> <span class="vi">@options</span><span class="o">[</span><span class="ss">:singleton</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">find_resource</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>okay，這段的作用等於如果你在 Controller 裡面下了 load_resource，cancan 會<strong>自作聰明</strong>的幫你 <strong>自動</strong> 在每一個 action 塞一個 instance 下去</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">lass</span> <span class="no">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">load_resource</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="c1"># @article is already loaded</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>如果是 new 這個 action，效果會等於</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>     <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>   <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果是 show 這個 action，效果會等於</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>     <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>   <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>有好處也有壞處，好處是…你不需要自己打一行 code，壞處就是不熟 cancan 的人，找不到 @article 在哪裡會驚慌失措…</p>
+
+<h3>authorize_resource</h3>
+
+<p>authorize_resource 就是對 resource 判斷權限（根據 CanCan::Ability 裡的權限表）。</p>
+
+<p>而這個 resource 必定是與同名的 instance。</p>
+
+<p>如果是 ArticlesController 對應的必然是 @article。</p>
+
+<p>但是你會想說這樣慘了？萬一我在 ArticlesController 裡面要用 @post 怎麼辦呢？</p>
+
+<p>你可以在 controller 裡面指定 resource instance 的 name 要用什麼名字: <code>authorize_resource :post</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">lass</span> <span class="no">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">authorize_resource</span> <span class="ss">:post</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Ability 裡面要這樣下</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span> <span class="no">Post</span>
+</span><span class='line'>  <span class="n">can</span> <span class="ss">:create</span><span class="p">,</span> <span class="no">Post</span>
+</span><span class='line'>  <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Post</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>resource 規則小結</h3>
+
+<p>所以 cancan 裡面的 resource 第一個會去吃 controller 的名稱當成 resource name，如果是 <code>ArticlesController</code>，instance 就會是 <code>@article</code>，而在 ability 裡面就會是 <code>can :read, Article</code>。這是在假設你已經使用同名設計 resource &amp; controller 的情況下。</p>
+
+<p>如果非同名。你可以做出指定：<code>authorize_resource :post</code>，雖然是 ArticlesController，但是這一組的 resource 名稱為 <code>post</code>，所以 instance 就會是 <code>@post</code>，而在 ability 裡面就會是 <code>can :read, Post</code>。</p>
+
+<p>一般開發者常會誤會的是</p>
+
+<ul>
+<li>ability 會綁到 model，實際上不是</li>
+<li>controller 名稱要與 @instance 名稱相同，實際上不一定</li>
+<li>@instance 要與 model 同名，實際上不用</li>
+<li>ability 吃的應該是 controller name，實際上不一定（吃的是 resource name，且可以被指定）。</li>
+</ul>
+
+
+<p>Cancan 吃的是 resource，而且自作聰明的假設了大家「應該」都同名，而且 README example 也是使用「同名」，才會造成了這麼多的誤解…</p>
+
+<p>如果你有更多疑問，可以直接看 source code 裡面的 這一支<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_resource.rb">controller_resource.rb</a>，相信會讓你對整個架構更加的清楚&#8230;</p>
+
+<h2>小結</h2>
+
+<p>這一節解釋了開發者認為最難懂的 <code>load_and_authorize_resource</code>、<code>authorize_resource</code>。下一節我們要來講 ability 要如何設計…</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-30T12:07:00+08:00" pubdate  data-updated="true" >Jul 30<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/25/some-naming-tips/">一些 Ruby 命名的技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/13/speed-up-zurb-foundation/">Asset Pipeline 加速：以 Zurb Foundation 為例</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
