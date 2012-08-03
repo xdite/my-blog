@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  各位應該有注意到我的 theme 從 Octopress 換成了自定的 Theme 了。LOGO 和背景色有做了一點小調整。頭換成以前經典款的 LOGO，背景色改成藍色。hover LOGO 還會進行「Dell 跳」XD不過這些都不是重點。這次的改版比較特別...">
+  <meta name="description" content="                  Asset Pipeline 是 Rails 3.1 引入的重大 feature。之前我曾經為文撰寫過背後設計的意義以及哲學。若你有興趣的話可以觀看這一系列的文章：Asset PipelineSass / SCSSCompassCoffeeScript今天我...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,180 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/10/18/asset-pipeline-version-control-assets/">Asset Pipeline 的重大意義：Version Control Your Asset Package</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-10-18T23:51:00+08:00" pubdate  data-updated="true" >Oct 18<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/10/18/asset-pipeline-version-control-assets/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/" data-show-faces="false"></div></div>
+    
+    <p>Asset Pipeline 是 Rails 3.1 引入的重大 feature。</p>
+
+<p>之前我曾經為文撰寫過背後設計的意義以及哲學。若你有興趣的話可以觀看這一系列的文章：</p>
+
+<ul>
+<li><a href="http://upgrade2rails31.com/asset-pipeline">Asset Pipeline</a></li>
+<li><a href="http://upgrade2rails31.com/sass-scss">Sass / SCSS</a></li>
+<li><a href="http://upgrade2rails31.com/compass">Compass</a></li>
+<li><a href="http://upgrade2rails31.com/coffee-script">CoffeeScript</a></li>
+</ul>
+
+
+<p>今天我要談的是 Assetp pipeline 帶來的另一個震撼：&#8221;Asset as rubygem&#8221;</p>
+
+<h2>Asset as rubygem</h2>
+
+<p>其實這個設計在 Rails 3.1 的蠻早期就有了，而且就藏在官方範例中。只是我初看時完全沒意識到這個設計背後的原理、哲學以及它的重大意義。而多數的鎂光燈也集中在 Asset Pipeline 可大幅獲益於 Compass 與 CoffeeScript 中，沒多少人提起這件事。</p>
+
+<p>Rails 的 application.js 裡面有著這麼一段：</p>
+
+<figure class='code'><figcaption><span>application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//= require jquery</span>
+</span><span class='line'><span class="c1">//= require jquery_ujs</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而這是由 Gemfile 中的這個 gem : <a href="/todo">jquery-rails</a> 所提供的</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;jquery-rails&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看得出來奧妙嗎？</p>
+
+<h3>結合 Rails Engine 提供 asset 掛載</h3>
+
+<p>yes。現在你可以透過結合 Rails Engine 把 gem 中的 asset 掛起來。所以 application.js 中</p>
+
+<figure class='code'><figcaption><span>application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//= require jquery</span>
+</span><span class='line'><span class="c1">//= require jquery_ujs</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>的 jquery 以及 jquery_ujs 都是 jquery-rails 這個 gem 中的 javascript。</p>
+
+<h3>Boost you project</h3>
+
+<p>還看不出來意義嗎？讓我再給你一個例子吧：<a href="https://github.com/anjlab/bootstrap-rails">bootstrap-rails</a></p>
+
+<p><a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 是 Twitter 近期所推出的一個 CSS Framework opensource project，它能夠讓程式設計師，在做 project 的初期（設計師還沒把畫面設計好時），或者是在做小 project （不需要複雜 Style）時，很快的就把一些簡單的版面元素搞定，簡單大方。</p>
+
+<p>但是在 Rails project 中 setup 還是小麻煩，因為你必須手動把 asset 搬到指定位址才行。</p>
+
+<p>若是我跟你說，如果用這個 gem，你只要在 Gemfile 裡 require</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;anjlab-bootstrap-rails&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;bootstrap-rails&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後再到 application.css 中</p>
+
+<figure class='code'><figcaption><span>application.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//=</span> <span class="nt">require</span> <span class="nt">bootstrap</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接著即刻就可以寫 HTML，Bootstrap 馬上就生效了呢？</p>
+
+<p>另一個程式設計師最愛的 <a href="https://github.com/pilu/web-app-theme">web-app-theme</a>，在 Rails 3.1 後的版本，也可以用同樣的方法，把 CSS 直接掛起來，馬上寫！</p>
+
+<p>而不是像之前的作法，掛上 gem 之後，還得用 generator 把當時版本的 asset copy （算是半自動）到目錄資料夾裡！</p>
+
+<p>不僅是這兩個 CSS framework，將來只要是有組織的 asset 套件，如 CSS Framework / jQuery plugin，都有可能可以這樣搞。</p>
+
+<p>這樣夠<strong>震撼</strong>你的心靈了嗎？</p>
+
+<h2>「萃取」 / 「打包」 / 「版本控制」core asset 的好處</h2>
+
+<p>在從前，若我們同時維護多個系列 project，都會有 asset 其實都長得差不多，但是會有只要一份發現要更新，其他份沒有同步更新，就會相當麻煩的痛處。但是作這些更新，都必須要手動去調整。而且 asset 的 version control log 會與專案程式的 version control log 混在一起。若沒有馬上一併處理更新，時日一久，當你要更新其他 project 時，就會忘記自己需要改哪裡。</p>
+
+<p>使用 SCSS 並沒有改變: 「你還是要 copy 好幾份 SCSS 到多個 project 」的事實。</p>
+
+<p>但是如果你的 core SCSS / core JavaScript plugin 是一份 Gem 呢？</p>
+
+<p><strong> 維護的方式可以變成只需要維護 Gemfile 中的版本號，複雜度幾乎趨近於 0。</strong></p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;some-css-plugin&quot;</span><span class="p">,</span> <span class="s2">&quot;0.0.2&quot;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;some-js-plugin&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5.7&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你不需要再對「一包」檔案作版本控制，而是對「一個數字」作版本控制。</p>
+
+<h3>使用 git submodule 不行嗎？</h3>
+
+<p>當然你也會問，使用 git submodule 管理 asset 不行嗎？ 這當然也是一種作法。但問題在於</p>
+
+<ul>
+<li>git submodule 不管修改、刪除、更新都要特殊的步驟，否則就會弄爛你的 project</li>
+<li>git submodule 是依 commit id</li>
+<li>git submodule 沒有處理 dependency 問題</li>
+</ul>
+
+
+<p>而且當你想把 asset revert 到某一版本時，可能就會讓你的耐性爆炸 ….</p>
+
+<h2>小結</h2>
+
+<p>因為今天在練習寫 Generator 還有 Rails Engine。寫著寫著就有鬼點子，不知道 Rails 3.1 之後，Rails Engine 支不支援掛 asset。當然也沒有一股就栽下去，當然先去找找有沒人已經作過這件事，想想 Bootstrap 最近很紅，應該會變成大家練習的對象。沒想到真的就有人寫出來&#8230;.而且還有一堆。</p>
+
+<p>看了別人有實作出來，就隨便找了一套 CSS 當練習包 Gem 的對象，熟悉一下結構。沒想到門檻也沒有說很高。既然 CSS 成功了，就開始繼續亂想 JavaScript 可不可以惡搞，這一想，才意識到 Rails 範例的</p>
+
+<figure class='code'><figcaption><span>application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//= require jquery</span>
+</span><span class='line'><span class="c1">//= require jquery_ujs</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就是在講這件事啊 XDDDDDD。</p>
+
+<p>為什麼我這麼豬頭，都沒想到過啊…繼續往下想，就 blow my mind 了。</p>
+
+<p>因為既然這樣可以 work，那就表示以後只要是 asset，就可以打包。CSS framework 和 jQuery plugin 市面上滿山滿谷，那就表示將來一定會出現更多更變態的玩法。不禁讓人越來越期待接下來的發展了。</p>
+
+<p>越來越覺得身為一個 Rails Developer 是相當幸福快樂的事啊！</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -190,7 +364,7 @@ LOGO 和背景色有做了一點小調整。</p>
 
 <hr />
 
-<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x77;&#97;&#x6e;&#x67;&#100;&#105;&#x6e;&#x67;&#x77;&#x65;&#105;&#x38;&#x32;&#64;&#103;&#x6d;&#97;&#105;&#108;&#46;&#99;&#111;&#x6d;">&#x77;&#97;&#x6e;&#103;&#100;&#105;&#x6e;&#103;&#x77;&#x65;&#x69;&#56;&#x32;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
+<p>LPTHW 簡體中文的翻譯者是 <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x77;&#x61;&#110;&#x67;&#x64;&#x69;&#x6e;&#103;&#119;&#x65;&#105;&#x38;&#50;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#x6f;&#109;">&#x77;&#97;&#110;&#x67;&#x64;&#x69;&#x6e;&#x67;&#119;&#101;&#x69;&#56;&#50;&#64;&#x67;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a>，而他的 blog 是 <a href="http://ducktypist.com/">http://ducktypist.com/</a></p>
 
 <p>LRTHW 中文版是我基於 LPTHW 中文版的翻譯成果，改編成 Ruby 版，並修正當中繁簡以及不同程式（ Python / Ruby 環境所造成的差異改譯而成。</p>
 
@@ -924,6 +1098,10 @@ LOGO 和背景色有做了一點小調整。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/08/03/how-to-use-bootstrap-in-clean-way/">如何乾淨的 使用 / 修改 Bootstrap Fraemwork</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a>
       </li>
     
@@ -939,15 +1117,11 @@ LOGO 和背景色有做了一點小調整。</p>
         <a href="/posts/2012/07/25/some-naming-tips/">一些 Ruby 命名的技巧</a>
       </li>
     
-      <li class="post">
-        <a href="/posts/2012/07/13/speed-up-zurb-foundation/">Asset Pipeline 加速：以 Zurb Foundation 為例</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/assetpipeline'>AssetPipeline (3)</a></li><li><a href='/blog/categories/boardgame'>BoardGame (1)</a></li><li><a href='/blog/categories/bookreviews'>BookReviews (4)</a></li><li><a href='/blog/categories/bootstrap'>Bootstrap (1)</a></li><li><a href='/blog/categories/coffeescript'>CoffeeScript (1)</a></li><li><a href='/blog/categories/css'>CSS (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/hosting'>Hosting (1)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/misc'>Misc (3)</a></li><li><a href='/blog/categories/mybook'>MyBook (5)</a></li><li><a href='/blog/categories/mycompany'>MyCompany (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/podcast'>Podcast (1)</a></li><li><a href='/blog/categories/projectmanagement'>ProjectManagement (6)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/railsconf'>RailsConf (3)</a></li><li><a href='/blog/categories/ruby'>Ruby (8)</a></li><li><a href='/blog/categories/rubygem'>Rubygem (8)</a></li><li><a href='/blog/categories/scss'>SCSS (2)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/seo'>SEO (1)</a></li><li><a href='/blog/categories/startup'>Startup (5)</a></li><li><a href='/blog/categories/tips'>Tips (16)</a></li><li><a href='/blog/categories/travel'>Travel (1)</a></li><li><a href='/blog/categories/webdesign'>WebDesign (5)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/assetpipeline'>AssetPipeline (3)</a></li><li><a href='/blog/categories/boardgame'>BoardGame (1)</a></li><li><a href='/blog/categories/bookreviews'>BookReviews (4)</a></li><li><a href='/blog/categories/bootstrap'>Bootstrap (2)</a></li><li><a href='/blog/categories/coffeescript'>CoffeeScript (1)</a></li><li><a href='/blog/categories/css'>CSS (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/hosting'>Hosting (1)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/misc'>Misc (3)</a></li><li><a href='/blog/categories/mybook'>MyBook (5)</a></li><li><a href='/blog/categories/mycompany'>MyCompany (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/podcast'>Podcast (1)</a></li><li><a href='/blog/categories/projectmanagement'>ProjectManagement (6)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/railsconf'>RailsConf (3)</a></li><li><a href='/blog/categories/ruby'>Ruby (8)</a></li><li><a href='/blog/categories/rubygem'>Rubygem (9)</a></li><li><a href='/blog/categories/scss'>SCSS (3)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/seo'>SEO (1)</a></li><li><a href='/blog/categories/startup'>Startup (5)</a></li><li><a href='/blog/categories/tips'>Tips (16)</a></li><li><a href='/blog/categories/travel'>Travel (1)</a></li><li><a href='/blog/categories/webdesign'>WebDesign (5)</a></li></ul>
 </section>
 
 <section id="popularthreads" class="dsq-widget">
