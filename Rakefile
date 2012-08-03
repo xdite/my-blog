@@ -59,6 +59,7 @@ desc "Watch the site and regenerate when it changes"
 task :watch do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   puts "Starting to watch source with Jekyll and Compass."
+  system "compass compile --css-dir #{source_dir}/stylesheets" unless File.exist?("#{source_dir}/stylesheets/screen.css")
   jekyllPid = Process.spawn("jekyll --auto")
   compassPid = Process.spawn("compass watch")
 
@@ -74,6 +75,7 @@ desc "preview the site in a web browser"
 task :preview do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   puts "Starting to watch source with Jekyll and Compass. Starting Rack on port #{server_port}"
+  system "compass compile --css-dir #{source_dir}/stylesheets" unless File.exist?("#{source_dir}/stylesheets/screen.css")
   jekyllPid = Process.spawn("jekyll --auto")
   compassPid = Process.spawn("compass watch")
   rackupPid = Process.spawn("rackup --port #{server_port}")
@@ -285,7 +287,7 @@ desc "Set up _deploy folder and deploy branch for Github Pages deployment"
 task :setup_github_pages do
   repo_url = get_stdin("Enter the read/write url for your repository: ")
   user = repo_url.match(/:([^\/]+)/)[1]
-  branch = (repo_url.match(/\/\w+.github.com/).nil?) ? 'gh-pages' : 'master'
+  branch = (repo_url.match(/\/[\w-]+.github.com/).nil?) ? 'gh-pages' : 'master'
   project = (branch == 'gh-pages') ? repo_url.match(/\/([^\.]+)/)[1] : ''
   unless `git remote -v`.match(/origin.+?octopress.git/).nil?
     # If octopress is still the origin remote (from cloning) rename it to octopress
