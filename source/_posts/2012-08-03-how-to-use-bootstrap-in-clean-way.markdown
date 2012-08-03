@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "如何乾淨的 使用 / 修改 Bootstrap Fraemwork"
+title: "如何乾淨的 使用 / 修改 Bootstrap Framework"
 date: 2012-08-03 20:41
 comments: true
 categories: Bootstrap SCSS Rubygem
