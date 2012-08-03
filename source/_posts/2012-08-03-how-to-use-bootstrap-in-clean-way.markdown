@@ -28,7 +28,7 @@ Bootstrap 的原始版本是使用 LESS 撰寫，不過也有開發者修改成 
 gem "bootstra-rails"
 ```
 
-### 利用 Asset Pipeline 以及 SCSS 機制，客製、複寫
+### 利用 Asset Pipeline 以及 SCSS 機制，客製、覆寫
 
 #### application.css 內容
 
