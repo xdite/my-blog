@@ -65,8 +65,9 @@ $navbarSearchPlaceholderColor: #565E65;
 ``` scss
 .navbar {
   .navbar-inner {
-    //注意要換成image內的檔案，檔名相同
     background: url(/assets/bg_header.png);
+  }
+}
 ```    
 
 * responsive 是 bootstrap 用來作 responsive 的 css
