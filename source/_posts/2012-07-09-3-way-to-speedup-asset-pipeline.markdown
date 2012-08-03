@@ -3,7 +3,7 @@ layout: post
 title: "3 招實用 Asset Pipeline 加速術"
 date: 2012-07-09 02:49
 comments: true
-categories: 
+categories: AssetPipeline Tips
 ---
 
 Asset Pipeline 最讓人詬病的就是 deploy 時花費速度過久。在[社群聚會](http://www.meetup.com/Ruby-Taiwan-Group/)時發現大家都對這個主題非常不熟。所以把最近累積了的這方面技巧整理出來分享給大家。

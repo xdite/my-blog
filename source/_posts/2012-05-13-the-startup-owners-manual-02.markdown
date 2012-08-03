@@ -3,7 +3,7 @@ layout: post
 title: "The Startup Owner's Manual 讀書心得（2）: New-product introduction model 致命的九宗罪"
 date: 2012-05-13 11:39
 comments: true
-categories: 
+categories: Startup BookReviews
 ---
 
 

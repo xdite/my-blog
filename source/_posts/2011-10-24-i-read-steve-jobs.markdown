@@ -3,7 +3,7 @@ layout: post
 title: "我讀 Steve Jobs 傳 - 我不是要看瘋子傳"
 date: 2011-10-24 23:52
 comments: true
-categories: 
+categories: BookReviews
 ---
 
 先聲明，這一篇純粹是個人讀後感而已。不是什麼嚴肅的 Book Review。

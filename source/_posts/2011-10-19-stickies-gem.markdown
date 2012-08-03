@@ -3,7 +3,7 @@ layout: post
 title: "Stickies Gem"
 date: 2011-10-19 14:38
 comments: true
-categories: 
+categories: Rubygem
 ---
 
 stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。

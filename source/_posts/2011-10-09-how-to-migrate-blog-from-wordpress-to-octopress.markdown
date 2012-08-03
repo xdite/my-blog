@@ -3,7 +3,7 @@ layout: post
 title: "如何從 Wordpress Migrate 到 Octopress"
 date: 2011-10-09 18:09
 comments: true
-categories: 
+categories: Octopress
 ---
 
 ### 文章轉換

@@ -3,7 +3,7 @@ layout: post
 title: "農家樂 (Agricola) - 創業者都應該玩過的一套 Lean Startup 桌遊"
 date: 2012-01-17 02:13
 comments: true
-categories: 
+categories: Startup BoardGame
 ---
 
 今天看到 Techorange 的 [創投包心菜-vc-專欄：創投最害怕的那些人-1](http://techorange.com/2012/01/16/%E5%89%B5%E6%8A%95%E5%8C%85%E5%BF%83%E8%8F%9C-vc-%E5%B0%88%E6%AC%84%EF%BC%9A%E5%89%B5%E6%8A%95%E6%9C%80%E5%AE%B3%E6%80%95%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%BA-1/) 引用了我之前寫的一篇關於創業資金與創業策略的文章： [Startup 需不需要一開始注意資金的問題？](http://wp.xdite.net/?p=2840)。

@@ -3,7 +3,7 @@ layout: post
 title: "Cancan 實作角色權限設計的最佳實踐(2)"
 date: 2012-07-30 12:07
 comments: true
-categories: 
+categories: Rubygem
 ---
 
 ## 使用Cancan 的限制：RESTful controller （resource）

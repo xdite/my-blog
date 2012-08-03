@@ -3,7 +3,7 @@ layout: post
 title: "一些 Ruby 命名的技巧"
 date: 2012-07-25 01:17
 comments: true
-categories: 
+categories: Ruby Tips
 ---
 
 命名是 CS 中兩大[難題](http://martinfowler.com/bliki/TwoHardThings.html)，（ref: 在 DK 週一 [Passion Bean 的 Talk 上聽到的](http://blog.gslin.org/archives/2012/07/24/2931/%e5%9c%a8-passion-bean-%e5%88%86%e4%ba%ab%ef%bc%9asystem-operations-for-startup/) ）。

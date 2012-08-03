@@ -3,7 +3,7 @@ layout: post
 title: "Essential Rails Pattern 開始 update"
 date: 2012-03-24 18:33
 comments: true
-categories: 
+categories: MyBook
 ---
 
 [Essntial Rails Pattern](http://rails-101.logdown.com/books/3-essential-rails-pattern) 這本書已經進入排版階段。

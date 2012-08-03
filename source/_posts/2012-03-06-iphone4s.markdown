@@ -3,7 +3,7 @@ layout: post
 title: "iPhone 4S 進洗衣機洗還是有救"
 date: 2012-03-06 22:53
 comments: true
-categories: 
+categories: iPhone
 ---
 
 一兩個禮拜之前因為太累，我回家時忘記把 iPhone 4S 從牛仔褲掏出來。洗完澡之後就恍神直接把髒衣服拿去洗衣機直接洗了。

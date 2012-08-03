@@ -3,7 +3,7 @@ layout: post
 title: "[出售] Macbook Air 攻頂款另贈 NDSi XL"
 date: 2012-01-06 00:30
 comments: true
-categories: 
+categories: Misc
 ---
 
 蘋果今天在大特賣，我也打算特賣我的 Macbook Air。

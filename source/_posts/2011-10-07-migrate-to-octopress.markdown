@@ -3,7 +3,7 @@ layout: post
 title: "Migrate to Octopress"
 date: 2011-10-07 18:19
 comments: true
-categories: 
+categories: Octopress
 ---
 
 [Wordpress](http://wordpress.org/) 用到今年，也第五年了。發現越來越不敷我的需求。

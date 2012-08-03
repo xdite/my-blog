@@ -3,7 +3,7 @@ layout: post
 title: "新創網站這樣開發才夠快"
 date: 2012-04-07 19:37
 comments: true
-categories: 
+categories: Startup
 ---
 
 借用 [新創網站這樣開發才夠快](http://www.kuobrothers.com/article-124.htm) 這篇格式，希望不要介意。我主要是想闡述以前在 [T客邦](http://techbang.com) 的經驗方法。

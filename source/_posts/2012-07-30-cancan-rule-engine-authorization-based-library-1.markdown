@@ -3,7 +3,7 @@ layout: post
 title: "Cancan 實作角色權限設計的最佳實踐(1)"
 date: 2012-07-30 02:12
 comments: true
-categories: 
+categories: Rubygem
 ---
 
 權限存取設計是在開發 Application 中相當讓人棘手的一個題目。

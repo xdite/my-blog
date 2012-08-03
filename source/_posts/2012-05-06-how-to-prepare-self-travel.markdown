@@ -3,7 +3,7 @@ layout: post
 title: "如何準備美國自助旅行（行程準備篇）"
 date: 2012-05-06 20:10
 comments: true
-categories: 
+categories: Travel
 ---
 
 這次去美國旅行接近三個禮拜（去參加研討會 + 旅遊）。這算是我第一次的美國自助旅行，機票、保險、飯店，景點的安排幾乎都是自己弄的，

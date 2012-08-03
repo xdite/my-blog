@@ -3,7 +3,7 @@ layout: post
 title: "Responsive Web Design 的一些技巧和想法"
 date: 2012-02-16 13:16
 comments: true
-categories: 
+categories: WebDesign
 ---
 
 昨天在 [Happy Designer 5](http://registrano.com/events/hdm5) 上，有聊起了做 Responsive Web Design (特別是 mobile 版)的一些狀況。在這裡我提供一些自己的經驗和技巧：

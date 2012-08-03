@@ -3,7 +3,7 @@ layout: post
 title: "[進階] Make ActiveRecord includable"
 date: 2012-01-04 16:58
 comments: true
-categories: 
+categories: Rails Tips
 ---
 
 [警告] 這一篇是進階的文章，如果你看不懂可以跳過。

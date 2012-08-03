@@ -3,7 +3,7 @@ layout: post
 title: "網站程式上線前需要準備的事 （五）"
 date: 2012-03-19 02:13
 comments: true
-categories: 
+categories: ProjectManagement
 ---
 
 ## 第 5 件事：Close Alpha Test、Close Open Test

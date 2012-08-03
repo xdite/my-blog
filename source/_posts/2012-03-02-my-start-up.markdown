@@ -3,7 +3,7 @@ layout: post
 title: "我創業了，我的公司 RocoDev"
 date: 2012-03-02 01:59
 comments: true
-categories: 
+categories: MyCompany
 ---
 
 我創業了。從 2012/03/01 開始，我跟我的好友：國內頂尖的視覺設計師 [@evenwu](http://twitter.com/evenwu) 合組了一間新公司 [RocoDev](http://rocodev.com)。

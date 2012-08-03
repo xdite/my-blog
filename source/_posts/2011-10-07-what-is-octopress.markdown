@@ -3,7 +3,7 @@ layout: post
 title: "Why Octopress?"
 date: 2011-10-07 19:05
 comments: true
-categories: 
+categories: Octopress
 ---
 
 [OctoPress](http://octopress.org/) 是一套Blog Framework。也是我這個 blog 正在用的系統。

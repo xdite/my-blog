@@ -3,7 +3,7 @@ layout: post
 title: "網站程式上線前需要準備的事 （三）"
 date: 2012-03-18 02:48
 comments: true
-categories: 
+categories: ProjectManagement
 ---
 ## 第 3 件事：制定 Art / RD 都遵守的開發 convention
 

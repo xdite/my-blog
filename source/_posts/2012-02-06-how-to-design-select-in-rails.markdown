@@ -3,7 +3,7 @@ layout: post
 title: "在 Rails 中如何設計 Select"
 date: 2012-02-06 00:27
 comments: true
-categories: 
+categories: Rails Tips
 ---
 
 在 Rails 開發中，有時候我們會遇到要在表單中設計 select 的選項。select 吃的 collection 是個 Array 。通常我們會往往第一直覺的想法是將之塞到 model 的 CONSTANT 裡，再寫一個 class method 包裝起來，再寫自己的 collection Helper 叫出來。

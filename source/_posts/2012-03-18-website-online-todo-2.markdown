@@ -3,7 +3,7 @@ layout: post
 title: "網站程式上線前需要準備的事 （二）"
 date: 2012-03-18 01:24
 comments: true
-categories: 
+categories: ProjectManagement
 ---
 
 ## 第 2 件事：application deployable from day 1

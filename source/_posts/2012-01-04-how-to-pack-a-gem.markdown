@@ -3,7 +3,7 @@ layout: post
 title: "[Ruby][教學] 如何打包一個 Gem "
 date: 2012-01-04 08:53
 comments: true
-categories: 
+categories: Ruby Tips
 ---
 
 ## What is Gem 

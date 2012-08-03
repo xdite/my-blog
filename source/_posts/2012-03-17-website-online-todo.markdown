@@ -3,7 +3,7 @@ layout: post
 title: "網站程式上線前需要準備的事 （一）"
 date: 2012-03-17 23:48
 comments: true
-categories: 
+categories: ProjectManagement
 ---
 
 很多人知道如何實作網站功能。但是卻不知道如何將網站成功的完工，並且如期上線。往往明明專案開始之初有不少的工期，有不錯結果的卻很少。上線前後總是一團慌亂。

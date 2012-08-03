@@ -3,7 +3,7 @@ layout: post
 title: "gollum : Git-backend Wiki"
 date: 2011-12-04 01:02
 comments: true
-categories: 
+categories: Rubygem Git
 ---
 
 這週繼續在實作 <http://ruby-taiwan.org> 上的 features。

@@ -3,7 +3,7 @@ layout: post
 title: "使用 SCSS 的 extend 重複利用 Bootstrap 的 style"
 date: 2012-02-06 02:20
 comments: true
-categories: 
+categories: WebDesign SCSS Bootstrap
 ---
 
 Twitter 的 [Bootstrap](http://twitter.github.com/bootstrap/) 是一套很好用的 CSS Framework。可以讓開發者加上工具類 CSS 如 `.btn`，就設計出一個按鈕。

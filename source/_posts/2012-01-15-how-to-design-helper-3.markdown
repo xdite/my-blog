@@ -3,7 +3,7 @@ layout: post
 title: "如何運用 / 設計 Rails Helper (3)"
 date: 2012-01-15 16:08
 comments: true
-categories: 
+categories: Rails Tips
 ---
 
 本系列其他文章：

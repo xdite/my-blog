@@ -3,7 +3,7 @@ layout: post
 title: "[讀書筆記] CSS 基礎技巧懶人包"
 date: 2012-01-29 14:24
 comments: true
-categories: 
+categories: WebDesign CSS Tips
 ---
 
 前幾天 Code School 的 [CSS Cross Country](http://www.codeschool.com/courses/css-cross-country) 課程釋出了。這一集是我相當期待的一集，整理和澄清了非常多「非常基礎但如果觀念不好」就會搞得一塌糊塗的 CSS 知識。

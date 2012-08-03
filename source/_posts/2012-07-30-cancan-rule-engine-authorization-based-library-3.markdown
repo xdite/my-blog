@@ -3,7 +3,7 @@ layout: post
 title: "Cancan 實作角色權限設計的最佳實踐(3)"
 date: 2012-07-30 23:03
 comments: true
-categories: 
+categories: Rubygem
 ---
 
 ### 角色判斷 current_ability

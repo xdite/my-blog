@@ -3,7 +3,7 @@ layout: post
 title: "Rails 的 cycle helper 以及 CSS 中的 nth-child"
 date: 2012-01-29 00:03
 comments: true
-categories: 
+categories: WebDesign SCSS
 ---
 
 在設計需要顏色循環的表格時你會怎麼作？

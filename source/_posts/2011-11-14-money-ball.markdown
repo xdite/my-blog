@@ -3,7 +3,7 @@ layout: post
 title: "魔球，一個搞清楚產業重點的棒球故事"
 date: 2011-11-14 23:56
 comments: true
-categories: 
+categories: BookReviews
 
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "從 Github 被 hack，談 Rails 的安全性（ mass-assignment ）"
 date: 2012-03-05 10:51
 comments: true
-categories: 
+categories: Rails Security
 ---
 
 關於 Github 被入侵這件事，目前在國外開發圈傳的沸沸揚揚。看來中文圈還沒有消息，我來報導一下到底發生了什麼事好了。順便宣導一下開發 Rails 程式碼需要注意的其中一個觀念..

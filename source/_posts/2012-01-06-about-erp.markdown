@@ -3,7 +3,7 @@ layout: post
 title: "關於 Essential Rails Pattern 這本書的近況"
 date: 2012-01-06 18:09
 comments: true
-categories: 
+categories: MyBook
 ---
 
 最近看到不少讀者都在「委婉」的催我最新這一本書「[Essential Rails Pattern](http://rails-101.logdown.com/books/3-essential-rails-pattern)」的近況。

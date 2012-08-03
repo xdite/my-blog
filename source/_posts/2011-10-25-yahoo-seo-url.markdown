@@ -3,7 +3,7 @@ layout: post
 title: "Yahoo News 的 SEO 網址所帶來的問題"
 date: 2011-10-25 17:08
 comments: true
-categories: 
+categories: SEO
 ---
 
 我不知道設計這個 feature 的是哪位。只是簡單講一下我覺得這個 feature **畫虎不成反類犬**了。

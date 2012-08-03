@@ -3,7 +3,7 @@ layout: post
 title: "[進階]使用 Facade Pattern 取代 Model callbacks"
 date: 2012-01-09 18:56
 comments: true
-categories: 
+categories: Rails Tips
 ---
 
 ## What is "callbacks"?

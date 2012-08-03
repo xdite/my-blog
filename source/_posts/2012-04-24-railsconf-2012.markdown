@@ -3,7 +3,7 @@ layout: post
 title: "Railsconf 2012 - 國際性 conference 是這樣辦的 （上）"
 date: 2012-04-24 17:31
 comments: true
-categories: 
+categories: RailsConf
 ---
 
 [Railsconf 2012](http://railsconf2012.com/sessions) 今年在 Austin, Texas 舉辦。這是一場超過 1000 人的大型開發者盛會。今年終於存夠了錢，終於能一舉飛到德州參加。這次的旅行讓我看到 / 學到不少遠超過在台灣能摸到的東西，有些部分很值得寫下來。技術的部分我以後會慢慢整理。不過軟性的部分，我倒想可以趁記憶猶新寫下來。光是 Conf 運行的部分，不少地方和細節都讓我覺得十分專業值得學習。

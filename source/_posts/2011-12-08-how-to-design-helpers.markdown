@@ -3,7 +3,7 @@ layout: post
 title: "如何運用 / 設計 Rails Helper (1)"
 date: 2011-12-08 21:40
 comments: true
-categories: 
+categories: Rails Tips
 ---
 
 Helper 與 Partial 一直是初學者比較容易迷路的主題之一。迷路的原因有幾個：

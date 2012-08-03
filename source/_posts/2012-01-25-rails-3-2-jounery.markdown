@@ -3,7 +3,7 @@ layout: post
 title: "Rails 3.2 新的 Route recognition 引擎 ： Jounery"
 date: 2012-01-25 20:55
 comments: true
-categories: 
+categories: Rails
 ---
 
 Rails 3.2 四天前 [Release](http://edgeguides.rubyonrails.org/3_2_release_notes.html) 了。這次主要的改進幾乎都在效能部分。

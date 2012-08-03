@@ -3,7 +3,7 @@ layout: post
 title: "Railsconf 2012 - 國際性 Conference 是這樣辦的 （下）"
 date: 2012-04-25 14:40
 comments: true
-categories: 
+categories: RailsConf
 ---
 
 

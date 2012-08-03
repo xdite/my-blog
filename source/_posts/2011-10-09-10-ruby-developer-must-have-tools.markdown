@@ -3,7 +3,7 @@ layout: post
 title: "十個 Ruby Web Developer 應該熟悉的工具"
 date: 2011-10-09 05:30
 comments: true
-categories: 
+categories: Ruby Tips
 ---
 
 原本是承諾讀者要整理一篇我常用的工具集，後來想想其實應該要改成來寫一篇：「十個 Ruby Web Developer 應該熟悉的工具」。

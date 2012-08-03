@@ -3,7 +3,7 @@ layout: post
 title: "使用 Github Pull Request 整合 CSS 設計"
 date: 2011-10-13 14:47
 comments: true
-categories: 
+categories: Git CSS
 ---
 
 各位應該有注意到我的 theme 從 Octopress 換成了自定的 Theme 了。

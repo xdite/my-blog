@@ -3,7 +3,7 @@ layout: post
 title: "Rails 101 聖誕限時特價"
 date: 2011-12-19 11:55
 comments: true
-categories: 
+categories: MyBook
 ---
 
 Rails 101 - 火速學會 Ruby on Rails

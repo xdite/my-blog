@@ -3,7 +3,7 @@ layout: post
 title: "Github Flavored Ruby - by Tom Preston-Werner (1)"
 date: 2011-12-10 11:23
 comments: true
-categories: 
+categories: Ruby Tips
 ---
 
 這是我近期裡面看到算比較有趣的演講，是 Github CTO Tom Preston-Werner 給的 talk

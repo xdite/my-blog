@@ -3,7 +3,7 @@ layout: post
 title: "Startup : 如何挑選適合的 Hosting Plan?"
 date: 2012-04-18 22:46
 comments: true
-categories: 
+categories: Startup Hosting
 ---
 
 這個議題在今年創業潮之前算是比較冷門，沒看到什麼人在討論。最近大概是大家瘋創業，有實際上的頻寬需求，所以看到網路上又開始吵頻寬的價格，一些討論串看起來讓人都有股張飛打岳飛的錯覺。

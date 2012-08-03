@@ -3,7 +3,7 @@ layout: post
 title: "Asset Pipeline 的重大意義：Version Control Your Asset Package"
 date: 2011-10-18 23:51
 comments: true
-categories: 
+categories: AssetPipeline
 
 ---
 

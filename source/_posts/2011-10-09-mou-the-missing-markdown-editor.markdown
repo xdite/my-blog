@@ -3,7 +3,7 @@ layout: post
 title: "Mou -- the Missing Markdown Editor"
 date: 2011-10-09 17:03
 comments: true
-categories: 
+categories: Markdown 
 ---
 
 這是我現在拿來寫 Blog 的 Editor。原先是使用付費軟體 [iA Writer](http://www.iawriter.com/)，後來九月底在 twitter 上看到朋友推薦使用 [Mou](http://mouapp.com)，毫不猶豫就放棄了原來的 solution，現在越寫越上手。

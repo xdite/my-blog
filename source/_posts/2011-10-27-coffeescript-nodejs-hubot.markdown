@@ -3,7 +3,7 @@ layout: post
 title: "CoffeeScript 還可以用來做什麼？ -- Hubot"
 date: 2011-10-27 16:44
 comments: true
-categories: 
+categories: CoffeeScript
 
 ---
 

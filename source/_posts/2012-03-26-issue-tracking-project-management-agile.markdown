@@ -3,7 +3,7 @@ layout: post
 title: "為什麼必須使用 Issue Tracking System 管理專案？"
 date: 2012-03-26 03:14
 comments: true
-categories: 
+categories: ProjectManagement
 ---
 我在 [網站程式上線前需要準備的事 （四）](http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/) 提到了為了順利進行專案，一個好的專案管理系統絕對是必備的。
 

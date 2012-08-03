@@ -3,7 +3,7 @@ layout: post
 title: "http://ruby-taiwan.org 開張"
 date: 2011-11-28 01:46
 comments: true
-categories: 
+categories: Misc
 ---
 
 上禮拜看到對岸弄了一個 <http://ruby-china.org>，看樣子蠻好玩的，介面也設計的不錯。而且這個網站還是 opensource 的，就抓下來玩了一下。

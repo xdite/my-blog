@@ -3,7 +3,7 @@ layout: post
 title: "五年寫了 230 萬字"
 date: 2011-10-08 00:17
 comments: true
-categories: 
+categories: Misc
 ---
 
 這兩天因為本來嘗試要將 Wordpress 轉成 Octopress 的緣故。寫了不少 script。而壓出來的 MySQL 備份檔大概也有 11 M。原本以為是 spam 佔了很多份量。沒想到去掉 comment，還是足足有 10 多 M...

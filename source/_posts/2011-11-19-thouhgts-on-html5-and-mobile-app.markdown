@@ -3,7 +3,7 @@ layout: post
 title: "Thoughts on HTML5 & Mobile App"
 date: 2011-11-19 16:14
 comments: true
-categories: 
+categories: WebDesign HTML5
 
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Railsconf 2012 - 國際性 conference 是這樣辦的 （中）"
 date: 2012-04-25 10:32
 comments: true
-categories: 
+categories: RailsConf
 ---
 
 ## 7. Keynote

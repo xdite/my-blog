@@ -3,7 +3,7 @@ layout: post
 title: "Ruby Podcast / Screencast / Issue 推薦清單"
 date: 2012-02-19 06:02
 comments: true
-categories: 
+categories: Ruby Podcast
 ---
 
 有些人問我平常日常怎麼補充知識，所以稍微整理一下我平常看的一些東西分享出來。我平常蠻常到處亂看東西，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…

@@ -3,7 +3,7 @@ layout: post
 title: "對於使用 Render Partial 的一些誤解"
 date: 2011-12-04 11:30
 comments: true
-categories: 
+categories: Rails Tips
 ---
 
 

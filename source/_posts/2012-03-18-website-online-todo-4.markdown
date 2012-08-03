@@ -3,7 +3,7 @@ layout: post
 title: "網站程式上線前需要準備的事 （四）"
 date: 2012-03-18 16:12
 comments: true
-categories: 
+categories: ProjectManagement
 ---
 
 ## 第 4 件事：架設一套 issue tracking system

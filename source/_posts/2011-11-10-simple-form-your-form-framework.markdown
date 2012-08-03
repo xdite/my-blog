@@ -3,7 +3,7 @@ layout: post
 title: "Simple Form - 你的 Form Framework"
 date: 2011-11-10 02:20
 comments: true
-categories: 
+categories: Rubygem
 
 ---
 

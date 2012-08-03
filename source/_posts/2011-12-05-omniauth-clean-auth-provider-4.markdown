@@ -3,7 +3,7 @@ layout: post
 title: "OmniAuth - 實作多方認證的最佳實踐 (4)"
 date: 2011-12-05 21:40
 comments: true
-categories: 
+categories: Rubygem
 ---
 
 

@@ -3,7 +3,7 @@ layout: post
 title: "[Ruby][教學] 如何打包一個 Asset Gem "
 date: 2012-01-04 09:10
 comments: true
-categories: 
+categories: Ruby Tips
 ---
 
 ## What is Asset Gem

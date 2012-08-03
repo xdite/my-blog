@@ -3,7 +3,7 @@ layout: post
 title: "Learn Ruby The Hard Way"
 date: 2011-10-12 23:21
 comments: true
-categories: 
+categories: Ruby MyBook
 ---
 
 跟各位介紹我剛剛做好的這一個翻譯 project [「Learn Ruby The Hard Way」中文版](http://lrthw.github.com/)。

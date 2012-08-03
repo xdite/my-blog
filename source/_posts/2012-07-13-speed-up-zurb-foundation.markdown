@@ -3,7 +3,7 @@ layout: post
 title: "Asset Pipeline 加速：以 Zurb Foundation 為例"
 date: 2012-07-13 03:28
 comments: true
-categories: 
+categories: AssetPipeline Tips
 ---
 
 前幾天貼了這一篇 [3 招實用 Asset Pipeline 加速術](http://blog.xdite.net/posts/2012/07/09/3-way-to-speedup-asset-pipeline/)。

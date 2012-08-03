@@ -3,7 +3,7 @@ layout: post
 title: "Rail 101 裝機實務以及改版通知"
 date: 2012-03-07 17:01
 comments: true
-categories: 
+categories: MyBook
 ---
 
 Hi, 各位讀者好。
