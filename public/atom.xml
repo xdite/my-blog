@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-08-09T01:11:24+08:00</updated>
+  <updated>2012-08-09T01:28:22+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -71,77 +71,111 @@
 </span><span class='line'>你們的政府讓你們失望了
 </span><span class='line'>本該保護你們的人
 </span><span class='line'>讓你們失望了
-</span><span class='line'>我，讓你們失望了
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>我，讓你們失望了</span></code></pre></td></tr></table></div></figure>
 
 
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>晚安 我是 Will McAvoy 
-</span><span class='line'>這裡是 New Night
-</span><span class='line'>剛剛撥出的影片是 Richard Clarke
-</span><span class='line'>小布希總統的反恐中心主任
-</span><span class='line'>於 2004 年 3 月 24 號在國會前作證的影像
-</span><span class='line'>美國人喜歡那一刻，我喜歡那一刻
-</span><span class='line'>成年人要敢於為失敗負責
-</span><span class='line'>所以，今天節目的開始，我將加入 Mr. Clarke 的行列
-</span><span class='line'>向美國群眾，為我們的失責而道歉
-</span><span class='line'>
-</span><span class='line'>因為在我負責期間這個節目時，我並沒有能夠有效地向傳遞資訊和教育美國選民
-</span><span class='line'>
-</span><span class='line'>讓我先聲明 我並不代表…所有的新聞工作者道歉
-</span><span class='line'>並不是所有新聞工作者都需要道歉 我僅代表自己我是這一系列複雜、重複、無知，且尚未被糾正的失敗的幫兇我所領導的行業，錯報選舉結果、誇大恐慌事件、挑起政治辯論、隱瞞國家結構的改變從經濟危機到國力的真實水準，到我們面對的真正威脅。
-</span><span class='line'>
-</span><span class='line'>我所領導的行業如Harry Houdini一般 (知名魔術大師)，嫻熟地分散你們的注意力，同時缺乏審慎地將成千上萬的勇敢年青人送上戰場。我們失敗的原因顯而易見：我們過分重視收視率。
-</span><span class='line'>在大眾通訊時代初始，新聞界的哥倫布和麥哲倫－William Paley和David Sarnoff(CBS之父及美國廣播通訊業之父)前往華盛頓，與國會簽署一份協議：「國會允許初有雛形的電視台，免費使用屬於納稅人的廣播頻道，條件是這必須是公共服務，即每晚用一小時播報訊息，就是我們現在稱為晚間新聞的東西。」
-</span><span class='line'>國會未能預料到電視廣告對消費者的巨大影響，所以協議中沒有任何一條本能大大改善國家言論秩序的內容；國會忘了加上「在任何條件下，於新聞播報期間內都不能有付費廣告」，他們忘了說「納稅人的廣播頻道是免費給你們使用，所以每天有23個小時，你們需要營利，但晚上那一小時，你們只能為國會服務」。所以現在，那些絕對誠實的新聞人，比如 Murror Reasoner 和 Huntley 還有 Brinkley 和 Buckley 和 Cronkite 和 Rather 和 Russert ...(皆為知名主播)
-</span><span class='line'>現在他們得和我這樣的人競爭，做為新聞主播，面對的業界壓力，卻與澤西海岸（肥皂劇）製片人一模一樣 (收視率決定一切)，那樣的方法對我們很有利，但本節目將不再這樣做。
-</span><span class='line'>你可能不相信，這個時代仍有一些偉大的新聞人，他們有卓越的頭腦跟多年的經驗，和對新聞工作的真摯熱情，但現在他們只是少數人，當碰到馬戲團，他們變得無力競爭，被淹沒了...
-</span><span class='line'>我要辭掉馬戲團的工作，轉換隊伍，我要和那些被打擊的人站在一起，
-</span><span class='line'>他們仍有贏的信念 我很感到
-</span><span class='line'>我希望他們能使我受教。從今天起，我們播出什麼新聞，如何呈現出來，都只有一個簡單的原則：在民主制度中，沒有什麼比腦袋清楚的選民更為重要。我們將努力將新聞放到更大的背景下，因為很少有新聞是獨立存在的；我們將成為事實的承載者，成為那些含沙射影、投機炒作、言過其實，或胡言亂語的死對頭，我們不是餐廳服務員，只會用你喜歡的方式呈現你喜歡的新聞
-</span><span class='line'>我們也不是電腦，只會乾巴巴地說出事實；因為新聞只有在人文背景下才有用
-</span><span class='line'>我不會抑制我的個人觀點，但同時我也將不遺餘力展現出不同於我的觀點。
-</span><span class='line'>你也許會問，我們憑什麼做出這些決定？我們是 Mackenzie MacHale 和 我自己
-</span><span class='line'>MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們需要的資訊，他是製作人、分析師和技師。我們樂意提供他的資格證書。
-</span><span class='line'>我是這節目的總編輯，對於節目上出現的一切，我有最終決定權。
-</span><span class='line'>我們憑什麼作這這些決定？
-</span><span class='line'>我們是媒體中的菁英稍後，我們將繼續播報新聞...」
-</span><span class='line'></span></code></pre></td></tr></table></div></figure>
+<pre>
+晚安 我是 Will McAvoy 
+這裡是 New Night
+剛剛撥出的影片是 Richard Clarke
+小布希總統的反恐中心主任
+於 2004 年 3 月 24 號在國會前作證的影像
+美國人喜歡那一刻，我喜歡那一刻
+成年人要敢於為失敗負責
+所以，今天節目的開始，我將加入 Mr. Clarke 的行列
+向美國群眾，為我們的失責而道歉
+
+因為在我負責期間這個節目時，我並沒有能夠有效地向傳遞資訊和教育美國選民
+
+讓我先聲明 我並不代表…所有的新聞工作者道歉 並不是所有新聞工作者都需要道歉 我僅代表自己
+
+我是這一系列複雜、重複、無知，且尚未被糾正的失敗的幫兇
+
+我所領導的行業，錯報選舉結果、誇大恐慌事件、挑起政治辯論、隱瞞國家結構的改變 從經濟危機到國力的真實水準
+
+到我們面對的真正威脅。
+
+我所領導的行業如Harry Houdini一般 (知名魔術大師)
+
+嫻熟地分散你們的注意力，同時缺乏審慎地將成千上萬的勇敢年青人送上戰場
+
+我們失敗的原因顯而易見：我們過分重視收視率。
+
+在大眾通訊時代初始，新聞界的哥倫布和麥哲倫－William Paley和David Sarnoff (CBS之父及美國廣播通訊業之父) 
+
+前往華盛頓，與國會簽署一份協議：
+
+「國會允許初有雛形的電視台，免費使用屬於納稅人的廣播頻道， 
+
+條件是這必須是公共服務，即每晚用一小時播報訊息， 
+
+就是我們現在稱為晚間新聞的東西。」
+
+國會未能預料到電視廣告對消費者的巨大影響， 
+
+所以協議中沒有任何一條本能大大改善國家言論秩序的內容； 
+
+國會忘了加上「在任何條件下，於新聞播報期間內都不能有付費廣告」，
+
+他們忘了說「納稅人的廣播頻道是免費給你們使用， 
+
+所以每天有23個小時，你們需要營利，但晚上那一小時，你們只能為國會服務」。
+
+所以現在，那些絕對誠實的新聞人， 比如 Murror Reasoner 和 Huntley 還有
+Brinkley 和 Buckley 和 Cronkite 和 Rather 和 Russert ...(皆為知名主播)
+
+現在他們得和我這樣的人競爭，做為新聞主播
+
+面對的業界壓力，卻與澤西海岸（肥皂劇）製片人一模一樣 (收視率決定一切) 
+
+那樣的方法對我們很有利，但本節目將不再這樣做。
+
+你可能不相信，這個時代仍有一些偉大的新聞人，他們有卓越的頭腦跟多年的經驗， 和對新聞工作的真摯熱情
+
+但現在他們只是少數人，當碰到馬戲團，他們變得無力競爭，被淹沒了...
+
+我要辭掉馬戲團的工作，轉換隊伍，我要和那些被打擊的人站在一起，
+
+他們仍有贏的信念 我很感動
+
+我希望他們能使我受教。
+
+從今天起，我們播出什麼新聞，如何呈現出來，
+
+都只有一個簡單的原則：在民主制度中，沒有什麼比腦袋清楚的選民更為重要。
+
+我們將努力將新聞放到更大的背景下，因為很少有新聞是獨立存在的；
+
+我們將成為事實的承載者，成為那些含沙射影、投機炒作、言過其實，或胡言亂語的死對頭
+
+我們不是餐廳服務員，只會用你喜歡的方式呈現你喜歡的新聞
+
+我們也不是電腦，只會乾巴巴地說出事實；因為新聞只有在人文背景下才有用
+
+我不會抑制我的個人觀點，但同時我也將不遺餘力展現出不同於我的觀點。
+
+你也許會問，我們憑什麼做出這些決定？
+
+我們是 Mackenzie MacHale 和 我自己
+
+MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們需要的資訊
+
+他是製作人、分析師和技師。我們樂意提供他的資格證書。
+
+我是這節目的總編輯，對於節目上出現的一切，我有最終決定權。
+
+我們憑什麼作這這些決定？
+
+我們是媒體中的菁英
+
+稍後，我們將繼續播報新聞...」
+
+</pre>
 
 
-<p>這真是非常好非常好的反省。</p>
+<p>非常非常深的反省。</p>
 
 <p>The Newsroom 每一集處理的題材都很發人深省。不少題材的處理都可以讓你直接勾想起國內的媒體亂象。比如第四集在報導：眾議員Giffords被槍擊事件時。電視台高層一直施壓節目必須馬上報導 Giffords 已死亡（純屬謠言，只因其他台先報導，高層怕沒追悼收視率），製作人卻力抗回了：「只有醫生才能宣告一個人死亡，新聞媒體不能」。那一個片段真的會讓看到起雞皮疙瘩。</p>
 
