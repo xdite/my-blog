@@ -38,7 +38,7 @@ comments: true
 
 ### plugin：strong_parameter
 
-這個 plugin 就是 [strong_parameters](https://github.com/rails/strong_parameters/) 。strong_parameters 的想法與 DHH [當時扔出來的想法](https://gist.github.com/1975644) 相近。
+現在 plugin 出來了。（其實出來很久了，只是我一直沒寫文章...) 就是 [strong_parameters](https://github.com/rails/strong_parameters/) 。strong_parameters 的想法與 DHH [當時扔出來的想法](https://gist.github.com/1975644) 相近。
 
 DHH 當時的作法
 

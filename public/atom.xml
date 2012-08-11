@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-08-12T02:20:55+08:00</updated>
+  <updated>2012-08-12T02:22:47+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -50,7 +50,7 @@
 
 <h3>plugin：strong_parameter</h3>
 
-<p>這個 plugin 就是 <a href="https://github.com/rails/strong_parameters/">strong_parameters</a> 。strong_parameters 的想法與 DHH <a href="https://gist.github.com/1975644">當時扔出來的想法</a> 相近。</p>
+<p>現在 plugin 出來了。（其實出來很久了，只是我一直沒寫文章&#8230;) 就是 <a href="https://github.com/rails/strong_parameters/">strong_parameters</a> 。strong_parameters 的想法與 DHH <a href="https://gist.github.com/1975644">當時扔出來的想法</a> 相近。</p>
 
 <p>DHH 當時的作法</p>
 
