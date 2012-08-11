@@ -30,7 +30,7 @@ comments: true
 
 雖然 Rails 在 3.1 加入了 [scoped mass assignment](http://enlightsolutions.com/articles/whats-new-in-edge-scoped-mass-assignment-in-rails-3-1)。但這也只能算是 model 方面的解決手法。
 
-一旦系統內有更多其他流程需求，coped mass assignment 的設計頓時就不夠解決問題了…
+一旦系統內有更多其他流程需求，scoped mass assignment 的設計頓時就不夠解決問題了…
 
 ### 癥結點：欄位核准與否應該由 controller 管理，而非 model
 
