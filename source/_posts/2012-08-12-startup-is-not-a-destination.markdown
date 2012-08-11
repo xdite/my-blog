@@ -3,7 +3,7 @@ layout: post
 title: "「創業」不是一個目的地"
 date: 2012-08-12 06:07
 comments: true
-categories: 
+categories: Startup
 ---
 
 自己出來創業，轉眼間也快半年了。蒙各界賞光，[公司](http://rocodev.com)的生意算是不錯。目前也跟生意夥伴 Max 合作得很開心。[Mac](http://maxlu.cc) 是個天生的生意人和創業家，我們常談論很多關於創業的點點滴滴，從這過程中激盪出不少智慧…
