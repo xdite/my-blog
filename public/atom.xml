@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-08-09T12:33:43+08:00</updated>
+  <updated>2012-08-12T02:19:29+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Strong Parameter: Mass Assignment 機制的防彈衣]]></title>
+    <link href="http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution/"/>
+    <updated>2012-08-12T02:16:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution</id>
+    <content type="html"><![CDATA[<p>還記得年初才發生的 <a href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/">Github 被入侵事件</a> 嗎？</p>
+
+<p>事件的起因是因為 Rails 內建的 mass assignment 機制，很容易被有心人利用這個漏洞入侵。</p>
+
+<p>原本的 attr_accessible / attr_protected 的設計並不足夠實務使用。在該事件發生後，Rails 核心團隊在 3.2.3 之後的版本，預設都開啟了 <code>config.whitelist_attributes = true</code> 的選項。</p>
+
+<p>也就是專案自動會對所有的 model 都自動開啟白名單模式，你必須手動對每一個 model 都加上 attr_accessible。這樣表單送值才會有辦法運作。</p>
+
+<p>這樣的舉動好處是：「夠安全」，能強迫開發者在設計表單時記得審核 model 該欄位是否適用於 mass-assign。</p>
+
+<p>但這樣的機制也引發開發者「不實用」「找麻煩」的議論。</p>
+
+<h3>問題 1: 新手容易踩中地雷</h3>
+
+<p>首先最麻煩的當然是，新手會被這一行設定整到。新手不知道此機制為何而來，出了問題也不知道如何關掉這個設定。更麻煩的是撰寫新手教學的人，必須又花上一大篇幅（就如同倒楣的我，想要幫 Rails 101 改版，結果內容無限追加）解釋 mass-assignment 的設計機制，為何重要，為何新手需要重視…etc.</p>
+
+<h3>問題 2: 不實用</h3>
+
+<p>手動一個一個加上 attr_accessible 真的很煩人，因為這也表示，若新增一個欄位，開發者也要手動去加上 attr_accessible，否則很可能在某些表單直接出現異常現象。</p>
+
+<p>而最麻煩的還是，其實 attr_accessible 不敷使用，因為一個系統通常存在不只一種角色，普通使用與 Admin 需要的 mass-assignment 範圍絕對不盡相同。</p>
+
+<p>雖然 Rails 在 3.1 加入了 <a href="http://enlightsolutions.com/articles/whats-new-in-edge-scoped-mass-assignment-in-rails-3-1">scoped mass assignment</a>。但這也只能算是 model 方面的解決手法。</p>
+
+<p>一旦系統內有更多其他流程需求，coped mass assignment 的設計頓時就不夠解決問題了…</p>
+
+<h3>癥結點：欄位核准與否應該由 controller 管理，而非 model</h3>
+
+<p>大家戰了一陣子，終於收斂出一個結論。原來一切的癥結點在於之前的想法都錯了，欄位核准與否應該由 controller 決定。因為「流程需求」本來就應該作在 controller 裡面。wycats 當時也起草了一份<a href="https://gist.github.com/1974187">解法的 proposal</a>。日後打算以 plugin 方式釋出。</p>
+
+<h3>plugin：strong_parameter</h3>
+
+<p>這個 plugin 就是 <a href="https://github.com/rails/strong_parameters/">strong_parameters</a> 。strong_parameters 的想法與 DHH <a href="https://gist.github.com/1975644">當時扔出來的想法</a> 相近。</p>
+
+<p>DHH 當時的作法</p>
+
+<div><script src='https://gist.github.com/1975644.js?file='></script>
+<noscript><pre><code>class PostsController &lt; ActionController::Base
+  def create
+    Post.create(post_params)
+  end
+  
+  def update
+    Post.find(params[:id]).update_attributes!(post_params)
+  end
+
+  private
+    def post_params
+      params[:post].slice(:title, :content)
+    end
+end</code></pre></noscript></div>
+
+
+<p>是使用 slice 去把真正需要的部分切出來，所以就算 hacker 打算送其他 parameter 也會被過濾掉(不會有 exception)。</p>
+
+<p>而 strong_parameters 的作法是必須過一段 permit，允許欄位。如果送不允許的欄位進來，會 throw exception。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PeopleController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">update</span>
+</span><span class='line'>    <span class="n">person</span><span class="o">.</span><span class="n">update_attributes!</span><span class="p">(</span><span class="n">person_params</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="ss">:back</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">person_params</span>
+</span><span class='line'>      <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:person</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:age</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安全多了，擴充性也比較大&#8230;</p>
+
+<h3>進階用法</h3>
+
+<p>當然，每一段 controller 都要來上這麼一段，有時候也挺煩人的。Railscast 也整理了一些<a href="http://railscasts.com/episodes/371-strong-parameters">進階招數</a>：</p>
+
+<ul>
+<li>Nested Attributes</li>
+<li>Orgngized to Class</li>
+</ul>
+
+
+<p>大家可以研究看看…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[影集] 喚醒新聞界的良知 The Newsroom]]></title>
@@ -3559,137 +3662,6 @@ I think you should use an
 <h3>開站</h3>
 
 <p>這些都確認沒什麼問題了，然後才是開站。然而開站不是這一切的結束，還有其他事情需要作&#8230;</p>
-
-<p>＝＝＝＝</p>
-
-<p>系列文章：</p>
-
-<ul>
-<li><a href="http://blog.xdite.net/posts/2012/03/17/website-online-todo-1/">網站程式上線前需要準備的事 （一）</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-2/">網站程式上線前需要準備的事 （二）</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[網站程式上線前需要準備的事 （四）]]></title>
-    <link href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/"/>
-    <updated>2012-03-18T16:12:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/03/18/website-online-todo-4</id>
-    <content type="html"><![CDATA[<h2>第 4 件事：架設一套 issue tracking system</h2>
-
-<p>你用什麼工具來管理軟體專案的進度呢？我曾經一度認為使用 issue tracking 管理專案進度，是一件天經地義的事。大家都是這麼做的，所以這個題目沒什麼好談的。
-後來，我才發現這個印象大錯特錯&#8230;</p>
-
-<p><strong> 絕大多數的人真的只用「mail」和「cc」來管專案，that&#8217;s all。(註1) </strong></p>
-
-<p>P.S. issue 真的太多的話，他們會改用 &#8230;<code>Excel</code>！！</p>
-
-<p>ZOMG&#8230;</p>
-
-<h3>What is issue tracking system ?</h3>
-
-<p>Issue Tracking system ，顧名思義就是<code>紀錄</code>、<code>追蹤</code> 問題的系統。<a href="http://www.bugzilla.org/">BugZilla</a>、<a href="trac.edgewall.org">Trac</a>、<a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://lighthouseapp.com/">lighthoustapp</a>、<a href="http://basecamp.com/">Basecamp</a> &#8230;等等這幾套軟體，都是知名的 Issue Tracking system。</p>
-
-<p>一套合格的 Issue Tracking system 的 Issue 至少要可以紀錄這些內容：</p>
-
-<ul>
-<li>Issue 的主題</li>
-<li>Issue 的內容</li>
-<li>Issue 現在的狀態 (新建立、已指派、已解決、已回應、已結束、已擱置&#8230;etc)</li>
-<li>Issue 優先權 (正常、重要、緊急、輕微、會擋路&#8230;etc.)</li>
-<li>Issue 發生日期</li>
-<li>Issue 希望解決日期</li>
-<li>Issue 實際解決日期</li>
-<li>Issue 被分派給誰</li>
-<li>Issue 的附件</li>
-<li>Isuue 的觀察者有誰</li>
-</ul>
-
-
-<h3>為什麼 email 不管用？</h3>
-
-<p>常人使用的 email 管理法其實會有幾個很大的缺點：</p>
-
-<h4>喪失時間感、無確切完成日期</h4>
-
-<p>專案中最珍貴的資源無非是「時間」。僅使用 email 往來，會造成一個嚴重的假象：大家都一直有信件往來，所以整件事其實是有進度的。但其實，專案進行的速度卻是牛步&#8230;</p>
-
-<p>後面的原因其實是因為：「回信」是一個「順序」執行動作，當一方回了，下一方才能決定要做什麼、要回什麼。「什麼時候」再回（有空回，做完回？）其實沒有人知道。通常一個來回就要搞掉一個上午，甚至是一個整天。但其實整件事沒什麼進展。</p>
-
-<p>這麼浪費效率，逼得某些 PM 還得自己用 TODO list + email tracking label 才可以勉強控制這種局面。</p>
-
-<h4>無確切執行人</h4>
-
-<p>有的 email，cc 者一大堆：A 先指派了 B 作這個工作，但 B 做到一半覺得需要 C 的火力支援，於是把 C 加入這個討論串裡面。C 做到一半覺得不妥，請示長官 D 要如何配合這個專案。往往一整個 mail 牽扯了一大堆人進去，大家討論來討論去，好不熱烈。</p>
-
-<p>但是呢&#8230;誰需要去執行，哪些事需要被執行，什麼時候這些事需要被執行完畢？在這一整個串裡面完全被模糊掉了。</p>
-
-<h4>洩密</h4>
-
-<p>cc 者一大堆。怎麼分得清楚誰有權知道、誰無權知道這一串信裡面提到的執行事項？</p>
-
-<h4>優先權的分配</h4>
-
-<p>一個專案可能同時間有幾十上百條待處理事項需要被執行。請問哪一條需要先被執行？它們的優先權又是用什麼標準決定的呢？</p>
-
-<h4>處理事項目前的執行狀態</h4>
-
-<p>一個較具規模的專案，可能不只一個人參與（多個 RD 和多個美術）。到底誰正在執行什麼項目，會不會相撞（項目、執行者）？什麼項目其實已經完工了，需要被 archive 起來？資訊有沒有 outdate 問題？</p>
-
-<p>Email + Excel 其實很不夠用&#8230;</p>
-
-<h3>What you need : Project Management Tool</h3>
-
-<p>其實由這一連串的問題整理下來，可以清楚的發現，一個專案需要的是什麼？這也是 Project Management Tool 可以提供給你的東西。</p>
-
-<p>與其說 <a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://basecamp.com/">Basecamp</a> 是 Issue Tracking System，更精確的來說，它們應該被稱為「專案管理工具」。</p>
-
-<p>要能夠的讓專案項目有計畫且順利的被執行，需要：</p>
-
-<ul>
-<li>一個地方可以透明的列出所有需要被執行的項目 (Issue List)</li>
-<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
-<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且具有「permalink」、「權限控管」，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
-<li>可以 cross reference 或具有子票功能</li>
-<li>一個地方可以整理統合專案現在所有的相關資訊。( Wiki 功能)</li>
-<li>一個地方可以看到自己今天需要 Focus 進行哪些項目（Issue Personal Dashboard)</li>
-<li>一個地方能讓 Manager 可以看到自己的 Employee 正在進行哪些項目，這些項目目前的狀態是什麼。（Issue Query)</li>
-</ul>
-
-
-<p>至於我個人一直以來偏好的系統，就是 <a href="http://www.redmine.org/">Redmine</a>。尤其是近一兩年的版本，Issue Query 的加強和 子票 / 相關票的功能被開發出來， 讓我在專案管理上更加的得心應手(註2)。</p>
-
-<h4>簡單歸納</h4>
-
-<p>專案往往會搞到失火，或是時間不夠用。問題往往出在整個專案之間的「不透明」。</p>
-
-<ul>
-<li>搞不清楚總共有多少事需要完成</li>
-<li>搞不清楚目前這件事的進行狀態</li>
-<li>搞不清楚今天要進行哪些事</li>
-<li>搞不清楚現在正在做的事，是否跟「目前」的全局有強大的正關聯</li>
-<li>搞不清楚哪些事必須在何時就需要「確切」的被完成，否則就會產生重大風險</li>
-</ul>
-
-
-<p>要讓專案順利上線，一套好的 issue tracking system 是不能少的啊。</p>
-
-<ul>
-<li><p>註 1: 我一直以為裝個 issue tracking system 是常識。為什麼會寫這種「常識」等級的東西？因為我後來發現這完全不是「常識」，特別對 「PM」 來說不是「常識」（顛覆了我的認知&#8230;orz）！之前在某社服務時，就發現他們竟然沒有這種東西，提議要部門內架設還被當作是異類。接著所有高階主管討論了超過一個月才勉強決定要裝 issue tracking。接著又花了兩個月的時間討論要裝哪一套 issue tracking，再花了一個月才把決定好的 issue tracking 架起來。真是嘆為觀止！&#8230;實在受不了種種的低效率，最後早早 say bye。</p></li>
-<li><p>註 2: 切票示範 (已取得授權)</p>
-
-<ul>
-<li>Redmine Nested Ticket Sample : <a href="http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/">http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/</a></li>
-<li>Redmine Milestone Sample: <a href="http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/">http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/</a></li>
-</ul>
-</li>
-</ul>
-
 
 <p>＝＝＝＝</p>
 

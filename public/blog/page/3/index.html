@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  第 3 件事：制定 Art / RD 都遵守的開發 convention在傳統的開發過程中，作法多半都是：規劃 => UI / 畫面設計 => 程式設計。其實若專案規劃階段結束的早（也就是實作類似最低可行產品產品的概念），並非需要等待 UI / 畫面設計 完...">
+  <meta name="description" content="                  第 4 件事：架設一套 issue tracking system你用什麼工具來管理軟體專案的進度呢？我曾經一度認為使用 issue tracking 管理專案進度，是一件天經地義的事。大家都是這麼做的，所以這個題目沒什麼好談的。後來，我才發現這個印象大錯特...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,170 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-18T16:12:00+08:00" pubdate  data-updated="true" >Mar 18<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/03/18/website-online-todo-4/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/" data-show-faces="false"></div></div>
+    
+    <h2>第 4 件事：架設一套 issue tracking system</h2>
+
+<p>你用什麼工具來管理軟體專案的進度呢？我曾經一度認為使用 issue tracking 管理專案進度，是一件天經地義的事。大家都是這麼做的，所以這個題目沒什麼好談的。
+後來，我才發現這個印象大錯特錯&#8230;</p>
+
+<p><strong> 絕大多數的人真的只用「mail」和「cc」來管專案，that&#8217;s all。(註1) </strong></p>
+
+<p>P.S. issue 真的太多的話，他們會改用 &#8230;<code>Excel</code>！！</p>
+
+<p>ZOMG&#8230;</p>
+
+<h3>What is issue tracking system ?</h3>
+
+<p>Issue Tracking system ，顧名思義就是<code>紀錄</code>、<code>追蹤</code> 問題的系統。<a href="http://www.bugzilla.org/">BugZilla</a>、<a href="trac.edgewall.org">Trac</a>、<a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://lighthouseapp.com/">lighthoustapp</a>、<a href="http://basecamp.com/">Basecamp</a> &#8230;等等這幾套軟體，都是知名的 Issue Tracking system。</p>
+
+<p>一套合格的 Issue Tracking system 的 Issue 至少要可以紀錄這些內容：</p>
+
+<ul>
+<li>Issue 的主題</li>
+<li>Issue 的內容</li>
+<li>Issue 現在的狀態 (新建立、已指派、已解決、已回應、已結束、已擱置&#8230;etc)</li>
+<li>Issue 優先權 (正常、重要、緊急、輕微、會擋路&#8230;etc.)</li>
+<li>Issue 發生日期</li>
+<li>Issue 希望解決日期</li>
+<li>Issue 實際解決日期</li>
+<li>Issue 被分派給誰</li>
+<li>Issue 的附件</li>
+<li>Isuue 的觀察者有誰</li>
+</ul>
+
+
+<h3>為什麼 email 不管用？</h3>
+
+<p>常人使用的 email 管理法其實會有幾個很大的缺點：</p>
+
+<h4>喪失時間感、無確切完成日期</h4>
+
+<p>專案中最珍貴的資源無非是「時間」。僅使用 email 往來，會造成一個嚴重的假象：大家都一直有信件往來，所以整件事其實是有進度的。但其實，專案進行的速度卻是牛步&#8230;</p>
+
+<p>後面的原因其實是因為：「回信」是一個「順序」執行動作，當一方回了，下一方才能決定要做什麼、要回什麼。「什麼時候」再回（有空回，做完回？）其實沒有人知道。通常一個來回就要搞掉一個上午，甚至是一個整天。但其實整件事沒什麼進展。</p>
+
+<p>這麼浪費效率，逼得某些 PM 還得自己用 TODO list + email tracking label 才可以勉強控制這種局面。</p>
+
+<h4>無確切執行人</h4>
+
+<p>有的 email，cc 者一大堆：A 先指派了 B 作這個工作，但 B 做到一半覺得需要 C 的火力支援，於是把 C 加入這個討論串裡面。C 做到一半覺得不妥，請示長官 D 要如何配合這個專案。往往一整個 mail 牽扯了一大堆人進去，大家討論來討論去，好不熱烈。</p>
+
+<p>但是呢&#8230;誰需要去執行，哪些事需要被執行，什麼時候這些事需要被執行完畢？在這一整個串裡面完全被模糊掉了。</p>
+
+<h4>洩密</h4>
+
+<p>cc 者一大堆。怎麼分得清楚誰有權知道、誰無權知道這一串信裡面提到的執行事項？</p>
+
+<h4>優先權的分配</h4>
+
+<p>一個專案可能同時間有幾十上百條待處理事項需要被執行。請問哪一條需要先被執行？它們的優先權又是用什麼標準決定的呢？</p>
+
+<h4>處理事項目前的執行狀態</h4>
+
+<p>一個較具規模的專案，可能不只一個人參與（多個 RD 和多個美術）。到底誰正在執行什麼項目，會不會相撞（項目、執行者）？什麼項目其實已經完工了，需要被 archive 起來？資訊有沒有 outdate 問題？</p>
+
+<p>Email + Excel 其實很不夠用&#8230;</p>
+
+<h3>What you need : Project Management Tool</h3>
+
+<p>其實由這一連串的問題整理下來，可以清楚的發現，一個專案需要的是什麼？這也是 Project Management Tool 可以提供給你的東西。</p>
+
+<p>與其說 <a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://basecamp.com/">Basecamp</a> 是 Issue Tracking System，更精確的來說，它們應該被稱為「專案管理工具」。</p>
+
+<p>要能夠的讓專案項目有計畫且順利的被執行，需要：</p>
+
+<ul>
+<li>一個地方可以透明的列出所有需要被執行的項目 (Issue List)</li>
+<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
+<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且具有「permalink」、「權限控管」，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
+<li>可以 cross reference 或具有子票功能</li>
+<li>一個地方可以整理統合專案現在所有的相關資訊。( Wiki 功能)</li>
+<li>一個地方可以看到自己今天需要 Focus 進行哪些項目（Issue Personal Dashboard)</li>
+<li>一個地方能讓 Manager 可以看到自己的 Employee 正在進行哪些項目，這些項目目前的狀態是什麼。（Issue Query)</li>
+</ul>
+
+
+<p>至於我個人一直以來偏好的系統，就是 <a href="http://www.redmine.org/">Redmine</a>。尤其是近一兩年的版本，Issue Query 的加強和 子票 / 相關票的功能被開發出來， 讓我在專案管理上更加的得心應手(註2)。</p>
+
+<h4>簡單歸納</h4>
+
+<p>專案往往會搞到失火，或是時間不夠用。問題往往出在整個專案之間的「不透明」。</p>
+
+<ul>
+<li>搞不清楚總共有多少事需要完成</li>
+<li>搞不清楚目前這件事的進行狀態</li>
+<li>搞不清楚今天要進行哪些事</li>
+<li>搞不清楚現在正在做的事，是否跟「目前」的全局有強大的正關聯</li>
+<li>搞不清楚哪些事必須在何時就需要「確切」的被完成，否則就會產生重大風險</li>
+</ul>
+
+
+<p>要讓專案順利上線，一套好的 issue tracking system 是不能少的啊。</p>
+
+<ul>
+<li><p>註 1: 我一直以為裝個 issue tracking system 是常識。為什麼會寫這種「常識」等級的東西？因為我後來發現這完全不是「常識」，特別對 「PM」 來說不是「常識」（顛覆了我的認知&#8230;orz）！之前在某社服務時，就發現他們竟然沒有這種東西，提議要部門內架設還被當作是異類。接著所有高階主管討論了超過一個月才勉強決定要裝 issue tracking。接著又花了兩個月的時間討論要裝哪一套 issue tracking，再花了一個月才把決定好的 issue tracking 架起來。真是嘆為觀止！&#8230;實在受不了種種的低效率，最後早早 say bye。</p></li>
+<li><p>註 2: 切票示範 (已取得授權)</p>
+
+<ul>
+<li>Redmine Nested Ticket Sample : <a href="http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/">http://www.flickr.com/photos/xdite/6469521821/sizes/o/in/photostream/</a></li>
+<li>Redmine Milestone Sample: <a href="http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/">http://www.flickr.com/photos/xdite/6469526205/sizes/o/in/photostream/</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>＝＝＝＝</p>
+
+<p>系列文章：</p>
+
+<ul>
+<li><a href="/posts/2012/03/17/website-online-todo-1/">網站程式上線前需要準備的事 （一）</a></li>
+<li><a href="/posts/2012/03/18/website-online-todo-2/">網站程式上線前需要準備的事 （二）</a></li>
+<li><a href="/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a></li>
+<li><a href="/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></li>
+<li><a href="/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -921,60 +1085,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/">Don’t Name Your Ruby Project With Underscore on Github</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-02-09T16:15:00+08:00" pubdate  data-updated="true" >Feb 9<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/" data-show-faces="false"></div></div>
-    
-    <p>I had a ruby project named &#8221;<a href="https://github.com/xdite/bootstrap_helper">bootstrap_helper</a>&#8221;, which has 43 watchers on Github.</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6845375847/" title="螢幕快照 2012-02-09 下午4.09.51 by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7026/6845375847_0eed10698d.jpg" width="500" height="100" alt="螢幕快照 2012-02-09 下午4.09.51"></a></p>
-
-<p>I thought having 43 watchers is sort of popular. But there is a weired thing:  when I search keyword : &#8220;bootstrap helper&#8221;, my gem is not in first page result.</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6845392075/" title="螢幕快照 2012-02-09 下午3.59.56 by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7045/6845392075_cfcd2676c5.jpg" width="500" height="485" alt="螢幕快照 2012-02-09 下午3.59.56"></a></p>
-
-<p>Then I found I made a hugh mistake: Ruby naming convention told Ruby developer to name everything with underscore. So every developer names their projects with underscore.</p>
-
-<p>But it&#8217;s a giant SEO mistake: Search Engine treats snake_keywords as CamelKeywords. If your project&#8217;s name contains  meaningful keywords, it won&#8217;t be matched. Because &#8220;snake_keywords&#8221; means &#8220;SnakeKeyword&#8221; not &#8220;snake keywords&#8221;.</p>
-
-<p>It&#8217;s really bad for SEO.</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1009,6 +1119,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/08/12/strong-parameter-mass-assignment-solution/">Strong Parameter: Mass Assignment 機制的防彈衣</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/08/09/recommended-the-newsroom/">[影集] 喚醒新聞界的良知 The Newsroom</a>
       </li>
     
@@ -1024,15 +1138,11 @@
         <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a>
       </li>
     
-      <li class="post">
-        <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/assetpipeline'>AssetPipeline (3)</a></li><li><a href='/blog/categories/boardgame'>BoardGame (1)</a></li><li><a href='/blog/categories/bookreviews'>BookReviews (4)</a></li><li><a href='/blog/categories/bootstrap'>Bootstrap (2)</a></li><li><a href='/blog/categories/coffeescript'>CoffeeScript (1)</a></li><li><a href='/blog/categories/css'>CSS (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/hosting'>Hosting (1)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/misc'>Misc (3)</a></li><li><a href='/blog/categories/mybook'>MyBook (5)</a></li><li><a href='/blog/categories/mycompany'>MyCompany (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/podcast'>Podcast (1)</a></li><li><a href='/blog/categories/projectmanagement'>ProjectManagement (6)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/railsconf'>RailsConf (3)</a></li><li><a href='/blog/categories/ruby'>Ruby (8)</a></li><li><a href='/blog/categories/rubygem'>Rubygem (9)</a></li><li><a href='/blog/categories/scss'>SCSS (3)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/seo'>SEO (1)</a></li><li><a href='/blog/categories/startup'>Startup (5)</a></li><li><a href='/blog/categories/tips'>Tips (16)</a></li><li><a href='/blog/categories/travel'>Travel (1)</a></li><li><a href='/blog/categories/webdesign'>WebDesign (5)</a></li></ul>
+    <ul id="category-list">Liquid error: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)</ul>
 </section>
 
 <section id="popularthreads" class="dsq-widget">

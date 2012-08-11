@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[Ruby][教學] 如何打包一個 Asset Gem  - Blog.XDite.net</title>
+  <title>Strong Parameter: Mass Assignment 機制的防彈衣 - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          What is Asset GemAsset Pipeline的概念興起，不只是推動了 SASS 與 CoffeeScript 的廣泛流行。其實造成更重大的影響是 assets ( CSS / JavaScript / Images ) 不再被視為專案中難以「整理」與「管理...">
+  <meta name="description" content="          還記得年初才發生的 Github 被入侵事件 嗎？事件的起因是因為 Rails 內建的 mass assignment 機制，很容易被有心人利用這個漏洞入侵。原本的 attr_accessible / attr_protected 的設計並不足夠實務使用。在該事件發生後，R...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">[Ruby][教學] 如何打包一個 Asset Gem</h1>
+      <h1 class="entry-title">Strong Parameter: Mass Assignment 機制的防彈衣</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2012-01-04T09:10:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
+<time datetime="2012-08-12T02:16:00+08:00" pubdate  data-updated="true" >Aug 12<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,92 +98,62 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <h2>What is Asset Gem</h2>
+  <p>還記得年初才發生的 <a href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/">Github 被入侵事件</a> 嗎？</p>
 
-<p><a href="http://upgrade2rails31.heroku.com/asset-pipeline/">Asset Pipeline</a>的概念興起，不只是推動了 SASS 與 CoffeeScript 的廣泛流行。其實造成更重大的影響是 assets ( CSS / JavaScript / Images ) 不再被視為專案中難以「整理」與「管理」的頭痛元件。透過 Asset Pipeline 的架構，我們可以把 assets 包裝成一個 gem ，在其他專案中重複使用。</p>
+<p>事件的起因是因為 Rails 內建的 mass assignment 機制，很容易被有心人利用這個漏洞入侵。</p>
 
-<p>在以往，如果想使用 <a href="http://twitter.github.com/bootstrap/">bootstrap</a> 這個 CSS / JS Framework，我們必須將所有靜態檔案 COPY 一份到專案的靜態目錄中。當專案使用到大量 3rd party vendor assets，整個靜態目錄就會被這種拷貝行為弄得髒亂不堪，難以整理。</p>
+<p>原本的 attr_accessible / attr_protected 的設計並不足夠實務使用。在該事件發生後，Rails 核心團隊在 3.2.3 之後的版本，預設都開啟了 <code>config.whitelist_attributes = true</code> 的選項。</p>
 
-<p>而透過 Asset Pipeline 的架構，開發者就可以停止這種草率但不得不為之的動作。要引用 3rd party vendor assets，只要在 application.css 或者 application.js 進行 require 就可以輕鬆使用了。</p>
+<p>也就是專案自動會對所有的 model 都自動開啟白名單模式，你必須手動對每一個 model 都加上 attr_accessible。這樣表單送值才會有辦法運作。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>//= require jquery
-</span><span class='line'>//= require bootstrap
-</span></code></pre></td></tr></table></div></figure>
+<p>這樣的舉動好處是：「夠安全」，能強迫開發者在設計表單時記得審核 model 該欄位是否適用於 mass-assign。</p>
 
+<p>但這樣的機制也引發開發者「不實用」「找麻煩」的議論。</p>
 
-<p></p>
+<h3>問題 1: 新手容易踩中地雷</h3>
 
-<p>引用 asset gem 很簡單，但不少人想知道的是：<code>如何把手上想整理的 asset 包裝成一個 gem 進行使用</code>。</p>
+<p>首先最麻煩的當然是，新手會被這一行設定整到。新手不知道此機制為何而來，出了問題也不知道如何關掉這個設定。更麻煩的是撰寫新手教學的人，必須又花上一大篇幅（就如同倒楣的我，想要幫 Rails 101 改版，結果內容無限追加）解釋 mass-assignment 的設計機制，為何重要，為何新手需要重視…etc.</p>
 
-<h2>Asset Pipeline 的 mount 位置</h2>
+<h3>問題 2: 不實用</h3>
 
-<p>談到這裡，就要稍微提一下 Asset Pipeline 對於 assets 位置的定義。by default，你可以把 assets 放在以下三個資料夾內：</p>
+<p>手動一個一個加上 attr_accessible 真的很煩人，因為這也表示，若新增一個欄位，開發者也要手動去加上 attr_accessible，否則很可能在某些表單直接出現異常現象。</p>
 
-<ul>
-<li>app/assets</li>
-<li>lib/assets</li>
-<li>vendor/assets</li>
-</ul>
+<p>而最麻煩的還是，其實 attr_accessible 不敷使用，因為一個系統通常存在不只一種角色，普通使用與 Admin 需要的 mass-assignment 範圍絕對不盡相同。</p>
 
+<p>雖然 Rails 在 3.1 加入了 <a href="http://enlightsolutions.com/articles/whats-new-in-edge-scoped-mass-assignment-in-rails-3-1">scoped mass assignment</a>。但這也只能算是 model 方面的解決手法。</p>
 
-<p>理論上，你把 assets 丟在這三個資料夾內，在 application.cs|js 內 require 都可以動。</p>
+<p>一旦系統內有更多其他流程需求，coped mass assignment 的設計頓時就不夠解決問題了…</p>
 
-<h3>如何整理目前專案中的 assets</h3>
+<h3>癥結點：欄位核准與否應該由 controller 管理，而非 model</h3>
 
-<p>這其實是另外一個主題，不過我在這裡也順便整理出來。</p>
+<p>大家戰了一陣子，終於收斂出一個結論。原來一切的癥結點在於之前的想法都錯了，欄位核准與否應該由 controller 決定。因為「流程需求」本來就應該作在 controller 裡面。wycats 當時也起草了一份<a href="https://gist.github.com/1974187">解法的 proposal</a>。日後打算以 plugin 方式釋出。</p>
 
-<p>如何整理歸類現在手頭上的 assets 呢？</p>
+<h3>plugin：strong_parameter</h3>
 
-<ul>
-<li>app/assets</li>
-</ul>
+<p>這個 plugin 就是 <a href="https://github.com/rails/strong_parameters/">strong_parameters</a> 。strong_parameters 的想法與 DHH <a href="https://gist.github.com/1975644">當時扔出來的想法</a> 相近。</p>
 
+<p>DHH 當時的作法</p>
 
-<p>在 Rails 3.1.x 之後的版本，rails g controler posts，會自動在 assets/styelsheets/ 和 assets/javascripts/ 中產生對應的 scss 與 coffeescript 檔案。</p>
+<div><script src='https://gist.github.com/1975644.js?file='></script>
+<noscript><pre><code>class PostsController &lt; ActionController::Base
+  def create
+    Post.create(post_params)
+  end
+  
+  def update
+    Post.find(params[:id]).update_attributes!(post_params)
+  end
 
-<p>所以 app/assets 是讓開發者放「自己為專案手寫的 assets」的地方。</p>
-
-<ul>
-<li>lib/assets</li>
-</ul>
-
-
-<p>lib 是 library 的簡寫，這裡是放 LIBRARY 的地方。所以如果你為專案手寫的 assets 漸漸形成了 library 規模，比如說 mixin 或者是自己為專案整理了簡單的 bootstrap，應該放在 lib/ 下。</p>
-
-<ul>
-<li>vendor/assets</li>
-</ul>
+  private
+    def post_params
+      params[:post].slice(:title, :content)
+    end
+end</code></pre></noscript></div>
 
 
-<p>verdor 是「供應商」的意思，也就是 「別人寫的」assets 都應該放在這裡。比如說:</p>
+<p>是使用 slice 去把真正需要的部分切出來，所以就算 hacker 打算送其他 parameter 也會被過濾掉(不會有 exception)。</p>
 
-<ul>
-<li>jquery.*.js</li>
-<li>fanfanfan icons</li>
-<li>tinymce / ckeditor</li>
-</ul>
-
-
-<p>等等…</p>
-
-<h2>透過 Rails Engine 機制實作</h2>
-
-<p>為什麼剛剛要扯這麼大一圈去解釋如何整理手頭的 assets 呢？</p>
-
-<p>因為 asset gem 其實就是透過 Rails Engine 的機制去實作出來的。</p>
-
-<p>拿一個前幾個月幫 <a href="http://twitter.com/evenwu">@evenwu</a> 寫的 asset gem 作為示範好了。</p>
-
-<p><a href="https://github.com/xdite/compass-ggs-framework/tree/rails-engine">https://github.com/xdite/compass-ggs-framework/tree/rails-engine</a></p>
-
-<p>作法是將你整理好的 lib/assets 扔到 vendor/assets 裡(你寫的給別人用，你就變成 vendor 了)，再宣告一個「空的」Rails Engine Class 讓 Rails 可以將這個 gem 視為網站的一部分「掛起來」裡面的 vendor/assets。</p>
-
-<p>沒錯，就是這麼簡單。</p>
-
-<p>而宣告自己是一個 Rails Engine 的方式也很簡單：只要把 Rails Engine 塞進自定義的 module 就好了。
-（還是看不懂的可以看我的 code…）</p>
+<p>而 strong_parameters 的作法是必須過一段 permit，允許欄位。如果送不允許的欄位進來，會 throw exception。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -191,22 +161,38 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Ggs</span>
-</span><span class='line'>  <span class="k">module</span> <span class="nn">Rails</span>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">Engine</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">Rails</span><span class="o">::</span><span class="no">Engine</span>
-</span><span class='line'>    <span class="k">end</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PeopleController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">update</span>
+</span><span class='line'>    <span class="n">person</span><span class="o">.</span><span class="n">update_attributes!</span><span class="p">(</span><span class="n">person_params</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="ss">:back</span>
 </span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">person_params</span>
+</span><span class='line'>      <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:person</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:age</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>剩下來的流程就跟<a href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/">一般包 Gem 的流程</a>差不多了。</p>
+<p>安全多了，擴充性也比較大&#8230;</p>
 
-<p>=====</p>
+<h3>進階用法</h3>
 
-<p>現在我每週都固定有在回答一些問題，發現不少朋友對 Ruby / Rails 的一些疑惑，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
+<p>當然，每一段 controller 都要來上這麼一段，有時候也挺煩人的。Railscast 也整理了一些<a href="http://railscasts.com/episodes/371-strong-parameters">進階招數</a>：</p>
 
-<p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>。</p>
+<ul>
+<li>Nested Attributes</li>
+<li>Orgngized to Class</li>
+</ul>
+
+
+<p>大家可以研究看看…</p>
 
 </div>
 
@@ -228,12 +214,12 @@
 
 
 
-<time datetime="2012-01-04T09:10:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
+<time datetime="2012-08-12T02:16:00+08:00" pubdate  data-updated="true" >Aug 12<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/tips/'>Tips</a>
+    <a class='category' href='/blog/categories/rubygem/'>Rubygem</a>, <a class='category' href='/blog/categories/security/'>Security</a>, <a class='category' href='/blog/categories/-rails/'> Rails</a>
   
 </span>
 
@@ -243,7 +229,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -319,8 +305,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/';
-        var disqus_url = 'http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution/';
         var disqus_script = 'embed.js';
       
     (function () {
