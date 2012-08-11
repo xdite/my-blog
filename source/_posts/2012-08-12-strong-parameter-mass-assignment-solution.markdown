@@ -3,7 +3,7 @@ layout: post
 title: "Strong Parameter: Mass Assignment 機制的防彈衣"
 date: 2012-08-12 02:16
 comments: true
-categories: Rails Security Rubygem
+
 ---
 
 還記得年初才發生的 [Github 被入侵事件](http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/) 嗎？
