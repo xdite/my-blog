@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  在上一篇。作者提到了 「New-product introduction model」有非常大的機率，會讓一個 Startup 從車站一開始出發，終點就注定是地獄。整理歸納了的九宗罪，多數 Startup 都是因為這九宗罪而死掉的。1. Assuming “...">
+  <meta name="description" content="                  Asset Pipeline 最讓人詬病的就是 deploy 時花費速度過久。在社群聚會時發現大家都對這個主題非常不熟。所以把最近累積了的這方面技巧整理出來分享給大家。1. Capistrano deployment speedup使用 capistrano...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,875 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-09T02:49:00+08:00" pubdate  data-updated="true" >Jul 9<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/07/09/3-way-to-speedup-asset-pipeline/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/07/09/3-way-to-speedup-asset-pipeline/" data-show-faces="false"></div></div>
+    
+    <p>Asset Pipeline 最讓人詬病的就是 deploy 時花費速度過久。在<a href="http://www.meetup.com/Ruby-Taiwan-Group/">社群聚會</a>時發現大家都對這個主題非常不熟。所以把最近累積了的這方面技巧整理出來分享給大家。</p>
+
+<h2>1. Capistrano deployment speedup</h2>
+
+<h3>使用 capistrano 內建 task 執行 assets:precompie</h3>
+
+<p>capistrano 內建了 <code>'deploy/assets'</code> 這個 task。只要在 <code>Capfile</code> 裡面</p>
+
+<figure class='code'><figcaption><span>Capfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">load</span> <span class="s1">&#39;deploy/assets&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>deploy 就會自動執行 assets precompile 的動作。由 <a href="https://github.com/capistrano/capistrano/blob/master/lib/capistrano/recipes/deploy/assets.rb">原始檔</a> 可以看到這個 task 實際執行的是</p>
+
+<p><code>"cd /home/apps/APP_NAME/releases/20120708184757 &amp;&amp; bundle exec rake RAILS_ENV=production RAILS_GROUPS=assets assets:precompile"</code></p>
+
+<p>而執行的時機是</p>
+
+<p><code>after 'deploy:update_code', 'deploy:assets:precompile'</code></p>
+
+<p>許多開發者不知道有這一個 task 可以用。手動寫 task 去 compile，造成了兩個問題:</p>
+
+<ol>
+<li>時機執行錯誤。Compile 時機錯誤會造成站上出現空白 css。</li>
+<li>執行 compile 機器負擔太重。如果是手寫的 task 通常會是 load 整個 production 的環境去 compile。與只 load assets 這個 group 所吃的系統資源「有可能」差得非常多。</li>
+</ol>
+
+
+<h3>如果沒有變更到 assets 時，就不 compile</h3>
+
+<p>請把這裡面的內容貼到你的 deploy.rb 檔裡面</p>
+
+<div><script src='https://gist.github.com/3072362.js?file=deploy/asset.rb'></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head prefix=&quot;og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#&quot;&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;title&gt;404 · GitHub&lt;/title&gt;
+    &lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; href=&quot;/opensearch.xml&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;fluid-icon&quot; href=&quot;https://raw.github.com/fluidicon.png&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;shortcut icon&quot; href=&quot;/favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;57x57&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;72x72&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;144x144&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+
+    
+    
+
+    
+
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-496f7426a679ea2d607d7e535f79e4be5f2a5352.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github2-606938cd1f3cb96004f114209fb257ec0d533338.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    
+    
+
+
+    &lt;script src=&quot;https://a248.e.akamai.net/assets.github.com/assets/frameworks-c86655d74d3a1c4761cfc641f9400895db04e2f8.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    &lt;script defer=&quot;defer&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-ea9b7fd977b807e9e9ef224d8900dc5893c4625e.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    
+
+    
+  &lt;/head&gt;
+
+
+  &lt;body class=&quot;logged_out    env-production &quot; data-blob-contribs-enabled=&quot;yes&quot;&gt;
+    &lt;div id=&quot;wrapper&quot;&gt;
+
+    
+    
+    
+
+      &lt;div id=&quot;header&quot; class=&quot;true clearfix&quot;&gt;
+        &lt;div class=&quot;container clearfix&quot;&gt;
+          &lt;a class=&quot;site-logo&quot; href=&quot;https://raw.github.com/&quot;&gt;
+            &lt;!--[if IE]&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7.png?1323882717&quot; /&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-hover&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7-hover.png?1324325358&quot; /&gt;
+            &lt;![endif]--&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1337118066&quot; /&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x-hover&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x-hover.png?1337118066&quot; /&gt;
+          &lt;/a&gt;
+
+
+                  &lt;!--
+      make sure to use fully qualified URLs here since this nav
+      is used on error pages on other domains
+    --&gt;
+    &lt;ul class=&quot;top-nav logged_out&quot;&gt;
+        &lt;li class=&quot;pricing&quot;&gt;&lt;a href=&quot;https://github.com/plans&quot;&gt;Signup and Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;explore&quot;&gt;&lt;a href=&quot;https://github.com/explore&quot;&gt;Explore GitHub&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;features&quot;&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;blog&quot;&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;login&quot;&gt;&lt;a href=&quot;https://github.com/login?return_to=%2Fgist%2F3072362%2Fdeploy%2Fasset.rb&quot;&gt;Sign in&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+
+
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      
+
+        &lt;div class=&quot;site clearfix&quot;&gt;
+          &lt;div id=&quot;site-container&quot; class=&quot;container&quot; data-pjax-container&gt;
+            
+
+&lt;style type=&quot;text/css&quot;&gt;
+    #header{
+        border-bottom: 0;
+    }
+    .site {
+        padding: 0;
+    }
+    #site-container {
+        width: 100%;
+    }
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+    #parallax_wrapper {
+      position: relative;
+      z-index: 0;
+    }
+    #parallax_field{
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 370px;
+        width: 100%;
+    }
+    #parallax_field #parallax_bg {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 110%;
+        height: 425px;
+        z-index: 1;
+    }
+    #parallax_illustration {
+        display: block;
+        margin: 0 auto;
+        width: 940px;
+        height: 370px;
+        position: relative;
+        overflow: hidden;
+        clear: both;
+    }
+    #parallax_illustration #parallax_error_text {
+        position: absolute;
+        top: 72px;
+        left: 72px;
+        z-index: 10;
+    }
+    #parallax_illustration #parallax_octocat {
+        position: absolute;
+        top: 94px;
+        left: 356px;
+        z-index: 9;
+    }
+    #parallax_illustration #parallax_speeder {
+        position: absolute;
+        top: 150px;
+        left: 432px;
+        z-index: 8;
+    }
+    #parallax_illustration #parallax_octocatshadow {
+        position: absolute;
+        top: 297px;
+        left: 371px;
+        z-index: 7;
+    }
+    #parallax_illustration #parallax_speedershadow {
+        position: absolute;
+        top: 263px;
+        left: 442px;
+        z-index: 6;
+    }
+    #parallax_illustration #parallax_building_1 {
+        position: absolute;
+        top: 73px;
+        left: 467px;
+        z-index: 5;
+    }
+    #parallax_illustration #parallax_building_2 {
+        position: absolute;
+        top: 113px;
+        left: 762px;
+        z-index: 4;
+    }
+    #footer-push {
+      height: 280px;
+    }
+    #footer {
+        margin-top: 0px;
+        z-index: 12;
+    }
+&lt;/style&gt;
+
+&lt;div id=&quot;parallax_wrapper&quot;&gt;
+
+&lt;div id=&quot;parallax_field&quot;&gt;
+    &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;0&quot; data-yrange=&quot;20&quot; height=&quot;415&quot; id=&quot;parallax_bg&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_bg.jpg?1315937721&quot; width=&quot;940&quot; /&gt;
+&lt;/div&gt;
+&lt;div id=&quot;parallax_illustration&quot;&gt;
+  &lt;img alt=&quot;404 | &amp;ldquo;This is not the web page you are looking for&amp;rdquo;&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;20&quot; data-yrange=&quot;10&quot; height=&quot;249&quot; id=&quot;parallax_error_text&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_errortext.png?1315937721&quot; width=&quot;271&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;230&quot; id=&quot;parallax_octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocat.png?1315937721&quot; width=&quot;188&quot; /&gt;
+  &lt;img alt=&quot;land speeder&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;156&quot; id=&quot;parallax_speeder&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speeder.png?1315937721&quot; width=&quot;440&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;49&quot; id=&quot;parallax_octocatshadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocatshadow.png?1315937721&quot; width=&quot;166&quot; /&gt;
+  &lt;img alt=&quot;land speeder's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;75&quot; id=&quot;parallax_speedershadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speedershadow.png?1315937721&quot; width=&quot;430&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;50&quot; data-yrange=&quot;20&quot; height=&quot;123&quot; id=&quot;parallax_building_1&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_1.png?1315937721&quot; width=&quot;304&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;75&quot; data-yrange=&quot;30&quot; height=&quot;50&quot; id=&quot;parallax_building_2&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_2.png?1315937721&quot; width=&quot;116&quot; /&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;div class=&quot;context-overlay&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;div id=&quot;footer-push&quot;&gt;&lt;/div&gt;&lt;!-- hack for sticky footer --&gt;
+    &lt;/div&gt;&lt;!-- end of wrapper - hack for sticky footer --&gt;
+
+      &lt;!-- footer --&gt;
+      &lt;div id=&quot;footer&quot; &gt;
+        
+  &lt;div class=&quot;upper_footer&quot;&gt;
+     &lt;div class=&quot;container clearfix&quot;&gt;
+
+       &lt;!--[if IE]&gt;&lt;h4 id=&quot;blacktocat_ie&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]--&gt;
+       &lt;![if !IE]&gt;&lt;h4 id=&quot;blacktocat&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;GitHub&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/contact&quot;&gt;Contact &amp;amp; Support&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/training&quot;&gt;Training&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://enterprise.github.com/&quot;&gt;GitHub Enterprise&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://status.github.com/&quot;&gt;Site Status&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Clients&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mac.github.com/&quot;&gt;GitHub for Mac&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://windows.github.com/&quot;&gt;GitHub for Windows&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://eclipse.github.com/&quot;&gt;GitHub for Eclipse&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mobile.github.com/&quot;&gt;GitHub Mobile Apps&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Tools&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://get.gaug.es/&quot;&gt;Gauges: Web analytics&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://speakerdeck.com&quot;&gt;Speaker Deck: Presentations&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://gist.github.com&quot;&gt;Gist: Code snippets&lt;/a&gt;&lt;/li&gt;
+
+         &lt;h4 class=&quot;second&quot;&gt;Extras&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://jobs.github.com/&quot;&gt;Job Board&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://shop.github.com/&quot;&gt;GitHub Shop&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://octodex.github.com/&quot;&gt;The Octodex&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Documentation&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://help.github.com/&quot;&gt;GitHub Help&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://developer.github.com/&quot;&gt;Developer API&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot;&gt;GitHub Flavored Markdown&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+     &lt;/div&gt;&lt;!-- /.site --&gt;
+  &lt;/div&gt;&lt;!-- /.upper_footer --&gt;
+
+&lt;div class=&quot;lower_footer&quot;&gt;
+  &lt;div class=&quot;container clearfix&quot;&gt;
+    &lt;!--[if IE]&gt;&lt;div id=&quot;legal_ie&quot;&gt;&lt;![endif]--&gt;
+    &lt;![if !IE]&gt;&lt;div id=&quot;legal&quot;&gt;&lt;![endif]&gt;
+      &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/terms&quot;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/privacy&quot;&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/security&quot;&gt;Security&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;p&gt;&amp;copy; 2012 &lt;span title=&quot;0.02002s from fe12.rs.github.com&quot;&gt;GitHub&lt;/span&gt; Inc. All rights reserved.&lt;/p&gt;
+    &lt;/div&gt;&lt;!-- /#legal or /#legal_ie--&gt;
+
+      &lt;div class=&quot;sponsor&quot;&gt;
+        &lt;a href=&quot;http://www.rackspace.com&quot; class=&quot;logo&quot;&gt;
+          &lt;img alt=&quot;Dedicated Server&quot; height=&quot;36&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/footer/rackspaces_logo.png?1329521040&quot; width=&quot;38&quot; /&gt;
+        &lt;/a&gt;
+        Powered by the &lt;a href=&quot;http://www.rackspace.com &quot;&gt;Dedicated
+        Servers&lt;/a&gt; and&lt;br/&gt; &lt;a href=&quot;http://www.rackspacecloud.com&quot;&gt;Cloud
+        Computing&lt;/a&gt; of Rackspace Hosting&lt;span&gt;&amp;reg;&lt;/span&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;&lt;!-- /.site --&gt;
+&lt;/div&gt;&lt;!-- /.lower_footer --&gt;
+
+      &lt;/div&gt;&lt;!-- /#footer --&gt;
+
+    
+
+&lt;div id=&quot;keyboard_shortcuts_pane&quot; class=&quot;instapaper_ignore readability-extra&quot; style=&quot;display:none&quot;&gt;
+  &lt;h2&gt;Keyboard Shortcuts &lt;small&gt;&lt;a href=&quot;#&quot; class=&quot;js-see-all-keyboard-shortcuts&quot;&gt;(see all)&lt;/a&gt;&lt;/small&gt;&lt;/h2&gt;
+
+  &lt;div class=&quot;columns threecols&quot;&gt;
+    &lt;div class=&quot;column first&quot;&gt;
+      &lt;h3&gt;Site wide shortcuts&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;s&lt;/dt&gt;
+        &lt;dd&gt;Focus site search&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;?&lt;/dt&gt;
+        &lt;dd&gt;Bring up this help dialog&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column middle&quot; style='display:none'&gt;
+      &lt;h3&gt;Commit list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;c &lt;em&gt;or&lt;/em&gt; o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open commit&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;y&lt;/dt&gt;
+        &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column last&quot; style='display:none'&gt;
+      &lt;h3&gt;Pull request list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open issue&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Submit comment&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.columns.last --&gt;
+
+  &lt;/div&gt;&lt;!-- /.columns.equacols --&gt;
+
+  &lt;div style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;x&lt;/dt&gt;
+          &lt;dd&gt;Toggle selection&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;c&lt;/dt&gt;
+          &lt;dd&gt;Create issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Create label&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;i&lt;/dt&gt;
+          &lt;dd&gt;Back to inbox&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;u&lt;/dt&gt;
+          &lt;dd&gt;Back to issues&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;/&lt;/dt&gt;
+          &lt;dd&gt;Focus issues search&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues Dashboard&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Network Graph&lt;/h3&gt;
+    &lt;div class=&quot;columns equacols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; h&lt;/dt&gt;
+          &lt;dd&gt;Scroll left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; l&lt;/dt&gt;
+          &lt;dd&gt;Scroll right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; k&lt;/dt&gt;
+          &lt;dd&gt;Scroll up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; j&lt;/dt&gt;
+          &lt;dd&gt;Scroll down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Toggle visibility of head labels&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift h&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift l&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift k&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift j&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way down&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.last --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot; style='display:none'&gt;
+        &lt;h3&gt;Source Code Browsing&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Activates the file finder&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Jump to line&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;w&lt;/dt&gt;
+          &lt;dd&gt;Switch branch/tag&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;y&lt;/dt&gt;
+          &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;h3&gt;Browsing Commits&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;escape&lt;/dt&gt;
+          &lt;dd&gt;Close form&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;p&lt;/dt&gt;
+          &lt;dd&gt;Parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o&lt;/dt&gt;
+          &lt;dd&gt;Other parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+    &lt;div id=&quot;markdown-help&quot; class=&quot;instapaper_ignore readability-extra&quot;&gt;
+  &lt;h2&gt;Markdown Cheat Sheet&lt;/h2&gt;
+
+  &lt;div class=&quot;cheatsheet-content&quot;&gt;
+
+  &lt;div class=&quot;mod&quot;&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Format Text&lt;/h3&gt;
+      &lt;p&gt;Headers&lt;/p&gt;
+      &lt;pre&gt;
+# This is an &amp;lt;h1&amp;gt; tag
+## This is an &amp;lt;h2&amp;gt; tag
+###### This is an &amp;lt;h6&amp;gt; tag&lt;/pre&gt;
+     &lt;p&gt;Text styles&lt;/p&gt;
+     &lt;pre&gt;
+*This text will be italic*
+_This will also be italic_
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Lists&lt;/h3&gt;
+      &lt;p&gt;Unordered&lt;/p&gt;
+      &lt;pre&gt;
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b&lt;/pre&gt;
+     &lt;p&gt;Ordered&lt;/p&gt;
+     &lt;pre&gt;
+1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Miscellaneous&lt;/h3&gt;
+      &lt;p&gt;Images&lt;/p&gt;
+      &lt;pre&gt;
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+&lt;/pre&gt;
+     &lt;p&gt;Links&lt;/p&gt;
+     &lt;pre&gt;
+http://github.com - automatic!
+[GitHub](http://github.com)&lt;/pre&gt;
+&lt;p&gt;Blockquotes&lt;/p&gt;
+     &lt;pre&gt;
+As Kanye West said:
+
+&gt; We're living the future so
+&gt; the present is our past.
+&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+  &lt;h3&gt;Code Examples in Markdown&lt;/h3&gt;
+  &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Syntax highlighting with &lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot; title=&quot;GitHub Flavored Markdown&quot; target=&quot;_blank&quot;&gt;GFM&lt;/a&gt;&lt;/p&gt;
+      &lt;pre&gt;
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Or, indent your code 4 spaces&lt;/p&gt;
+      &lt;pre&gt;
+Here is a Python code example
+without syntax highlighting:
+
+    def foo:
+      if not bar:
+        return true&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Inline code for comments&lt;/p&gt;
+      &lt;pre&gt;
+I think you should use an
+`&amp;lt;addr&amp;gt;` element here instead.&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+    &lt;div id=&quot;ajax-error-message&quot;&gt;
+      &lt;span class=&quot;mini-icon mini-icon-exclamation&quot;&gt;&lt;/span&gt;
+      Something went wrong with that request. Please try again.
+      &lt;a href=&quot;#&quot; class=&quot;ajax-error-dismiss&quot;&gt;Dismiss&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;logo-popup&quot;&gt;
+      &lt;h2&gt;Looking for the GitHub logo?&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;h4&gt;GitHub Logo&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot;&gt;&lt;img alt=&quot;Github_logo&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/github_logo.png?1315937721&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;h4&gt;The Octocat&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot;&gt;&lt;img alt=&quot;Octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/octocat.png?1315937721&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    
+    
+    
+    &lt;span id='server_response_time' data-time='0.02830' data-host='fe12'&gt;&lt;/span&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></noscript></div>
+
+
+<p>這是在 Railsconf 2012 的 <a href="https://speakerdeck.com/u/czarneckid/p/railsconf-2012-stack-smashing-cornflower-blue">Stack Smashing</a> 上學到的一招。</p>
+
+<p>如果你的 assets 檔案沒有變動的話，只要執行 copy 上一版本的 assets 就好了。這段 task 會偵測</p>
+
+<ul>
+<li>app/assets</li>
+<li>lib/assets</li>
+<li>vendor/assets</li>
+<li>Gemfile.lock</li>
+<li>confir/routes.rb</li>
+</ul>
+
+
+<p>是否有變動。基本上已經含了所有可能 assets 會變動的可能性。有變動才會重新 compile。</p>
+
+<p>整體上會加速 <strong>非常非常的多</strong>。</p>
+
+<h2>2. use @import carefully</h2>
+
+<h3>避免使用 @import &#8220;compass&#8221;; 這種寫法</h3>
+
+<p><a href="http://compass-style.org/">compass</a> 是大家很愛用的 SCSS framework。大家寫 gradiant 或者 css spriate 很常直接開下去。</p>
+
+<p>但是你知道</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="k">@import</span> <span class="s2">&quot;compass&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>和</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="k">@import</span> <span class="s2">&quot;compass/typography/links/link-colors&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這兩種寫法。</p>
+
+<p>前者 compile 的速度可能比後者慢到 9 倍以上嗎？</p>
+
+<p>會這麼慢的原因，是因為 compass 本身即是<a href="https://github.com/chriseppstein/compass/blob/stable/frameworks/compass/stylesheets/_compass.scss">懶人包</a>，<code>@import "compass";</code> 會把</p>
+
+<ul>
+<li>&#8220;compass/utilities&#8221;;</li>
+<li>&#8220;compass/typography&#8221;;</li>
+<li>&#8220;compass/css3&#8221;;</li>
+</ul>
+
+
+<p>下面的東西 <strong>通通</strong> 都掛起來（還跑 directory recursive）。</p>
+
+<p>所以自然慢到爆炸。如果要用什麼 helper，請直接掛它單支的 CSS 就好了，不要整包都掛上來。</p>
+
+<p>全掛其慢無比是正常的。</p>
+
+<h3>避免使用 partial</h3>
+
+<p>我知道 partial 是 SCSS 整理術的大絕招。但是若非必要，也儘量避免一直單檔一路 @import 到底。</p>
+
+<figure class='code'><figcaption><span>common.css.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="k">@import</span> <span class="s2">&quot;reset&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;base&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;product&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>common.css.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="c1">//= require &quot;reset&quot;</span>
+</span><span class='line'><span class="c1">//= require &quot;base&quot;</span>
+</span><span class='line'><span class="c1">//= require &quot;product&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這兩個在 asset pipeline 輸出結果是一樣的。但後者會比前者快。</p>
+
+<p>如果真的需要用到非得使用 partial 的技巧（如需讀變數用 require 讀不到，@import 才讀得到）再使用即可，因為只要一牽涉到directory recursive compile 就會慢…</p>
+
+<h2>3. don&#8217;t require .scss &amp; .coffee for no reason</h2>
+
+<h3>避免使用 require_tree</h3>
+
+<p>使用 generator 產生 controller 時，rails 會自動幫忙產生</p>
+
+<ul>
+<li>product.css.scss</li>
+<li>product.js.coffee</li>
+</ul>
+
+
+<p>然後 application.css 與 application.js 會利用</p>
+
+<figure class='code'><figcaption><span>application.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//=</span> <span class="nt">require_tree</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這種技巧來把這些檔案掛上去。</p>
+
+<p>但是你知道嗎？就算這些檔案裡面只寫了這幾行注解：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># Place all the behaviors and hooks related to the matching controller here.</span>
+</span><span class='line'><span class="c1"># All this logic will automatically be available in application.js.</span>
+</span><span class='line'><span class="c1"># You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而且實際執行結果也等於空輸出。compile 一支大概也要 250ms。你可以想想，多 compile 10 支，就是 2.5 秒了。難怪超耗時。</p>
+
+<h3>可以使用 .js 或 .css 解決的不要用 .scss 與 .coffee 當結尾</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Compiled jquery-ui-1.8.16.custom.css (0ms) (pid 19108)
+</span><span class='line'>Compiled jquery.ui.1.8.16.ie.css (0ms) (pid 19108)
+</span><span class='line'>Compiled jquery.js (5ms) (pid 19108)
+</span><span class='line'>Compiled jquery_ujs.js (0ms) (pid 19108)
+</span><span class='line'>Compiled custom.css (14ms) (pid 19108)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中 custom.css 的檔名是 custom.css.scss</p>
+
+<p>這樣應該知道為什麼不要亂用 scss 當檔名了吧？</p>
+
+<h2>小結</h2>
+
+<p>為了方便大家調整，我把具體加速 assets precompile 過程的步驟羅列在下面。</p>
+
+<h4>1. 換掉 deploy.rb 的 assets precompile tasks</h4>
+
+<h4>2. 觀察 logs/product.log。</h4>
+
+<ol>
+<li>找出慢的 assets。</li>
+<li>拿掉直接使用 import &#8220;comppass&#8221;; 的 SCSS，改用功能針對性寫法。</li>
+<li>不需要使用 @import 寫法的改用 require</li>
+<li>拿掉 require_tree，改用 //=require 一行一行掛上去</li>
+<li>刪掉空的 scss 與 coffeescript</li>
+<li>單純只是 CSS 的不要自作聰明幫忙加上 .scss 檔名。</li>
+</ol>
+
+
+<p>====</p>
+
+<p>如果有什麼問題，歡迎各位在底下留言討論。</p>
+
+<p>也歡迎大家有空來 <a href="http://www.meetup.com/Ruby-Taiwan-Group/">Rails Tuesday</a> 坐坐。我很樂意幫大家解答問題。</p>
+
+<p>P.S. 如果你是要問 <a href="http://rails-101.logdown.com">Rails 101</a> 書上的問題，請找小蟹。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1790,67 +2659,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/03/24/essential-rails-pattern-update/">Essential Rails Pattern 開始 Update</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-03-24T18:33:00+08:00" pubdate  data-updated="true" >Mar 24<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/03/24/essential-rails-pattern-update/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/03/24/essential-rails-pattern-update/" data-show-faces="false"></div></div>
-    
-    <p><a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">Essntial Rails Pattern</a> 這本書已經進入排版階段。</p>
-
-<p>各位已經購買的讀者，近期信箱應該會開始一直收到本書的 update。</p>
-
-<p>感謝你們一直以來的耐心等候。</p>
-
-<p>這本書絕對不會讓你們失望。</p>
-
-<p>===</p>
-
-<p>樣章
-線上<a href="https://www.dropbox.com/sh/ueha9xsjw6ybwye/JzNGR_VIr7/ERP-preview.pdf?dl=1">預覽</a>。</p>
-
-<p>目錄</p>
-
-<p>線上<a href="https://www.dropbox.com/sh/5hytcw56xcr86zk/f_Racu5xw3/ERP-toc.pdf?dl=1">預覽</a></p>
-
-<p>如果有任何書籍內容錯誤，和 Billing 上的問題，請透過<a href="http://xdite.wufoo.com/forms/ce-billing-support/">聯絡表單</a> 通知我，協助我改善產品。</p>
-
-<p>如果你有任何學習 Rails 上的問題，請不要害羞，直接上 <a href="http://ruby-taiwan.org">Ruby Taiwan Group</a> 詢問。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1885,6 +2693,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/08/12/startup-is-not-a-destination/">「創業」不是一個目的地</a>
       </li>
     
@@ -1900,15 +2712,11 @@
         <a href="/posts/2012/08/03/how-to-use-bootstrap-in-clean-way/">如何乾淨的 使用 / 修改 Bootstrap Framework</a>
       </li>
     
-      <li class="post">
-        <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/assetpipeline'>AssetPipeline (3)</a></li><li><a href='/blog/categories/boardgame'>BoardGame (1)</a></li><li><a href='/blog/categories/bookreviews'>BookReviews (4)</a></li><li><a href='/blog/categories/bootstrap'>Bootstrap (2)</a></li><li><a href='/blog/categories/coffeescript'>CoffeeScript (1)</a></li><li><a href='/blog/categories/css'>CSS (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/hosting'>Hosting (1)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/misc'>Misc (3)</a></li><li><a href='/blog/categories/mybook'>MyBook (5)</a></li><li><a href='/blog/categories/mycompany'>MyCompany (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/podcast'>Podcast (1)</a></li><li><a href='/blog/categories/projectmanagement'>ProjectManagement (6)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/railsconf'>RailsConf (3)</a></li><li><a href='/blog/categories/ruby'>Ruby (8)</a></li><li><a href='/blog/categories/rubygem'>Rubygem (9)</a></li><li><a href='/blog/categories/scss'>SCSS (3)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/seo'>SEO (1)</a></li><li><a href='/blog/categories/startup'>Startup (6)</a></li><li><a href='/blog/categories/tips'>Tips (16)</a></li><li><a href='/blog/categories/travel'>Travel (1)</a></li><li><a href='/blog/categories/webdesign'>WebDesign (5)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/assetpipeline'>AssetPipeline (3)</a></li><li><a href='/blog/categories/boardgame'>BoardGame (1)</a></li><li><a href='/blog/categories/bookreviews'>BookReviews (4)</a></li><li><a href='/blog/categories/bootstrap'>Bootstrap (2)</a></li><li><a href='/blog/categories/coffeescript'>CoffeeScript (1)</a></li><li><a href='/blog/categories/css'>CSS (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/hosting'>Hosting (1)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/misc'>Misc (3)</a></li><li><a href='/blog/categories/mybook'>MyBook (5)</a></li><li><a href='/blog/categories/mycompany'>MyCompany (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/podcast'>Podcast (1)</a></li><li><a href='/blog/categories/projectmanagement'>ProjectManagement (6)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/railsconf'>RailsConf (3)</a></li><li><a href='/blog/categories/ruby'>Ruby (8)</a></li><li><a href='/blog/categories/rubygem'>Rubygem (10)</a></li><li><a href='/blog/categories/scss'>SCSS (3)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/seo'>SEO (1)</a></li><li><a href='/blog/categories/startup'>Startup (6)</a></li><li><a href='/blog/categories/tips'>Tips (16)</a></li><li><a href='/blog/categories/travel'>Travel (1)</a></li><li><a href='/blog/categories/webdesign'>WebDesign (5)</a></li></ul>
 </section>
 
 <section id="popularthreads" class="dsq-widget">
