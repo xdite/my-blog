@@ -99,3 +99,8 @@ Pry 在短短一年間，已經默默的演化出一個龐大的生態圈，只�
 
 [Pry 的 wiki](https://github.com/pry/pry/wiki) 上有著相當大的相關資源，相當值得各位繼續探索下去…
 
+### 同場加映
+
+[rack-webconsole](https://github.com/mrbrdo/rack-webconsole) 一樣是 pry 的應用，可以在 webpage 裡面直接開 console 改東西…超酷的
+
+
