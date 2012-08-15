@@ -14,8 +14,6 @@ categories:
 
 * MySQL Indexing Best Practices: [影片連結](http://www.percona.tv/percona-webinars/mysql-indexing-best-practices)、[投影片連結](http://www.percona.com/files/presentations/WEBINAR-MySQL-Indexing-Best-Practices.pdf)
 
-裡面內容講的還蠻棒的。
-
-教了不少讓開發者判斷 Index 如何下、下得好不好的準則…
+內容講的蠻紮實。教了不少讓開發者判斷 Index 如何下、下得好不好的準則…
 
 有時間應該整理成講義的…
