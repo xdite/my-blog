@@ -12,7 +12,7 @@ categories:
 
 大概半小時後系統通知影片和 slide 在 <http://percona.tv> 已經可以抓了…
 
-* MySQL Indexing Best Practices: [影片連結](http://www.percona.tv/percona-webinars/mysql-indexing-best-practices)、[投影片](http://www.percona.com/files/presentations/WEBINAR-MySQL-Indexing-Best-Practices.pdf)
+* MySQL Indexing Best Practices: [影片連結](http://www.percona.tv/percona-webinars/mysql-indexing-best-practices)、[投影片連結](http://www.percona.com/files/presentations/WEBINAR-MySQL-Indexing-Best-Practices.pdf)
 
 裡面內容講的還蠻棒的。
 
