@@ -17,3 +17,7 @@ categories:
 內容講的蠻紮實。教了不少讓開發者判斷 Index 如何下、下得好不好的準則…
 
 有時間應該整理成講義的…
+
+===
+
+打完這篇要去睡之前，又在 twitter 上看到 confreaks 丟出了新的 pry 影片 <http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life>。（前幾天寫過的 [Pry ：新一代 Debug 利器](http://blog.xdite.net/posts/2012/08/12/pry-the-new-debugger/) )

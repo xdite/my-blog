@@ -103,4 +103,6 @@ Pry 在短短一年間，已經默默的演化出一個龐大的生態圈，只�
 
 [rack-webconsole](https://github.com/mrbrdo/rack-webconsole) 一樣是 pry 的應用，可以在 webpage 裡面直接開 console 改東西…超酷的
 
+### 追加
 
+Confreaks 最近又釋出了 Moutain West Ruby conf 的 Pry talk <http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life>
