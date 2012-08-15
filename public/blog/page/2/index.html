@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  Asset Pipeline 最讓人詬病的就是 deploy 時花費速度過久。在社群聚會時發現大家都對這個主題非常不熟。所以把最近累積了的這方面技巧整理出來分享給大家。1. Capistrano deployment speedup使用 capistrano...">
+  <meta name="description" content="                  前幾天貼了這一篇 3 招實用 Asset Pipeline 加速術。順便去 sass-rails 上面這個靠北 sass-rails 的 issue 回了一下 zurb/foundation 主要的問題…我觀察 foundation 原先慢的原因是：幾乎所有...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/07/13/speed-up-zurb-foundation/">Asset Pipeline 加速：以 Zurb Foundation 為例</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-13T03:28:00+08:00" pubdate  data-updated="true" >Jul 13<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/07/13/speed-up-zurb-foundation/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/" data-show-faces="false"></div></div>
+    
+    <p>前幾天貼了這一篇 <a href="http://blog.xdite.net/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>。</p>
+
+<p>順便去 <a href="https://github.com/rails/sass-rails/issues/67#issuecomment-6854291">sass-rails</a> 上面這個靠北 sass-rails 的 issue 回了一下 <a href="https://github.com/zurb/foundation">zurb/foundation</a> 主要的問題…</p>
+
+<p>我觀察 foundation 原先慢的原因是：幾乎所有的 library 都 <code>@import "base";</code>，然後 base 又 <code>@import "compass";</code>。所以導致只要 compile foundation 就無敵慢…</p>
+
+<p>不過不知道解掉這個問題可以實際上快多少。今天正打算抓下來 benchmark 時，就發現這篇靠么 zurb 的人應該收到了。他們 <a href="https://github.com/zurb/foundation/commit/b9c8d1d5ca29ceb89111084dfd530b68bfd65484">patch 掉</a>了，版本從 3.0.4 升到 3.0.5 。</p>
+
+<p>主要變更就是把原先 <code>@import "compass";</code> 改成 <code>@import "compass/css3";</code>。然後把所有的 <code>@import "base";</code> 拿掉。</p>
+
+<h2>Benchmark</h2>
+
+<p>我就開了一個空的 Rails。實際用手上的機器去測 compile 時間。</p>
+
+<h4>iMac i5 2010 mid 款 8GB ram</h4>
+
+<ul>
+<li>Compiled application.css  (9516ms)  (pid 41169) # 3.0.4</li>
+<li>Compiled application.css  (2300ms)  (pid 41483) # 3.0.5</li>
+</ul>
+
+
+<h4>Linode 4096</h4>
+
+<ul>
+<li>Compiled application.css  (12518ms)  (pid 12585) # 3.0.4</li>
+<li>Compiled application.css  (3201ms)  (pid 12853) # 3.0.5</li>
+</ul>
+
+
+<p>平均來說速度快了四倍&#8230;</p>
+
+<h2>結論</h2>
+
+<ul>
+<li>… 拜託不要偷懶直接用 <code>@import "compass";</code> 啊 XD</li>
+<li>太慢有時候可能是 SCSS Framework 的問題</li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2414,251 +2494,6 @@ I think you should use an
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/03/26/issue-tracking-project-management-agile/">為什麼必須使用 Issue Tracking System 管理專案？</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-03-26T03:14:00+08:00" pubdate  data-updated="true" >Mar 26<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/03/26/issue-tracking-project-management-agile/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/03/26/issue-tracking-project-management-agile/" data-show-faces="false"></div></div>
-    
-    <p>我在 <a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a> 提到了為了順利進行專案，一個好的專案管理系統絕對是必備的。</p>
-
-<p>專案管理系統背後運作的邏輯何在，就是這篇文章主要的重點。</p>
-
-<h2>What is issue tracking (project management) system ?</h2>
-
-<p>Issue Tracking system ，顧名思義就是<code>紀錄</code>、<code>追蹤</code> 問題的系統。<a href="http://www.bugzilla.org/">BugZilla</a>、<a href="trac.edgewall.org">Trac</a>、<a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://lighthouseapp.com/">lighthoustapp</a>、<a href="http://basecamp.com/">Basecamp</a> &#8230;等等這幾套軟體，都是知名的 Issue Tracking system。</p>
-
-<p>一套合格的 Issue Tracking system 的 Issue 至少要可以紀錄這些內容：</p>
-
-<ul>
-<li>Issue 的主題</li>
-<li>Issue 的內容</li>
-<li>Issue 現在的狀態 (新建立、已指派、已解決、已回應、已結束、已擱置…etc)</li>
-<li>Issue 優先權 (正常、重要、緊急、輕微、會擋路…etc.)</li>
-<li>Issue 發生日期</li>
-<li>Issue 希望解決日期</li>
-<li>Issue 實際解決日期</li>
-<li>Issue 被分派給誰</li>
-<li>Issue 的附件</li>
-<li>Isuue 的觀察者有誰</li>
-</ul>
-
-
-<h3>Project Management Tool</h3>
-
-<p>其中 <a href="http://www.redmine.org/">Redmine</a>、<a href="http://www.atlassian.com/software/jira/overview">JIRA</a>、<a href="http://basecamp.com/">Basecamp</a>  並不僅止是 Issue Tracking System，更精確的來說，它們應該被稱為「專案管理工具」。</p>
-
-<p>它們多半能夠提供以下作用：</p>
-
-<ul>
-<li>一個地方可以透明的列出所有需要被執行的項目 (Issue List)</li>
-<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
-<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且具有「permalink」、「權限控管」，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
-<li>可以 cross reference 或具有子票功能</li>
-<li>一個地方可以整理統合專案現在所有的相關資訊。( Wiki 功能)</li>
-<li>一個地方可以看到自己今天需要 Focus 進行哪些項目（Issue Personal Dashboard)</li>
-<li>一個地方能讓 Manager 可以看到自己的 Member 正在進行哪些項目，這些項目目前的狀態是什麼。（Issue Query)</li>
-</ul>
-
-
-<h2>背後運作的原理</h2>
-
-<p><a href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a> 這篇文章刊出後，得到不少的迴響。其中我看到的絕大多數的回應多是多半抱怨 PM 根本不稱職不盡責，只顧著畫規格，然後只按照自己寫出來的無法執行ㄉ的天才（？）規格的催進度。所謂的 M 不是 Management，而是 Magic。即使成員賣了命的加班，專案還是得不到好的結果：超時，品質粗糙，成本
-過高，scope 過大無法完成。</p>
-
-<p>在我進行開發軟體專案時，也發現所謂的其實絕對多數的 PM，其實職稱與進行的事務完全不合。它們的工作內容往往只有 Project Planning，應該被稱作是 Planner，而不是 Project Manager。</p>
-
-<p>一個軟體開發專案，最重要的變數有四：成本、品質、時間和規模。真正的 Project Management，是能夠準確 Manage 這四項變因，在可以接受的與變動差異下，完成整個專案，產出預期的成果。</p>
-
-<p>我認為 Project management tool 可以協助做到專案中以下幾項的管理：</p>
-
-<h3>規模管理</h3>
-
-<p>專案會無限膨脹，主要多半是因為規模的掌控不佳。而規模掌控不佳，時間和成本就會隨之膨脹。</p>
-
-<p>規模之所以膨脹，有幾個原因：</p>
-
-<ul>
-<li>沒有人知道，到底「總共」有多少事情需要完成。</li>
-<li>離目前的時間表，「還有」多少事情需要完成，還有多少時間可以用。這些事情裡面有沒有可以被「調整縮減」的餘地。</li>
-</ul>
-
-
-<hr>
-
-
-<p>所以，專案需要一個工具能提供以下功能：</p>
-
-<ul>
-<li>一個地方可以透明的列出所有需要被執行的項目 (Issue List)</li>
-<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
-<li>一個可以記載 內容，狀態、分派者、執行者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
-</ul>
-
-
-<h3>時間管理</h3>
-
-<p>一個專案中，最寶貴的資源是「時間」。什麼東西都可以用「錢」買到，唯獨時間不能。
-在專案中時間最容易被浪費的地方在：</p>
-
-<ul>
-<li>使用信件往來，交涉的互相等待時間。</li>
-<li>沒有被壓定「完成日期」，「詳細需求品質」的工作細項。（陷入不必要的完美，或者是悠哉的怠惰）</li>
-<li>不符合期待，修改的來回時間。（沒有達到良好溝通，導致方向錯誤）</li>
-<li>類似的事情，重複消耗資源。（沒有 SOP，每次都要花費一定以上的資源去解決）</li>
-</ul>
-
-
-<hr>
-
-
-<p>所以，專案需要一個工具能提供以下功能：</p>
-
-<ul>
-<li>一個可以記載 內容，狀態、優先權、預計完成日期、分派者、執行者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)
-
-<ul>
-<li>可以平行討論，而不是信件順序往來</li>
-<li>明確的完成時間</li>
-</ul>
-</li>
-<li>一個地方可以整理統合專案現在所有的相關資訊。( Wiki 功能)
-
-<ul>
-<li>提供專案相關的資訊以及 SOP</li>
-</ul>
-</li>
-</ul>
-
-
-<hr>
-
-
-<p>同時，專案最好能夠搭配舉行每日的 Standup Meeting，確保每個人正在進行的方向是正確的，以及確保專案資源沒有被浪費的跡象。</p>
-
-<h3>團隊工作管理</h3>
-
-<p>一個專案，成員至少會有兩人以上。兩個人以上，就會有溝通與工作協調安排的問題。專案的工作項目往往是有 related 的，少有獨支。
-比如說 Planner 沒有把規格寫完，RD 和 Art 就不太容易先動工。沒有把 Database schema 規劃好，後續就很難繼續開發程式。</p>
-
-<p>這也是專案當中最傷資源的狀況：優先權等級為：「block」票。因為 A 方沒有交付，導致 B 方不能交付，連帶導致 C 不能開始。</p>
-
-<p>而專案當中也有很多工作項目分別是「對最終專案目標很重要，但當下不重要」、「對當下 milestone 很重要，對最終目標沒那麼重要」，「只對合作同事很重要」&#8230;etc</p>
-
-<p>如果工作項目不能夠按照當下狀況調整正確的優先等級分派給團隊成員。就很容易會造成所有的人雖然很努力，整體工作效益卻非常低的情形。</p>
-
-<p>當然，不只是 Project Manager 需要知道全部的人今天要做什麼。而被分派到項目的成員，也需要能夠知道自己當天所需要執行的項目依序是哪些，按照優先狀況完成。如果優先狀況有錯誤，可以及早告知資源協調者 (Manager) 。</p>
-
-<hr>
-
-
-<p>所以，專案需要一個工具能提供以下功能：</p>
-
-<ul>
-<li>一個地方可以列出階段內需要被執行的項目 ( Issue Milestone )</li>
-<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
-<li>可以 cross reference 或具有子票功能</li>
-<li>一個地方可以看到自己今天需要 Focus 進行哪些項目（Issue Personal Dashboard)</li>
-<li>一個地方能讓 Manager 可以看到自己的 Member 正在進行哪些項目，這些項目目前的狀態是什麼。（Issue Query)</li>
-</ul>
-
-
-<h3>資源調配管理</h3>
-
-<p>Project Management，並不是在專案的一開始設下「完成時間」，切出所有「工作項目」，列出「完成目標」這麼簡單。隨著專案的進行，開始會有很多變因出現，造成資源不足，需求改變，規模追加，人力減少&#8230;等等的挑戰障礙出現。</p>
-
-<p>都在考驗著專案經理對於資源調配的管理能力。能不能在預定的時間、預定的預算、預定的人力資源內，如期完成當初設立的目標以及交付達到品質要求的產品。</p>
-
-<p>如果條件不允許，當下必須作出取捨、做出決定，而非死板的捍衛規則與命令。</p>
-
-<hr>
-
-
-<p>所以，專案需要一個工具能提供以下功能：</p>
-
-<ul>
-<li>一個地方可以列出階段內需要被執行的項目，並可以移動改變階段項目。 ( Issue Milestone )</li>
-<li>一個可以記載 內容，狀態、優先權、日期、分派者、觀察者，且讓大家可以討論執行項目細節的地方。(Issue Ticket)</li>
-</ul>
-
-
-<h2>Agile Method</h2>
-
-<p>若讀者對於專案管理有興趣的話，研究過一些「敏捷開發」的 method，不管是 XP、Scrum、Kanban&#8230;，你會發現到這些工作方法都在傳達幾件類似的事：</p>
-
-<ul>
-<li>專案必須透明，進行局勢一目了然</li>
-<li>專案要能拆分成可執行的階段</li>
-<li>溝通、溝通再溝通</li>
-<li>不斷的消除浪費</li>
-<li>不斷的 deliver</li>
-</ul>
-
-
-<p>而一個好的 Project Management Tool 能夠輔助專案具備以上的特徵。</p>
-
-<h2>小結</h2>
-
-<p>還是老話一句：真正的 Project Management，是要能夠準確管理，成本、品質、時間和規模這四項變因，在可以接受的與變動差異下，完成整個專案，產出預期的成果。</p>
-
-<p>「Project Manager」必須要做到的事，也就是要在動態的環境下，利用種種手段盡力讓這件事發生。</p>
-
-<p>所謂的「Project Management」其實可以用很科學的手段達成，因為事實上這本身就是一門科學。</p>
-
-<p>一般所謂的 PM 很常誤以為 Project Management 就是用 mail+excel、口頭分配任務，得到專案成員的口頭回覆，接著只要坐著回去發呆或無時無刻的跑到座位上催專案成員作事，整件事情就會發生。
-如果你真的一直這樣想，我想可能最後程式設計師可能做的事：就是直接用 shell script 換掉你。</p>
-
-<p>no kidding。</p>
-
-<h3>Thinkgeek : Go away or I will replace you with a very small shell script</h3>
-
-<p><a href="http://www.thinkgeek.com/tshirts-apparel/unisex/frustrations/374d/"><img src="http://www.thinkgeek.com/images/products/frontsquare/lg-go-away-tshirt.jpg" alt="Go away or I will replace you with a very small shell script"></a></p>
-
-<h2>推薦書單</h2>
-
-<p><a href="http://www.flickr.com/photos/xdite/7014948309/" title="Untitled by xdite, on Flickr"><img src="http://farm7.staticflickr.com/6091/7014948309_52e099ec27.jpg" width="375" height="500" alt=""></a></p>
-
-<p>＝＝＝＝</p>
-
-<h4>廣告：Essential Rails Pattern 開始 update 了</h4>
-
-<p><a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">Essntial Rails Pattern</a> 這本書已經進入排版階段。
-詳情請看<a href="http://blog.xdite.net/posts/2012/03/24/essential-rails-pattern-update/">這篇文章</a></p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -2693,6 +2528,10 @@ I think you should use an
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/08/16/mysql-index-best-practice/">MySQL Indexing Best Practices</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a>
       </li>
     
@@ -2706,10 +2545,6 @@ I think you should use an
     
       <li class="post">
         <a href="/posts/2012/08/09/recommended-the-newsroom/">[影集] 喚醒新聞界的良知 The Newsroom</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/08/03/how-to-use-bootstrap-in-clean-way/">如何乾淨的 使用 / 修改 Bootstrap Framework</a>
       </li>
     
   </ul>
