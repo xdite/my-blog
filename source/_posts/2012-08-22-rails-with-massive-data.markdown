@@ -118,7 +118,7 @@ Post Load (18.8ms)  SELECT `posts`.* FROM `posts` WHERE (id < 10)
 
 拉出 10 萬筆會發生什麼事呢？(炸)
 
-所以這也是我建議如果你不是要作複雜操作（高度 model 邏輯）的話，千萬別碰 ActiveRecord，因為你不會知道哪按下哪一顆核蛋按鈕。
+所以這也是我建議如果你沒有複雜操作（相依高度 model 邏輯）需要的話，千萬別碰 ActiveRecord，因為你不會知道會按下哪一顆核彈按鈕。
 
 ### 7. 使用 delegate
 
@@ -148,7 +148,7 @@ end
 
 使用 Rails 產生的 varchar，多半是 varchar(255)，很少有人會直接去改長度的。而且使用 Rails 直接打的 index，也就是全長的 index 打下去了。效率爛到炸掉。
 
-可以用 [index 可以指定只取前面 n chars](http://blog.gslin.org/archives/2012/07/17/2911/%e5%b0%8d-mysql-%e7%9a%84-varchar-%e6%ac%84%e4%bd%8d%e4%bd%bf%e7%94%a8-index-%e6%99%82%e5%8f%af%e4%bb%a5%e5%a2%9e%e5%8a%a0%e6%95%88%e7%8e%87%e7%9a%84%e6%96%b9%e6%b3%95/) 的方式增進效率
+可以用這招 [index 可以指定只取前面 n chars](http://blog.gslin.org/archives/2012/07/17/2911/%e5%b0%8d-mysql-%e7%9a%84-varchar-%e6%ac%84%e4%bd%8d%e4%bd%bf%e7%94%a8-index-%e6%99%82%e5%8f%af%e4%bb%a5%e5%a2%9e%e5%8a%a0%e6%95%88%e7%8e%87%e7%9a%84%e6%96%b9%e6%b3%95/) 的方式增進效率
 
 ```
 ALTER TABLE post DROP INDEX PTitle, ADD INDEX(PTitle(13));
@@ -160,7 +160,7 @@ Percona 前幾天也有一個 talk 是 [MySQL Indexing Best Practices](http://ww
 
 首先第一件事要分清楚 delete 和 destroy 有什麼不同。
 
-* destroy 刪除資料並 go trough callbacks
+* destroy 刪除資料並 go through callbacks
 * delete 刪除資料，不過任何 callbacks
 
 所以要刪除資料前，請確認你用的是「何種」刪除。

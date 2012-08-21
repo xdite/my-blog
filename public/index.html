@@ -243,7 +243,7 @@
 
 <p>拉出 10 萬筆會發生什麼事呢？(炸)</p>
 
-<p>所以這也是我建議如果你不是要作複雜操作（高度 model 邏輯）的話，千萬別碰 ActiveRecord，因為你不會知道哪按下哪一顆核蛋按鈕。</p>
+<p>所以這也是我建議如果你沒有複雜操作（相依高度 model 邏輯）需要的話，千萬別碰 ActiveRecord，因為你不會知道會按下哪一顆核彈按鈕。</p>
 
 <h3>7. 使用 delegate</h3>
 
@@ -284,7 +284,7 @@
 
 <p>使用 Rails 產生的 varchar，多半是 varchar(255)，很少有人會直接去改長度的。而且使用 Rails 直接打的 index，也就是全長的 index 打下去了。效率爛到炸掉。</p>
 
-<p>可以用 <a href="http://blog.gslin.org/archives/2012/07/17/2911/%e5%b0%8d-mysql-%e7%9a%84-varchar-%e6%ac%84%e4%bd%8d%e4%bd%bf%e7%94%a8-index-%e6%99%82%e5%8f%af%e4%bb%a5%e5%a2%9e%e5%8a%a0%e6%95%88%e7%8e%87%e7%9a%84%e6%96%b9%e6%b3%95/">index 可以指定只取前面 n chars</a> 的方式增進效率</p>
+<p>可以用這招 <a href="http://blog.gslin.org/archives/2012/07/17/2911/%e5%b0%8d-mysql-%e7%9a%84-varchar-%e6%ac%84%e4%bd%8d%e4%bd%bf%e7%94%a8-index-%e6%99%82%e5%8f%af%e4%bb%a5%e5%a2%9e%e5%8a%a0%e6%95%88%e7%8e%87%e7%9a%84%e6%96%b9%e6%b3%95/">index 可以指定只取前面 n chars</a> 的方式增進效率</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ALTER</span> <span class="no">TABLE</span> <span class="n">post</span> <span class="no">DROP</span> <span class="no">INDEX</span> <span class="no">PTitle</span><span class="p">,</span> <span class="no">ADD</span> <span class="no">INDEX</span><span class="p">(</span><span class="no">PTitle</span><span class="p">(</span><span class="mi">13</span><span class="p">));</span>
