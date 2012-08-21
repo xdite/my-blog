@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-08-22T00:52:15+08:00</updated>
+  <updated>2012-08-22T00:53:00+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -43,26 +43,28 @@
 
 <p>通常會出問題的 code 是長這樣的：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>posts = Post.where(:board_id =&gt; 5)
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:board_id</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>post.each do |post|
-</span><span class='line'>  post.board_id = 1
-</span><span class='line'>  post.save
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">board_id</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>這段 code 非常直觀，但會造成許多的問題。如果符合的條件有 10 萬筆，大概放著跑一天都跑不完&#8230;.</p>
 
 <p>先提供快速解法。Rails 提供了 <a href="http://apidock.com/rails/ActiveRecord/Base/update_all/class">update_all</a> 可以下。可以改成這樣</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Post.update_all({:board_id =&gt; 1}, {:board_id =&gt; 5})</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">update_all</span><span class="p">({</span><span class="ss">:board_id</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="ss">:board_id</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>基本上就是等於直接幫你下 update 的 SQL 啦。同樣資料量跑下去大概只要 10 秒秒以下左右吧。</p>
@@ -73,18 +75,19 @@
 
 <p>Rails 提供了 find_in_batches</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Post.find_in_batches(:conditions =&gt; "board_id = 5", :batch_size =&gt; 1000) do |posts|
-</span><span class='line'>  posts.each do |post|
-</span><span class='line'>    post.board_id = 1
-</span><span class='line'>    post.save
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">find_in_batches</span><span class="p">(</span><span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s2">&quot;board_id = 5&quot;</span><span class="p">,</span> <span class="ss">:batch_size</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">posts</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">posts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">board_id</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>如果沒下 batch_size 預設一次是拉 2000 筆。可以一次指定小一點的數目，如一次 500 筆去跑。</p>
@@ -93,15 +96,16 @@
 
 <p>打開 Rails 的 development.log，這樣的 LOG 應該對你不陌生。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   (0.3ms)  BEGIN
-</span><span class='line'>   (0.5ms)  COMMIT</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="n">ms</span><span class="p">)</span>  <span class="k">BEGIN</span>
+</span><span class='line'>   <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="no">COMMIT</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Rails 開發時，為了確保每比資料正確性，儲存的時候都會過一次 transaction，於是即使已經照 <code>3</code> 這樣的解法，還是要過 10 萬次 COMMIT BEGIN。很浪費時間。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -109,14 +113,15 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Post.find_in_batches(:conditions =&gt; "board_id = 5", :batch_size =&gt; 1000) do |posts|
-</span><span class='line'>  Post.transaction do 
-</span><span class='line'>    posts.each do |post|
-</span><span class='line'>      post.board_id = 1
-</span><span class='line'>      post.save
-</span><span class='line'>    end
-</span><span class='line'>  end 
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">find_in_batches</span><span class="p">(</span><span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s2">&quot;board_id = 5&quot;</span><span class="p">,</span> <span class="ss">:batch_size</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">posts</span><span class="o">|</span>
+</span><span class='line'>  <span class="no">Post</span><span class="o">.</span><span class="n">transaction</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">posts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">post</span><span class="o">.</span><span class="n">board_id</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="n">post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>如果你只是要 update 少量欄位，而且資料處於離線狀態，可以使用 <a href="http://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html">Transactions</a> 搭配 find_in_batches，做完兩千筆再一次 commit，而不是每次做完就 commit 一次，在資料量很大的狀況下也可以節省不少時間。</p>
