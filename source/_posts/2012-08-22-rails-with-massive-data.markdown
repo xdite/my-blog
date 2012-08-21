@@ -163,7 +163,7 @@ Percona 前幾天也有一個 talk 是 [MySQL Indexing Best Practices](http://ww
 * destroy 刪除資料並 go through callbacks
 * delete 刪除資料，不過任何 callbacks
 
-所以要刪除資料前，請確認你用的是「何種」刪除。
+所以要刪除資料前，請確認你用的是何種「刪除」。
 
 destroy_all 和 delete_all 也是類似的原則。
 

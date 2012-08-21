@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-08-22T00:54:32+08:00</updated>
+  <updated>2012-08-22T00:55:27+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -215,12 +215,12 @@
 <p>首先第一件事要分清楚 delete 和 destroy 有什麼不同。</p>
 
 <ul>
-<li>destroy 刪除資料並 go trough callbacks</li>
+<li>destroy 刪除資料並 go through callbacks</li>
 <li>delete 刪除資料，不過任何 callbacks</li>
 </ul>
 
 
-<p>所以要刪除資料前，請確認你用的是「何種」刪除。</p>
+<p>所以要刪除資料前，請確認你用的是何種「刪除」。</p>
 
 <p>destroy_all 和 delete_all 也是類似的原則。</p>
 
