@@ -120,7 +120,7 @@ Post Load (18.8ms)  SELECT `posts`.* FROM `posts` WHERE (id < 10)
 
 所以這也是我建議如果你沒有複雜操作（相依高度 model 邏輯）需要的話，千萬別碰 ActiveRecord，因為你不會知道會按下哪一顆核彈按鈕。
 
-### 7. 使用 delegate
+### 7. 使用 delegate 把大資料搬出去
 
 ActiveRecord 裡面有 delegate 這個 API。如果你嫌要 `Post.select("column 1, colum2").where` 這樣東閃西閃很麻煩，還是希望使用 `SELECT post.*`。那麼不妨可以換一個思路，把肥的 column 丟到另外一個 table，再用 delegate 接起來。
 
