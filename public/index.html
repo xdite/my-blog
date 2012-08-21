@@ -118,9 +118,9 @@
 
 <p>（但大多數開發者直覺都是會開 ActiveRecord 下了條件就直接跑迴圈，忘記 MySQL 是可以直接拿來下指令的）</p>
 
-<p>當然，沒有 ActiveRecord 這麼抽象化的工具，使用上會不直覺，下指令蠻很痛苦，我推薦使用 <a href="http://sequel.rubyforge.org/">sequel</a> 這套工具。</p>
+<p>當然，沒有 ActiveRecord 這麼抽象化的工具，下純指令也是蠻痛苦的一件事，我推薦可以換用 <a href="http://sequel.rubyforge.org/">sequel</a> 這套工具試看看。</p>
 
-<p>再者，我也建議避免使用避免用 ActiveRecord + 內建的 rake task 操作巨量資料。原因是，開發者會順帶會把整套的 Rails 環境都載進來跑，其慢無比是正常的…</p>
+<p>再者，在實務操作上我也建議避免使用 ActiveRecord + 內建的 rake task 操作巨量資料。原因是，開發者會順帶會把整套的 Rails 環境都載進來跑，其慢無比是正常的…</p>
 
 <h3>2. 有 update_all 可以用，少用 for / each。</h3>
 

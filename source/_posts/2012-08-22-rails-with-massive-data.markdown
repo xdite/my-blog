@@ -23,15 +23,15 @@ ActiveRecord 當初的設計目的是為了框架內「商業使用」。它的�
 
 （但大多數開發者直覺都是會開 ActiveRecord 下了條件就直接跑迴圈，忘記 MySQL 是可以直接拿來下指令的）
 
-當然，沒有 ActiveRecord 這麼抽象化的工具，使用上會不直覺，下指令蠻很痛苦，我推薦使用 [sequel](http://sequel.rubyforge.org/) 這套工具。
+當然，沒有 ActiveRecord 這麼抽象化的工具，下純指令也是蠻痛苦的一件事，我推薦可以換用 [sequel](http://sequel.rubyforge.org/) 這套工具試看看。
 
-再者，我也建議避免使用避免用 ActiveRecord + 內建的 rake task 操作巨量資料。原因是，開發者會順帶會把整套的 Rails 環境都載進來跑，其慢無比是正常的…
+再者，在實務操作上我也建議避免使用 ActiveRecord + 內建的 rake task 操作巨量資料。原因是，開發者會順帶會把整套的 Rails 環境都載進來跑，其慢無比是正常的…
 
 ### 2. 有 update_all 可以用，少用 for / each。
 
 通常會出問題的 code 是長這樣的：
 
-```
+``` ruby
 posts = Post.where(:board_id => 5)
 
 post.each do |post|
@@ -44,7 +44,7 @@ end
 
 先提供快速解法。Rails 提供了 [update_all](http://apidock.com/rails/ActiveRecord/Base/update_all/class) 可以下。可以改成這樣
 
-```
+``` ruby
 Post.update_all({:board_id => 1}, {:board_id => 5})
 ```
 
@@ -56,7 +56,7 @@ Post.update_all({:board_id => 1}, {:board_id => 5})
 
 Rails 提供了 find_in_batches 
 
-```
+``` ruby
 Post.find_in_batches(:conditions => "board_id = 5", :batch_size => 1000) do |posts|
   posts.each do |post|
     post.board_id = 1
@@ -78,7 +78,7 @@ end
 
 Rails 開發時，為了確保每比資料正確性，儲存的時候都會過一次 transaction，於是即使已經照 `3` 這樣的解法，還是要過 10 萬次 COMMIT BEGIN。很浪費時間。
 
-```
+``` ruby
 Post.find_in_batches(:conditions => "board_id = 5", :batch_size => 1000) do |posts|
   Post.transaction do 
     posts.each do |post|
