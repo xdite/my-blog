@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  這是我今天在 Ruby Tuesday #21 所寫的投影片。以下文章是寫投影片前已經擬好的草稿。可以配著服用Rails Developer 在使用內建工具開發網站時，若是由小做起，通常不會踩到這些雷。但是若一開始開站資料就預計會有 10 萬筆、甚至 100...">
+  <meta name="description" content="                  大概半個月之前（2012/ 8/13 前後），@dhh 釋出了一個有關於 cache 的 gem，叫做 cache_digests，並宣布此 gem 會成為 Rails 4 中的一部分。既然會是主體的一部分，想必這個 gem 解決的問題非常重要。但無奈 RE...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,251 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/09/02/cache-digest-new-strategy/">Cache_digests 最大化緩存策略</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-09-02T20:06:00+08:00" pubdate  data-updated="true" >Sep 2<span>nd</span>, 2012</time>
+        
+         | <a href="/posts/2012/09/02/cache-digest-new-strategy/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/" data-show-faces="false"></div></div>
+    
+    <p><a href="http://www.flickr.com/photos/ferguson666/3605271302/" title="Russian Dolls 097 by Louise...6661, on Flickr"><img src="http://farm3.staticflickr.com/2473/3605271302_0532598c8f.jpg" width="500" height="333" alt="Russian Dolls 097"></a></p>
+
+<p>大概半個月之前（2012/ 8/13 前後），<a href="http://twitter.com/dhh">@dhh</a> 釋出了一個有關於 cache 的 gem，叫做 <a href="https://github.com/rails/cache_digests">cache_digests</a>，並宣布此 gem 會成為 Rails 4 中的一部分。</p>
+
+<p>既然會是主體的一部分，想必這個 gem 解決的問題非常重要。但無奈 README 也非常簡略，看不出重要性在哪。還花了我一點時間在網路上找資料，把 DHH 想要表達的哲學拼出來&#8230;.</p>
+
+<h3>從 new Basecamp 改版談起</h3>
+
+<p>@dhh 的公司 <a href="http://37signals.com">37signals</a> 旗下最有名的產品 <a href="http://basecamp.com">Basecamp</a> 大概半年前改版了。與其說是改版，不如說是整個大重寫了。撇開使用性不談（好用度大幅提高），Website Performance 整體也大幅提升。</p>
+
+<p>37signals 在大概二月發表了一篇文章，談了這次的版本為什麼效能變得這麼好：</p>
+
+<h4>1. Turn to JavaScript Applicaton</h4>
+
+<p>眾所皆知（?）的這次的改寫重點是在 JavaScript 上，整個 codebase 中CoffeScript 與 Ruby 的比例到達了 1:1 之譜。也就是 new Basecamp 實質上是個「JavaScript Application」。另外再利用 Stacker (advanced puhState-based engine for sheets) 大幅降低 HTTP requests。</p>
+
+<h4>2. Cache TO THE MAX: Russian Doll cache stratgy</h4>
+
+<p>雖然 new Basecamp 已經是個 「JavaScript Application」。但有個問題還是存在，身為 backend 的 Rails App 在 render Basecamp 的邏輯時，速度還是不夠快。於是他們採用「Russian Doll」的 Cache Strategy 把能 Cache 的部分擴展到上限…</p>
+
+<h3>Russian Doll cache strategy</h3>
+
+<p>如名所示，Russian Doll strategy，就是使用層層 cache 嵌套的策略。</p>
+
+<p><img src="http://s3.amazonaws.com/37assets/svn/777-russian-doll-caching-1.png" alt="image" /></p>
+
+<p>這一張圖片的背後 code 會是這樣的寫法：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@project</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  aaa</span>
+</span><span class='line'><span class="sx">  &lt;% cache @todo do %&gt;</span>
+</span><span class='line'>    <span class="n">bbb</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">      ccc</span>
+</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再利用 Rails 內建 cache helper 使用 <code>"#{cache_key}/#{id}-#{timestamp}"</code> (<a href="http://apidock.com/rails/ActiveRecord/Base/cache_key">出處</a>) 的方式去實作 cache invalidation。如此一來，只要 object 被變更，cache 就會被刷新。</p>
+
+<p>但這招即使如此直觀，還是會遇到 invalidation 上的幾個問題。</p>
+
+<h4>1. 更新了 todolist，但是上層 class: todo 卻不知道…</h4>
+
+<p>todlist 更新了，所以 updated_at 會被更新。不過 todo 卻不知道 todolist 的更新，所以整塊並不會被更新。</p>
+
+<h5>解法：</h5>
+
+<p>不過解法容易。可以透過 <code>belongs_to :todo, :touch =&gt; true</code>，<code>belongs_to :product, :touch =&gt; true</code>。從最底部的 todolist，層層連鎖更新到最上層。</p>
+
+<h4>2. 更新了 code block，但 object 內容卻因為沒更新而不會 expire。</h4>
+
+<p>當我把 ccc 改成 zzz 時且打算 deploy 時，問題來了&#8230;。整套 cache 機制是基於 object 更新，而不是 code 更新。所以 cache 並不會 invalid….</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@project</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  aaa</span>
+</span><span class='line'><span class="sx">  &lt;% cache @todo do %&gt;</span>
+</span><span class='line'>    <span class="n">bbb</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">      zzz</span>
+</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>解法：</h5>
+
+<p>這邊有另外一個寫法可以閃過這個地雷，就是為這整段 code 加上版本號：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v15</span><span class="p">,</span><span class="vi">@project</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  aaa</span>
+</span><span class='line'><span class="sx">  &lt;% cache [v10,@todo] do %&gt;</span>
+</span><span class='line'>    <span class="n">bbb</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">      zzz</span>
+</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果我要將 todolist block 那塊更新，要強制 invalid，我可以把 <code>v45</code> 改成 <code>v46</code>。這樣就更新了。</p>
+
+<p>不過如果這一塊 view 上面還有外層 cache 嵌套，<code>v10</code> 要跟著變成 <code>v11</code>，<code>v15</code> 要跟著變成 <code>v16</code>。</p>
+
+<p>有點麻煩了…</p>
+
+<p>但這還不是最糟糕的…</p>
+
+<h4>3. cache 的部分散落在 partial 裡面，版本號更新不易</h4>
+
+<p>改版本號麻煩但還算可以接受。但這只限於都在同一張 view 裡面的狀況。</p>
+
+<p>若是 cache 被放在 partial 裡面，被多個 view 引用呼叫，那就麻煩了…</p>
+
+<p><code>_todolist.html.erb</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  zzz</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>改版本號的手續就變成地獄了…。因為你永遠都會有忘記清掉的 view…</p>
+
+<p>解法：</p>
+
+<p>暫無。認命的改吧（？）</p>
+
+<h3>4. 逐漸冗長的 syntax 問題..</h3>
+
+<p>而使用版本號閃避 cache 還會造成，原本直觀的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">    zzz</span>
+</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>為了要 invalid cache 的問題，被迫使用 trick 去 bypass。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">    zzz</span>
+</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可不可以單純一點，我們寫 code 還是回到直觀的 <code>cache @object</code>，然後以上談到的這些問題都會自動解決？</p>
+
+<h3>cache_digests 就是這一切的答案：md5_of_this_view</h3>
+
+<p><a href="https://github.com/rails/cache_digests">cache_digests</a> 就是 DHH 解決這一切惱人問題的手段。</p>
+
+<p>而且解決策略也非常簡單，既然大家都在版本號上面 GGYY，那麼其實最快的方式就是 <strong>md5_of_this_view</strong> ！！！</p>
+
+<p><a href="https://github.com/rails/cache_digests">cache_digests</a> 允許開發者繼續使用這樣的 code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">    zzz</span>
+</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但！cache_digests 自動幫忙計算此 block 裡面的 code 產出的內容的 md5，以此 md5 作為 cache key，從而達到自動 invalid 的效果。</p>
+
+<p>同時，這個 gem 也會自動解決層層嵌套的 dependency 問題…</p>
+
+<h3>小結</h3>
+
+<p>這一個 gem 前前後後不到 150 行。卻解決了一個非常重要的 cache 問題，也難怪會變成 Rails 4 之後內建的功能。</p>
+
+<p>gem 雖然直觀。不過翻出這些前因後果還真是不簡單，在寫這篇文章的確也花了我花了一點時間去蒐集資料。從 37signals 釋出的一些小片段去把內容組出來。</p>
+
+<p>相關連結：</p>
+
+<ul>
+<li><a href="http://37signals.com/svn/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui">How Basecamp Next got to be so damn fast without using much client-side UI</a></li>
+<li><a href="http://37signals.com/svn/posts/3113-how-key-based-cache-expiration-works">How key-based cache expiration works</a></li>
+<li><a href="http://www.youtube.com/watch?v=FkLVl3gpJP4#t=33m30s">Evening on Backbone.js/Views w/ Q&amp;A with David Heinemeier Hansson</a></li>
+<li><a href="http://www.broadcastingadam.com/2012/07/advanced_caching_part_2-using_strategies/">Advanced Caching: Part 2 - Using Caching Strategies</a></li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1505,244 +1750,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-07-30T12:07:00+08:00" pubdate  data-updated="true" >Jul 30<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/" data-show-faces="false"></div></div>
-    
-    <h2>使用Cancan 的限制：RESTful controller （resource）</h2>
-
-<p>一般新進開發者會被  cancan 這兩個 API 搞得七葷八素：<code>load_and_authorize_resource</code>、<code>authorize_resource</code>。</p>
-
-<p>這是因為 cancan 並沒有明顯的在 README 上做出說明：<strong>cancan 在使用上是有架構的限制</strong>：</p>
-
-<h4>* 必須為 RESTful resource</h4>
-
-<p>（cancan 直接假設了你一定使用 RESTful，畢竟這年頭誰還在寫 non-RESTful …?）</p>
-
-<h4>* resource 必須與 Controller 同名</h4>
-
-<p>（@article 與 ArticlesController）</p>
-
-<p>使用過 cancan 的人，大概都「猜到」規則好像是這樣？</p>
-
-<p>其實不必猜，<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_resource.rb">source code</a> 裡面就寫的很清楚。</p>
-
-<h3>load_and_authorize_resource</h3>
-
-<p>load_and_authorized_resource 做了兩件事：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">load_and_authorize_resource</span>
-</span><span class='line'>      <span class="n">load_resource</span>
-</span><span class='line'>      <span class="n">authorize_resource</span>
-</span><span class='line'>    <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<ul>
-<li>load_resource</li>
-<li>authorize_resource</li>
-</ul>
-
-
-<p>load_resource 作什麼呢？: loard_resource => load_resource_instance</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">load_resource_instance</span>
-</span><span class='line'>  <span class="k">if</span> <span class="o">!</span><span class="n">parent?</span> <span class="o">&amp;&amp;</span> <span class="n">new_actions</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="vi">@params</span><span class="o">[</span><span class="ss">:action</span><span class="o">].</span><span class="n">to_sym</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">build_resource</span>
-</span><span class='line'>  <span class="k">elsif</span> <span class="n">id_param</span> <span class="o">||</span> <span class="vi">@options</span><span class="o">[</span><span class="ss">:singleton</span><span class="o">]</span>
-</span><span class='line'>    <span class="n">find_resource</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>okay，這段的作用等於如果你在 Controller 裡面下了 load_resource，cancan 會<strong>自作聰明</strong>的幫你 <strong>自動</strong> 在每一個 action 塞一個 instance 下去</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">lass</span> <span class="no">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">load_resource</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
-</span><span class='line'>    <span class="c1"># @article is already loaded</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>如果是 new 這個 action，效果會等於</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">new</span>
-</span><span class='line'>     <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>   <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果是 show 這個 action，效果會等於</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="k">def</span> <span class="nf">show</span>
-</span><span class='line'>     <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>   <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>有好處也有壞處，好處是…你不需要自己打一行 code，壞處就是不熟 cancan 的人，找不到 @article 在哪裡會驚慌失措…</p>
-
-<p><code>load_resource</code> 還有一些其他進階用法，在 <a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_additions.rb">controller_additions.rb</a> 裡面有不少說明&#8230;</p>
-
-<h3>authorize_resource</h3>
-
-<p>authorize_resource 就是對 resource 判斷權限（根據 CanCan::Ability 裡的權限表）。</p>
-
-<p>而這個 resource 必定是與同名的 instance。</p>
-
-<p>如果是 ArticlesController 對應的必然是 @article。</p>
-
-<p>但是你會想說這樣慘了？萬一我在 ArticlesController 裡面要用 @post 怎麼辦呢？</p>
-
-<p>你可以在 controller 裡面指定 resource instance 的 name 要用什麼名字: <code>authorize_resource :post</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">lass</span> <span class="no">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">authorize_resource</span> <span class="ss">:post</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
-</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
-</span><span class='line'>    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Ability 裡面要這樣下</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span> <span class="no">Post</span>
-</span><span class='line'>  <span class="n">can</span> <span class="ss">:create</span><span class="p">,</span> <span class="no">Post</span>
-</span><span class='line'>  <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Post</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h3>resource 規則小結</h3>
-
-<p>所以 cancan 裡面的 resource 第一個會去吃 controller 的名稱當成 resource name，如果是 <code>ArticlesController</code>，instance 就會是 <code>@article</code>，而在 ability 裡面就會是 <code>can :read, Article</code>。這是在假設你已經使用同名設計 resource &amp; controller 的情況下。</p>
-
-<p>如果非同名。你可以做出指定：<code>authorize_resource :post</code>，雖然是 ArticlesController，但是這一組的 resource 名稱為 <code>post</code>，所以 instance 就會是 <code>@post</code>，而在 ability 裡面就會是 <code>can :read, Post</code>。</p>
-
-<p>一般開發者常會誤會的是</p>
-
-<ul>
-<li>ability 會綁到 model，實際上不是</li>
-<li>controller 名稱要與 @instance 名稱相同，實際上不一定</li>
-<li>@instance 要與 model 同名，實際上不用</li>
-<li>ability 吃的應該是 controller name，實際上不一定（吃的是 resource name，且可以被指定）。</li>
-</ul>
-
-
-<p>Cancan 吃的是 resource，而且自作聰明的假設了大家「應該」都同名，而且 README example 也是使用「同名」，才會造成了這麼多的誤解…</p>
-
-<p>如果你有更多疑問，可以直接看 source code 裡面的 這一支<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_resource.rb">controller_resource.rb</a>，相信會讓你對整個架構更加的清楚&#8230;</p>
-
-<h2>小結</h2>
-
-<p>這一節解釋了開發者認為最難懂的 <code>load_and_authorize_resource</code>、<code>authorize_resource</code>。下一節我們要來講 ability 要如何設計…</p>
-
-<h2>系列連結</h2>
-
-<ul>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a></li>
-</ul>
-
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1775,6 +1782,10 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/09/02/cache-digest-new-strategy/">cache_digests 最大化緩存策略</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/08/22/rails-with-massive-data/">Rails-with-massive-data</a>
       </li>
     
@@ -1788,10 +1799,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
     
       <li class="post">
         <a href="/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/08/12/startup-is-not-a-destination/">「創業」不是一個目的地</a>
       </li>
     
   </ul>

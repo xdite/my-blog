@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>cache_digests 最大化緩存策略 - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          大概半個月之前（2012/ 8/13 前後），@dhh 釋出了一個有關於 cache 的 gem，叫做 cache_digests，並宣布此 gem 會成為 Rails 4 中的一部分。既然會是主體的一部分，想必這個 gem 解決的問題非常重要。但無奈 README 也非常...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+-->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Cache_digests 最大化緩存策略</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-09-02T20:06:00+08:00" pubdate  data-updated="true" >Sep 2<span>nd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <p><a href="http://www.flickr.com/photos/ferguson666/3605271302/" title="Russian Dolls 097 by Louise...6661, on Flickr"><img src="http://farm3.staticflickr.com/2473/3605271302_0532598c8f.jpg" width="500" height="333" alt="Russian Dolls 097"></a></p>
+
+<p>大概半個月之前（2012/ 8/13 前後），<a href="http://twitter.com/dhh">@dhh</a> 釋出了一個有關於 cache 的 gem，叫做 <a href="https://github.com/rails/cache_digests">cache_digests</a>，並宣布此 gem 會成為 Rails 4 中的一部分。</p>
+
+<p>既然會是主體的一部分，想必這個 gem 解決的問題非常重要。但無奈 README 也非常簡略，看不出重要性在哪。還花了我一點時間在網路上找資料，把 DHH 想要表達的哲學拼出來&#8230;.</p>
+
+<h3>從 new Basecamp 改版談起</h3>
+
+<p>@dhh 的公司 <a href="http://37signals.com">37signals</a> 旗下最有名的產品 <a href="http://basecamp.com">Basecamp</a> 大概半年前改版了。與其說是改版，不如說是整個大重寫了。撇開使用性不談（好用度大幅提高），Website Performance 整體也大幅提升。</p>
+
+<p>37signals 在大概二月發表了一篇文章，談了這次的版本為什麼效能變得這麼好：</p>
+
+<h4>1. Turn to JavaScript Applicaton</h4>
+
+<p>眾所皆知（?）的這次的改寫重點是在 JavaScript 上，整個 codebase 中CoffeScript 與 Ruby 的比例到達了 1:1 之譜。也就是 new Basecamp 實質上是個「JavaScript Application」。另外再利用 Stacker (advanced puhState-based engine for sheets) 大幅降低 HTTP requests。</p>
+
+<h4>2. Cache TO THE MAX: Russian Doll cache stratgy</h4>
+
+<p>雖然 new Basecamp 已經是個 「JavaScript Application」。但有個問題還是存在，身為 backend 的 Rails App 在 render Basecamp 的邏輯時，速度還是不夠快。於是他們採用「Russian Doll」的 Cache Strategy 把能 Cache 的部分擴展到上限…</p>
+
+<h3>Russian Doll cache strategy</h3>
+
+<p>如名所示，Russian Doll strategy，就是使用層層 cache 嵌套的策略。</p>
+
+<p><img src="http://s3.amazonaws.com/37assets/svn/777-russian-doll-caching-1.png" alt="image" /></p>
+
+<p>這一張圖片的背後 code 會是這樣的寫法：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@project</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  aaa</span>
+</span><span class='line'><span class="sx">  &lt;% cache @todo do %&gt;</span>
+</span><span class='line'>    <span class="n">bbb</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">      ccc</span>
+</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再利用 Rails 內建 cache helper 使用 <code>"#{cache_key}/#{id}-#{timestamp}"</code> (<a href="http://apidock.com/rails/ActiveRecord/Base/cache_key">出處</a>) 的方式去實作 cache invalidation。如此一來，只要 object 被變更，cache 就會被刷新。</p>
+
+<p>但這招即使如此直觀，還是會遇到 invalidation 上的幾個問題。</p>
+
+<h4>1. 更新了 todolist，但是上層 class: todo 卻不知道…</h4>
+
+<p>todlist 更新了，所以 updated_at 會被更新。不過 todo 卻不知道 todolist 的更新，所以整塊並不會被更新。</p>
+
+<h5>解法：</h5>
+
+<p>不過解法容易。可以透過 <code>belongs_to :todo, :touch =&gt; true</code>，<code>belongs_to :product, :touch =&gt; true</code>。從最底部的 todolist，層層連鎖更新到最上層。</p>
+
+<h4>2. 更新了 code block，但 object 內容卻因為沒更新而不會 expire。</h4>
+
+<p>當我把 ccc 改成 zzz 時且打算 deploy 時，問題來了&#8230;。整套 cache 機制是基於 object 更新，而不是 code 更新。所以 cache 並不會 invalid….</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@project</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  aaa</span>
+</span><span class='line'><span class="sx">  &lt;% cache @todo do %&gt;</span>
+</span><span class='line'>    <span class="n">bbb</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">      zzz</span>
+</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>解法：</h5>
+
+<p>這邊有另外一個寫法可以閃過這個地雷，就是為這整段 code 加上版本號：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v15</span><span class="p">,</span><span class="vi">@project</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  aaa</span>
+</span><span class='line'><span class="sx">  &lt;% cache [v10,@todo] do %&gt;</span>
+</span><span class='line'>    <span class="n">bbb</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">      zzz</span>
+</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果我要將 todolist block 那塊更新，要強制 invalid，我可以把 <code>v45</code> 改成 <code>v46</code>。這樣就更新了。</p>
+
+<p>不過如果這一塊 view 上面還有外層 cache 嵌套，<code>v10</code> 要跟著變成 <code>v11</code>，<code>v15</code> 要跟著變成 <code>v16</code>。</p>
+
+<p>有點麻煩了…</p>
+
+<p>但這還不是最糟糕的…</p>
+
+<h4>3. cache 的部分散落在 partial 裡面，版本號更新不易</h4>
+
+<p>改版本號麻煩但還算可以接受。但這只限於都在同一張 view 裡面的狀況。</p>
+
+<p>若是 cache 被放在 partial 裡面，被多個 view 引用呼叫，那就麻煩了…</p>
+
+<p><code>_todolist.html.erb</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  zzz</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>改版本號的手續就變成地獄了…。因為你永遠都會有忘記清掉的 view…</p>
+
+<p>解法：</p>
+
+<p>暫無。認命的改吧（？）</p>
+
+<h3>4. 逐漸冗長的 syntax 問題..</h3>
+
+<p>而使用版本號閃避 cache 還會造成，原本直觀的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">    zzz</span>
+</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>為了要 invalid cache 的問題，被迫使用 trick 去 bypass。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">    zzz</span>
+</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可不可以單純一點，我們寫 code 還是回到直觀的 <code>cache @object</code>，然後以上談到的這些問題都會自動解決？</p>
+
+<h3>cache_digests 就是這一切的答案：md5_of_this_view</h3>
+
+<p><a href="https://github.com/rails/cache_digests">cache_digests</a> 就是 DHH 解決這一切惱人問題的手段。</p>
+
+<p>而且解決策略也非常簡單，既然大家都在版本號上面 GGYY，那麼其實最快的方式就是 <strong>md5_of_this_view</strong> ！！！</p>
+
+<p><a href="https://github.com/rails/cache_digests">cache_digests</a> 允許開發者繼續使用這樣的 code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">    zzz</span>
+</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但！cache_digests 自動幫忙計算此 block 裡面的 code 產出的內容的 md5，以此 md5 作為 cache key，從而達到自動 invalid 的效果。</p>
+
+<p>同時，這個 gem 也會自動解決層層嵌套的 dependency 問題…</p>
+
+<h3>小結</h3>
+
+<p>這一個 gem 前前後後不到 150 行。卻解決了一個非常重要的 cache 問題，也難怪會變成 Rails 4 之後內建的功能。</p>
+
+<p>gem 雖然直觀。不過翻出這些前因後果還真是不簡單，在寫這篇文章的確也花了我花了一點時間去蒐集資料。從 37signals 釋出的一些小片段去把內容組出來。</p>
+
+<p>相關連結：</p>
+
+<ul>
+<li><a href="http://37signals.com/svn/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui">How Basecamp Next got to be so damn fast without using much client-side UI</a></li>
+<li><a href="http://37signals.com/svn/posts/3113-how-key-based-cache-expiration-works">How key-based cache expiration works</a></li>
+<li><a href="http://www.youtube.com/watch?v=FkLVl3gpJP4#t=33m30s">Evening on Backbone.js/Views w/ Q&amp;A with David Heinemeier Hansson</a></li>
+<li><a href="http://www.broadcastingadam.com/2012/07/advanced_caching_part_2-using_strategies/">Advanced Caching: Part 2 - Using Caching Strategies</a></li>
+</ul>
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-09-02T20:06:00+08:00" pubdate  data-updated="true" >Sep 2<span>nd</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/09/02/cache-digest-new-strategy/">cache_digests 最大化緩存策略</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/08/22/rails-with-massive-data/">Rails-with-massive-data</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/08/18/recruiting-team-member/">Startup 別「找人」來上班，請「徵人」來上班</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/08/16/mysql-index-best-practice/">MySQL Indexing Best Practices</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

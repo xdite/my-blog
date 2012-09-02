@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  一兩個禮拜之前因為太累，我回家時忘記把 iPhone 4S 從牛仔褲掏出來。洗完澡之後就恍神直接把髒衣服拿去洗衣機直接洗了。一兩個小時，等我回神過來之後，要幫手機充電，才發現手機已經躺在洗衣機裡面被洗得亮晶晶了。這還不夠，手機還是在開機狀態進去洗的，跟一般只...">
+  <meta name="description" content="                  Hi, 各位讀者好。因為 Apple 一直在改變 XCode 的編譯套件位置，所以 Rails 101 內附的裝機實務已經過期了。我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。不過因為裝機實務這個步驟比...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/03/07/rail-101-install-practice/">Rail 101 裝機實務以及改版通知</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-03-07T17:01:00+08:00" pubdate  data-updated="true" >Mar 7<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/03/07/rail-101-install-practice/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/" data-show-faces="false"></div></div>
+    
+    <p>Hi, 各位讀者好。</p>
+
+<p>因為 Apple 一直在改變 XCode 的編譯套件位置，所以 <a href="http://rails-101.logdown.com">Rails 101</a> 內附的裝機實務已經過期了。</p>
+
+<p>我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。</p>
+
+<p>不過因為裝機實務這個步驟比較會卡到大家，所以我先放這個章節: <a href="/mac-lion-xcode-ruby-rails-192/">Rails on Mac 安裝最佳實務</a> 出來給大家使用。</p>
+
+<p>若您在裝機上還碰到什麼問題，請至 <a href="http://ruby-taiwan.org/">Ruby Taiwan Group</a> 上面回報。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1651,185 +1701,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/01/29/cycle-and-nth-child/">Rails 的 Cycle Helper 以及 CSS 中的 Nth-child</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-29T00:03:00+08:00" pubdate  data-updated="true" >Jan 29<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/01/29/cycle-and-nth-child/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/29/cycle-and-nth-child/" data-show-faces="false"></div></div>
-    
-    <p>在設計需要顏色循環的表格時你會怎麼作？</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6776490237/" title="table by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7157/6776490237_b2418f359b.jpg" width="500" height="146" alt="table"></a></p>
-
-<h2>Rails</h2>
-
-<h3>初入門者</h3>
-
-<h4>使用兩種不同 HTML class : even 與 odd，上不同的顏色</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% count </span><span class="o">=</span> <span class="mi">0</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">&lt;table&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% if count % 2 == 0 %&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% css_class </span><span class="o">=</span> <span class="s2">&quot;even &quot;</span><span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% else %&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% css_class </span><span class="o">=</span> <span class="s2">&quot;odd&quot;</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">tr</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;&lt;%= css_class %&gt;&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="n">item</span><span class="o">&lt;</span><span class="sr">/td&gt;</span>
-</span><span class='line'><span class="sr">  &lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% count </span><span class="o">+=</span> <span class="mi">1</span><span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sr">/table&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>懂一點 Ruby</h3>
-
-<h4>Ruby 裡面有 each_with_index，不需要在外部宣告 count</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each_with_index </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="p">,</span> <span class="n">index</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% if index % 2 == 0 %&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% css_class </span><span class="o">=</span> <span class="s2">&quot;even &quot;</span><span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% else %&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% css_class </span><span class="o">=</span> <span class="s2">&quot;odd&quot;</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">tr</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;&lt;%= css_class %&gt;&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="n">item</span><span class="o">&lt;</span><span class="sr">/td&gt;</span>
-</span><span class='line'><span class="sr">  &lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% end %&gt;</span>
-</span><span class='line'><span class="sx">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>熟 Rails Helper</h3>
-
-<h4>Rails 有 <a href="http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html#method-i-cycle">cycle</a> 這個 helper，可以做出循環效果</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;tr class=&quot;&lt;%= cycle(&quot;odd&quot;, &quot;even&quot;) %&gt;</span><span class="s2">&quot;&gt;</span>
-</span><span class='line'><span class="s2">    &lt;td&gt;item&lt;/td&gt;</span>
-</span><span class='line'><span class="s2">  &lt;/tr&gt;</span>
-</span><span class='line'><span class="s2">&lt;% end %&gt;</span>
-</span><span class='line'><span class="s2">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>熟 CSS</h3>
-
-<h4>使用 pseudo class 中的 <a href="http://reference.sitepoint.com/css/pseudoclass-nthchild">nth-child</a></h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;tr&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="n">item</span><span class="o">&lt;</span><span class="sr">/td&gt;</span>
-</span><span class='line'><span class="sr">  &lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% end %&gt;</span>
-</span><span class='line'><span class="sx">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>用法：<code>:nth-child(an+b)</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">tr</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">2n</span><span class="o">+</span><span class="nt">1</span><span class="o">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#ccc</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nt">tr</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">2n</span><span class="o">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#000</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>小結</h2>
-
-<p>快改用 nth-child，不要繼續在 class 裡面寫 even, odd, one, two, three 了 XD</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1864,6 +1735,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/09/02/cache-digest-new-strategy/">cache_digests 最大化緩存策略</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/08/22/rails-with-massive-data/">Rails-with-massive-data</a>
       </li>
     
@@ -1877,10 +1752,6 @@
     
       <li class="post">
         <a href="/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/08/12/startup-is-not-a-destination/">「創業」不是一個目的地</a>
       </li>
     
   </ul>
