@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "cache_digests 最大化緩存策略"
+title: "Cache Digests 最大化緩存策略"
 date: 2012-09-02 20:06
 comments: true
 categories: 
