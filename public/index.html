@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  大概半個月之前（2012/ 8/13 前後），@dhh 釋出了一個有關於 cache 的 gem，叫做 cache_digests，並宣布此 gem 會成為 Rails 4 中的一部分。既然會是主體的一部分，想必這個 gem 解決的問題非常重要。但無奈 RE...">
+  <meta name="description" content="                  這是前陣子在 LongStarRubyConf 2012 上複習一些主題時，無意中翻到的一份宣言。這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :Millions of Apps Deployed: Wha...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,141 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/09/03/12-factor-app/">Tweleve-Factor App 宣言（開發者必看）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-09-03T12:56:00+08:00" pubdate  data-updated="true" >Sep 3<span>rd</span>, 2012</time>
+        
+         | <a href="/posts/2012/09/03/12-factor-app/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/09/03/12-factor-app/" data-show-faces="false"></div></div>
+    
+    <p>這是前陣子在 <a href="http://www.lonestarrubyconf.com/">LongStarRubyConf 2012</a> 上複習一些主題時，無意中翻到的一份宣言。</p>
+
+<p>這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :<a href="https://speakerdeck.com/u/schneems/p/millions-of-apps-deployed-presented-at-lsrc">Millions of Apps Deployed: What We&#8217;ve Learned</a> 裡面翻到的。（不是很多人關注到。這份投影片我看到時才 100 Views 左右）</p>
+
+<script async class="speakerdeck-embed" data-id="50254cb6af597c0002005bf3" data-ratio="1.3333333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>這篇投影片相當精彩，內容是從一份宣言 <a href="http://12factor.net">12factor.net</a> 出發。列舉了十二項構建 Service as Service 所需的方法主題，再以如何使用 Rails 及其 Ecosystem 搭建出 Tweleve-Factor App 宣言裡的需求條件為主旨展開。</p>
+
+<p>因為這份投影片的內容，其實我在兩三年前就想寫過系列文章，但因為是一份相當宏大且沒有邊界（就當時來看）的主題，因此一直遲遲無法完成。社群內有人能夠整理出來，覺得實在太棒了。</p>
+
+<p>不過我更好奇的是，若這能是一份非 Rails 為主軸的內容，影響層面應可以更大。念頭剛起，我就發現投影片的源頭出處 <a href="http://12factor.net">12factor.net</a> 的這份宣言原本就是 language-agnostic based 的。</p>
+
+<p>這麼宏大的主題，若是一個社群阿貓阿狗所寫，想必沒有說服力。但順著線索摸下去，我更發現 <a href="http://www.12factor.net/">The Tweleve-Factor App</a> 這份宣言的起草人不是別人，正是 <a href="http://heroku.com">Heroku</a> 的 Founder: Adam Wiggins。宣言的內容是他基於運營 Heroku 以來，公司經手過數十萬 Application 歸納出的結論。</p>
+
+<p>這份宣言在上禮拜已有人翻成簡體中文版 <a href="http://www.harmy.me/the-twelve-factor-app.html">The Twelve-Factor App</a>，我推薦各位絕對要去讀完&#8230;</p>
+
+<hr>
+
+
+<p>(以下轉錄中文簡介，並對用語酌量修改)</p>
+
+<h4>簡介</h4>
+
+<p>如今，軟體通常會作為一種服務來交付，它們被稱為網路應用程式，或「軟體即服務」（SaaS）。「十二因子應用程式」（12-Factor App）為構建如下的SaaS應用提供了方法論：</p>
+
+<p>使用標準化流程自動配置，從而使新的開發者花費最少的學習成本加入這個項目；
+和操作系統之間盡可能的劃清界限，在各個系統中提供最大的可移植性；
+適合部署在現代的雲計算平台，從而在服務器和系統管理方面節省資源；
+將開發環境和生產環境的差異降至最低，並使用持續交付實施敏捷開發；
+可以在工具、架構和開發流程不發生明顯變化的前提下實現擴展；
+這套理論適用於任意語言和後端服務（資料庫、Message Queue、Cache等）開發的應用程式。</p>
+
+<h4>背景</h4>
+
+<p>本文的貢獻者者參與過數以百計的應用程式的開發和部署，並通過Heroku平台間接見證了數十萬應用程式的開發，運作以及擴展的過程。</p>
+
+<p>本文綜合了我們關於SaaS應用幾乎所有的經驗和智慧，是開發此類應用的理想實踐標準，並特別關注於應用程式如何保持良性成長，開發者之間如何進行有效的代碼協作，以及如何避免軟件污染。</p>
+
+<p>我們的初衷是分享在現代軟體開發過程中發現的一些系統性問題，並加深對這些問題的認識。我們提供了討論這些問題時所需的共享詞彙，同時使用相關術語給出一套針對這些問題的廣義解決方案。本文格式的靈感來自於 Martin Fowler的書籍：<a href="http://books.google.com/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC">Patterns of Enterprise Application Architecture</a>，<a href="http://books.google.com/books/about/Refactoring.html?id=1MsETFPD3I0C">Refactoring</a>。</p>
+
+<h4>讀者應該是哪些人？</h4>
+
+<p>任何SaaS應用的開發人員。部署和管理此類應用的運維工程師。</p>
+
+<h4>The Twelve Factors</h4>
+
+<h5>I. Codebase</h5>
+
+<p>One codebase tracked in revision control, many deploys</p>
+
+<h5>II. Dependencies</h5>
+
+<p>Explicitly declare and isolate dependencies</p>
+
+<h5>III. Config</h5>
+
+<p>Store config in the environment</p>
+
+<h5>IV. Backing Services</h5>
+
+<p>Treat backing services as attached resources</p>
+
+<h5>V. Build, release, run</h5>
+
+<p>Strictly separate build and run stages</p>
+
+<h5>VI. Processes</h5>
+
+<p>Execute the app as one or more stateless processes</p>
+
+<h5>VII. Port binding</h5>
+
+<p>Export services via port binding</p>
+
+<h5>VIII. Concurrency</h5>
+
+<p>Scale out via the process model</p>
+
+<h5>IX. Disposability</h5>
+
+<p>Maximize robustness with fast startup and graceful shutdown</p>
+
+<h5>X. Dev/prod parity</h5>
+
+<p>Keep development, staging, and production as similar as possible</p>
+
+<h5>XI. Logs</h5>
+
+<p>Treat logs as event streams</p>
+
+<h5>XII. Admin processes</h5>
+
+<p>Run admin/management tasks as one-off processes</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1519,237 +1654,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-07-30T23:03:00+08:00" pubdate  data-updated="true" >Jul 30<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/" data-show-faces="false"></div></div>
-    
-    <h3>角色判斷 current_ability</h3>
-
-<p>這是一段普通的 <code>ability.rb</code> 權限範例 code。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Ability</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CanCan</span><span class="o">::</span><span class="no">Ability</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">blank?</span>
-</span><span class='line'>      <span class="c1"># not logged in</span>
-</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
-</span><span class='line'>      <span class="n">basic_read_only</span>
-</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
-</span><span class='line'>      <span class="c1"># admin</span>
-</span><span class='line'>      <span class="n">can</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">protected</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>一般開發者最有疑問的是 <code>def initialize(user)</code> 這一段程式碼中的 user 到底是怎麼來的？怎麼會沒頭沒尾的天外飛來一個 user，然後對這個 user 進行角色判斷就可以動了？</p>
-
-<p>這一段要追溯到&#8230;<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_additions.rb">lib/controller_additions.rb</a> 中的這一段 current_ability。</p>
-
-<p>cancan 裡面去判斷是否有權限的一直是 <code>current_abibilty</code>，而 <code>current_abibilty</code> initialize 的方式就是塞 current_user 進去。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">current_ability</span>
-</span><span class='line'>  <span class="vi">@current_ability</span> <span class="o">||=</span> <span class="o">::</span><span class="no">Ability</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>所以 <code>initialize(user)</code> 裡的 <code>if user.blank?</code> 其實就等於 <code>if current_user.blank?</code>（若沒登入）。</p>
-
-<p>這樣去解讀程式碼，看起來就好理解很多了…</p>
-
-<h3>權限類別解說 :manage, :all, ..etc.</h3>
-
-<p>cancan 裡面用了一堆自定義縮寫，如 <code>:manage</code>、<code>:read</code>、<code>:update</code>、<code>:all</code>，讓人不是很了解在做什麼。</p>
-
-<ul>
-<li>:manage: 是指這個 controller 內所有的 action</li>
-<li>:read : 指 :index 和 :show</li>
-<li>:update: 指 :edit 和 :update</li>
-<li>:destroy: 指 :destroy</li>
-<li>:create: 指 :new 和 :crate</li>
-</ul>
-
-
-<p>而 :all 是指所有 object (resource)</p>
-
-<p>當然，不只是 CRUD 的 method 才可以被列上去，如果你有其他非 RESTful 的 method 如 :search，也是可以寫上去..，只是要一條一條列上去，有點麻煩就是了。</p>
-
-<h4>組合技：alias_action</h4>
-
-<p>cancan 還提供了組合技，要是嫌原先的 :update, :read 這種組合包不夠用。還可以用 <code>alias_action</code> 自己另外再組。例如把 :update 和 :destroy 組成 :modify。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="n">alias_action</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="ss">:modify</span>
-</span><span class='line'>   <span class="n">can</span> <span class="ss">:modify</span><span class="p">,</span> <span class="no">Comment</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>組合技: 自訂 method</h4>
-
-<p>要是你嫌每個角色都要一條一條把權限列上去，超麻煩。可以把一些共通的權限包成 method。用疊加 method 上去的方式列舉。比如把基礎權限都包成 <code>basic_read_only</code>、<code>account_manager_only</code>, etc…</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h3>針對物件狀態控管</h3>
-
-<p>在 User story 中，使用者固然 <code>can :update, Topic</code>，但還是讓人覺得覺得哪裡有點怪怪的？</p>
-
-<p>是的。使用者應該只能編輯和修改屬於自己的文章，<code>can :update, Topic</code> 只有說使用者可以「修改文章」啊（等於可以修改所有文章） XD</p>
-
-<p>所以 <code>ability.rb</code> 就要這樣設計了</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
-</span><span class='line'>    <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">can</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
-</span><span class='line'>     <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>可以玩的更加進階：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">can</span> <span class="ss">:publish</span><span class="p">,</span> <span class="no">Post</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">(</span> <span class="n">post</span><span class="o">.</span><span class="n">draft?</span> <span class="o">||</span> <span class="n">post</span><span class="o">.</span><span class="n">submitted?</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">post</span><span class="o">.</span><span class="n">published?</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h2>其他</h2>
-
-<p>cancan 還有其他進階主題可以繼續探討，讀者可以自行研究：</p>
-
-<ul>
-<li><a href="https://github.com/ryanb/cancan/wiki/Nested-Resources">Nested Resources</a></li>
-<li><a href="https://github.com/ryanb/cancan/wiki/Exception-Handling">Exception Handling</a></li>
-<li><a href="https://github.com/ryanb/cancan/wiki/Ensure-Authorization">Ensure Authorization</a></li>
-</ul>
-
-
-<p>不過關於「難懂」和「難用」的部分，我想我應該講的差不多了…</p>
-
-<h2>小結</h2>
-
-<p>在寫這一系列文章時，我發現 cancan 的作者，其實把大部分的文件與範例，都寫在 lib/ 下的 RDOC 裡面了，光看 code comment 其實就可以瞭解大半流程。</p>
-
-<p>不過我覺得 cancan 讓人覺得難讀的最大原因，可能還是官方缺乏一個 example <code>ability.rb</code>，對於被隱藏的自動完成部分也缺乏解釋，所以才造成大家覺得 cancan 是個難用的 magic library。事實上如果你開始搞懂 cancan 怎麼撰寫的話，它是可以幫你把網站的權限 code 處理的非常漂亮又易懂的。</p>
-
-<p>這系列就寫到這邊，如果你對 cancan 還有什麼使用上的問題，歡迎到 <a href="http://www.meetup.com/Ruby-Taiwan-Group/">Rails Tuesday</a> 來找我討論。</p>
-
-<h2>系列連結</h2>
-
-<ul>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a></li>
-</ul>
-
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1782,6 +1686,10 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/09/03/12-factor-app/">Tweleve-Factor App 宣言（開發者必看）</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/09/02/cache-digest-new-strategy/">Cache Digests 最大化緩存策略</a>
       </li>
     
@@ -1795,10 +1703,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
     
       <li class="post">
         <a href="/posts/2012/08/16/mysql-index-best-practice/">MySQL Indexing Best Practices</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a>
       </li>
     
   </ul>

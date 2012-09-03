@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-09-02T21:36:43+08:00</updated>
+  <updated>2012-09-03T13:38:15+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tweleve-Factor App 宣言（開發者必看）]]></title>
+    <link href="http://blog.xdite.net/posts/2012/09/03/12-factor-app/"/>
+    <updated>2012-09-03T12:56:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/09/03/12-factor-app</id>
+    <content type="html"><![CDATA[<p>這是前陣子在 <a href="http://www.lonestarrubyconf.com/">LongStarRubyConf 2012</a> 上複習一些主題時，無意中翻到的一份宣言。</p>
+
+<p>這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :<a href="https://speakerdeck.com/u/schneems/p/millions-of-apps-deployed-presented-at-lsrc">Millions of Apps Deployed: What We&#8217;ve Learned</a> 裡面翻到的。（不是很多人關注到。這份投影片我看到時才 100 Views 左右）</p>
+
+<script async class="speakerdeck-embed" data-id="50254cb6af597c0002005bf3" data-ratio="1.3333333333333333" src="http://blog.xdite.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>這篇投影片相當精彩，內容是從一份宣言 <a href="http://12factor.net">12factor.net</a> 出發。列舉了十二項構建 Service as Service 所需的方法主題，再以如何使用 Rails 及其 Ecosystem 搭建出 Tweleve-Factor App 宣言裡的需求條件為主旨展開。</p>
+
+<p>因為這份投影片的內容，其實我在兩三年前就想寫過系列文章，但因為是一份相當宏大且沒有邊界（就當時來看）的主題，因此一直遲遲無法完成。社群內有人能夠整理出來，覺得實在太棒了。</p>
+
+<p>不過我更好奇的是，若這能是一份非 Rails 為主軸的內容，影響層面應可以更大。念頭剛起，我就發現投影片的源頭出處 <a href="http://12factor.net">12factor.net</a> 的這份宣言原本就是 language-agnostic based 的。</p>
+
+<p>這麼宏大的主題，若是一個社群阿貓阿狗所寫，想必沒有說服力。但順著線索摸下去，我更發現 <a href="http://www.12factor.net/">The Tweleve-Factor App</a> 這份宣言的起草人不是別人，正是 <a href="http://heroku.com">Heroku</a> 的 Founder: Adam Wiggins。宣言的內容是他基於運營 Heroku 以來，公司經手過數十萬 Application 歸納出的結論。</p>
+
+<p>這份宣言在上禮拜已有人翻成簡體中文版 <a href="http://www.harmy.me/the-twelve-factor-app.html">The Twelve-Factor App</a>，我推薦各位絕對要去讀完&#8230;</p>
+
+<hr>
+
+
+<p>(以下轉錄中文簡介，並對用語酌量修改)</p>
+
+<h4>簡介</h4>
+
+<p>如今，軟體通常會作為一種服務來交付，它們被稱為網路應用程式，或「軟體即服務」（SaaS）。「十二因子應用程式」（12-Factor App）為構建如下的SaaS應用提供了方法論：</p>
+
+<p>使用標準化流程自動配置，從而使新的開發者花費最少的學習成本加入這個項目；
+和操作系統之間盡可能的劃清界限，在各個系統中提供最大的可移植性；
+適合部署在現代的雲計算平台，從而在服務器和系統管理方面節省資源；
+將開發環境和生產環境的差異降至最低，並使用持續交付實施敏捷開發；
+可以在工具、架構和開發流程不發生明顯變化的前提下實現擴展；
+這套理論適用於任意語言和後端服務（資料庫、Message Queue、Cache等）開發的應用程式。</p>
+
+<h4>背景</h4>
+
+<p>本文的貢獻者者參與過數以百計的應用程式的開發和部署，並通過Heroku平台間接見證了數十萬應用程式的開發，運作以及擴展的過程。</p>
+
+<p>本文綜合了我們關於SaaS應用幾乎所有的經驗和智慧，是開發此類應用的理想實踐標準，並特別關注於應用程式如何保持良性成長，開發者之間如何進行有效的代碼協作，以及如何避免軟件污染。</p>
+
+<p>我們的初衷是分享在現代軟體開發過程中發現的一些系統性問題，並加深對這些問題的認識。我們提供了討論這些問題時所需的共享詞彙，同時使用相關術語給出一套針對這些問題的廣義解決方案。本文格式的靈感來自於 Martin Fowler的書籍：<a href="http://books.google.com/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC">Patterns of Enterprise Application Architecture</a>，<a href="http://books.google.com/books/about/Refactoring.html?id=1MsETFPD3I0C">Refactoring</a>。</p>
+
+<h4>讀者應該是哪些人？</h4>
+
+<p>任何SaaS應用的開發人員。部署和管理此類應用的運維工程師。</p>
+
+<h4>The Twelve Factors</h4>
+
+<h5>I. Codebase</h5>
+
+<p>One codebase tracked in revision control, many deploys</p>
+
+<h5>II. Dependencies</h5>
+
+<p>Explicitly declare and isolate dependencies</p>
+
+<h5>III. Config</h5>
+
+<p>Store config in the environment</p>
+
+<h5>IV. Backing Services</h5>
+
+<p>Treat backing services as attached resources</p>
+
+<h5>V. Build, release, run</h5>
+
+<p>Strictly separate build and run stages</p>
+
+<h5>VI. Processes</h5>
+
+<p>Execute the app as one or more stateless processes</p>
+
+<h5>VII. Port binding</h5>
+
+<p>Export services via port binding</p>
+
+<h5>VIII. Concurrency</h5>
+
+<p>Scale out via the process model</p>
+
+<h5>IX. Disposability</h5>
+
+<p>Maximize robustness with fast startup and graceful shutdown</p>
+
+<h5>X. Dev/prod parity</h5>
+
+<p>Keep development, staging, and production as similar as possible</p>
+
+<h5>XI. Logs</h5>
+
+<p>Treat logs as event streams</p>
+
+<h5>XII. Admin processes</h5>
+
+<p>Run admin/management tasks as one-off processes</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cache Digests 最大化緩存策略]]></title>
@@ -3454,112 +3556,6 @@ I think you should use an
 <p>以前我沒參加過選在旅館舉辦這種形式的 conf。這次下來的感想也覺得很棒，是因為這麼有張力的 schedule，聽完整天大概體力就垮了。而中場就已經沒體力的話，電梯一按也是可以直接回房間睡覺。參加這種等級的 event 才深深覺得辦在旅館真好&#8230;.</p>
 
 <p>明年 Railsconf 2013 會在 Portland, Oregon 舉辦。我想我可能還會再來一次吧，畢竟 Oregon 是免稅州&#8230;XD</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Railsconf 2012 - 國際性 conference 是這樣辦的 （中）]]></title>
-    <link href="http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2/"/>
-    <updated>2012-04-25T10:32:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/04/25/railsconf-2012-2</id>
-    <content type="html"><![CDATA[<h2>7. Keynote</h2>
-
-<p>大會準備的 Keynote 都蠻有趣和有意義。</p>
-
-<p>基本上 DHH (Rails creator) 和 Aaron Patterson （Ruby core, Rails core）每年都會給 talk。</p>
-
-<h3>Rails core: DHH</h3>
-
-<p>DHH 的主題大概會是他會想硬幹什麼（現在進行式），2011 是 Asset Pipeline，今年是… Rails 4 將會讓你的 project 爛一堆東西，但爛什麼他沒說（抖 XD）</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7112862631/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7247/7112862631_d7e881f84a.jpg" width="500" height="375" alt="Untitled"></a></p>
-
-<h3>Rails core: Aaron Patterson</h3>
-
-<p>Aaron 的主題則是他從現在的 Rails stack 中看到什麼爛的東西，他今年會重寫哪一部分的底層（都是 Conf 結束後才會開始）。去年他是靠北 rack 實在太多層了嚴重影響 performance，於是他決定重寫 rack。但今年他坦承工程太大最後他放棄…XD。今年則是靠北每套 Queue 的介面和實作方式不一樣，他想要寫 ActiveQueue 這種東西。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6966381198/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7251/6966381198_88c6ff63a4.jpg" width="375" height="500" alt="Untitled"></a></p>
-
-<h3>Entrepreneurship</h3>
-
-<p>自 2010 起，都有一個 keynote 會講創業。2010 年請到 Gary Vaynerchuk，2011 年請到 Eric Ries。今年則請到 Techstar 的 David Cohen（VC)。</p>
-
-<p>不過今年 David Cohen 的場次真是無聊到爆炸…講的都是老生常談的東西。2010 的 Gary 就熱血許多，大概也許他是創業家的關係。</p>
-
-<h3>Ruby Hero Award</h3>
-
-<p>每年大會都會頒發 Ruby Hero Award 給對社群有重大貢獻的開發者。有一些人通常你只有在網路上見過 id，能看到作者真的都還蠻有趣的。</p>
-
-<h3>Panel Discussion</h3>
-
-<p>每年都會有 Rails core team panel discussion。會邀請今年在場的 Rails core team 現場接受提問然後大亂鬥。基本上每年都會有 DHH 在場，不過今年他沒有參加。今年現場的 Panelist 跟往年的成員組成成分都不太一樣。成員有 Aaron Patterson, Yehuda Katz, Santiago Pastorino, Jim Weirich(大師倒楣被抓來充數)。</p>
-
-<p>不過光看 Aaron Patterson 和 Yehuda Katz 吵架就真的超有趣的，值回票價。Yehuda 真人講話跟網路上文章（很有禮貌）差很多，語調都超挑釁的。而且最機車的是他每次都吵贏（看他戰幾個主題感覺他真的很熟 Ruby / Rails，Aaron 還戰輸他）。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7112444863/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7199/7112444863_d5c848186b.jpg" width="500" height="374" alt="Untitled"></a></p>
-
-<p>現場還有辦著色比賽。發給大家一本著色簿。贏的人可以跟 Railscore team 合照。而且可以指定姿勢。Aaron Patterson 馬上慘叫：「I&#8217;m not signup for this」
-他覺得大家一定會找他拍超過 PG13 的照片。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7112961327/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7084/7112961327_d86d81d6bc.jpg" width="500" height="375" alt="Untitled"></a></p>
-
-<p>（左邊是著色簿，右邊是蠟筆）</p>
-
-<h3>Ruby Rogues Live</h3>
-
-<p>RubyRogues 是這一年來比較新的 Podcast，每週主題都很不錯，主要在深度的討論 Ruby / Rails 周邊的哲學、工具、語言框架特性…etc.</p>
-
-<p>大會這次準備了現場版。有趣程度直逼 panel discussion，主要是現場大戰互酸開玩笑都很 high。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7112921975/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7139/7112921975_4fe7d21656.jpg" width="500" height="375" alt="Untitled"></a></p>
-
-<h2>8. After Party</h2>
-
-<p>我不是講者，所以不知道大會有沒有講者晚餐。但是參加的這幾天，幾乎每天都有 HappyHour 或者是 After Party。這些都是大會贊助廠商贊助的，如 Engine Yard、New Relic、Bluebox。基本上就是租下超大的一整層 bar，讓 developer hangout。在 conf 後能有地方可以免費喝酒、聽樂團、有地方聊天。</p>
-
-<p>場地真的無敵大。大概可以塞下 500 人左右。我在這裡認識不少新朋友。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6964857592/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7265/6964857592_65e62c7ea3.jpg" width="375" height="500" alt="Untitled"></a></p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7112464527/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7208/7112464527_236519f84e.jpg" width="500" height="375" alt="Untitled"></a></p>
-
-<h2>9. 現場白板</h2>
-
-<p>大會現場準備了三大塊白板。主要用途是公布議程、社群告示板（ hiring , contest, announcement…etc)</p>
-
-<p>這些白板不到一天就被塗的滿滿了。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7112465131/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7051/7112465131_c0bcaa3213.jpg" width="375" height="500" alt="Untitled"></a></p>
-
-<h2>10. 講者 （講題） / 錄影 / Slides / 筆記</h2>
-
-<h3>講者（講題）</h3>
-
-<p>基本上講者和講題都算專業和有深度的，主 track 不小心出現初學 101 等級的 talk 的機率很低。因為已經有一條主要的 track 是專門排給 101 等級的，而且都是平常的職業教學者在講。</p>
-
-<p>不過還是有幾個講者是雷。題目很吸引人，結果在講 101，<strong>這一些題目就被開發者在 twitter 上幹很兇。因為都(繳了這麼多錢)參加 conf 了，就是要學新 / 深的東西，竟然還講一些回家在網站上看 Turtorial 就可以知道的東西，浪費大家時間 =_=||||</strong>。</p>
-
-<p>不過我後來發現一個鑑定手法，只要是主題還在 Rails / Ruby Ecosystem 本身的，幾乎都有一定水準。但講其他搭配語言或技術的幾乎都是超級大雷…</p>
-
-<p>而大概是 conf 本身等級很高，講者台風都有一定等級，看得出來都有稍微排練過。（雖然還是可以看到他們現場在狂改投影片，我剛好恰巧有幾次坐在講者旁邊看他們一直在改 XD）</p>
-
-<p>複述觀眾問題：<strong>觀眾問問題的時候，都會用麥克風重新複述一遍問題，讓全場可以聽到和讓錄影團隊收到音</strong>。</p>
-
-<h3>錄影</h3>
-
-<p>現場有雇用專業的 confreaks 團隊，錄下整場的影片。通常會在大會結束的一個月左右，上傳公布。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6966370024/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7220/6966370024_032a0f8518.jpg" width="375" height="500" alt="Untitled"></a></p>
-
-<h3>投影片網址</h3>
-
-<p>講者在 <strong>Slides 第一張，或是最後一張，都會放 Slide 網址。</strong></p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6966860928/" title="Untitled by xdite, on Flickr"><img src="http://farm6.staticflickr.com/5465/6966860928_c68573d720.jpg" width="500" height="375" alt="Untitled"></a></p>
-
-<h3>社群共筆筆記</h3>
-
-<p>共筆筆記：而這次最誇張的，是竟然有人在 Github 上開 <a href="https://github.com/newhavenrb/railsconf2012/wiki">Wiki Repo</a> 讓大家上傳。每天 conf 結束之後，上面就滿滿的更新了！</p>
 ]]></content>
   </entry>
   

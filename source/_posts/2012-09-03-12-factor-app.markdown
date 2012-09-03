@@ -1,0 +1,80 @@
+---
+layout: post
+title: "Tweleve-Factor App 宣言（開發者必看）"
+date: 2012-09-03 12:56
+comments: true
+categories: 
+---
+
+這是前陣子在 [LongStarRubyConf 2012](http://www.lonestarrubyconf.com/) 上複習一些主題時，無意中翻到的一份宣言。
+
+這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :[Millions of Apps Deployed: What We've Learned](https://speakerdeck.com/u/schneems/p/millions-of-apps-deployed-presented-at-lsrc) 裡面翻到的。（不是很多人關注到。這份投影片我看到時才 100 Views 左右）
+
+
+<script async class="speakerdeck-embed" data-id="50254cb6af597c0002005bf3" data-ratio="1.3333333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+這篇投影片相當精彩，內容是從一份宣言 [12factor.net](http://12factor.net) 出發。列舉了十二項構建 Service as Service 所需的方法主題，再以如何使用 Rails 及其 Ecosystem 搭建出 Tweleve-Factor App 宣言裡的需求條件為主旨展開。
+
+因為這份投影片的內容，其實我在兩三年前就想寫過系列文章，但因為是一份相當宏大且沒有邊界（就當時來看）的主題，因此一直遲遲無法完成。社群內有人能夠整理出來，覺得實在太棒了。
+
+不過我更好奇的是，若這能是一份非 Rails 為主軸的內容，影響層面應可以更大。念頭剛起，我就發現投影片的源頭出處 [12factor.net](http://12factor.net) 的這份宣言原本就是 language-agnostic based 的。
+
+這麼宏大的主題，若是一個社群阿貓阿狗所寫，想必沒有說服力。但順著線索摸下去，我更發現 [The Tweleve-Factor App](http://www.12factor.net/) 這份宣言的起草人不是別人，正是 [Heroku](http://heroku.com) 的 Founder: Adam Wiggins。宣言的內容是他基於運營 Heroku 以來，公司經手過數十萬 Application 歸納出的結論。
+
+這份宣言在上禮拜已有人翻成簡體中文版 [The Twelve-Factor App](http://www.harmy.me/the-twelve-factor-app.html)，我推薦各位絕對要去讀完...
+
+<hr>
+
+(以下轉錄中文簡介，並對用語酌量修改)
+
+
+#### 簡介
+
+如今，軟體通常會作為一種服務來交付，它們被稱為網路應用程式，或「軟體即服務」（SaaS）。「十二因子應用程式」（12-Factor App）為構建如下的SaaS應用提供了方法論：
+
+使用標準化流程自動配置，從而使新的開發者花費最少的學習成本加入這個項目；
+和操作系統之間盡可能的劃清界限，在各個系統中提供最大的可移植性；
+適合部署在現代的雲計算平台，從而在服務器和系統管理方面節省資源；
+將開發環境和生產環境的差異降至最低，並使用持續交付實施敏捷開發；
+可以在工具、架構和開發流程不發生明顯變化的前提下實現擴展；
+這套理論適用於任意語言和後端服務（資料庫、Message Queue、Cache等）開發的應用程式。
+
+#### 背景
+
+本文的貢獻者者參與過數以百計的應用程式的開發和部署，並通過Heroku平台間接見證了數十萬應用程式的開發，運作以及擴展的過程。
+
+本文綜合了我們關於SaaS應用幾乎所有的經驗和智慧，是開發此類應用的理想實踐標準，並特別關注於應用程式如何保持良性成長，開發者之間如何進行有效的代碼協作，以及如何避免軟件污染。
+
+我們的初衷是分享在現代軟體開發過程中發現的一些系統性問題，並加深對這些問題的認識。我們提供了討論這些問題時所需的共享詞彙，同時使用相關術語給出一套針對這些問題的廣義解決方案。本文格式的靈感來自於 Martin Fowler的書籍：[Patterns of Enterprise Application Architecture](http://books.google.com/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC)，[Refactoring](http://books.google.com/books/about/Refactoring.html?id=1MsETFPD3I0C)。
+
+#### 讀者應該是哪些人？
+
+任何SaaS應用的開發人員。部署和管理此類應用的運維工程師。
+
+#### The Twelve Factors
+
+##### I. Codebase
+One codebase tracked in revision control, many deploys
+#####  II. Dependencies
+Explicitly declare and isolate dependencies
+#####  III. Config
+Store config in the environment
+#####  IV. Backing Services
+Treat backing services as attached resources
+#####  V. Build, release, run
+Strictly separate build and run stages
+#####  VI. Processes
+Execute the app as one or more stateless processes
+#####  VII. Port binding
+Export services via port binding
+#####  VIII. Concurrency
+Scale out via the process model
+#####  IX. Disposability
+Maximize robustness with fast startup and graceful shutdown
+#####  X. Dev/prod parity
+Keep development, staging, and production as similar as possible
+#####  XI. Logs
+Treat logs as event streams
+#####  XII. Admin processes
+Run admin/management tasks as one-off processes

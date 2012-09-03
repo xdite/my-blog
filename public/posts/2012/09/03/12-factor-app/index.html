@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>如何從 Wordpress Migrate 到 Octopress - Blog.XDite.net</title>
+  <title>Tweleve-Factor App 宣言（開發者必看） - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          文章轉換如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。使用 Jekyll Convertor我改了一支 convertor，可以從 Wordpress XML 匯入文章，並解決中文問題。（是的，老外才不管 UTF8 死活。）（有問題我不...">
+  <meta name="description" content="          這是前陣子在 LongStarRubyConf 2012 上複習一些主題時，無意中翻到的一份宣言。這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :Millions of Apps Deployed: What We&#82...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/09/03/12-factor-app/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">如何從 Wordpress Migrate 到 Octopress</h1>
+      <h1 class="entry-title">Tweleve-Factor App 宣言（開發者必看）</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2011-10-09T18:09:00+08:00" pubdate  data-updated="true" >Oct 9<span>th</span>, 2011</time>
+<time datetime="2012-09-03T12:56:00+08:00" pubdate  data-updated="true" >Sep 3<span>rd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,93 +98,100 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <h3>文章轉換</h3>
+  <p>這是前陣子在 <a href="http://www.lonestarrubyconf.com/">LongStarRubyConf 2012</a> 上複習一些主題時，無意中翻到的一份宣言。</p>
 
-<p>如果你不 Care 你的舊連結能不能動，只在乎內容和 Comment 能不能搬而已。</p>
+<p>這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :<a href="https://speakerdeck.com/u/schneems/p/millions-of-apps-deployed-presented-at-lsrc">Millions of Apps Deployed: What We&#8217;ve Learned</a> 裡面翻到的。（不是很多人關注到。這份投影片我看到時才 100 Views 左右）</p>
 
-<ul>
-<li>使用 Jekyll Convertor</li>
-</ul>
+<script async class="speakerdeck-embed" data-id="50254cb6af597c0002005bf3" data-ratio="1.3333333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>我改了一支 <a href="https://gist.github.com/1273518">convertor</a>，可以從 Wordpress XML 匯入文章，並解決中文問題。</p>
+<p>這篇投影片相當精彩，內容是從一份宣言 <a href="http://12factor.net">12factor.net</a> 出發。列舉了十二項構建 Service as Service 所需的方法主題，再以如何使用 Rails 及其 Ecosystem 搭建出 Tweleve-Factor App 宣言裡的需求條件為主旨展開。</p>
 
-<p>（是的，老外才不管 UTF8 死活。）
-（有問題我不負責保固，請自行修理）</p>
+<p>因為這份投影片的內容，其實我在兩三年前就想寫過系列文章，但因為是一份相當宏大且沒有邊界（就當時來看）的主題，因此一直遲遲無法完成。社群內有人能夠整理出來，覺得實在太棒了。</p>
 
-<h3>留言轉換</h3>
+<p>不過我更好奇的是，若這能是一份非 Rails 為主軸的內容，影響層面應可以更大。念頭剛起，我就發現投影片的源頭出處 <a href="http://12factor.net">12factor.net</a> 的這份宣言原本就是 language-agnostic based 的。</p>
 
-<ul>
-<li>把 Comment 倒進 DISQUS</li>
-</ul>
+<p>這麼宏大的主題，若是一個社群阿貓阿狗所寫，想必沒有說服力。但順著線索摸下去，我更發現 <a href="http://www.12factor.net/">The Tweleve-Factor App</a> 這份宣言的起草人不是別人，正是 <a href="http://heroku.com">Heroku</a> 的 Founder: Adam Wiggins。宣言的內容是他基於運營 Heroku 以來，公司經手過數十萬 Application 歸納出的結論。</p>
 
+<p>這份宣言在上禮拜已有人翻成簡體中文版 <a href="http://www.harmy.me/the-twelve-factor-app.html">The Twelve-Factor App</a>，我推薦各位絕對要去讀完&#8230;</p>
 
-<p>DISQUS 與 Wordpress 與 Octopress 都有良好的整合。你可以把 Woordpress XML 先 import 進 DISQUS 引擎，處理完後可以對應回剛剛轉的 markdown（裡面會有記 wordpress_id）。</p>
-
-<h3>圖片轉換</h3>
-
-<p>我個人習慣很好，平日貼圖都貼在 Flickr 上，沒有這樣的問題。</p>
-
-<p>（有這樣問題的人，請自行解決。）</p>
-
-<h3>RSS Feed</h3>
-
-<p>我個人習慣很好，幾年前就將 feed 代管在 <a href="http://feedburner.com/">feedburner</a> 之上。</p>
-
-<p>（有這樣問題的人，請自行解決。）</p>
-
-<h3>Facebook Likes 數</h3>
-
-<p>你瘋了嗎？</p>
-
-<h3>使用舊有網址</h3>
-
-<ul>
-<li>如果你之前的 網址是使用 ?p=XXX 作為永久網址，目前此題無解。</li>
-<li>如果你是之前有已經定義好的 permalinks，你可以使用修改 Jekyll Convertor，將 permalink 加入轉換選項裡</li>
-</ul>
+<hr>
 
 
-<p><a href="https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter">https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter</a></p>
+<p>(以下轉錄中文簡介，並對用語酌量修改)</p>
 
-<h2>大絕招</h2>
+<h4>簡介</h4>
 
-<p>如果你是像我一樣，覺得轉換成本代價過高，只是想另起爐灶而已。就不要管之前的 Blog 怎樣了，改個網址做 301 重新導向就好。</p>
+<p>如今，軟體通常會作為一種服務來交付，它們被稱為網路應用程式，或「軟體即服務」（SaaS）。「十二因子應用程式」（12-Factor App）為構建如下的SaaS應用提供了方法論：</p>
 
-<h3>301 轉址</h3>
+<p>使用標準化流程自動配置，從而使新的開發者花費最少的學習成本加入這個項目；
+和操作系統之間盡可能的劃清界限，在各個系統中提供最大的可移植性；
+適合部署在現代的雲計算平台，從而在服務器和系統管理方面節省資源；
+將開發環境和生產環境的差異降至最低，並使用持續交付實施敏捷開發；
+可以在工具、架構和開發流程不發生明顯變化的前提下實現擴展；
+這套理論適用於任意語言和後端服務（資料庫、Message Queue、Cache等）開發的應用程式。</p>
 
-<p>這招只適合使用在自己 hosting 或 heroku 之上。因為 Github pages 不支援 .htacess 設定，只能放置靜態檔案。
-我是放在 Heroku 上，使用 <a href="https://github.com/jtrupiano/rack-rewrite">rack-rewrite </a> 做到對過去的網址 301 轉址。</p>
+<h4>背景</h4>
 
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;rack-rewrite&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>本文的貢獻者者參與過數以百計的應用程式的開發和部署，並通過Heroku平台間接見證了數十萬應用程式的開發，運作以及擴展的過程。</p>
 
+<p>本文綜合了我們關於SaaS應用幾乎所有的經驗和智慧，是開發此類應用的理想實踐標準，並特別關注於應用程式如何保持良性成長，開發者之間如何進行有效的代碼協作，以及如何避免軟件污染。</p>
 
+<p>我們的初衷是分享在現代軟體開發過程中發現的一些系統性問題，並加深對這些問題的認識。我們提供了討論這些問題時所需的共享詞彙，同時使用相關術語給出一套針對這些問題的廣義解決方案。本文格式的靈感來自於 Martin Fowler的書籍：<a href="http://books.google.com/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC">Patterns of Enterprise Application Architecture</a>，<a href="http://books.google.com/books/about/Refactoring.html?id=1MsETFPD3I0C">Refactoring</a>。</p>
 
+<h4>讀者應該是哪些人？</h4>
 
-<figure class='code'><figcaption><span>config.ru</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rack/rewrite&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
-</span><span class='line'>
-</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?p=(.*)?}</span><span class="p">,</span>  <span class="s2">&quot;http://wp.xdite.net/?p=$1&quot;</span>
-</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?s=(.*)?}</span><span class="p">,</span>  <span class="s2">&quot;http://wp.xdite.net/?s=$1&quot;</span>
-</span><span class='line'> <span class="n">r301</span> <span class="sr">%r{/\?feed=(.*)?}</span><span class="p">,</span> <span class="s2">&quot;http://feeds.feedburner.com/xxddite&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>任何SaaS應用的開發人員。部署和管理此類應用的運維工程師。</p>
 
+<h4>The Twelve Factors</h4>
 
-<p>這簡單三行我可是琢磨了好幾個小時啊 :/</p>
+<h5>I. Codebase</h5>
+
+<p>One codebase tracked in revision control, many deploys</p>
+
+<h5>II. Dependencies</h5>
+
+<p>Explicitly declare and isolate dependencies</p>
+
+<h5>III. Config</h5>
+
+<p>Store config in the environment</p>
+
+<h5>IV. Backing Services</h5>
+
+<p>Treat backing services as attached resources</p>
+
+<h5>V. Build, release, run</h5>
+
+<p>Strictly separate build and run stages</p>
+
+<h5>VI. Processes</h5>
+
+<p>Execute the app as one or more stateless processes</p>
+
+<h5>VII. Port binding</h5>
+
+<p>Export services via port binding</p>
+
+<h5>VIII. Concurrency</h5>
+
+<p>Scale out via the process model</p>
+
+<h5>IX. Disposability</h5>
+
+<p>Maximize robustness with fast startup and graceful shutdown</p>
+
+<h5>X. Dev/prod parity</h5>
+
+<p>Keep development, staging, and production as similar as possible</p>
+
+<h5>XI. Logs</h5>
+
+<p>Treat logs as event streams</p>
+
+<h5>XII. Admin processes</h5>
+
+<p>Run admin/management tasks as one-off processes</p>
 
 </div>
 
@@ -206,14 +213,8 @@
 
 
 
-<time datetime="2011-10-09T18:09:00+08:00" pubdate  data-updated="true" >Oct 9<span>th</span>, 2011</time>
+<time datetime="2012-09-03T12:56:00+08:00" pubdate  data-updated="true" >Sep 3<span>rd</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
-  
-</span>
 
 
     </p>
@@ -221,7 +222,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/09/03/12-factor-app/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/09/03/12-factor-app/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -297,8 +298,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/';
-        var disqus_url = 'http://blog.xdite.net/posts/2011/10/09/how-to-migrate-blog-from-wordpress-to-octopress/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/09/03/12-factor-app/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/09/03/12-factor-app/';
         var disqus_script = 'embed.js';
       
     (function () {
