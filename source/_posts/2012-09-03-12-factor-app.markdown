@@ -14,13 +14,13 @@ categories:
 <script async class="speakerdeck-embed" data-id="50254cb6af597c0002005bf3" data-ratio="1.3333333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
 
-這篇投影片相當精彩，內容是從一份宣言 [12factor.net](http://12factor.net) 出發。列舉了十二項構建 Service as Service 所需的方法主題，再以如何使用 Rails 及其 Ecosystem 搭建出 Tweleve-Factor App 宣言裡的需求條件為主旨展開。
+這篇投影片相當精彩，內容是從一份宣言 [12factor.net](http://12factor.net) 出發。列舉了十二項構建 Service as Service 所需的方法主題，再以如何使用 Rails 及其 Ecosystem 搭建出 Twelve-Factor App 宣言裡的需求條件為主旨展開。
 
 因為這份投影片的內容，其實我在兩三年前就想寫過系列文章，但因為是一份相當宏大且沒有邊界（就當時來看）的主題，因此一直遲遲無法完成。社群內有人能夠整理出來，覺得實在太棒了。
 
 不過我更好奇的是，若這能是一份非 Rails 為主軸的內容，影響層面應可以更大。念頭剛起，我就發現投影片的源頭出處 [12factor.net](http://12factor.net) 的這份宣言原本就是 language-agnostic based 的。
 
-這麼宏大的主題，若是一個社群阿貓阿狗所寫，想必沒有說服力。但順著線索摸下去，我更發現 [The Tweleve-Factor App](http://www.12factor.net/) 這份宣言的起草人不是別人，正是 [Heroku](http://heroku.com) 的 Founder: Adam Wiggins。宣言的內容是他基於運營 Heroku 以來，公司經手過數十萬 Application 歸納出的結論。
+這麼宏大的主題，若是一個社群阿貓阿狗所寫，想必沒有說服力。但順著線索摸下去，我更發現 [The Twelve-Factor App](http://www.12factor.net/) 這份宣言的起草人不是別人，正是 [Heroku](http://heroku.com) 的 Founder: Adam Wiggins。宣言的內容是他基於運營 Heroku 以來，公司經手過數十萬 Application 歸納出的結論。
 
 這份宣言在上禮拜已有人翻成簡體中文版 [The Twelve-Factor App](http://www.harmy.me/the-twelve-factor-app.html)，我推薦各位絕對要去讀完...
 
