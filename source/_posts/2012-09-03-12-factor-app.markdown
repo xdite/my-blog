@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-這是前陣子在 [LongStarRubyConf 2012](http://www.lonestarrubyconf.com/) 上複習一些主題時，無意中翻到的一份宣言。
+這是前陣子在 [LoneStarRubyConf 2012](http://www.lonestarrubyconf.com/) 上複習一些主題時，無意中翻到的一份宣言。
 
 這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :[Millions of Apps Deployed: What We've Learned](https://speakerdeck.com/u/schneems/p/millions-of-apps-deployed-presented-at-lsrc) 裡面翻到的。（不是很多人關注到。這份投影片我看到時才 100 Views 左右）
 
