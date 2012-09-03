@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-09-03T13:38:15+08:00</updated>
+  <updated>2012-09-03T13:40:04+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Tweleve-Factor App 宣言（開發者必看）]]></title>
+    <title type="html"><![CDATA[Tweleve-Factor App 宣言]]></title>
     <link href="http://blog.xdite.net/posts/2012/09/03/12-factor-app/"/>
     <updated>2012-09-03T12:56:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/09/03/12-factor-app</id>
