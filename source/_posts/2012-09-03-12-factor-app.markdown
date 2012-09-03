@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tweleve-Factor App 宣言"
+title: "Twelve-Factor App 宣言"
 date: 2012-09-03 12:56
 comments: true
 categories: 
