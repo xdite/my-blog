@@ -53,7 +53,7 @@ video creditd by htchien
 
 看了 [demo 影片](http://youtu.be/FM6FOl4frRc)就知道！
 
-這個服務也讓 我跟夥伴 [zhusee](http://twitter.com/zhusee) 同時奪得了 2012 Facebook World Hack 台北站的首獎 (Best Overall)
+這個服務也讓 我跟夥伴 [zhusee](http://twitter.com/zhusee2) 同時奪得了 2012 Facebook World Hack 台北站的首獎 (Best Overall)
 
 歡迎各位試用！
 
