@@ -23,7 +23,7 @@ The idea was from a small thing: I always forget what url I ever liked on Facebo
 * automatic tracking and backup 
 * organized by various types, provides url info  and snapshots.
 * can reshare to google plus+, twitter, del.icio.us…etc
-* seachable!!
+* searchable!!
 
 ### demo video
 
