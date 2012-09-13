@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-<a href="http://www.flickr.com/photos/xdite/7981727596/" title="Paerclip.io by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8449/7981727596_abbb2a2de9.jpg" width="500" height="257" alt="Paerclip.io"></a>
+<a href="http://paperclip.io" title="Paerclip.io by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8449/7981727596_abbb2a2de9.jpg" width="500" height="257" alt="Paerclip.io"></a>
 
 Hi, everyone. I want to introduce the new service I recently built at 2012 Facebook World Hack Taipei : 「[Paperclip.io](http://paperclio.io)」
 
