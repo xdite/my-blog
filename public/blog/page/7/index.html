@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  上禮拜看到對岸弄了一個 http://ruby-china.org，看樣子蠻好玩的，介面也設計的不錯。而且這個網站還是 opensource 的，就抓下來玩了一下。不過大概是程式碼加的太快，當時的程式碼不是很「乾淨」，抓下來一般人是改不太動的，加上沒有 te...">
+  <meta name="description" content="                  這週繼續在實作 http://ruby-taiwan.org 上的 features。既然要打造一個讓程式設計師很願意發表的社區，介面就要對 developer content 非常 friendly。如何友善法？除了發文介面要做的棒，讓人很容易發表文章、寫...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +73,208 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/posts/2011/12/04/gollum-git-based-wiki/">Gollum : Git-backend Wiki</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-12-04T01:02:00+08:00" pubdate  data-updated="true" >Dec 4<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/12/04/gollum-git-based-wiki/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/12/04/gollum-git-based-wiki/" data-show-faces="false"></div></div>
+    
+    <p>這週繼續在實作 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a> 上的 features。</p>
+
+<p>既然要打造一個讓程式設計師很願意發表的社區，介面就要對 developer content 非常 friendly。</p>
+
+<p>如何友善法？除了發文介面要做的棒，讓人很容易發表文章、寫回應之外，還要容易貼 code！社區不能貼 code 還叫程式社區嗎？</p>
+
+<h2>Topic 與 Reply 支援多種語法、程式碼高亮</h2>
+
+<p>所以這週的主要進度是：Topic 支援程式高亮了。(by <a href="http://twitter.com/yorkxin">@yorkxin</a> )，詳細的內容在這篇公告：<a href="http://ruby-taiwan.org/topics/31">新增多種語法支援：粗體、斜體、底線、程式碼高亮</a>。</p>
+
+<h2>Wiki</h2>
+
+<p>Wiki 是當初第二個看不順眼的東西。</p>
+
+<p>在程式社區中 Wiki 也算是很重要的角色，但是一個爛的介面和動線也會讓人不怎麼想要貢獻內容。</p>
+
+<p>而 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a> 的 Wiki 其實還是只具備非常初階的功能，底層是用 DB 實作，而表單也是簡單的用 Bootstrap 套，雖然支援 Markdown 語法，但 Wiki 內連結什麼都還是要自己 hard link。貼程式碼也容易貼的歪七扭八…</p>
+
+<p>理想的程式社區 Wiki 我覺得要具備幾個要素</p>
+
+<ol>
+<li>內容可以實現 [[ XXX ]] 站內超連結</li>
+<li>Markdown 或 Markdown extra 以上功能</li>
+<li>貼任何程式碼都支援高亮</li>
+<li>Version Control ( 基本 )</li>
+<li>可 Diff</li>
+<li>權限控管</li>
+<li>容易「預覽」的介面…</li>
+</ol>
+
+
+<p>不過這些願望就算是自己用 Rails 實作，也很苦手。因為有一大堆底層苦工需要先作…</p>
+
+<p>我是個很討厭重造輪子的人，馬上就想起以前曾經用過的一套 Wiki : <a href="https://github.com/github/gollum">gollum</a>。</p>
+
+<p>以前曾經寫過一篇文章介紹過這套 wiki : <a href="http://wp.xdite.net/?p=2182">用 Pow 架起 Gollum</a>。</p>
+
+<p>Github 官方部落格上面的介紹：<a href="https://github.com/blog/699-making-github-more-open-git-backed-wikis">Making GitHub More Open: Git-backed Wikis</a></p>
+
+<h3>gollum 的基本想法</h3>
+
+<p>gollum 的想法是將 Wiki 的每一頁都視為一個檔案，塞進 Git 版本控制。這與傳統的 Wiki 作法不同，多數的 Wiki 實作是將每一頁視為一筆 DB record，而且還要另外拉一個表紀錄版本變遷（有的 Wiki 甚至沒有這樣功能）。</p>
+
+<p>而用 Git 實作的好處，是檔案儲存、變更、版本控制、搜尋，就可以走 Git 本身的機制，不必再重造一套輪子了。所以當初看到 gollum 釋出的時候，受到很大的震撼，沒想過原來可以這樣惡搞閃掉重造輪子。</p>
+
+<h3>gollum 的基本功能</h3>
+
+<p>gollum 提供了一套 API，可以存取，版本控制，搜尋，自動將特定格式內容轉換。（支援 Markdown、RST, ASCIIDoc…等等）</p>
+
+<p>而且 gollum 還提供一套用 Sinatra 刻的介面，可以讓人輕鬆的寫 Wiki…</p>
+
+<h3>還是要重造輪子</h3>
+
+<p>寫到這裡，可能會讓人以為我的作法可能是會將 gollum 當作一個 rack app 掛在 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a> 就收工?</p>
+
+<p>gollum 的介面頂多是勉強堪「自用」，所以在我自己的 Mac 上，我的確是用 gollum + Pow 架起來寫私人程式筆記的。但是 gollum 的 wiki 介面，我自己覺得連易用都摸不上邊&#8230;（更別提 1.3.x , web preview 介面是爛的 …）</p>
+
+<p>再來是 gollum 並沒有權限與使用者概念，如果是用 web interface 發表，走的都是 local git config 的 user name…</p>
+
+<h2>終極 solution</h2>
+
+<p>以前自己寫過一個小專案，用 Rails 刻一套介面去接整套 gollum API，自己把 UI 改的 friedly 些。讓寫筆記的速度可以加快，直到 <a href="http://mouapp.com/">Mou</a> 出來之前，我一直都是這樣寫東西的…</p>
+
+<p>要達到剛剛所說的六個重點，於是最後實作的解法就是…</p>
+
+<h2>寫 Rails 去接 Gollum API…</h2>
+
+<h3>Model</h3>
+
+<p><a href="https://github.com/rubytaiwan/ruby-taiwan/blob/production/app/models/wiki.rb">https://github.com/rubytaiwan/ruby-taiwan/blob/production/app/models/wiki.rb</a></p>
+
+<ul>
+<li>檔案存取 / 版本控制：把整個 db 抽換掉，換成 gollum</li>
+<li>與 bootstrap form 結合：因為 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a> 是用 simple_form 實作表單，所以 Wiki 的部分是寫了一個 class 去 include ActiveModel 的一些 API 去接上 form</li>
+</ul>
+
+
+<h3>Controller</h3>
+
+<p><a href="https://github.com/rubytaiwan/ruby-taiwan/blob/production/app/controllers/gikis_controller.rb">https://github.com/rubytaiwan/ruby-taiwan/blob/production/app/controllers/gikis_controller.rb</a></p>
+
+<ul>
+<li>CRU 接了 gollum API 去實作。</li>
+<li>寫入 commit log 則取站上認證的 current_user 去塞</li>
+</ul>
+
+
+<h3>權限控制</h3>
+
+<p><a href="https://github.com/rubytaiwan/ruby-taiwan/blob/production/app/models/ability.rb">https://github.com/rubytaiwan/ruby-taiwan/blob/production/app/models/ability.rb</a></p>
+
+<ul>
+<li>用 <a href="https://github.com/ryanb/cancan">CanCan</a> 去管基本的存取。若以後要上黑名單，細緻權限，鎖定，都可以從 CanCan 這端寫 rule block 掉。</li>
+</ul>
+
+
+<h3>Markdown Support &amp; Syntax Highlight</h3>
+
+<p><a href="https://github.com/github/gollum/blob/master/lib/gollum/markup.rb">https://github.com/github/gollum/blob/master/lib/gollum/markup.rb</a></p>
+
+<ul>
+<li>gollum 本身就是使用 <a href="https://github.com/tanoku/redcarpet">Redcarpet</a> 去實作 Markdown 的 renderer，所以吐回來的 formatted_data 已經會是支援 Markdown Extra 以上的格式了。更棒的是也自動結合了<a href="http://rubygems.org/gems/pygments.rb">pygments.rb</a>。</li>
+</ul>
+
+
+<h3>Preview</h3>
+
+<p><a href="https://github.com/github/gollum/blob/master/lib/gollum/wiki.rb">https://github.com/github/gollum/blob/master/lib/gollum/wiki.rb</a>
+<a href="https://github.com/rubytaiwan/ruby-taiwan/blob/master/app/assets/javascripts/topics.coffee">https://github.com/rubytaiwan/ruby-taiwan/blob/master/app/assets/javascripts/topics.coffee</a></p>
+
+<ul>
+<li>本來在煩惱 Page Preview 要怎麼實作…真不想自己寫 renderer 硬幹。後來發現 gollum 也提供了 preview_page，提供 in-memory preview。而 <a href="http://twitter.com/yorkxin">@yorkxin</a> 這兩天才為 Topic &amp; Reply 寫一個 ajax preview。就用同樣的一套 interface 也接上去…</li>
+</ul>
+
+
+<h3>Backup</h3>
+
+<ul>
+<li>用 Git 實作 Wiki 最大的好處，是可以把內容都塞進一個資料夾內。再定期跑 crobtab 丟上 github …（這是其他 wiki 很難做到的地方）</li>
+</ul>
+
+
+<h2>踩到的一些雷</h2>
+
+<p>其實事情也不是大家想像中的順利。主要還有遇到兩個地雷。</p>
+
+<p><a href="https://github.com/xdite/gollum/commit/7924e8c9a90a772d90da5f7c6a3366bfc5010fbb">https://github.com/xdite/gollum/commit/7924e8c9a90a772d90da5f7c6a3366bfc5010fbb</a></p>
+
+<ul>
+<li>Redcarpet 的介面改變。原先 Redcarpet 1.0.x 是走 <code>Redcarpet.new(data, *flags).to_html</code> 這種介面。而 Redcarpet 2.0.x 是走 <code>markdown = Redcarpet::Markdown.new(html_renderer)</code>、<code>data = markdown.render(data)</code>。gollum 沒有鎖 redcarpet 版本，然後就大爆炸了。目前官方沒有 release 新 gem 的打算，只好自己 hot fix 然後拉 pull request 回去。</li>
+</ul>
+
+
+<p><a href="https://github.com/mojombo/grit/commit/696761d">https://github.com/mojombo/grit/commit/696761d</a></p>
+
+<ul>
+<li>Ruby 1.9.2 在塞中文內容進檔案時會爆炸。主要是 <a href="https://github.com/mojombo/grit">Git</a> 這套拿來存取 Git 的 Ruby Library，會遇上 UTF8 string 長度問題。同樣的，官方目前沒有 release 新 gem 的打算，不過 patch 已經進 master ..</li>
+</ul>
+
+
+<h2>小結</h2>
+
+<p>所以為了作這個 Wiki 功能，用了..</p>
+
+<ul>
+<li>ActiveModel</li>
+<li><a href="https://github.com/plataformatec/simple_form">simple_form</a></li>
+<li><a href="https://github.com/ryanb/cancan">CanCan</a></li>
+<li><a href="https://github.com/rafaelfranca/simple_form-bootstrap/blob/master/config/initializers/simple_form.rb">bootstrap + simple_form wrapper</a></li>
+<li><a href="https://github.com/tanoku/redcarpet">RedCarpet</a></li>
+<li><a href="http://rubygems.org/gems/pygments.rb">pygments.rb</a></li>
+<li><a href="https://github.com/thetron/css3buttons_rails_helpers">css3buttons_rails_helpers</a></li>
+<li><a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a></li>
+</ul>
+
+
+<p>非常神經病的列表…</p>
+
+<p>不過出來的架構和最後呈現算是令人滿意&#8230;:D</p>
+
+<p>歡迎用看看吧 <a href="http://ruby-taiwan.org/wiki">http://ruby-taiwan.org/wiki</a></p>
+
+  </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/posts/2011/11/28/ruby-taiwan-org/">http://ruby-taiwan.org 開張</a></h1>
     
     
@@ -87,7 +289,7 @@
 
 
 
-<time datetime="2011-11-28T01:46:00-08:00" pubdate  data-updated="true" >Nov 28<span>th</span>, 2011</time>
+<time datetime="2011-11-28T01:46:00+08:00" pubdate  data-updated="true" >Nov 28<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/11/28/ruby-taiwan-org/#disqus_thread">Comments</a>
         
@@ -176,7 +378,7 @@
 
 
 
-<time datetime="2011-11-19T16:14:00-08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
+<time datetime="2011-11-19T16:14:00+08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/11/19/thouhgts-on-html5-and-mobile-app/#disqus_thread">Comments</a>
         
@@ -398,7 +600,7 @@
 
 
 
-<time datetime="2011-11-19T12:43:00-08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
+<time datetime="2011-11-19T12:43:00+08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/11/19/omniauth-clean-auth-provider-3/#disqus_thread">Comments</a>
         
@@ -538,7 +740,7 @@
 
 
 
-<time datetime="2011-11-19T03:33:00-08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
+<time datetime="2011-11-19T03:33:00+08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/11/19/omniauth-clean-auth-provider-2/#disqus_thread">Comments</a>
         
@@ -766,7 +968,7 @@
 
 
 
-<time datetime="2011-11-19T02:16:00-08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
+<time datetime="2011-11-19T02:16:00+08:00" pubdate  data-updated="true" >Nov 19<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/11/19/omniauth-clean-auth-provider-1/#disqus_thread">Comments</a>
         
@@ -888,7 +1090,7 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
 
 
 
-<time datetime="2011-11-14T23:56:00-08:00" pubdate  data-updated="true" >Nov 14<span>th</span>, 2011</time>
+<time datetime="2011-11-14T23:56:00+08:00" pubdate  data-updated="true" >Nov 14<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/11/14/money-ball/#disqus_thread">Comments</a>
         
@@ -1023,7 +1225,7 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
 
 
 
-<time datetime="2011-11-10T02:20:00-08:00" pubdate  data-updated="true" >Nov 10<span>th</span>, 2011</time>
+<time datetime="2011-11-10T02:20:00+08:00" pubdate  data-updated="true" >Nov 10<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/11/10/simple-form-your-form-framework/#disqus_thread">Comments</a>
         
@@ -1168,7 +1370,7 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
 
 
 
-<time datetime="2011-10-27T16:44:00-07:00" pubdate  data-updated="true" >Oct 27<span>th</span>, 2011</time>
+<time datetime="2011-10-27T16:44:00+08:00" pubdate  data-updated="true" >Oct 27<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/10/27/coffeescript-nodejs-hubot/#disqus_thread">Comments</a>
         
@@ -1258,7 +1460,7 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
 
 
 
-<time datetime="2011-10-25T17:08:00-07:00" pubdate  data-updated="true" >Oct 25<span>th</span>, 2011</time>
+<time datetime="2011-10-25T17:08:00+08:00" pubdate  data-updated="true" >Oct 25<span>th</span>, 2011</time>
         
          | <a href="/posts/2011/10/25/yahoo-seo-url/#disqus_thread">Comments</a>
         
@@ -1329,86 +1531,6 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2011/10/24/i-read-steve-jobs/">我讀 Steve Jobs 傳 - 我不是要看瘋子傳</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-10-24T23:52:00-07:00" pubdate  data-updated="true" >Oct 24<span>th</span>, 2011</time>
-        
-         | <a href="/posts/2011/10/24/i-read-steve-jobs/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/24/i-read-steve-jobs/" data-show-faces="false"></div></div>
-    
-    <p>先聲明，這一篇純粹是個人讀後感而已。不是什麼嚴肅的 Book Review。</p>
-
-<p>今天 <a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010522255">賈伯斯傳</a> 上市了。身為一個蘋果愛用者，自然是蠻高興這件事的。因此就花了「一點時間」把這本書讀完了。</p>
-
-<p>但是讀完之後，坦白說我真的算蠻失望的。若要我形容這本書的讀後感，我會說 &#8211; 去把 2 L 悅氏礦泉水 一飲而盡，你就知道讀這本書的滋味了。</p>
-
-<p>這麼好的題材，被這樣烹調實在很可惜。</p>
-
-<p>沒有人說傳記「必須」要有趣，但我覺得「Jobs 傳」這本書平淡到過於異常。</p>
-
-<p>怎麼說呢？也許你是 Jobs 的反對者，那麼你可能會覺得這本書 &#8212; 很有趣。因為裡面不少八卦小故事，關於他詭異作風、負面人格描述，關於不屑別人的行為的大量描述。</p>
-
-<p>但有營養的呢？我覺得很少。如果這是採訪一百多個親友、同事、仇敵得出來的樣貌，我真的非常失望。</p>
-
-<p>人們最敬佩也想了解的是 Jobs 的熱情、Vision、和推動他持續創造出偉大產品背後的秘密。而 Steve Jobs 會希望作者幫他作傳，也是基於他想讓「他的孩子」們知道他「所做的一切」、還有「這一切背後的想法與意義」。</p>
-
-<p>但是 Walter Isaacson，他真的不理解 Jobs，這也就是我認為可惜的地方。我在書中只見作者一直不斷的描述周遭人覺得他多詭異、多暴君，而雖然看得出來作者試圖為 Jobs 說話解套，但是一直失敗。He just doesn&#8217;t get it.。</p>
-
-<p>我想這也是 Jobs 這輩子始終為什麼認為別人為什麼愚蠢的原因：「He just doesn&#8217;t get it.」</p>
-
-<p>如果你曾新創過某個事業，並 fell in love with it。你就能從書中就會看見閃閃發光的 Jobs。他能夠夠持續偉大的原因很簡單 &#8212; 那就是他熱愛自己的公司，熱愛持續打造偉大的成品。Willing to die for it，而他最後也作到了…</p>
-
-<p>我想這也許是因為傳記作者始終是個作家。而不是個 some business founders。只要你是個 bussiness owner，曾經熱愛過某個事業，用盡了全力打造你深信的偉大的產品。你就能夠了解 Steve Jobs 的行為和心理模式。這是領人薪水，覺得別人家資金花不完的上班族很難領悟到的事：</p>
-
-<p>It&#8217;s simple，<strong>只要你覺得這是別人的事業。你就不會想要 &#8211; 「做到最好」</strong>。反之亦然。</p>
-
-<p>Steve 會有那麼大的動力打造產品，力求瘋狂的完美，講話時不時散發著令人攝服的現實扭曲場。這些都不是因為它是一個詭異瘋子，而是因為他真心相信且瘋狂熱愛它的事業。</p>
-
-<p>用盡一切的氣力去熱愛作某一件事，去把產品打造到最好是很累的。有過這樣經驗的人，就會更敬佩  Steve Jobs，他真的夠厲害，遠遠不是熱情覺得讓人可敬而已。這也不只是熱情而已，當中還要有不動趨鞭自己進步的動力。</p>
-
-<p>因為他走在世界最前端，這更加格外的辛苦。</p>
-
-<p>We do want to see things behind these. 我們不是要看瘋子傳。</p>
-
-<p>He just doesn&#8217;t get it.</p>
-
-<p>===</p>
-
-<p>Reed Jobs 都可能比 Water Issacson 懂 Steve Jobs 在想什麼（ according to some piece of this book ）。真是可惜了，這麼好的材料，這麼平淡的一本八卦書….</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1443,6 +1565,10 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/10/01/specification-by-example/">Specification by Example - 團隊如何交付正確的軟體</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/09/12/paperclip-io-fb-url-like-service/">paperclip.io : track urls you ever liked</a>
       </li>
     
@@ -1456,10 +1582,6 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
     
       <li class="post">
         <a href="/posts/2012/09/02/cache-digest-new-strategy/">Cache Digests 最大化緩存策略</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/08/22/rails-with-massive-data/">Rails-with-massive-data</a>
       </li>
     
   </ul>
