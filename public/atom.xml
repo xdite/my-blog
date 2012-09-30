@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-10-01T05:06:25+08:00</updated>
+  <updated>2012-10-01T05:07:33+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -211,10 +211,10 @@
 
 <p>敘述一個場景，然後寫下步驟，然後驗證步驟。這對一般開發者來說，BDD 相對多餘以及冗長。</p>
 
-<p>原因何在？這是一般一般專案中，通常我們只會遇到兩種狀況：</p>
+<p>原因何在？這是一般專案中，通常我們只會遇到兩種狀況：</p>
 
 <ul>
-<li>客戶疏於描述 : 只給解決方案，如必須要能夠進行付款。（但是卻沒有講清楚支援信用卡還是 ATM）</li>
+<li>客戶疏於描述實作內容 : 只給解決方案，如必須要能夠進行付款。（但是卻沒有講清楚支援信用卡還是 ATM）</li>
 </ul>
 
 
