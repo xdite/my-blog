@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-10-07T03:54:48+08:00</updated>
+  <updated>2012-10-07T12:49:23+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.xdite.net/posts/2012/10/07/maybe-you-should-listen-what-your-rd-said/"/>
     <updated>2012-10-07T02:44:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/10/07/maybe-you-should-listen-what-your-rd-said</id>
-    <content type="html"><![CDATA[<p>在我的前一篇文章「<a href="http://dev-xdworks.dev/posts/2012/10/01/specification-by-example/">Specification by Example - 團隊如何交付正確的軟體</a>」，我提到了一件在工程師界，人人皆知卻不願意說出口的「秘密」：</p>
+    <content type="html"><![CDATA[<p>在我的前一篇文章「<a href="http://blog.xdite.net/posts/2012/10/01/specification-by-example/">Specification by Example - 團隊如何交付正確的軟體</a>」，我提到了一件在工程師界，人人皆知卻不願意說出口的「秘密」：</p>
 
 <blockquote>
 「工程師竟然時常比他們的雇主或PM，更了解它的生意邏輯與流程」。

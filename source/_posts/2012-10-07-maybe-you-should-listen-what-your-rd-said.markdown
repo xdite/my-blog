@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-在我的前一篇文章「[Specification by Example - 團隊如何交付正確的軟體](http://dev-xdworks.dev/posts/2012/10/01/specification-by-example/)」，我提到了一件在工程師界，人人皆知卻不願意說出口的「秘密」：
+在我的前一篇文章「[Specification by Example - 團隊如何交付正確的軟體](http://blog.xdite.net/posts/2012/10/01/specification-by-example/)」，我提到了一件在工程師界，人人皆知卻不願意說出口的「秘密」：
 
 
 <blockquote>
