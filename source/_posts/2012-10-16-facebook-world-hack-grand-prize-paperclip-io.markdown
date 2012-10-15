@@ -9,7 +9,7 @@ categories:
 <a href="http://paperclip.io" title="Paerclip.io by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8449/7981727596_abbb2a2de9.jpg" width="500" height="257" alt="Paerclip.io"></a>
 
 
-Hi, everyone. I am happy to announce the new service I recently built at 2012 Facebook World Hack Taipei : 「[Paperclip.io](http://paperclip.io)」. Not only won the “Best Overall” prize in Taipei. We also win the **Grand Prize**. 
+Hi, everyone. I am happy to announce the new service I recently built at 2012 Facebook World Hack Taipei : 「[Paperclip.io](http://paperclip.io)」. Not only won the “Best Overall” prize in Taipei. We also win the **Grand Prize of World Hack** . 
 
 News here: [World HACK Recap and Winners](https://developers.facebook.com/blog/post/2012/10/15/world-hack-recap-and-winners/)
 
@@ -25,7 +25,7 @@ The BoostMate team, from Moscow. BoostMate analyzes your social graph and the co
 
 ====
 
-各位好，前陣子在 Facbook World Hack 奪下[台北站首獎](http://blog.xdite.net/posts/2012/09/12/paperclip-io-fb-url-like-service/)的作品[paperclip.io](http://paperclip.io)。我們很高興的宣布，這個服務再次奪下了首獎。獎品是前往 Facebook 總部一遊。
+各位好，前陣子在 Facbook World Hack 奪下[台北站首獎](http://blog.xdite.net/posts/2012/09/12/paperclip-io-fb-url-like-service/)的作品[paperclip.io](http://paperclip.io)。我們很高興的宣布，這個服務再次奪下了 **Grand Prize of World Hack** 。獎品是前往 Facebook 總部一遊。
 
 我們很高興能為台灣爭了一口氣！謝謝大家一路上的鼓勵！
 
