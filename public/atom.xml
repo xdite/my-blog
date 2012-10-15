@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-10-12T01:23:09+08:00</updated>
+  <updated>2012-10-16T01:20:04+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Paperclip.io win the Grand Prize of Facebook World Hack]]></title>
+    <link href="http://blog.xdite.net/posts/2012/10/16/facebook-world-hack-grand-prize-paperclip-io/"/>
+    <updated>2012-10-16T01:04:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/10/16/facebook-world-hack-grand-prize-paperclip-io</id>
+    <content type="html"><![CDATA[<p><a href="http://paperclip.io" title="Paerclip.io by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8449/7981727596_abbb2a2de9.jpg" width="500" height="257" alt="Paerclip.io"></a></p>
+
+<p>Hi, everyone. I am happy to announce the new service I recently built at 2012 Facebook World Hack Taipei : 「<a href="http://paperclip.io">Paperclip.io</a>」. Not only get the “Best Overall” prize in Taipei. We also win the <strong>Grand Prize of Asia</strong>.</p>
+
+<p>News here: <a href="https://developers.facebook.com/blog/post/2012/10/15/world-hack-recap-and-winners/">World HACK Recap and Winners</a></p>
+
+<p>====</p>
+
+<p>We&#8217;re pleased to announce the Grand Prize winners, whose projects stood out from the many high quality apps. These teams have won a trip to Facebook headquarters in Menlo Park, where they will meet with members of the Facebook engineering team:</p>
+
+<p>The Paperclip.io team, from Taipei. Paperclip.io indexes and sorts the things you&#8217;ve liked on Facebook and across the web, so you can easily browse your likes by category or by the date you liked them.</p>
+
+<p>The Chained Story team, from Buenos Aires. Chained Story is a web version of a storytelling game in which players take turns adding a sentence or paragraph to a story. The completed story can be published to a user&#8217;s timeline.</p>
+
+<p>The BoostMate team, from Moscow. BoostMate analyzes your social graph and the connections you have with all your friends, producing a ranking of who you&#8217;re closest to, who you interact with least, and whether those interactions were positive.</p>
+
+<p>====</p>
+
+<p>各位好，前陣子在 Facbook World Hack 奪下<a href="http://blog.xdite.net/posts/2012/09/12/paperclip-io-fb-url-like-service/">台北站首獎</a>的作品<a href="http://paperclip.io">paperclip.io</a>。我們很高興的宣布，這個服務再次奪下了亞洲區的首獎。獎品是前往 Facebook 總部一遊。</p>
+
+<p>我們很高興能為台灣爭了一口氣！謝謝大家一路上的鼓勵！</p>
+
+<p>新聞連結在此：<a href="https://developers.facebook.com/blog/post/2012/10/15/world-hack-recap-and-winners/">World HACK Recap and Winners</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bootstrappers 一鍵產生 Rails App with Bootstrap theme]]></title>
@@ -2580,53 +2611,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
 <h2>Summary</h2>
 
 <p>這是我目前整理出來的一些比較大的方向。如果照著這樣的原則走去寫程式碼，大致上都會蠻乾淨好懂的…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Asset Pipeline 加速：以 Zurb Foundation 為例]]></title>
-    <link href="http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/"/>
-    <updated>2012-07-13T03:28:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation</id>
-    <content type="html"><![CDATA[<p>前幾天貼了這一篇 <a href="http://blog.xdite.net/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>。</p>
-
-<p>順便去 <a href="https://github.com/rails/sass-rails/issues/67#issuecomment-6854291">sass-rails</a> 上面這個靠北 sass-rails 的 issue 回了一下 <a href="https://github.com/zurb/foundation">zurb/foundation</a> 主要的問題…</p>
-
-<p>我觀察 foundation 原先慢的原因是：幾乎所有的 library 都 <code>@import "base";</code>，然後 base 又 <code>@import "compass";</code>。所以導致只要 compile foundation 就無敵慢…</p>
-
-<p>不過不知道解掉這個問題可以實際上快多少。今天正打算抓下來 benchmark 時，就發現這篇靠么 zurb 的人應該收到了。他們 <a href="https://github.com/zurb/foundation/commit/b9c8d1d5ca29ceb89111084dfd530b68bfd65484">patch 掉</a>了，版本從 3.0.4 升到 3.0.5 。</p>
-
-<p>主要變更就是把原先 <code>@import "compass";</code> 改成 <code>@import "compass/css3";</code>。然後把所有的 <code>@import "base";</code> 拿掉。</p>
-
-<h2>Benchmark</h2>
-
-<p>我就開了一個空的 Rails。實際用手上的機器去測 compile 時間。</p>
-
-<h4>iMac i5 2010 mid 款 8GB ram</h4>
-
-<ul>
-<li>Compiled application.css  (9516ms)  (pid 41169) # 3.0.4</li>
-<li>Compiled application.css  (2300ms)  (pid 41483) # 3.0.5</li>
-</ul>
-
-
-<h4>Linode 4096</h4>
-
-<ul>
-<li>Compiled application.css  (12518ms)  (pid 12585) # 3.0.4</li>
-<li>Compiled application.css  (3201ms)  (pid 12853) # 3.0.5</li>
-</ul>
-
-
-<p>平均來說速度快了四倍&#8230;</p>
-
-<h2>結論</h2>
-
-<ul>
-<li>… 拜託不要偷懶直接用 <code>@import "compass";</code> 啊 XD</li>
-<li>太慢有時候可能是 SCSS Framework 的問題</li>
-</ul>
-
 ]]></content>
   </entry>
   

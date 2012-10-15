@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  提起 Pry，一般 Ruby 開發者幾乎對這套 Gem 沒有很深的印象。比較有在追社群新聞的人，會知道這是一套新的 IRB 取代方案，但僅此於如此。事實上在近一年前，Pry 被 Ruby5 報導的原因 也是因為很炫的 console。比如說 Pry 允許開發...">
+  <meta name="description" content="                  睡前看到 DK 在 twitter 講 Percona 有一場 Webniar 在講 MySQL index 的 best practices。結果連過去看時發現已經結束了。不過還是不死心的註冊了一下…大概半小時後系統通知影片和 slide 在 http:/...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/08/16/mysql-index-best-practice/">MySQL Indexing Best Practices</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-16T03:19:00+08:00" pubdate  data-updated="true" >Aug 16<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/08/16/mysql-index-best-practice/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/08/16/mysql-index-best-practice/" data-show-faces="false"></div></div>
+    
+    <p>睡前看到 <a href="http://blog.gslin.org">DK</a> 在 twitter 講 Percona 有一場 Webniar 在講 MySQL index 的 best practices。</p>
+
+<p>結果連過去看時發現已經結束了。不過還是不死心的註冊了一下…</p>
+
+<p>大概半小時後系統通知影片和 slide 在 <a href="http://percona.tv">http://percona.tv</a> 已經可以抓了…</p>
+
+<ul>
+<li>MySQL Indexing Best Practices: <a href="http://www.percona.tv/percona-webinars/mysql-indexing-best-practices">影片連結</a>、<a href="http://www.percona.com/files/presentations/WEBINAR-MySQL-Indexing-Best-Practices.pdf">投影片連結</a></li>
+</ul>
+
+
+<p>內容講的蠻紮實。教了不少讓開發者判斷 Index 如何下、下得好不好的準則…</p>
+
+<p>有時間應該整理成講義的…</p>
+
+<p>===</p>
+
+<p>打完這篇要去睡之前，又在 twitter 上看到 confreaks 丟出了新的 pry 影片 <a href="http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life">http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life</a>。（前幾天寫過的 <a href="http://blog.xdite.net/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a> )</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1732,86 +1791,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/07/13/speed-up-zurb-foundation/">Asset Pipeline 加速：以 Zurb Foundation 為例</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-07-13T03:28:00+08:00" pubdate  data-updated="true" >Jul 13<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/07/13/speed-up-zurb-foundation/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/07/13/speed-up-zurb-foundation/" data-show-faces="false"></div></div>
-    
-    <p>前幾天貼了這一篇 <a href="http://blog.xdite.net/posts/2012/07/09/3-way-to-speedup-asset-pipeline/">3 招實用 Asset Pipeline 加速術</a>。</p>
-
-<p>順便去 <a href="https://github.com/rails/sass-rails/issues/67#issuecomment-6854291">sass-rails</a> 上面這個靠北 sass-rails 的 issue 回了一下 <a href="https://github.com/zurb/foundation">zurb/foundation</a> 主要的問題…</p>
-
-<p>我觀察 foundation 原先慢的原因是：幾乎所有的 library 都 <code>@import "base";</code>，然後 base 又 <code>@import "compass";</code>。所以導致只要 compile foundation 就無敵慢…</p>
-
-<p>不過不知道解掉這個問題可以實際上快多少。今天正打算抓下來 benchmark 時，就發現這篇靠么 zurb 的人應該收到了。他們 <a href="https://github.com/zurb/foundation/commit/b9c8d1d5ca29ceb89111084dfd530b68bfd65484">patch 掉</a>了，版本從 3.0.4 升到 3.0.5 。</p>
-
-<p>主要變更就是把原先 <code>@import "compass";</code> 改成 <code>@import "compass/css3";</code>。然後把所有的 <code>@import "base";</code> 拿掉。</p>
-
-<h2>Benchmark</h2>
-
-<p>我就開了一個空的 Rails。實際用手上的機器去測 compile 時間。</p>
-
-<h4>iMac i5 2010 mid 款 8GB ram</h4>
-
-<ul>
-<li>Compiled application.css  (9516ms)  (pid 41169) # 3.0.4</li>
-<li>Compiled application.css  (2300ms)  (pid 41483) # 3.0.5</li>
-</ul>
-
-
-<h4>Linode 4096</h4>
-
-<ul>
-<li>Compiled application.css  (12518ms)  (pid 12585) # 3.0.4</li>
-<li>Compiled application.css  (3201ms)  (pid 12853) # 3.0.5</li>
-</ul>
-
-
-<p>平均來說速度快了四倍&#8230;</p>
-
-<h2>結論</h2>
-
-<ul>
-<li>… 拜託不要偷懶直接用 <code>@import "compass";</code> 啊 XD</li>
-<li>太慢有時候可能是 SCSS Framework 的問題</li>
-</ul>
-
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1846,6 +1825,10 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/10/16/facebook-world-hack-grand-prize-paperclip-io/">Paperclip.io win the Grand Prize of Facebook World Hack</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/10/12/bootstrappers-create-rails-app/">Bootstrappers 一鍵產生 Rails App with Bootstrap theme</a>
       </li>
     
@@ -1859,10 +1842,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
     
       <li class="post">
         <a href="/posts/2012/09/12/paperclip-io-fb-url-like-service/">paperclip.io : track urls you ever liked</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/09/05/912-920-in-sf/">9/12 - 9/20 在舊金山</a>
       </li>
     
   </ul>
