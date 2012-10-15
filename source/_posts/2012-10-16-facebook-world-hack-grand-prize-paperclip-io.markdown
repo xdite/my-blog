@@ -9,7 +9,7 @@ categories:
 <a href="http://paperclip.io" title="Paerclip.io by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8449/7981727596_abbb2a2de9.jpg" width="500" height="257" alt="Paerclip.io"></a>
 
 
-Hi, everyone. I am happy to announce the new service I recently built at 2012 Facebook World Hack Taipei : 「[Paperclip.io](http://paperclip.io)」. Not only get the “Best Overall” prize in Taipei. We also win the **Grand Prize of Asia**. 
+Hi, everyone. I am happy to announce the new service I recently built at 2012 Facebook World Hack Taipei : 「[Paperclip.io](http://paperclip.io)」. Not only won the “Best Overall” prize in Taipei. We also win the **Grand Prize of Asia**. 
 
 News here: [World HACK Recap and Winners](https://developers.facebook.com/blog/post/2012/10/15/world-hack-recap-and-winners/)
 
