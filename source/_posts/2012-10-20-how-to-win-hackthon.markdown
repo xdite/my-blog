@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "如何在 Hackthon 中獲勝？Paperclip.io 獲獎的背後祕辛"
+title: "如何在 Hackathon 中獲勝？Paperclip.io 獲獎的背後祕辛"
 date: 2012-10-20 16:53
 comments: true
 categories: 
