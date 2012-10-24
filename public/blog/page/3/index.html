@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  命名是 CS 中兩大難題，（ref: 在 DK 週一 Passion Bean 的 Talk 上聽到的 ）。今天在公司批票，剛好稍微教了一下同事如何設計寫出好讀的 Ruby method 名稱，覺得蠻有價值的，就隨手整理了一下貼上來。場景手機需要驗證，需要寫...">
+  <meta name="description" content="                  權限存取設計是在開發 Application 中相當讓人棘手的一個題目。在一個網站開始建設的初期，通常這樣的問題並不會浮現，畢竟一般人的需求大半只會有 user 和 admin 兩種角色。但是隨著網站長大，更多的生意需求浮現，第三種角色的出現，通常就會把原本...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,244 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-30T02:12:00+08:00" pubdate  data-updated="true" >Jul 30<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/" data-show-faces="false"></div></div>
+    
+    <p>權限存取設計是在開發 Application 中相當讓人棘手的一個題目。</p>
+
+<p>在一個網站開始建設的初期，通常這樣的問題並不會浮現，畢竟一般人的需求大半只會有 user 和 admin 兩種角色。但是隨著網站長大，更多的生意需求浮現，第三種角色的出現，通常就會把原本乾淨的 code 弄得骯髒不堪。</p>
+
+<h2>多種角色的權限設計難題</h2>
+
+<p>當只有 user 和 admin 的情況下，你可以在 <code>view</code> 裡面單純的做出這樣的設計</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_admin</span> <span class="p">?</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;Admin Pannel&quot;</span><span class="p">,</span> <span class="n">admin_panel_path</span> <span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>並且在 controller 裡面加上權限判斷</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Admin</span><span class="o">::</span><span class="no">ArticleController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:require_is_admin</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但一段時間之後，User Story 被加進了這樣的需求:</p>
+
+<ul>
+<li>使用者可以被設定為「editor」</li>
+<li>擁有「editor」角色的使用者，可以進入 admin 後台發表、編輯文章</li>
+<li>擁有「edtior」角色的使用者，進入 admin 後台內的活動範圍僅限縮在文章後台內</li>
+<li>擁有「edtior」角色的使用者，進入 admin 後台內，不可以看到其他後台選項。</li>
+</ul>
+
+
+<p>身為開發者的你，要如何在現有後台內加入這樣的設計？</p>
+
+<p>不用實際動手寫也知道，若如以往使用 if / else 的設計，Helper / Controller / View 鐵定變成一團血肉模糊。</p>
+
+<p>抱怨不能解決問題，但世界上是否存在乾淨的解答？</p>
+
+<h2>Rule-engine based authorization library: Cancan</h2>
+
+<p>答案就是：「Rule Engine」。</p>
+
+<p>「針對多種條件執行多種動作」，此類的使用者需求，無論是使用 if / else，甚至是 case when，架構還是不免會一團混亂。與其承襲舊思路，不如啟用新想法「Rule Engine」實作：預先設計撰寫一套邏輯規則引擎，而後程式針對預設的規則進行邏輯判斷後執行。</p>
+
+<p>而「角色權限」的設計需求上，正特別適合用 Rule Engine 這樣的觀念去建構。Rails 界知名的 authorization library <a href="https://github.com/ryanb/cancan">cancan</a> 正是以此作為基礎。</p>
+
+<h3>Cancan 可以做到的：介面單純化</h3>
+
+<p>cancan 希望做到的是，把權限判定的處理部分從 Helper / Controller / View 裡面，全部移到 <code>app/models/ability.rb</code> 進行判定。也因此可以做到</p>
+
+<ul>
+<li>View 只需要判斷是否可以執行動作，而不必問是否有權限</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">can?</span> <span class="ss">:update</span><span class="p">,</span> <span class="vi">@article</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">edit_article_path</span><span class="p">(</span><span class="vi">@article</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Controller 不需要手動判斷是否具有權限</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">authorize_resource</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="c1"># @article is already authorized</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但驚人的是 <strong> view 的權限會是與 controller 的權限判定規則 </strong> 卻是一致的。（以往「自刻」權限判定，往往加了 view 卻會忘記 controller, 加了 controller 卻會忘記 view ）</p>
+
+<h3>Cancan 希望做到的：權限中心化管理</h3>
+
+<p>而是否有權限存取，則全交給 <code>app/models/ability.rb</code> 去判斷處理。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Ability</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">CanCan</span><span class="o">::</span><span class="no">Ability</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>      <span class="c1"># not logged in</span>
+</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
+</span><span class='line'>      <span class="n">basic_read_only</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
+</span><span class='line'>      <span class="c1"># admin</span>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:member</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:create</span><span class="p">,</span> <span class="no">Topic</span>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
+</span><span class='line'>        <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">can</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
+</span><span class='line'>         <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">basic_read_only</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="c1"># banned or unknown situation</span>
+</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
+</span><span class='line'>      <span class="n">basic_read_only</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">protected</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
+</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>小結</h2>
+
+<p><a href="https://github.com/ryanb/cancan">cancan</a> 是一套相當 powerful 的權限管理系統，但是它的文件卻相當不好讀，第一次想使用 cacan的 developer 很難從文件上找到自己想要的範例以及 api，或者了解其原理構造。如果沒有先給一些基礎範例，往往會是寸步難行。</p>
+
+<p>下一篇我會深入頗析 Cancan 更深的設計原理，讓大家更看得懂 cancan 的 API 到底想幹什麼&#8230;.。</p>
+
+<h2>系列連結</h2>
+
+<ul>
+<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a></li>
+<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a></li>
+<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a></li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2281,255 +2519,6 @@ I think you should use an
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/04/18/startup-hosting-plan/">Startup : 如何挑選適合的 Hosting Plan?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-04-18T22:46:00+08:00" pubdate  data-updated="true" >Apr 18<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/04/18/startup-hosting-plan/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/04/18/startup-hosting-plan/" data-show-faces="false"></div></div>
-    
-    <p>這個議題在今年創業潮之前算是比較冷門，沒看到什麼人在討論。最近大概是大家瘋創業，有實際上的頻寬需求，所以看到網路上又開始吵頻寬的價格，一些討論串看起來讓人都有股張飛打岳飛的錯覺。</p>
-
-<p>這個主題我在<a href="http://wp.xdite.net/?p=1130">三年前</a>其實寫過類似的內容，現在環境當然有點不一樣了，被 <a href="http://twitter.com/pirrer">Fox</a> 拱出來寫一篇 2012 版的。</p>
-
-<h2>Hosting Plan</h2>
-
-<ul>
-<li>Simple CMS and Facebook Pages</li>
-<li>Shared Hosting</li>
-<li>VPS</li>
-<li>Cloud Hosting</li>
-<li>Dedicated Hosting</li>
-<li>Amazon EC2</li>
-</ul>
-
-
-<p>不少創業者談到開網站，始除了最原始的技術支出之外，一開始最令人覺得恐怖的就是頻寬的支出了。然後談到頻寬這個議題，接下來就會陷入 panic 。</p>
-
-<p>台灣的 IDC 價格是不便宜，但不代表這樣的價格不能讓人做事，主要還是看公司的營運策略。</p>
-
-<h3>Bootstrap 期：利用 Tumblr + Facebook</h3>
-
-<p>在過去，作內容網站要直接養一批內容觀眾是困難的。創業者必須先架起一個內容網站（也許是 Wordpress 或者是 Customized CMS），探尋適合的 Hosting Plan，接下來每日寫文，做好 SEO…etc.</p>
-
-<p>於是一開始會糾纏於到底要選用那種 Share Hosting 比較便宜（Blehoust? Dreamhost?）…</p>
-
-<p>2009 與 2012 年，創業狀況很不一樣的地方在於，現在我們有了 <a href="http://tumblr.com">Tumblr</a>、成熟的 Facebook 行銷工具、完整的 Amazon Web Services 以及地區配套。</p>
-
-<p>現今，一般的內容網站最主要的流量來源龍頭，不再是 Search Engine，而是 Facebook。一個網站若做好 facebook-optimized，成效往往會比投注在 SEO 上更加的驚人。</p>
-
-<p>所以，熟悉網路議題操作者。會改用以下手法：先用 Tumblr (簡單的 CMS) + Facebook 專頁，進行議題操作養出粉絲。確定這一塊主題有一定的市場，才決定是否拓展成「訂製網站」規模。</p>
-
-<p>知名網站「<a href="http://icook.tw">iCook</a>」一開始其實就是用粉絲團的方式先去操作，買出 Application 製作的時間，即使身處在製作期也不至於造成沒有網站就沒有觀眾。而是一開始就把觀眾養在 Facebook，把人養出來之後等到網站上線後再一口氣倒過去。避免掉內容網站一開始上線沒觀眾沒內容，還需要很多時間經營的尷尬。</p>
-
-<h4>使用 Tumblr 的原因：Scaling</h4>
-
-<p>要養內容的方式有很多種，不一定需要自己弄一個 Wordpress + Shared Hosting。不過這當中最關鍵的點在於，其實一般人付不起需要自己 Host 內容網站的成本。</p>
-
-<p>我並沒有誇飾。</p>
-
-<p>經營不錯的內容網站，一個網站 daily 30000 PV 並不誇張，Wordpress 本身的好處是有很多第三方 plugin，帶來網站修改的靈活性。但壞處也是這些第三方 plugin 本身的效能低落。可以將這些 plugin 比喻成類固醇，短期績效很棒，但長期副作用也很強大。</p>
-
-<p>若網站經營者本身不具備 Performance Tuning 能力，大概到 daily 10000 PV 規模開始，就會開始力不從心。每到當日的尖峰時段（10:00, 15:00, 22:00 ），就會倒站。</p>
-
-<p>像<a href="http://briian.com">重灌狂人</a> 這樣等級的 Blog，都要租到不錯的 Dedicated Hosting 機器才擋得住。一個月要花上一兩百塊美金跑不掉…</p>
-
-<p>而 <a href="http://tumblr.com">Tumblr</a> / <a href="http://wordpress.com">Wordpress.com</a> 這種 vendor CMS，雖然修改彈性是比較小一點點，但是背後的 scaling 能力卻是完全不用擔心。就算養到數十萬 PV /daily …也不用擔心倒站。</p>
-
-<h3>Shared Hosting</h3>
-
-<p>Shared Hosting 在幾年前比較流行，主要是因為大多數的 Open source Application 還是以 PHP 為主。<code>上傳</code>了就能開始使用。俗稱的「空間」大部分是指這樣的方案。</p>
-
-<p>Shared Hosting 大概的價錢都在 $10/month 以下。比較好的 Solution 像是 <a href="http://mediatemple.net/">Media Temple</a> 大概會在 $20/month 以上。</p>
-
-<p>不過 Shared Hosting 就如同字面上的意思，是跟人 Shared 的。Hosting 廠商，將一台機器切成幾十份資源，租給大家。如果你有爛鄰居（spam site）或者是胖鄰居(heavy site)，很容易被連帶牽連倒站。</p>
-
-<p>說人胖鄰居其實也不公平，7000/daily 的 content site 基本上就會超過 Shared Hosting 廠商提供的 CPU limit 了（超過也是倒站）。</p>
-
-<h3>VPS</h3>
-
-<p>VPS 也是這三年來變得比較成熟的 solution，主要是因為虛擬機技術的成熟 (ex. <a href="http://www.xen.org/">Xen</a>) 和 PHP 以外的 Language Framework 變得很熱門（Ruby on Rails / Python …etc)</p>
-
-<p>會佈署上 VPS 的 Application 共通特徵是，佈署時通常需要自訂客製整塊 stack。也就是開發者自己要搞定 MySQL、HTTP Server、Mail Server 、 Memcached Server 等等。</p>
-
-<p>雖然是小網站，但這些 Server 疊一疊加一加至少也要吃掉 512 MB 的常駐記憶體空間。</p>
-
-<p>VPS 市場在這幾年也有比較大勢底定的走向。一般來說，如果你要人推薦哪一家廠商比較優質？幾乎大多數的人都會推薦 <a href="http://linode.com">Linode</a>。</p>
-
-<p><a href="http://linode.com">Linode</a> 的起步價是 $19.95 USD/month (512 MB)。</p>
-
-<p>除了便宜之外，Linode 的優勢在於最近這一兩年來在東京佈了點。從台灣連過去 Ping 值大概可以壓在 80ms 以下。（美國就算點再好至少要 130ms 起跳，這樣的 ping 值會讓使用者「有感」）</p>
-
-<p>所以在台灣，Linode 會算是一個可以考慮的 Option。</p>
-
-<h3>Cloud Hosting (單指 PaaS )</h3>
-
-<p>雖然這樣講有點傷害到人。但是這個市場自從 GAE 改變收費模式而 Heroku 開始支援除了 Ruby 以外的其他語言之後。這個市場就變成了&#8230;.Cloud Hosting = 「<a href="http://heroku.com">Heroku</a> 與其他」。</p>
-
-<p>Heroku 的模式是開發者必須按照 Heroku 規定的架構設計程式，然後把網站上傳即可。而 Heroku 本身也會提供一些基礎措施方便讓開發者銜接而不需要自幹（ex. memchaced, mail, MySQL, DNS, backup…etc.）</p>
-
-<p>缺點當然就是架構在某方面被限制住了，設計修改起來不是那麼靈活。但好處是 Scaling 的問題 Heroku 可以幫你解決。資源不夠用，信用卡只要開下去就可以撐著了。</p>
-
-<p>當然會有一些開發者覺得 Heroku 的收費很貴，覺得不值得。但是在真實的運營狀況中，Scaling 從來不是一個很簡單的課題。一台機器的架構當然很簡單，但是兩台、三台、十台、百台，那就幾乎不是一般純開發者能夠 handle 的狀況。</p>
-
-<p>有一些開發者，如 Facebook Application / iOS 開發者，他們往往只懂設計「遊戲」和專注本業而已，而不是那麼熟 Scaling。於是他們通常會採取這樣的模式：付錢 Scale，讓事業長上去，繼續賺錢。買到時間空間之後再補人改架構。</p>
-
-<p>不過 Heroku 也不是沒有致命缺點，Heroku 幾年來都只有美東的點而已，美東以外的點，從來沒有明確的時間表和承諾。我估計以後也不可能會有&#8230;.（大工程）</p>
-
-<h3>Dedicated Hosting</h3>
-
-<p>Dedicated Hosting 就是租整台機器給你用，然後贈送一定 quota 的流量（大概是給個幾 T 的 free 流量，超過另算）。<a href="http://blog.gslin.org">@gslin</a> 在他以前的文章裡面有推薦幾家外國品質比較穩定的廠商：</p>
-
-<ul>
-<li><a href="http://www.egihosting.com/">http://www.egihosting.com/</a></li>
-<li><a href="http://www.hostgator.com/">http://www.hostgator.com/</a></li>
-<li><a href="http://www.layeredtech.com/">http://www.layeredtech.com/</a></li>
-<li><a href="http://www.limestonenetworks.com/">http://www.limestonenetworks.com/</a></li>
-</ul>
-
-
-<p>當然，國內當然是…沒有推薦的廠商 XDD</p>
-
-<p>Dedicated Hosting 的優點當然是整台機器資源是你的，而且換算成「單位成本」C/P 值最高。但缺點通常也是你要自己「管」。包括備份、Monitoring 什麼都要自己來。需要的底子相對功力要跟很多（VPS 多半還提供個簡單的 gui console 可以幫開發者弄備份、監視系統狀態…etc）</p>
-
-<p>台灣的人會跑去租美國的 Dedicated Hosting 多半是拿來作需要高輸出流量但品質不需要那麼好（高 ping 值）的 Service &#8230;.如影音之類的 streaming server 。</p>
-
-<p>因為美國頻寬非常便宜，大概是 400TWD - 900 TWD / Mbps 上下（看你的量，遠低於這個數字到非常誇張的地步的都有&#8230;）。而「反應」比較慢的這件事在「影音服務」上面相對是可以被接受的。</p>
-
-<h3>AWS : EC2</h3>
-
-<p>自從 AWS 在亞洲地區佈點之後（新加坡、東京）之後，在台灣幾乎就直接吃掉 VPS 等級這一塊的市場。原因當然就是 C/P 值真的還算夠，價格也能讓人接受。</p>
-
-<p>而在地點的選擇部分， 台灣 <-> 東京  比 台灣 <-> 新加坡 來的有優勢許多（routing 和 bandwidth）。</p>
-
-<p>所以很多人創業租機器的首選，就是租東京的 EC2 了。</p>
-
-<p>但別以為 AWS 真的其實很便宜，它只是對一般入門者門檻很低而已（不需要保證 commit 量，「牌價」比較令人有辦法親近）。真要比較起來，東京 AWS 的流量其實比台灣 IDC 的價格還要「貴」。</p>
-
-<p>在 <a href="http://twitter.com/deduce">@deduce</a> 這篇 <a href="https://www.facebook.com/yiru.lin/posts/10150695440498300?comment_id=22685170">iCook 圖片費用的討論</a>。</p>
-
-<p>提到在 S3+ Cloudfront 上 250GB 的流量只要花費台幣 1500。不知道在台灣要花多少錢？</p>
-
-<p>事實上若把 iCook 放在台灣的機房，光計流量的花費是可以低於 1500/month 的。</p>
-
-<p>==== FB 分隔線 ====</p>
-
-<p>250G 如果算 30 天，平均 1 天 8.3G 左右。一天流 8.3G 出去大概就是 0.83M 的線左右。所以只要租一條 1M 的線就夠擋了。如果你向 IDC （中華 / TFN ) 租一條 1M 的線，拿到的牌價可能會是 2000+ / m 左右。但是如果是一次租到 10M+ 的線，或者是去跟二房東租，絕對可以拿到 1500/m 以下的價格（900-1500 不等）</p>
-
-<p>所以不可能是 40k 或 50k 這個價錢。最多只會花到原先所說的 1.5k 以下的價格。而事實上 amazon 的頻寬還比台灣純租 IDC 的價格貴，也不算什麼便宜的 CDN。只能算是刷卡就有，而且不用保證 commit 的水管&#8230;.。若真要省錢的話通常會去跟國外專業的 CDN 廠商談 地區性 / global CDN，不過這都是量大之後的事了&#8230;.</p>
-
-<p>==== FB 分隔線 ====</p>
-
-<p>當然事實上也不能這樣比。因為這個價格不是 colocated，而是 CDN 的價格（雖然 AWS 價格兩者是一樣）。但說實話，CDN 比 Cloudfront 便宜而且品質高的選項不是沒有，純優質流量（Hinet/TFN）其實也比 EC2 便宜。這都不是錯覺。</p>
-
-<p>只是你可能都要有一點 connection 或必須要有保證 commit 的使用量才拿得到。</p>
-
-<p>對沒有「背景」的 Startup，EC2 才相對變成了「好」選擇…</p>
-
-<h3>IDC : colocation</h3>
-
-<p>以上講的都是廠商提供機器與流量，創業者不需要自己出任何設備的狀況。但事實上還有另外一種情形，就是你自己有機器，直接放在 IDC 裡面。</p>
-
-<p>現在什麼年代了，大家都雲來雲去，為什麼還要自己買機器放在 IDC 裡面？</p>
-
-<p>「軟體」「雲」其實不是萬能。</p>
-
-<p>有一些特殊的服務和需求，不買硬體 Solution 丟在 IDC 裡面，用軟體自己幹反而會很昂貴。比如說 <a href="http://www.f5.com.tw/">F5</a>、<a href="http://www.netapp.com/us/">NetApp</a>、<a href="http://www.bluecoat.com/">Bluecoat</a>，這些東西自己幹就會很貴。所以才會有自己買設備放在機房的需求。</p>
-
-<p>再來是 EC2 始終是虛擬機，而且有一些 Web services 因為業務型態，需要訂製的 Server 才能達到需求。</p>
-
-<p>比如說 37 signals 的這兩篇文章</p>
-
-<ul>
-<li><p><a href="http://37signals.com/svn/posts/2471-nuts-bolts-new-datacenter">Nuts &amp; Bolts: New Datacenter!</a> 提到 EC2 I/O capacity 不夠</p></li>
-<li><p><a href="http://37signals.com/svn/posts/1185-the-need-for-speed-making-basecamp-faster">The need for speed: Making Basecamp faster</a> 提到他們因為速度需求，需要把整個站都 run 在記憶體裡，需要那種有 128 GB 記憶體的怪物機器。</p></li>
-</ul>
-
-
-<p>又或者是你的客戶有很強的地域性需求，比如說用戶都在台灣或者是用戶都在中國。才適合 colocation。</p>
-
-<p>而租 IDC 作 colocation 並不只是頻寬支出。你要先買機器、然後租機櫃（一個櫃 幾千元/月），然後才是談頻寬(2000+/Mbps)。</p>
-
-<p>所以一般 startup 並不建議從這個方向直接開始。因為起步成本實在太高，而且手上沒有一定的 commit 量幾乎價格砍不下來</p>
-
-<h3>HiCloud</h3>
-
-<p>我個人對 <a href="http://hicloud.hinet.net/">HiCloud</a> 並沒有什麼喜歡和討厭。因為 HiCloud 實際在我的生意模型裡面從來不是個選項。HiCloud 的模型比較像是 Hinet 提供你一個可以用「低於牌價」的機會租到優質頻寬+一小台機器資源的選項。</p>
-
-<p>這是一般 Startup 在沒有向固網業者有議價能力時的其中一個選擇。</p>
-
-<p>你會注意到我在這篇文章中，提到了「優質頻寬」這個字不只一次。很多沒有實際網站運營經驗者，寫文章的攻擊重點往往是擺在價格。而忽略了更重要的一個重點「頻寬品質」。</p>
-
-<h4>什麼樣的價格，什麼樣的品質，做什麼樣的服務</h4>
-
-<p>如果你平常有觀察國內一些大網站使用的頻寬。你會發現他們幾乎只會租這三家（Hinet , TFN, Seednet）的頻寬，其他的不太考慮。這是因為這三家業者互連或對國外的水管真的就很粗。網站開起來也非常的快。</p>
-
-<p>當然這個現象不是絕對，但是 Web Front Server幾乎都會在這三家的點上面。至於周邊 Service 就不一定了，比如說圖片、相片就會丟在 CDN 上（省去圖床 Server 的 tunning），影片就會丟在外國機器、三流頻寬、次等 CDN 上。</p>
-
-<p>都是處於架構以及 C/P 值的需求。影片可以接受比較高的 latency 所以就會這樣作，節省開銷。</p>
-
-<p>網站開啟的「速度」，攸關著一個網站的 User Experience 和 Conversion Rate
-。（註）</p>
-
-<p>====</p>
-
-<p>ref : <a href="http://www.cw.com.tw/article/article.action?id=5032062&amp;page=2">亞馬遜執行長貝佐斯　「性價比」最高的CEO</a></p>
-
-<p>例如，貝佐斯不斷改善亞馬遜網站頁面下載速度，因為分析顧客使用網站習慣後，他們發現，網頁下載速度只要慢○．一秒，顧客在網站的使用時間就會減少一％。</p>
-
-<p>====</p>
-
-<p>「速度」影響的指標也還不僅只這些，SEO 以及 Alexa 的 ranking 甚至也有大幅相關。</p>
-
-<p>所以，也不是說誰誰誰便宜，就應該喊誰誰誰應該降價太誇張。</p>
-
-<p>難道 40 盎司巨無霸牛排只要 900 元，高級鐵板燒店裡面賣的「和牛」就應該比照辦理嗎？</p>
-
-<h2>Summary</h2>
-
-<p>當然，寫這篇文章的初衷只是把一些過去作網站測過和用過的 solution 寫出來。不同型態的服務，和團隊的人力配置，適用不同的架構和方案。</p>
-
-<p>AWS 對一般 Startup 是友善，也是 pay as you go，只是千萬不要誤以為這是萬靈丹。</p>
-
-<p>只是看到一些張飛打岳飛的討論有感 …</p>
-
-<p>BTW，如果你有興趣談更多這方面的話題的話，歡迎 <a href="http://rocodev.com/contact/">寫信聯絡</a> 我。</p>
-
-<p>如果你想研究更多美國的 hosting plan，可以上<a href="http://www.webhostingtalk.com/">webhostingtalk.com</a> 這個網站，這裡有很多討論。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -2564,6 +2553,10 @@ I think you should use an
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/10/23/some-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 能力培養篇</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/10/20/how-to-win-hackthon/">如何在 Hackathon 中獲勝？Paperclip.io 獲獎的背後祕辛</a>
       </li>
     
@@ -2577,10 +2570,6 @@ I think you should use an
     
       <li class="post">
         <a href="/posts/2012/10/07/maybe-you-should-listen-what-your-rd-said/">也許你該停下來聽聽工程師怎麼說</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/01/specification-by-example/">Specification by Example - 團隊如何交付正確的軟體</a>
       </li>
     
   </ul>
