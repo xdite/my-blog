@@ -115,7 +115,15 @@ categories:
 
 這一篇是關於「什麼技能建議學」。下一篇的主題我將談「什麼樣的決定不要作」。
 
+===
 
+順便插播廣告：
+
+Facebook Hack Meetup Taiwan 即將在 11/4 (日）下午舉辦第一次 Local Meetup 以及演講分享。這次演講將會邀請 FB World Hack 台北站的得獎者分享經驗以及舉辦座談。
+
+地點將會在 倉庫藝文空間。歡迎大家踴躍報名！（入場費 300 台幣）
+
+<http://www.meetup.com/Facebook-Hack-Meetup-Taiwan/events/87703602/>
 
 
 
