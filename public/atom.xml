@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-10-26T13:43:35+08:00</updated>
+  <updated>2012-10-28T02:21:55+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[被迫才是進步的原動力]]></title>
+    <link href="http://blog.xdite.net/posts/2012/10/28/force-to-improve-yourself/"/>
+    <updated>2012-10-28T02:12:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/10/28/force-to-improve-yourself</id>
+    <content type="html"><![CDATA[<p>昨天看到神人 vgod 寫了一篇 <a href="http://blog.vgod.tw/2012/10/27/premature-optimization/">過早最佳化是萬惡的根源</a>，這篇文章是不錯。但是，對於「職業」那邊實在有太多奇怪的假設。</p>
+
+<p>想了一下，決定還是在 FB 寫了一下我的看法，然後再轉貼到這裡來。</p>
+
+<p>===</p>
+
+<p>簡單回一下好了。關於職業的部分。我本來也是覺得就如同跟 @vgod 一樣所說，在裡面可以全新鍛鍊和學習各種知識和技能。</p>
+
+<p>我在大學裡面，就是抱著這樣的心態，學習各種知識。我在大學裡面最認真修的課，不是數學（唯一感興趣的是線性代數、離散數學、代數）
+，而是&#8230;.去資科系基礎理論的課，什麼作業系統、計算機結構、演算法、資料結構、數位電路、etc&#8230;大概能修的我都修了。數學系最
+重視的微積分、高等微積分，我沒有很喜歡。而且，我大概下課的時間都泡在系上的機房，弄網路、伺服器、寫寫簡單的網站。</p>
+
+<p>而最後我也是抱著這樣的心態，選擇了第一份工作。因為我覺得大學的環境才能讓「自己有選擇想練什麼武功的自由」。
+我希望一直這樣持續下去。</p>
+
+<p>然而，接下來的事情。你們知道了，我被打臉了。狠狠的打了一巴掌。</p>
+
+<p>那一天，我才發現我關在學校自己練的等級，跟職業的人是差上那麼多。這才是讓我選擇馬上離開那個環境的主因。</p>
+
+<p>很多人以為「自己有選擇想練什麼武功的自由」，才能讓自己的 power 開到最大。我對這件事情有截然不同的感受。為什麼職業的環境會成長很快。因為上班領錢，才有限時被交出成果的壓力。而且那個壓力能造成的動力是遠比自己下定決心要練什麼技能的動力還要可怕的。上班，你會被迫限時學到跟這個領域所有「基礎」的工具。一個月「基礎的程度」，可能直接贏掉自己自由學「半年」以上的程度。</p>
+
+<p>而且特別是，如果你的同事和老闆，都是佼佼者的話&#8230;.。到現在我還是相當感謝曾經共事過的 @gugod, @ihower, @gslin, @hlb, @嬸嬸 XD</p>
+
+<p>我學到的就是。如果你想把什麼東西學好，稍微深呼吸一下（當然就是自學一點皮毛，希望不要進去之後死太慘），就跳下去&#8230;。
+害怕溺水的恐懼會被讓你瞬間就學會游泳。（如果你跳下去就死拜託不要怪我&#8230;orz）</p>
+
+<p>如果你曾經看過我半年前寫過的<a href="http://xdite-smalltalk.tumblr.com/post/18303489993">為什麼我想創業</a> 一文。
+你就會知道，我在這四年裡面「被迫」學會了多少事。</p>
+
+<p>職業工程師，並不是只有用 PHP 寫了一千個論壇和購物程式那麼無聊。老實說，寫到第二個第三個，你就會知道 Framework 的重要性。</p>
+
+<p>當然，如果你之後玩到神兵級 Framework 如「Ruby on Rails」。那麼你還會更會知道，這世界不是只有 CRUD。（Ruby on Rails 本身
+的架構採用了大量 <a href="http://www.amazon.com/Patterns-Enterprise-Application-Architecture-Martin/dp/0321127420">Patterns of Enterprise Application Architecture</a> 這本書裡面的實作，裡面也大量用了 Design Pattern 的技巧）。</p>
+
+<p>不只如此，你還會從周遭的 ecosystem 的 plugin 中學到各種各式各樣的 pratical、theoretical 的佼佼實作。</p>
+
+<p>當這些東西看多了以後你就更進一步的發現，語言根本不是重點，掌握這些「企業級理論」（註）的核心精隨，才是重點。</p>
+
+<p>而當進一步又將 Ruby on Rails 玩的十分純熟之後。就會馬上意識到，用什麼語言寫，把 code 寫得多快已經完全不是重點了。</p>
+
+<ul>
+<li>如果專案控管能力不佳，需求一直在改變，那麼就算你的「架構理論」玩的再漂亮都是一樣的，結不了案就是結不了案。</li>
+<li>如果團隊協調能力不佳，那麼不管公司投再多人進來，累死的就是那幾個人而已。</li>
+<li>如果時間成本能力不佳，不是會造成公司大虧損賠本，甚至會專案進行到一半就被迫終止。</li>
+</ul>
+
+
+<p>很多人以為我網站寫的很快，是因為 Framework 的關係。真的不是這麼簡單&#8230;，那是我身上擁有所有的技巧綜合出來的結果。</p>
+
+<p>如果我沒有領錢「被迫」進行我很多「不喜歡」的事，我不會學到這一些東西。如果我沒有「被迫」去處在那一些環境，我能學到的東西就限於「我在學校時一開始能望過去的眼界」，而不是環繞在我周遭各個神人的眼界。</p>
+
+<p>而這也是為什麼我會寫出那兩篇文章的初衷。我不是出來走這麼一遭，不會發現我當初那樣的假設，完全不堪一擊。</p>
+
+<p>而再舉一個例子，曾經很多人一直對我，開口閉口就是 Ruby on Rails 值得學習，感到很不解。事實上，我也是從這個 Framework 的進化裡面，
+才學到人不能把眼界只侷限在某一個端點。我個人的能力，很大的原因是跟隨這個 Framework 一起成長的。如果我當初不是碰這個 Framework 起來，我恐怕真的沒有這個能力成長的這麼迅速。因為台灣沒有太多「大型」Scale （PV 千萬以上） 的網站，可以逼迫一個工程師直接從最基礎的 Turtorial 中，自學到那麼多 optimze techniques、best practices（更何況這種等級公司的入場卷，也不是你說想要應徵就能應徵上)。</p>
+
+<p>從這個 Framework ecosystem 裡面產生出來的 plugin 也是世界上各式各地的程式設計師貢獻出來的，這裡面融合了他們公司現在「最好」的 pratices，有些甚至是 future architecture。如果我在一間悶頭自幹工具的公司上班，我是沒有機會見識到這一切的。</p>
+
+<p>我不認為自己一開始有多好的眼界，能有辦法看到多棒的未來，並且照著我所看到的事堅定的往前走。甚至，直到現在，我現在還是不認為自己還是具備這個能力。但我唯一知道的是，我不能把自己鎖在自己的眼界裡。</p>
+
+<p>我想說的話，就只有這樣而已。</p>
+
+<p>[註] ：Deisgn Pattern、Agile、Testing、Scaling、Performace Tuning …</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[給尚未大學畢業的朋友的幾個人生建議 - 挑戰未來篇]]></title>
@@ -2289,204 +2360,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
 <h3>小結</h3>
 
 <p>這樣你的 application 「理論上」就可以跟著 bootstrap 的小升級而升級，而不會被纏到這個纏那個&#8230;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Cancan 實作角色權限設計的最佳實踐(3)]]></title>
-    <link href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/"/>
-    <updated>2012-07-30T23:03:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3</id>
-    <content type="html"><![CDATA[<h3>角色判斷 current_ability</h3>
-
-<p>這是一段普通的 <code>ability.rb</code> 權限範例 code。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Ability</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CanCan</span><span class="o">::</span><span class="no">Ability</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">blank?</span>
-</span><span class='line'>      <span class="c1"># not logged in</span>
-</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
-</span><span class='line'>      <span class="n">basic_read_only</span>
-</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
-</span><span class='line'>      <span class="c1"># admin</span>
-</span><span class='line'>      <span class="n">can</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">protected</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>一般開發者最有疑問的是 <code>def initialize(user)</code> 這一段程式碼中的 user 到底是怎麼來的？怎麼會沒頭沒尾的天外飛來一個 user，然後對這個 user 進行角色判斷就可以動了？</p>
-
-<p>這一段要追溯到&#8230;<a href="https://github.com/ryanb/cancan/blob/master/lib/cancan/controller_additions.rb">lib/controller_additions.rb</a> 中的這一段 current_ability。</p>
-
-<p>cancan 裡面去判斷是否有權限的一直是 <code>current_abibilty</code>，而 <code>current_abibilty</code> initialize 的方式就是塞 current_user 進去。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">current_ability</span>
-</span><span class='line'>  <span class="vi">@current_ability</span> <span class="o">||=</span> <span class="o">::</span><span class="no">Ability</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>所以 <code>initialize(user)</code> 裡的 <code>if user.blank?</code> 其實就等於 <code>if current_user.blank?</code>（若沒登入）。</p>
-
-<p>這樣去解讀程式碼，看起來就好理解很多了…</p>
-
-<h3>權限類別解說 :manage, :all, ..etc.</h3>
-
-<p>cancan 裡面用了一堆自定義縮寫，如 <code>:manage</code>、<code>:read</code>、<code>:update</code>、<code>:all</code>，讓人不是很了解在做什麼。</p>
-
-<ul>
-<li>:manage: 是指這個 controller 內所有的 action</li>
-<li>:read : 指 :index 和 :show</li>
-<li>:update: 指 :edit 和 :update</li>
-<li>:destroy: 指 :destroy</li>
-<li>:create: 指 :new 和 :crate</li>
-</ul>
-
-
-<p>而 :all 是指所有 object (resource)</p>
-
-<p>當然，不只是 CRUD 的 method 才可以被列上去，如果你有其他非 RESTful 的 method 如 :search，也是可以寫上去..，只是要一條一條列上去，有點麻煩就是了。</p>
-
-<h4>組合技：alias_action</h4>
-
-<p>cancan 還提供了組合技，要是嫌原先的 :update, :read 這種組合包不夠用。還可以用 <code>alias_action</code> 自己另外再組。例如把 :update 和 :destroy 組成 :modify。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="n">alias_action</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="ss">:modify</span>
-</span><span class='line'>   <span class="n">can</span> <span class="ss">:modify</span><span class="p">,</span> <span class="no">Comment</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>組合技: 自訂 method</h4>
-
-<p>要是你嫌每個角色都要一條一條把權限列上去，超麻煩。可以把一些共通的權限包成 method。用疊加 method 上去的方式列舉。比如把基礎權限都包成 <code>basic_read_only</code>、<code>account_manager_only</code>, etc…</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h3>針對物件狀態控管</h3>
-
-<p>在 User story 中，使用者固然 <code>can :update, Topic</code>，但還是讓人覺得覺得哪裡有點怪怪的？</p>
-
-<p>是的。使用者應該只能編輯和修改屬於自己的文章，<code>can :update, Topic</code> 只有說使用者可以「修改文章」啊（等於可以修改所有文章） XD</p>
-
-<p>所以 <code>ability.rb</code> 就要這樣設計了</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
-</span><span class='line'>    <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">can</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
-</span><span class='line'>     <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>可以玩的更加進階：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">can</span> <span class="ss">:publish</span><span class="p">,</span> <span class="no">Post</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">(</span> <span class="n">post</span><span class="o">.</span><span class="n">draft?</span> <span class="o">||</span> <span class="n">post</span><span class="o">.</span><span class="n">submitted?</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">post</span><span class="o">.</span><span class="n">published?</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h2>其他</h2>
-
-<p>cancan 還有其他進階主題可以繼續探討，讀者可以自行研究：</p>
-
-<ul>
-<li><a href="https://github.com/ryanb/cancan/wiki/Nested-Resources">Nested Resources</a></li>
-<li><a href="https://github.com/ryanb/cancan/wiki/Exception-Handling">Exception Handling</a></li>
-<li><a href="https://github.com/ryanb/cancan/wiki/Ensure-Authorization">Ensure Authorization</a></li>
-</ul>
-
-
-<p>不過關於「難懂」和「難用」的部分，我想我應該講的差不多了…</p>
-
-<h2>小結</h2>
-
-<p>在寫這一系列文章時，我發現 cancan 的作者，其實把大部分的文件與範例，都寫在 lib/ 下的 RDOC 裡面了，光看 code comment 其實就可以瞭解大半流程。</p>
-
-<p>不過我覺得 cancan 讓人覺得難讀的最大原因，可能還是官方缺乏一個 example <code>ability.rb</code>，對於被隱藏的自動完成部分也缺乏解釋，所以才造成大家覺得 cancan 是個難用的 magic library。事實上如果你開始搞懂 cancan 怎麼撰寫的話，它是可以幫你把網站的權限 code 處理的非常漂亮又易懂的。</p>
-
-<p>這系列就寫到這邊，如果你對 cancan 還有什麼使用上的問題，歡迎到 <a href="http://www.meetup.com/Ruby-Taiwan-Group/">Rails Tuesday</a> 來找我討論。</p>
-
-<h2>系列連結</h2>
-
-<ul>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
