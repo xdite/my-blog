@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  前幾天 Code School 的 CSS Cross Country 課程釋出了。這一集是我相當期待的一集，整理和澄清了非常多「非常基礎但如果觀念不好」就會搞得一塌糊塗的 CSS 知識。看完把筆記整理在這裡，不過相較於原網站，我寫的算是非常簡陋的版本。我相...">
+  <meta name="description" content="                  在 Rails 開發中，有時候我們會遇到要在表單中設計 select 的選項。select 吃的 collection 是個 Array 。通常我們會往往第一直覺的想法是將之塞到 model 的 CONSTANT 裡，再寫一個 class method 包裝...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,303 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/02/06/how-to-design-select-in-rails/">在 Rails 中如何設計 Select</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-02-06T00:27:00+08:00" pubdate  data-updated="true" >Feb 6<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/02/06/how-to-design-select-in-rails/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/02/06/how-to-design-select-in-rails/" data-show-faces="false"></div></div>
+    
+    <p>在 Rails 開發中，有時候我們會遇到要在表單中設計 select 的選項。select 吃的 collection 是個 Array 。通常我們會往往第一直覺的想法是將之塞到 model 的 CONSTANT 裡，再寫一個 class method 包裝起來，再寫自己的 collection Helper 叫出來。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">my_collection_select</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">target_id</span><span class="p">,</span> <span class="n">default_val</span><span class="p">,</span> <span class="n">objs</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;div class=&quot;clearfix&quot;&gt;&lt;label for=&quot;normalSelect&quot;&gt;&#39;</span><span class="o">+</span><span class="n">title</span><span class="o">+</span><span class="s1">&#39;&lt;/label&gt;&lt;div class=&quot;input&quot;&gt;&#39;</span>
+</span><span class='line'>  <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;select name=&quot;&#39;</span><span class="o">+</span><span class="n">target_id</span><span class="o">+</span><span class="s1">&#39;&quot; id=&quot;normalSelect&quot;&gt;&#39;</span>
+</span><span class='line'>  <span class="n">objs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">obj</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">selected</span> <span class="o">=</span> <span class="p">(</span><span class="n">default_val</span><span class="o">.</span><span class="n">to_s</span> <span class="o">==</span> <span class="n">obj</span><span class="o">[</span><span class="ss">:downcase</span><span class="o">].</span><span class="n">to_s</span><span class="p">)</span> <span class="p">?</span> <span class="s1">&#39;selected=&quot;selected&quot;&#39;</span> <span class="p">:</span> <span class="s1">&#39;&#39;</span>
+</span><span class='line'>    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;option &#39;</span><span class="o">+</span><span class="n">selected</span><span class="o">+</span><span class="s1">&#39;value=&quot;&#39;</span><span class="o">+</span><span class="n">obj</span><span class="o">[</span><span class="ss">:downcase</span><span class="o">].</span><span class="n">to_s</span><span class="o">+</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="o">+</span><span class="n">obj</span><span class="o">[</span><span class="ss">:titleize</span><span class="o">]+</span><span class="s1">&#39;&lt;/option&gt;&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;&#39;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">raw</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">%&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;%= my_collection_select(&quot;職務類別&quot;, &quot;job[job_category]&quot;, @job.job_category, Job.categories) %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Job</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'><span class="c1">#職務類別</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">CAT_OTHER</span>                   <span class="o">=</span> <span class="mi">0</span>   <span class="c1">#其他</span>
+</span><span class='line'><span class="no">CAT_WEB_DEVLOPER</span>            <span class="o">=</span> <span class="mi">1</span>   <span class="c1">#網站設計師</span>
+</span><span class='line'><span class="no">CAT_DESIGNER</span>                <span class="o">=</span> <span class="mi">2</span>   <span class="c1">#美術設計師</span>
+</span><span class='line'><span class="no">CAT_PHONE_APP_DEVLOPER</span>      <span class="o">=</span> <span class="mi">3</span>   <span class="c1">#手機APP開發</span>
+</span><span class='line'><span class="no">CAT_MARKETING_SALES</span>         <span class="o">=</span> <span class="mi">4</span>   <span class="c1">#市場規劃 &amp; 業務</span>
+</span><span class='line'><span class="no">CAT_WEB_SOCIAL_MANAGER</span>      <span class="o">=</span> <span class="mi">5</span>   <span class="c1">#社群管理</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">categories</span>
+</span><span class='line'>  <span class="o">[</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:downcase</span><span class="o">=&gt;</span><span class="no">CAT_OTHER</span><span class="p">,</span> <span class="ss">:titleize</span><span class="o">=&gt;</span><span class="s1">&#39;其他職缺&#39;</span><span class="p">},</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:downcase</span><span class="o">=&gt;</span><span class="no">CAT_WEB_DEVLOPER</span><span class="p">,</span> <span class="ss">:titleize</span><span class="o">=&gt;</span><span class="s1">&#39;網站設計師&#39;</span><span class="p">},</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:downcase</span><span class="o">=&gt;</span><span class="no">CAT_DESIGNER</span><span class="p">,</span> <span class="ss">:titleize</span><span class="o">=&gt;</span><span class="s1">&#39;美術設計師&#39;</span><span class="p">},</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:downcase</span><span class="o">=&gt;</span><span class="no">CAT_PHONE_APP_DEVLOPER</span><span class="p">,</span> <span class="ss">:titleize</span><span class="o">=&gt;</span><span class="s1">&#39;手機APP開發&#39;</span><span class="p">},</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:downcase</span><span class="o">=&gt;</span><span class="no">CAT_MARKETING_SALES</span><span class="p">,</span> <span class="ss">:titleize</span><span class="o">=&gt;</span><span class="s1">&#39;行銷&amp;業務&#39;</span><span class="p">},</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:downcase</span><span class="o">=&gt;</span><span class="no">CAT_WEB_SOCIAL_MANAGER</span><span class="p">,</span> <span class="ss">:titleize</span><span class="o">=&gt;</span><span class="s1">&#39;社群管理&#39;</span><span class="p">}</span>
+</span><span class='line'>  <span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">category_str</span>
+</span><span class='line'>   <span class="no">Job</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
+</span><span class='line'>     <span class="k">return</span> <span class="n">item</span><span class="o">[</span><span class="ss">:titleize</span><span class="o">]</span> <span class="k">if</span> <span class="n">item</span><span class="o">[</span><span class="ss">:downcase</span><span class="o">]</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">job_category</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>會這樣設計的原因是：通常程式設計師會想要對一個值 assign 一個數字，又想要用一個英文字包裝它，以方便取用。</p>
+
+<p>這樣設計的手法很常見，但其實這樣的設計一聞下來就有「壞味道」。我自己也是思考了這個問題好幾年，換了非常多寫法，直到最近終於想出一個比較好的方式去設計 select。</p>
+
+<h2>翻修</h2>
+
+<p>我設計出一個比較漂亮的方式去改寫這樣的 code。當中用到了 <a href="https://github.com/binarylogic/settingslogic">settings_logic</a> 與 <a href="https://github.com/plataformatec/simple_form">simple_form</a> 這兩個 gem。</p>
+
+<h3>Simple Form</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= f.input :job_category, :label =</span><span class="o">&gt;</span> <span class="s2">&quot;職務類別&quot;</span> <span class="k">do</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">    &lt;%= f.select :job_category, Job.categories %&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>SettingsLogic</h3>
+
+<figure class='code'><figcaption><span>app/models/job_data.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">JobData</span> <span class="o">&lt;</span> <span class="no">Settingslogic</span>
+</span><span class='line'>  <span class="n">source</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/job_data.yml&quot;</span>
+</span><span class='line'>  <span class="n">namespace</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>把數值塞到 settings</p>
+
+<figure class='code'><figcaption><span>config/job_data.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">defaults</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">defaults</span>
+</span><span class='line'>   <span class="n">job_categories</span><span class="p">:</span>
+</span><span class='line'>      <span class="n">other</span> <span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="n">web_developer</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="n">designer</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'>      <span class="n">app_developer</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'>      <span class="n">marketing_sales</span><span class="p">:</span> <span class="mi">4</span>
+</span><span class='line'>      <span class="n">web_social_manager</span><span class="p">:</span> <span class="mi">5</span>
+</span><span class='line'><span class="n">development</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">defaults</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">test</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">defaults</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">production</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">defaults</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Rails 內建的 I18n</h3>
+
+<figure class='code'><figcaption><span>config/locals/job.zh-TW.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;zh-TW&quot;</span><span class="p">:</span>
+</span><span class='line'>   <span class="n">job_categories</span><span class="p">:</span>
+</span><span class='line'>      <span class="n">other</span> <span class="p">:</span> <span class="s2">&quot;其他職缺&quot;</span>
+</span><span class='line'>      <span class="n">web_developer</span><span class="p">:</span> <span class="s2">&quot;網站設計師&quot;</span>
+</span><span class='line'>      <span class="n">designer</span><span class="p">:</span> <span class="s2">&quot;美術設計師&quot;</span>
+</span><span class='line'>      <span class="n">app_developer</span><span class="p">:</span> <span class="s2">&quot;手機APP開發&quot;</span>
+</span><span class='line'>      <span class="n">marketing_sales</span><span class="p">:</span> <span class="s2">&quot;行銷&amp;業務&quot;</span>
+</span><span class='line'>      <span class="n">web_social_manager</span><span class="p">:</span> <span class="s2">&quot;社群管理&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Model : Job</h3>
+
+<p>JobData.job_categories 拉出來會是這樣的內容：</p>
+
+<p><code>{"other"=&gt;0, "web_developer"=&gt;1, "designer"=&gt;2, "app_developer"=&gt;3, "marketing_sales"=&gt;4, "web_social_manager"=&gt;5}</code></p>
+
+<p>但 select 要吃的是： <code>[["其他職缺", 0],["網站設計師",1]]</code> 這樣的 Array。所以我們再用 map 去對 I18n 求值包裝。</p>
+
+<figure class='code'><figcaption><span>app/modesl/job.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Job</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">categories</span>
+</span><span class='line'>    <span class="no">JobData</span><span class="o">.</span><span class="n">job_categories</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="o">|</span> <span class="o">[</span><span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s2">&quot;job_categories.</span><span class="si">#{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span><span class="n">v</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Helper</h3>
+
+<p>最後是如何把 <code>category_str</code> 從 model 搬出來。</p>
+
+<h4>這樣很明顯是錯的</h4>
+
+<ul>
+<li>這應該是 view 要做的事。</li>
+<li>應該善用 Ruby 的特性，而不是跑 each 比較拿數值。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>app/modesl/job.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">category_str</span>
+</span><span class='line'>   <span class="no">Job</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
+</span><span class='line'>     <span class="k">return</span> <span class="n">item</span><span class="o">[</span><span class="ss">:titleize</span><span class="o">]</span> <span class="k">if</span> <span class="n">item</span><span class="o">[</span><span class="ss">:downcase</span><span class="o">]</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">job_category</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>利用 Ruby 的 Hash 的 key，從翻譯檔裡面拿出正確的中文。</h4>
+
+<figure class='code'><figcaption><span>app/helpers/job_helper.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">render_job_category</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">key</span> <span class="o">=</span> <span class="no">JobData</span><span class="o">.</span><span class="n">job_categories</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">job_category</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s2">&quot;job_categories.</span><span class="si">#{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>其他</h3>
+
+<p>如果以後想拿數值：</p>
+
+<p>可以這樣下：</p>
+
+<ul>
+<li><code>JobData.job_categories[:designer]</code> => 2</li>
+<li><code>I18n.t("job_categories.designer")</code> => &#8220;美術設計師&#8221;</li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2226,156 +2523,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/01/04/how-to-pack-a-asset-gem/">[Ruby][教學] 如何打包一個 Asset Gem</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-04T09:10:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/01/04/how-to-pack-a-asset-gem/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-asset-gem/" data-show-faces="false"></div></div>
-    
-    <h2>What is Asset Gem</h2>
-
-<p><a href="http://upgrade2rails31.heroku.com/asset-pipeline/">Asset Pipeline</a>的概念興起，不只是推動了 SASS 與 CoffeeScript 的廣泛流行。其實造成更重大的影響是 assets ( CSS / JavaScript / Images ) 不再被視為專案中難以「整理」與「管理」的頭痛元件。透過 Asset Pipeline 的架構，我們可以把 assets 包裝成一個 gem ，在其他專案中重複使用。</p>
-
-<p>在以往，如果想使用 <a href="http://twitter.github.com/bootstrap/">bootstrap</a> 這個 CSS / JS Framework，我們必須將所有靜態檔案 COPY 一份到專案的靜態目錄中。當專案使用到大量 3rd party vendor assets，整個靜態目錄就會被這種拷貝行為弄得髒亂不堪，難以整理。</p>
-
-<p>而透過 Asset Pipeline 的架構，開發者就可以停止這種草率但不得不為之的動作。要引用 3rd party vendor assets，只要在 application.css 或者 application.js 進行 require 就可以輕鬆使用了。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>//= require jquery
-</span><span class='line'>//= require bootstrap
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>引用 asset gem 很簡單，但不少人想知道的是：<code>如何把手上想整理的 asset 包裝成一個 gem 進行使用</code>。</p>
-
-<h2>Asset Pipeline 的 mount 位置</h2>
-
-<p>談到這裡，就要稍微提一下 Asset Pipeline 對於 assets 位置的定義。by default，你可以把 assets 放在以下三個資料夾內：</p>
-
-<ul>
-<li>app/assets</li>
-<li>lib/assets</li>
-<li>vendor/assets</li>
-</ul>
-
-
-<p>理論上，你把 assets 丟在這三個資料夾內，在 application.cs|js 內 require 都可以動。</p>
-
-<h3>如何整理目前專案中的 assets</h3>
-
-<p>這其實是另外一個主題，不過我在這裡也順便整理出來。</p>
-
-<p>如何整理歸類現在手頭上的 assets 呢？</p>
-
-<ul>
-<li>app/assets</li>
-</ul>
-
-
-<p>在 Rails 3.1.x 之後的版本，rails g controler posts，會自動在 assets/styelsheets/ 和 assets/javascripts/ 中產生對應的 scss 與 coffeescript 檔案。</p>
-
-<p>所以 app/assets 是讓開發者放「自己為專案手寫的 assets」的地方。</p>
-
-<ul>
-<li>lib/assets</li>
-</ul>
-
-
-<p>lib 是 library 的簡寫，這裡是放 LIBRARY 的地方。所以如果你為專案手寫的 assets 漸漸形成了 library 規模，比如說 mixin 或者是自己為專案整理了簡單的 bootstrap，應該放在 lib/ 下。</p>
-
-<ul>
-<li>vendor/assets</li>
-</ul>
-
-
-<p>verdor 是「供應商」的意思，也就是 「別人寫的」assets 都應該放在這裡。比如說:</p>
-
-<ul>
-<li>jquery.*.js</li>
-<li>fanfanfan icons</li>
-<li>tinymce / ckeditor</li>
-</ul>
-
-
-<p>等等…</p>
-
-<h2>透過 Rails Engine 機制實作</h2>
-
-<p>為什麼剛剛要扯這麼大一圈去解釋如何整理手頭的 assets 呢？</p>
-
-<p>因為 asset gem 其實就是透過 Rails Engine 的機制去實作出來的。</p>
-
-<p>拿一個前幾個月幫 <a href="http://twitter.com/evenwu">@evenwu</a> 寫的 asset gem 作為示範好了。</p>
-
-<p><a href="https://github.com/xdite/compass-ggs-framework/tree/rails-engine">https://github.com/xdite/compass-ggs-framework/tree/rails-engine</a></p>
-
-<p>作法是將你整理好的 lib/assets 扔到 vendor/assets 裡(你寫的給別人用，你就變成 vendor 了)，再宣告一個「空的」Rails Engine Class 讓 Rails 可以將這個 gem 視為網站的一部分「掛起來」裡面的 vendor/assets。</p>
-
-<p>沒錯，就是這麼簡單。</p>
-
-<p>而宣告自己是一個 Rails Engine 的方式也很簡單：只要把 Rails Engine 塞進自定義的 module 就好了。
-（還是看不懂的可以看我的 code…）</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Ggs</span>
-</span><span class='line'>  <span class="k">module</span> <span class="nn">Rails</span>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">Engine</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">Rails</span><span class="o">::</span><span class="no">Engine</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>剩下來的流程就跟<a href="http://blog.xdite.net/posts/2012/01/04/how-to-pack-a-gem/">一般包 Gem 的流程</a>差不多了。</p>
-
-<p>=====</p>
-
-<p>現在我每週都固定有在回答一些問題，發現不少朋友對 Ruby / Rails 的一些疑惑，都大同小異。這些問題有一些我有寫過文件但沒有公開披露，有一些沒有寫過文件但有答案。所以順手把這些回答過的答案整理到 blog 上讓大家參考。</p>
-
-<p>如果你在 Ruby / Rails 在使用有任何問題，都歡迎貼到 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -2410,6 +2557,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/">RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/10/28/force-to-improve-yourself/">被迫才是進步的原動力</a>
       </li>
     
@@ -2423,10 +2574,6 @@
     
       <li class="post">
         <a href="/posts/2012/10/20/how-to-win-hackthon/">如何在 Hackathon 中獲勝？Paperclip.io 獲獎的背後祕辛</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/16/facebook-world-hack-grand-prize-paperclip-io/">Paperclip.io win the Grand Prize of Facebook World Hack</a>
       </li>
     
   </ul>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Rail 101 裝機實務以及改版通知 - Blog.XDite.net</title>
+  <title>RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐 - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          Hi, 各位讀者好。因為 Apple 一直在改變 XCode 的編譯套件位置，所以 Rails 101 內附的裝機實務已經過期了。我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。不過因為裝機實務這個步驟比較會卡到大家，所...">
+  <meta name="description" content="          這是我今年參加 [RubyConf China 2012] 所給的演講。不過這個投影片裡面的不少內容，是在現場直接解說掉的，所以只看投影片的話，可能不會知道這樣的設計慢在哪裡。這陣子比較忙，如果有空的話，過一陣子我再寫一個全文版的。這個演講的主旨是，在以往，我們設計 Rai...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rail 101 裝機實務以及改版通知</h1>
+      <h1 class="entry-title">RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2012-03-07T17:01:00+08:00" pubdate  data-updated="true" >Mar 7<span>th</span>, 2012</time>
+<time datetime="2012-11-20T03:24:00+08:00" pubdate  data-updated="true" >Nov 20<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,15 +98,16 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>Hi, 各位讀者好。</p>
+  <script async class="speakerdeck-embed" data-id="60e4fb4013c5013077d112313d1a82a3" data-ratio="1.2994923857868" src="//speakerdeck.com/assets/embed.js"></script>
 
-<p>因為 Apple 一直在改變 XCode 的編譯套件位置，所以 <a href="http://rails-101.logdown.com">Rails 101</a> 內附的裝機實務已經過期了。</p>
 
-<p>我最近正在籌劃下一次的改版，已經進行的差不多了。將會直接 support 到 Rails 3.2.2。</p>
+<p>這是我今年參加 [RubyConf China 2012] 所給的演講。</p>
 
-<p>不過因為裝機實務這個步驟比較會卡到大家，所以我先放這個章節: <a href="/mac-lion-xcode-ruby-rails-192/">Rails on Mac 安裝最佳實務</a> 出來給大家使用。</p>
+<p>不過這個投影片裡面的不少內容，是在現場直接解說掉的，所以只看投影片的話，可能不會知道這樣的設計慢在哪裡。這陣子比較忙，如果有空的話，過一陣子我再寫一個全文版的。</p>
 
-<p>若您在裝機上還碰到什麼問題，請至 <a href="http://ruby-taiwan.org/">Ruby Taiwan Group</a> 上面回報。</p>
+<p>這個演講的主旨是，在以往，我們設計 Rails Application 時，為了想要寫出一些漂亮的架構，會參考一些 Best Practices，或者是參照官方 Rails 官方指南的 Convention 建議，進行設計。</p>
+
+<p>但是這一些 Convention 或依照直覺的軟體設計，很大的成分其實會造成你的 Application Performance 下降。這些問題即使你裝了 New Relic 還是絕對抓不出來。而這些設計可能也不太能算是 Rails 或者是相關套件的錯，甚至是 nobody&#8217;s fault。這個 talk 會帶你找出這些問題，解釋原因，並且給出修正方案。</p>
 
 </div>
 
@@ -128,14 +129,8 @@
 
 
 
-<time datetime="2012-03-07T17:01:00+08:00" pubdate  data-updated="true" >Mar 7<span>th</span>, 2012</time>
+<time datetime="2012-11-20T03:24:00+08:00" pubdate  data-updated="true" >Nov 20<span>th</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/mybook/'>MyBook</a>
-  
-</span>
 
 
     </p>
@@ -143,7 +138,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -219,8 +214,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/';
-        var disqus_url = 'http://blog.xdite.net/posts/2012/03/07/rail-101-install-practice/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/';
         var disqus_script = 'embed.js';
       
     (function () {

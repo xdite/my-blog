@@ -369,6 +369,12 @@
         <lastmod>2012-10-28T02:23:44+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://blog.xdite.net/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/
+        </loc>
+        <lastmod>2012-11-20T03:30:59+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.xdite.net/about/</loc>
         <lastmod>2012-02-09T17:10:35+08:00</lastmod>
     </url>
@@ -378,7 +384,7 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/blog/archives/</loc>
-        <lastmod>2012-10-28T02:23:44+08:00</lastmod>
+        <lastmod>2012-11-20T03:30:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/drafted/2012-07-25-some-tips-for-dealing-large-data.html</loc>
@@ -386,11 +392,11 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/</loc>
-        <lastmod>2012-10-28T02:23:44+08:00</lastmod>
+        <lastmod>2012-11-20T03:30:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/</loc>
-        <lastmod>2012-07-03T03:24:00+08:00</lastmod>
+        <lastmod>2012-11-03T18:21:37+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/talks/</loc>
