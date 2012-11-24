@@ -46,7 +46,7 @@ Refactor 昨天寫的 mini Rails，教你如何 trace Rails core。利用 Rails 
 
 一個 request 進來，首先通過的是層層的 rack middleware。所以你要先理解什麼是 rack，rack 的運作原理是什麼。可以試著自己先寫一個 rack app 玩看看。
 
-如果你想知道 Rails 裡面的 request 流程是什麼。可以在 Rails 專案裡面打 rake middleware，再去把 class 一個一個叫出來讀。
+如果你想知道 Rails 裡面的 request 流程會經過哪些 middleware，被加過哪些工。可以在 Rails 專案裡面打 rake middleware，再去把 class 一個一個叫出來讀。
 
 ### routing
 
@@ -82,9 +82,9 @@ ActiveRecord 的上一層就是一套 ActiveModel API。其實 Rails 不一定�
 
 ## 5. 讀別人（熱門）的 Rails Plugin
 
-有時候，你想要實作某一些功能不得其法。最好的方式就是去讀有類似功能的 Gem，去看看其他作者怎麼做的。有時候會翻到他們用了不少你根本不知道的 Rails API。
+有時候，想要實作某一些功能不得其法。最好的方式就是去讀有類似功能的 Gem，去看看其他作者怎麼做的。有時候會翻到他們用了不少你根本不知道的 Rails API。
 
-順著他們用這些 Rails API 的方法，更快的在 Rails 原始碼找到你要的答案…
+順著他們用這些 Rails API 的方法，可以更快的在 Rails 原始碼找到你要的答案…
 
 
 ## 小結
