@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-11-20T03:32:32+08:00</updated>
+  <updated>2012-11-25T01:26:08+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何閱讀 Rails 原始碼]]></title>
+    <link href="http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode/"/>
+    <updated>2012-11-25T00:28:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode</id>
+    <content type="html"><![CDATA[<p>開始有計畫整理一些在 <a href="http://rubyconfchina.org">RubyConf China</a> 大家線下問我的問題的答案。</p>
+
+<p>挑選出來暫定的第一篇是大會期間詢問度最高的：「如何閱讀 Rails 原始碼」。</p>
+
+<p>想要「閱讀 Rails 原始碼」的原因很多，不過多半的出發點都是想要能夠設計出更好的 Plugin (Gem)、或者是希望能在程式碼出錯時，能夠更快在 Rails 原始碼快速找到答案。</p>
+
+<p>但擺在眼前的事實是， Rails 的原始碼已經成長大到成幾萬行的怪獸，如何「看懂」或者是有效率的找到答案，已經變成是一個很大的難題。</p>
+
+<p>以下是我根據這幾年的經驗，能夠給各位的建議：</p>
+
+<h2>1. 從單純的部分切入，例如 Helper</h2>
+
+<p>最令大家頭疼的地方是，這麼多程式碼，要從哪部分開始讀起。</p>
+
+<p>如果你是初心者，想要跳進這個池子裡，想找點簡單的東西讀，我會建議你先從「Helper」的部分開始讀。「Helper」是整個 Rails 程式碼裡面最獨立的部分（不牽扯到 request 呼叫），而且結構相對單純。</p>
+
+<h2>2. 從 request 開始，到 rack，到 routing，到 controller，最後再到 model</h2>
+
+<p>我真正開始有系統的讀懂 Rails code，是從一門線上 <a href="http://owningrails.com">Owning Rails</a>開始的。這門課的宗旨是，就是教你有效掌握搞懂 Rails 的核心與結構。相當有趣的是，他並不是教你讀任何 Rails 代碼，而是實際一步步帶你造出一個「mini Rails」。而造完這個 「mini Rails」之後，學員也能夠開始神奇的開始擁有快速找 code 的能力。</p>
+
+<p>我在去年曾經寫過一篇 <a href="http://wp.xdite.net/?p=2407">Owning Rails masterclass</a> 介紹過這個課程。</p>
+
+<h4>第一天：造出自己的 mini Rails</h4>
+
+<p>帶你如何寫出精簡版 ActiveRecord、寫 rack app、用 rack app 改出精簡版 ActionController、自己 implement 出 before<em>, after</em>, around_ filter、自己 implement 出 view。然後最後再用你自己刻出來的這套 mini Rails 寫 web application。</p>
+
+<h4>第二天的課程</h4>
+
+<p>Refactor 昨天寫的 mini Rails，教你如何 trace Rails core。利用 Rails internal API 客製化出你想要的特殊 function、library。作業有 custom validator、custom finder、create responder、create form builder、使用 Railtie 客制 Engine、造 plugin。</p>
+
+<p>宥於這是付費課程的關係，我也無法公開提供你更進一步的教材內容。但是我能夠告訴你這們課程為什麼會這樣設計，讓你可以也依循著這個軌道去自我進修。</p>
+
+<h3>rack</h3>
+
+<p>一個 request 進來，首先通過的是層層的 rack middleware。所以你要先理解什麼是 rack，rack 的運作原理是什麼。可以試著自己先寫一個 rack app 玩看看。</p>
+
+<p>如果你想知道 Rails 裡面的 request 流程是什麼。可以在 Rails 專案裡面打 rake middleware，再去把 class 一個一個叫出來讀。</p>
+
+<h3>routing</h3>
+
+<p>request 通過 rack 層進來後，首先面對的是 dispatch 問題，Rails 透過 routes.rb 進行 dispatch。而如何 dispatch 到正確的 controller，中間靠的就是 regexp。</p>
+
+<h3>controller</h3>
+
+<p>開發者在 controller 會牽涉到兩個常用的相關機制：Filter 與 View Rendering。Filter 時怎麼運作的。method 應該是回傳「值」，怎麼做到自動回傳的是 render 出來的view。</p>
+
+<h3>model</h3>
+
+<p>ActiveRecord 的上一層就是一套 ActiveModel API。其實 Rails 不一定要靠 ActiveRecord，也可以透過實作一個 Class 加上部分機制做出自己的 ORM。其中 validation, finder 都是這方面的課題。</p>
+
+<h2>3. 搞懂 Rails 的啟動流程</h2>
+
+<p><a href="http://railscast-china.com">RailsCast China</a> 曾經 release 過一個很好的影片：<a href="http://railscasts-china.com/episodes/the-rails-initialization-process-by-kenshin54">The Rails Initialization Process By kenshin54</a></p>
+
+<p>講解了整個 Rails 啟動流程。你也可以讀由 Ruby on Rails 官方釋出的這篇<a href="http://guides.rubyonrails.org/initialization.html">官方教學啟動流程</a>去更加了解啟動過程中究竟會經過哪些檔案，如果要寫 plugin 可以 hook 在哪一些部分。</p>
+
+<h2>4. 實際簡單寫一個 Rails Plugin</h2>
+
+<p>最好的學習方法就是動手實作。在看過以上這一些資料之後，我建議你可以實際透過開發一個 Gem 去更加了解整個 Rails 內部的結構。</p>
+
+<p>目前 Rails Plugin 幾乎都是以 Engine Gem 的形式釋出。所以透過撰寫一個 Gem，可以了解到：</p>
+
+<ul>
+<li>如何將自己的 Library 與現有 API 整合</li>
+<li>如何將自己的 Library / 不掛進啟動 process 中。</li>
+<li>Engine 與 Railtie 的結構</li>
+<li>如果有相依檔案，如何撰寫 generator，把檔案放進去 project 裡面。</li>
+<li>如果有檔案操作和客製選項，如何透過 thor 這個工具去達到檔案修改的目的。</li>
+</ul>
+
+
+<p>算是一個相當好的鍛鍊。</p>
+
+<h2>5. 讀別人（熱門）的 Rails Plugin</h2>
+
+<p>有時候，你想要實作某一些功能不得其法。最好的方式就是去讀有類似功能的 Gem，去看看其他作者怎麼做的。有時候會翻到他們用了不少你根本不知道的 Rails API。</p>
+
+<p>順著他們用這些 Rails API 的方法，更快的在 Rails 原始碼找到你要的答案…</p>
+
+<h2>小結</h2>
+
+<p>希望以上的方法能夠協助各位更快的上手讀通 Rails 的原始碼。有任何問題歡迎留言在底下討論。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐]]></title>
@@ -25,7 +115,7 @@
 
 <p>不過這個投影片裡面的不少內容，是在現場直接解說掉的，所以只看投影片的話，可能不會知道這樣的設計慢在哪裡。這陣子比較忙，如果有空的話，過一陣子我再寫一個全文版的。</p>
 
-<p>這個演講的主旨是，在以往，我們設計 Rails Application 時，為了想要寫出一些漂亮的架構，會參考一些 Best Practices，或者是參照官方 Rails 官方指南的 Convention 建議，進行設計。</p>
+<p>這個演講的主旨是：在以往，我們設計 Rails Application 時，為了想要寫出一些漂亮的架構，會參考一些 Best Practices，或者是參照官方 Rails 官方指南的 Convention 建議，進行設計。</p>
 
 <p>但是這一些 Convention 或依照直覺的軟體設計，很大的成分其實會造成你的 Application Performance 下降。這些問題即使你裝了 New Relic 還是絕對抓不出來。而這些設計可能也不太能算是 Rails 或者是相關套件的錯，甚至是 nobody&#8217;s fault。這個 talk 會帶你找出這些問題，解釋原因，並且給出修正方案。</p>
 ]]></content>
@@ -2131,146 +2221,6 @@ end</code></pre></noscript></div>
 
 
 <p>大家可以研究看看…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[影集] 喚醒新聞界的良知 The Newsroom]]></title>
-    <link href="http://blog.xdite.net/posts/2012/08/09/recommended-the-newsroom/"/>
-    <updated>2012-08-09T00:18:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/08/09/recommended-the-newsroom</id>
-    <content type="html"><![CDATA[<p>今天要在這裡推薦一部影集：HBO 拍攝的關於新聞從業界的影集 The Newsroom 「新聞急先鋒」。</p>
-
-<p>這部戲大概是在 6/24 左右才開始播的影集，原本是沒有去追的。直到幾天前有人作好了第一集開場的中文字幕，在 FB 流傳，因為氣勢過於震撼，所以才開始注意。</p>
-
-<p>主角 Will McAvoy 是一個極受歡迎的新聞主播，專題 News Night 的風格溫和中立極受大眾喜愛。第一幕是 Will 參加西北大學的座談，一個女學生提問：為什麼美國是世界上最偉大的國家？」座談都在閑扯，直到 一個女學生提問：「為什麼美國是世界上最偉大的國家？」原本 Will 不想要得罪人，亂扯一些答案。但主持人不放過 Will，Will 就大爆炸開始…XD</p>
-
-<p>看了就知道&#8230;.</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/tG8F6BeAER8" frameborder="0" allowfullscreen></iframe>
-
-
-<p>這個開場影片很讓人讚嘆，於是我就開始去挖這一部影集剩下的部分和劇集背景：</p>
-
-<p>Will McAvoy 在該次爆發事件之後，雖然當時說了真話（美國並不是世界上最偉大的國家，但&#8230;），但影視圈大家對避之唯恐不及。他的老闆 Charlie 趁事件爆發後他去度假時，幫他找了以前的 Partner 準備作新型態的節目。</p>
-
-<p>原本 Will 以為他老闆弄來這個 Producer 是認為西北大學那件事是出包，所以弄出這招搞他。後來才知道 Charlie 是欣賞他，欣賞他那番話找回良知，希望找來一個幫手，讓 Will 的節目轉型，也跳脫收視率的包袱扭曲，去作真的「新聞」，以良知報導「真相」。走出一番新路。</p>
-
-<p>對比國內新聞節目亂象（特別是最近的旺中天走路工事件），看到這套影集真的很感慨。</p>
-
-<p>第一集這一段 clip 並不是目前七集中最令人震撼的片段，第三集開場的陳詞才真正精彩：</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/0_i9fw43Moo" frameborder="0" allowfullscreen></iframe>
-
-
-<p>因為實在太喜歡這一段的台詞，於是摘錄字幕如下：</p>
-
-<pre>
-晚安 我是 Will McAvoy 
-這裡是 New Night
-剛剛撥出的影片是 Richard Clarke
-小布希總統的反恐中心主任
-於 2004 年 3 月 24 號在國會前作證的影像
-美國人喜歡那一刻，我喜歡那一刻
-成年人要敢於為失敗負責
-所以，今天節目的開始，我將加入 Mr. Clarke 的行列
-向美國群眾，為我們的失責而道歉
-
-因為在我負責期間這個節目時，我並沒有能夠有效地向傳遞資訊和教育美國選民
-
-讓我先聲明 我並不代表…所有的新聞工作者道歉 並不是所有新聞工作者都需要道歉 我僅代表自己
-
-我是這一系列複雜、重複、無知，且尚未被糾正的失敗的幫兇
-
-我所領導的行業，錯報選舉結果、誇大恐慌事件、挑起政治辯論、隱瞞國家結構的改變 從經濟危機到國力的真實水準
-
-到我們面對的真正威脅。
-
-我所領導的行業如Harry Houdini一般 (知名魔術大師)
-
-嫻熟地分散你們的注意力，同時缺乏審慎地將成千上萬的勇敢年青人送上戰場
-
-我們失敗的原因顯而易見：我們過分重視收視率。
-
-在大眾通訊時代初始，新聞界的哥倫布和麥哲倫－William Paley和David Sarnoff (CBS之父及美國廣播通訊業之父) 
-
-前往華盛頓，與國會簽署一份協議：
-
-「國會允許初有雛形的電視台，免費使用屬於納稅人的廣播頻道， 
-
-條件是這必須是公共服務，即每晚用一小時播報訊息， 
-
-就是我們現在稱為晚間新聞的東西。」
-
-國會未能預料到電視廣告對消費者的巨大影響， 
-
-所以協議中沒有任何一條本能大大改善國家言論秩序的內容； 
-
-國會忘了加上「在任何條件下，於新聞播報期間內都不能有付費廣告」，
-
-他們忘了說「納稅人的廣播頻道是免費給你們使用， 
-
-所以每天有23個小時，你們需要營利，但晚上那一小時，你們只能為國會服務」。
-
-所以現在，那些絕對誠實的新聞人， 比如 Murror Reasoner 和 Huntley 還有
-Brinkley 和 Buckley 和 Cronkite 和 Rather 和 Russert ...(皆為知名主播)
-
-現在他們得和我這樣的人競爭
-
-做為新聞主播面對的業界壓力，卻與澤西海岸（肥皂劇）製片人一模一樣 (收視率決定一切) 
-
-那樣的方法對我們很有利，但本節目將不再這樣做。
-
-你可能不相信，這個時代仍有一些偉大的新聞人，他們有卓越的頭腦跟多年的經驗， 和對新聞工作的真摯熱情
-
-但現在他們只是少數人，當碰到馬戲團，他們變得無力競爭，被淹沒了...
-
-我要辭掉馬戲團的工作，轉換隊伍，我要和那些被打擊的人站在一起，
-
-他們仍有贏的信念 我很感動
-
-我希望他們能使我受教。
-
-從今天起，我們播出什麼新聞，如何呈現出來，
-
-都只有一個簡單的原則：在民主制度中，沒有什麼比腦袋清楚的選民更為重要。
-
-我們將努力將新聞放到更大的背景下，因為很少有新聞是獨立存在的；
-
-我們將成為事實的承載者，成為那些含沙射影、投機炒作、言過其實，或胡言亂語的死對頭
-
-我們不是餐廳服務員，只會用你喜歡的方式呈現你喜歡的新聞
-
-我們也不是電腦，只會乾巴巴地說出事實；因為新聞只有在人文背景下才有用
-
-我不會抑制我的個人觀點，但同時我也將不遺餘力展現出不同於我的觀點。
-
-你也許會問，我們憑什麼做出這些決定？
-
-我們是 Mackenzie MacHale 和 我自己
-
-MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們需要的資訊
-
-他是製作人、分析師和技師。我們樂意提供他的資格證書。
-
-我是這節目的總編輯，對於節目上出現的一切，我有最終決定權。
-
-我們憑什麼作這這些決定？
-
-我們是媒體中的菁英
-
-稍後，我們將繼續播報新聞...」
-
-</pre>
-
-
-<p>非常非常深的反省。</p>
-
-<p>The Newsroom 每一集處理的題材都很發人深省。不少題材的處理都可以讓你直接勾想起國內的媒體亂象。比如第四集在報導：眾議員Giffords被槍擊事件時。電視台高層一直施壓節目必須馬上報導 Giffords 已死亡（純屬謠言，只因其他台先報導，高層怕沒追到新聞會掉收視率），製作人卻力抗回了：「只有醫生才能宣告一個人死亡，新聞媒體不能」。那一個片段真的會讓看到起雞皮疙瘩。</p>
-
-<p>看到第七集，集集都讓我嘆息，「這只是電視劇」。何時媒體才能夠醒過來與自清呢？</p>
-
-<p>不過 The Newsroom 目前開播才七集，就已經掀起不小的震撼。我真的很推這部電視劇，希望更多人能看到這部影集，能重新思考新聞媒體的本質到底是什麼。</p>
 ]]></content>
   </entry>
   

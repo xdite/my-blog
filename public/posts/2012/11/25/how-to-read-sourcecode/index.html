@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>如何閱讀 Rails 原始碼 - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          開始有計畫整理一些在 RubyConf China 大家線下問我的問題的答案。挑選出來暫定的第一篇是大會期間詢問度最高的：「如何閱讀 Rails 原始碼」。想要「閱讀 Rails 原始碼」的原因很多，不過多半的出發點都是想要能夠設計出更好的 Plugin (Gem)、或者是...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+-->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">如何閱讀 Rails 原始碼</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-11-25T00:28:00+08:00" pubdate  data-updated="true" >Nov 25<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <p>開始有計畫整理一些在 <a href="http://rubyconfchina.org">RubyConf China</a> 大家線下問我的問題的答案。</p>
+
+<p>挑選出來暫定的第一篇是大會期間詢問度最高的：「如何閱讀 Rails 原始碼」。</p>
+
+<p>想要「閱讀 Rails 原始碼」的原因很多，不過多半的出發點都是想要能夠設計出更好的 Plugin (Gem)、或者是希望能在程式碼出錯時，能夠更快在 Rails 原始碼快速找到答案。</p>
+
+<p>但擺在眼前的事實是， Rails 的原始碼已經成長大到成幾萬行的怪獸，如何「看懂」或者是有效率的找到答案，已經變成是一個很大的難題。</p>
+
+<p>以下是我根據這幾年的經驗，能夠給各位的建議：</p>
+
+<h2>1. 從單純的部分切入，例如 Helper</h2>
+
+<p>最令大家頭疼的地方是，這麼多程式碼，要從哪部分開始讀起。</p>
+
+<p>如果你是初心者，想要跳進這個池子裡，想找點簡單的東西讀，我會建議你先從「Helper」的部分開始讀。「Helper」是整個 Rails 程式碼裡面最獨立的部分（不牽扯到 request 呼叫），而且結構相對單純。</p>
+
+<h2>2. 從 request 開始，到 rack，到 routing，到 controller，最後再到 model</h2>
+
+<p>我真正開始有系統的讀懂 Rails code，是從一門線上 <a href="http://owningrails.com">Owning Rails</a>開始的。這門課的宗旨是，就是教你有效掌握搞懂 Rails 的核心與結構。相當有趣的是，他並不是教你讀任何 Rails 代碼，而是實際一步步帶你造出一個「mini Rails」。而造完這個 「mini Rails」之後，學員也能夠開始神奇的開始擁有快速找 code 的能力。</p>
+
+<p>我在去年曾經寫過一篇 <a href="http://wp.xdite.net/?p=2407">Owning Rails masterclass</a> 介紹過這個課程。</p>
+
+<h4>第一天：造出自己的 mini Rails</h4>
+
+<p>帶你如何寫出精簡版 ActiveRecord、寫 rack app、用 rack app 改出精簡版 ActionController、自己 implement 出 before<em>, after</em>, around_ filter、自己 implement 出 view。然後最後再用你自己刻出來的這套 mini Rails 寫 web application。</p>
+
+<h4>第二天的課程</h4>
+
+<p>Refactor 昨天寫的 mini Rails，教你如何 trace Rails core。利用 Rails internal API 客製化出你想要的特殊 function、library。作業有 custom validator、custom finder、create responder、create form builder、使用 Railtie 客制 Engine、造 plugin。</p>
+
+<p>宥於這是付費課程的關係，我也無法公開提供你更進一步的教材內容。但是我能夠告訴你這們課程為什麼會這樣設計，讓你可以也依循著這個軌道去自我進修。</p>
+
+<h3>rack</h3>
+
+<p>一個 request 進來，首先通過的是層層的 rack middleware。所以你要先理解什麼是 rack，rack 的運作原理是什麼。可以試著自己先寫一個 rack app 玩看看。</p>
+
+<p>如果你想知道 Rails 裡面的 request 流程是什麼。可以在 Rails 專案裡面打 rake middleware，再去把 class 一個一個叫出來讀。</p>
+
+<h3>routing</h3>
+
+<p>request 通過 rack 層進來後，首先面對的是 dispatch 問題，Rails 透過 routes.rb 進行 dispatch。而如何 dispatch 到正確的 controller，中間靠的就是 regexp。</p>
+
+<h3>controller</h3>
+
+<p>開發者在 controller 會牽涉到兩個常用的相關機制：Filter 與 View Rendering。Filter 時怎麼運作的。method 應該是回傳「值」，怎麼做到自動回傳的是 render 出來的view。</p>
+
+<h3>model</h3>
+
+<p>ActiveRecord 的上一層就是一套 ActiveModel API。其實 Rails 不一定要靠 ActiveRecord，也可以透過實作一個 Class 加上部分機制做出自己的 ORM。其中 validation, finder 都是這方面的課題。</p>
+
+<h2>3. 搞懂 Rails 的啟動流程</h2>
+
+<p><a href="http://railscast-china.com">RailsCast China</a> 曾經 release 過一個很好的影片：<a href="http://railscasts-china.com/episodes/the-rails-initialization-process-by-kenshin54">The Rails Initialization Process By kenshin54</a></p>
+
+<p>講解了整個 Rails 啟動流程。你也可以讀由 Ruby on Rails 官方釋出的這篇<a href="http://guides.rubyonrails.org/initialization.html">官方教學啟動流程</a>去更加了解啟動過程中究竟會經過哪些檔案，如果要寫 plugin 可以 hook 在哪一些部分。</p>
+
+<h2>4. 實際簡單寫一個 Rails Plugin</h2>
+
+<p>最好的學習方法就是動手實作。在看過以上這一些資料之後，我建議你可以實際透過開發一個 Gem 去更加了解整個 Rails 內部的結構。</p>
+
+<p>目前 Rails Plugin 幾乎都是以 Engine Gem 的形式釋出。所以透過撰寫一個 Gem，可以了解到：</p>
+
+<ul>
+<li>如何將自己的 Library 與現有 API 整合</li>
+<li>如何將自己的 Library / 不掛進啟動 process 中。</li>
+<li>Engine 與 Railtie 的結構</li>
+<li>如果有相依檔案，如何撰寫 generator，把檔案放進去 project 裡面。</li>
+<li>如果有檔案操作和客製選項，如何透過 thor 這個工具去達到檔案修改的目的。</li>
+</ul>
+
+
+<p>算是一個相當好的鍛鍊。</p>
+
+<h2>5. 讀別人（熱門）的 Rails Plugin</h2>
+
+<p>有時候，你想要實作某一些功能不得其法。最好的方式就是去讀有類似功能的 Gem，去看看其他作者怎麼做的。有時候會翻到他們用了不少你根本不知道的 Rails API。</p>
+
+<p>順著他們用這些 Rails API 的方法，更快的在 Rails 原始碼找到你要的答案…</p>
+
+<h2>小結</h2>
+
+<p>希望以上的方法能夠協助各位更快的上手讀通 Rails 的原始碼。有任何問題歡迎留言在底下討論。</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-11-25T00:28:00+08:00" pubdate  data-updated="true" >Nov 25<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/11/25/how-to-read-sourcecode/">如何閱讀 Rails 原始碼</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/">RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/10/28/force-to-improve-yourself/">被迫才是進步的原動力</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/10/25/another-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 挑戰未來篇</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/10/23/some-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 能力培養篇</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode/';
+        var disqus_url = 'http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

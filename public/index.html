@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  這是我今年參加 RubyConf China 2012 所給的演講。不過這個投影片裡面的不少內容，是在現場直接解說掉的，所以只看投影片的話，可能不會知道這樣的設計慢在哪裡。這陣子比較忙，如果有空的話，過一陣子我再寫一個全文版的。這個演講的主旨是，在以往，我們...">
+  <meta name="description" content="                  開始有計畫整理一些在 RubyConf China 大家線下問我的問題的答案。挑選出來暫定的第一篇是大會期間詢問度最高的：「如何閱讀 Rails 原始碼」。想要「閱讀 Rails 原始碼」的原因很多，不過多半的出發點都是想要能夠設計出更好的 Plugin (...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +73,129 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/posts/2012/11/25/how-to-read-sourcecode/">如何閱讀 Rails 原始碼</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-11-25T00:28:00+08:00" pubdate  data-updated="true" >Nov 25<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/11/25/how-to-read-sourcecode/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode/" data-show-faces="false"></div></div>
+    
+    <p>開始有計畫整理一些在 <a href="http://rubyconfchina.org">RubyConf China</a> 大家線下問我的問題的答案。</p>
+
+<p>挑選出來暫定的第一篇是大會期間詢問度最高的：「如何閱讀 Rails 原始碼」。</p>
+
+<p>想要「閱讀 Rails 原始碼」的原因很多，不過多半的出發點都是想要能夠設計出更好的 Plugin (Gem)、或者是希望能在程式碼出錯時，能夠更快在 Rails 原始碼快速找到答案。</p>
+
+<p>但擺在眼前的事實是， Rails 的原始碼已經成長大到成幾萬行的怪獸，如何「看懂」或者是有效率的找到答案，已經變成是一個很大的難題。</p>
+
+<p>以下是我根據這幾年的經驗，能夠給各位的建議：</p>
+
+<h2>1. 從單純的部分切入，例如 Helper</h2>
+
+<p>最令大家頭疼的地方是，這麼多程式碼，要從哪部分開始讀起。</p>
+
+<p>如果你是初心者，想要跳進這個池子裡，想找點簡單的東西讀，我會建議你先從「Helper」的部分開始讀。「Helper」是整個 Rails 程式碼裡面最獨立的部分（不牽扯到 request 呼叫），而且結構相對單純。</p>
+
+<h2>2. 從 request 開始，到 rack，到 routing，到 controller，最後再到 model</h2>
+
+<p>我真正開始有系統的讀懂 Rails code，是從一門線上 <a href="http://owningrails.com">Owning Rails</a>開始的。這門課的宗旨是，就是教你有效掌握搞懂 Rails 的核心與結構。相當有趣的是，他並不是教你讀任何 Rails 代碼，而是實際一步步帶你造出一個「mini Rails」。而造完這個 「mini Rails」之後，學員也能夠開始神奇的開始擁有快速找 code 的能力。</p>
+
+<p>我在去年曾經寫過一篇 <a href="http://wp.xdite.net/?p=2407">Owning Rails masterclass</a> 介紹過這個課程。</p>
+
+<h4>第一天：造出自己的 mini Rails</h4>
+
+<p>帶你如何寫出精簡版 ActiveRecord、寫 rack app、用 rack app 改出精簡版 ActionController、自己 implement 出 before<em>, after</em>, around_ filter、自己 implement 出 view。然後最後再用你自己刻出來的這套 mini Rails 寫 web application。</p>
+
+<h4>第二天的課程</h4>
+
+<p>Refactor 昨天寫的 mini Rails，教你如何 trace Rails core。利用 Rails internal API 客製化出你想要的特殊 function、library。作業有 custom validator、custom finder、create responder、create form builder、使用 Railtie 客制 Engine、造 plugin。</p>
+
+<p>宥於這是付費課程的關係，我也無法公開提供你更進一步的教材內容。但是我能夠告訴你這們課程為什麼會這樣設計，讓你可以也依循著這個軌道去自我進修。</p>
+
+<h3>rack</h3>
+
+<p>一個 request 進來，首先通過的是層層的 rack middleware。所以你要先理解什麼是 rack，rack 的運作原理是什麼。可以試著自己先寫一個 rack app 玩看看。</p>
+
+<p>如果你想知道 Rails 裡面的 request 流程是什麼。可以在 Rails 專案裡面打 rake middleware，再去把 class 一個一個叫出來讀。</p>
+
+<h3>routing</h3>
+
+<p>request 通過 rack 層進來後，首先面對的是 dispatch 問題，Rails 透過 routes.rb 進行 dispatch。而如何 dispatch 到正確的 controller，中間靠的就是 regexp。</p>
+
+<h3>controller</h3>
+
+<p>開發者在 controller 會牽涉到兩個常用的相關機制：Filter 與 View Rendering。Filter 時怎麼運作的。method 應該是回傳「值」，怎麼做到自動回傳的是 render 出來的view。</p>
+
+<h3>model</h3>
+
+<p>ActiveRecord 的上一層就是一套 ActiveModel API。其實 Rails 不一定要靠 ActiveRecord，也可以透過實作一個 Class 加上部分機制做出自己的 ORM。其中 validation, finder 都是這方面的課題。</p>
+
+<h2>3. 搞懂 Rails 的啟動流程</h2>
+
+<p><a href="http://railscast-china.com">RailsCast China</a> 曾經 release 過一個很好的影片：<a href="http://railscasts-china.com/episodes/the-rails-initialization-process-by-kenshin54">The Rails Initialization Process By kenshin54</a></p>
+
+<p>講解了整個 Rails 啟動流程。你也可以讀由 Ruby on Rails 官方釋出的這篇<a href="http://guides.rubyonrails.org/initialization.html">官方教學啟動流程</a>去更加了解啟動過程中究竟會經過哪些檔案，如果要寫 plugin 可以 hook 在哪一些部分。</p>
+
+<h2>4. 實際簡單寫一個 Rails Plugin</h2>
+
+<p>最好的學習方法就是動手實作。在看過以上這一些資料之後，我建議你可以實際透過開發一個 Gem 去更加了解整個 Rails 內部的結構。</p>
+
+<p>目前 Rails Plugin 幾乎都是以 Engine Gem 的形式釋出。所以透過撰寫一個 Gem，可以了解到：</p>
+
+<ul>
+<li>如何將自己的 Library 與現有 API 整合</li>
+<li>如何將自己的 Library / 不掛進啟動 process 中。</li>
+<li>Engine 與 Railtie 的結構</li>
+<li>如果有相依檔案，如何撰寫 generator，把檔案放進去 project 裡面。</li>
+<li>如果有檔案操作和客製選項，如何透過 thor 這個工具去達到檔案修改的目的。</li>
+</ul>
+
+
+<p>算是一個相當好的鍛鍊。</p>
+
+<h2>5. 讀別人（熱門）的 Rails Plugin</h2>
+
+<p>有時候，你想要實作某一些功能不得其法。最好的方式就是去讀有類似功能的 Gem，去看看其他作者怎麼做的。有時候會翻到他們用了不少你根本不知道的 Rails API。</p>
+
+<p>順著他們用這些 Rails API 的方法，更快的在 Rails 原始碼找到你要的答案…</p>
+
+<h2>小結</h2>
+
+<p>希望以上的方法能夠協助各位更快的上手讀通 Rails 的原始碼。有任何問題歡迎留言在底下討論。</p>
+
+  </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/">RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐</a></h1>
     
     
@@ -108,7 +231,7 @@
 
 <p>不過這個投影片裡面的不少內容，是在現場直接解說掉的，所以只看投影片的話，可能不會知道這樣的設計慢在哪裡。這陣子比較忙，如果有空的話，過一陣子我再寫一個全文版的。</p>
 
-<p>這個演講的主旨是，在以往，我們設計 Rails Application 時，為了想要寫出一些漂亮的架構，會參考一些 Best Practices，或者是參照官方 Rails 官方指南的 Convention 建議，進行設計。</p>
+<p>這個演講的主旨是：在以往，我們設計 Rails Application 時，為了想要寫出一些漂亮的架構，會參考一些 Best Practices，或者是參照官方 Rails 官方指南的 Convention 建議，進行設計。</p>
 
 <p>但是這一些 Convention 或依照直覺的軟體設計，很大的成分其實會造成你的 Application Performance 下降。這些問題即使你裝了 New Relic 還是絕對抓不出來。而這些設計可能也不太能算是 Rails 或者是相關套件的錯，甚至是 nobody&#8217;s fault。這個 talk 會帶你找出這些問題，解釋原因，並且給出修正方案。</p>
 
@@ -1398,105 +1521,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/09/12/paperclip-io-fb-url-like-service/">paperclip.io : Track Urls You Ever Liked</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-09-12T22:23:00+08:00" pubdate  data-updated="true" >Sep 12<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/09/12/paperclip-io-fb-url-like-service/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/09/12/paperclip-io-fb-url-like-service/" data-show-faces="false"></div></div>
-    
-    <p><a href="http://paperclip.io" title="Paerclip.io by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8449/7981727596_abbb2a2de9.jpg" width="500" height="257" alt="Paerclip.io"></a></p>
-
-<p>Hi, everyone. I want to introduce the new service I recently built at 2012 Facebook World Hack Taipei : 「<a href="http://paperclip.io">Paperclip.io</a>」. It is also the &#8220;Best Overall&#8221; service in Facebook World Hack Taipei.</p>
-
-<h2>What is Paperclip.io?</h2>
-
-<p>Paperclip.io tracks and collects webpages you liked via Facebook, and organizes them for you. You can browse or search through the liked pages quickly in Paperclip.io.</p>
-
-<h3>idea from …</h3>
-
-<p>The idea was from a small thing: I always forget what url I ever liked on Facebook. It was really annoying. So finally I decide to build a service to help me to collect and organize this url links.</p>
-
-<h3>Features</h3>
-
-<ul>
-<li>automatic tracking and backup</li>
-<li>organized by various types, provides url info  and snapshots.</li>
-<li>can reshare to google plus+, twitter, del.icio.us…etc</li>
-<li>searchable!!</li>
-</ul>
-
-
-<h3>demo video</h3>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/FM6FOl4frRc" frameborder="0" allowfullscreen></iframe>
-
-
-<p>video creditd by htchien</p>
-
-<h3>like us on Facebook:</h3>
-
-<p><a href="https://www.facebook.com/paperclip.io">https://www.facebook.com/paperclip.io</a></p>
-
-<p>======</p>
-
-<p>各位好。這是我昨天才剛推出的新服務「<a href="http://paperclip.io">paperclip.io</a>」。這個服務的主旨是要解決一個困擾：我們每天在 Facebook 上都會「讚」過很多網址。但是，就是因為「讚」過的東西太多了，每次要回去找今天或前幾天讚過什麼東西，都很麻煩。</p>
-
-<p>所以最後我決定寫了一個服務來解這樣的困擾，它可以：</p>
-
-<ul>
-<li>每天自動備份你曾經「讚」過什麼</li>
-<li>按照 og:type 分類排好，而且有縮圖、大綱，</li>
-<li>還可以讓你容易再度的分享到其他服務（如 Google+, twitter）去。</li>
-<li>最棒的是可以搜尋！！也就是可以快速搜尋你曾經到底「讚」過什麼鬼了！</li>
-</ul>
-
-
-<p><a href="http://www.flickr.com/photos/xdite/7981771741/" title="螢幕快照 2012-09-11 下午7.10.01 by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8180/7981771741_e6f28baf19_n.jpg" width="320" height="208" alt="螢幕快照 2012-09-11 下午7.10.01"></a></p>
-
-<p>看了 <a href="http://youtu.be/FM6FOl4frRc">demo 影片</a>就知道！</p>
-
-<p>這個服務也讓 我跟夥伴 <a href="http://twitter.com/zhusee2">zhusee</a> 同時奪得了 2012 Facebook World Hack 台北站的首獎 (Best Overall)</p>
-
-<p>歡迎各位試用！</p>
-
-<p>如果使用上有什麼 bug 的話，請在這篇文章底下留言。我會儘快處理…</p>
-
-<p>P.S. 因為機器小台，而且光今天用戶就瞬間爆增幾百個&#8230;，所以有可能你剛剛匯入的東西有可能不會那麼快跑出來，這目前不是 bug…還請見諒。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1529,6 +1553,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/11/25/how-to-read-sourcecode/">如何閱讀 Rails 原始碼</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/">RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐</a>
       </li>
     
@@ -1542,10 +1570,6 @@
     
       <li class="post">
         <a href="/posts/2012/10/23/some-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 能力培養篇</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/20/how-to-win-hackthon/">如何在 Hackathon 中獲勝？Paperclip.io 獲獎的背後祕辛</a>
       </li>
     
   </ul>

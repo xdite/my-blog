@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  這篇文章是看完陳鐘誠教授寫的「HTC 最需要的軟體能力」的文章後，自己的感想。坦白說，我真的覺得這是一篇相當天真的文章。[在看下去之前，先警告讀者本文是一篇 TL;DR 的文章。]Thoughts on Flash上個禮拜網路界的熱門是，Adobe 宣布放棄...">
+  <meta name="description" content="                  上禮拜看到對岸弄了一個 http://ruby-china.org，看樣子蠻好玩的，介面也設計的不錯。而且這個網站還是 opensource 的，就抓下來玩了一下。不過大概是程式碼加的太快，當時的程式碼不是很「乾淨」，抓下來一般人是改不太動的，加上沒有 te...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/11/28/ruby-taiwan-org/">http://ruby-taiwan.org 開張</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-11-28T01:46:00+08:00" pubdate  data-updated="true" >Nov 28<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/11/28/ruby-taiwan-org/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/11/28/ruby-taiwan-org/" data-show-faces="false"></div></div>
+    
+    <p>上禮拜看到對岸弄了一個 <a href="http://ruby-china.org">http://ruby-china.org</a>，看樣子蠻好玩的，介面也設計的不錯。而且這個網站還是 opensource 的，就抓下來玩了一下。</p>
+
+<p>不過大概是程式碼加的太快，當時的程式碼不是很「乾淨」，抓下來一般人是改不太動的，加上沒有 test。所以我想一般人也沒人敢「翻修」。</p>
+
+<p>為了想玩玩這個 project，我也想說投資一天來試看看翻不翻得動（因為在公司翻修同事的 code 有過非常豐富的經驗了，大概都知道 bad smell 在哪裡，如何在低 cost 狀態，把 code 整理到容易維護）。結論：翻修起來也不算是什麼難事，只是有點繁瑣而已。</p>
+
+<p>總之，最後我終於把 code 整理的算差強人意，算讓人能容易加功能上去了…</p>
+
+<p>看著看著總覺得又少點東西。想想大概是沒有 production data，要幫忙一些功能總是不知道要從哪裡起頭，加上這個站又沒有 test，幫忙翻修還是容易弄爛 master…</p>
+
+<p>後來乾脆就決定了，來作一個 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>！</p>
+
+<p>這個決定在推特宣布後，似乎有嚇到人，對岸朋友好幾個過來道德勸說我放棄這種行為 XDXD</p>
+
+<p>其實不是什麼眼紅別人，自己也想搞一個多紅火的社群，而是說真的，我覺得台灣雖然玩 Ruby 的人開始變多，但會主動跑去大陸的論壇進行太熱烈的討論的機率太低了。加上用語、想法、習慣多多少少會有差距。現在台灣 Ruby 社群也算有點規模了…</p>
+
+<p>沒想到我寶刀未老，原本只是隨便屁屁（我這個人的習慣是，有什麼新想法，就會先投資自己一點時間，可能是 1 天、3 天、1 週，先寫個 prototype 出來…如果寫不完，就是這個想法我並沒有想的清楚，或是我的技術不夠純熟到可以實作這個 idea。我必須馬上放棄這個想法，等待以後有機會再執行。反之，我就適合作這件事。）</p>
+
+<p>一個晚上我竟然就搞定 deploy + i18n 翻修了。於是 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a> 就誕生了！</p>
+
+<p>為了怕初期沒什麼資料，怕沒人想用也沒人要發言。我在這個網站上有預先準備了自己以前從來沒有 release 出去過的一些教學文件。</p>
+
+<p>…之後也會持續釋出更多東西。</p>
+
+<p>首先是</p>
+
+<ul>
+<li><a href="http://wp.xdite.net/?p=2525">邁向 Rails 高級新手 – 你所需要知道的一些知識</a></li>
+</ul>
+
+
+<p>這篇提到的所有 topic 已經在 <a href="http://ruby-taiwan.org/wiki/essential-ruby-rails-knowledge">http://ruby-taiwan.org/wiki/essential-ruby-rails-knowledge</a> 這裡釋出了。（這裡面的內容是 <a href="http://www.techbang.com.tw">T 客邦</a> 技術部讓新人在訓練期寫的東西，主要是透過 Topic 導向讓新手知道怎樣使用這些東西，而且這裡選的 Topic 幾乎都已經是練完 Rails 101 之後接續開發產品，會碰到的各種基本知識）。大概有 30 幾篇文件。</p>
+
+<ul>
+<li><p>接下來是兩篇我以前沒公開放過的教學:</p>
+
+<ul>
+<li><a href="http://ruby-taiwan.org/wiki/custom-generators">Custom Generators</a></li>
+<li><a href="http://ruby-taiwan.org/wiki/packing-gems">Packing Gems</a></li>
+</ul>
+</li>
+<li><p>最後是 <a href="http://rails-101.logdown.com">Rails 101</a> 的第七章 <a href="http://ruby-taiwan.org/wiki/deploy_to_production_practice">遠端佈署最佳實踐</a>。教大家如何完美的佈署遠端 production server。</p></li>
+</ul>
+
+
+<p>歡迎大家有空上去<a href="http://ruby-taiwan.org/topics">多多交流</a>和完善補充自己的 pratices。以後我還會繼續把一些沒分享過的 pratices 繼續 release 出來。（相信我，多到嚇死人&#8230;）</p>
+
+<p>最後，似乎是我改用 <a href="http://octopress.org">Octopress</a> 並撰文介紹這套 blogging system 後，引起非常熱烈的迴響，現在大家似乎都開始搬家轉用 Octopress…在這當中也出現了不少問題，我在 twitter 和社群聚會答了非常多相關問題。現在也決定在 Ruby Taiwan 上開一個 <a href="http://ruby-taiwan.org/topics/node24">Octopress 的節點主題</a> ，歡迎大家如果在用 Octopress 上如果遇到任何問題，都上來問，謝謝！</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1320,67 +1409,6 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2011/10/19/stickies-gem/">Stickies Gem</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-10-19T14:38:00+08:00" pubdate  data-updated="true" >Oct 19<span>th</span>, 2011</time>
-        
-         | <a href="/posts/2011/10/19/stickies-gem/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/19/stickies-gem/" data-show-faces="false"></div></div>
-    
-    <p>stickies 這個 plugin 是我在開發中常用的一個 plugin。用來實作注意/警告訊息的。</p>
-
-<p><img src="http://farm7.static.flickr.com/6114/6259519683_ae8e1d15b6.jpg"></p>
-
-<p>stickies 是一個非常古早的 plugin，在 2008 年前左右就問世了，當時的特效還是使用 rjs 。後來 <a href="http://ihower.tw">ihower</a> 在 <a href="http://handlino.com">和多</a> 時把這個 plugin 翻成 jQuery 版本。</p>
-
-<p>這套 plugin 我自己還蠻喜歡用的。T 客邦內部也用了很多，不過因為內部有 Gem （認證系統）預設訊息就綁 stickies，每次開新專案裝完認證，就要手動 copy plugin 到 vendor/ 和手動 copy assets 到 public/，有夠麻煩&#8230;</p>
-
-<p>今天進公司大概跟同事聊了一下昨天寫的用 <a href="http://blog.xdite.net/posts/2011/10/18/asset-pipeline-version-control-assets/">Asset Pipeline 掛 Asset</a> 的概念。</p>
-
-<p><a href="http://twitter.com/v1nc3ntlaw">vincent</a> 就覺得 stickies 應該要首先被拔出去，每次 copy asset 實在太麻煩了，將來最好還可以放在認證系統的 Gemfile dependency 上。於是剛剛我就接下來作了。</p>
-
-<p>本來以為只是掛 asset 而已，小事一樁。不巧的我發現它還是 Rails 2.x 時代的 Rails Plugin。於是剛剛索性將架構作了一番重構。</p>
-
-<p>（重寫 generator，用 Railtie / Engine 作 gem )</p>
-
-<p>目前 stickies 已經被我包裝成 rubygems，並支援 Rails 3.0 / 3.1。
-而且 3.1 版本可以直接用 asset pipeline 掛 assets。不需要再跑 copy tasks )</p>
-
-<p>code 放在這裡：<a href="https://github.com/techbang/stickies">https://github.com/techbang/stickies</a></p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1415,6 +1443,10 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/11/25/how-to-read-sourcecode/">如何閱讀 Rails 原始碼</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/">RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐</a>
       </li>
     
@@ -1428,10 +1460,6 @@ Android 手機的內建瀏覽器和海豚瀏覽器，就因此看不到新版奇
     
       <li class="post">
         <a href="/posts/2012/10/23/some-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 能力培養篇</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/20/how-to-win-hackthon/">如何在 Hackathon 中獲勝？Paperclip.io 獲獎的背後祕辛</a>
       </li>
     
   </ul>
