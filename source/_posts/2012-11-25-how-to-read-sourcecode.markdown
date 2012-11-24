@@ -39,14 +39,14 @@ categories:
 Refactor 昨天寫的 mini Rails，教你如何 trace Rails core。利用 Rails internal API 客製化出你想要的特殊 function、library。作業有 custom validator、custom finder、create responder、create form builder、使用 Railtie 客制 Engine、造 plugin。
 
 
-宥於這是付費課程的關係，我也無法公開提供你更進一步的教材內容。但是我能夠告訴你這們課程為什麼會這樣設計，讓你可以也依循著這個軌道去自我進修。
+宥於這是付費課程的關係，我也無法公開提供各位更進一步的教材內容。但是我能夠告訴各位這們課程為什麼會這樣設計，讓你可以也依循著這個軌道去自我進修。
 
 
 ### rack
 
-一個 request 進來，首先通過的是層層的 rack middleware。所以你要先理解什麼是 rack，rack 的運作原理是什麼。可以試著自己先寫一個 rack app 玩看看。
+一個 request 進來，首先通過的是層層的 rack middleware。所以必須要先理解什麼是 rack，rack 的運作原理是什麼。可以試著自己先寫一個 rack app 玩看看。
 
-如果你想知道 Rails 裡面的 request 流程會經過哪些 middleware，被加過哪些工。可以在 Rails 專案裡面打 rake middleware，再去把 class 一個一個叫出來讀。
+如果想知道 Rails 裡面的 request 流程會經過哪些 middleware，被加過哪些工。可以在 Rails 專案裡面打 rake middleware，再去把 class 一個一個叫出來讀。
 
 ### routing
 
