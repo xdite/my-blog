@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  Twitter 的 Bootstrap 是一套很好用的 CSS Framework。可以讓開發者加上工具類 CSS 如 .btn，就設計出一個按鈕。但有時候這東西也像 inline style 一樣討厭，比如說我要設計一排「按鈕] link，就非得每行都加個...">
+  <meta name="description" content="                  昨天在 Happy Designer 5 上，有聊起了做 Responsive Web Design (特別是 mobile 版)的一些狀況。在這裡我提供一些自己的經驗和技巧：Mobile First：如果你要做 Desktop / Mobile 雙版本的網...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,124 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/02/16/about-responsive-design-technique/">Responsive Web Design 的一些技巧和想法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-02-16T13:16:00+08:00" pubdate  data-updated="true" >Feb 16<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/02/16/about-responsive-design-technique/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/02/16/about-responsive-design-technique/" data-show-faces="false"></div></div>
+    
+    <p>昨天在 <a href="http://registrano.com/events/hdm5">Happy Designer 5</a> 上，有聊起了做 Responsive Web Design (特別是 mobile 版)的一些狀況。在這裡我提供一些自己的經驗和技巧：</p>
+
+<ol>
+<li><p>Mobile First：如果你要做 Desktop / Mobile 雙版本的網站。先設計 Mobile 版的，而且要從最小的尺寸開始做。</p></li>
+<li><p>盡量讓 Mobile 的版本：大部分功能保持唯讀狀態。因為在 Mobile 上要將「輸入」這件事做得好，是很困難的，而且不少的寫入會牽涉到動線及頁面的跳轉，會大幅降低 user experience。雖然某些功能和元素幹掉很可惜，但要懂得「取捨」。</p></li>
+<li><p>不要過於迷信 Media Query: media query 只能解決 CSS 的問題。但是 mobile client 上需要解決的問題不只是這些：</p>
+
+<ul>
+<li>內圖的尺寸與傳輸速度：圖可能是用 Desktop version 的圖硬縮的。</li>
+<li>3rd party social plugin：3rd party social plugin 多半沒有考慮 mobile 版本的問題。所以在 mobile 版面上，幾乎都會有尺寸問題。而這些 social plugin 的 js 因為都是由放置在外國的原站提供，在 mobile 版上 loading 更加的緩慢。</li>
+</ul>
+
+
+<p>所以我會採取「偵測 agent 」與 media query 混合使用的招數進行開發。如果這個 agent 確定是手機，則直接移除掉 social 功能（直接從 server side 幹掉 DOM，而不是用 CSS 隱藏），並且吐尺寸較小的圖片。</p></li>
+<li><p>我個人還是認為 Responsive 的用途比較適合用在 Tablet 的 Portrait / Landscape 的用途上。畢竟 Responsive Web Design 的想法，是讓 Desktop / Mobile 擠在同一個版面上，用同一份 code。再 conditional override 或者 remove。在需要「持續維護」的產品上，容易搞死 Developer…</p></li>
+</ol>
+
+
+<p>P.S. 如果你對 Responsive Web Design 好奇，可以用手機打開 <a href="http://www.techbang.com.tw">T 客邦</a> 以及 <a href="http://digiphoto.techbang.com.tw">Digiphoto</a> ，這個站都是用此技巧設計的…</p>
+
+<p>＝＝＝</p>
+
+<p>廣告：二月份 <a href="http://registrano.com/events/xdbg-1202">xdite 家桌遊團</a> 又開放了，限八人，請儘速報名。</p>
+
+  </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/">Don’t Name Your Ruby Project With Underscore on Github</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-02-09T16:15:00+08:00" pubdate  data-updated="true" >Feb 9<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/02/09/dont-name-your-project-with-underscore-on-github/" data-show-faces="false"></div></div>
+    
+    <p>I had a ruby project named &#8221;<a href="https://github.com/xdite/bootstrap_helper">bootstrap_helper</a>&#8221;, which has 43 watchers on Github.</p>
+
+<p><a href="http://www.flickr.com/photos/xdite/6845375847/" title="螢幕快照 2012-02-09 下午4.09.51 by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7026/6845375847_0eed10698d.jpg" width="500" height="100" alt="螢幕快照 2012-02-09 下午4.09.51"></a></p>
+
+<p>I thought having 43 watchers is sort of popular. But there is a weired thing:  when I search keyword : &#8220;bootstrap helper&#8221;, my gem is not in first page result.</p>
+
+<p><a href="http://www.flickr.com/photos/xdite/6845392075/" title="螢幕快照 2012-02-09 下午3.59.56 by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7045/6845392075_cfcd2676c5.jpg" width="500" height="485" alt="螢幕快照 2012-02-09 下午3.59.56"></a></p>
+
+<p>Then I found I made a hugh mistake: Ruby naming convention told Ruby developer to name everything with underscore. So every developer names their projects with underscore.</p>
+
+<p>But it&#8217;s a giant SEO mistake: Search Engine treats snake_keywords as CamelKeywords. If your project&#8217;s name contains  meaningful keywords, it won&#8217;t be matched. Because &#8220;snake_keywords&#8221; means &#8220;SnakeKeyword&#8221; not &#8220;snake keywords&#8221;.</p>
+
+<p>It&#8217;s really bad for SEO.</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2228,152 +2346,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/01/06/about-erp/">關於 Essential Rails Pattern 這本書的近況</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-06T18:09:00+08:00" pubdate  data-updated="true" >Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/01/06/about-erp/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/06/about-erp/" data-show-faces="false"></div></div>
-    
-    <p>最近看到不少讀者都在「委婉」的催我最新這一本書「<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">Essential Rails Pattern</a>」的近況。</p>
-
-<p>跟大家報告一下這本書的近況，其實我每個禮拜都還是有在持續撰寫這本書。但是這本書寫著寫著，我越發現一件可怕的事情，內容太大了，大到比我當初想象中的還大概長五倍。到現在我已經為這本書寫超過 10 萬字了。可是還是看不到盡頭。</p>
-
-<p>而且在當初安排初版結構時，在前三章的結構上安排得有些錯誤。原本是要寫 Ruby / Rails 的設計技巧，卻岔遠路去撰寫基本的程式設計技巧。</p>
-
-<p>草稿的字是累積不少，但是還不能見人，於是就一直放著。改先出零散的文章，所以最近各位可能看到我在撰寫一些回歸基本的教學，其實也是為這本書在做準備。</p>
-
-<p>這幾天，我想了很久，預購的讀者每次抓下來都只有空白頁，等久了也會生氣 XD。</p>
-
-<p>終於我做了一個決定，原先的目錄結構太爛了，不砍掉重寫可能就會永遠斷頭了XD。</p>
-
-<p>於是我將原本寫好的幾章全部打散重排，所有已經寫好的內容，可以抽成章的就先整理出來。目前的草稿雖然有點多，但還算整理的完的。我會將草稿放在這裡: <a href="http://erp-book.heroku.com">http://erp-book.heroku.com</a>。</p>
-
-<p>這次也算釋出正式版的全部大綱。我希望可以在今年二月，釋出現在手頭上絕大部分的 beta 內容。</p>
-
-<p>如果有「等的不耐煩」的讀者，或者是「看完大綱覺得這本書不是你想要的」，或者是「這本書覺得不值得這個價錢的」，或者是「就是不爽 xdite 你這個大騙子」的，都可以寫信給我要求退錢。</p>
-
-<p>再次為進度的緩慢，致上我深深的歉意。</p>
-
-<p>===</p>
-
-<p>不過如果你看完這本書的大綱和目前進度，還滿意這樣的內容和主題，想支持我繼續寫作的(其實寫這麼多字也是很累的..orz)，也歡迎加入<a href="http://rails-101.logdown.com/books/3-essential-rails-pattern">預購</a>支持我的作品，謝謝。</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/01/06/sell-my-macbook-air/">[出售] Macbook Air 攻頂款另贈 NDSi XL</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-06T00:30:00+08:00" pubdate  data-updated="true" >Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/01/06/sell-my-macbook-air/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/06/sell-my-macbook-air/" data-show-faces="false"></div></div>
-    
-    <p>蘋果今天在大特賣，我也打算特賣我的 Macbook Air。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6642182625/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7024/6642182625_d32456e871.jpg" width="500" height="375" alt=""></a></p>
-
-<p>打算在過年前把手上這一臺 Macbook Air 13&#8221; 賣掉換新的。</p>
-
-<p>這台是 2011/03 從香港買的攻頂款。</p>
-
-<p>配備:</p>
-
-<ul>
-<li>CPU: Intel Core2 Duo 2.13GHZ</li>
-<li>RAM: 4G</li>
-<li>HDD: 256 GB SSD</li>
-<li>鍵盤: 全英文鍵盤</li>
-</ul>
-
-
-<p>還在 Apple Care 中。沒有貼紙在上面，保護得還算不錯。</p>
-
-<p>當時台灣售價是 $ 62000，我從香港買進花了 $52xxx。</p>
-
-<p>我打算賣 NT $41000。賣了之後會幫你還原到 10.6 出廠預設。</p>
-
-<p>====</p>
-
-<p>售價 41000 怎麼算特賣？</p>
-
-<p>因為之前手上玩具不小心買太多了，有一臺也是當時買的，但是後來沒玩幾次的 NDSi XL 放在家裡沒在打…
-應該也還值個幾千塊（這台在美國買的時候也花了 6-7000）。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6642193481/" title="Untitled by xdite, on Flickr"><img src="http://farm8.staticflickr.com/7164/6642193481_dfde9ce8b5.jpg" width="500" height="375" alt=""></a></p>
-
-<p>如果你購買這台 Air 的話，這台 NDSi XL 就也順便送你啦。看你要拿去換現金還是收起來自用。</p>
-
-<p>有興趣的朋友歡迎跟我聯絡。如果你已經是我 FB 好友的話，可以少收你 1000 元。</p>
-
-<p>===
-用 iPhone 4S 拍的現況圖，不知道解析度夠不夠</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/sets/72157628733737777/">http://www.flickr.com/photos/xdite/sets/72157628733737777/</a></p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -2408,7 +2380,15 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/12/06/dhl-sucks-missing-package/">原來 DHL 這麼不可靠？寄丟包裹竟是客戶自己要負責</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/11/25/how-to-read-sourcecode/">如何閱讀 Rails 原始碼</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/11/20/how-to-read-rails-source-code/">如何閱讀 Rails 源代碼</a>
       </li>
     
       <li class="post">
@@ -2417,14 +2397,6 @@
     
       <li class="post">
         <a href="/posts/2012/10/28/force-to-improve-yourself/">被迫才是進步的原動力</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/25/another-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 挑戰未來篇</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/23/some-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 能力培養篇</a>
       </li>
     
   </ul>

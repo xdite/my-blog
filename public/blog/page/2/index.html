@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  Hi, everyone. I want to introduce the new service I recently built at 2012 Facebook World Hack Taipei : 「Paperclip.io」. It is als...">
+  <meta name="description" content="                  在我的前一篇文章「Specification by Example - 團隊如何交付正確的軟體」，我提到了一件在工程師界，人人皆知卻不願意說出口的「秘密」：「工程師竟然時常比他們的雇主或PM，更了解它的生意邏輯與流程」。「客戶在它的 Spec 裡面卻指定了完...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,423 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/10/07/maybe-you-should-listen-what-your-rd-said/">也許你該停下來聽聽工程師怎麼說</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-10-07T02:44:00+08:00" pubdate  data-updated="true" >Oct 7<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/10/07/maybe-you-should-listen-what-your-rd-said/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/10/07/maybe-you-should-listen-what-your-rd-said/" data-show-faces="false"></div></div>
+    
+    <p>在我的前一篇文章「<a href="http://blog.xdite.net/posts/2012/10/01/specification-by-example/">Specification by Example - 團隊如何交付正確的軟體</a>」，我提到了一件在工程師界，人人皆知卻不願意說出口的「秘密」：</p>
+
+<blockquote>
+「工程師竟然時常比他們的雇主或PM，更了解它的生意邏輯與流程」。
+</blockquote>
+
+
+
+
+<blockquote>
+「客戶在它的 Spec 裡面卻指定了完全不可行或者是成本效益極低的作法」。因為簽了合約或領了老闆的薪水，我們被迫在明知不可而為之的狀況下，進行了一個徹底失敗的專案。」
+
+</blockquote>
+
+
+<p>如果你不是身處於工程師這個圈子的話，若無意中聽到這一件事，通常會覺得這群人相當傲慢。這群人不負責執行 Bussiness Development，怎都可大膽有此感想？</p>
+
+<p>一開始，我也對這個「觀察」是存疑的。因為一開始時擁有這個觀察時，我還算是個很菜的工程師，這個觀察對我來說應該是錯覺。但隨著生涯中經歷過許多專案的角色。在專案中，我屢屢嘗試著尋找能夠反駁這個觀察的蛛絲馬跡。但最終都以失敗告終。</p>
+
+<p>而後來更輾轉得知，這幾乎是這個圈子內「不能說出口的秘密」。我才同意這也是真的結論。只是我還是找不出 理論 / 反證。</p>
+
+<p>直到最近，我才從幾段討論中，赫然領悟這件事情也許可能是有一套理論可以解釋的。</p>
+
+<p>一段是從 @yllan （台灣知名 Cocoa 開發者，Nally 作者）在的 <a href="https://www.facebook.com/yllan/posts/10151056527591945">Facebook 的 post</a></p>
+
+<p>====</p>
+
+<p>Steve Jobs 說他很喜歡一個比喻。他以前在 Scientific American 上看到一篇文章，研究各種動物運動的效率，最強的是兀鷹（同樣的運動使用最少能量），人類排名普普通通，可能排在所有動物的三分之一左右。</p>
+
+<p>有趣的是，那篇文章也研究了「騎著腳踏車」的人類，而騎腳踏車的人其能源效率把所有動物遠遠甩在後頭。人類製造工具大幅拓展自己的能力。而 SJ 把「電腦」比喻成「心靈的腳踏車」。</p>
+
+<p>他又認為每個人都應該學程式，因為你在教電腦事情的時候，其實是在釐清自己的思考。這正和 Knuth 的名言「A person does not really understand something until after teaching it to a computer」不謀而合。</p>
+
+<p>====</p>
+
+<p>一段是我在跟與朋友的網路爭辯中，脫口而出寫出來的一段話（我常常從辯論驗證中，突然找到靈感，這些感想甚至是我自己也不知道為何會脫口而出的絕妙結論）：</p>
+
+<p>====</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>xdite : RD 會知道你的生意
+</span><span class='line'>xdite : 能不能成
+</span><span class='line'>xdite : 遠比你自己早知道
+</span><span class='line'>xdite : 因為他們會直接先面臨
+</span><span class='line'>xdite : 邏輯能不能實作
+</span><span class='line'>xdite : 我們會推測就是
+</span><span class='line'>xdite : 1. 合理
+</span><span class='line'>xdite : 2. 成本（要作多久）
+</span><span class='line'>xdite : 3. 效益
+</span><span class='line'>xdite : 剛好就是一個事業能不能做的基礎
+</span><span class='line'>xdite : 只是很多人誤以為
+</span><span class='line'>xdite : RD 只會 code .....
+</span><span class='line'>xdite : 3. 效益 就是...能不能重複用
+</span><span class='line'>xdite : 能不能實作 要作多久 可不可以重複利用
+</span><span class='line'>xdite : 都不可以 就會懷疑
+</span><span class='line'>xdite : 你是賺三小</span></code></pre></td></tr></table></div></figure>
+
+
+<p>====</p>
+
+<p>我終於理解，為什麼 RD 會提早知道這個生意能不能成。這根本的原因就是因為他們便是嘗試教電腦事情的第一線人員。也就是會先面對「釐清」實作上「合不合理」的第一個人。</p>
+
+<p>程式邏輯是非常現實的，若這件事不合理，RD 就會面臨「無法實作」的困境。這是其一。</p>
+
+<p>其二：只有實作的人，才會知道這件事到底要作多久。RD 也許有樂觀病，往往他們告訴你需要實作兩週，但往往真實需要的時間也許是四週。但如果他們告訴你，需要半年這麼久，或者是根本作不出來，沒有完工的可能性。那可能這件事就不可能發生 &#8211; 起碼在他們手上。</p>
+
+<p>同時也應該要注意的是，這直接反應了成本的爆增。有時候，這甚至不是換一批執行團隊可以解決的問題。RD 正在試圖告訴你，執行代價高昂，你最好不要白花錢。因為很現實的，他也不想要白花時間…</p>
+
+<p>其三：所有 RD 都非常討厭寫 event code。所謂 event code 就是只用過一次的 Code（因為某些特殊事件，如廣告、行銷活動，只執行過一次即扔的產品）。這類型的程式碼，往往無法被重新用在下一次的類似事件中，只能重新撰寫重新來過。這對任何重視自己心血結晶的人，重新來過是非常累人非常惱人的事。</p>
+
+<p>而這對生意執行面來說，是非常高昂的沉沒成本。一再發生，甚至是不應被允許的行為。</p>
+
+<h3>小結</h3>
+
+<p>任何賺錢生意無非都是幾個簡單原則：首先，先觀察到一個合理需求。接著針對這個需求設計出一個可執行的解決方案。重複，證明解決方案可以被重製，可以得到收益。接著壓低執行成本，演化出一個可以獲利的模式。而在這段過程中：</p>
+
+<ol>
+<li>合理實作</li>
+<li>時間成本</li>
+<li>重複效益</li>
+</ol>
+
+
+<p>是至關重要的。</p>
+
+<p>世上從來就不存在這麼一個假設：「覺得自己有一個偉大 idea，接著偉大的事情就會發生」</p>
+
+<p>而在整個模式的發生過程，RD 正是日日夜夜都要面對這個挑戰的第一線執行者。</p>
+
+<p>如果他們很坦白的告訴你這個想法很蠢，也許這件事就真的很蠢，你應該停下來聽他們怎麼說…</p>
+
+  </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/10/01/specification-by-example/">Specification by Example - 團隊如何交付正確的軟體</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-10-01T04:46:00+08:00" pubdate  data-updated="true" >Oct 1<span>st</span>, 2012</time>
+        
+         | <a href="/posts/2012/10/01/specification-by-example/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/10/01/specification-by-example/" data-show-faces="false"></div></div>
+    
+    <p><img src="http://z2-ec2.images-amazon.com/images/P/1617290084.01._SX278_SCLZZZZZZZ_V146204546_.jpg" alt="img" /></p>
+
+<p>這個禮拜終於斷斷續續用了空檔時間讀完了一本買了卻一直沒時間坐下來好好研究的書「<a href="http://manning.com/adzic/">Specification by Example</a>」</p>
+
+<p>對岸的圖靈系列最近也出了這本書的中文版:「實例化需求」。如果你想要觀看這本書的書評，InfoQ 上有一篇不錯的文章：「<a href="http://www.infoq.com/cn/articles/specification-by-example-book">《實例化需求》採訪與書評</a>」。</p>
+
+<p>這本書給我一種很奇妙的讀後感，因為書中既沒有程式碼，也不介紹任何工具，甚至實際軟體例子也很少，篇幅最多的甚至是模糊的團隊訪談。</p>
+
+<p>但讀完了以後，卻讓我在軟體開發上流程上有了更大的啟發。</p>
+
+<h3>交付錯誤的軟體的原因</h3>
+
+<p>我是一名職業的軟體開發者。前前後後寫過的軟體專案也有 50 個, 60 個。目前也以開發軟體為生。在我的職業生涯裡面，其實我有一個從來沒有跟人講過的秘密困擾。這個困擾，我相信許多同業們可能也有。那就是 &#8212; 一個專案開發下來，「我們竟然時常比我們的客戶或 PM，更了解它的生意邏輯與流程」</p>
+
+<p>但這個問題帶來更大的困擾是：「客戶在它的 Spec 裡面卻指定了完全不可行或者是成本效益極低的作法」。因為簽了合約或領了老闆的薪水，我們被迫在明知不可而為之的狀況下，進行了一個徹底失敗的專案。</p>
+
+<p>技術很好，團隊也強大，產品也有市場。但還是失敗，因為 &#8211; 「交付錯誤的軟體」。</p>
+
+<h3>軟體工程沒教的課題: 交付正確的軟體</h3>
+
+<p>市面上有很多書，教人如何敏捷開發，教人測試驅動開發（TDD)。它們可以帶給開發者的好處是可以利用這些技巧將工程時間大幅縮短，降低軟體內發生 Bug 的頻率。</p>
+
+<p>這些技巧對於進行軟體專案不是沒有作用，因為早點完工（把功能實做出來），專案早點失敗，專案可以及早軸轉到較接近成功的方向。</p>
+
+<p>對於正在營運中的公司，內部專案早點失敗，及早軸轉到較接近成功的方向。往往是可接受的。因為總體目標是儘快交付到貼近正確方向的軟體。</p>
+
+<p>但對於目標是交付一個軟體的專案，「交付錯誤的軟體」卻往往是糾紛的起源。但卻也是一個千古難解的課題。對於業主來說，他付錢是希望得到一個「正確的軟體」。但於對於被委託的開發者也往往有苦難言，因為他們得到的指示是「按照業主精確的功能敘述去實作軟體」，「正確與否」不是他們的最終責任。而是否「正確」通常往往也得等到上線之後，客戶根據用戶實測反應才能得知（雖然開發者往往是開發階段就往往能猜測出是否失敗的那一群人）。但這從來也不在合約的責任之內。</p>
+
+<p>而這本書也就是在探討這個課題：怎麼樣的軟體流程，才能交付正確的軟體。</p>
+
+<h3>大家沒想到的答案: BDD</h3>
+
+<p>這本書繞了很多遠路去講解什麼是 Specification by example，但這也是作者的用意：刻意不使用專業定義字眼如「敏捷」、「測試驅動開發」去輔助解釋，避免整個梳理的流程被大家腦海裡面的術語印象所綁架。</p>
+
+<p>但總體來說，這個結論毫無疑問就是 Behavior Driven Development (BDD)。不過這個 BDD 卻跟我當初學到的 BDD ( from Cucumber ) 印象很不一樣。這也是為什麼這次會花上幾個小時謄下這篇心得。</p>
+
+<p>裡面有幾段 quote 我很喜歡，實際擊中困擾的核心：摘錄如下：</p>
+
+<p>「實現範圍（Implementation scope）含有對業務問題的解決方案或達成業務目標的手段。很多團隊在開始實現軟件之前（在此之前發生的一切往往被軟件開發團隊所忽略），期望客戶、產品負責人或商業用戶來確定工作的範圍。在商業用戶明確說明他們的需求後，軟建交付團隊就依此時現。這樣本應該會讓客戶滿意。但事實上，這正是構建產品開始出現問題的時候。</p>
+
+<p>如果軟件交付團隊依賴客戶給出用戶故事、用例清單或其他相關信息，那麼他們其實是在讓客戶設計解決方案。但是商業用戶不是軟件設計師。如果我們讓客戶去界定範圍，那麼項目就無法從交付團隊已有的知識受益。這樣開發出來的軟件是客戶所要求的，卻不是他們真正想要的。</p>
+
+<p>成功的團隊不會盲目的接受軟件需求，將其作為未知問題的解決方案，相反，他們會從目標中獲取範圍。他們以客戶的業務目標為起始，然後通過協作界定可以實現目標的範圍。團隊與商業用戶一起工作確定解決方案。商業用戶專注於所需功能希望達到的目的，以及他們期望由此帶來的價值，這樣有助於所有人了解所需的功能。然後團隊提議一個解決方案，這樣比商業用戶自己想出來的方案更實惠、更快，並且更容易交付或維護。」</p>
+
+<p>「與我一起共事過的商業用戶和客戶，大多喜歡把需求描述成解決方案；他們很少會去討論想要達到的目標，或者亟待解決的問題具有什麼特殊性質。我見過太多的團隊有一種危險的誤解，他們認為客戶總是正確的，客戶要求的東西總是一成不變的。這導致很多團隊盲目的接受客戶建議的解決方案，然後竭盡全力去實現。」</p>
+
+<p>「在構建正確軟件產品的過程中，確定範圍扮演著重要的角色。沒有正確的範圍，其餘的工作只是在作無用功。」</p>
+
+<p>「人們告訴你他們自己認為需要什麼，通過問他們『為什麼』，你可以找到背後的目標。許多組織不能明確地指出他們的商業目標。然而，一旦你獲得了目標，就應該再反過來從已確定的目標上獲取範圍，可能你會丟棄掉原先假定出來的範圍」</p>
+
+<h3>一個實際的例子：對 VIP 免費送貨 的需求</h3>
+
+<p>Specification by example 強調的是對於需求，我們必須設計出一個可以被實現的方案，這個方案可以被單獨測試驗證。並且從這個方案與程式碼中演化出 LiveDocument。</p>
+
+<p>書中舉出了一個實際的例子。（整理摘錄）</p>
+
+<p><a href="http://www.flickr.com/photos/xdite/8040169023/" title="Untitled by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8182/8040169023_b634581f99.jpg" width="500" height="375" alt="Untitled"></a></p>
+
+<h5>商業目標</h5>
+
+<p>12 個月內對現有客戶提高 50% 的重複銷售</p>
+
+<h5>實作範圍</h5>
+
+<p>我們可以從商業目標中獲取實現範圍。實現團隊和商業投資者一起提出一些想法，然後把他們分成可交付的軟件塊。比方說我們發現一個主題故事是關於客戶忠誠度計畫的。這個故事可以分解成客戶忠誠度管理系統的基本功能和更高級的獎勵計畫。我們決定首先專注在建立一個基本的會員忠誠度管理系統上：客戶註冊一個 VIP 計畫，VIP 客戶有資格獲得特定物品的免費送貨。我們將推遲關於高級獎勵計畫的討論。下面這個例子的用戶故事：</p>
+
+<ul>
+<li>為了能對現有客戶作產品直銷，作為營銷經理，我想讓客戶通過加入 VIP 計畫註冊個人信息。</li>
+<li>為了吸引現有客戶註冊 VIP 計畫，作為營消經理，我要系統為 VIP 客戶提供特定物品的免費送貨。</li>
+<li>為了節省開支，作為現有客戶，我希望能收到特價優惠的信息。</li>
+</ul>
+
+
+<h5>關鍵實例</h5>
+
+<p>一旦團隊開始實現某個特定的功能，我們就可以為特定的範圍產生具體的需求說明。比如，當我們開始作範圍中的第二項 &#8211; 免費送貨時 &#8211; 必須定義好什麼是免費送貨。在協作討論過程中，為了避免運送電子產品或大件物品相關的後勤問題，我們決定系統只提供書籍的免費送貨服務。因為商業目標是提升重複銷售，我們嘗試讓客戶進行多次購買，「免費送貨」變成了「免費為 5 本或以上書籍送貨」。我們要確定好關鍵實例，比如 VIP 客戶購買 5 本圖書、VIP 客戶購買 5 本以下的圖書，或者非 VIP 客戶購買書籍。</p>
+
+<p>接著討論當客戶同時購買了書籍和電子產品時該怎麼辦。有些人建議擴展範圍，例如，將訂單拆分成兩個，只為書籍提供免費送貨。我們決定推遲這個決定，先實現最簡單的。如果訂單中有非書籍的物品，我們就不提供免費送貨。我們加入下面這個新的關鍵實例，之後會再討論。</p>
+
+<h6>關鍵實例：免費送貨</h6>
+
+<ul>
+<li>VIP 客戶購物車中有 5 本書籍可以獲得免費送貨</li>
+<li>VIP 客戶購物車中有 4 本書及就不提供免費送貨</li>
+<li>普通客戶購物車中有 5 本書籍沒有免費送貨</li>
+<li>VIP 客戶購物車中有 5 台洗衣機時不提供免費送貨</li>
+<li>VIP 客戶購物車中有 5 本書籍和 1 台洗衣機時不提供免費送貨</li>
+</ul>
+
+
+<h5>帶實例的需求說明</h5>
+
+<p>我們從關鍵實例中提煉出需求說明、創建出一目了然的文檔並將其格式化成便於今後作自動化驗證的格式（如下所示）</p>
+
+<h6>免費送貨</h6>
+
+<ul>
+<li>當VIP 客戶購買一定數量的書籍時，提供免費送貨。免費送貨不提供給普通用戶或購買非書籍的 VIP 客戶。</li>
+<li>假定至少買 5 本書才能獲得免費送貨服務，那麼我們會得到以下預期：</li>
+</ul>
+
+
+<p>Example:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>客戶類型</th>
+<th>購物車中的物品</th>
+<th>送貨</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> VIP </td>
+<td> 5 本書 </td>
+<td> 免費、標準 </td>
+</tr>
+<tr>
+<td></td>
+<td> VIP </td>
+<td> 4 本書 </td>
+<td> 標準 </td>
+</tr>
+<tr>
+<td></td>
+<td> 普通 </td>
+<td> 10 本書 </td>
+<td> 標準 </td>
+</tr>
+<tr>
+<td></td>
+<td> VIP </td>
+<td> 5 台洗衣機 </td>
+<td> 標準 </td>
+</tr>
+<tr>
+<td></td>
+<td> VIP </td>
+<td> 5 本書、1台洗衣機 </td>
+<td> 標準 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>這個需求說明 &#8212; 一目了然的文檔 &#8211; 可以用作實現的目標或自動化測試的驅動，這樣我們就可以客觀地衡量什麼時候算完成了。把它作為 LiveDocument 的一部分，保存在需求說明 Repository 中。FitNesse 的 wiki 系統或者 Cucumber 功能文件的目錄結構就是這樣的例子。</p>
+
+<h5>可執行的需求說明</h5>
+
+<p>當開發人員開始實現需求說明所描述的功能時，基於需求說明的測試開始時會失敗，因為測試還沒有自動化，功能也還沒有實現。</p>
+
+<p>開發人員會實現相關功能並把它與自動化框架關聯在一起。他們使用自動化框架從需求說明中獲得輸入並驗證預期的輸出，而不需要實際修改需求說明文檔。當驗證實現自動化以後，需求說明就變成可執行的了。</p>
+
+<h5>Live Document</h5>
+
+<p>所有已實現功能的需求說明需要頻繁地進行驗證，一般通過自動化構建過程來實現。這樣可以確保需求說明保持更新，同時有助於避免功能退化的問題。</p>
+
+<p>當實現了整個用戶故事的時候，需要有人去作首次驗證以確保其已經完成，然後重組需求說明確保它和已實現功能的需求說明是一致的。從需求說明逐步演化出文檔系統。舉例來說，他們可能將免費送貨的需求移到送貨相關的功能體系中，也可能將它們和其他因素促發的免費送貨實例合併在一起。為了更容易訪問文檔，他們可能會在免費送貨的需求說明和其他送貨類型的需求說明之間建立連結。</p>
+
+<p>然後這個循環再次開始。一旦我們需要再次回顧免費送貨的規則 &#8211; 比如，在做高級獎勵計畫，或是擴展功能把帶書籍的訂單和其他貨物訂單分離開的時候 &#8211; 我們就可以使用 Live Document 來理解現有的功能並註明需要修改的地方。我們可以使用已有的實例來協作制定需求說明，同時舉例說明會更加有效。然後我們會舉出另一組關鍵實例，進一步演進免費送貨的需求說明，這部分最終會和需求說明的其他部分合併到一起。這個循環會不斷重複。</p>
+
+<h3>為何 BDD 沒有 TDD 那麼流行？</h3>
+
+<p>如果你身為 Rails Developer 又看到這套循環格式的話，你會馬上感到這跟一套測試框架很像，沒錯，就是 <a href="http://cukes.info/">Cucumber</a>。</p>
+
+<p>我第一次接觸到 BDD 的觀念大概是 2009 年。當然也是因為接觸到 Cucumber，才知道什麼叫做 BDD。但是一直以來，我能夠接受 TDD，但是 BDD 卻一直讓我無法理解。事實上，BDD 也一直沒有普遍流行起來</p>
+
+<p>現在看完這本書，我才理解是什麼的盲點造成了實作上的心理障礙：在一般的專案開發中，通常業主不會要求開發者寫測試（甚至業主不理解什麼叫測試），所以通常測試是開發者自己寫的，為了正確構建功能，以及避免在專案後期踢到大鐵板，所寫的。</p>
+
+<p>但是 BDD 的格式乍看之下卻相當突兀，以 Cucumber 為例，格式是這樣的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Scenario</span><span class="p">:</span> <span class="no">Multiple</span> <span class="no">Givens</span>
+</span><span class='line'>    <span class="no">Given</span> <span class="n">one</span> <span class="n">thing</span>
+</span><span class='line'>      <span class="no">And</span> <span class="n">another</span> <span class="n">thing</span>
+</span><span class='line'>      <span class="no">And</span> <span class="n">yet</span> <span class="n">another</span> <span class="n">thing</span>
+</span><span class='line'>    <span class="no">When</span> <span class="n">I</span> <span class="nb">open</span> <span class="n">my</span> <span class="n">eyes</span>
+</span><span class='line'>    <span class="no">Then</span> <span class="n">I</span> <span class="n">see</span> <span class="n">something</span>
+</span><span class='line'>      <span class="no">But</span> <span class="n">I</span> <span class="n">don</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">see</span> <span class="n">something</span> <span class="k">else</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>敘述一個場景，然後寫下步驟，然後驗證步驟。這對一般開發者來說，BDD 相對多餘以及冗長。</p>
+
+<p>原因何在？這是一般專案中，通常我們只會遇到兩種狀況：</p>
+
+<ul>
+<li>客戶疏於描述實作內容 : 只給解決方案，如必須要能夠進行付款。（但是卻沒有講清楚支援信用卡還是 ATM）</li>
+</ul>
+
+
+<p>所以所謂 BDD 裡面的用戶故事，開發者必須要自行腦內補完。於是只要當「規格」一變，基於規格所生(想像)的整個用戶故事自然就會被摧毀。所以沒有人很喜歡寫這鬼東西。</p>
+
+<ul>
+<li>客戶過於精確的描述：對於描述操作步驟過於繁瑣，甚至是規定 UI （比如結帳必須要跳出一個 POP 視窗，等待信用卡驗證時必須要塞入一個等待過場動畫）</li>
+</ul>
+
+
+<p>這又會變成另外一種情形，開發者把 BDD 當作是 UI 的驗收測試（尤其在使用 Cucumber 中特別容易被誤解）。在網站開發過程中，UI 很有可能是會變來變去的。沒有人會喜歡因為 UI 改變了然後又回去翻修用戶故事&#8230;.</p>
+
+<p>這就造成了為什麼人們寧願只進行 TDD，甚至只進行 Unit Test。因為比較不可能被需求變動整到。</p>
+
+<p>但只進行 TDD 只能幫助我們：正確地開發一個產品。卻無法達到我們進行軟體開發最終的目標：「開發出一個正確的產品」。</p>
+
+<h3>Startup 前期應不應該導入 TDD / BDD？</h3>
+
+<p>在去年，我曾經寫過一篇 <a href="http://wp.xdite.net/?p=2478">對 BDD / TDD 的看法</a>，提到 Obie Fernandez 在 Rails Conf 2011 的 lightning talk 曾經給過這樣一個 lighting talk : Why BDD is Poison For Your Early Stage Startup 。並且在演講之後寫了一篇文章 <a href="http://blog.obiefernandez.com/content/2011/05/the-dark-side-beckons.html">The Dark Side Beckons?</a></p>
+
+<p>Obie 的觀點正如 talk 名 &#8220;Why BDD is Poison For Your Early Stage Startup&#8221; 所言。他並且強調了：「Early on in the startup process, it&#8217;s much more important to be testing against business metrics than anything having to do with code.」</p>
+
+<p>「Until you are able to prove that you have a viable market, that customers will give you money for your product, you shouldn&#8217;t be sinking a lot of time and money into implementation.」</p>
+
+<p>現在回頭看起來，當時的討論完全是掉入方法論面的論述。我們以為 TDD / BDD 是「正確地開發一個產品」的一個手段。但這個手段會有相對高額的 technical cost。所以在 Startup 早期階段，開發者實際不應該投入過多心力在此之上。因為 Startup 的第一優先是「開發出一個正確的產品」。</p>
+
+<p>而 Specification by example 卻強調的是，你應該透過這一系列的手段，利用 BDD 這樣的手法，摸索出一系列可以實作可以測試的正確軟體需求，從而交付出一個成功的軟體專案。</p>
+
+<h3>小結</h3>
+
+<p>如果你是抱著裡面有什麼厲害的大絕招，去翻這本書的話。我不敢保證你不會失望。因為這本書不太能算是一本嚴肅的方法論。裡面沒有 code，也不介紹任何工具。同時我也不推薦任何專案新手去翻閱這本書，因為這本書並不是什麼印度蛇藥，你一看完就會變成專案高手。</p>
+
+<p>但是若你進行過不少專案，對於測試驅動開發、行為驅動開發、探索用戶需求有著自己的一番見解、疑問、心得。我相信這本書將會顛覆你的世界觀。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1226,266 +1643,6 @@ DELETE 涉及到會 update index，所以會…很慢。<a href="http://stackove
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/08/12/startup-is-not-a-destination/">「創業」不是一個目的地</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-08-12T06:07:00+08:00" pubdate  data-updated="true" >Aug 12<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/08/12/startup-is-not-a-destination/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/08/12/startup-is-not-a-destination/" data-show-faces="false"></div></div>
-    
-    <p>自己出來創業，轉眼間也快半年了。蒙各界賞光，<a href="http://rocodev.com">公司</a>的生意算是不錯。目前也跟生意夥伴 Max 合作得很開心。<a href="http://maxlu.cc">Max</a> 是個天生的生意人和創業家，我們常談論很多關於創業的點點滴滴，從這過程中激盪出不少智慧…</p>
-
-<p>最近跟他一個討論的話題，就是台灣這麼多人在網路創業，尤其是台灣也存在著不少 質優的 developer，但為什麼所謂的網路創業為什麼都「不算成功」或甚至失敗得很徹底。</p>
-
-<p>因為我也在創業的這條路上，這一兩年來我一直在思考這件事情，到底問題在哪裡？</p>
-
-<p>一直到最近的這幾個禮拜我大概理出一個頭緒：原因是太多人把「創業」當作是一個「目的地」，而不是一個職業、解決問題的過程，為想創業而創業，所以所謂的失敗率才這麼高&#8230;。</p>
-
-<p>我知道這樣的結論可能會招致很多反對的炮火聲，但請先耐著性子繼續讓我把最近歸結出的想法說完：</p>
-
-<h3>「上班」到「創業」不是一個「打怪」「升等」路線</h3>
-
-<p>這一個想法是從 <a href="http://www.businessweekly.com.tw/blog/article.php?id=1838">給下個年輕世代的殘酷真相</a>得出來的靈感。這篇文章有一段是關於年輕人對於未來的憧憬：</p>
-
-<p>「22到24歲時念個好的研究所。在25歲左右開始第一份工作然後住自己租的公寓。順利的話我想要在28歲左右自己開公司，大約30歲左右結婚。我想我多數的同學和我在財務上想像我們能夠在28歲時擁有自己的車子，30歲時開始存錢準備有天能夠買自己的房子。」</p>
-
-<p>如果你已經出過社會幾年了，就會知道這真的如同原文作者鐘先生所說的，是一個非常天真的夢。而在這個年代，你可能很難在 30 歲前達到這樣的夢想。這卻是這個世代普遍受過大學教育年輕人所共同的夢。</p>
-
-<p>而這段話也意外彰顯出一個迷思：「受一個不錯的教育，預備找到一個好的工作。工作一段時間，升到不錯的職位得到不錯職業的薪水，最後創業達到財務自由。」</p>
-
-<p>yes。「最後」「創業」</p>
-
-<p>我們把從上班到創業當成是一個「打怪」「升等」路線，問題是真實生活卻不是這麼回事。</p>
-
-<h3>「上班」的終點不是「創業」</h3>
-
-<p>「上班」的終點不是「創業」。這是我最後思索驗證出來的結論。（雖然乍看之下好像是廢話）</p>
-
-<p>我一直以來有一個謎團未解：為什麼有人「沒什麼技術」創業卻會成功，有人功夫不錯，為什麼創業卻會去失敗？</p>
-
-<p>我想這也是大部分創業者共同的疑惑。幾年來我一直思考，但沒有答案。</p>
-
-<p>直到最近才意外的在一本書裡面得到了一個比較可靠的模型，找出了一點頭緒，這本書的書名是：<a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010546972">川普、清崎點石成金</a>。</p>
-
-<p>清崎由一個模型為這個問題做出了解釋：它把所有人分成四種類型：</p>
-
-<ul>
-<li>Employee（受僱者、僱員）：為他人工作而賺取薪金，追求安全、穩定，畏懼風險的一群。</li>
-<li>Self-employed（自僱者、專業技能者、自由職業者、小企業主）：擁有某一專長而能為自己工作而賺錢，重視完美，不輕易將職責交託予人，如：醫生、律師‧‧‧等等。</li>
-<li>Business owner（企業所有人、僱傭者、僱主、老闆）：擁有一個能夠良好運轉的企業系統，視風險為挑戰、歡迎問題並樂於透過解決問題而致富的一群，信奉以別人的時間(OTHER PEOPLE&#8217;S TIME，OPT)以及別人的金錢(OTHER PEOPLE&#8217;S MONEY，OPM)為他們工作，收入來源是企業的收益。</li>
-<li>Investor（投資者）：讓錢為他們工作，收入來源是各種投資，用錢來產生出更多的錢，即是「富爸爸」一書中所強調「讓金錢為你工作」。</li>
-</ul>
-
-
-<p>在這本書中，他指出世界上最有錢的人都是 B。（而非大家以為的 I ）</p>
-
-<p>且清崎認為，身處 E、S兩種象限，無法令自己達至財務自由。我們應該透過成為B、I象限，才能達到目標。</p>
-
-<p>無可厚非的大家都想要變成 B，或變成 I 。但有幾種身分轉變模式，很容易失敗，分別是（E -> I , E -> B , I -> B )。而比較容易成功的是 ( S -> B ) 或者是 ( B -> I )。</p>
-
-<p>為什麼一些創業者，創業不久後會瞬間就 fail 是因為他們往往在 E 階段，就直接想往 B 階段跨過去，缺乏太多存活的技巧，所以就直接陣亡。清崎建議的路線是，如果你想成功的話，採取 (E -> S -> B) 的路線，機率是會比較高的。</p>
-
-<p>這個模型解答一些疑惑（為什麼有人快速陣亡），但卻沒有回答到另外一些問題：為什麼有人直接走 E -> B 或甚至直接 B 卻成功了。</p>
-
-<h3>「解決問題」然後才「創業」</h3>
-
-<p>Max 就是典型的例子，他是直接就當 B 的人（還有一些創業成功的網路界朋友是 E-> B）。E -> B 成功不是不可能。那麼關鍵點在哪裡？Max 不會寫 code，但他事業成功了。我也問了 Max，Max 只跟我說了他「解決了問題」，「也許應該是這樣」。</p>
-
-<p>很多創業文章的重點，都是勸創業者實際「踏出辦公室」「實際解決問題」。這些文章的道理是不錯，總是令我覺得說不出的哪裡怪。</p>
-
-<p>最近還有一篇文章 <a href="http://www.alibuybuy.com/posts/74638.html">互連網創業降級論</a>。也是說不出的詭異。</p>
-
-<p>後來我終於想清楚所謂邏輯的謬誤在哪裡。所謂的「創業」應該是創業者有一個問題，創業者為了解決它，而製造了方法，最後重新將此方法規模化，乃所謂「創造一個事業」。而目前的網路創業很多卻是所謂的「創業者」手上擁有了一堆技術，然後到處找問題，想把這些「技巧」變成「解決的方法」。難怪失敗率很高。</p>
-
-<p>因為創業者不是真真切切擁有一個「很痛的」問題，然後製造一個方法解決它。而是賭自己的方法「能夠找到一個問題而恰好」解決它。能夠賭中的機會已經夠低了。而碰上這個「問題」恰巧「很痛」的機會又更低，這個問題不夠痛，造成利潤追不上成本，最後虧本。</p>
-
-<p>這就解釋了為什麼那些「沒有技術」的人為什麼能夠網路創業成功，他們並非所謂的幸運。因為他們並非「沒有技術」，他們擁有珍貴的「解決問題的 Domain Knowledge」和其他建構事業所需的綜合技能（如 Leadership, Finace, Accounting, Sales)，缺的是「網站建構技術」。但這不會阻止他們成為 B。因為這樣東西可以用資本買到，品質的高低並不會太大方面影響到能夠解決問題的核心能力。</p>
-
-<p>而只有「網站建構技術」，卻無法單獨自己形成一個生意。因為這項技術並沒有解決任何問題。（除非你的事業就是販售前者製作好的網站或者是使用這些技術解決同領域的問題）</p>
-
-<p>所謂的 ESBI 模型，缺陷的部分就在於：對於 S 的解釋過於單薄。癥結點在於若創業者的 S 與 B 的「領域」並不是同一個的話，S -> B 的成功機率是很低的。</p>
-
-<p>這也解釋了為什麼很多網路創業最終以失敗收場。因為這些 S 者，專精的領域是軟體、行銷，而非 Bussiness Domain。而那些成功的 B 者，並非幸運，而是因為他們都是該領域的 solution provider。</p>
-
-<h3>小結</h3>
-
-<p>繞了這麼遠，才終於把這套想法梳理成一個脈絡。為什麼清崎的建議是走 E -> S -> B。這是因為不一定有人可以一次走 B 就能成功。而作為一個 B，所需要的技能也並不僅只於單一方面的技術純熟就可以達成。所以走 E -> S -> B 是一個可靠的路線。但這絕不保證你走了 E -> S，就能到 B。</p>
-
-<p>而要成為所謂的 B ，重點也不在於之前累計多少技巧，而是在「解決核心問題」的能力。「解決問題」，然後最後會變成「創業」，然後就會得到「超額回報」。</p>
-
-<p>但是為了有一個生意而去製造一個生意，而不是把精力放在解決問題之上，通常結局不是失敗就是繞了超長的遠路&#8230;.</p>
-
-<p>終於或多或少了解了一些這樣的來龍去脈&#8230;</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/08/12/strong-parameter-mass-assignment-solution/">Strong Parameter: Mass Assignment 機制的防彈衣</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-08-12T02:16:00+08:00" pubdate  data-updated="true" >Aug 12<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/08/12/strong-parameter-mass-assignment-solution/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution/" data-show-faces="false"></div></div>
-    
-    <p>還記得年初才發生的 <a href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/">Github 被入侵事件</a> 嗎？</p>
-
-<p>事件的起因是因為 Rails 內建的 mass assignment 機制，很容易被有心人利用這個漏洞入侵。</p>
-
-<p>原本的 attr_accessible / attr_protected 的設計並不足夠實務使用。在該事件發生後，Rails 核心團隊在 3.2.3 之後的版本，預設都開啟了 <code>config.whitelist_attributes = true</code> 的選項。</p>
-
-<p>也就是專案自動會對所有的 model 都自動開啟白名單模式，你必須手動對每一個 model 都加上 attr_accessible。這樣表單送值才會有辦法運作。</p>
-
-<p>這樣的舉動好處是：「夠安全」，能強迫開發者在設計表單時記得審核 model 該欄位是否適用於 mass-assign。</p>
-
-<p>但這樣的機制也引發開發者「不實用」「找麻煩」的議論。</p>
-
-<h3>問題 1: 新手容易踩中地雷</h3>
-
-<p>首先最麻煩的當然是，新手會被這一行設定整到。新手不知道此機制為何而來，出了問題也不知道如何關掉這個設定。更麻煩的是撰寫新手教學的人，必須又花上一大篇幅（就如同倒楣的我，想要幫 Rails 101 改版，結果內容無限追加）解釋 mass-assignment 的設計機制，為何重要，為何新手需要重視…etc.</p>
-
-<h3>問題 2: 不實用</h3>
-
-<p>手動一個一個加上 attr_accessible 真的很煩人，因為這也表示，若新增一個欄位，開發者也要手動去加上 attr_accessible，否則很可能在某些表單直接出現異常現象。</p>
-
-<p>而最麻煩的還是，其實 attr_accessible 不敷使用，因為一個系統通常存在不只一種角色，普通使用與 Admin 需要的 mass-assignment 範圍絕對不盡相同。</p>
-
-<p>雖然 Rails 在 3.1 加入了 <a href="http://enlightsolutions.com/articles/whats-new-in-edge-scoped-mass-assignment-in-rails-3-1">scoped mass assignment</a>。但這也只能算是 model 方面的解決手法。</p>
-
-<p>一旦系統內有更多其他流程需求，scoped mass assignment 的設計頓時就不夠解決問題了…</p>
-
-<h3>癥結點：欄位核准與否應該由 controller 管理，而非 model</h3>
-
-<p>大家戰了一陣子，終於收斂出一個結論。原來一切的癥結點在於之前的想法都錯了，欄位核准與否應該由 controller 決定。因為「流程需求」本來就應該作在 controller 裡面。wycats 當時也起草了一份<a href="https://gist.github.com/1974187">解法的 proposal</a>。日後打算以 plugin 方式釋出。</p>
-
-<h3>plugin：strong_parameter</h3>
-
-<p>現在 plugin 出來了。（其實出來很久了，只是我一直沒寫文章&#8230;) 就是 <a href="https://github.com/rails/strong_parameters/">strong_parameters</a> 。strong_parameters 的想法與 DHH <a href="https://gist.github.com/1975644">當時扔出來的想法</a> 相近。</p>
-
-<p>DHH 當時的作法</p>
-
-<div><script src='https://gist.github.com/1975644.js?file='></script>
-<noscript><pre><code>class PostsController &lt; ActionController::Base
-  def create
-    Post.create(post_params)
-  end
-  
-  def update
-    Post.find(params[:id]).update_attributes!(post_params)
-  end
-
-  private
-    def post_params
-      params[:post].slice(:title, :content)
-    end
-end</code></pre></noscript></div>
-
-
-<p>是使用 slice 去把真正需要的部分切出來，所以就算 hacker 打算送其他 parameter 也會被過濾掉(不會有 exception)。</p>
-
-<p>而 strong_parameters 的作法是必須過一段 permit，允許欄位。如果送不允許的欄位進來，會 throw exception。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PeopleController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">update</span>
-</span><span class='line'>    <span class="n">person</span><span class="o">.</span><span class="n">update_attributes!</span><span class="p">(</span><span class="n">person_params</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="ss">:back</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">person_params</span>
-</span><span class='line'>      <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:person</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:age</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安全多了，擴充性也比較大&#8230;</p>
-
-<h3>進階用法</h3>
-
-<p>當然，每一段 controller 都要來上這麼一段，有時候也挺煩人的。Railscast 也整理了一些<a href="http://railscasts.com/episodes/371-strong-parameters">進階招數</a>：</p>
-
-<ul>
-<li>Nested Attributes</li>
-<li>Orgngized to Class</li>
-</ul>
-
-
-<p>大家可以研究看看…</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1520,7 +1677,15 @@ end</code></pre></noscript></div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2012/12/06/dhl-sucks-missing-package/">原來 DHL 這麼不可靠？寄丟包裹竟是客戶自己要負責</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/11/25/how-to-read-sourcecode/">如何閱讀 Rails 原始碼</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/11/20/how-to-read-rails-source-code/">如何閱讀 Rails 源代碼</a>
       </li>
     
       <li class="post">
@@ -1529,14 +1694,6 @@ end</code></pre></noscript></div>
     
       <li class="post">
         <a href="/posts/2012/10/28/force-to-improve-yourself/">被迫才是進步的原動力</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/25/another-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 挑戰未來篇</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/23/some-advice-for-undergraduate/">給尚未大學畢業的朋友的幾個人生建議 - 能力培養篇</a>
       </li>
     
   </ul>

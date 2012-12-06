@@ -73,7 +73,7 @@ ActiveRecord 的上一層就是一套 ActiveModel API。其實 Rails 不一定�
 目前 Rails Plugin 幾乎都是以 Engine Gem 的形式釋出。所以透過撰寫一個 Gem，可以了解到：
 
 * 如何將自己的 Library 與現有 API 整合
-* 如何將自己的 Library / 不掛進啟動 process 中。
+* 如何將自己的 Library 掛 / 不掛進啟動 process 中。
 * Engine 與 Railtie 的結構
 * 如果有相依檔案，如何撰寫 generator，把檔案放進去 project 裡面。
 * 如果有檔案操作和客製選項，如何透過 thor 這個工具去達到檔案修改的目的。
