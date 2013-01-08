@@ -1,0 +1,40 @@
+---
+layout: post
+title: "2012 我的 commit 數據"
+date: 2013-01-08 20:04
+comments: true
+categories: 
+---
+
+Github 今天[上了新的 features： Contributions](https://github.com/blog/1360-introducing-contributions) 。
+
+在新的個人頁面可以看到過去一年自己 Commit 的軌跡...。
+
+看了一下，我公開的 commit 有 923 次。
+
+<a href="http://www.flickr.com/photos/xdite/8361383762/" title="2012-public by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8079/8361383762_d03e2a7068_z.jpg" width="640" height="279" alt="2012-public"></a>
+
+含 Private repo (公司和自己的 side project)，有 3363 次。
+
+<a href="http://www.flickr.com/photos/xdite/8361383756/" title="2012-private by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8465/8361383756_cb712eab89_z.jpg" width="640" height="280" alt="2012-private"></a>
+
+另外一些之前整理在 FB 上的數據。2012 年，我：
+
+* 出國了四次
+* 去過了三個國家
+* 給了超過 10 場 talk
+* 完成了五個案子
+* opensource 了兩個熱門 gem
+* 拿了一個世界大獎
+* 開了一間公司
+* 開發了超過 10 個 Rails porject
+* 寫了超過 60 篇文章
+* 寫作了超過 30 萬字
+* 讀了超過 200 本書......
+
+加上去年一整年 commit 的 3300 次。
+
+到底哪來的這麼多時間啊？..orz
+
+結論是，應該要來放個假了嗎？
+

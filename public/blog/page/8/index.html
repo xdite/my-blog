@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  http://ruby-taiwan.org 是從 ruby-china 這個專案 fork 出來改的。====本文章經過 ruby-china 作者 huacnlee 同意後進行寫作。===坦白說，最初會開始把玩這個專案，是因為覺得想法和介面上做的不錯，想...">
+  <meta name="description" content="                  兩週前談到 OmniAuth，還剩下最後一篇欠稿：實作篇。來還債了&#8230;OmniAuth - 實作多方認證的最佳實踐 (1)OmniAuth - 實作多方認證的最佳實踐 (2)OmniAuth - 實作多方認證的最佳實踐 (3)本來還在煩惱怎樣給出一...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,227 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2011/12/05/omniauth-clean-auth-provider-4/">OmniAuth - 實作多方認證的最佳實踐 (4)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-12-05T21:40:00+08:00" pubdate  data-updated="true" >Dec 5<span>th</span>, 2011</time>
+        
+         | <a href="/posts/2011/12/05/omniauth-clean-auth-provider-4/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/12/05/omniauth-clean-auth-provider-4/" data-show-faces="false"></div></div>
+    
+    <p>兩週前談到 OmniAuth，還剩下最後一篇欠稿：實作篇。來還債了&#8230;</p>
+
+<ul>
+<li><a href="http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-1/">OmniAuth - 實作多方認證的最佳實踐 (1)</a></li>
+<li><a href="http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-2/">OmniAuth - 實作多方認證的最佳實踐 (2)</a></li>
+<li><a href="http://blog.xdite.net/posts/2011/11/19/omniauth-clean-auth-provider-3/">OmniAuth - 實作多方認證的最佳實踐 (3)</a></li>
+</ul>
+
+
+<p>本來還在煩惱怎樣給出一個 demo app。剛好最近幫忙翻修 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a>。網站的 0.3 => 1.0 的升級就是出於筆者之手。</p>
+
+<p>乾脆拿這個網站直接來講&#8230;</p>
+
+<p>若最後還是看不懂示範的可以直接 <a href="git://github.com/rubytaiwan/ruby-taiwan.git">clone 專案</a>下來直接 copy。</p>
+
+<h2>Install Devise</h2>
+
+<ol>
+<li>安裝 Devise</li>
+<li><code>rails g devise User</code> 產生 User model</li>
+<li><code>rails g model Authorization provider:string user_id:integer uid:string</code> 產生 Authorization Model</li>
+</ol>
+
+
+<p>User <strong>has_many</strong> Authorizations</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:authorizations</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Authorization</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install OmniAuth</h2>
+
+<ul>
+<li>安裝 OmniAuth 1.0</li>
+<li>安裝 omniauth-github 與 omniauth-twitter</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">gem</span> <span class="s1">&#39;devise&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://github.com/plataformatec/devise.git&#39;</span>
+</span><span class='line'> <span class="n">gem</span> <span class="s2">&quot;omniauth&quot;</span>
+</span><span class='line'> <span class="n">gem</span> <span class="s2">&quot;omniauth-github&quot;</span>
+</span><span class='line'> <span class="n">gem</span> <span class="s2">&quot;omniauth-twitter&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>定義 :omniauthable</li>
+</ul>
+
+
+<p>在 User model 內加入 <code>:omniauthable</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">devise</span> <span class="ss">:database_authenticatable</span><span class="p">,</span> <span class="ss">:registerable</span><span class="p">,</span>
+</span><span class='line'>        <span class="ss">:recoverable</span><span class="p">,</span> <span class="ss">:rememberable</span><span class="p">,</span> <span class="ss">:trackable</span><span class="p">,</span> <span class="ss">:validatable</span><span class="p">,</span> <span class="ss">:omniauthable</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>extend OmniauthCallbacks</li>
+</ul>
+
+
+<p>在 <code>User</code> model extend OmniauthCallbacks</p>
+
+<figure class='code'><figcaption><span>app/model/user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="kp">extend</span> <span class="no">OmniauthCallbacks</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>`</p>
+
+<ul>
+<li>新增 <code>app/model/users/omniauth_callbacks.rb</code></li>
+</ul>
+
+
+<p>具體內容請看這裡 <a href="https://github.com/rubytaiwan/ruby-taiwan/blob/master/app/models/user/omniauth_callbacks.rb">https://github.com/rubytaiwan/ruby-taiwan/blob/master/app/models/user/omniauth_callbacks.rb</a></p>
+
+<p>主要是拿 callbacks 回來的東西 new_from_provider_data 塞進去。先找有沒有，有找到回傳 user。沒找到從 data 裡塞資料進去，同時建立 provider 與 uid 關係。</p>
+
+<h2>設定 route 與 controller</h2>
+
+<p><code>config/routes.rb</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">devise_for</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:controllers</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:registrations</span> <span class="o">=&gt;</span> <span class="s2">&quot;registrations&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:omniauth_callbacks</span> <span class="o">=&gt;</span> <span class="s2">&quot;users/omniauth_callbacks&quot;</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">get</span> <span class="s2">&quot;logout&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;devise/sessions#destroy&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>app/controllers/users/omniauth_callbacks_controller.rb</code></p>
+
+<p>具體內容看這裡 <a href="https://github.com/rubytaiwan/ruby-taiwan/blob/master/app/controllers/users/omniauth_callbacks_controller.rb">https://github.com/rubytaiwan/ruby-taiwan/blob/master/app/controllers/users/omniauth_callbacks_controller.rb</a></p>
+
+<p>光用  <code>app/model/users/omniauth_callbacks.rb</code> 與 <code>app/controllers/users/omniauth_callbacks_controller.rb</code> 這兩招就可以把 callback 和 provider 切得很漂亮了。</p>
+
+<h2>申請 OAuth</h2>
+
+<p>各大網站都有審請 OAuth 的機制：</p>
+
+<ul>
+<li>Twitter: <a href="https://dev.twitter.com/apps/new">https://dev.twitter.com/apps/new</a></li>
+<li>Github: <a href="https://github.com/account/applications">https://github.com/account/applications</a></li>
+</ul>
+
+
+<p>如果你是使用 ruby-taiwan 這個 project 的話</p>
+
+<ul>
+<li>網址填 http://ruby-taiwan.dev/</li>
+<li>Call 網址填 http://ruby-taiwan.dev/account/auth/github/callback</li>
+</ul>
+
+
+<p><strong> 一定得這樣填，亂改炸掉別怪我.. </strong></p>
+
+<h2>設定 token</h2>
+
+<p>key 設定都放在這裡 <code>config/initializers/devise.rb</code></p>
+
+<p><a href="https://github.com/rubytaiwan/ruby-taiwan/blob/master/config/initializers/devise.rb">https://github.com/rubytaiwan/ruby-taiwan/blob/master/config/initializers/devise.rb</a></p>
+
+<figure class='code'><figcaption><span>config/initializers/devise.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">omniauth</span> <span class="ss">:github</span><span class="p">,</span> <span class="no">Setting</span><span class="o">.</span><span class="n">github_token</span><span class="p">,</span> <span class="no">Setting</span><span class="o">.</span><span class="n">github_secret</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">omniauth</span> <span class="ss">:twitter</span><span class="p">,</span> <span class="no">Setting</span><span class="o">.</span><span class="n">twitter_token</span><span class="p">,</span> <span class="no">Setting</span><span class="o">.</span><span class="n">twitter_secret</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">omniauth</span> <span class="ss">:douban</span><span class="p">,</span> <span class="no">Setting</span><span class="o">.</span><span class="n">douban_token</span><span class="p">,</span> <span class="no">Setting</span><span class="o">.</span><span class="n">douban_secret</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">omniauth</span> <span class="ss">:open_id</span><span class="p">,</span> <span class="ss">:store</span> <span class="o">=&gt;</span> <span class="no">OpenID</span><span class="o">::</span><span class="no">Store</span><span class="o">::</span><span class="no">Filesystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;/tmp&#39;</span><span class="p">),</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;google&#39;</span><span class="p">,</span> <span class="ss">:identifier</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://www.google.com/accounts/o8/id&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;omniauth-openid&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Link Helper</h2>
+
+<p>可看 <a href="https://github.com/rubytaiwan/ruby-taiwan/blob/master/app/views/devise/sessions/new.html.erb">https://github.com/rubytaiwan/ruby-taiwan/blob/master/app/views/devise/sessions/new.html.erb</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>          <span class="nt">&lt;li&gt;</span><span class="err">&lt;</span>%= link_to &quot;Twitter&quot;, user_omniauth_authorize_path(:twitter) %&gt; <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;li&gt;</span><span class="err">&lt;</span>%= link_to &quot;Google&quot;, user_omniauth_authorize_path(:google) %&gt; <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;li&gt;</span><span class="err">&lt;</span>%= link_to &quot;Github&quot;, user_omniauth_authorize_path(:github) %&gt; <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;li&gt;</span><span class="err">&lt;</span>%= link_to &quot;Douban&quot;, user_omniauth_authorize_path(:douban) %&gt; <span class="nt">&lt;/li&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>小結</h2>
+
+<p>這樣就設完了，非常乾淨。如果有任何問題歡迎上 <a href="http://ruby-taiwan.org">http://ruby-taiwan.org</a> 討論。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1636,96 +1857,6 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2011/10/27/coffeescript-nodejs-hubot/">CoffeeScript 還可以用來做什麼？ &#8211; Hubot</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-10-27T16:44:00+08:00" pubdate  data-updated="true" >Oct 27<span>th</span>, 2011</time>
-        
-         | <a href="/posts/2011/10/27/coffeescript-nodejs-hubot/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2011/10/27/coffeescript-nodejs-hubot/" data-show-faces="false"></div></div>
-    
-    <p><a href="http://github.com">Github</a> 內部自用的機器人 Hubot 一直是個神秘的產品，常常看到內部員工在<a href="http://speakerdeck.com/u/holman/p/how-github-uses-github-to-build-github">投影片</a>內炫耀 Hubot 多麼的屌：</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6285733326/" title="Hubot1 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6031/6285733326_5754b16968.jpg" width="500" height="375" alt="Hubot1"></a></p>
-
-<p><a href="http://www.flickr.com/photos/xdite/6285212725/" title="Hubot2 by xdite, on Flickr"><img src="http://farm7.static.flickr.com/6110/6285212725_7255bbcabc.jpg" width="500" height="374" alt="Hubot2"></a></p>
-
-<p>但往往只是聞其聲，不見其蹤。</p>
-
-<p>不過要是按照 Github 內部慣例，常常在員工投影片出現的東西，往往就是下一個 release 的標的。因此大家也都是迫不及待在等 Hubot 的釋出。按照大家的假想，Hubot 應該是某種 Perl 或 Ruby 的 client，而且 Ruby 的機率可能還大的多。</p>
-
-<p>但 Github 官方 blog 貼的這篇<a href="https://github.com/blog/968-say-hello-to-hubot">公告文</a>章讓大家下巴掉下來：<a href="http://hubot.github.com/">Hubot</a> 是 <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> 寫的&#8230;&#8230;.XDDDDD</p>
-
-<p>(註：以防你不知道什麼是 <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a>，或者是它能帶來的好處，我曾經寫過這麼一篇<a href="http://upgrade2rails31.com/coffee-script">文章</a> 解釋原理以及用途 )</p>
-
-<h3>CoffeeScript meets NodeJS</h3>
-
-<p>更精確的來說，Hubot 是用 <a href="http://nodejs.org/">NodeJS</a> 架構作出來的一套機器人框架，而 Github 並非直接撰寫 JavaScript，他們是直接使用 CoffeeScript。整個專案的原始碼都只有 .coffee 而已。</p>
-
-<h3>Support Campfire 與 IRC</h3>
-
-<p>目前 Hubot 支援兩種 chatroom，預設是 <a href="http://37signals.com">37signals</a> 的產品 <a href="http://campfirenow.com">Campfire</a>，也有提供 <a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a> 的 adapter。</p>
-
-<h3>Provide tons of hubot-scripts example</h3>
-
-<p>為了避免大家不知道怎樣擴展 Hubot 的功能，Github 在專案內提供了大概十支左右的 example，也另開了一個專案 <a href="https://github.com/github/hubot-scripts">hubot-scripts</a>，讓大家交流和 contribute。</p>
-
-<h3>Hosted on Heroku</h3>
-
-<p>你會覺得，要跑起這樣一隻 bot，也許又要找一台機器把 bot 跑起來？</p>
-
-<p>Well，這次你錯了…</p>
-
-<p>Hubot 的架構被設計為可以透過 <a href="http://heroku.com">Heroku</a> 的 <a href="http://devcenter.heroku.com/articles/node-js">Procfile 架構</a>掛起來，也就是可以把這一隻 Bot 養在雲端 XD （ Hubot 的文件有教你怎麼作 ）</p>
-
-<h2>小結</h2>
-
-<p>昨天晚上在 Twitter 上看到幾個 Rails core team member 在講 hubot-scripts 時，才突然發現 Hubot 竟然已經釋出了。早上認真想玩時，發現整個架構竟然是 CoffeeScript + NodeJS 時，內心其實有小震撼…</p>
-
-<p>目前看到的幾個是 feature project 的 network program 都是以這樣的方式誕生，如 <a href="http://pow.cx">Pow</a>、Hubot。看來 network program 應該會越來越往 NodeJS 方向傾斜過去。</p>
-
-<p>BTW，今天在玩 Hubot 時，有發現幾個比較值得注意的地方。</p>
-
-<ol>
-<li><p>請使用 trunk 版。雖然官方請你直接下載有版本號的打包檔，不過大概是剛釋出，bug 有一點點多，但社群都積極的在修補，這些修補檔目前都還在 master branch 上，還沒被 tag 成 release 版本。所以跑 master 通常會比較沒問題。</p></li>
-<li><p>扔上 Heroku 時，要記得寫 Procfile，不然是不會動的。Procfile 的 sample 在 src/templates 下。記得一定要寫，然後再開 <code>heroku ps:scale app=1</code>。完整 Heroku 教學放在 <code>src/templates/README.md</code> 下。</p></li>
-</ol>
-
-
-<p>Good Luck!</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1760,6 +1891,10 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/01/08/2012-commit/">2012 我的 commit 數據</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/12/24/christmas-books-offer/">[Book] 耶誕限時折扣</a>
       </li>
     
@@ -1773,10 +1908,6 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
     
       <li class="post">
         <a href="/posts/2012/11/20/rubyconf-china-2012-ten-slow-things-you-dont-know/">RubyConf China 2012 演講：最佳實踐如何變成了最慢實踐</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/10/28/force-to-improve-yourself/">被迫才是進步的原動力</a>
       </li>
     
   </ul>
@@ -1820,7 +1951,7 @@ OpenID + API 存取，改成直接走 OAuth &#8230;</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - xdite -
+  Copyright &copy; 2013 - xdite -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

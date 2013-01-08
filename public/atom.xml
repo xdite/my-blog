@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2012-12-24T16:05:39+08:00</updated>
+  <updated>2013-01-08T20:35:20+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2012 我的 commit 數據]]></title>
+    <link href="http://blog.xdite.net/posts/2013/01/08/2012-commit/"/>
+    <updated>2013-01-08T20:04:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/01/08/2012-commit</id>
+    <content type="html"><![CDATA[<p>Github 今天<a href="https://github.com/blog/1360-introducing-contributions">上了新的 features： Contributions</a> 。</p>
+
+<p>在新的個人頁面可以看到過去一年自己 Commit 的軌跡&#8230;。</p>
+
+<p>看了一下，我公開的 commit 有 923 次。</p>
+
+<p><a href="http://www.flickr.com/photos/xdite/8361383762/" title="2012-public by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8079/8361383762_d03e2a7068_z.jpg" width="640" height="279" alt="2012-public"></a></p>
+
+<p>含 Private repo (公司和自己的 side project)，有 3363 次。</p>
+
+<p><a href="http://www.flickr.com/photos/xdite/8361383756/" title="2012-private by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8465/8361383756_cb712eab89_z.jpg" width="640" height="280" alt="2012-private"></a></p>
+
+<p>另外一些之前整理在 FB 上的數據。2012 年，我：</p>
+
+<ul>
+<li>出國了四次</li>
+<li>去過了三個國家</li>
+<li>給了超過 10 場 talk</li>
+<li>完成了五個案子</li>
+<li>opensource 了兩個熱門 gem</li>
+<li>拿了一個世界大獎</li>
+<li>開了一間公司</li>
+<li>開發了超過 10 個 Rails porject</li>
+<li>寫了超過 60 篇文章</li>
+<li>寫作了超過 30 萬字</li>
+<li>讀了超過 200 本書&#8230;&#8230;</li>
+</ul>
+
+
+<p>加上去年一整年 commit 的 3300 次。</p>
+
+<p>到底哪來的這麼多時間啊？..orz</p>
+
+<p>結論是，應該要來放個假了嗎？</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[Book] 耶誕限時折扣]]></title>
@@ -23,7 +65,7 @@
 
 <p>限時特價 9.99USD</p>
 
-<p>被大家嫌拖稿很久的本書，終於在 12/22 新增了接近 8 萬字，共 100 頁的內容。</p>
+<p>被大家嫌拖稿很久的本書，終於在 12/22 新增了接近 8 萬字，共 165 頁的內容。</p>
 
 <p>Rails 101
 <a href="http://rails-101.logdown.com/books/1-rails-101">http://rails-101.logdown.com/books/1-rails-101</a></p>
@@ -1930,135 +1972,6 @@ DELETE 涉及到會 update index，所以會…很慢。<a href="http://stackove
 <p>===</p>
 
 <p>打完這篇要去睡之前，又在 twitter 上看到 confreaks 丟出了新的 pry 影片 <a href="http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life">http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life</a>。（前幾天寫過的 <a href="http://blog.xdite.net/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a> )</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pry ：新一代 Debug 利器]]></title>
-    <link href="http://blog.xdite.net/posts/2012/08/12/pry-the-new-debugger/"/>
-    <updated>2012-08-12T18:37:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/08/12/pry-the-new-debugger</id>
-    <content type="html"><![CDATA[<p>提起 <a href="https://github.com/pry/pry">Pry</a>，一般 Ruby 開發者幾乎對這套 Gem 沒有很深的印象。比較有在追社群新聞的人，會知道這是一套新的 IRB 取代方案，但僅此於如此。事實上在近一年前，<a href="http://ruby5.envylabs.com/episodes/173-episode-170-april-26-2011/stories/1526-pry-a-powerful-alternative-to-the-standard-irb-shell-for-ruby">Pry 被 Ruby5 報導的原因</a> 也是因為很炫的 console。</p>
-
-<p>比如說 Pry 允許開發者在 console 這樣幹：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pry(main)&gt; cd Article
-</span><span class='line'>pry(#&lt;Class:0x1022f60e0&gt;):1&gt; self
-</span><span class='line'>=&gt; Article(id: integer, name: string, content: text, created_at: datetime, updated_at: datetime, published_at: datetime)</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>Article.first</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pry(#&lt;Class:0x1022f60e0&gt;):1&gt; first
-</span><span class='line'>=&gt; #&lt;Article id: 1, name: "What is Music", content: "Music is an art form in which the medium is sound o...", created_at: "2011-08-24 20:35:29", updated_at: "2011-08-24 20:37:22", published_at: "2011-05-13 23:00:00"&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>cd name</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pry(#&lt;Article:0x102300c98&gt;):2&gt; cd name
-</span><span class='line'>pry("What is Music"):3&gt; upcase
-</span><span class='line'>=&gt; "WHAT IS MUSIC"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>允許了開發者利用 console 進行程式的進階探索。當然這樣的 feature 是很炫。但是不算很大幅解決了開發者的問題，所以只被當作是一套還不錯的 shell。就這麼被大家靜悄悄的撇在身後了…</p>
-
-<h3>killer feature: binding.pry</h3>
-
-<p>但是大家比較沒有注意到的是，Pry 真正強大的地方不在於它的 console，而是在後面接著演化出的 <code>binding.pry</code>。</p>
-
-<p><code>binding.pry</code> 做的是 Runtime invocation。也就是可以在執行時攔截呼叫。這樣講你可能沒有感覺。</p>
-
-<p>真正厲害的用途是： 例如搭配 Rails 使用，在程式碼裡面插入 binding.pry。打開 <code>rails s</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CourseController</span> <span class="o">&lt;</span> <span class="no">ApplcationController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
-</span><span class='line'>    <span class="vi">@course</span> <span class="o">=</span> <span class="no">Course</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">binding</span><span class="o">.</span><span class="n">pry</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>當 browser 打開 <a href="http://localhost:3000/courses/30">http://localhost:3000/courses/30</a>，pry 會自動攔下 request，跳出 console 供開發者 debug 。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">From</span><span class="p">:</span><span class="sr"> /Users/x</span><span class="n">dite</span><span class="o">/</span><span class="no">Dropbox</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">mentorhub</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">courses_controller</span><span class="o">.</span><span class="n">rb</span> <span class="err">@</span> <span class="n">line</span> <span class="mi">20</span> <span class="no">CoursesController</span><span class="c1">#show:</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="mi">20</span><span class="p">:</span> <span class="k">def</span> <span class="nf">show</span>
-</span><span class='line'>    <span class="mi">21</span><span class="p">:</span>   <span class="vi">@course</span> <span class="o">=</span> <span class="no">Course</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">22</span><span class="p">:</span>   <span class="nb">binding</span><span class="o">.</span><span class="n">pry</span>
-</span><span class='line'>    <span class="mi">23</span><span class="p">:</span> <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>開發者可以在 console 直接就拉出 @course 這個 object 出來看</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="c1">#&lt;CoursesController&gt;)&gt; @course</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Course id: 30, name: &quot;voluptas&quot;, user_id: 1, course_topic_id: 2, plan: &quot;Laboriosam labore soluta debitis excepturi consequa...&quot;, hourly_rate: 822, location: &quot;Taipei&quot;, course_type: nil, created_at: &quot;2012-08-12 09:41:21&quot;, updated_at: &quot;2012-08-12 09:41:21&quot;, video_link: nil, video_link_html: nil&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>也可以繼續追下去看裡面的東西</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="c1">#&lt;CoursesController&gt;)&gt; cd @course</span>
-</span><span class='line'><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="c1">#&lt;Course&gt;):1&gt; plan</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Laboriosam labore soluta debitis excepturi consequatur et eos et et praesentium doloremque. qui debitis ab est rerum aut velit fuga ut nemo omnis eum praesentium voluptatem ut. eum fugit rerum fuga error architecto quod nesciunt assumenda in. dicta &quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>binding.pry</code> 可以 Runtime 攔截呼叫物件，這讓開發者在寫一些複雜 Library 或者是 API 交涉資訊時，頓時就變得如虎添翼。因為每次在解決這類需求時，狀況都很像被綁黑布蒙著眼開發，最討厭的就是每次還要不斷的執行「印出」 debug，效率低落的驚人。</p>
-
-<h3>pry-nav</h3>
-
-<p>也因為 <code>binding.pry</code> 太好用。社群也基於 Pry 繼續做了其他的 pry 的 plugin。最 killling 的就是 <a href="https://github.com/nixme/pry-nav">pry-nav</a>。</p>
-
-<p>pry-nav 做的就是可以讓你在 <code>binding.pry</code> 的攔節點前後，作 <code>next</code>、<code>step</code>。直接一行一行的逐一 debug。</p>
-
-<p>相信我，如果你在寫通訊交涉的 Library，或者是正在改複雜的 Rails View。用到 pry + pry-nav 鐵定會感動到哭出來 XD</p>
-
-<h3>pry-remote</h3>
-
-<p>Pry 搭配 Rails，在往常的作法只有 <code>rails s</code> 可以叫出 debug console 而已。但很多人實際上是使用 <a href="http://pow.cx">Pow</a> 作為開發用 HTTP Server。</p>
-
-<p>這樣的需求可以用 <a href="https://github.com/Mon-Ouie/pry-remote">pry-remote</a> 解決。pry-remote 的作法是把原本的 <code>bindig.pry</code> 改成 <code>binding.remote_pry</code>。</p>
-
-<p>而 <code>binding.remote_pry</code> 會開一支 DRb 起來，開發者再用 <code>pry-remote</code> 連到 debug console。</p>
-
-<h2>小結</h2>
-
-<p>Pry 在短短一年間，已經默默的演化出一個龐大的生態圈，只是這當中的過程並沒有大張旗鼓，所以很多開發者並沒有發現 Pry 其實已經默默從 console shell 進化到超強 Debugger 了。</p>
-
-<p><a href="https://github.com/pry/pry/wiki">Pry 的 wiki</a> 上有著相當大的相關資源，相當值得各位繼續探索下去…</p>
-
-<h3>同場加映</h3>
-
-<p><a href="https://github.com/mrbrdo/rack-webconsole">rack-webconsole</a> 一樣是 pry 的應用，可以在 webpage 裡面直接開 console 改東西…超酷的</p>
-
-<h3>追加</h3>
-
-<p>Confreaks 最近又釋出了 Moutain West Ruby conf 的 Pry talk <a href="http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life">http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life</a></p>
 ]]></content>
   </entry>
   
