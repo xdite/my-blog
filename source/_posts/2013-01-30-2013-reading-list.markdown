@@ -10,7 +10,7 @@ Here are the reading marterials I recommend in 2013:
 
 ## Basic Stuff
 
-If you are new to Ruby / Rails world, I suggest you to take following courses :
+If you are new to Ruby / Rails world, I suggest you take following courses :
 
 * Code School [Try Ruby](http://www.codeschool.com/courses/try-ruby)
 * Code School [Try Git](http://www.codeschool.com/courses/try-git)
