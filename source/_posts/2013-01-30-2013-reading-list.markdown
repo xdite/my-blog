@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2013 Ruby on Rails Reading List"
+title: "2013 Ruby on Rails Reading List"
 date: 2013-01-30 08:13
 comments: true
 categories: 
@@ -8,7 +8,7 @@ categories:
 
 Here are the reading marterials I recommend in 2013:
 
-## Basic
+## Basic 
 
 If you are new to Ruby / Rails world, I suggest you take following courses :
 
@@ -26,7 +26,7 @@ Use following courses to build a simple application, like a "forum"
 * Code School [Rails for Zombies Redux](http://www.codeschool.com/courses/rails-for-zombies-redux)
 * Code School [Rails for Zombies 2](http://www.codeschool.com/courses/rails-for-zombies-2)
 
-## Basic web development
+## Basic web development 
 
 * CodeSchool [jQuery Air: First Flight](http://www.codeschool.com/courses/jquery-air-first-flight)
 * CodeSchool [jQuery Air: Captain's Log](http://www.codeschool.com/courses/jquery-air-captains-log)
@@ -35,7 +35,7 @@ Use following courses to build a simple application, like a "forum"
 
 ## Intermediate Ruby on Rails
 
-( If you are not familer with TDD with Ruby on Rails, these two books might be a good start point)
+( If you are not familer with TDD with Ruby on Rails, these two books might be a good start)
 
 * Michael Hartl [Rails Turtorial](http://ruby.railstutorial.org/)
 * Ryan Bigg [Rails in Action 4](http://www.manning.com/bigg2/)
