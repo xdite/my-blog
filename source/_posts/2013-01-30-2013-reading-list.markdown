@@ -40,7 +40,7 @@ Use following courses to build a simple application, like a "forum"
 * Michael Hartl [Rails Turtorial](http://ruby.railstutorial.org/)
 * Ryan Bigg [Rails in Action 4](http://www.manning.com/bigg2/)
 
-Also, UT on Rails is also a excellent learning material
+UT on Rails is also a excellent learning material
 
 * Schneems [UT on Rails](http://schneems.com/ut-rails)
 
