@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-01-08T20:35:20+08:00</updated>
+  <updated>2013-01-30T09:39:36+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,172 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2013 Ruby on Rails Reading List]]></title>
+    <link href="http://blog.xdite.net/posts/2013/01/30/2013-reading-list/"/>
+    <updated>2013-01-30T08:13:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/01/30/2013-reading-list</id>
+    <content type="html"><![CDATA[<p>Here are the reading marterials I recommend in 2013:</p>
+
+<h2>Basic Stuff</h2>
+
+<p>If you are new to Ruby / Rails world, I suggest you to take following courses :</p>
+
+<ul>
+<li>Code School <a href="http://www.codeschool.com/courses/try-ruby">Try Ruby</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/try-git">Try Git</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/git-real">Git Real</a></li>
+<li>Peepcode <a href="https://peepcode.com/screencasts">Meet Command Line</a></li>
+<li>Peepcode <a href="https://peepcode.com/products/advanced-command-line">Advanced Command Line</a></li>
+<li>Zed Shaw <a href="http://ruby.learncodethehardway.org/">Learn Ruby The Hard Way</a></li>
+</ul>
+
+
+<h2>Learning Rails</h2>
+
+<p>Use following courses to build a simple application, like a &#8220;forum&#8221;</p>
+
+<ul>
+<li>Code School <a href="http://www.codeschool.com/courses/rails-for-zombies-redux">Rails for Zombies Redux</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/rails-for-zombies-2">Rails for Zombies 2</a></li>
+</ul>
+
+
+<h2>Basic web development stuff</h2>
+
+<ul>
+<li>CodeSchool <a href="http://www.codeschool.com/courses/jquery-air-first-flight">jQuery Air: First Flight</a></li>
+<li>CodeSchool <a href="http://www.codeschool.com/courses/jquery-air-captains-log">jQuery Air: Captain&#8217;s Log</a></li>
+<li>CodeSchool <a href="http://www.codeschool.com/courses/css-cross-country">CSS Cross-Country</a></li>
+<li>Codecademy <a href="http://www.codecademy.com/zh/tracks/javascript">Javascripts</a></li>
+</ul>
+
+
+<h2>Intermediate Ruby on Rails</h2>
+
+<p>( If you are not familer with TDD with Ruby on Rails, these two books might be a good start point)</p>
+
+<ul>
+<li>Michael Hartl <a href="http://ruby.railstutorial.org/">Rails Turtorial</a></li>
+<li>Ryan Bigg <a href="http://www.manning.com/bigg2/">Rails in Action 4</a></li>
+</ul>
+
+
+<p>Also, UT on Rails is also a excellent learning material</p>
+
+<ul>
+<li>Schneems <a href="http://schneems.com/ut-rails">UT on Rails</a></li>
+</ul>
+
+
+<h2>Testing</h2>
+
+<ul>
+<li>Code School <a href="http://www.codeschool.com/courses/rails-testing-for-zombies">Rails testing for zombies</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/testing-with-rspec">Testing with Rspec</a></li>
+<li>Noel Rappin <a href="http://pragprog.com/book/nrtest/rails-test-prescriptions">Rails Test Prescriptions: Keeping Your Application Healthy</a></li>
+<li>Thougutbot <a href="https://learn.thoughtbot.com/workshops/18-test-driven-rails">Learn Test-Driven Development using RSpec and Capybara.</a></li>
+</ul>
+
+
+<h2>Advanced web development stuff</h2>
+
+<ul>
+<li>Code School <a href="http://www.codeschool.com/courses/journey-into-mobile">Jounry into Mobile</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/anatomy-of-backbonejs">The Anatomy of Backbone</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/coffeescript">CoffeeScript</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/assembling-sass">Assembling Sass</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/assembling-sass">Assembling Sass Part2</a></li>
+</ul>
+
+
+<h2>Refactoring Ruby / Rails code</h2>
+
+<ul>
+<li>Codschool <a href="http://www.codeschool.com/courses/rails-best-practices">Rails Best Practices</a></li>
+<li>Chad Pytel / Tammer Saleh : <a href="http://railsantipatterns.com/">Rails Antipattern</a></li>
+<li>John Athayde / Bruce Williamsp <a href="http://pragprog.com/book/warv/the-rails-view">The Rails View: Create a Beautiful and Maintainable User Experience</a></li>
+<li>Eric Davis <a href="http://www.refactoringredmine.com/">Refacotoring Redmine</a></li>
+<li>Code Climate <a href="http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/">7 Patterns to Refactor Fat ActiveRecord Models</a></li>
+</ul>
+
+
+<h2>Writing better Ruby code</h2>
+
+<ul>
+<li>Code School <a href="http://www.codeschool.com/courses/ruby-bits">Code Ruby Bits</a></li>
+<li>Code School <a href="http://www.codeschool.com/courses/ruby-bits-part-2">Code Ruby Bits Part 2</a></li>
+<li>David A. Black <a href="http://www.manning.com/black2/">The Well-Grounded Rubyist</a></li>
+<li>Russ Olsen <a href="http://www.amazon.com/Eloquent-Ruby-Addison-Wesley-Professional/dp/0321584104">Eloquent Ruby</a></li>
+<li>Avdi Grimm <a href="http://devblog.avdi.org/2012/06/05/confident-ruby-beta/">Confident Ruby</a></li>
+<li>Avdi Grimm <a href="http://exceptionalruby.com/">Exceptional Ruby</a></li>
+<li>Stefan Kaes <a href="http://www.informit.com/store/writing-efficient-ruby-code-digital-short-cut-9780321540034">Writing Efficient Ruby Code (Digital Short Cut)</a></li>
+</ul>
+
+
+<h3>Podcast / Journal of writing better Ruby/Rails code</h3>
+
+<ul>
+<li><a href="http://devblog.avdi.org/rubytapas/">Ruby Tapas</a></li>
+<li><a href="https://www.destroyallsoftware.com/screencasts">Destroy All Software</a></li>
+<li><a href="https://practicingruby.com/">Practicing Ruby</a></li>
+</ul>
+
+
+<h2>Object-oriend Design in Ruby on Rails</h2>
+
+<ul>
+<li>thoughtbot <a href="https://learn.thoughtbot.com/products/13">Ruby Science</a></li>
+<li>Avdi Grimm <a href="http://objectsonrails.com/">Object on Rails</a></li>
+<li>Russ Olsen <a href="http://www.amazon.com/Design-Patterns-Ruby-Russ-Olsen/dp/0321490452">Design Patterns in Ruby</a></li>
+<li>Jay fields <a href="http://www.amazon.com/Design-Patterns-Ruby-Russ-Olsen/dp/0321490452">Refacoting : Ruby Edition</a></li>
+<li>Sandi Metz <a href="http://www.amazon.com/dp/0321721330">Practical Object-Oriented Design in Ruby: An Agile Primer</a></li>
+</ul>
+
+
+<h2>Know Rails better</h2>
+
+<ul>
+<li>José Valim <a href="http://pragprog.com/book/jvrails/crafting-rails-applications">Crafting Rails Applications: Expert Practices for Everyday Rails Development</a></li>
+<li>Marc-André Cournoyer <a href="http://owningrails.com/">Owning Rails: The Rails Online Master Class</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/299-rails-initialization-walkthrough">Rails Initialization Walkthrough</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/319-rails-middleware-walkthrough">Rails Middleware Walkthrough</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/317-rack-app-from-scratch">Rack App from Scratch</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/349-rails-modularity">Rails Modularity</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/355-hacking-with-arel">Hacking with Arel</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/385-authorization-from-scratch-part-1">Authorization from Scratch Part 1</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/386-authorization-from-scratch-part-2">Authorization from Scratch Part 2</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/395-action-controller-walkthrough">Action Controller Walkthrough</a></li>
+<li>Railscast <a href="http://railscasts.com/episodes/397-action-view-walkthrough">Action View Walkthrough</a></li>
+</ul>
+
+
+<h2>Guideline of writng Ruby / Rails code</h2>
+
+<ul>
+<li><a href="http://www.refactoringredmine.com/">ruby-style-guide</a></li>
+<li><a href="https://github.com/bbatsov/rails-style-guide">rails-style-guide</a></li>
+<li><a href="https://github.com/hopsoft/rails_standards/tree/rails-3-2">rails_standards</a></li>
+<li>thoughtbot <a href="https://github.com/thoughtbot/guides">guides</a></li>
+</ul>
+
+
+<h2>Resources of latest Ruby</h2>
+
+<ul>
+<li><a href="http://ruby5.envylabs.com/">Ruby5</a></li>
+<li><a href="http://rubyweekly.com/">Ruby Weekly</a></li>
+<li><a href="http://www.rubyinside.com/">Ruby Inside</a></li>
+<li><a href="http://www.rubyflow.com/">RubyFlow</a></li>
+<li><a href="http://rubyrogues.com/">RubyRogues</a></li>
+<li><a href="http://learn.thoughtbot.com/podcast">Thoughtbot Podcast</a></li>
+<li><a href="http://railscasts.com/">Railscast</a></li>
+<li><a href="http://www.confreaks.com/">Confreaks</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2012 我的 commit 數據]]></title>
@@ -1946,32 +2112,6 @@ DELETE 涉及到會 update index，所以會…很慢。<a href="http://stackove
 <p>不少 Startup 團隊在一開始草創時，缺乏自信或管道，找到戰力。因此都會想透過熟悉的渠徑「找」到人補上空缺，繼續往目標前進。</p>
 
 <p>只是現在看起來，這個「找」，看起來還是要好好的看狀況使用啊…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MySQL Indexing Best Practices]]></title>
-    <link href="http://blog.xdite.net/posts/2012/08/16/mysql-index-best-practice/"/>
-    <updated>2012-08-16T03:19:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/08/16/mysql-index-best-practice</id>
-    <content type="html"><![CDATA[<p>睡前看到 <a href="http://blog.gslin.org">DK</a> 在 twitter 講 Percona 有一場 Webniar 在講 MySQL index 的 best practices。</p>
-
-<p>結果連過去看時發現已經結束了。不過還是不死心的註冊了一下…</p>
-
-<p>大概半小時後系統通知影片和 slide 在 <a href="http://percona.tv">http://percona.tv</a> 已經可以抓了…</p>
-
-<ul>
-<li>MySQL Indexing Best Practices: <a href="http://www.percona.tv/percona-webinars/mysql-indexing-best-practices">影片連結</a>、<a href="http://www.percona.com/files/presentations/WEBINAR-MySQL-Indexing-Best-Practices.pdf">投影片連結</a></li>
-</ul>
-
-
-<p>內容講的蠻紮實。教了不少讓開發者判斷 Index 如何下、下得好不好的準則…</p>
-
-<p>有時間應該整理成講義的…</p>
-
-<p>===</p>
-
-<p>打完這篇要去睡之前，又在 twitter 上看到 confreaks 丟出了新的 pry 影片 <a href="http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life">http://confreaks.com/videos/959-mwrc2012-prying-into-your-app-s-private-life</a>。（前幾天寫過的 <a href="http://blog.xdite.net/posts/2012/08/12/pry-the-new-debugger/">Pry ：新一代 Debug 利器</a> )</p>
 ]]></content>
   </entry>
   
