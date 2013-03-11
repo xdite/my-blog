@@ -8,6 +8,10 @@ categories:
 
 我們公司 [Roco](http://rocodev.com) 最近要徵人。
 
+我們是專業的軟體開發公司。主要技術為 Ruby on Rails。擅長敏捷軟體開發。曾經在 2012/9 參加 Facebook World Hack 奪得世界級首獎。具備優異的開發實力。
+
+公司的業務最近還在不斷的成長。因此我們預計將再招募數位夥伴加入我們的團隊。
+
 開放三種職缺。
 
 ### Software Developer
