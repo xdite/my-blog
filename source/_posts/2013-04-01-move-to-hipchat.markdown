@@ -41,9 +41,9 @@ categories:
 
 我們目前是把目前的幾種 Log 都打到 hipchat 上
 
-1. Github (github 的 hook 支援 hipchat)
+1. Github (github 的 hook 支援 hipchat, pull request, push , merge 都會通知...)
 2. Capistrano Deploy <http://blog.hipchat.com/tag/capistrano/>
-3. Airbrake ( airbrake 支援 hipchat )
+3. Airbrake ( server error 通知系統, airbrake 支援 hipchat )
 4. Redmine (官方的 hipchat/redmine_hipchat 不好用，所以我自己改了一隻 [rocodev/redmine_hipchat](https://github.com/rocodev/redmine_hipchat) 出來)
 
 之後還會掛更多東西上去…
