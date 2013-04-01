@@ -37,6 +37,17 @@ categories:
 
 ![img](https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-snc6/221729_10151576143483552_1020905528_n.jpg)
 
+
+## Hipchat 的好處
+
+1. 主要是 Web Based，但有 iOS, Android, Mac, Windows, Linux client
+2. 有 group 和 permission control，踢人加人很方便
+3. API 整合，寫 bot 很容易
+4. 聊天行為與一般 IRC chat 蠻相近的
+5. 貼圖貼檔案貼 Link 很方便
+6. 一樣會存歷史紀錄，就算離線了，重新上線還是可以找 Log
+7. 5 人以下現在是免費的方案...
+
 ## Hipchat integration
 
 我們目前是把目前的幾種 Log 都打到 hipchat 上
