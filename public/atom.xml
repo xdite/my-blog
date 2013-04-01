@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-04-01T23:43:05+08:00</updated>
+  <updated>2013-04-01T23:44:33+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/"/>
     <updated>2013-04-01T22:19:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2013/04/01/move-to-hipchat</id>
-    <content type="html"><![CDATA[<p>一直以來（ 5-6 年前幾..)，我都是用 IRC 在管團隊的 Log 和通知。</p>
+    <content type="html"><![CDATA[<p>一直以來（ 5-6 年前開始..)，我都是用 IRC 在管團隊的 Log 和通知。</p>
 
 <p>這個習慣最早以來是跟前輩學習來的。這在比較強悍的技術團隊內部，幾乎是行之有年的標準 Convention。</p>
 
