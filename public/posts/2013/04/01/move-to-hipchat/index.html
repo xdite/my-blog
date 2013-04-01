@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ruby Podcast / Screencast / Issue 推薦清單 - Blog.XDite.net</title>
+  <title>把公司 Log 搬到 Hipchat... - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          有些人問我平常日常怎麼補充知識，所以稍微整理一下我平常看的一些東西分享出來。我平常蠻常到處亂看東西，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…不過看完之後當然還要練習，東西才會變自己的就是了&#8230;PODCASTRuby...">
+  <meta name="description" content="          一直以來（ 5-6 年前幾..)，我都是用 IRC 在管團隊的 Log 和通知。這個習慣最早以來是跟前輩學習來的。這在比較強悍技術團隊內部，幾乎是行之有年的標準 Convention。（ 可見 Flickr 著名的 10+ Deploys Per Day: Dev and ...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Ruby Podcast / Screencast / Issue 推薦清單</h1>
+      <h1 class="entry-title">把公司 Log 搬到 Hipchat...</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2012-02-19T06:02:00+08:00" pubdate  data-updated="true" >Feb 19<span>th</span>, 2012</time>
+<time datetime="2013-04-01T22:19:00+08:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,41 +98,52 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <p>有些人問我平常日常怎麼補充知識，所以稍微整理一下我平常看的一些東西分享出來。我平常蠻常到處亂看東西，比例大概是這樣：70% 以上是 Ruby，30 % 是 JavaScript 和其他東西…</p>
+  <p>一直以來（ 5-6 年前幾..)，我都是用 IRC 在管團隊的 Log 和通知。</p>
 
-<p>不過看完之後當然還要練習，東西才會變自己的就是了&#8230;</p>
+<p>這個習慣最早以來是跟前輩學習來的。這在比較強悍技術團隊內部，幾乎是行之有年的標準 Convention。</p>
 
-<h2>PODCAST</h2>
+<p>（ 可見 Flickr 著名的 <a href="http://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr">10+ Deploys Per Day: Dev and Ops Cooperation at Flickr
+</a> 投影片 (P.52)，不過他們大概 2006 年就開始這樣做了，這篇只是後來比較漂亮的整理&#8230;）。</p>
 
-<ul>
-<li>Ruby <a href="http://ruby5.envylabs.com/">Ruby5</a></li>
-<li>Ruby <a href="http://rubyshow.com/">The Ruby Show</a></li>
-<li>Ruby <a href="http://rubyrogues.com/">Ruby Rogues</a></li>
-<li>Ruby <a href="http://rubyfreelancers.com/">Ruby FreeLancers</a></li>
-<li>JS <a href="http://javascriptjabber.com/">Javascript Jabber</a></li>
-<li>Startup <a href="http://www.thisweekinstartups.com/">This Week in Startups</a></li>
-<li>Startup <a href="http://mixergy.com/">Mixergy</a></li>
-</ul>
+<p>當年 <a href="http://t17.techbang.com/topics/7181-t-off-state-technical-departments-magic-work-processes-open-to-the-public">在 T 客邦</a>，也是用 redmine + IRC bot 自己搞了一套。</p>
+
+<p>把 Log 都打到 IRC 有很多好處。團隊成員去開會、或者暫時離開。回到電腦前，還是可以很快速的掌握剛剛發生了什麼事。再加上 issue tracking 或者是 system alert 其實是很洗信箱讓人容易分神的東西，所以我們把這些幾乎都搬到 IRC 上，建立出一個可以非同步但又高效率的合作開發模式。</p>
+
+<p><img src="http://www.techbang.com.tw/system/images/56563/original/f619713e13061413515e24406f7fbe02.png?1312367582" alt="img" /></p>
+
+<p><img src="http://www.techbang.com.tw/system/images/56564/original/a2c052c70ec3bfc1023c2660bfbf54b9.png?1312367582" alt="img" /></p>
+
+<p>不過這個模式還是有一些極限，所以最近在 survey 過後，最近我決定把 <a href="http://rocodev.com">公司</a> 整套 solution 搬到 <a href="http://hipchat.com">Hipchat</a> 上。</p>
+
+<h2>主要搬家原因</h2>
+
+<ol>
+<li>發現每個同事一進來都要教怎麼用 <a href="http://www.irssi.org/">irssi</a> + 工作站掛 irc，學習成本很高</li>
+<li>公司聊天室是 skype, log 在 irc 上，開兩窗有點麻煩。加上 skype-bot 不是不能作，只是我覺得 skype-bot 很吵…</li>
+<li>人員離職很麻煩，因為要把 irc room 的 key 和 info 整套換掉，無法作權限控管</li>
+<li>demo 給別人看 irc solution 時也很麻煩，因為對方一定看得到我們的 key &#8230;.</li>
+<li>對 irc 訊息上色要試很久，對一般的 developer 門檻有點高</li>
+<li>irc log 多半要切到桌機才能看，沒有 mobile solution。</li>
+</ol>
 
 
-<h2>Screencast</h2>
+<p>所以最後就整套就搬到 Hipchat 了。看起來大家現在是用的蠻習慣的。</p>
 
-<ul>
-<li>Rails <a href="http://railscasts.com/">Railscast</a></li>
-<li>Rails / CSS <a href="http://www.codeschool.com/code_tv">CodeTV</a></li>
-<li>Rails <a href="https://www.destroyallsoftware.com/screencasts">Destroy All Software</a></li>
-<li>General <a href="http://www.cleancoders.com/">The Clean Coders</a></li>
-</ul>
+<p><img src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-snc6/221729_10151576143483552_1020905528_n.jpg" alt="img" /></p>
+
+<h2>Hipchat integration</h2>
+
+<p>我們目前是把目前的幾種 Log 都打到 hipchat 上</p>
+
+<ol>
+<li>Github (github 的 hook 支援 hipchat)</li>
+<li>Capistrano Deploy <a href="http://blog.hipchat.com/tag/capistrano/">http://blog.hipchat.com/tag/capistrano/</a></li>
+<li>Airbrake ( airbrake 支援 hipchat )</li>
+<li>Redmine (官方的 hipchat/redmine_hipchat 不好用，所以我自己改了一隻 <a href="https://github.com/rocodev/redmine_hipchat">rocodev/redmine_hipchat</a> 出來)</li>
+</ol>
 
 
-<h2>Weekly issue</h2>
-
-<ul>
-<li><a href="http://rubyweekly.com/">Ruby Weekly</a></li>
-<li><a href="http://javascriptweekly.com/">JavaScript Weekly</a></li>
-<li><a href="http://html5weekly.com/">HTML5 Weekly</a></li>
-</ul>
-
+<p>之後還會掛更多東西上去…</p>
 
 </div>
 
@@ -154,14 +165,8 @@
 
 
 
-<time datetime="2012-02-19T06:02:00+08:00" pubdate  data-updated="true" >Feb 19<span>th</span>, 2012</time>
+<time datetime="2013-04-01T22:19:00+08:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2013</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/podcast/'>Podcast</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
-  
-</span>
 
 
     </p>
@@ -169,7 +174,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -245,8 +250,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/';
-        var disqus_url = 'http://blog.xdite.net/posts/2012/02/19/ruby-podcasts/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/';
+        var disqus_url = 'http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/';
         var disqus_script = 'embed.js';
       
     (function () {

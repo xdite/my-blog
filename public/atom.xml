@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-03-22T04:30:02+08:00</updated>
+  <updated>2013-04-01T23:33:15+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[把公司 Log 搬到 Hipchat...]]></title>
+    <link href="http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/"/>
+    <updated>2013-04-01T22:19:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/04/01/move-to-hipchat</id>
+    <content type="html"><![CDATA[<p>一直以來（ 5-6 年前幾..)，我都是用 IRC 在管團隊的 Log 和通知。</p>
+
+<p>這個習慣最早以來是跟前輩學習來的。這在比較強悍技術團隊內部，幾乎是行之有年的標準 Convention。</p>
+
+<p>（ 可見 Flickr 著名的 <a href="http://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr">10+ Deploys Per Day: Dev and Ops Cooperation at Flickr
+</a> 投影片 (P.52)，不過他們大概 2006 年就開始這樣做了，這篇只是後來比較漂亮的整理&#8230;）。</p>
+
+<p>當年 <a href="http://t17.techbang.com/topics/7181-t-off-state-technical-departments-magic-work-processes-open-to-the-public">在 T 客邦</a>，也是用 redmine + IRC bot 自己搞了一套。</p>
+
+<p>把 Log 都打到 IRC 有很多好處。團隊成員去開會、或者暫時離開。回到電腦前，還是可以很快速的掌握剛剛發生了什麼事。再加上 issue tracking 或者是 system alert 其實是很洗信箱讓人容易分神的東西，所以我們把這些幾乎都搬到 IRC 上，建立出一個可以非同步但又高效率的合作開發模式。</p>
+
+<p><img src="http://www.techbang.com.tw/system/images/56563/original/f619713e13061413515e24406f7fbe02.png?1312367582" alt="img" /></p>
+
+<p><img src="http://www.techbang.com.tw/system/images/56564/original/a2c052c70ec3bfc1023c2660bfbf54b9.png?1312367582" alt="img" /></p>
+
+<p>不過這個模式還是有一些極限，所以最近在 survey 過後，最近我決定把 <a href="http://rocodev.com">公司</a> 整套 solution 搬到 <a href="http://hipchat.com">Hipchat</a> 上。</p>
+
+<h2>主要搬家原因</h2>
+
+<ol>
+<li>發現每個同事一進來都要教怎麼用 <a href="http://www.irssi.org/">irssi</a> + 工作站掛 irc，學習成本很高</li>
+<li>公司聊天室是 skype, log 在 irc 上，開兩窗有點麻煩。加上 skype-bot 不是不能作，只是我覺得 skype-bot 很吵…</li>
+<li>人員離職很麻煩，因為要把 irc room 的 key 和 info 整套換掉，無法作權限控管</li>
+<li>demo 給別人看 irc solution 時也很麻煩，因為對方一定看得到我們的 key &#8230;.</li>
+<li>對 irc 訊息上色要試很久，對一般的 developer 門檻有點高</li>
+<li>irc log 多半要切到桌機才能看，沒有 mobile solution。</li>
+</ol>
+
+
+<p>所以最後就整套就搬到 Hipchat 了。看起來大家現在是用的蠻習慣的。</p>
+
+<p><img src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-snc6/221729_10151576143483552_1020905528_n.jpg" alt="img" /></p>
+
+<h2>Hipchat integration</h2>
+
+<p>我們目前是把目前的幾種 Log 都打到 hipchat 上</p>
+
+<ol>
+<li>Github (github 的 hook 支援 hipchat)</li>
+<li>Capistrano Deploy <a href="http://blog.hipchat.com/tag/capistrano/">http://blog.hipchat.com/tag/capistrano/</a></li>
+<li>Airbrake ( airbrake 支援 hipchat )</li>
+<li>Redmine (官方的 hipchat/redmine_hipchat 不好用，所以我自己改了一隻 <a href="https://github.com/rocodev/redmine_hipchat">rocodev/redmine_hipchat</a> 出來)</li>
+</ol>
+
+
+<p>之後還會掛更多東西上去…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Audiophile.im 我是發燒友]]></title>
@@ -1676,218 +1730,6 @@
 <h5>XII. Admin processes</h5>
 
 <p>Run admin/management tasks as one-off processes</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Cache Digests 最大化緩存策略]]></title>
-    <link href="http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/"/>
-    <updated>2012-09-02T20:06:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy</id>
-    <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/ferguson666/3605271302/" title="Russian Dolls 097 by Louise...6661, on Flickr"><img src="http://farm3.staticflickr.com/2473/3605271302_0532598c8f.jpg" width="500" height="333" alt="Russian Dolls 097"></a></p>
-
-<p>大概半個月之前（2012/ 8/13 前後），<a href="http://twitter.com/dhh">@dhh</a> 釋出了一個有關於 cache 的 gem，叫做 <a href="https://github.com/rails/cache_digests">cache_digests</a>，並宣布此 gem 會成為 Rails 4 中的一部分。</p>
-
-<p>既然會是主體的一部分，想必這個 gem 解決的問題非常重要。但無奈 README 也非常簡略，看不出重要性在哪。還花了我一點時間在網路上找資料，把 DHH 想要表達的哲學拼出來&#8230;.</p>
-
-<h3>從 new Basecamp 改版談起</h3>
-
-<p>@dhh 的公司 <a href="http://37signals.com">37signals</a> 旗下最有名的產品 <a href="http://basecamp.com">Basecamp</a> 大概半年前改版了。與其說是改版，不如說是整個大重寫了。撇開使用性不談（好用度大幅提高），Website Performance 整體也大幅提升。</p>
-
-<p>37signals 在大概二月發表了一篇文章，談了這次的版本為什麼效能變得這麼好：</p>
-
-<h4>1. Turn to JavaScript Applicaton</h4>
-
-<p>眾所皆知（?）的這次的改寫重點是在 JavaScript 上，整個 codebase 中CoffeScript 與 Ruby 的比例到達了 1:1 之譜。也就是 new Basecamp 實質上是個「JavaScript Application」。另外再利用 Stacker (advanced puhState-based engine for sheets) 大幅降低 HTTP requests。</p>
-
-<h4>2. Cache TO THE MAX: Russian Doll cache stratgy</h4>
-
-<p>雖然 new Basecamp 已經是個 「JavaScript Application」。但有個問題還是存在，身為 backend 的 Rails App 在 render Basecamp 的邏輯時，速度還是不夠快。於是他們採用「Russian Doll」的 Cache Strategy 把能 Cache 的部分擴展到上限…</p>
-
-<h3>Russian Doll cache strategy</h3>
-
-<p>如名所示，Russian Doll strategy，就是使用層層 cache 嵌套的策略。</p>
-
-<p><img src="http://s3.amazonaws.com/37assets/svn/777-russian-doll-caching-1.png" alt="image" /></p>
-
-<p>這一張圖片的背後 code 會是這樣的寫法：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@project</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  aaa</span>
-</span><span class='line'><span class="sx">  &lt;% cache @todo do %&gt;</span>
-</span><span class='line'>    <span class="n">bbb</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">      ccc</span>
-</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>再利用 Rails 內建 cache helper 使用 <code>"#{cache_key}/#{id}-#{timestamp}"</code> (<a href="http://apidock.com/rails/ActiveRecord/Base/cache_key">出處</a>) 的方式去實作 cache invalidation。如此一來，只要 object 被變更，cache 就會被刷新。</p>
-
-<p>但這招即使如此直觀，還是會遇到 invalidation 上的幾個問題。</p>
-
-<h4>1. 更新了 todolist，但是上層 class: todo 卻不知道…</h4>
-
-<p>todlist 更新了，所以 updated_at 會被更新。不過 todo 卻不知道 todolist 的更新，所以整塊並不會被更新。</p>
-
-<h5>解法：</h5>
-
-<p>不過解法容易。可以透過 <code>belongs_to :todo, :touch =&gt; true</code>，<code>belongs_to :product, :touch =&gt; true</code>。從最底部的 todolist，層層連鎖更新到最上層。</p>
-
-<h4>2. 更新了 code block，但 object 內容卻因為沒更新而不會 expire。</h4>
-
-<p>當我把 ccc 改成 zzz 時且打算 deploy 時，問題來了&#8230;。整套 cache 機制是基於 object 更新，而不是 code 更新。所以 cache 並不會 invalid….</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@project</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  aaa</span>
-</span><span class='line'><span class="sx">  &lt;% cache @todo do %&gt;</span>
-</span><span class='line'>    <span class="n">bbb</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">      zzz</span>
-</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>解法：</h5>
-
-<p>這邊有另外一個寫法可以閃過這個地雷，就是為這整段 code 加上版本號：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v15</span><span class="p">,</span><span class="vi">@project</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  aaa</span>
-</span><span class='line'><span class="sx">  &lt;% cache [v10,@todo] do %&gt;</span>
-</span><span class='line'>    <span class="n">bbb</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">      zzz</span>
-</span><span class='line'><span class="sx">    &lt;% end %&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果我要將 todolist block 那塊更新，要強制 invalid，我可以把 <code>v45</code> 改成 <code>v46</code>。這樣就更新了。</p>
-
-<p>不過如果這一塊 view 上面還有外層 cache 嵌套，<code>v10</code> 要跟著變成 <code>v11</code>，<code>v15</code> 要跟著變成 <code>v16</code>。</p>
-
-<p>有點麻煩了…</p>
-
-<p>但這還不是最糟糕的…</p>
-
-<h4>3. cache 的部分散落在 partial 裡面，版本號更新不易</h4>
-
-<p>改版本號麻煩但還算可以接受。但這只限於都在同一張 view 裡面的狀況。</p>
-
-<p>若是 cache 被放在 partial 裡面，被多個 view 引用呼叫，那就麻煩了…</p>
-
-<p><code>_todolist.html.erb</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  zzz</span>
-</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>改版本號的手續就變成地獄了…。因為你永遠都會有忘記清掉的 view…</p>
-
-<p>解法：</p>
-
-<p>暫無。認命的改吧（？）</p>
-
-<h3>4. 逐漸冗長的 syntax 問題..</h3>
-
-<p>而使用版本號閃避 cache 還會造成，原本直觀的</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">    zzz</span>
-</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>為了要 invalid cache 的問題，被迫使用 trick 去 bypass。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="o">[</span><span class="n">v45</span><span class="p">,</span><span class="vi">@todolist</span><span class="o">]</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">    zzz</span>
-</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>可不可以單純一點，我們寫 code 還是回到直觀的 <code>cache @object</code>，然後以上談到的這些問題都會自動解決？</p>
-
-<h3>cache_digests 就是這一切的答案：md5_of_this_view</h3>
-
-<p><a href="https://github.com/rails/cache_digests">cache_digests</a> 就是 DHH 解決這一切惱人問題的手段。</p>
-
-<p>而且解決策略也非常簡單，既然大家都在版本號上面 GGYY，那麼其實最快的方式就是 <strong>md5_of_this_view</strong> ！！！</p>
-
-<p><a href="https://github.com/rails/cache_digests">cache_digests</a> 允許開發者繼續使用這樣的 code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="o">&lt;</span><span class="sx">% cache </span><span class="vi">@todolist</span> <span class="k">do</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">    zzz</span>
-</span><span class='line'><span class="sx">  &lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但！cache_digests 自動幫忙計算此 block 裡面的 code 產出的內容的 md5，以此 md5 作為 cache key，從而達到自動 invalid 的效果。</p>
-
-<p>同時，這個 gem 也會自動解決層層嵌套的 dependency 問題…</p>
-
-<h3>小結</h3>
-
-<p>這一個 gem 前前後後不到 150 行。卻解決了一個非常重要的 cache 問題，也難怪會變成 Rails 4 之後內建的功能。</p>
-
-<p>gem 雖然直觀。不過翻出這些前因後果還真是不簡單，在寫這篇文章的確也花了我花了一點時間去蒐集資料。從 37signals 釋出的一些小片段去把內容組出來。</p>
-
-<p>相關連結：</p>
-
-<ul>
-<li><a href="http://37signals.com/svn/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui">How Basecamp Next got to be so damn fast without using much client-side UI</a></li>
-<li><a href="http://37signals.com/svn/posts/3113-how-key-based-cache-expiration-works">How key-based cache expiration works</a></li>
-<li><a href="http://www.youtube.com/watch?v=FkLVl3gpJP4#t=33m30s">Evening on Backbone.js/Views w/ Q&amp;A with David Heinemeier Hansson</a></li>
-<li><a href="http://www.broadcastingadam.com/2012/07/advanced_caching_part_2-using_strategies/">Advanced Caching: Part 2 - Using Caching Strategies</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
