@@ -46,7 +46,8 @@ categories:
 4. 聊天行為與一般 IRC chat 蠻相近的
 5. 貼圖貼檔案貼 Link 很方便
 6. 一樣會存歷史紀錄，就算離線了，重新上線還是可以找 Log
-7. 5 人以下現在是免費的方案...
+7. 很多主流系統整合支援（ github, redmine, capistrano, airbrake….)
+8. 5 人以下現在是免費的方案…
 
 ## Hipchat integration
 
