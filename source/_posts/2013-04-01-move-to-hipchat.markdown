@@ -33,7 +33,7 @@ categories:
 5. 對 irc 訊息上色要試很久，對一般的 developer 門檻有點高
 6. irc log 多半要切到桌機才能看，沒有 mobile solution。
 
-所以最後就整套就搬到 Hipchat 了。看起來大家現在是用的蠻習慣的。
+所以最後就整套就搬到 [Hipchat](http://hipchat.com) 了。看起來大家現在是用的蠻習慣的。
 
 ![img](https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-snc6/221729_10151576143483552_1020905528_n.jpg)
 
