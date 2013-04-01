@@ -8,7 +8,7 @@ categories:
 
 一直以來（ 5-6 年前幾..)，我都是用 IRC 在管團隊的 Log 和通知。
 
-這個習慣最早以來是跟前輩學習來的。這在比較強悍技術團隊內部，幾乎是行之有年的標準 Convention。
+這個習慣最早以來是跟前輩學習來的。這在比較強悍的技術團隊內部，幾乎是行之有年的標準 Convention。
 
 （ 可見 Flickr 著名的 [10+ Deploys Per Day: Dev and Ops Cooperation at Flickr
 ](http://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr) 投影片 (P.52)，不過他們大概 2006 年就開始這樣做了，這篇只是後來比較漂亮的整理...）。

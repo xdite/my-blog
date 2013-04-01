@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-04-01T23:36:39+08:00</updated>
+  <updated>2013-04-01T23:37:17+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.xdite.net/posts/2013/04/01/move-to-hipchat</id>
     <content type="html"><![CDATA[<p>一直以來（ 5-6 年前幾..)，我都是用 IRC 在管團隊的 Log 和通知。</p>
 
-<p>這個習慣最早以來是跟前輩學習來的。這在比較強悍技術團隊內部，幾乎是行之有年的標準 Convention。</p>
+<p>這個習慣最早以來是跟前輩學習來的。這在比較強悍的技術團隊內部，幾乎是行之有年的標準 Convention。</p>
 
 <p>（ 可見 Flickr 著名的 <a href="http://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr">10+ Deploys Per Day: Dev and Ops Cooperation at Flickr
 </a> 投影片 (P.52)，不過他們大概 2006 年就開始這樣做了，這篇只是後來比較漂亮的整理&#8230;）。</p>
