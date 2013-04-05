@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-04-01T23:44:33+08:00</updated>
+  <updated>2013-04-06T06:52:16+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何招聘技術人才 [JD篇]]]></title>
+    <link href="http://blog.xdite.net/posts/2013/04/06/hiring-advice/"/>
+    <updated>2013-04-06T06:10:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/04/06/hiring-advice</id>
+    <content type="html"><![CDATA[<p>這是一兩個禮拜前貼在 <a href="https://www.facebook.com/xdite/posts/10151575386888552">Facebook 牆上的心得</a>。整理一下重貼在 Blog 上&#8230;</p>
+
+<p>整理一下過去幾年的心得，如下：</p>
+
+<h2>JD 部分</h2>
+
+<h3>寫清楚 Job Description</h3>
+
+<ul>
+<li>寫清楚公司能提供什麼（薪資福利）</li>
+<li>希望對方已經有什麼經驗？（已具備什麼技術，什麼職位就寫什麼）。</li>
+</ul>
+
+
+<h3>不要徵超人</h3>
+
+<p>不要徵 「超人」。徵「超人」沒有意義。</p>
+
+<p>這裡的超人若以 Web 界來比喻，就是你可能看到 JD 這樣寫「熟 Rails、熟 jQuery、熟 ORM、熟 API 設計、熟 OO Design、熟&#8230;.」</p>
+
+<p>若一個工作職缺，出現「超人」的內容。通常表示：</p>
+
+<ul>
+<li>這個公司只缺一個人，就是做到死的超人。Developer 不是笨蛋，看了也知道雇主想幹嘛…</li>
+<li>雇主不知道自己想徵什麼人。這對 Developer 來說也是危險訊號。</li>
+</ul>
+
+
+<p>如果你不是這種心態，是認真想招到合適的人。那麼請把需求寫清楚。</p>
+
+<ul>
+<li>如果團隊用 Git 很深，那麼寫上「會使用 Git」。</li>
+<li>如果團隊用 Rails，那麼寫上「熟 Rails」。</li>
+<li>如果團隊用 Rails，願意收 junior，那麼寫上「具備 MVC 開發經驗」。</li>
+</ul>
+
+
+<p>不要貪心寫得希望對方什麼條件都具備，這樣十之八九只會收到一堆充滿 Buzz World (對方希望合你胃口嘛)的垃圾履歷，大大拖慢你篩寫出正確合適的候選人時間。</p>
+
+<h3>不要請對方直接寫信到 jobs@mycompany.com</h3>
+
+<p>通常這樣做的下場是，「你會覺得自己會收到一堆來亂的履歷」。這不是應徵者的錯，因為你沒告訴人家「你想看什麼樣的履歷」。</p>
+
+<p>而且，不是人人都有辦法寫出「有重點」的履歷。</p>
+
+<p>我建議的方式是乾脆設計一張表單，請對方照格式填。不需太制式，但你可以用這種方式引導對方把他自身的重點 highlight 出來。而且 fit 你的需求。</p>
+
+<p>這樣可以節省你在看履歷時很多時間。</p>
+
+<p>Appsumo 的 Noah Kagan 在 <a href="http://www.appsumo.com/~Q3_wb/">Learn Chief Sumo&#8217;s Proven Automated Hiring Formula</a> 也是用了類似的手段。只不過他做得接近自動化…</p>
+
+<p>至於我們公司的 <a href="http://rocodev.wufoo.com/forms/job-apply/">應徵表單</a>，我是這樣設計的..</p>
+
+<h3>把招聘啟示貼在正確的地方</h3>
+
+<p>徵人公告只是一篇文章，你可以貼在任何地方。</p>
+
+<p>但就我的經驗是，貼在你平常在混的社群裡就好，不要到處亂貼。高曝光率對招聘一點幫助都沒有。</p>
+
+<p>怎麼說呢？這幾年下來，我發現共事過最棒的同事，或收過來看起來不錯的履歷。都是在社群裡面徵來的。不是在社群裡面原本就有見過面的，就是看我的 Blog 在徵才，寫信過來應徵的。再不然就是平常有在 Facebook follow 動態的人。</p>
+
+<p>至於那些在其他地方看到徵才啟示寫過來的履歷。怎麼說呢？你真的會覺得他寫過來的東西「不合胃口」。</p>
+
+<p>相信我，收到「很多」履歷，絕對也不是什麼好事&#8230;。因為最痛苦的往往不是你已經很忙了，卻招不到人。而是你已經很忙了，還要花上一堆時間過濾履歷；挑來面試的人，還瘋狂浪費你寶貴的時間…</p>
+
+<p>Noah Kagan 在 <a href="http://www.appsumo.com/~Q3_wb/">Learn Chief Sumo&#8217;s Proven Automated Hiring Formula</a> 這篇其中的一個招聘技巧。也是建議不要到處亂貼，儘量把徵才啟示、通知放自己家產品的 Facebook Page 邊欄，或者是產品網站、產品通知信裡。</p>
+
+<p>這些原本就認同你產品的人，有極大的機會 fit 公司 culture。而不是網路上的任意陌生人。</p>
+
+<h2>其他</h2>
+
+<p>這篇文章已經太長了。下次有空再來寫 interview…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[把公司 Log 搬到 Hipchat...]]></title>
@@ -1642,108 +1722,6 @@
 <p>如果有灣區的讀者想晚上吃個飯小酌，歡迎寫信給我 :D  (xdite AT rocodev.com)</p>
 
 <p>P.S. 我住 San Francisco 的 Mission District</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Twelve-Factor App 宣言]]></title>
-    <link href="http://blog.xdite.net/posts/2012/09/03/12-factor-app/"/>
-    <updated>2012-09-03T12:56:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/09/03/12-factor-app</id>
-    <content type="html"><![CDATA[<p>這是前陣子在 <a href="http://www.lonestarrubyconf.com/">LoneStarRubyConf 2012</a> 上複習一些主題時，無意中翻到的一份宣言。</p>
-
-<p>這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :<a href="https://speakerdeck.com/u/schneems/p/millions-of-apps-deployed-presented-at-lsrc">Millions of Apps Deployed: What We&#8217;ve Learned</a> 裡面翻到的。（不是很多人關注到。這份投影片我看到時才 100 Views 左右）</p>
-
-<script async class="speakerdeck-embed" data-id="50254cb6af597c0002005bf3" data-ratio="1.3333333333333333" src="http://blog.xdite.net//speakerdeck.com/assets/embed.js"></script>
-
-
-<p>這篇投影片相當精彩，內容是從一份宣言 <a href="http://12factor.net">12factor.net</a> 出發。列舉了十二項構建 Service as Service 所需的方法主題，再以如何使用 Rails 及其 Ecosystem 搭建出 Twelve-Factor App 宣言裡的需求條件為主旨展開。</p>
-
-<p>因為這份投影片的內容，其實我在兩三年前就想寫過系列文章，但因為是一份相當宏大且沒有邊界（就當時來看）的主題，因此一直遲遲無法完成。社群內有人能夠整理出來，覺得實在太棒了。</p>
-
-<p>不過我更好奇的是，若這能是一份非 Rails 為主軸的內容，影響層面應可以更大。念頭剛起，我就發現投影片的源頭出處 <a href="http://12factor.net">12factor.net</a> 的這份宣言原本就是 language-agnostic based 的。</p>
-
-<p>這麼宏大的主題，若是一個社群阿貓阿狗所寫，想必沒有說服力。但順著線索摸下去，我更發現 <a href="http://www.12factor.net/">The Twelve-Factor App</a> 這份宣言的起草人不是別人，正是 <a href="http://heroku.com">Heroku</a> 的 Founder: Adam Wiggins。宣言的內容是他基於運營 Heroku 以來，公司經手過數十萬 Application 歸納出的結論。</p>
-
-<p>這份宣言在上禮拜已有人翻成簡體中文版 <a href="http://www.harmy.me/the-twelve-factor-app.html">The Twelve-Factor App</a>，我推薦各位絕對要去讀完&#8230;</p>
-
-<hr>
-
-
-<p>(以下轉錄中文簡介，並對用語酌量修改)</p>
-
-<h4>簡介</h4>
-
-<p>如今，軟體通常會作為一種服務來交付，它們被稱為網路應用程式，或「軟體即服務」（SaaS）。「十二因子應用程式」（12-Factor App）為構建如下的SaaS應用提供了方法論：</p>
-
-<p>使用標準化流程自動配置，從而使新的開發者花費最少的學習成本加入這個項目；
-和操作系統之間盡可能的劃清界限，在各個系統中提供最大的可移植性；
-適合部署在現代的雲計算平台，從而在服務器和系統管理方面節省資源；
-將開發環境和生產環境的差異降至最低，並使用持續交付實施敏捷開發；
-可以在工具、架構和開發流程不發生明顯變化的前提下實現擴展；
-這套理論適用於任意語言和後端服務（資料庫、Message Queue、Cache等）開發的應用程式。</p>
-
-<h4>背景</h4>
-
-<p>本文的貢獻者者參與過數以百計的應用程式的開發和部署，並通過Heroku平台間接見證了數十萬應用程式的開發，運作以及擴展的過程。</p>
-
-<p>本文綜合了我們關於SaaS應用幾乎所有的經驗和智慧，是開發此類應用的理想實踐標準，並特別關注於應用程式如何保持良性成長，開發者之間如何進行有效的代碼協作，以及如何避免軟件污染。</p>
-
-<p>我們的初衷是分享在現代軟體開發過程中發現的一些系統性問題，並加深對這些問題的認識。我們提供了討論這些問題時所需的共享詞彙，同時使用相關術語給出一套針對這些問題的廣義解決方案。本文格式的靈感來自於 Martin Fowler的書籍：<a href="http://books.google.com/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC">Patterns of Enterprise Application Architecture</a>，<a href="http://books.google.com/books/about/Refactoring.html?id=1MsETFPD3I0C">Refactoring</a>。</p>
-
-<h4>讀者應該是哪些人？</h4>
-
-<p>任何SaaS應用的開發人員。部署和管理此類應用的運維工程師。</p>
-
-<h4>The Twelve Factors</h4>
-
-<h5>I. Codebase</h5>
-
-<p>One codebase tracked in revision control, many deploys</p>
-
-<h5>II. Dependencies</h5>
-
-<p>Explicitly declare and isolate dependencies</p>
-
-<h5>III. Config</h5>
-
-<p>Store config in the environment</p>
-
-<h5>IV. Backing Services</h5>
-
-<p>Treat backing services as attached resources</p>
-
-<h5>V. Build, release, run</h5>
-
-<p>Strictly separate build and run stages</p>
-
-<h5>VI. Processes</h5>
-
-<p>Execute the app as one or more stateless processes</p>
-
-<h5>VII. Port binding</h5>
-
-<p>Export services via port binding</p>
-
-<h5>VIII. Concurrency</h5>
-
-<p>Scale out via the process model</p>
-
-<h5>IX. Disposability</h5>
-
-<p>Maximize robustness with fast startup and graceful shutdown</p>
-
-<h5>X. Dev/prod parity</h5>
-
-<p>Keep development, staging, and production as similar as possible</p>
-
-<h5>XI. Logs</h5>
-
-<p>Treat logs as event streams</p>
-
-<h5>XII. Admin processes</h5>
-
-<p>Run admin/management tasks as one-off processes</p>
 ]]></content>
   </entry>
   
