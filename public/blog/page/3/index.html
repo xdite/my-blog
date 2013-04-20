@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  這是前陣子在 LoneStarRubyConf 2012 上複習一些主題時，無意中翻到的一份宣言。這份宣言我是從 Heroku 的工程師 Richard Schneeman 發表的這份 talk :Millions of Apps Deployed: Wha...">
+  <meta name="description" content="                  我 9/12 - 9/20 會在舊金山。參加 9/14, 9/15 的 Golden Gate Ruby Conf 。如果有灣區的讀者想晚上吃個飯小酌，歡迎寫信給我 :D  (xdite AT rocodev.com)P.S. 我住 San Francisc...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/09/05/912-920-in-sf/">9/12 - 9/20 在舊金山</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-09-05T09:17:00+08:00" pubdate  data-updated="true" >Sep 5<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/09/05/912-920-in-sf/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/09/05/912-920-in-sf/" data-show-faces="false"></div></div>
+    
+    <p>我 9/12 - 9/20 會在舊金山。參加 9/14, 9/15 的 <a href="http://gogaruco.com">Golden Gate Ruby Conf</a> 。</p>
+
+<p>如果有灣區的讀者想晚上吃個飯小酌，歡迎寫信給我 :D  (xdite AT rocodev.com)</p>
+
+<p>P.S. 我住 San Francisco 的 Mission District</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1514,146 +1560,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/08/03/how-to-use-bootstrap-in-clean-way/">如何乾淨的 使用 / 修改 Bootstrap Framework</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-08-03T20:41:00+08:00" pubdate  data-updated="true" >Aug 3<span>rd</span>, 2012</time>
-        
-         | <a href="/posts/2012/08/03/how-to-use-bootstrap-in-clean-way/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/08/03/how-to-use-bootstrap-in-clean-way/" data-show-faces="false"></div></div>
-    
-    <p><a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 是 Twitter 推出的一套 CSS Framework。相當受歡迎的原因是因為讓原本對設計苦手的程式設計師在開發產品早期原型時可以有個可以看的門面先擋著。</p>
-
-<p>又因為 Bootstrap 在 2.0 版以後加入了 configuable 以及 responsive 的設計。所以有些開發團隊，不僅只在 development 階段當臨時門面，在 production 階段，也作為骨架使用。</p>
-
-<p>不過作為 production 使用，就出現了一個不容忽視的課題：如何在一套已經有現成的 styling 的 CSS Framework 上「客製發揮」。</p>
-
-<p>「客製」往往意味著「大幅修改」。不過既然也要「乾淨」，這也表示一個附加條件：「不能破壞 bootstrap 原始架構」。</p>
-
-<p>How can it be possible?</p>
-
-<p>以下是我平常使用 bootstrap 的方式：</p>
-
-<h3>利用 Bundler 掛上 Bootstrap 的 rubygems</h3>
-
-<p>Bootstrap 的原始版本是使用 LESS 撰寫，不過也有開發者修改成 SCSS 版本。我本身是使用 anjlab 的 <a href="https://github.com/anjlab/bootstrap-rails">bootstrap-rails</a>。</p>
-
-<p>透過 Gemfile 把 Bootstrap 掛上來，不直接放進 Rails project 裡面。</p>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;bootstra-rails&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>利用 Asset Pipeline 以及 SCSS 機制，客製、覆寫</h3>
-
-<h4>application.css 內容</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//=</span> <span class="nt">require</span> <span class="nt">base</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>base.scss 內容</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootstrap-config&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootstrap&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootstrap-customized&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;responsive&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;responsive-customized&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>解說</h4>
-
-<ul>
-<li>bootstrap-config.scss 是用來修改「Bootstrap 預設的變數」</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nv">$navbarHeight</span><span class="o">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$navbarBackgroundHighlight</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$navbarBackground</span><span class="o">:</span> <span class="mh">#F7F7F7</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$navbarSearchBackground</span><span class="o">:</span> <span class="mh">#EAECEF</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$navbarSearchBorder</span><span class="o">:</span> <span class="mh">#EAECEF</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$navbarSearchPlaceholderColor</span><span class="o">:</span> <span class="mh">#565E65</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><p>bootstrap 則是 Gemfile 裡面掛上的預設 bootstrap 包。（不修改）</p></li>
-<li><p>bootstrap-customized.scss 則是無法透過修改變數的效果，通通放這裡用 override 的方式覆蓋。</p></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nc">.navbar</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nc">.navbar-inner</span> <span class="p">{</span>
-</span><span class='line'>    <span class="na">background</span><span class="o">:</span> <span class="sx">url(/assets/bg_header.png)</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<ul>
-<li>responsive 是 bootstrap 用來作 responsive 的 css</li>
-<li>responsive-customized 是你想要針對 bootstrap 的 resposnive 版本做的客製。</li>
-</ul>
-
-
-<h3>小結</h3>
-
-<p>這樣你的 application 「理論上」就可以跟著 bootstrap 的小升級而升級，而不會被纏到這個纏那個&#8230;</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1688,6 +1594,10 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/04/20/isis-replace-hubot-as-hipchat-bot/">使用 isis 作為 hipchat bot 取代 hubot</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2013/04/06/hiring-advice/">如何招聘技術人才，一點心得 [JD篇]</a>
       </li>
     
@@ -1701,10 +1611,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
     
       <li class="post">
         <a href="/posts/2013/03/11/rocodev-is-hiring/">We are hiring</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/01/30/2013-reading-list/">2013 Ruby on Rails Reading List</a>
       </li>
     
   </ul>

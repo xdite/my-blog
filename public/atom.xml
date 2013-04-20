@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-04-06T10:54:44+08:00</updated>
+  <updated>2013-04-20T12:48:41+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用 isis 作為 hipchat bot 取代 hubot]]></title>
+    <link href="http://blog.xdite.net/posts/2013/04/20/isis-replace-hubot-as-hipchat-bot/"/>
+    <updated>2013-04-20T12:25:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/04/20/isis-replace-hubot-as-hipchat-bot</id>
+    <content type="html"><![CDATA[<p>最近公司頻道從 <a href="http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/">IRC 換到 Hipchat</a> 上面，本來也想要把 <a href="http://hubot.github.com/">Hubot</a> 也一起搬過去的。</p>
+
+<p>但是 Hubot 的安裝真是惡夢，光是 node.js 版本和 npm 之間的 dependencies 就可以搞死人。我們公司現在又沒有專職的 SA，工具蠻多都是我自己下海寫的&#8230;.</p>
+
+<p>最後想了一下，決定找一套在 ruby 下也很好開發的 hipchat bot framework。</p>
+
+<p>最後找到這套 isis[https://github.com/whitehat101/isis]。因為<a href="http://rocodev.com">敝公司</a> 是 100% 靠 Ruby 吃飯的，所以瞬間就把寫 bot 的門檻拉到很低&#8230;</p>
+
+<h3>掛上 hipchat bot 的方式</h3>
+
+<p>因為 bot 是常駐在聊天室的，所以你必須要幫 bot 申請一個 hipchat 專用帳號。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">hipchat</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">jid</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">DDDD_XXXXX@chat.hipchat.com</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Full Name</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">&lt;password&gt;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">history</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">3</span> <span class="c1"># num of history fields to request</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">rooms</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">DDDD_room_name@conf.hipchat.com</span>
+</span><span class='line'>    <span class="c1"># - DDDD_second_room_name@conf.hipchat.com</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bot 走 Jabber 通訊協定。Jid 和 Romm 的資訊在 <a href="https://rocodev.hipchat.com/account/xmpp">https://rocodev.hipchat.com/account/xmpp</a></p>
+
+<p>jid 走 <code>DDDD_XXXXX@chat.hipchat.com</code>，room  走 <code>DDDD_room_name@conf.hipchat.com</code></p>
+
+<h3>開發 / 掛上 Plugin 方式</h3>
+
+<p>isis 的 plugin 撰寫很簡單。基本上只要到 <code>lib/isis/plugins</code> 多開一個 <code>class</code> 繼承 <code>Isis::Plugin::Base</code>，然後掛進 config.yml。
+這樣就做好了&#8230;</p>
+
+<h3>Local 測試</h3>
+
+<p><code>bin/isis run</code> 就可以把 bot 跑起來了。而若要背景常駐要跑 <code>bin/isis start</code></p>
+
+<h3>Deployment</h3>
+
+<p>開發完畢推上 git 之後，要讓 bot 重開還要跑到 server 上跑 <code>bin/isis restart</code>。懶人如我當然覺得這很麻煩，所以我用 <a href="https://github.com/brentd/gitploy">gitploy</a> 和 Rake 檔寫了 autodeploy，跑 <code>rake deploy</code> 就會動了。</p>
+
+<p>順便還參考 <a href="https://github.com/hipchat/hipchat-rb/blob/master/lib/hipchat/capistrano.rb">hipchat/hipchat-rb</a> 的 deploy 檔，做了 deploy hook 掛在 bot 的 deploy rake 上，這樣起碼有人 deploy bot 時大家會知道，以免 bot 被搞爛了沒人發現&#8230;。</p>
+
+<p><code>config/gitploy.rb</code></p>
+
+<div><script src='https://gist.github.com/5424771.js?file='></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<p><code>Rakefile</code></p>
+
+<div><script src='https://gist.github.com/5424780.js?file='></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<h3>後記</h3>
+
+<p>昨天後續還寫了幾隻常用 bot，比如說「午餐吃什麼 bot」、「redmine #issue_number bot」、「網頁自動抓標題 bot」。</p>
+
+<p>不過這不是重點，重點是 bot framework 架好之後，禮拜五晚上同事們竟然不睡覺，一直在惡搞這隻 bot 瘋狂加功能&#8230;.</p>
+
+<p>真是有趣 XD</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[如何招聘技術人才，一點心得 [JD篇]]]></title>
@@ -1713,19 +1790,6 @@
 <p>如果使用上有什麼 bug 的話，請在這篇文章底下留言。我會儘快處理…</p>
 
 <p>P.S. 因為機器小台，而且光今天用戶就瞬間爆增幾百個&#8230;，所以有可能你剛剛匯入的東西有可能不會那麼快跑出來，這目前不是 bug…還請見諒。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[9/12 - 9/20 在舊金山]]></title>
-    <link href="http://blog.xdite.net/posts/2012/09/05/912-920-in-sf/"/>
-    <updated>2012-09-05T09:17:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/09/05/912-920-in-sf</id>
-    <content type="html"><![CDATA[<p>我 9/12 - 9/20 會在舊金山。參加 9/14, 9/15 的 <a href="http://gogaruco.com">Golden Gate Ruby Conf</a> 。</p>
-
-<p>如果有灣區的讀者想晚上吃個飯小酌，歡迎寫信給我 :D  (xdite AT rocodev.com)</p>
-
-<p>P.S. 我住 San Francisco 的 Mission District</p>
 ]]></content>
   </entry>
   
