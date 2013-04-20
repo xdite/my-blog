@@ -57,7 +57,7 @@ isis 的 plugin 撰寫很簡單。基本上只要到 `lib/isis/plugins` 多開�
 
 昨天後續還寫了幾隻常用 bot，比如說「午餐吃什麼 bot」、「redmine #issue_number bot」、「網頁自動抓標題 bot」。
 
-不過這不是重點，重點是 bot framework 架好之後，禮拜五晚上同事們竟然不睡覺，一直在惡搞這隻 bot 瘋狂加功能....
+不過這不是重點，重點是 bot framework 架好之後，禮拜五晚上同事們竟然不睡覺，一直在惡搞這隻 bot 瘋狂加功能....XD
 
-真是有趣 XD
+看起來 bot 的確可以玩出不少花樣啊...
 
