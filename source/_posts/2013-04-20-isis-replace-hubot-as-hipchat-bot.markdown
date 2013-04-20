@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "使用 isis 作為 hipchat bot 取代 hubot"
+title: "使用 isis 作為 Hipchat bot 取代 Hubot"
 date: 2013-04-20 12:25
 comments: true
 categories: 
@@ -29,7 +29,7 @@ hipchat:
     # - DDDD_second_room_name@conf.hipchat.com
 ```
 
-Bot 走 Jabber 通訊協定。Jid 和 Romm 的資訊在 <https://rocodev.hipchat.com/account/xmpp> 
+Bot 走 Jabber 通訊協定。Jid 和 Romm 的資訊在 <https://yourcompany.hipchat.com/account/xmpp> 
 
 jid 格式 `DDDD_XXXXX@chat.hipchat.com`，room 格式 `DDDD_room_name@conf.hipchat.com`
 
