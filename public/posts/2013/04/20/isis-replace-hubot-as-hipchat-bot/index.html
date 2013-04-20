@@ -104,7 +104,7 @@
 
 <p>最後想了一下，決定找一套在 ruby 下也很好開發的 hipchat bot framework。</p>
 
-<p>最後找到這套 isis[https://github.com/whitehat101/isis]。因為<a href="http://rocodev.com">敝公司</a> 是 100% 靠 Ruby 吃飯的，所以瞬間就把寫 bot 的門檻拉到很低&#8230;</p>
+<p>最後找到這套 <a href="https://github.com/whitehat101/isis">isis</a>。因為<a href="http://rocodev.com">敝公司</a> 是 100% 靠 Ruby 吃飯的，所以瞬間就把寫 bot 的門檻拉到很低&#8230;</p>
 
 <h3>掛上 hipchat bot 的方式</h3>
 
@@ -131,7 +131,7 @@
 
 <p>Bot 走 Jabber 通訊協定。Jid 和 Romm 的資訊在 <a href="https://rocodev.hipchat.com/account/xmpp">https://rocodev.hipchat.com/account/xmpp</a></p>
 
-<p>jid 走 <code>DDDD_XXXXX@chat.hipchat.com</code>，room  走 <code>DDDD_room_name@conf.hipchat.com</code></p>
+<p>jid 格式 <code>DDDD_XXXXX@chat.hipchat.com</code>，room 格式 <code>DDDD_room_name@conf.hipchat.com</code></p>
 
 <h3>開發 / 掛上 Plugin 方式</h3>
 
@@ -148,17 +148,9 @@
 
 <p>順便還參考 <a href="https://github.com/hipchat/hipchat-rb/blob/master/lib/hipchat/capistrano.rb">hipchat/hipchat-rb</a> 的 deploy 檔，做了 deploy hook 掛在 bot 的 deploy rake 上，這樣起碼有人 deploy bot 時大家會知道，以免 bot 被搞爛了沒人發現&#8230;。</p>
 
-<p><code>config/gitploy.rb</code></p>
+<p><code>config/gitploy.rb</code> <a href="https://gist.github.com/xdite/5424771">https://gist.github.com/xdite/5424771</a></p>
 
-<div><script src='https://gist.github.com/5424771.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-
-
-<p><code>Rakefile</code></p>
-
-<div><script src='https://gist.github.com/5424780.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-
+<p><code>Rakefile</code> <a href="https://gist.github.com/xdite/5424780">https://gist.github.com/xdite/5424780</a></p>
 
 <h3>後記</h3>
 
