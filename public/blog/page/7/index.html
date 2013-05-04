@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  在 Rails 開發中，有時候我們會遇到要在表單中設計 select 的選項。select 吃的 collection 是個 Array 。通常我們會往往第一直覺的想法是將之塞到 model 的 CONSTANT 裡，再寫一個 class method 包裝...">
+  <meta name="description" content="                  Twitter 的 Bootstrap 是一套很好用的 CSS Framework。可以讓開發者加上工具類 CSS 如 .btn，就設計出一個按鈕。但有時候這東西也像 inline style 一樣討厭，比如說我要設計一排「按鈕] link，就非得每行都加個...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,132 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/02/06/extend-bootstrap-in-compass/">使用 SCSS 的 Extend 重複利用 Bootstrap 的 Style</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-02-06T02:20:00+08:00" pubdate  data-updated="true" >Feb 6<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/02/06/extend-bootstrap-in-compass/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/02/06/extend-bootstrap-in-compass/" data-show-faces="false"></div></div>
+    
+    <p>Twitter 的 <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 是一套很好用的 CSS Framework。可以讓開發者加上工具類 CSS 如 <code>.btn</code>，就設計出一個按鈕。</p>
+
+<p>但有時候這東西也像 <strong>inline style</strong> 一樣討厭，比如說我要設計一排「按鈕] link，就非得每行都加個 <code>class = "btn"</code>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;job-options&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;option-title&quot;</span><span class="o">&gt;</span> <span class="err">工作類別：</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;網站設計師&quot;, jobs_path+&quot;?m_type=1&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;美術設計師&quot;, jobs_path+&quot;?m_type=2&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;手機APP開發&quot;, jobs_path+&quot;?m_type=3&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;市場行銷&quot;, jobs_path+&quot;?m_type=4&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;社群管理&quot;, jobs_path+&quot;?m_type=5&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;其他&quot;, jobs_path+&quot;?m_type=0&quot;, :class=&gt;&quot;btn &quot;) %&gt;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我在開發時並不是使用 Twitter 自己提供的 LESS 版本，而是採用人家拆好的 SCSS 版本 <a href="https://github.com/anjlab/bootstrap-rails">anjlab/bootstrap-rails</a>。</p>
+
+<p>如何翻修這樣的 code 呢？我使用了 SCSS 的 @extend。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nc">.job-options</span><span class="p">{</span>
+</span><span class='line'>   <span class="na">padding-bottom</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span class='line'>   <span class="nt">a</span><span class="p">{</span>
+</span><span class='line'>      <span class="k">@extend</span> <span class="nc">.btn</span><span class="o">;</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;job-options&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;option-title&quot;</span><span class="o">&gt;</span> <span class="err">工作類別：</span> <span class="o">&lt;</span><span class="sr">/span&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;網站設計師&quot;, jobs_path+&quot;?m_type=1&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;美術設計師&quot;, jobs_path+&quot;?m_type=2&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;手機APP開發&quot;, jobs_path+&quot;?m_type=3&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;市場行銷&quot;, jobs_path+&quot;?m_type=4&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;社群管理&quot;, jobs_path+&quot;?m_type=5&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;%= link_to(&quot;其他&quot;, jobs_path+&quot;?m_type=0&quot;) %&gt;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣就可以把 .btn 從 HTML 裡面拿掉了。</p>
+
+<h3>其他</h3>
+
+<p>其實表格也可以比較辦理&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nn">#feeds-list</span><span class="p">{</span>
+</span><span class='line'>   <span class="k">@extend</span> <span class="nc">.zebra-striped</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>====</p>
+
+<p>不過不能 span2 這種定位的 class 不能 @extend。@extend bootstrap 這招只能用在與「位置」無關的 style 上。</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2248,281 +2374,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/01/04/make-activerecord-includable/">[進階] Make ActiveRecord Includable</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-04T16:58:00+08:00" pubdate  data-updated="true" >Jan 4<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/01/04/make-activerecord-includable/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/01/04/make-activerecord-includable/" data-show-faces="false"></div></div>
-    
-    <p>[警告] 這一篇是進階的文章，如果你看不懂可以跳過。</p>
-
-<p>前幾天在 Twitter 看到一條值得慶賀的消息（印象已模糊，忘記誰慶賀，也不知慶賀的原因），是關於 Rails core 上的一串 commit，大意是 ActiveRecord::Base 已經從傳統的繼承使用，變成了可以用 include 的 ActvieRecord::Model。</p>
-
-<p><a href="https://github.com/rails/rails/compare/58f69ba...00318e9#diff-0">https://github.com/rails/rails/compare/58f69ba&#8230;00318e9#diff-0</a></p>
-
-<p>也就是從開始有 Rails 以來，傳統的使用方式</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以後將變成</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Model</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>坦白說，我看不懂這一串的意義是什麼。而 commit 下面的留言也有人說他看不懂&#8230;.XDDDD</p>
-
-<p>所以我就把這則收入記憶倉庫了。直到今天聽 podcast 時不小心觸發…</p>
-
-<h2>Ruby Rogues Podcast</h2>
-
-<p><a href="http://rubyrogues.com/">Ruby Rogues</a> 是這幾個月才興起的一個新的 Ruby Podcast，與較知名的 <a href="http://ruby5.envylabs.com/">Ruby 5</a> 或 <a href="http://rubyshow.com">The Ruby Show</a> 這兩個 podcast，性質很不同。後兩者著重於介紹本週有什麼 Ruby / Rails 的新消息，或者亮點 gem。Ruby Rouges 的則是每周邀請五個 Ruby 大師，上來針對一個特定主題，無盡的喇賽亂鬥 XD</p>
-
-<p>當然這些大師也不是在講廢話，從他們的喇賽中可以學到不少觀念，甚至是有的時候你還可以聽到有的大師現場被其他人電：「什麼，你不知道可以這樣用？」「什麼，你一直用錯誤的觀念寫 code？」….XD</p>
-
-<p>到目前為止一共有 35 集，每集大概 1 小時。這麼多&#8230;.所以當然我…沒有聽完 XDDDD</p>
-
-<p>今天找資料時，翻到第 20 集 <a href="http://rubyrogues.com/object-oriented-programming-in-rails-with-jim-weirich/">RR Object Oriented Programming in Rails with Jim Weirich</a></p>
-
-<p>為了要找其中的一段資料，就耐心的下載了這集，開始聽。結果原先的資料沒找到，倒是意外聽到一段重要的寫 code 觀念，讓我理解 Make ActiveRecord includable 的意義。</p>
-
-<h2>Rails 誤導大家的觀念 : Model = DB</h2>
-
-<p>這一段觀念可以從 <a href="http://rubyrogues.com/object-oriented-programming-in-rails-with-jim-weirich/">podcast</a> 中的大約 30:00 左右開始聽。</p>
-
-<p>Rails 誕生以來，model 的設計就是長這樣，從 ActiveRecord::Base 繼承。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:comments</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>當專案長大了，開發者免不了會往裡面塞一些 Business Logic，所以會變成這樣。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:comments</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">aaa</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">bbb</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">ccc</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但是 class 再繼續長大之後，大家可能就會受不了了。developer 開始把一些 method ( 所謂的 bussiness logic 抽出去)，用 include 的方式去做，然後把這些 logic 放在 lib/ 下。</p>
-
-<p>變成</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:comments</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">AAA</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">BBB</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CCC</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>儘量讓這個 model class 只保持著 db 的 association，logic 抽出去保持整潔。</p>
-
-<p>寫到這裡看起來都沒問題？</p>
-
-<h2>繼承自 ActiveRecord::Base 帶來的問題</h2>
-
-<p>錯了，問題可大了。</p>
-
-<p>這樣的設計導致了一個現象：因為繼承自 ActivRecord::Base，無可避免的寫測試一定要扯到 DB，於是就帶來了其他頭痛的問題</p>
-
-<ol>
-<li><p>寫測試變成在測試 query 和 ORM。寫測試的重點是在測 Business  Logic，其實應該要與 DB 資料與 DB 連線無關，結果測試都在測這個…</p></li>
-<li><p>因為一定要過 DB，於是 model 測試很慢。</p></li>
-</ol>
-
-
-<h2>ORM 是配角，被誤以為主角，反客為主！！！</h2>
-
-<p>在 MVC 裡面，Model 的定義－主要負責應用程式中的商業邏輯(Business Logic)。</p>
-
-<p>看看這個範例，你覺得這個 model 寫法是正確的嗎！？</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:comments</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span> <span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">AAA</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">BBB</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CCC</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這是一個 ORM 行為為主的 model，不是 Bussiness Logic 為主的 Model 啊 XD。真正的主角好像被趕走了，被趕到 lib/ 去。</p>
-
-<p>podcast 中 30:00 - 33:00 主要討論的議題就是：</p>
-
-<p>===</p>
-
-<p>你將 Bussiness Logic 放在哪裡？你稱 Bussiness Model 為 Model 還是 SuperModel。然後 James Edward Gray 在這裡回答他放在 lib 下，就被電了 XDDDDD</p>
-
-<p>===</p>
-
-<p>事實上正確的寫法應該通通都是要放在 <code>app/models</code> 下。</p>
-
-<p>而設計手法應該是</p>
-
-<p>class Post 本身就放自己的 bussiness logic，然後去 claim 自己有用 ORM。至於過多複雜的邏輯就整理起來放在 Module 裡。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Model</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">AAA</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">BBB</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CCC</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而寫測試應該就是測 model 本身的商業邏輯而不是測 DB !!</p>
-
-<h2>小結</h2>
-
-<p>Rails 原生的機制讓開發者非常容易以為 Model 與 ORM 是一對一的關係。並且在此架構中，要將 code 整理得乾淨，就會無可避免的演變到反客為主的寫法。</p>
-
-<p>這個 commit 其實只是剛起步，還沒有能夠完全避免一定要測到 DB 的問題。不過至少邁開了一大步。</p>
-
-<p>聽完了這集 podcast，讓我完全看懂這個 commit 和下面的留言，還順便澄清了一個錯誤觀念…</p>
-
-<p>（不過對現狀沒什麼幫助，因為這是 4.0 feature，所以目前還是不能用的 XD，開發者還是只能按照舊的寫法繼續當鴕鳥）</p>
-
-<p>有空還是要多聽大師喇賽才能進步啊&#8230;</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -2557,6 +2408,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/05/04/bootstrap-helper-yu-bootstrappers-kai-shi-zhi-yuan-rails-4/">Bootstrap Helper 與 Bootstrappers 開始支援 Rails 4</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2013/04/20/isis-replace-hubot-as-hipchat-bot/">使用 isis 作為 Hipchat bot 取代 Hubot</a>
       </li>
     
@@ -2570,10 +2425,6 @@
     
       <li class="post">
         <a href="/posts/2013/03/22/audiophile-dot-im/">Audiophile.im 我是發燒友</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/03/11/rocodev-is-hiring/">We are hiring</a>
       </li>
     
   </ul>

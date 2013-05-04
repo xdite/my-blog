@@ -415,6 +415,12 @@
         <lastmod>2013-04-20T13:01:28+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://blog.xdite.net/posts/2013/05/04/bootstrap-helper-yu-bootstrappers-kai-shi-zhi-yuan-rails-4/
+        </loc>
+        <lastmod>2013-05-04T13:25:44+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.xdite.net/about/</loc>
         <lastmod>2012-08-03T19:32:59+08:00</lastmod>
     </url>
@@ -424,7 +430,7 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/blog/archives/</loc>
-        <lastmod>2013-04-20T13:01:28+08:00</lastmod>
+        <lastmod>2013-05-04T13:25:44+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/drafted/2012-07-25-some-tips-for-dealing-large-data.html</loc>
@@ -432,7 +438,7 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/</loc>
-        <lastmod>2013-04-20T13:01:28+08:00</lastmod>
+        <lastmod>2013-05-04T13:25:44+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/</loc>
