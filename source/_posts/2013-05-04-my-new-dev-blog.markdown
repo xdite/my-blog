@@ -13,7 +13,7 @@ categories:
 
 歡迎訂閱！ <http://feeds.feedburner.com/rocodev>
 
-P.S. [Rocodev Blog](http://blog.rocodev.com/) 裡的文章不一定會 100% 與這裡的 Blog 文章 100% sync。
+P.S. Rocodev Blog 裡的文章不一定會 100% 與這裡的 Blog 文章 100% sync。
 
 如 [SCSS 開發原則：禁用 @import 'compass';](http://blog.rocodev.com/posts/11-dont-import-compass) 這篇我就沒有打算貼過來，所以建議各位兩邊都訂…
 

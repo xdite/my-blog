@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-05-04T13:36:11+08:00</updated>
+  <updated>2013-05-04T13:36:56+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -24,7 +24,7 @@
 
 <p>歡迎訂閱！ <a href="http://feeds.feedburner.com/rocodev">http://feeds.feedburner.com/rocodev</a></p>
 
-<p>P.S. <a href="http://blog.rocodev.com/">Rocodev Blog</a> 裡的文章不一定會 100% 與這裡的 Blog 文章 100% sync。</p>
+<p>P.S. Rocodev Blog 裡的文章不一定會 100% 與這裡的 Blog 文章 100% sync。</p>
 
 <p>如 <a href="http://blog.rocodev.com/posts/11-dont-import-compass">SCSS 開發原則：禁用 @import &#8216;compass&#8217;;</a> 這篇我就沒有打算貼過來，所以建議各位兩邊都訂…</p>
 ]]></content>
