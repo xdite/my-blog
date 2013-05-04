@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Talks - Blog.XDite.net</title>
+  <title>Upgrade 到 Rails4 的一些感想 - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="        Talks      Sep 26th, 2011      2011/09/17 HTML5 語意標籤理論與實戰( 投影片）2011/08/27 Rubyconf TW 2011 Essential Rails Design Pattern for Beginners2011...">
+  <meta name="description" content="          Rails4 在前天的 RailsConf 2013 釋出 Rails 4.0 RC1 了，這也表示大家應該可以進場了。上個月在 Rails 4.0 beta1 時為了練手感，把手上的一個中小 production 專案，也上了 rails4 branch。大概有幾個感想：...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/talks/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -66,11 +66,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Talks</h1>
-    <p class="meta">
+    
+      <h1 class="entry-title">Upgrade 到 Rails4 的一些感想</h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -80,44 +84,72 @@
 
 
 
-<time datetime="2011-09-26T05:29:00+08:00" pubdate  data-updated="true" >Sep 26<span>th</span>, 2011</time></p>
+<time datetime="2013-05-04T13:27:00+08:00" pubdate  data-updated="true" >May 4<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
   </header>
+
+
+<div class="entry-content">
   
-  <ul>
-<li>2011/09/17 <a href="http://html5-practices.heroku.com/">HTML5 語意標籤理論與實戰( 投影片）</a></li>
-<li>2011/08/27 Rubyconf TW 2011 <a href="http://essential-rails-pattern.heroku.com/">Essential Rails Design Pattern for Beginners</a></li>
-<li>2011/03/22 OSDC TW 2011<a href="http://www.slideshare.net/xuitejoke/rapid-development-with-rails-7394238">Rapid Development with Rails ( OSDC 演講）</a></li>
-<li>2010/08/18 Ruby Tuesday #13 <a href="http://www.slideshare.net/xuitejoke/upgrading-to-rails3-4997117">Upgrading to Rails 3</a></li>
-<li>2010/04/25 Rubyconf TW 2010 <a href="http://www.slideshare.net/xuitejoke/ship-it-with-ruby-rails-ecosystem">Ship It! with Ruby &amp; Rails ecosystem</a></li>
-<li>2010/03/20 Ruby Tuesday #10 <a href="http://www.slideshare.net/xuitejoke/scaling-rails-sites-by-default">Scaling Rails Sites by Default</a></li>
-<li>2009/08/16 COSCUP 2009 <a href="http://blog.xdite.net/?p=1369">莫拉克颱風災情支援網</a></li>
-<li>2009/06/30 Ruby Tuesday #5 <a href="http://www.slideshare.net/xuitejoke/sinatra-introduction-1661103">Sinatra introduction</a></li>
-<li>2008/11/25 Ruby Tuesday #1 <a href="http://blog.xdite.net/?p=821">EC2 on rails</a></li>
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <p><img src="http://www.upgradingtorails4.com/ipad_sized.jpg" alt="img" /></p>
+
+<p>Rails4 在前天的 <a href="http://www.railsconf.com/">RailsConf 2013</a> 釋出 <a href="http://weblog.rubyonrails.org/2013/5/1/Rails-4-0-release-candidate-1/">Rails 4.0 RC1</a> 了，這也表示大家應該可以進場了。</p>
+
+<p>上個月在 Rails 4.0 beta1 時為了練手感，把手上的一個中小 production 專案，也上了 rails4 branch。</p>
+
+<p>大概有幾個感想：</p>
+
+<ul>
+<li><p><a href="http://www.upgradingtorails4.com/">Upgrading to Rails4</a> 這本書強烈建議要買，才 $15 USD，可以節省你不少 debug 時間。</p></li>
+<li><p>升 Rails4 建議不只開 branch，也用 rvm 開一個 gemset 出來作，因為 gem dependency 變更蠻多的。</p></li>
+<li><p><a href="https://github.com/alindeman/rails4_upgrade">rails4_upgrade</a> 要裝。這個 gem 蠻好用的..可以幫你掃 dependency 問題。事實上 Rails3 升 Rails4 最討厭的是 gem dependency tree，因為 Rails 3 已經出太久了（幾乎快兩年了吧)，很多 Gemfile 都強綁定 3 ，所以升 Gemfile 時會出現很多問題&#8230;</p></li>
+<li><p>major gem，如 simple_form, devise, 幾乎都有 beta1 版，裝了就保證可以動。小的 gem 也幾乎都有 rails4 branch 可以 hotfix。(起碼我在 beta1 進場時遇到的問題就幾乎都有解，所以在 rc1 的狀況應該會更好)</p></li>
+<li><p>這次 Rails4 的改動，我個人的感想會是 Rails3 的 New Feature, Better syntax Version。如果平常 code 都寫的蠻漂亮（接口和封裝乾淨）的話，升級應該是沒有太痛才對。唯一讓人很煩的就是 gem dependency 解不完，還有牽扯到 scope 與 query 的部份幾乎都要重寫..:/ （目前是都還跳 warning 而已，但真要清 warning，如果 model 裡面 condition 很多，真的會清到手快斷&#8230;）</p></li>
+<li><p>有關於 New Feature 與 Better syntax 這個議題，我應該週末會寫一篇出來..</p></li>
+<li><p>Rails project 的本體內容物是沒有改動太大，但大家拿來 build gem 的 internal API 改不少，這也難怪 Jose Valim 這一兩天也同步釋出了 <a href="http://pragprog.com/book/jvrails2/crafting-rails-applications">Crafting Rails Applications (2nd edition): Expert Practices for Everyday Rails Development</a> 第二版的 beta。我這幾天改 gem 要升 Rails4 也是中了一堆 api 變更的地雷…</p></li>
+<li><p>會逼大家都改 gem 的原因是因為是，連 migration api 都改了，所以只要提供產生 migration 的 gem 通通會逼要升 Rails4，真是個好招 -_- （連我只有兩個 commit 的 AutoFacebook gem 也不能倖免。解法在<a href="https://github.com/xdite/auto-facebook/commit/2e21a3fd1884c6eec7856b849d811b1d9b168502">這裡</a> ）</p></li>
+<li><p>Obie Fernandez 前天也宣布了 Rails 聖經 <a href="https://leanpub.com/tr4w">The Rails 4 Way</a>開始 beta。值得注意的是他這次是使用 <a href="leanpub.com">Leanpub</a> 釋出書籍的 beta，而非走 <a href="http://www.informit.com/">Informit</a> 的 RoughCut 版本。</p></li>
+<li><p>為什麼我有時間測這些東西？好問題，我也不知道…明明最近就忙到快死了&#8230;orz</p></li>
 </ul>
 
 
-  
-    <footer>
-      <p class="meta">
-        
-        
+</div>
 
 
-
-
-
-  
-
-
-
-<time datetime="2011-09-26T05:29:00+08:00" pubdate  data-updated="true" >Sep 26<span>th</span>, 2011</time>
-        
-      </p>
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/talks/index.html" data-via="xdite" data-counturl="http://blog.xdite.net/talks/index.html" >Tweet</a>
+
+
+
+<time datetime="2013-05-04T13:27:00+08:00" pubdate  data-updated="true" >May 4<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -127,9 +159,8 @@
   
 </div>
 
-      
-    </footer>
-  
+    
+  </footer>
 </article>
 
   <section>
@@ -168,29 +199,11 @@
     
   </ul>
 </section>
-<section>
-  <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/assetpipeline'>AssetPipeline (3)</a></li><li><a href='/blog/categories/boardgame'>BoardGame (1)</a></li><li><a href='/blog/categories/bookreviews'>BookReviews (4)</a></li><li><a href='/blog/categories/bootstrap'>Bootstrap (2)</a></li><li><a href='/blog/categories/coffeescript'>CoffeeScript (1)</a></li><li><a href='/blog/categories/css'>CSS (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/hosting'>Hosting (1)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/iphone'>iPhone (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/misc'>Misc (3)</a></li><li><a href='/blog/categories/mybook'>MyBook (5)</a></li><li><a href='/blog/categories/mycompany'>MyCompany (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/podcast'>Podcast (1)</a></li><li><a href='/blog/categories/projectmanagement'>ProjectManagement (6)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/railsconf'>RailsConf (3)</a></li><li><a href='/blog/categories/ruby'>Ruby (8)</a></li><li><a href='/blog/categories/rubygem'>Rubygem (10)</a></li><li><a href='/blog/categories/scss'>SCSS (3)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/seo'>SEO (1)</a></li><li><a href='/blog/categories/startup'>Startup (6)</a></li><li><a href='/blog/categories/tips'>Tips (16)</a></li><li><a href='/blog/categories/travel'>Travel (1)</a></li><li><a href='/blog/categories/webdesign'>WebDesign (5)</a></li></ul>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
 </section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("xdite", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/xdite" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @xdite</a>
-  
-</section>
-
-
 
   
 </aside>
@@ -212,8 +225,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/talks/index.html';
-        var disqus_url = 'http://blog.xdite.net/talks/index.html';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/';
+        var disqus_url = 'http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/';
         var disqus_script = 'embed.js';
       
     (function () {

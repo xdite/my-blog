@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-05-04T13:25:56+08:00</updated>
+  <updated>2013-05-04T13:27:53+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Upgrade 到 Rails4 的一些感想]]></title>
+    <link href="http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/"/>
+    <updated>2013-05-04T13:27:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4</id>
+    <content type="html"><![CDATA[<p><img src="http://www.upgradingtorails4.com/ipad_sized.jpg" alt="img" /></p>
+
+<p>Rails4 在前天的 <a href="http://www.railsconf.com/">RailsConf 2013</a> 釋出 <a href="http://weblog.rubyonrails.org/2013/5/1/Rails-4-0-release-candidate-1/">Rails 4.0 RC1</a> 了，這也表示大家應該可以進場了。</p>
+
+<p>上個月在 Rails 4.0 beta1 時為了練手感，把手上的一個中小 production 專案，也上了 rails4 branch。</p>
+
+<p>大概有幾個感想：</p>
+
+<ul>
+<li><p><a href="http://www.upgradingtorails4.com/">Upgrading to Rails4</a> 這本書強烈建議要買，才 $15 USD，可以節省你不少 debug 時間。</p></li>
+<li><p>升 Rails4 建議不只開 branch，也用 rvm 開一個 gemset 出來作，因為 gem dependency 變更蠻多的。</p></li>
+<li><p><a href="https://github.com/alindeman/rails4_upgrade">rails4_upgrade</a> 要裝。這個 gem 蠻好用的..可以幫你掃 dependency 問題。事實上 Rails3 升 Rails4 最討厭的是 gem dependency tree，因為 Rails 3 已經出太久了（幾乎快兩年了吧)，很多 Gemfile 都強綁定 3 ，所以升 Gemfile 時會出現很多問題&#8230;</p></li>
+<li><p>major gem，如 simple_form, devise, 幾乎都有 beta1 版，裝了就保證可以動。小的 gem 也幾乎都有 rails4 branch 可以 hotfix。(起碼我在 beta1 進場時遇到的問題就幾乎都有解，所以在 rc1 的狀況應該會更好)</p></li>
+<li><p>這次 Rails4 的改動，我個人的感想會是 Rails3 的 New Feature, Better syntax Version。如果平常 code 都寫的蠻漂亮（接口和封裝乾淨）的話，升級應該是沒有太痛才對。唯一讓人很煩的就是 gem dependency 解不完，還有牽扯到 scope 與 query 的部份幾乎都要重寫..:/ （目前是都還跳 warning 而已，但真要清 warning，如果 model 裡面 condition 很多，真的會清到手快斷&#8230;）</p></li>
+<li><p>有關於 New Feature 與 Better syntax 這個議題，我應該週末會寫一篇出來..</p></li>
+<li><p>Rails project 的本體內容物是沒有改動太大，但大家拿來 build gem 的 internal API 改不少，這也難怪 Jose Valim 這一兩天也同步釋出了 <a href="http://pragprog.com/book/jvrails2/crafting-rails-applications">Crafting Rails Applications (2nd edition): Expert Practices for Everyday Rails Development</a> 第二版的 beta。我這幾天改 gem 要升 Rails4 也是中了一堆 api 變更的地雷…</p></li>
+<li><p>會逼大家都改 gem 的原因是因為是，連 migration api 都改了，所以只要提供產生 migration 的 gem 通通會逼要升 Rails4，真是個好招 -_- （連我只有兩個 commit 的 AutoFacebook gem 也不能倖免。解法在<a href="https://github.com/xdite/auto-facebook/commit/2e21a3fd1884c6eec7856b849d811b1d9b168502">這裡</a> ）</p></li>
+<li><p>Obie Fernandez 前天也宣布了 Rails 聖經 <a href="https://leanpub.com/tr4w">The Rails 4 Way</a>開始 beta。值得注意的是他這次是使用 <a href="leanpub.com">Leanpub</a> 釋出書籍的 beta，而非走 <a href="http://www.informit.com/">Informit</a> 的 RoughCut 版本。</p></li>
+<li><p>為什麼我有時間測這些東西？好問題，我也不知道…明明最近就忙到快死了&#8230;orz</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bootstrap Helper 與 Bootstrappers 開始支援 Rails 4]]></title>
@@ -1506,244 +1535,6 @@
 <p>而在整個模式的發生過程，RD 正是日日夜夜都要面對這個挑戰的第一線執行者。</p>
 
 <p>如果他們很坦白的告訴你這個想法很蠢，也許這件事就真的很蠢，你應該停下來聽他們怎麼說…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Specification by Example - 團隊如何交付正確的軟體]]></title>
-    <link href="http://blog.xdite.net/posts/2012/10/01/specification-by-example/"/>
-    <updated>2012-10-01T04:46:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/10/01/specification-by-example</id>
-    <content type="html"><![CDATA[<p><img src="http://z2-ec2.images-amazon.com/images/P/1617290084.01._SX278_SCLZZZZZZZ_V146204546_.jpg" alt="img" /></p>
-
-<p>這個禮拜終於斷斷續續用了空檔時間讀完了一本買了卻一直沒時間坐下來好好研究的書「<a href="http://manning.com/adzic/">Specification by Example</a>」</p>
-
-<p>對岸的圖靈系列最近也出了這本書的中文版:「實例化需求」。如果你想要觀看這本書的書評，InfoQ 上有一篇不錯的文章：「<a href="http://www.infoq.com/cn/articles/specification-by-example-book">《實例化需求》採訪與書評</a>」。</p>
-
-<p>這本書給我一種很奇妙的讀後感，因為書中既沒有程式碼，也不介紹任何工具，甚至實際軟體例子也很少，篇幅最多的甚至是模糊的團隊訪談。</p>
-
-<p>但讀完了以後，卻讓我在軟體開發上流程上有了更大的啟發。</p>
-
-<h3>交付錯誤的軟體的原因</h3>
-
-<p>我是一名職業的軟體開發者。前前後後寫過的軟體專案也有 50 個, 60 個。目前也以開發軟體為生。在我的職業生涯裡面，其實我有一個從來沒有跟人講過的秘密困擾。這個困擾，我相信許多同業們可能也有。那就是 &#8212; 一個專案開發下來，「我們竟然時常比我們的客戶或 PM，更了解它的生意邏輯與流程」</p>
-
-<p>但這個問題帶來更大的困擾是：「客戶在它的 Spec 裡面卻指定了完全不可行或者是成本效益極低的作法」。因為簽了合約或領了老闆的薪水，我們被迫在明知不可而為之的狀況下，進行了一個徹底失敗的專案。</p>
-
-<p>技術很好，團隊也強大，產品也有市場。但還是失敗，因為 &#8211; 「交付錯誤的軟體」。</p>
-
-<h3>軟體工程沒教的課題: 交付正確的軟體</h3>
-
-<p>市面上有很多書，教人如何敏捷開發，教人測試驅動開發（TDD)。它們可以帶給開發者的好處是可以利用這些技巧將工程時間大幅縮短，降低軟體內發生 Bug 的頻率。</p>
-
-<p>這些技巧對於進行軟體專案不是沒有作用，因為早點完工（把功能實做出來），專案早點失敗，專案可以及早軸轉到較接近成功的方向。</p>
-
-<p>對於正在營運中的公司，內部專案早點失敗，及早軸轉到較接近成功的方向。往往是可接受的。因為總體目標是儘快交付到貼近正確方向的軟體。</p>
-
-<p>但對於目標是交付一個軟體的專案，「交付錯誤的軟體」卻往往是糾紛的起源。但卻也是一個千古難解的課題。對於業主來說，他付錢是希望得到一個「正確的軟體」。但於對於被委託的開發者也往往有苦難言，因為他們得到的指示是「按照業主精確的功能敘述去實作軟體」，「正確與否」不是他們的最終責任。而是否「正確」通常往往也得等到上線之後，客戶根據用戶實測反應才能得知（雖然開發者往往是開發階段就往往能猜測出是否失敗的那一群人）。但這從來也不在合約的責任之內。</p>
-
-<p>而這本書也就是在探討這個課題：怎麼樣的軟體流程，才能交付正確的軟體。</p>
-
-<h3>大家沒想到的答案: BDD</h3>
-
-<p>這本書繞了很多遠路去講解什麼是 Specification by example，但這也是作者的用意：刻意不使用專業定義字眼如「敏捷」、「測試驅動開發」去輔助解釋，避免整個梳理的流程被大家腦海裡面的術語印象所綁架。</p>
-
-<p>但總體來說，這個結論毫無疑問就是 Behavior Driven Development (BDD)。不過這個 BDD 卻跟我當初學到的 BDD ( from Cucumber ) 印象很不一樣。這也是為什麼這次會花上幾個小時謄下這篇心得。</p>
-
-<p>裡面有幾段 quote 我很喜歡，實際擊中困擾的核心：摘錄如下：</p>
-
-<p>「實現範圍（Implementation scope）含有對業務問題的解決方案或達成業務目標的手段。很多團隊在開始實現軟件之前（在此之前發生的一切往往被軟件開發團隊所忽略），期望客戶、產品負責人或商業用戶來確定工作的範圍。在商業用戶明確說明他們的需求後，軟建交付團隊就依此時現。這樣本應該會讓客戶滿意。但事實上，這正是構建產品開始出現問題的時候。</p>
-
-<p>如果軟件交付團隊依賴客戶給出用戶故事、用例清單或其他相關信息，那麼他們其實是在讓客戶設計解決方案。但是商業用戶不是軟件設計師。如果我們讓客戶去界定範圍，那麼項目就無法從交付團隊已有的知識受益。這樣開發出來的軟件是客戶所要求的，卻不是他們真正想要的。</p>
-
-<p>成功的團隊不會盲目的接受軟件需求，將其作為未知問題的解決方案，相反，他們會從目標中獲取範圍。他們以客戶的業務目標為起始，然後通過協作界定可以實現目標的範圍。團隊與商業用戶一起工作確定解決方案。商業用戶專注於所需功能希望達到的目的，以及他們期望由此帶來的價值，這樣有助於所有人了解所需的功能。然後團隊提議一個解決方案，這樣比商業用戶自己想出來的方案更實惠、更快，並且更容易交付或維護。」</p>
-
-<p>「與我一起共事過的商業用戶和客戶，大多喜歡把需求描述成解決方案；他們很少會去討論想要達到的目標，或者亟待解決的問題具有什麼特殊性質。我見過太多的團隊有一種危險的誤解，他們認為客戶總是正確的，客戶要求的東西總是一成不變的。這導致很多團隊盲目的接受客戶建議的解決方案，然後竭盡全力去實現。」</p>
-
-<p>「在構建正確軟件產品的過程中，確定範圍扮演著重要的角色。沒有正確的範圍，其餘的工作只是在作無用功。」</p>
-
-<p>「人們告訴你他們自己認為需要什麼，通過問他們『為什麼』，你可以找到背後的目標。許多組織不能明確地指出他們的商業目標。然而，一旦你獲得了目標，就應該再反過來從已確定的目標上獲取範圍，可能你會丟棄掉原先假定出來的範圍」</p>
-
-<h3>一個實際的例子：對 VIP 免費送貨 的需求</h3>
-
-<p>Specification by example 強調的是對於需求，我們必須設計出一個可以被實現的方案，這個方案可以被單獨測試驗證。並且從這個方案與程式碼中演化出 LiveDocument。</p>
-
-<p>書中舉出了一個實際的例子。（整理摘錄）</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/8040169023/" title="Untitled by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8182/8040169023_b634581f99.jpg" width="500" height="375" alt="Untitled"></a></p>
-
-<h5>商業目標</h5>
-
-<p>12 個月內對現有客戶提高 50% 的重複銷售</p>
-
-<h5>實作範圍</h5>
-
-<p>我們可以從商業目標中獲取實現範圍。實現團隊和商業投資者一起提出一些想法，然後把他們分成可交付的軟件塊。比方說我們發現一個主題故事是關於客戶忠誠度計畫的。這個故事可以分解成客戶忠誠度管理系統的基本功能和更高級的獎勵計畫。我們決定首先專注在建立一個基本的會員忠誠度管理系統上：客戶註冊一個 VIP 計畫，VIP 客戶有資格獲得特定物品的免費送貨。我們將推遲關於高級獎勵計畫的討論。下面這個例子的用戶故事：</p>
-
-<ul>
-<li>為了能對現有客戶作產品直銷，作為營銷經理，我想讓客戶通過加入 VIP 計畫註冊個人信息。</li>
-<li>為了吸引現有客戶註冊 VIP 計畫，作為營消經理，我要系統為 VIP 客戶提供特定物品的免費送貨。</li>
-<li>為了節省開支，作為現有客戶，我希望能收到特價優惠的信息。</li>
-</ul>
-
-
-<h5>關鍵實例</h5>
-
-<p>一旦團隊開始實現某個特定的功能，我們就可以為特定的範圍產生具體的需求說明。比如，當我們開始作範圍中的第二項 &#8211; 免費送貨時 &#8211; 必須定義好什麼是免費送貨。在協作討論過程中，為了避免運送電子產品或大件物品相關的後勤問題，我們決定系統只提供書籍的免費送貨服務。因為商業目標是提升重複銷售，我們嘗試讓客戶進行多次購買，「免費送貨」變成了「免費為 5 本或以上書籍送貨」。我們要確定好關鍵實例，比如 VIP 客戶購買 5 本圖書、VIP 客戶購買 5 本以下的圖書，或者非 VIP 客戶購買書籍。</p>
-
-<p>接著討論當客戶同時購買了書籍和電子產品時該怎麼辦。有些人建議擴展範圍，例如，將訂單拆分成兩個，只為書籍提供免費送貨。我們決定推遲這個決定，先實現最簡單的。如果訂單中有非書籍的物品，我們就不提供免費送貨。我們加入下面這個新的關鍵實例，之後會再討論。</p>
-
-<h6>關鍵實例：免費送貨</h6>
-
-<ul>
-<li>VIP 客戶購物車中有 5 本書籍可以獲得免費送貨</li>
-<li>VIP 客戶購物車中有 4 本書及就不提供免費送貨</li>
-<li>普通客戶購物車中有 5 本書籍沒有免費送貨</li>
-<li>VIP 客戶購物車中有 5 台洗衣機時不提供免費送貨</li>
-<li>VIP 客戶購物車中有 5 本書籍和 1 台洗衣機時不提供免費送貨</li>
-</ul>
-
-
-<h5>帶實例的需求說明</h5>
-
-<p>我們從關鍵實例中提煉出需求說明、創建出一目了然的文檔並將其格式化成便於今後作自動化驗證的格式（如下所示）</p>
-
-<h6>免費送貨</h6>
-
-<ul>
-<li>當VIP 客戶購買一定數量的書籍時，提供免費送貨。免費送貨不提供給普通用戶或購買非書籍的 VIP 客戶。</li>
-<li>假定至少買 5 本書才能獲得免費送貨服務，那麼我們會得到以下預期：</li>
-</ul>
-
-
-<p>Example:</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th>客戶類型</th>
-<th>購物車中的物品</th>
-<th>送貨</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> VIP </td>
-<td> 5 本書 </td>
-<td> 免費、標準 </td>
-</tr>
-<tr>
-<td></td>
-<td> VIP </td>
-<td> 4 本書 </td>
-<td> 標準 </td>
-</tr>
-<tr>
-<td></td>
-<td> 普通 </td>
-<td> 10 本書 </td>
-<td> 標準 </td>
-</tr>
-<tr>
-<td></td>
-<td> VIP </td>
-<td> 5 台洗衣機 </td>
-<td> 標準 </td>
-</tr>
-<tr>
-<td></td>
-<td> VIP </td>
-<td> 5 本書、1台洗衣機 </td>
-<td> 標準 </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>這個需求說明 &#8212; 一目了然的文檔 &#8211; 可以用作實現的目標或自動化測試的驅動，這樣我們就可以客觀地衡量什麼時候算完成了。把它作為 LiveDocument 的一部分，保存在需求說明 Repository 中。FitNesse 的 wiki 系統或者 Cucumber 功能文件的目錄結構就是這樣的例子。</p>
-
-<h5>可執行的需求說明</h5>
-
-<p>當開發人員開始實現需求說明所描述的功能時，基於需求說明的測試開始時會失敗，因為測試還沒有自動化，功能也還沒有實現。</p>
-
-<p>開發人員會實現相關功能並把它與自動化框架關聯在一起。他們使用自動化框架從需求說明中獲得輸入並驗證預期的輸出，而不需要實際修改需求說明文檔。當驗證實現自動化以後，需求說明就變成可執行的了。</p>
-
-<h5>Live Document</h5>
-
-<p>所有已實現功能的需求說明需要頻繁地進行驗證，一般通過自動化構建過程來實現。這樣可以確保需求說明保持更新，同時有助於避免功能退化的問題。</p>
-
-<p>當實現了整個用戶故事的時候，需要有人去作首次驗證以確保其已經完成，然後重組需求說明確保它和已實現功能的需求說明是一致的。從需求說明逐步演化出文檔系統。舉例來說，他們可能將免費送貨的需求移到送貨相關的功能體系中，也可能將它們和其他因素促發的免費送貨實例合併在一起。為了更容易訪問文檔，他們可能會在免費送貨的需求說明和其他送貨類型的需求說明之間建立連結。</p>
-
-<p>然後這個循環再次開始。一旦我們需要再次回顧免費送貨的規則 &#8211; 比如，在做高級獎勵計畫，或是擴展功能把帶書籍的訂單和其他貨物訂單分離開的時候 &#8211; 我們就可以使用 Live Document 來理解現有的功能並註明需要修改的地方。我們可以使用已有的實例來協作制定需求說明，同時舉例說明會更加有效。然後我們會舉出另一組關鍵實例，進一步演進免費送貨的需求說明，這部分最終會和需求說明的其他部分合併到一起。這個循環會不斷重複。</p>
-
-<h3>為何 BDD 沒有 TDD 那麼流行？</h3>
-
-<p>如果你身為 Rails Developer 又看到這套循環格式的話，你會馬上感到這跟一套測試框架很像，沒錯，就是 <a href="http://cukes.info/">Cucumber</a>。</p>
-
-<p>我第一次接觸到 BDD 的觀念大概是 2009 年。當然也是因為接觸到 Cucumber，才知道什麼叫做 BDD。但是一直以來，我能夠接受 TDD，但是 BDD 卻一直讓我無法理解。事實上，BDD 也一直沒有普遍流行起來</p>
-
-<p>現在看完這本書，我才理解是什麼的盲點造成了實作上的心理障礙：在一般的專案開發中，通常業主不會要求開發者寫測試（甚至業主不理解什麼叫測試），所以通常測試是開發者自己寫的，為了正確構建功能，以及避免在專案後期踢到大鐵板，所寫的。</p>
-
-<p>但是 BDD 的格式乍看之下卻相當突兀，以 Cucumber 為例，格式是這樣的：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Scenario</span><span class="p">:</span> <span class="no">Multiple</span> <span class="no">Givens</span>
-</span><span class='line'>    <span class="no">Given</span> <span class="n">one</span> <span class="n">thing</span>
-</span><span class='line'>      <span class="no">And</span> <span class="n">another</span> <span class="n">thing</span>
-</span><span class='line'>      <span class="no">And</span> <span class="n">yet</span> <span class="n">another</span> <span class="n">thing</span>
-</span><span class='line'>    <span class="no">When</span> <span class="n">I</span> <span class="nb">open</span> <span class="n">my</span> <span class="n">eyes</span>
-</span><span class='line'>    <span class="no">Then</span> <span class="n">I</span> <span class="n">see</span> <span class="n">something</span>
-</span><span class='line'>      <span class="no">But</span> <span class="n">I</span> <span class="n">don</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">see</span> <span class="n">something</span> <span class="k">else</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>敘述一個場景，然後寫下步驟，然後驗證步驟。這對一般開發者來說，BDD 相對多餘以及冗長。</p>
-
-<p>原因何在？這是一般專案中，通常我們只會遇到兩種狀況：</p>
-
-<ul>
-<li>客戶疏於描述實作內容 : 只給解決方案，如必須要能夠進行付款。（但是卻沒有講清楚支援信用卡還是 ATM）</li>
-</ul>
-
-
-<p>所以所謂 BDD 裡面的用戶故事，開發者必須要自行腦內補完。於是只要當「規格」一變，基於規格所生(想像)的整個用戶故事自然就會被摧毀。所以沒有人很喜歡寫這鬼東西。</p>
-
-<ul>
-<li>客戶過於精確的描述：對於描述操作步驟過於繁瑣，甚至是規定 UI （比如結帳必須要跳出一個 POP 視窗，等待信用卡驗證時必須要塞入一個等待過場動畫）</li>
-</ul>
-
-
-<p>這又會變成另外一種情形，開發者把 BDD 當作是 UI 的驗收測試（尤其在使用 Cucumber 中特別容易被誤解）。在網站開發過程中，UI 很有可能是會變來變去的。沒有人會喜歡因為 UI 改變了然後又回去翻修用戶故事&#8230;.</p>
-
-<p>這就造成了為什麼人們寧願只進行 TDD，甚至只進行 Unit Test。因為比較不可能被需求變動整到。</p>
-
-<p>但只進行 TDD 只能幫助我們：正確地開發一個產品。卻無法達到我們進行軟體開發最終的目標：「開發出一個正確的產品」。</p>
-
-<h3>Startup 前期應不應該導入 TDD / BDD？</h3>
-
-<p>在去年，我曾經寫過一篇 <a href="http://wp.xdite.net/?p=2478">對 BDD / TDD 的看法</a>，提到 Obie Fernandez 在 Rails Conf 2011 的 lightning talk 曾經給過這樣一個 lighting talk : Why BDD is Poison For Your Early Stage Startup 。並且在演講之後寫了一篇文章 <a href="http://blog.obiefernandez.com/content/2011/05/the-dark-side-beckons.html">The Dark Side Beckons?</a></p>
-
-<p>Obie 的觀點正如 talk 名 &#8220;Why BDD is Poison For Your Early Stage Startup&#8221; 所言。他並且強調了：「Early on in the startup process, it&#8217;s much more important to be testing against business metrics than anything having to do with code.」</p>
-
-<p>「Until you are able to prove that you have a viable market, that customers will give you money for your product, you shouldn&#8217;t be sinking a lot of time and money into implementation.」</p>
-
-<p>現在回頭看起來，當時的討論完全是掉入方法論面的論述。我們以為 TDD / BDD 是「正確地開發一個產品」的一個手段。但這個手段會有相對高額的 technical cost。所以在 Startup 早期階段，開發者實際不應該投入過多心力在此之上。因為 Startup 的第一優先是「開發出一個正確的產品」。</p>
-
-<p>而 Specification by example 卻強調的是，你應該透過這一系列的手段，利用 BDD 這樣的手法，摸索出一系列可以實作可以測試的正確軟體需求，從而交付出一個成功的軟體專案。</p>
-
-<h3>小結</h3>
-
-<p>如果你是抱著裡面有什麼厲害的大絕招，去翻這本書的話。我不敢保證你不會失望。因為這本書不太能算是一本嚴肅的方法論。裡面沒有 code，也不介紹任何工具。同時我也不推薦任何專案新手去翻閱這本書，因為這本書並不是什麼印度蛇藥，你一看完就會變成專案高手。</p>
-
-<p>但是若你進行過不少專案，對於測試驅動開發、行為驅動開發、探索用戶需求有著自己的一番見解、疑問、心得。我相信這本書將會顛覆你的世界觀。</p>
 ]]></content>
   </entry>
   
