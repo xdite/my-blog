@@ -23,8 +23,7 @@ TL; DR 版本：Linode 是躺著中槍的路人
 
 === 題外話 ===
 
-不只 name.com 被打下來了。 Xinnet, MelbourneIT, and Moniker 也被打下來了。在去年 11 月，他們從 Symantec 放了一隻 Huawei 後門，Symantec 的註冊商？就是 Xinnet…
-
+不只 name.com 被打下來了。 Xinnet, MelbourneIT, and Moniker 也被打下來了。
 這一波總共有 550 萬的 domain 被打下來..no kidding
 
 === 題外話結束 ===
