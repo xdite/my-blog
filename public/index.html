@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  以後關於 Web 開發技術的東西，我會同步或 優先貼在 Rocodev 的 官方 Blog 裡面。裡面除了我的技術文章之外，也會有我們優秀同事所寫的一些技術文章，如 Sublime Text 2 Packages for Rails歡迎訂閱！ http://...">
+  <meta name="description" content="                  TL;DR : Rails 4 是一個溫和加強版的 Rails3，而且贈送了很多酷炫 feature，適合進場上個月花了一點時間直接衝了 Rails 4.0beta1，利用 upgrade project 去熟悉整個 Rails4 新的架構。若要我形容對於 ...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,133 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2013/05/04/rails4-new-feature/">Rails 4: New Feature, Better Syntax</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-04T15:28:00+08:00" pubdate  data-updated="true" >May 4<span>th</span>, 2013</time>
+        
+         | <a href="/posts/2013/05/04/rails4-new-feature/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/" data-show-faces="false"></div></div>
+    
+    <p>TL;DR : Rails 4 是一個溫和加強版的 Rails3，而且贈送了很多酷炫 feature，適合進場</p>
+
+<p>上個月花了一點時間直接衝了 Rails 4.0beta1，利用 upgrade project 去熟悉整個 Rails4 新的架構。</p>
+
+<p>若要我形容對於 Rails4 這次升級的感想的話，我會總結為兩句話 <code>New Feature, Better Syntax</code>。</p>
+
+<p>相較於 Rails 2 -> Rails 3 幾乎是個毀天滅地的重新大改寫（i.e. 不管是 Rails 本身，還是使用 Rails 開發的 project），Rails 3 -> Rails 4 的升級及變更內容顯得溫和許多。</p>
+
+<h2>Better Syntax</h2>
+
+<p>Rails 4 這次的改進，許多都是吵了多年以來的折衷方案、或者是許多開發者對如何設計，始終各自有 strong opinion 的主題，都找到 best practices 而被一槌定音了。或者是一些一直以來大家覺得老是被逼著這樣寫，非常智障的設計，也都被改掉了…</p>
+
+<h3>Routing</h3>
+
+<ul>
+<li>讓 Routing 更安全：新增了以 http verb 為 syntax 的寫法，如 get/post</li>
+<li>支援 Rouring concern: 如果要幫不同的 resources 加上如同 :comments 這樣的 nested_resources 就不用一直再重複貼上</li>
+</ul>
+
+
+<h3>ActiveRecord</h3>
+
+<ul>
+<li>強迫 scope 的寫法要全面改成 proc / lambda：避免 eager-evaluated 出現的問題。</li>
+<li>Relation#not：以往要寫出 not 的查詢條件，寫法讓人哭笑不得。</li>
+<li>Relation#none：以往撈不出集合，是 nil，要回傳 [] 空集合要自己作..</li>
+<li>Relation#pluck：可以輕鬆只摘出某些欄位，以及要自己手下 select…</li>
+<li>Relation#unscope：避免 default_scope + order 產生的排序問題。（因為下 except 無法閃過去）</li>
+<li><code>update</code> &amp; <code>update_columns</code>：update 會觸發 callbacks, update_column 不會，但是 update_column 無法送多個 params，於是必須只好用 sneaky-save 這個 solution 繞過。現在 4 直接支援 update_columns</li>
+</ul>
+
+
+<h3>ActionController</h3>
+
+<ul>
+<li>before_filter 更名為 before_action：就是正名&#8230;</li>
+<li><code>respond_to do |format|</code> 拿掉 xml 以 json 取代：2013 年了，沒人再拿 xml 當 default API&#8230;</li>
+</ul>
+
+
+<h3>Security</h3>
+
+<ul>
+<li>拿掉 attr_accessible，改用 strong_paraments：去年 <a href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/">Github 被打下</a>的事情鬧很大，Rails 的安全策略重新被檢討，於是最後社群討論出採用 strong_parameters 得這個 best practices。</li>
+</ul>
+
+
+<h3>Other</h3>
+
+<ul>
+<li>砍掉 <code>public/index.html</code> : 砍掉愚蠢的 publc/index.html，以往教 Rails 初學者第一課就是記得砍掉這個預設檔案，不然寫的東西都會看不到</li>
+<li>add_flash_type ：以往警告訊息只有 [:notice , :alert, :error ] 三種類型，但是自從有 <a href="http://twitter.github.io/bootstrap/">bootstrap</a> 之後。大家習慣使用的是 [:notice , :warning, :error]。要套版時要一直手加 <code>, :flash =&gt; { :warning =&gt; "Oh no!" }</code> 是很智障的事，Rails4 開放自定義 flash types。(P.S. 這是我提的&#8230;)</li>
+<li>mem_cache_store 換成 dalli：自從 1.9 出了之後，原先的 :mem_cache_store （memcache-client）會撞到 utf8 問題，於是大家都改用 dalli 作為 backend cache，Rails 4 的 :mem_cache_store 預設將改為 dalli。</li>
+</ul>
+
+
+<h2>New Feature</h2>
+
+<ul>
+<li>Model Concern / Controller Cern: 重複用到的 method使用 Concern 複用</li>
+<li><a href="https://speakerdeck.com/xdite/turbolinks">Turboklinks</a> : 無痛自動 pjax。pjax 不難，只要你用 Rails4 …</li>
+<li><a href="http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/">Cache Digest</a>: 採用 Russian Doll Cache Strategy，智能 cache 設計，以前多層 partial cache 的問題讓大家實在很頭大。</li>
+<li>HTML5 input form helpers: 現在是 HTML5 的時代，開發時自然會使用很多 js plugin，如calendar plugin，但用傳統的 form object 去產生這些 field 實在很痛苦。Rails4 內建了 HTML5 input form helpers。</li>
+<li>採用 jbuilder 產生 json : 生 json 可以採用類似生 rss 的方式寫 builder，真是驚訝這個 feature 現在才出現 ….</li>
+</ul>
+
+
+<h2>結論</h2>
+
+<p>學 Rails4 最快的方式不是看書，因為總體而言，這次的升級並不是什麼大破壞。改良的 syntax 和好用的新 feature。反而應該會減少不少平常開發上的負擔。而學習 Rails4 最好的方式就是用勇敢在現有的 project 上，大方的開一個 rails4 branch 下去練習升。</p>
+
+<p>不用花很多時間你就能感受到 Rails4 新 feature 帶來給你的好處…</p>
+
+<p>// 警告：以上建議只針對 Senior Rails Developer。目前還有一些 gem 沒有 Rails4 版本。所以 project 升級有時候會遇到必須要自己 fork gem「手動升級/Hack」的狀況，不熟包 gem 者勿輕易嘗試。</p>
+
+<p>這次內建的一些 feature，其實都還蠻有意思的，也許將來還會挑幾篇特別再寫幾篇文章&#8230;</p>
+
+<h2>資源</h2>
+
+<ul>
+<li><a href="http://www.upgradingtorails4.com/">http://www.upgradingtorails4.com/</a></li>
+<li><a href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/">http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/</a></li>
+<li><a href="http://blog.remarkablelabs.com/2012/11/rails-4-countdown-to-2013">http://blog.remarkablelabs.com/2012/11/rails-4-countdown-to-2013</a></li>
+<li><a href="http://www.edgerails.info/">http://www.edgerails.info/</a></li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -948,81 +1075,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2013/01/08/2012-commit/">2012 我的 Commit 數據</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-01-08T20:04:00+08:00" pubdate  data-updated="true" >Jan 8<span>th</span>, 2013</time>
-        
-         | <a href="/posts/2013/01/08/2012-commit/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2013/01/08/2012-commit/" data-show-faces="false"></div></div>
-    
-    <p>Github 今天<a href="https://github.com/blog/1360-introducing-contributions">上了新的 features： Contributions</a> 。</p>
-
-<p>在新的個人頁面可以看到過去一年自己 Commit 的軌跡&#8230;。</p>
-
-<p>看了一下，我公開的 commit 有 923 次。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/8361383762/" title="2012-public by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8079/8361383762_d03e2a7068_z.jpg" width="640" height="279" alt="2012-public"></a></p>
-
-<p>含 Private repo (公司和自己的 side project)，有 3363 次。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/8361383756/" title="2012-private by xdite, on Flickr"><img src="http://farm9.staticflickr.com/8465/8361383756_cb712eab89_z.jpg" width="640" height="280" alt="2012-private"></a></p>
-
-<p>另外一些之前整理在 FB 上的數據。2012 年，我：</p>
-
-<ul>
-<li>出國了四次</li>
-<li>去過了三個國家</li>
-<li>給了超過 10 場 talk</li>
-<li>完成了五個案子</li>
-<li>opensource 了兩個熱門 gem</li>
-<li>拿了一個世界大獎</li>
-<li>開了一間公司</li>
-<li>開發了超過 10 個 Rails porject</li>
-<li>寫了超過 60 篇文章</li>
-<li>寫作了超過 30 萬字</li>
-<li>讀了超過 200 本書&#8230;&#8230;</li>
-</ul>
-
-
-<p>加上去年一整年 commit 的 3300 次。</p>
-
-<p>到底哪來的這麼多時間啊？..orz</p>
-
-<p>結論是，應該要來放個假了嗎？</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1055,6 +1107,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/05/04/rails4-new-feature/">Rails 4: New Feature, Better Syntax</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2013/05/04/my-new-dev-blog/">Rocodev 的技術部落格上線了</a>
       </li>
     
@@ -1068,10 +1124,6 @@
     
       <li class="post">
         <a href="/posts/2013/04/20/isis-replace-hubot-as-hipchat-bot/">使用 isis 作為 Hipchat bot 取代 Hubot</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/04/06/hiring-advice/">如何招聘技術人才，一點心得 [JD篇]</a>
       </li>
     
   </ul>

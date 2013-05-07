@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-05-04T13:36:56+08:00</updated>
+  <updated>2013-05-07T13:27:56+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 4: New Feature, Better Syntax]]></title>
+    <link href="http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/"/>
+    <updated>2013-05-04T15:28:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/05/04/rails4-new-feature</id>
+    <content type="html"><![CDATA[<p>TL;DR : Rails 4 是一個溫和加強版的 Rails3，而且贈送了很多酷炫 feature，適合進場</p>
+
+<p>上個月花了一點時間直接衝了 Rails 4.0beta1，利用 upgrade project 去熟悉整個 Rails4 新的架構。</p>
+
+<p>若要我形容對於 Rails4 這次升級的感想的話，我會總結為兩句話 <code>New Feature, Better Syntax</code>。</p>
+
+<p>相較於 Rails 2 -> Rails 3 幾乎是個毀天滅地的重新大改寫（i.e. 不管是 Rails 本身，還是使用 Rails 開發的 project），Rails 3 -> Rails 4 的升級及變更內容顯得溫和許多。</p>
+
+<h2>Better Syntax</h2>
+
+<p>Rails 4 這次的改進，許多都是吵了多年以來的折衷方案、或者是許多開發者對如何設計，始終各自有 strong opinion 的主題，都找到 best practices 而被一槌定音了。或者是一些一直以來大家覺得老是被逼著這樣寫，非常智障的設計，也都被改掉了…</p>
+
+<h3>Routing</h3>
+
+<ul>
+<li>讓 Routing 更安全：新增了以 http verb 為 syntax 的寫法，如 get/post</li>
+<li>支援 Rouring concern: 如果要幫不同的 resources 加上如同 :comments 這樣的 nested_resources 就不用一直再重複貼上</li>
+</ul>
+
+
+<h3>ActiveRecord</h3>
+
+<ul>
+<li>強迫 scope 的寫法要全面改成 proc / lambda：避免 eager-evaluated 出現的問題。</li>
+<li>Relation#not：以往要寫出 not 的查詢條件，寫法讓人哭笑不得。</li>
+<li>Relation#none：以往撈不出集合，是 nil，要回傳 [] 空集合要自己作..</li>
+<li>Relation#pluck：可以輕鬆只摘出某些欄位，以及要自己手下 select…</li>
+<li>Relation#unscope：避免 default_scope + order 產生的排序問題。（因為下 except 無法閃過去）</li>
+<li><code>update</code> &amp; <code>update_columns</code>：update 會觸發 callbacks, update_column 不會，但是 update_column 無法送多個 params，於是必須只好用 sneaky-save 這個 solution 繞過。現在 4 直接支援 update_columns</li>
+</ul>
+
+
+<h3>ActionController</h3>
+
+<ul>
+<li>before_filter 更名為 before_action：就是正名&#8230;</li>
+<li><code>respond_to do |format|</code> 拿掉 xml 以 json 取代：2013 年了，沒人再拿 xml 當 default API&#8230;</li>
+</ul>
+
+
+<h3>Security</h3>
+
+<ul>
+<li>拿掉 attr_accessible，改用 strong_paraments：去年 <a href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/">Github 被打下</a>的事情鬧很大，Rails 的安全策略重新被檢討，於是最後社群討論出採用 strong_parameters 得這個 best practices。</li>
+</ul>
+
+
+<h3>Other</h3>
+
+<ul>
+<li>砍掉 <code>public/index.html</code> : 砍掉愚蠢的 publc/index.html，以往教 Rails 初學者第一課就是記得砍掉這個預設檔案，不然寫的東西都會看不到</li>
+<li>add_flash_type ：以往警告訊息只有 [:notice , :alert, :error ] 三種類型，但是自從有 <a href="http://twitter.github.io/bootstrap/">bootstrap</a> 之後。大家習慣使用的是 [:notice , :warning, :error]。要套版時要一直手加 <code>, :flash =&gt; { :warning =&gt; "Oh no!" }</code> 是很智障的事，Rails4 開放自定義 flash types。(P.S. 這是我提的&#8230;)</li>
+<li>mem_cache_store 換成 dalli：自從 1.9 出了之後，原先的 :mem_cache_store （memcache-client）會撞到 utf8 問題，於是大家都改用 dalli 作為 backend cache，Rails 4 的 :mem_cache_store 預設將改為 dalli。</li>
+</ul>
+
+
+<h2>New Feature</h2>
+
+<ul>
+<li>Model Concern / Controller Cern: 重複用到的 method使用 Concern 複用</li>
+<li><a href="https://speakerdeck.com/xdite/turbolinks">Turboklinks</a> : 無痛自動 pjax。pjax 不難，只要你用 Rails4 …</li>
+<li><a href="http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/">Cache Digest</a>: 採用 Russian Doll Cache Strategy，智能 cache 設計，以前多層 partial cache 的問題讓大家實在很頭大。</li>
+<li>HTML5 input form helpers: 現在是 HTML5 的時代，開發時自然會使用很多 js plugin，如calendar plugin，但用傳統的 form object 去產生這些 field 實在很痛苦。Rails4 內建了 HTML5 input form helpers。</li>
+<li>採用 jbuilder 產生 json : 生 json 可以採用類似生 rss 的方式寫 builder，真是驚訝這個 feature 現在才出現 ….</li>
+</ul>
+
+
+<h2>結論</h2>
+
+<p>學 Rails4 最快的方式不是看書，因為總體而言，這次的升級並不是什麼大破壞。改良的 syntax 和好用的新 feature。反而應該會減少不少平常開發上的負擔。而學習 Rails4 最好的方式就是用勇敢在現有的 project 上，大方的開一個 rails4 branch 下去練習升。</p>
+
+<p>不用花很多時間你就能感受到 Rails4 新 feature 帶來給你的好處…</p>
+
+<p>// 警告：以上建議只針對 Senior Rails Developer。目前還有一些 gem 沒有 Rails4 版本。所以 project 升級有時候會遇到必須要自己 fork gem「手動升級/Hack」的狀況，不熟包 gem 者勿輕易嘗試。</p>
+
+<p>這次內建的一些 feature，其實都還蠻有意思的，也許將來還會挑幾篇特別再寫幾篇文章&#8230;</p>
+
+<h2>資源</h2>
+
+<ul>
+<li><a href="http://www.upgradingtorails4.com/">http://www.upgradingtorails4.com/</a></li>
+<li><a href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/">http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/</a></li>
+<li><a href="http://blog.remarkablelabs.com/2012/11/rails-4-countdown-to-2013">http://blog.remarkablelabs.com/2012/11/rails-4-countdown-to-2013</a></li>
+<li><a href="http://www.edgerails.info/">http://www.edgerails.info/</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rocodev 的技術部落格上線了]]></title>
@@ -1352,93 +1446,6 @@
 <p>我們很高興能為台灣爭了一口氣！謝謝大家一路上的鼓勵！</p>
 
 <p>新聞連結在此：<a href="https://developers.facebook.com/blog/post/2012/10/15/world-hack-recap-and-winners/">World HACK Recap and Winners</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bootstrappers 一鍵產生 Rails App with Bootstrap theme]]></title>
-    <link href="http://blog.xdite.net/posts/2012/10/12/bootstrappers-create-rails-app/"/>
-    <updated>2012-10-12T00:17:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/10/12/bootstrappers-create-rails-app</id>
-    <content type="html"><![CDATA[<p><img src="http://farm9.staticflickr.com/8045/8077515365_44bccfc5c5.jpg" width="500" height="334" alt="Bootstrappers Demo"></p>
-
-<p>這是我本週剛釋出的一個 Gem: <a href="http://github.com/xdite/bootstrappers">Bootstrappers</a>。是一個 Rails 專案產生器，特色是內建馬上套好的 <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> theme 和 其他好東西。</p>
-
-<h2>Bootstrappers 的開發緣由</h2>
-
-<p>身為一個職業開發者，我開啟一個新專案的機會實在太高了。但是，你知道的。每次要開發一個專案，無非就是 <code>rails new project_name</code>。然後打開 Gemfile，添加一些常用 Gem，再修改 <code>application.html.erb</code>，塞塞設定，填填 CSS，修修 HTML。</p>
-
-<p><a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 以及其他 rubygems 是很方便，但是把他們組起來還是非常花時間。次數多了，我就覺得這樣的初始化動作實在很煩。</p>
-
-<p>於是，我第一次的嘗試，就是作一個空專案，把我平常的 best practices 和 templates 都丟進去。如果有開新專案的需求，再 copy 過去。</p>
-
-<p>但是，隨著時間更迭，我又發現更煩的事了。就是我還是得花上一堆時間改 namespace 與 setting。而且，裡面內建的 rubygems 會過期，等於還要花時間 ugprade 這些 template。而最煩的還是：Rails 本身自己也會過期！而要升級的小版本，自己可能還要補一堆 config，而這些變動真的很難追蹤。</p>
-
-<p>於是，最後我下定決心要來研究 App Generator 到底要怎麼寫。我實在受夠了每次的 c/p + modify 了。</p>
-
-<p>（之後我也許會寫一篇如何製作 App 產生器的文章 ）</p>
-
-<p>最後 <a href="http://github.com/xdite/bootstrappers">Bootstrappers</a> 就這樣誕生了。</p>
-
-<h3>內建好康</h3>
-
-<p>這個專案裡面目前內建了以下這些 Gem 以及相關 Template :</p>
-
-<ul>
-<li><a href="https://github.com/anjlab/bootstrap-rails">Bootstrap SCSS</a></li>
-<li><a href="https://github.com/xdite/bootstrap-helper">Bootstrap Helper</a></li>
-<li><a href="https://github.com/plataformatec/simple_form">SimpleForm</a></li>
-<li><a href="https://github.com/mislav/will_paginate/">WillPaginate</a></li>
-<li><a href="http://compass-style.org/">Compass</a></li>
-<li><a href="https://github.com/techbang/seo_helper">SeoHelper</a></li>
-<li><a href="https://github.com/capistrano/capistrano">Capistrano</a></li>
-<li><a href="https://github.com/njonsson/cape">Cape</a></li>
-<li><a href="https://github.com/m-ryan/magic_encoding">Magic encoding</a></li>
-<li><a href="https://github.com/binarylogic/settingslogic">Settingslogic</a></li>
-<li><a href="https://github.com/airbrake/airbrake">Airbrake</a></li>
-<li><a href="https://github.com/newrelic/rpm">NewRelic RPM</a></li>
-<li><a href="https://github.com/ndbroadbent/turbo-sprockets-rails3">Turbo Sprockets for Rails 3.2.x</a> Speeds up your Rails 3 rake assets:precompile by only recompiling changed assets</li>
-</ul>
-
-
-<h3>Powerful Features</h3>
-
-<p>特點如下</p>
-
-<ul>
-<li>現成套好的 Bootstrap Theme (application.html.erb)</li>
-<li>搭配的 Bootstrap Helper，快速兜出表單、選單、按鈕、Dropmenu、ajax modal、alert、breadcrumb 等等…</li>
-<li>套好的 WillPaginate (with bootstrap style)</li>
-<li>套好的 SimpleForm (with bootstrap style)</li>
-<li>內建 Devise 會員系統</li>
-<li>Bootstrap useful hacks (比如 <code>body { padding-top:60px }</code>、dropmenu 自動展開等等)</li>
-<li><a href="http://blog.xdite.net/posts/2012/08/03/how-to-use-bootstrap-in-clean-way/">Boostrap override best-practices</a></li>
-<li>MagicEncoding : Ruby 1.9 自動添加 utf-8 宣告</li>
-<li>自動掛上 Compass</li>
-<li>SeoHelper : 自動幫你的網站產生 page description / page keywords</li>
-<li>Open Graph : 自動幫你的網站產生 og description / og_image</li>
-<li>Facebook JS、Google Analytics</li>
-<li>Capistrano / Cape</li>
-<li>Asset Pipeline 加速器</li>
-<li>….etc.</li>
-</ul>
-
-
-<p>一些我平常開發專案時，累積出來的 best practices。</p>
-
-<p>有了這個武器，你現在可以使用 <code>bootstrappers project_name</code> 這個指令，一鍵瞬間就產生出一個不錯的 app，而不用擔心套版問題以及一些基本的網站優化問題。</p>
-
-<p>歡迎 <a href="http://github.com/xdite/bootstrappers">現在就試看看</a> ！</p>
-
-<h2>Bug / Pull Request</h2>
-
-<p><a href="https://github.com/xdite/bootstrappers/issues">https://github.com/xdite/bootstrappers/issues</a></p>
-
-<p>歡迎各位回報錯誤，或者提交 Pull Request。當然，如果能夠直接提交 Pull Request，是最感謝的。</p>
-
-<p>我還會繼續把一些還沒丟進去的 best practices 繼續整合進去。如果各位有興趣幫忙的話，歡迎查看 TODO.md。</p>
-
-<p><a href="https://github.com/xdite/bootstrappers/blob/master/TODO.md">https://github.com/xdite/bootstrappers/blob/master/TODO.md</a></p>
 ]]></content>
   </entry>
   

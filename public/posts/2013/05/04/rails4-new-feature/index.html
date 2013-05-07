@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>網站程式上線前需要準備的事 （三） - Blog.XDite.net</title>
+  <title>Rails 4: New Feature, Better Syntax - Blog.XDite.net</title>
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="          第 3 件事：制定 Art / RD 都遵守的開發 convention在傳統的開發過程中，作法多半都是：規劃 => UI / 畫面設計 => 程式設計。其實若專案規劃階段結束的早（也就是實作類似最低可行產品產品的概念），並非需要等待 UI / 畫面設計 完工，才可以進行到...">
+  <meta name="description" content="          TL;DR : Rails 4 是一個溫和加強版的 Rails3，而且贈送了很多酷炫 feature，適合進場上個月花了一點時間直接衝了 Rails 4.0beta1，利用 upgrade project 去熟悉整個 Rails4 新的架構。若要我形容對於 Rails4 這...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta property="fb:admins" content="577398551" />
 
   
-  <link rel="canonical" href="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/">
+  <link rel="canonical" href="http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">網站程式上線前需要準備的事 （三）</h1>
+      <h1 class="entry-title">Rails 4: New Feature, Better Syntax</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
 
 
 
-<time datetime="2012-03-18T02:48:00+08:00" pubdate  data-updated="true" >Mar 18<span>th</span>, 2012</time>
+<time datetime="2013-05-04T15:28:00+08:00" pubdate  data-updated="true" >May 4<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,102 +98,90 @@
   
     <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
   
-  <h2>第 3 件事：制定 Art / RD 都遵守的開發 convention</h2>
+  <p>TL;DR : Rails 4 是一個溫和加強版的 Rails3，而且贈送了很多酷炫 feature，適合進場</p>
 
-<p>在傳統的開發過程中，作法多半都是：規劃 => UI / 畫面設計 => 程式設計。</p>
+<p>上個月花了一點時間直接衝了 Rails 4.0beta1，利用 upgrade project 去熟悉整個 Rails4 新的架構。</p>
 
-<p>其實若專案規劃階段結束的早（也就是實作類似最低可行產品產品的概念），並非需要等待 UI / 畫面設計 完工，才可以進行到「套版」（程式設計）的階段。</p>
+<p>若要我形容對於 Rails4 這次升級的感想的話，我會總結為兩句話 <code>New Feature, Better Syntax</code>。</p>
 
-<p>一直以來，我都認為「套版」是一個非常不好的說法，造成了偏差的印象。因為一個網站實際上是「一整套」的「軟體」，並非是「畫面」設計的出來，程式就配合寫的出來。雙方必須都要是可以執行實作的部分才行。</p>
+<p>相較於 Rails 2 -> Rails 3 幾乎是個毀天滅地的重新大改寫（i.e. 不管是 Rails 本身，還是使用 Rails 開發的 project），Rails 3 -> Rails 4 的升級及變更內容顯得溫和許多。</p>
 
-<p>程式一定要實際的「美術畫面」被設計出來才能夠被接著實作嗎？其實不是這樣的：只要有 wireframe，RD 往往就可以先行動工。</p>
+<h2>Better Syntax</h2>
 
-<p>但問題來了：若雙方各自進行自己的部分，那最後要怎麼組起來？</p>
+<p>Rails 4 這次的改進，許多都是吵了多年以來的折衷方案、或者是許多開發者對如何設計，始終各自有 strong opinion 的主題，都找到 best practices 而被一槌定音了。或者是一些一直以來大家覺得老是被逼著這樣寫，非常智障的設計，也都被改掉了…</p>
 
-<p>這其實還不是最大的問題。</p>
-
-<p>最大的問題，其實是 Art 切出來的「版」，多半是不能夠被「套」的。</p>
-
-<h2>畫面不是切得出來就能「套」</h2>
-
-<p>這個問題其實不能夠怪 Art，它們有的是藝術細胞，並非邏輯細胞。而：</p>
+<h3>Routing</h3>
 
 <ul>
-<li><p>能夠熟練 Photoshop，並 <code>不代表</code> 能夠寫出良好結構的 HTML 與 CSS code。</p>
-
-<ul>
-<li>這需要一定的經驗以及技術實力。</li>
-</ul>
-</li>
-<li><p>能夠切出 HTML 與 CSS，並 <code>不代表</code> 這一份原始碼，可以被實際使用。</p>
-
-<ul>
-<li>有一些 Art 只懂得 PSD to table，整個畫面毫無結構可言，讓人頭痛萬分。</li>
-<li>有一些 Art 專精製作單頁的活動頁面，但 application 需要整套的 DOM 能夠重複利用，CSS 一旦被重疊使用時大爆炸。</li>
-</ul>
-</li>
+<li>讓 Routing 更安全：新增了以 http verb 為 syntax 的寫法，如 get/post</li>
+<li>支援 Rouring concern: 如果要幫不同的 resources 加上如同 :comments 這樣的 nested_resources 就不用一直再重複貼上</li>
 </ul>
 
 
-<p>在傳統的專案進行到「套版」階段，程式開發進度會難以掌控的其中一個原因。也是因為：RD 面對著一套爛 HTML，完全不知從何下手「套」進去。不改結構無法讓程式運作，或者程式運作效率會很低；但一改結構，就別肖想 Art 再幫你調整細部 style 和追加細節了。（東西被改的不爽情緒或原始結構被改變）</p>
-
-<p><strong>「套版」這個過程中無端被追加浪費了大量時間</strong>，這也是一個上線前的隱藏變因。</p>
-
-<h3>解決方法：製作一套 HTML / CSS 設計準則</h3>
-
-<p>多數的 application 有固定結構的 DOM。差異在於  &lt;div id=&quot;content&quot;&gt; &lt;/div&gt; 內的不同。
-至於</p>
+<h3>ActiveRecord</h3>
 
 <ul>
-<li>header</li>
-<li>sidebar</li>
-<li>warning</li>
-<li>form</li>
-<li>footer</li>
-<li>etc&#8230;</li>
+<li>強迫 scope 的寫法要全面改成 proc / lambda：避免 eager-evaluated 出現的問題。</li>
+<li>Relation#not：以往要寫出 not 的查詢條件，寫法讓人哭笑不得。</li>
+<li>Relation#none：以往撈不出集合，是 nil，要回傳 [] 空集合要自己作..</li>
+<li>Relation#pluck：可以輕鬆只摘出某些欄位，以及要自己手下 select…</li>
+<li>Relation#unscope：避免 default_scope + order 產生的排序問題。（因為下 except 無法閃過去）</li>
+<li><code>update</code> &amp; <code>update_columns</code>：update 會觸發 callbacks, update_column 不會，但是 update_column 無法送多個 params，於是必須只好用 sneaky-save 這個 solution 繞過。現在 4 直接支援 update_columns</li>
 </ul>
 
 
-<p>其實多半是相同的。</p>
-
-<p>與其抱怨 Art 切出來的東西不能被套，不如設計一套 general 的實際準則可以被大家遵守學習。</p>
-
-<p>不僅僅是 HTML 設計規則，其實開發當中會花掉很多時間的，還包含一些常見的 CSS hack / IE hack。這些也可以被整理起來，節省開發時間（當然，現在你只要學 <a href="http://compass-style.org/">compass</a> 就好）。</p>
-
-<h2>平行開發互動：解決多人團隊的偏好歧異問題</h2>
-
-<p>剛剛有一個問題我們沒有回答到：就是個人偏好如何「組合」？</p>
-
-<p>比如說美術的版裡面有這樣的 DOM &lt;div class=&quot;article&quot;&gt; &lt;/div&gt;，class 是 <code>article</code>。</p>
-
-<p>但是 RD 實際的程式碼卻是 <code>post</code> 這樣的物件名稱。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;% @posts.each do |post| %&gt;
-</span><span class='line'>  &lt;%= post.title %&gt;
-</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這樣「套」起來不是很有問題嗎？如何實現所謂我說的「平行開發」？</p>
-
-<p>其實 Art / RD 雙軌平行開發，才可以有效的為專案爭取到時間。</p>
-
-<p>其實之前的所謂「套」，因為有完工的時間壓力，DOM 往往不能夠被更改。但是不改 DOM 又不能讓專案繼續被執行下去。</p>
-
-<p>若是雙方平行開發，又有一個 deployable 的 application 讓進度透明，所有的修改和溝通調整，只是一下子的功夫(article 與 post 的不同，可以在很早期就被抓出來修掉），不但不會打亂開發節奏，反而會加速專案的進行。</p>
-
-<p>＝＝＝＝</p>
-
-<p>系列文章：</p>
+<h3>ActionController</h3>
 
 <ul>
-<li><a href="/posts/2012/03/17/website-online-todo-1/">網站程式上線前需要準備的事 （一）</a></li>
-<li><a href="/posts/2012/03/18/website-online-todo-2/">網站程式上線前需要準備的事 （二）</a></li>
-<li><a href="/posts/2012/03/18/website-online-todo-3/">網站程式上線前需要準備的事 （三）</a></li>
-<li><a href="/posts/2012/03/18/website-online-todo-4/">網站程式上線前需要準備的事 （四）</a></li>
-<li><a href="/posts/2012/03/19/website-online-todo-5/">網站程式上線前需要準備的事 （五）</a></li>
+<li>before_filter 更名為 before_action：就是正名&#8230;</li>
+<li><code>respond_to do |format|</code> 拿掉 xml 以 json 取代：2013 年了，沒人再拿 xml 當 default API&#8230;</li>
+</ul>
+
+
+<h3>Security</h3>
+
+<ul>
+<li>拿掉 attr_accessible，改用 strong_paraments：去年 <a href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/">Github 被打下</a>的事情鬧很大，Rails 的安全策略重新被檢討，於是最後社群討論出採用 strong_parameters 得這個 best practices。</li>
+</ul>
+
+
+<h3>Other</h3>
+
+<ul>
+<li>砍掉 <code>public/index.html</code> : 砍掉愚蠢的 publc/index.html，以往教 Rails 初學者第一課就是記得砍掉這個預設檔案，不然寫的東西都會看不到</li>
+<li>add_flash_type ：以往警告訊息只有 [:notice , :alert, :error ] 三種類型，但是自從有 <a href="http://twitter.github.io/bootstrap/">bootstrap</a> 之後。大家習慣使用的是 [:notice , :warning, :error]。要套版時要一直手加 <code>, :flash =&gt; { :warning =&gt; "Oh no!" }</code> 是很智障的事，Rails4 開放自定義 flash types。(P.S. 這是我提的&#8230;)</li>
+<li>mem_cache_store 換成 dalli：自從 1.9 出了之後，原先的 :mem_cache_store （memcache-client）會撞到 utf8 問題，於是大家都改用 dalli 作為 backend cache，Rails 4 的 :mem_cache_store 預設將改為 dalli。</li>
+</ul>
+
+
+<h2>New Feature</h2>
+
+<ul>
+<li>Model Concern / Controller Cern: 重複用到的 method使用 Concern 複用</li>
+<li><a href="https://speakerdeck.com/xdite/turbolinks">Turboklinks</a> : 無痛自動 pjax。pjax 不難，只要你用 Rails4 …</li>
+<li><a href="http://blog.xdite.net/posts/2012/09/02/cache-digest-new-strategy/">Cache Digest</a>: 採用 Russian Doll Cache Strategy，智能 cache 設計，以前多層 partial cache 的問題讓大家實在很頭大。</li>
+<li>HTML5 input form helpers: 現在是 HTML5 的時代，開發時自然會使用很多 js plugin，如calendar plugin，但用傳統的 form object 去產生這些 field 實在很痛苦。Rails4 內建了 HTML5 input form helpers。</li>
+<li>採用 jbuilder 產生 json : 生 json 可以採用類似生 rss 的方式寫 builder，真是驚訝這個 feature 現在才出現 ….</li>
+</ul>
+
+
+<h2>結論</h2>
+
+<p>學 Rails4 最快的方式不是看書，因為總體而言，這次的升級並不是什麼大破壞。改良的 syntax 和好用的新 feature。反而應該會減少不少平常開發上的負擔。而學習 Rails4 最好的方式就是用勇敢在現有的 project 上，大方的開一個 rails4 branch 下去練習升。</p>
+
+<p>不用花很多時間你就能感受到 Rails4 新 feature 帶來給你的好處…</p>
+
+<p>// 警告：以上建議只針對 Senior Rails Developer。目前還有一些 gem 沒有 Rails4 版本。所以 project 升級有時候會遇到必須要自己 fork gem「手動升級/Hack」的狀況，不熟包 gem 者勿輕易嘗試。</p>
+
+<p>這次內建的一些 feature，其實都還蠻有意思的，也許將來還會挑幾篇特別再寫幾篇文章&#8230;</p>
+
+<h2>資源</h2>
+
+<ul>
+<li><a href="http://www.upgradingtorails4.com/">http://www.upgradingtorails4.com/</a></li>
+<li><a href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/">http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/</a></li>
+<li><a href="http://blog.remarkablelabs.com/2012/11/rails-4-countdown-to-2013">http://blog.remarkablelabs.com/2012/11/rails-4-countdown-to-2013</a></li>
+<li><a href="http://www.edgerails.info/">http://www.edgerails.info/</a></li>
 </ul>
 
 
@@ -217,14 +205,8 @@
 
 
 
-<time datetime="2012-03-18T02:48:00+08:00" pubdate  data-updated="true" >Mar 18<span>th</span>, 2012</time>
+<time datetime="2013-05-04T15:28:00+08:00" pubdate  data-updated="true" >May 4<span>th</span>, 2013</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/projectmanagement/'>ProjectManagement</a>
-  
-</span>
 
 
     </p>
@@ -232,7 +214,7 @@
       <div class="sharing">
 
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -308,8 +290,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/';
-        var disqus_url = 'http://blog.xdite.net/posts/2012/03/18/website-online-todo-3/';
+        var disqus_identifier = 'http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/';
+        var disqus_url = 'http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/';
         var disqus_script = 'embed.js';
       
     (function () {
