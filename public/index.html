@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  TL;DR : Rails 4 是一個溫和加強版的 Rails3，而且贈送了很多酷炫 feature，適合進場上個月花了一點時間直接衝了 Rails 4.0beta1，利用 upgrade project 去熟悉整個 Rails4 新的架構。若要我形容對於 ...">
+  <meta name="description" content="                  TL; DR 版本：Linode 是躺著中槍的路人上個月，Linode 被打下來，洩漏了一堆資訊。逼得很多人不得不換卡和換密碼。幾個小時前，在 HackerNews 的一篇文章揭露 Linode 其實是路邊的那個倒楣鬼，人家不是要揍他，而是揍他的客戶&#82...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,93 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2013/05/08/linode-hacked-htp/">Linode 被 Hack 事件始末</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-08T00:49:00+08:00" pubdate  data-updated="true" >May 8<span>th</span>, 2013</time>
+        
+         | <a href="/posts/2013/05/08/linode-hacked-htp/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2013/05/08/linode-hacked-htp/" data-show-faces="false"></div></div>
+    
+    <p>TL; DR 版本：Linode 是躺著中槍的路人</p>
+
+<p>上個月，Linode 被打下來，洩漏了一堆資訊。逼得很多人不得不換卡和換密碼。幾個小時前，在 HackerNews 的一篇文章揭露 Linode 其實是路邊的那個倒楣鬼，人家不是要揍他，而是揍他的客戶&#8230;</p>
+
+<p>以下內容是基於 <a href="https://news.ycombinator.com/item?id=5667027">HN 上的一篇懶人包</a>翻譯，然後加上<a href="http://straylig.ht/zines/HTP5/0x02_Linode.txt">HTP 雜誌原文</a>裡的資訊。</p>
+
+<p>故事是這樣的：</p>
+
+<p>有個駭客組織叫 HTP，最近有個匿名組織假冒成另一個組織 &#8220;ac1db1tch3z&#8221; 想要挖他們的底（去挖 HTP 的 botnet）。HTP 非常不爽想要報復，後來他們查到這個匿名組織在用 SwiftIRC 這個 IRC 服務在聯絡。而 SwiftIRC 的 nameserver 放在 Linode..。</p>
+
+<p>所以 HTP 想要把 Linode 打下來，hack 進 SwitftIRC 放後門，然後報復回去。</p>
+
+<p>他們一開始直接打 Linode，結果 1day exploit 被 Linode 防下來了。但是，Linode 的域名註冊商 name.com 被打下來了。所以他們的計畫改成弄一個 transparent proxy，打算從中間攔下 Linode 的帳號密碼&#8230;。</p>
+
+<p>=== 題外話 ===</p>
+
+<p>不只 name.com 被打下來了。 Xinnet, MelbourneIT, and Moniker 也被打下來了。在去年 11 月，他們從 Symantec 放了一隻 Huawei 後門，Symantec 的註冊商？就是 Xinnet…</p>
+
+<p>這一波總共有 550 萬的 domain 被打下來..no kidding</p>
+
+<p>=== 題外話結束 ===</p>
+
+<p>本來計畫是這樣的，但是他們發現了一個更棒的洞，直接打下了 Linode &#8230;</p>
+
+<p>這當然很 high 啦。他們當然直接拿下 SwiftIRC 開始中後門。更精彩的是，因為不少站台也放在 Linode，中獎的名單還有： Nmap, Nagios, SQLite, OSTicket,    <br/>
+Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, Pwnie Express, Puppet, and oauth.</p>
+
+<p>（都是一些超重要的站&#8230;）</p>
+
+<p>但是，HTP 不知道的是，HTP 內部被 FBI 滲透了..因為 nmap.org 是個非常重要的站台（security scanner）。於是 Linode 很快就被 FBI 警告了 nmap.org 被打下來了。</p>
+
+<p>於是，Linode 上其他站被 HTP 打下來的事，很快的也被知道了。這讓 HTP 的報復計畫來不及實現&#8230;於是 HTP 決定警告 Linode 至少在 5/1 不准講出去，否則 HTP 就會散佈這些他們拿到的這些敏感資訊（包括客戶資料以及信用卡資料）。如果 Linode 安靜的話，HTP 就會遵守約定刪掉拿到的這些東西。</p>
+
+<p>=== 題外話 ===</p>
+
+<p>敏感資訊包括 : 159000 + 信用卡資料，使用這名稱, $5 (我不知道是多少數量) 筆加密過的密碼，LiSH 使用者名稱，LiSH 密碼 「明碼版」 。還有 Linode 雇員 Login 帳號。</p>
+
+<p>=== 題外話結束 ===</p>
+
+<p>因為 HTP 打 Linode 本來就不是為了拿這些資料，而是想要打仇家。所以他們認為開給 Linode 的 Offer 已經算不錯了。如果他們不聲張，基本上就等於什麼事都沒發生。</p>
+
+<p>但是！！Linode 還是公開了被打下的這件事（因為他們也被 FBI 逼著要公開，FBI 很明顯的不信任 HTP 會守約）。HTP 知道 Linode 其實被逼到一個很難自處的位置，於是也跟 Linode 達成了另一個協議，只要 Linode 在公告上說，經過分析之後發現打下他們的是 HTP。HTP 就會同意刪除當初拿到的這些資料&#8230;.（很多 Hacker 其實只是想留名）</p>
+
+<p>HTP 被這樣偷搞很不爽，於是他們就在查到底誰是 FBI 的內鬼。最近終於找到了，他們打進了這個內鬼的電腦，並且打開了 webcam。正好清楚拍到了 FBI 正在對某個 HTP 成員背後下指導棋，然後這個人就被踢出了組織&#8230;</p>
+
+<p>這是到目前的故事。不過這是 HTP 單方面的故事，信不信就隨你了…</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -876,205 +963,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2013/01/30/2013-reading-list/">2013 Ruby on Rails Reading List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-01-30T08:13:00+08:00" pubdate  data-updated="true" >Jan 30<span>th</span>, 2013</time>
-        
-         | <a href="/posts/2013/01/30/2013-reading-list/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2013/01/30/2013-reading-list/" data-show-faces="false"></div></div>
-    
-    <p>Here are the reading marterials I recommend in 2013:</p>
-
-<h2>Basic</h2>
-
-<p>If you are new to Ruby / Rails world, I suggest you take following courses :</p>
-
-<ul>
-<li>Code School <a href="http://www.codeschool.com/courses/try-ruby">Try Ruby</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/try-git">Try Git</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/git-real">Git Real</a></li>
-<li>Peepcode <a href="https://peepcode.com/screencasts">Meet Command Line</a></li>
-<li>Peepcode <a href="https://peepcode.com/products/advanced-command-line">Advanced Command Line</a></li>
-<li>Zed Shaw <a href="http://ruby.learncodethehardway.org/">Learn Ruby The Hard Way</a></li>
-</ul>
-
-
-<h2>Learning Rails</h2>
-
-<p>Use following courses to build a simple application, like a &#8220;forum&#8221;</p>
-
-<ul>
-<li>Code School <a href="http://www.codeschool.com/courses/rails-for-zombies-redux">Rails for Zombies Redux</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/rails-for-zombies-2">Rails for Zombies 2</a></li>
-</ul>
-
-
-<h2>Basic web development</h2>
-
-<ul>
-<li>CodeSchool <a href="http://www.codeschool.com/courses/jquery-air-first-flight">jQuery Air: First Flight</a></li>
-<li>CodeSchool <a href="http://www.codeschool.com/courses/jquery-air-captains-log">jQuery Air: Captain&#8217;s Log</a></li>
-<li>CodeSchool <a href="http://www.codeschool.com/courses/css-cross-country">CSS Cross-Country</a></li>
-<li>Codecademy <a href="http://www.codecademy.com/zh/tracks/javascript">Javascripts</a></li>
-</ul>
-
-
-<h2>Intermediate Ruby on Rails</h2>
-
-<p>( If you are not familer with TDD with Ruby on Rails, these two books might be a good start)</p>
-
-<ul>
-<li>Michael Hartl <a href="http://ruby.railstutorial.org/">Rails Turtorial</a></li>
-<li>Ryan Bigg <a href="http://www.manning.com/bigg2/">Rails in Action 4</a></li>
-</ul>
-
-
-<p>UT on Rails is also a excellent learning material</p>
-
-<ul>
-<li>Schneems <a href="http://schneems.com/ut-rails">UT on Rails</a></li>
-</ul>
-
-
-<h2>Testing</h2>
-
-<ul>
-<li>Code School <a href="http://www.codeschool.com/courses/rails-testing-for-zombies">Rails testing for zombies</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/testing-with-rspec">Testing with Rspec</a></li>
-<li>Noel Rappin <a href="http://pragprog.com/book/nrtest/rails-test-prescriptions">Rails Test Prescriptions: Keeping Your Application Healthy</a></li>
-<li>Thougutbot <a href="https://learn.thoughtbot.com/workshops/18-test-driven-rails">Learn Test-Driven Development using RSpec and Capybara.</a></li>
-</ul>
-
-
-<h2>Advanced web development</h2>
-
-<ul>
-<li>Code School <a href="http://www.codeschool.com/courses/journey-into-mobile">Jounry into Mobile</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/anatomy-of-backbonejs">The Anatomy of Backbone</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/coffeescript">CoffeeScript</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/assembling-sass">Assembling Sass</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/assembling-sass">Assembling Sass Part2</a></li>
-</ul>
-
-
-<h2>Refactoring Ruby / Rails code</h2>
-
-<ul>
-<li>Codschool <a href="http://www.codeschool.com/courses/rails-best-practices">Rails Best Practices</a></li>
-<li>Chad Pytel / Tammer Saleh : <a href="http://railsantipatterns.com/">Rails Antipattern</a></li>
-<li>John Athayde / Bruce Williamsp <a href="http://pragprog.com/book/warv/the-rails-view">The Rails View: Create a Beautiful and Maintainable User Experience</a></li>
-<li>Eric Davis <a href="http://www.refactoringredmine.com/">Refacotoring Redmine</a></li>
-<li>Code Climate <a href="http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/">7 Patterns to Refactor Fat ActiveRecord Models</a></li>
-</ul>
-
-
-<h2>Writing better Ruby code</h2>
-
-<ul>
-<li>Code School <a href="http://www.codeschool.com/courses/ruby-bits">Code Ruby Bits</a></li>
-<li>Code School <a href="http://www.codeschool.com/courses/ruby-bits-part-2">Code Ruby Bits Part 2</a></li>
-<li>David A. Black <a href="http://www.manning.com/black2/">The Well-Grounded Rubyist</a></li>
-<li>Russ Olsen <a href="http://www.amazon.com/Eloquent-Ruby-Addison-Wesley-Professional/dp/0321584104">Eloquent Ruby</a></li>
-<li>Avdi Grimm <a href="http://devblog.avdi.org/2012/06/05/confident-ruby-beta/">Confident Ruby</a></li>
-<li>Avdi Grimm <a href="http://exceptionalruby.com/">Exceptional Ruby</a></li>
-<li>Stefan Kaes <a href="http://www.informit.com/store/writing-efficient-ruby-code-digital-short-cut-9780321540034">Writing Efficient Ruby Code (Digital Short Cut)</a></li>
-</ul>
-
-
-<h3>Podcast / Journal of writing better Ruby/Rails code</h3>
-
-<ul>
-<li><a href="http://devblog.avdi.org/rubytapas/">Ruby Tapas</a></li>
-<li><a href="https://www.destroyallsoftware.com/screencasts">Destroy All Software</a></li>
-<li><a href="https://practicingruby.com/">Practicing Ruby</a></li>
-</ul>
-
-
-<h2>Object-oriend Design in Ruby on Rails</h2>
-
-<ul>
-<li>thoughtbot <a href="https://learn.thoughtbot.com/products/13">Ruby Science</a></li>
-<li>Avdi Grimm <a href="http://objectsonrails.com/">Object on Rails</a></li>
-<li>Russ Olsen <a href="http://www.amazon.com/Design-Patterns-Ruby-Russ-Olsen/dp/0321490452">Design Patterns in Ruby</a></li>
-<li>Jay fields <a href="http://www.amazon.com/Design-Patterns-Ruby-Russ-Olsen/dp/0321490452">Refacoting : Ruby Edition</a></li>
-<li>Sandi Metz <a href="http://www.amazon.com/dp/0321721330">Practical Object-Oriented Design in Ruby: An Agile Primer</a></li>
-</ul>
-
-
-<h2>Know Rails better</h2>
-
-<ul>
-<li>José Valim <a href="http://pragprog.com/book/jvrails/crafting-rails-applications">Crafting Rails Applications: Expert Practices for Everyday Rails Development</a></li>
-<li>Marc-André Cournoyer <a href="http://owningrails.com/">Owning Rails: The Rails Online Master Class</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/299-rails-initialization-walkthrough">Rails Initialization Walkthrough</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/319-rails-middleware-walkthrough">Rails Middleware Walkthrough</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/317-rack-app-from-scratch">Rack App from Scratch</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/349-rails-modularity">Rails Modularity</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/355-hacking-with-arel">Hacking with Arel</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/385-authorization-from-scratch-part-1">Authorization from Scratch Part 1</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/386-authorization-from-scratch-part-2">Authorization from Scratch Part 2</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/395-action-controller-walkthrough">Action Controller Walkthrough</a></li>
-<li>Railscast <a href="http://railscasts.com/episodes/397-action-view-walkthrough">Action View Walkthrough</a></li>
-</ul>
-
-
-<h2>Guideline of writng Ruby / Rails code</h2>
-
-<ul>
-<li><a href="http://www.refactoringredmine.com/">ruby-style-guide</a></li>
-<li><a href="https://github.com/bbatsov/rails-style-guide">rails-style-guide</a></li>
-<li><a href="https://github.com/hopsoft/rails_standards/tree/rails-3-2">rails_standards</a></li>
-<li>thoughtbot <a href="https://github.com/thoughtbot/guides">guides</a></li>
-</ul>
-
-
-<h2>Resources of latest Ruby</h2>
-
-<ul>
-<li><a href="http://ruby5.envylabs.com/">Ruby5</a></li>
-<li><a href="http://rubyweekly.com/">Ruby Weekly</a></li>
-<li><a href="http://www.rubyinside.com/">Ruby Inside</a></li>
-<li><a href="http://www.rubyflow.com/">RubyFlow</a></li>
-<li><a href="http://rubyrogues.com/">RubyRogues</a></li>
-<li><a href="http://learn.thoughtbot.com/podcast">Thoughtbot Podcast</a></li>
-<li><a href="http://railscasts.com/">Railscast</a></li>
-<li><a href="http://www.confreaks.com/">Confreaks</a></li>
-</ul>
-
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1107,6 +995,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/05/08/linode-hacked-htp/">Linode 被 Hack 事件始末</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2013/05/04/rails4-new-feature/">Rails 4: New Feature, Better Syntax</a>
       </li>
     
@@ -1120,10 +1012,6 @@
     
       <li class="post">
         <a href="/posts/2013/05/04/bootstrap-helper-yu-bootstrappers-kai-shi-zhi-yuan-rails-4/">Bootstrap Helper 與 Bootstrappers 開始支援 Rails 4</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/04/20/isis-replace-hubot-as-hipchat-bot/">使用 isis 作為 Hipchat bot 取代 Hubot</a>
       </li>
     
   </ul>
