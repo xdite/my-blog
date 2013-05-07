@@ -31,7 +31,7 @@ TL; DR 版本：Linode 是躺著中槍的路人
 
 本來計畫是這樣的，但是他們發現了一個更棒的洞，直接打下了 Linode ...
 
-這當然很 high 啦。他們當然直接拿下 SwiftIRC 開始中後門。更精彩的是，因為不少站台也放在 Linode，中獎的名單還有： Nmap, Nagios, SQLite, OSTicket,      
+這當然很 high 啦。他們當然直接拿下 SwiftIRC 開始種後門。更精彩的是，因為不少站台也放在 Linode，中獎的名單還有： Nmap, Nagios, SQLite, OSTicket,      
 Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, Pwnie Express, Puppet, and oauth. 
 
 （都是一些超重要的站...）
