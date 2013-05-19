@@ -437,6 +437,10 @@
         <lastmod>2013-05-08T01:33:15+08:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.xdite.net/posts/2013/05/19/one-assertion-per-test/</loc>
+        <lastmod>2013-05-20T00:16:00+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.xdite.net/about/</loc>
         <lastmod>2012-08-03T19:32:59+08:00</lastmod>
     </url>
@@ -446,7 +450,7 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/blog/archives/</loc>
-        <lastmod>2013-05-08T01:33:15+08:00</lastmod>
+        <lastmod>2013-05-20T00:16:00+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/drafted/2012-07-25-some-tips-for-dealing-large-data.html</loc>
@@ -454,7 +458,7 @@
     </url>
     <url>
         <loc>http://blog.xdite.net/</loc>
-        <lastmod>2013-05-08T01:33:15+08:00</lastmod>
+        <lastmod>2013-05-20T00:16:00+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xdite.net/mac-lion-xcode-ruby-rails-192/</loc>
