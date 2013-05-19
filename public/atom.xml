@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-05-20T00:39:31+08:00</updated>
+  <updated>2013-05-20T00:49:45+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -305,25 +305,31 @@
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe</span> <span class="no">Post</span> <span class="k">do</span>
 </span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#xxx&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:alice</span><span class="p">)</span> <span class="p">{</span><span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">alice</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">bob</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">post</span> <span class="o">=</span>  <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>
 </span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#yyy&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:alice</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span> <span class="p">{</span>  <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span>  <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">alice</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">bob</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">post</span> <span class="o">=</span>  <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span>
 </span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#zzz&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:alice</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span> <span class="p">{</span>  <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">alice</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">bob</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">post</span> <span class="o">=</span>  <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span>
 </span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
