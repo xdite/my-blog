@@ -92,7 +92,7 @@ def create
   @post = Post.new(params[:post])
   
   if @post.save
-    urls = URI.extract(content)
+    urls = URI.extract(@post.content)
     urls = urls.uniq 
     urls.each do |url|
       link = @post.links.build(:url => url)
@@ -114,7 +114,7 @@ def create
   @post = Post.new(params[:post])
   
   if @post.save
-	@post.extract_links!
+    @post.extract_links!
     redirect_to posts_path
   else
     render :new

@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-05-20T00:20:25+08:00</updated>
+  <updated>2013-05-20T00:23:14+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -159,7 +159,7 @@
 </span><span class='line'>  <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">if</span> <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>    <span class="n">urls</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">urls</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="vi">@post</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </span><span class='line'>    <span class="n">urls</span> <span class="o">=</span> <span class="n">urls</span><span class="o">.</span><span class="n">uniq</span>
 </span><span class='line'>    <span class="n">urls</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">url</span><span class="o">|</span>
 </span><span class='line'>      <span class="n">link</span> <span class="o">=</span> <span class="vi">@post</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">url</span><span class="p">)</span>
@@ -193,7 +193,7 @@
 </span><span class='line'>  <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">if</span> <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>  <span class="vi">@post</span><span class="o">.</span><span class="n">extract_links!</span>
+</span><span class='line'>    <span class="vi">@post</span><span class="o">.</span><span class="n">extract_links!</span>
 </span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
 </span><span class='line'>  <span class="k">else</span>
 </span><span class='line'>    <span class="n">render</span> <span class="ss">:new</span>
