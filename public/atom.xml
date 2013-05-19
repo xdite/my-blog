@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-05-20T01:14:18+08:00</updated>
+  <updated>2013-05-20T02:17:30+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.xdite.net/posts/2013/05/19/one-assertion-per-test</id>
     <content type="html"><![CDATA[<p>TL; DR : 寫測試兩個鐵律：一次只測一件事情、不要自作聰明幫測試碼 DRY。</p>
 
-<p>最近跟著朋友 <a href="http://twitter.com/knwang">Kevin Wang</a>，現 <a href="http://teahleaf.com">Tealeaf</a> (Ruby on Rails 線上教學公司) 教師，前 <a href="http://hashrocket.com">Hashrocket</a> 工程師，學習寫正統的測試。</p>
+<p>最近跟著朋友 <a href="http://twitter.com/knwang">Kevin Wang</a>，現 <a href="http://goteahleaf.com">Tealeaf</a> (Ruby on Rails 線上教學公司) 教師，前 <a href="http://hashrocket.com">Hashrocket</a> 工程師，學習寫正統的測試。</p>
 
 <p>找老師直接學下來，果然比自己抄一抄外面的 code ，寫出湊合測試，果然神速許多。</p>
 
