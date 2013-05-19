@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-05-20T00:18:58+08:00</updated>
+  <updated>2013-05-20T00:19:37+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -203,7 +203,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>針對 @post.extrat_links 再寫一個 unit test，然後在 controller test 中 mock 掉。</p>
+<p>針對 @post.extrat_links! 再寫一個 unit test，然後在 controller test 中 mock 掉。</p>
 
 <p>一旦不這樣拆，你就會發現「非常難遵守」「One assertion per test」這條定律，更不用說也很難測。當一旦習慣寫 code 拆 method 時，你就會發現程式碼其實會一天一天更乾淨&#8230;.</p>
 
