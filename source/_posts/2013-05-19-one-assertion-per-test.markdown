@@ -183,26 +183,25 @@ DAMP 的原則是要你，在寫測試時 CASE 寫的越清楚越好，甚至「
 
 ``` ruby
 describe Post do 
-  it "#xxx" do 
-    alice = Fabricate(:user) 
-    bob = Fabricate(:user) 
-    post =  Fabricate(:post, :user => alice )
 
-    ...
-
-  end
-  
-  it "#yyy" do 
-    alice = Fabricate(:user) 
-    bob = Fabricate(:user) 
-    post =  Fabricate(:post, :user => alice )
+  describe "#xxx" do 
+    let(:alice) { Fabricate(:user) }
+    let(:bob) = { Fabricate(:user) }
+    let(:post) =  { Fabricate(:post, :user => alice ) } 
     ...
   end
   
-  it "#zzz" do 
-    alice = Fabricate(:user) 
-    bob = Fabricate(:user) 
-    post =  Fabricate(:post, :user => alice ) 
+  describe "#yyy" do 
+    let(:alice) { Fabricate(:user) }
+    let(:bob) = { Fabricate(:user) }
+    let(:post) =  { Fabricate(:post, :user => alice ) } 
+    ...
+  end
+  
+  describe "#zzz" do 
+    let(:alice) { Fabricate(:user) }
+    let(:bob) = { Fabricate(:user) }
+    let(:post) =  { Fabricate(:post, :user => alice ) } 
     ...
   end
 
