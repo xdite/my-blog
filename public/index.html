@@ -205,7 +205,7 @@
 <span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describle</span> <span class="s2">&quot;GET show&quot;</span> <span class="k">do</span>
 </span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">)}</span>
-</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:comment</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:comment</span><span class="p">,</span> <span class="ss">:post</span> <span class="o">=&gt;</span> <span class="n">post</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:comment</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:comment</span><span class="p">,</span> <span class="ss">:post</span> <span class="o">=&gt;</span> <span class="n">post</span><span class="p">)</span> <span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;assgin @post variable and assigns @comments to @post.comments and render show&#39;s view &quot;</span> <span class="k">do</span>
 </span><span class='line'>    <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="n">post</span>

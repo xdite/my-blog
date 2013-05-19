@@ -72,7 +72,7 @@ end
 ``` ruby
 describle "GET show" do 
   let(:post) { Fabricate(:post)} 
-  let(:comment) = { Fabricate(:comment, :post => post) } 
+  let(:comment) { Fabricate(:comment, :post => post) } 
   
   it "assgin @post variable and assigns @comments to @post.comments and render show's view " do 
     get :show, :id => post
