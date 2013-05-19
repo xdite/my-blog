@@ -54,7 +54,7 @@ describle "GET show" do
     assigns(:post).should == post
   nd
   
-  it "assigns @comments to @post.comments  do 
+  it "assigns @comments to @post.comments"  do 
     get :show, :id => post
     assigns(:comments).should == [comment]
   end
