@@ -156,13 +156,15 @@ describe Post do
   end
 
   it "#xxx" do 
-     …..
+    ...
   end
   
   it "#yyy" do 
+    ...
   end
   
   it "#zzz" do 
+    ...
   end
 
 end
@@ -185,21 +187,21 @@ describe Post do
     let(:alice) { user = Fabricate(:user) } 
     let(:bob) { user = Fabricate(:user) } 
     let(:post) { post = Fabricate(:post, :user => alice ) }    
-    …..
+    ...
   end
   
   it "#yyy" do 
     let(:alice) { user = Fabricate(:user) } 
     let(:bob) { user = Fabricate(:user) } 
     let(:post) { post = Fabricate(:post, :user => alice ) }  
-    …..  
+    ...
   end
   
   it "#zzz" do 
     let(:alice) { user = Fabricate(:user) } 
     let(:bob) { user = Fabricate(:user) } 
     let(:post) { post = Fabricate(:post, :user => alice ) }    
-    …..
+    ...
   end
 
 end
