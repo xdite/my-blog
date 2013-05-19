@@ -8,7 +8,7 @@ categories:
 
 TL; DR : 寫測試兩個鐵律：一次只測一件事情、不要自作聰明幫測試碼 DRY。
 
-最近跟著朋友 [Kevin Wang](http://twitter.com/knwang)，現 [Tealeaf](http://goteahleaf.com) (Ruby on Rails 線上教學公司) 教師，前 [Hashrocket](http://hashrocket.com) 工程師，學習寫正統的測試。
+最近跟著朋友 [Kevin Wang](http://twitter.com/knwang)，現 [Tealeaf](http://gotealeaf.com) (Ruby on Rails 線上教學公司) 教師，前 [Hashrocket](http://hashrocket.com) 工程師，學習寫正統的測試。
 
 找老師直接學下來，果然比自己抄一抄外面的 code ，寫出湊合測試，果然神速許多。
 
