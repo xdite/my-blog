@@ -52,7 +52,7 @@ describle "GET show" do
   it "assgin @post variable" do 
     get :show, :id => post
     assigns(:post).should == post
-  nd
+  end
   
   it "assigns @comments to @post.comments"  do 
     get :show, :id => post
