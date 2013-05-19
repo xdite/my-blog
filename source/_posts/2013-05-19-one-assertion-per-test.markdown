@@ -150,9 +150,9 @@ DRY 在寫程式時是一個很重要的好原則沒錯，它的作用是讓程�
 ``` ruby
 describe Post do 
   before do 
-    let(:alice) { Fabricate(:user) } 
-    let(:bob) {  Fabricate(:user) } 
-    let(:post) { Fabricate(:post, :user => alice ) }    
+    alice = Fabricate(:user) 
+    bob = Fabricate(:user) 
+    post =  Fabricate(:post, :user => alice )
   end
 
   it "#xxx" do 
@@ -187,7 +187,6 @@ describe Post do
     alice = Fabricate(:user) 
     bob = Fabricate(:user) 
     post =  Fabricate(:post, :user => alice )
-
 
     ...
 
