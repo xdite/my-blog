@@ -150,9 +150,9 @@ DRY 在寫程式時是一個很重要的好原則沒錯，它的作用是讓程�
 ``` ruby
 describe Post do 
   before do 
-    let(:alice) { user = Fabricate(:user) } 
-    let(:bob) { user = Fabricate(:user) } 
-    let(:post) { post = Fabricate(:post, :user => alice ) }    
+    let(:alice) { Fabricate(:user) } 
+    let(:bob) {  Fabricate(:user) } 
+    let(:post) { Fabricate(:post, :user => alice ) }    
   end
 
   it "#xxx" do 
@@ -184,23 +184,23 @@ DAMP 的原則是要你，在寫測試時 CASE 寫的越清楚越好，甚至「
 ``` ruby
 describe Post do 
   it "#xxx" do 
-    let(:alice) { user = Fabricate(:user) } 
-    let(:bob) { user = Fabricate(:user) } 
-    let(:post) { post = Fabricate(:post, :user => alice ) }    
+    let(:alice) {Fabricate(:user) } 
+    let(:bob) { Fabricate(:user) } 
+    let(:post) { Fabricate(:post, :user => alice ) }    
     ...
   end
   
   it "#yyy" do 
-    let(:alice) { user = Fabricate(:user) } 
-    let(:bob) { user = Fabricate(:user) } 
-    let(:post) { post = Fabricate(:post, :user => alice ) }  
+    let(:alice) { Fabricate(:user) } 
+    let(:bob) {  Fabricate(:user) } 
+    let(:post) {  Fabricate(:post, :user => alice ) }  
     ...
   end
   
   it "#zzz" do 
-    let(:alice) { user = Fabricate(:user) } 
-    let(:bob) { user = Fabricate(:user) } 
-    let(:post) { post = Fabricate(:post, :user => alice ) }    
+    let(:alice) { Fabricate(:user) } 
+    let(:bob) {  Fabricate(:user) } 
+    let(:post) { Fabricate(:post, :user => alice ) }    
     ...
   end
 
