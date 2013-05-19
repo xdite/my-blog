@@ -35,7 +35,7 @@ One assertion per test 講的其實是：一個測試必須只驗證一件事。
 
 這是指就算是你的程式碼只有下面幾行的話
 
-```
+``` ruby
 def show
   @post = Post.find(params[:id])
   @comments = @post.comments 
@@ -44,7 +44,7 @@ end
 
 你也必須這樣拆開測
 
-```
+``` ruby
 describle "GET show" do 
   let(:post) { Fabricate(:post)} 
   let(:comment) { Fabricate(:comment, :post => post) } 
@@ -69,7 +69,7 @@ end
 
 而不是擠在一起。如同下面這個測試。
 
-```
+``` ruby
 describle "GET show" do 
   let(:post) = Fabricate(:post)
   let(:comment) = Fabricate(:comment, :post => post)
@@ -86,7 +86,7 @@ end
 
 為什麼守著這個原則這麼重要呢？因為當你在寫類似以下程式碼時
 
-```
+``` ruby
 def create
 
   @post = Post.new(params[:post])
@@ -108,7 +108,7 @@ end
 
 就會下意識的改寫成
 
-```
+``` ruby
 def create
 
   @post = Post.new(params[:post])
