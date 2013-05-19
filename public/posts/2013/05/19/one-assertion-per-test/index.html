@@ -130,19 +130,20 @@
 
 <p>這是指就算是你的程式碼只有下面幾行的話</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>def show
-</span><span class='line'>  @post = Post.find(params[:id])
-</span><span class='line'>  @comments = @post.comments 
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>  <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@comments</span> <span class="o">=</span> <span class="vi">@post</span><span class="o">.</span><span class="n">comments</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>你也必須這樣拆開測</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -162,31 +163,32 @@
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>describle "GET show" do 
-</span><span class='line'>  let(:post) { Fabricate(:post)} 
-</span><span class='line'>  let(:comment) { Fabricate(:comment, :post =&gt; post) } 
-</span><span class='line'>  
-</span><span class='line'>  it "assgin @post variable" do 
-</span><span class='line'>    get :show, :id =&gt; post
-</span><span class='line'>    assigns(:post).should == post
-</span><span class='line'>  nd
-</span><span class='line'>  
-</span><span class='line'>  it "assigns @comments to @post.comments  do 
-</span><span class='line'>    get :show, :id =&gt; post
-</span><span class='line'>    assigns(:comments).should == [comment]
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>  it "render show's view" do 
-</span><span class='line'>    get :show, :id =&gt; post
-</span><span class='line'>    response.should render_tempate :show
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describle</span> <span class="s2">&quot;GET show&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">)}</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:comment</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:comment</span><span class="p">,</span> <span class="ss">:post</span> <span class="o">=&gt;</span> <span class="n">post</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;assgin @post variable&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="n">post</span>
+</span><span class='line'>    <span class="n">assigns</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="n">post</span>
+</span><span class='line'>  <span class="n">nd</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;assigns @comments to @post.comments  do </span>
+</span><span class='line'><span class="s2">    get :show, :id =&gt; post</span>
+</span><span class='line'><span class="s2">    assigns(:comments).should == [comment]</span>
+</span><span class='line'><span class="s2">  end</span>
+</span><span class='line'><span class="s2">  </span>
+</span><span class='line'><span class="s2">  it &quot;</span><span class="n">render</span> <span class="n">show</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">view</span><span class="s2">&quot; do </span>
+</span><span class='line'><span class="s2">    get :show, :id =&gt; post</span>
+</span><span class='line'><span class="s2">    response.should render_tempate :show</span>
+</span><span class='line'><span class="s2">  end</span>
+</span><span class='line'><span class="s2">  </span>
+</span><span class='line'><span class="s2">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>而不是擠在一起。如同下面這個測試。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -198,23 +200,24 @@
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>describle "GET show" do 
-</span><span class='line'>  let(:post) = Fabricate(:post)
-</span><span class='line'>  let(:comment) = Fabricate(:comment, :post =&gt; post)
-</span><span class='line'>  
-</span><span class='line'>  it "assgin @post variable and assigns @comments to @post.comments and render show's view " do 
-</span><span class='line'>    get :show, :id =&gt; post
-</span><span class='line'>    assigns(:post).should == post
-</span><span class='line'>    assigns(:comments).should == [comment]
-</span><span class='line'>    response.should render_tempate :show
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describle</span> <span class="s2">&quot;GET show&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:comment</span><span class="p">)</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:comment</span><span class="p">,</span> <span class="ss">:post</span> <span class="o">=&gt;</span> <span class="n">post</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;assgin @post variable and assigns @comments to @post.comments and render show&#39;s view &quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">get</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="n">post</span>
+</span><span class='line'>    <span class="n">assigns</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="n">post</span>
+</span><span class='line'>    <span class="n">assigns</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="o">[</span><span class="n">comment</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">render_tempate</span> <span class="ss">:show</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>為什麼守著這個原則這麼重要呢？因為當你在寫類似以下程式碼時</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -231,28 +234,29 @@
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>def create
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
 </span><span class='line'>
-</span><span class='line'>  @post = Post.new(params[:post])
-</span><span class='line'>  
-</span><span class='line'>  if @post.save
-</span><span class='line'>    urls = URI.extract(content)
-</span><span class='line'>    urls = urls.uniq 
-</span><span class='line'>    urls.each do |url|
-</span><span class='line'>      link = @post.links.build(:url =&gt; url)
-</span><span class='line'>      link.save
-</span><span class='line'>    end
-</span><span class='line'>    redirect_to posts_path
-</span><span class='line'>  else
-</span><span class='line'>    render :new
-</span><span class='line'>  end
-</span><span class='line'>      
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="n">urls</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">urls</span> <span class="o">=</span> <span class="n">urls</span><span class="o">.</span><span class="n">uniq</span>
+</span><span class='line'>    <span class="n">urls</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">url</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">link</span> <span class="o">=</span> <span class="vi">@post</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">url</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">link</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">render</span> <span class="ss">:new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>就會下意識的改寫成</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -264,18 +268,19 @@
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>def create
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
 </span><span class='line'>
-</span><span class='line'>  @post = Post.new(params[:post])
-</span><span class='line'>  
-</span><span class='line'>  if @post.save
-</span><span class='line'>  @post.extract_links!
-</span><span class='line'>    redirect_to posts_path
-</span><span class='line'>  else
-</span><span class='line'>    render :new
-</span><span class='line'>  end
-</span><span class='line'>      
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>  <span class="vi">@post</span><span class="o">.</span><span class="n">extract_links!</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">posts_path</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">render</span> <span class="ss">:new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>針對 @post.extrat_links 再寫一個 unit test，然後在 controller test 中 mock 掉。</p>
@@ -304,7 +309,7 @@
 
 <p>很可能就會寫出這樣的測試碼：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -322,24 +327,25 @@
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>describe Post do 
-</span><span class='line'>  before do 
-</span><span class='line'>    let(:alice) { user = Fabricate(:user) } 
-</span><span class='line'>    let(:bob) { user = Fabricate(:user) } 
-</span><span class='line'>    let(:post) { post = Fabricate(:post, :user =&gt; alice ) }    
-</span><span class='line'>  end
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe</span> <span class="no">Post</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">before</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:alice</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>  it "#xxx" do 
-</span><span class='line'>     …..
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>  it "#yyy" do 
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>  it "#zzz" do 
-</span><span class='line'>  end
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#xxx&quot;</span> <span class="k">do</span>
+</span><span class='line'>     <span class="err">âŚ</span><span class="o">.</span><span class="n">.</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#yyy&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#zzz&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>這，就，慘，了。</p>
@@ -352,7 +358,7 @@
 
 <p>DAMP 的原則是要你，在寫測試時 CASE 寫的越清楚越好，甚至「多行重複」也沒有關係。也就是以上的程式碼我們應該改成：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -375,29 +381,30 @@
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>describe Post do 
-</span><span class='line'>  it "#xxx" do 
-</span><span class='line'>    let(:alice) { user = Fabricate(:user) } 
-</span><span class='line'>    let(:bob) { user = Fabricate(:user) } 
-</span><span class='line'>    let(:post) { post = Fabricate(:post, :user =&gt; alice ) }    
-</span><span class='line'>    …..
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>  it "#yyy" do 
-</span><span class='line'>    let(:alice) { user = Fabricate(:user) } 
-</span><span class='line'>    let(:bob) { user = Fabricate(:user) } 
-</span><span class='line'>    let(:post) { post = Fabricate(:post, :user =&gt; alice ) }  
-</span><span class='line'>    …..  
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>  it "#zzz" do 
-</span><span class='line'>    let(:alice) { user = Fabricate(:user) } 
-</span><span class='line'>    let(:bob) { user = Fabricate(:user) } 
-</span><span class='line'>    let(:post) { post = Fabricate(:post, :user =&gt; alice ) }    
-</span><span class='line'>    …..
-</span><span class='line'>  end
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe</span> <span class="no">Post</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#xxx&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:alice</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="err">âŚ</span><span class="o">.</span><span class="n">.</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#yyy&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:alice</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="err">âŚ</span><span class="o">.</span><span class="n">.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;#zzz&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:alice</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="o">=</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="err">âŚ</span><span class="o">.</span><span class="n">.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>它的原則是：開發者要儘量讓寫的每一個測試「環境獨立」。不要被其他測試環境變數的改變，也被影響到。</p>
