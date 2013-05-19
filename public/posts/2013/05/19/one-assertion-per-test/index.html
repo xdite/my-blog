@@ -390,8 +390,8 @@
 </span><span class='line'>
 </span><span class='line'>  <span class="n">describe</span> <span class="s2">&quot;#xxx&quot;</span> <span class="k">do</span>
 </span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:alice</span><span class="p">)</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span> <span class="o">=</span>  <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:bob</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">let</span><span class="p">(</span><span class="ss">:post</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Fabricate</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">alice</span> <span class="p">)</span> <span class="p">}</span>
 </span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
