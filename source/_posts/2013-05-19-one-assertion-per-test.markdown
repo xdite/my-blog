@@ -186,22 +186,22 @@ describe Post do
 
   describe "#xxx" do 
     let(:alice) { Fabricate(:user) }
-    let(:bob)  { Fabricate(:user) }
-    let(:post)  { Fabricate(:post, :user => alice ) } 
+    let(:bob) { Fabricate(:user) }
+    let(:post) { Fabricate(:post, :user => alice ) } 
     ...
   end
   
   describe "#yyy" do 
     let(:alice) { Fabricate(:user) }
-    let(:bob) = { Fabricate(:user) }
-    let(:post) =  { Fabricate(:post, :user => alice ) } 
+    let(:bob) { Fabricate(:user) }
+    let(:post)  { Fabricate(:post, :user => alice ) } 
     ...
   end
   
   describe "#zzz" do 
     let(:alice) { Fabricate(:user) }
-    let(:bob) = { Fabricate(:user) }
-    let(:post) =  { Fabricate(:post, :user => alice ) } 
+    let(:bob)  { Fabricate(:user) }
+    let(:post)  { Fabricate(:post, :user => alice ) } 
     ...
   end
 
