@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-05-20T00:33:08+08:00</updated>
+  <updated>2013-05-20T00:35:53+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -38,7 +38,7 @@
 
 <p>就可以解決 80% 的問題。</p>
 
-<p>只是我以前從來就不知道這兩條原則不是寫好玩的，而是寫測試的「鐵律」。</p>
+<p>只是我以前從來就不知道這兩條原則不是寫好玩的（指選擇性遵守），而是寫測試的「鐵律」。</p>
 
 <p>只要你嚴格守住第一條線「One assertion per test」，你的程式碼就會變得非常乾淨。守住第二條線「DAMP not DRY」，你的測試碼就會變得非常好維護。</p>
 
