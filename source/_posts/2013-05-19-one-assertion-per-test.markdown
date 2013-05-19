@@ -71,8 +71,8 @@ end
 
 ``` ruby
 describle "GET show" do 
-  let(:post) = Fabricate(:post)
-  let(:comment) = Fabricate(:comment, :post => post)
+  let(:post) { Fabricate(:post)} 
+  let(:comment) = { Fabricate(:comment, :post => post) } 
   
   it "assgin @post variable and assigns @comments to @post.comments and render show's view " do 
     get :show, :id => post
@@ -123,7 +123,7 @@ def create
 end
 ```
 
-針對 @post.extrat_links 再寫一個 unit test，然後在 controller test 中 mock 掉。
+針對 @post.extrat_links! 再寫一個 unit test，然後在 controller test 中 mock 掉。
 
 一旦不這樣拆，你就會發現「非常難遵守」「One assertion per test」這條定律，更不用說也很難測。當一旦習慣寫 code 拆 method 時，你就會發現程式碼其實會一天一天更乾淨....
 
