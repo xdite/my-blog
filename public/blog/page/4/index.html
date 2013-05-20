@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  朋友的公司最近遇到一些公司成長上的問題。這些問題搞的他很頭大，於是也請我幫他想想辦法。看問題到底是出在哪裡…公司裡面的員工，在當初面試時都沒什麼異狀，但進來之後有一些工作上的問題搞得他頭很大。原因是有些人的職能明顯有落差（也就是當初面試進來時，是希望他補上這...">
+  <meta name="description" content="                  這是我今天在 Ruby Tuesday #21 所寫的投影片。以下文章是寫投影片前已經擬好的草稿。可以配著服用Rails Developer 在使用內建工具開發網站時，若是由小做起，通常不會踩到這些雷。但是若一開始開站資料就預計會有 10 萬筆、甚至 100...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,316 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/08/22/rails-with-massive-data/">Rails-with-massive-data</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-22T00:20:00+08:00" pubdate  data-updated="true" >Aug 22<span>nd</span>, 2012</time>
+        
+         | <a href="/posts/2012/08/22/rails-with-massive-data/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/08/22/rails-with-massive-data/" data-show-faces="false"></div></div>
+    
+    <p>這是我今天在 Ruby Tuesday #21 所寫的投影片。以下文章是寫投影片前已經擬好的草稿。可以配著服用</p>
+
+<script async class="speakerdeck-embed" data-id="5030bd74edfca8000202c365" data-ratio="1.299492385786802" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>Rails Developer 在使用內建工具開發網站時，若是由小做起，通常不會踩到這些雷。但是若一開始開站資料就預計會有 10 萬筆、甚至 100 萬筆資料。執行 db 的 rake task 通常往往會令人痛苦不堪。</p>
+
+<p>在這篇文章內，我整理了一些處理巨量資料必須注意的細節，應該可以有效解決大家常遇到的問題：</p>
+
+<h3>1. 盡量避免使用 ActiveRecord Object</h3>
+
+<p>ActiveRecord 當初的設計目的是為了框架內「商業使用」。它的工作是將純資料化為具有商業邏輯的 Ruby Object，並且配合框架，設計了多層 callbacks。</p>
+
+<p>簡單來說，它並不是為了「處理 raw data」而設計。如果開發者只是要作一些簡單的資料操作，建議的方式請直接下 SQL，不要沾到任何 ActiveRecord。</p>
+
+<p>（但大多數開發者直覺都是會開 ActiveRecord 下了條件就直接跑迴圈，忘記 MySQL 是可以直接拿來下指令的）</p>
+
+<p>當然，沒有 ActiveRecord 這麼抽象化的工具，下純指令也是蠻痛苦的一件事，我推薦可以換用 <a href="http://sequel.rubyforge.org/">sequel</a> 這套工具試看看。</p>
+
+<p>再者，在實務操作上我也建議避免使用 ActiveRecord + 內建的 rake task 操作巨量資料。原因是，開發者會順帶會把整套的 Rails 環境都載進來跑，其慢無比是正常的…</p>
+
+<h3>2. 有 update_all 可以用，少用 for / each。</h3>
+
+<p>通常會出問題的 code 是長這樣的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:board_id</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">board_id</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這段 code 非常直觀，但會造成許多的問題。如果符合的條件有 10 萬筆，大概放著跑一天都跑不完&#8230;.</p>
+
+<p>先提供快速解法。Rails 提供了 <a href="http://apidock.com/rails/ActiveRecord/Base/update_all/class">update_all</a> 可以下。可以改成這樣</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">update_all</span><span class="p">({</span><span class="ss">:board_id</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="ss">:board_id</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>基本上就是等於直接幫你下 update 的 SQL 啦。同樣資料量跑下去大概只要 10 秒秒以下左右吧。</p>
+
+<h3>3. 不要傻傻的直接 Post.all.each，可以用 find_in_batches</h3>
+
+<p>直接叫出所有符合的資料（Array) 是一件危險的事。如果符合條件的資料是 10 萬筆，全拉出來有高達 10G 的大小，嗯…我想機器沒個 10 G 以上的記憶體，指令下去機器直接跑到死掉有極大的可能性…</p>
+
+<p>Rails 提供了 find_in_batches</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">find_in_batches</span><span class="p">(</span><span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s2">&quot;board_id = 5&quot;</span><span class="p">,</span> <span class="ss">:batch_size</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">posts</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">posts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">board_id</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果沒下 batch_size 預設一次是拉 2000 筆。可以一次指定小一點的數目，如一次 500 筆去跑。</p>
+
+<h3>4. 使用 transaction 跳過每次都要 BEGIN COMMIT 的過程，一次做完 1000 筆，然後再 COMMIT。</h3>
+
+<p>打開 Rails 的 development.log，這樣的 LOG 應該對你不陌生。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="n">ms</span><span class="p">)</span>  <span class="k">BEGIN</span>
+</span><span class='line'>   <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="no">COMMIT</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rails 開發時，為了確保每比資料正確性，儲存的時候都會過一次 transaction，於是即使已經照 <code>3</code> 這樣的解法，還是要過 10 萬次 COMMIT BEGIN。很浪費時間。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">find_in_batches</span><span class="p">(</span><span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s2">&quot;board_id = 5&quot;</span><span class="p">,</span> <span class="ss">:batch_size</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">posts</span><span class="o">|</span>
+</span><span class='line'>  <span class="no">Post</span><span class="o">.</span><span class="n">transaction</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">posts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">post</span><span class="o">.</span><span class="n">board_id</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="n">post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你只是要 update 少量欄位，而且資料處於離線狀態，可以使用 <a href="http://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html">Transactions</a> 搭配 find_in_batches，做完兩千筆再一次 commit，而不是每次做完就 commit 一次，在資料量很大的狀況下也可以節省不少時間。</p>
+
+<h3>5. 使用 update_column / sneacky-save 而非原生 save</h3>
+
+<p>用原生 <code>save</code> 會有什麼問題呢？原生的 <code>save</code> 在資料儲存時，會經過一堆 <code>validator</code> 和 <code>callbacks</code>，即使你只是要簡單 update 一個欄位，會觸發到一狗票東西（假設 10 道 hook），那 10 萬筆就是過 100 萬道 hook 了啊。天啊 /_\，機器死掉不意外。</p>
+
+<p>如果你想要閃掉 hook 的話，可以使用 update_column，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">posts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">update_column</span><span class="p">(</span><span class="ss">:board</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>但 update_column 的缺點是一次只能 update 一個欄位，如果你有 update 多個欄位的需求，可以用<a href="https://github.com/partyearth/sneaky-save">sneacky-save</a> 這套 gem。</p>
+
+<p>如其名，sneacky-save 偷偷儲存不會勾動任何天雷地火。</p>
+
+<h3>6. 可以的話使用 Post.select(&#8220;column 1, colum2&#8221;).where</h3>
+
+<p>很多人會忽略一件事，<code>Post.where("id &lt; 10")</code>，其實是把這 10 個 object 拉出 database。Post 裡面有什麼呢？會有幾千字的 <code>content</code> 啊。所以當你下了這道 comment 後，拉出來的是這些內容</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">18</span><span class="o">.</span><span class="mi">8</span><span class="n">ms</span><span class="p">)</span>  <span class="no">SELECT</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">*</span> <span class="no">FROM</span> <span class="sb">`posts`</span> <span class="no">WHERE</span> <span class="p">(</span><span class="nb">id</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>拉出 10 萬筆會發生什麼事呢？(炸)</p>
+
+<p>所以這也是我建議如果你沒有複雜操作（相依高度 model 邏輯）需要的話，千萬別碰 ActiveRecord，因為你不會知道會按下哪一顆核彈按鈕。</p>
+
+<h3>7. 使用 delegate 把大資料搬出去</h3>
+
+<p>ActiveRecord 裡面有 delegate 這個 API。如果你嫌要 <code>Post.select("column 1, colum2").where</code> 這樣東閃西閃很麻煩，還是希望使用 <code>SELECT post.*</code>。那麼不妨可以換一個思路，把肥的 column 丟到另外一個 table，再用 delegate 接起來。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">has_one</span> <span class="ss">:meta</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:create_meta</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">deleage</span> <span class="ss">:content</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="ss">:meta</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>8. 操作資料前，別忘記打 INDEX</h3>
+
+<p>舉凡操作資料，多半是至少會先下個 condition。再看是直接用 SQL 處理掉還是跑迴圈。不過一般開發者最會中地雷的部分就是</p>
+
+<ul>
+<li>忘記打 index</li>
+</ul>
+
+
+<p>忘記打 index 下 condition ，就會引發 table scan，這當然會很慢啊 /_\</p>
+
+<ul>
+<li>對 varchar(255) 直接打 index</li>
+</ul>
+
+
+<p>使用 Rails 產生的 varchar，多半是 varchar(255)，很少有人會直接去改長度的。而且使用 Rails 直接打的 index，也就是全長的 index 打下去了。效率爛到炸掉。</p>
+
+<p>可以用這招 <a href="http://blog.gslin.org/archives/2012/07/17/2911/%e5%b0%8d-mysql-%e7%9a%84-varchar-%e6%ac%84%e4%bd%8d%e4%bd%bf%e7%94%a8-index-%e6%99%82%e5%8f%af%e4%bb%a5%e5%a2%9e%e5%8a%a0%e6%95%88%e7%8e%87%e7%9a%84%e6%96%b9%e6%b3%95/">index 可以指定只取前面 n chars</a> 的方式增進效率</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ALTER</span> <span class="no">TABLE</span> <span class="n">post</span> <span class="no">DROP</span> <span class="no">INDEX</span> <span class="no">PTitle</span><span class="p">,</span> <span class="no">ADD</span> <span class="no">INDEX</span><span class="p">(</span><span class="no">PTitle</span><span class="p">(</span><span class="mi">13</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Percona 前幾天也有一個 talk 是 <a href="http://www.percona.tv/percona-webinars/mysql-indexing-best-practices">MySQL Indexing Best Practices</a>，值得參考。</p>
+
+<h3>9.  delete / destroy，刪除很昂貴。確保你知道自己在幹什麼。</h3>
+
+<p>首先第一件事要分清楚 delete 和 destroy 有什麼不同。</p>
+
+<ul>
+<li>destroy 刪除資料並 go through callbacks</li>
+<li>delete 刪除資料，不過任何 callbacks</li>
+</ul>
+
+
+<p>所以要刪除資料前，請確認你用的是何種「刪除」。</p>
+
+<p>destroy_all 和 delete_all 也是類似的原則。</p>
+
+<ul>
+<li><a href="http://apidock.com/rails/ActiveRecord/Base/destroy_all/class">destroy_all</a></li>
+</ul>
+
+
+<p>找到符合特徵的紀錄，然後呼叫 destroy method。在這個動作中會引發 <code>callbacks</code> ….orz</p>
+
+<ul>
+<li><a href="http://apidock.com/rails/ActiveRecord/Base/delete_all/class">deletea_all</a></li>
+</ul>
+
+
+<p>找到符合特徵的紀錄，刪掉，但不觸發 <code>callbacks</code>。</p>
+
+<p>不過如果你真的要「清空 DB」。不要用 delete_all，MySQL 提供了：TRUNCATE 給你用。請用這個&#8230;</p>
+
+<ul>
+<li>TRUNCATE TABLE</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;TRUNCATE TABLE </span><span class="si">#{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>雖然 delete 不觸發 callbacks，但是「刪除」DELETE 真的很慢，因為
+DELETE 涉及到會 update index，所以會…很慢。<a href="http://stackoverflow.com/questions/4020240/in-mysql-is-it-faster-to-delete-and-then-insert-or-is-it-faster-to-update-exist">http://stackoverflow.com/questions/4020240/in-mysql-is-it-faster-to-delete-and-then-insert-or-is-it-faster-to-update-exist</a></p>
+
+<p>如果你的資料要作大量的刪除動作，有兩種思路可以繞。</p>
+
+<p>一個是使用軟性刪除 soft_delete，也就是加上標記標示已刪除，但實質上不從資料庫刪除資料，只 update 會比 delete 快一點。有 <a href="https://github.com/winton/acts_as_archive">acts_as_archive</a> 可以用。</p>
+
+<p>另外一個想法是：與其用刪的 (DELETE) 不如用 塞的 (INSERT)</p>
+
+<p>開一個新的 Table，用倒的，把 match 的 record 塞到新的 DB 去。INSERT 比 DELETE 快太多了。</p>
+
+<h3>10. 無法避免的昂貴操作丟到 background job 去操作。</h3>
+
+<p>使用 <code>posts.each</code> 是一個昂貴的線性操作。這個 process 會無限的膨脹及 block 資源。</p>
+
+<p>所以可以改用一個作法，使用 background job 如</p>
+
+<ul>
+<li><a href="https://github.com/collectiveidea/delayed_job">delayed_job</a> (不推薦)</li>
+<li><a href="https://github.com/defunkt/resque/">resque</a></li>
+<li><a href="http://mperham.github.com/sidekiq/">sidekiq</a></li>
+</ul>
+
+
+<p>把昂貴的操作包成獨立事件。塞進 queue 裡面，丟到背景跑，然後開 10 支 worker，十箭其發，速度可以快不少。</p>
+
+<p>之所以把 delayed_job 列出來又不推薦的原因是因為 delayed_job 清 queue 的方式是用 DELETE，在第九點我們談過了，在有大量資料的情況下，「刪除」這件事會非常昂貴。使用 delayed_job 無異是拿汽油澆火。</p>
+
+<h2>結論</h2>
+
+<p>十點列下來。我的建議是，如果你手上的資料量大到一個程度，能儘量回歸基本(SQL command)就回歸基本。因為使用 ActiveRecord ，開發者永遠不知道自己什麼時候會按下核爆彈的按鈕啊…</p>
+
+<h4>其他</h4>
+
+<p>目前我們固定在禮拜二，都會在 松江路的田中園 上舉辦 <a href="http://www.meetup.com/taipei-rails-meetup/">Taipei Rails Meetup</a>。我自己本身也會固定在這裡免費幫大家解答 Rails 與 Web Operation 相關的問題。而坦白說，最近一些比較經典的 Post 也是從聚會裡的問答集裡面萃取出來的。</p>
+
+<p>如果你對 Rails 有濃厚的興趣又住在台北，歡迎每週加入我們，謝謝！</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1433,244 +1743,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-07-30T02:12:00+08:00" pubdate  data-updated="true" >Jul 30<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/" data-show-faces="false"></div></div>
-    
-    <p>權限存取設計是在開發 Application 中相當讓人棘手的一個題目。</p>
-
-<p>在一個網站開始建設的初期，通常這樣的問題並不會浮現，畢竟一般人的需求大半只會有 user 和 admin 兩種角色。但是隨著網站長大，更多的生意需求浮現，第三種角色的出現，通常就會把原本乾淨的 code 弄得骯髒不堪。</p>
-
-<h2>多種角色的權限設計難題</h2>
-
-<p>當只有 user 和 admin 的情況下，你可以在 <code>view</code> 裡面單純的做出這樣的設計</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_admin</span> <span class="p">?</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;Admin Pannel&quot;</span><span class="p">,</span> <span class="n">admin_panel_path</span> <span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>並且在 controller 裡面加上權限判斷</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Admin</span><span class="o">::</span><span class="no">ArticleController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:require_is_admin</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但一段時間之後，User Story 被加進了這樣的需求:</p>
-
-<ul>
-<li>使用者可以被設定為「editor」</li>
-<li>擁有「editor」角色的使用者，可以進入 admin 後台發表、編輯文章</li>
-<li>擁有「edtior」角色的使用者，進入 admin 後台內的活動範圍僅限縮在文章後台內</li>
-<li>擁有「edtior」角色的使用者，進入 admin 後台內，不可以看到其他後台選項。</li>
-</ul>
-
-
-<p>身為開發者的你，要如何在現有後台內加入這樣的設計？</p>
-
-<p>不用實際動手寫也知道，若如以往使用 if / else 的設計，Helper / Controller / View 鐵定變成一團血肉模糊。</p>
-
-<p>抱怨不能解決問題，但世界上是否存在乾淨的解答？</p>
-
-<h2>Rule-engine based authorization library: Cancan</h2>
-
-<p>答案就是：「Rule Engine」。</p>
-
-<p>「針對多種條件執行多種動作」，此類的使用者需求，無論是使用 if / else，甚至是 case when，架構還是不免會一團混亂。與其承襲舊思路，不如啟用新想法「Rule Engine」實作：預先設計撰寫一套邏輯規則引擎，而後程式針對預設的規則進行邏輯判斷後執行。</p>
-
-<p>而「角色權限」的設計需求上，正特別適合用 Rule Engine 這樣的觀念去建構。Rails 界知名的 authorization library <a href="https://github.com/ryanb/cancan">cancan</a> 正是以此作為基礎。</p>
-
-<h3>Cancan 可以做到的：介面單純化</h3>
-
-<p>cancan 希望做到的是，把權限判定的處理部分從 Helper / Controller / View 裡面，全部移到 <code>app/models/ability.rb</code> 進行判定。也因此可以做到</p>
-
-<ul>
-<li>View 只需要判斷是否可以執行動作，而不必問是否有權限</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">can?</span> <span class="ss">:update</span><span class="p">,</span> <span class="vi">@article</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">edit_article_path</span><span class="p">(</span><span class="vi">@article</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Controller 不需要手動判斷是否具有權限</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">authorize_resource</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
-</span><span class='line'>    <span class="c1"># @article is already authorized</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但驚人的是 <strong> view 的權限會是與 controller 的權限判定規則 </strong> 卻是一致的。（以往「自刻」權限判定，往往加了 view 卻會忘記 controller, 加了 controller 卻會忘記 view ）</p>
-
-<h3>Cancan 希望做到的：權限中心化管理</h3>
-
-<p>而是否有權限存取，則全交給 <code>app/models/ability.rb</code> 去判斷處理。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Ability</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">CanCan</span><span class="o">::</span><span class="no">Ability</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">blank?</span>
-</span><span class='line'>      <span class="c1"># not logged in</span>
-</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
-</span><span class='line'>      <span class="n">basic_read_only</span>
-</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
-</span><span class='line'>      <span class="c1"># admin</span>
-</span><span class='line'>      <span class="n">can</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
-</span><span class='line'>    <span class="k">elsif</span> <span class="n">user</span><span class="o">.</span><span class="n">has_role?</span><span class="p">(</span><span class="ss">:member</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">can</span> <span class="ss">:create</span><span class="p">,</span> <span class="no">Topic</span>
-</span><span class='line'>      <span class="n">can</span> <span class="ss">:update</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
-</span><span class='line'>        <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">can</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="no">Topic</span> <span class="k">do</span> <span class="o">|</span><span class="n">topic</span><span class="o">|</span>
-</span><span class='line'>         <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">basic_read_only</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="c1"># banned or unknown situation</span>
-</span><span class='line'>      <span class="n">cannot</span> <span class="ss">:manage</span><span class="p">,</span> <span class="ss">:all</span>
-</span><span class='line'>      <span class="n">basic_read_only</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">protected</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">basic_read_only</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:read</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:list</span><span class="p">,</span>    <span class="no">Topic</span>
-</span><span class='line'>    <span class="n">can</span> <span class="ss">:search</span><span class="p">,</span>  <span class="no">Topic</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>小結</h2>
-
-<p><a href="https://github.com/ryanb/cancan">cancan</a> 是一套相當 powerful 的權限管理系統，但是它的文件卻相當不好讀，第一次想使用 cacan的 developer 很難從文件上找到自己想要的範例以及 api，或者了解其原理構造。如果沒有先給一些基礎範例，往往會是寸步難行。</p>
-
-<p>下一篇我會深入頗析 Cancan 更深的設計原理，讓大家更看得懂 cancan 的 API 到底想幹什麼&#8230;.。</p>
-
-<h2>系列連結</h2>
-
-<ul>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-1/">Cancan 實作角色權限設計的最佳實踐(1)</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-2/">Cancan 實作角色權限設計的最佳實踐(2)</a></li>
-<li><a href="http://blog.xdite.net/posts/2012/07/30/cancan-rule-engine-authorization-based-library-3/">Cancan 實作角色權限設計的最佳實踐(3)</a></li>
-</ul>
-
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1705,6 +1777,10 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/05/20/jsdc-2013-slide/">Why F2E should learn Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2013/05/19/one-assertion-per-test/">One assertion per test & DAMP not DRY</a>
       </li>
     
@@ -1718,10 +1794,6 @@ MacHale 是我們的執行製作人，他從超過百篇報導中整理出我們
     
       <li class="post">
         <a href="/posts/2013/05/04/my-new-dev-blog/">Rocodev 的技術部落格上線了</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/05/04/upgrade-to-rails4/">Upgrade 到 Rails4 的一些感想</a>
       </li>
     
   </ul>

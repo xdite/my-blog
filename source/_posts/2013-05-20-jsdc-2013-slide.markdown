@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Why F2E should learn Rails"
+date: 2013-05-20 13:34
+comments: true
+categories: 
+---
+
+這是我前天在 [JSDC](http://jsdc) 演講「Why F2E should learn Rails」。
+
+<http://xdite.github.io/jsdc-2013-slide/>
+
+
+介紹了 Rails 內建哪一些 Feature 可以讓 F2E 工作時更上手。
+
+對於 F2E 來說很重要的幾個工具與原則，其實 Rails 都內建好了。而且還額外提供順手的架構方便 F2E 整理專案。
+
