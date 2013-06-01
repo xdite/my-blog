@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-06-01T14:53:31+08:00</updated>
+  <updated>2013-06-01T14:54:32+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -29,6 +29,8 @@
 <li>Rails 4.0+ 起內建的新 feature 與 syntax 示範</li>
 <li>這次的版本加入了，使用 helper / scope / method 「整理程式碼」</li>
 <li>Rails 4.0 與主流 plugin 的 Hack 解法 ( devise &amp; strong parameters)</li>
+<li>在時尚的寫書平台 <a href="https://leanpub.com/rails-101">Leanpub</a> 上架！</li>
+<li>同時支援 PDF、Epub、Mobi 三種版本</li>
 </ul>
 
 

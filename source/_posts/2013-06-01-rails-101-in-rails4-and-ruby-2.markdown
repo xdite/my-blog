@@ -16,7 +16,8 @@ categories:
 * Rails 4.0+ 起內建的新 feature 與 syntax 示範
 * 這次的版本加入了，使用 helper / scope / method 「整理程式碼」
 * Rails 4.0 與主流 plugin 的 Hack 解法 ( devise & strong parameters)
-
+* 在時尚的寫書平台 [Leanpub](https://leanpub.com/rails-101) 上架！
+* 同時支援 PDF、Epub、Mobi 三種版本
 
 目前書籍的進度是完成了 65% 左右。（開發程式碼已完全 complete）
 
