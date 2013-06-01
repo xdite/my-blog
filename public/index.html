@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  這是我前天在 JSDC 演講「Why F2E should learn Rails」。http://xdite.github.io/jsdc-2013-slide/介紹了 Rails 內建哪一些 Feature 可以讓 F2E 工作時更上手。對於 F2E 來...">
+  <meta name="description" content="                  我兩年前寫的 Rails 入門學習書籍 Rails 101，這個月進行改版了。主要的變動有以下：以 Rails 4.0.0 rc1 為範例以 Ruby 2.0.0 為語言版本全新的範例 （ Group 討論區 ）Rails 4.0+ 起內建的新 featur...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2013/06/01/rails-101-in-rails4-and-ruby-2/">Rails 101 改版：支援 Rails 4 與 Ruby 2.0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-06-01T14:40:00+08:00" pubdate  data-updated="true" >Jun 1<span>st</span>, 2013</time>
+        
+         | <a href="/posts/2013/06/01/rails-101-in-rails4-and-ruby-2/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2013/06/01/rails-101-in-rails4-and-ruby-2/" data-show-faces="false"></div></div>
+    
+    <p>我兩年前寫的 Rails 入門學習書籍 <a href="https://leanpub.com/rails-101">Rails 101</a>，這個月進行改版了。</p>
+
+<p>主要的變動有以下：</p>
+
+<ul>
+<li>以 Rails 4.0.0 rc1 為範例</li>
+<li>以 Ruby 2.0.0 為語言版本</li>
+<li>全新的範例 （ Group 討論區 ）</li>
+<li>Rails 4.0+ 起內建的新 feature 與 syntax 示範</li>
+<li>這次的版本加入了，使用 helper / scope / method 「整理程式碼」</li>
+</ul>
+
+
+<p>目前書籍的進度是完成了 65% 左右。（開發程式碼已完全 complete）</p>
+
+<p>價格一樣維持在 9.99 USD。</p>
+
+<p>慶祝改版 coupon : <code>ruby-taiwan-2013-june</code>  ( 5USD 折扣，到 6/15 為止)</p>
+
+<h3>其他</h3>
+
+<ul>
+<li>書籍討論區 <a href="http://bumblr.io/groups/26">http://bumblr.io/groups/26</a></li>
+<li>舊版讀者免費轉換：（皆已寄信贈送免費轉換 coupon）</li>
+<li>舊版讀者如喜歡，歡迎重新購買一份支持我 XD</li>
+<li>舊版 Rails 3 版本已下架…</li>
+<li>其他書籍問題，請填表：<a href="http://xdite.wufoo.com/forms/ce-billing-support/">http://xdite.wufoo.com/forms/ce-billing-support/</a></li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1093,107 +1163,6 @@ Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2013/04/01/move-to-hipchat/">把公司 Log 搬到 Hipchat&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-04-01T22:19:00+08:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2013</time>
-        
-         | <a href="/posts/2013/04/01/move-to-hipchat/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2013/04/01/move-to-hipchat/" data-show-faces="false"></div></div>
-    
-    <p>一直以來（ 5-6 年前開始..)，我都是用 IRC 在管團隊的 Log 和通知。</p>
-
-<p>這個習慣最早以來是跟前輩學習來的。這在比較強悍的技術團隊內部，幾乎是行之有年的標準 Convention。</p>
-
-<p>（ 可見 Flickr 著名的 <a href="http://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr">10+ Deploys Per Day: Dev and Ops Cooperation at Flickr
-</a> 投影片 (P.52)，不過他們大概 2006 年就開始這樣做了，這篇只是後來比較漂亮的整理&#8230;）。</p>
-
-<p>當年 <a href="http://t17.techbang.com/topics/7181-t-off-state-technical-departments-magic-work-processes-open-to-the-public">在 T 客邦</a>，也是用 redmine + IRC bot 自己搞了一套。</p>
-
-<p>把 Log 都打到 IRC 有很多好處。團隊成員去開會、或者暫時離開。回到電腦前，還是可以很快速的掌握剛剛發生了什麼事。再加上 issue tracking 或者是 system alert 其實是很洗信箱讓人容易分神的東西，所以我們把這些幾乎都搬到 IRC 上，建立出一個可以非同步但又高效率的合作開發模式。</p>
-
-<p><img src="http://www.techbang.com.tw/system/images/56563/original/f619713e13061413515e24406f7fbe02.png?1312367582" alt="img" /></p>
-
-<p><img src="http://www.techbang.com.tw/system/images/56564/original/a2c052c70ec3bfc1023c2660bfbf54b9.png?1312367582" alt="img" /></p>
-
-<p>不過這個模式還是有一些極限，所以最近在 survey 過後，最近我決定把 <a href="http://rocodev.com">公司</a> 整套 solution 搬到 <a href="http://hipchat.com">Hipchat</a> 上。</p>
-
-<h2>主要搬家原因</h2>
-
-<ol>
-<li>發現每個同事一進來都要教怎麼用 <a href="http://www.irssi.org/">irssi</a> + 工作站掛 irc，學習成本很高</li>
-<li>公司聊天室是 skype, log 在 irc 上，開兩窗有點麻煩。加上 skype-bot 不是不能作，只是我覺得 skype-bot 很吵…</li>
-<li>人員離職很麻煩，因為要把 irc room 的 key 和 info 整套換掉，無法作權限控管</li>
-<li>demo 給別人看 irc solution 時也很麻煩，因為對方一定看得到我們的 key &#8230;.</li>
-<li>對 irc 訊息上色要試很久，對一般的 developer 門檻有點高</li>
-<li>irc log 多半要切到桌機才能看，沒有 mobile solution。</li>
-</ol>
-
-
-<p>所以最後就整套就搬到 <a href="http://hipchat.com">Hipchat</a> 了。看起來大家現在是用的蠻習慣的。</p>
-
-<p><img src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-snc6/221729_10151576143483552_1020905528_n.jpg" alt="img" /></p>
-
-<h2>Hipchat 的好處</h2>
-
-<ol>
-<li>主要是 Web Based，但有 iOS, Android, Mac, Windows, Linux client</li>
-<li>有 group 和 permission control，踢人加人很方便</li>
-<li>API 整合，寫 bot 很容易</li>
-<li>聊天行為與一般 IRC chat 蠻相近的</li>
-<li>貼圖貼檔案貼 Link 很方便</li>
-<li>一樣會存歷史紀錄，就算離線了，重新上線還是可以找 Log</li>
-<li>很多主流系統整合支援（ github, redmine, capistrano, airbrake….)</li>
-<li>5 人以下現在是免費的方案…</li>
-</ol>
-
-
-<h2>Hipchat integration</h2>
-
-<p>我們目前是把目前的幾種 Log 都打到 hipchat 上</p>
-
-<ol>
-<li>Github (github 的 hook 支援 hipchat, pull request, push , merge 都會通知&#8230;)</li>
-<li>Capistrano Deploy <a href="http://blog.hipchat.com/tag/capistrano/">http://blog.hipchat.com/tag/capistrano/</a></li>
-<li>Airbrake ( server error 通知系統, airbrake 支援 hipchat )</li>
-<li>Redmine (官方的 hipchat/redmine_hipchat 不好用，所以我自己改了一隻 <a href="https://github.com/rocodev/redmine_hipchat">rocodev/redmine_hipchat</a> 出來)</li>
-</ol>
-
-
-<p>之後還會掛更多東西上去…</p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1226,6 +1195,10 @@ Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/06/01/rails-101-in-rails4-and-ruby-2/">Rails 101 改版：支援 Rails 4 與 Ruby 2.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2013/05/20/jsdc-2013-slide/">Why F2E should learn Rails</a>
       </li>
     
@@ -1239,10 +1212,6 @@ Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, 
     
       <li class="post">
         <a href="/posts/2013/05/04/rails4-new-feature/">Rails 4: New Feature, Better Syntax</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/05/04/my-new-dev-blog/">Rocodev 的技術部落格上線了</a>
       </li>
     
   </ul>
