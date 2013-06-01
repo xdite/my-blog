@@ -15,6 +15,7 @@ categories:
 * 全新的範例 （ Group 討論區 ）
 * Rails 4.0+ 起內建的新 feature 與 syntax 示範
 * 這次的版本加入了，使用 helper / scope / method 「整理程式碼」
+* Rails 4.0 與主流 plugin 的 Hack 解法 ( devise & strong parameters)
 
 
 目前書籍的進度是完成了 65% 左右。（開發程式碼已完全 complete）
