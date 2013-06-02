@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-06-01T14:54:32+08:00</updated>
+  <updated>2013-06-02T23:57:25+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,186 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[電子出版] Rails 101 的兩年來的一些數據]]></title>
+    <link href="http://blog.xdite.net/posts/2013/06/02/rails-101-some-data/"/>
+    <updated>2013-06-02T23:00:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/06/02/rails-101-some-data</id>
+    <content type="html"><![CDATA[<p><a href="https://leanpub.com/rails-101">Rails-101</a> 是我兩年前寫的一本 Rails 教學書，前身是我的 Developer 訓練教材 / 解答本。</p>
+
+<p>不少想出書的朋友這兩年來問過我一些大大小小的相關問題，想一想乾脆趁改版作一次解答。</p>
+
+<p>Q: 這一本書兩年來賣了多少本？</p>
+
+<p>A: 接近 2000 本。</p>
+
+<p>Q: 賺了多少錢？</p>
+
+<p>A: 其實沒有仔細算過。因為這本書有時候賣 9.99，有時候特殊節慶我會特價幾天打對折。但總體來說，乘以最佳銷售狀況的 0.6 應該是個合理的數字吧&#8230;.</p>
+
+<p>Q: 好像比紙本書好賺？</p>
+
+<p>A: 看你怎麼想？出版社大概都是一刷 2000 本，預付版稅大概 5-7 萬元。技術書一刷也不會賣超過這個數量。看起來收入比給出版社出版高不少。但是你可能要考慮</p>
+
+<ol>
+<li>書是我自己排版輸出的</li>
+<li>客服信是我自己回的</li>
+<li>購物車系統&#8230;（呃，還好不是自己做的，不過月費 9 USD）</li>
+<li>書的網站是我自己做的…</li>
+</ol>
+
+
+<p>這本書要付 RD xdite, 客服 xdite, 編輯 xdite, blogger xdite 不少錢&#8230;.所以 Author xdite 應該沒什麼賺。</p>
+
+<p>Q: 自費出版的優缺點你覺得是什麼？</p>
+
+<p>A:</p>
+
+<h3>優點：小眾市場的書也能賣</h3>
+
+<p>小眾市場導向的書也能賣。通常這種書出版社不願意出。但是卻有讀者願意要買，運氣好挑對主題就其實蠻賺的。我看 Leanpub 上有人寫 Larvel 的書就賣了 6000 多本…</p>
+
+<h3>優點：技術書籍載體適合電子發行</h3>
+
+<p>而且技術書籍的載體蠻適合電子發行，因為內容有時效性。</p>
+
+<h3>缺點：排版技術門檻很高</h3>
+
+<p>缺點就是排版系統不好搞。寫一本電子書，幾乎 90% 的時間不是在寫書，而是在搞定「該死」的排版系統（下一段會講到&#8230;）。而且當你的書裡面有很多程式碼時，就準備排到死吧 -_-</p>
+
+<h3>缺點：書籍內容容易過期</h3>
+
+<p>我這本書剛寫成時是 Rails 3.0.3。到下架時 Rails 版本是 3.2.13。</p>
+
+<p>當中 Rails stack 有很多技術架構上的轉變，這些讓我在更新書籍時遇到很多麻煩，因為讀者都會想要我支援最新架構，但是有一些 stack 是很難寫進去的&#8230;.</p>
+
+<p>（比如 rails 在 10.6, 10.7, 10.8 的安裝方法不一樣..orz）</p>
+
+<p>但是其實更新書籍，排版很容易爆炸，所以我不是沒有寫好需要更新的內容，而是每次排版排到生氣我就想放棄了…orz</p>
+
+<h3>缺點：書籍讀者認為「更新」是應當的。</h3>
+
+<p>一般紙版的書籍，書一旦印出來了，內容就算過期，讀者會摸摸鼻子就算了。但是在電子書上，讀者會認為作者有需要更新內容的義務&#8230;.</p>
+
+<p>而且應當是免費的 /_\</p>
+
+<h3>缺點：讀者認為作者提供 pdf, epub, mobi 三種版本是理所當然的</h3>
+
+<p>嗯&#8230;.雖然我買書時也希望別人都提供，但實際上，排版實在會搞死人啊 XD</p>
+
+<p>Q: 你曾經用哪一些技術進行排版？</p>
+
+<p>A:</p>
+
+<p>(1) 最初我是用 Mac 的 Pages 寫作，但只能轉成 PDF，而且貼 code 很痛苦。</p>
+
+<p>(2). 第二版我就改用 <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> 重新改寫。貼 code 變得很漂亮了，也有辦法寫一些註解，但是裡面的文字編排反而讓人很頭大…邊寫邊排是一個大挑戰</p>
+
+<p>轉 pdf 需要自己 hack 一些 latex 的支援，因為 reStructuredText 當時並沒有考慮到 UTF-8 排版的問題，所以我花了不少時間在解中文內容輸出問題。</p>
+
+<p>這一個版本我有順利同時轉了一個 epub 出來</p>
+
+<p>(3) 在這中間我有試過幾套軟體（不一定是在 101 這本書上）</p>
+
+<p>a. <a href="https://github.com/progit/progit">Progit</a> 的排版軟體
+b. <a href="https://github.com/kmuto/review">review</a> 達人出版會的排版軟體
+c. <a href="http://www.jstorimer.com/products/working-with-tcp-sockets">Working with tcp-sockets</a> 用的排版軟體 <a href="https://github.com/fnando/kitabu">kitabu</a>
+d. <a href="https://learn.thoughtbot.com/products/13-ruby-science">Ruby Science</a> 用的排版軟體 (thoughtbot 自己拼出來的)
+e. <a href="http://www.literatureandlatte.com/scrivener.php">Scrivener</a> 劇本寫作軟體</p>
+
+<p>個人覺得有用的是 c,d,e</p>
+
+<p>在這當中踢到的鐵板多數是：</p>
+
+<ul>
+<li>軟體喜歡自己發明格式的問題。所以每換一個平台，內容等於要通通重排&#8230;</li>
+<li>解決 latex 中文與相依性套件問題（轉 pdf 所需要的套件）</li>
+<li>讀者靠北為何沒有贈送 .mobi 的問題</li>
+<li>為何贈送了 .mobi 卻不支援七吋 kindle 排版的問題&#8230;.</li>
+</ul>
+
+
+<p>（我覺得自己真是毅力驚人，要是我不懂寫程式，可能老早就放棄了&#8230;..）</p>
+
+<p>Q: 為何這次會選 Leanpub 發行？幹嘛兩年之內搞得這麼累，早用 Leanpub 不就好了&#8230;</p>
+
+<p>A:</p>
+
+<p>其實 Leanpub 一出來就想用了。只是兩年前 Leanpub 的問題是，(1) 不支援中文 (2) 不支援排 code (3) 不支援 coding tips。只能排排文學小書，所以很快就被 rule out 了。</p>
+
+<p>這次會進場是因為最近有幾檔強檔 Ruby 新書，特別是 Rails 界聖經 <a href="http://blog.obiefernandez.com/content/2013/04/the-rails-4-way-beta.html">The Rails4 Way</a> 宣布在 leanpub 上發行…</p>
+
+<p>要知道這本書可是 6-700 頁以上的超級程式巨作，如果他們排的動，那就表示應該沒什麼問題了&#8230;.</p>
+
+<p>這次進場寫作，也發現意外的順手，所以就打算把早前寫完但放棄排版的書稿，開始搬上去了…</p>
+
+<p>撰寫輸入格式接近 markdown，輸出格式則有 pdf, epub, mobi。能夠滿足讀者需求。</p>
+
+<p>一本書賣 10 元，Leanpub 抽我 1 元。我覺得算是個蠻合理的數字。</p>
+
+<p>Q: 你之前用什麼平台收錢？</p>
+
+<p>A :
+<a href="http://www.digitaldeliveryapp.com/">Digital Delivery</a> + Paypal。這個平台本身不抽交易，但每月使用費 9 USD。所以我的獲利會是每一本書被 paypal 抽的交易稅 + 每個月的使用費。其實算下來跟 Leanpub 其實差不多&#8230;.</p>
+
+<p>Q: 你不怕電子書被盜版嗎？如何處理買書退費問題？</p>
+
+<p>A:</p>
+
+<p>寫書「真的」就是一半在作功德的事。其實在作者的立場，其實是希望書能被越多人看到越好。收入有個合理回報就好。</p>
+
+<p>我也遇過跟人「借看」的讀者，最後覺得，寫信自己補買的。這次雖然改版我送大家 100% 折價卷，但是也有讀者覺得全新內容很不錯，自己重新付錢補買的…誰知道呢？</p>
+
+<p>至於退費問題，在網路上退費的原則通常是 45-60 天內無條件退費原則。不過其實在賣電子書的各位作者，其實都願意讓大家無限時間退費，只是超過了這個時間，paypal 刷退非常麻煩。所以最後大概都限制 45-60 天。</p>
+
+<p>退錢也不會囉唆。反正不合期待大家都能理解。</p>
+
+<p>不過大陸讀者申請退費數量是台灣的 10 倍這我必須在這裡講一下 XDDD</p>
+
+<p>Q: 有沒有下載 PDF, EPUB, MBI 的數據？
+A: 第一版沒有。但第二版有，Leanpub 有提供這個功能。直至剛剛，我這本書總已經發出大約 600 本。</p>
+
+<p>數據如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>Metrics
+</span><span class='line'>Book formats downloaded at least once per purchase
+</span><span class='line'>97.9% of your readers downloaded PDF format.
+</span><span class='line'>60.7% of your readers downloaded EPUB format.
+</span><span class='line'>37.6% of your readers downloaded MOBI format.
+</span><span class='line'>These numbers won't add up to 100%, as purchases include all formats.
+</span><span class='line'>
+</span><span class='line'>Book formats download profile
+</span><span class='line'>34.9% of your readers downloaded PDF only.
+</span><span class='line'>1.0% of your readers downloaded EPUB only.
+</span><span class='line'>0.5% of your readers downloaded MOBI only.
+</span><span class='line'>26.5% of your readers downloaded PDF and EPUB only.
+</span><span class='line'>3.9% of your readers downloaded PDF and MOBI only.
+</span><span class='line'>0.5% of your readers downloaded EPUB and MOBI only.
+</span><span class='line'>32.6% of your readers downloaded all three formats.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我目前能整理出常見的內容和問題大概就是這些。對電子出版有興趣的朋友歡迎留言交流&#8230;.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails 101 改版：支援 Rails 4 與 Ruby 2.0]]></title>
@@ -1316,77 +1496,6 @@ Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, 
 <p>這個演講的主旨是：在以往，我們設計 Rails Application 時，為了想要寫出一些漂亮的架構，會參考一些 Best Practices，或者是參照官方 Rails 官方指南的 Convention 建議，進行設計。</p>
 
 <p>但是這一些 Convention 或依照直覺的軟體設計，很大的成分其實會造成你的 Application Performance 下降。這些問題即使你裝了 New Relic 還是絕對抓不出來。而這些設計可能也不太能算是 Rails 或者是相關套件的錯，甚至是 nobody&#8217;s fault。這個 talk 會帶你找出這些問題，解釋原因，並且給出修正方案。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[被迫才是進步的原動力]]></title>
-    <link href="http://blog.xdite.net/posts/2012/10/28/force-to-improve-yourself/"/>
-    <updated>2012-10-28T02:12:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/10/28/force-to-improve-yourself</id>
-    <content type="html"><![CDATA[<p>昨天看到神人 vgod 寫了一篇 <a href="http://blog.vgod.tw/2012/10/27/premature-optimization/">過早最佳化是萬惡的根源</a>，這篇文章是不錯。但是，對於「職業」那邊實在有太多奇怪的假設。</p>
-
-<p>想了一下，決定還是在 FB 寫了一下我的看法，然後再轉貼到這裡來。</p>
-
-<p>===</p>
-
-<p>簡單回一下好了。關於職業的部分。我本來也是覺得就如同跟 @vgod 一樣所說，在裡面可以全新鍛鍊和學習各種知識和技能。</p>
-
-<p>我在大學裡面，就是抱著這樣的心態，學習各種知識。我在大學裡面最認真修的課，不是數學（唯一感興趣的是線性代數、離散數學、代數）
-，而是&#8230;.去修資科系基礎理論的課，什麼作業系統、計算機結構、演算法、資料結構、數位電路、etc&#8230;大概能修的我都修了。數學系最
-重視的微積分、高等微積分，我沒有很喜歡。而且，我大概下課的時間都泡在系上的機房，弄網路、伺服器、寫寫簡單的網站。</p>
-
-<p>而最後我也是抱著這樣的心態，選擇了第一份工作。因為我覺得大學的環境才能讓「自己有選擇想練什麼武功的自由」。
-我希望一直這樣持續下去。</p>
-
-<p>然而，接下來的事情。你們知道了，我被打臉了。狠狠的打了一巴掌。</p>
-
-<p>那一天，我才發現我關在學校自己練的等級，跟職業的人是差上那麼多。這才是讓我選擇馬上離開那個環境的主因。</p>
-
-<p>很多人以為「自己有選擇想練什麼武功的自由」，才能讓自己的 power 開到最大。我對這件事情有截然不同的感受。為什麼職業的環境會成長很快。因為上班領錢，才有限時被交出成果的壓力。而且那個壓力能造成的動力是遠比自己下定決心要練什麼技能的動力還要可怕的。上班，你會被迫限時學到跟這個領域所有「基礎」的工具。一個月「基礎的程度」，可能直接贏掉自己自由學「半年」以上的程度。</p>
-
-<p>而且特別是，如果你的同事和老闆，都是佼佼者的話&#8230;.。到現在我還是相當感謝曾經共事過的 @gugod, @ihower, @gslin, @hlb, @嬸嬸 XD</p>
-
-<p>我學到的就是。如果你想把什麼東西學好，稍微深呼吸一下（當然就是自學一點皮毛，希望不要進去之後死太慘），就跳下去&#8230;。
-害怕溺水的恐懼會被讓你瞬間就學會游泳。（如果你跳下去就死拜託不要怪我&#8230;orz）</p>
-
-<p>如果你曾經看過我半年前寫過的<a href="http://xdite-smalltalk.tumblr.com/post/18303489993">為什麼我想創業</a> 一文。
-你就會知道，我在這四年裡面「被迫」學會了多少事。</p>
-
-<p>職業工程師，並不是只有用 PHP 寫了一千個論壇和購物程式那麼無聊。老實說，寫到第二個第三個，你就會知道 Framework 的重要性。</p>
-
-<p>當然，如果你之後玩到神兵級 Framework 如「Ruby on Rails」。那麼你還會更會知道，這世界不是只有 CRUD。（Ruby on Rails 本身
-的架構採用了大量 <a href="http://www.amazon.com/Patterns-Enterprise-Application-Architecture-Martin/dp/0321127420">Patterns of Enterprise Application Architecture</a> 這本書裡面的實作，裡面也大量用了 Design Pattern 的技巧）。</p>
-
-<p>不只如此，你還會從周遭的 ecosystem 的 plugin 中學到各種各式各樣的 pratical、theoretical 的佼佼實作。</p>
-
-<p>當這些東西看多了以後你就更進一步的發現，語言根本不是重點，掌握這些「企業級理論」（註）的核心精隨，才是重點。</p>
-
-<p>而當進一步又將 Ruby on Rails 玩的十分純熟之後。就會馬上意識到，用什麼語言寫，把 code 寫得多快已經完全不是重點了。</p>
-
-<ul>
-<li>如果專案控管能力不佳，需求一直在改變，那麼就算你的「架構理論」玩的再漂亮都是一樣的，結不了案就是結不了案。</li>
-<li>如果團隊協調能力不佳，那麼不管公司投再多人進來，累死的就是那幾個人而已。</li>
-<li>如果時間成本能力不佳，不是會造成公司大虧損賠本，甚至會專案進行到一半就被迫終止。</li>
-</ul>
-
-
-<p>很多人以為我網站寫的很快，是因為 Framework 的關係。真的不是這麼簡單&#8230;，那是我身上擁有所有的技巧綜合出來的結果。</p>
-
-<p>如果我沒有領錢「被迫」進行我很多「不喜歡」的事，我不會學到這一些東西。如果我沒有「被迫」去處在那一些環境，我能學到的東西就限於「我在學校時一開始能望過去的眼界」，而不是環繞在我周遭各個神人的眼界。</p>
-
-<p>而這也是為什麼我會寫出那兩篇文章的初衷。我不是出來走這麼一遭，不會發現我當初那樣的假設，完全不堪一擊。</p>
-
-<p>而再舉一個例子，曾經很多人一直對我，開口閉口就是 Ruby on Rails 值得學習，感到很不解。事實上，我也是從這個 Framework 的進化裡面，
-才學到人不能把眼界只侷限在某一個端點。我個人的能力，很大的原因是跟隨這個 Framework 一起成長的。如果我當初不是碰這個 Framework 起來，我恐怕真的沒有這個能力成長的這麼迅速。因為台灣沒有太多「大型」Scale （PV 千萬以上） 的網站，可以逼迫一個工程師直接從最基礎的 Turtorial 中，自學到那麼多 optimze techniques、best practices（更何況這種等級公司的入場卷，也不是你說想要應徵就能應徵上)。</p>
-
-<p>從這個 Framework ecosystem 裡面產生出來的 plugin 也是世界上各式各地的程式設計師貢獻出來的，這裡面融合了他們公司現在「最好」的 pratices，有些甚至是 future architecture。如果我在一間悶頭自幹工具的公司上班，我是沒有機會見識到這一切的。</p>
-
-<p>我不認為自己一開始有多好的眼界，能有辦法看到多棒的未來，並且照著我所看到的事堅定的往前走。甚至，直到現在，我現在還是不認為自己還是具備這個能力。但我唯一知道的是，我不能把自己鎖在自己的眼界裡。</p>
-
-<p>我想說的話，就只有這樣而已。</p>
-
-<p>[註] ：Deisgn Pattern、Agile、Testing、Scaling、Performace Tuning …</p>
 ]]></content>
   </entry>
   
