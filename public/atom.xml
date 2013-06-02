@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-06-03T00:01:10+08:00</updated>
+  <updated>2013-06-03T00:02:57+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -94,11 +94,14 @@
 
 <p>(3) 在這中間我有試過幾套軟體（不一定是在 101 這本書上）</p>
 
-<p>a. <a href="https://github.com/progit/progit">Progit</a> 的排版軟體
-b. <a href="https://github.com/kmuto/review">review</a> 達人出版會的排版軟體
-c. <a href="http://www.jstorimer.com/products/working-with-tcp-sockets">Working with tcp-sockets</a> 用的排版軟體 <a href="https://github.com/fnando/kitabu">kitabu</a>
-d. <a href="https://learn.thoughtbot.com/products/13-ruby-science">Ruby Science</a> 用的排版軟體 (thoughtbot 自己拼出來的)
-e. <a href="http://www.literatureandlatte.com/scrivener.php">Scrivener</a> 劇本寫作軟體</p>
+<ul>
+<li>a. <a href="https://github.com/progit/progit">Progit</a> 的排版軟體</li>
+<li>b. <a href="https://github.com/kmuto/review">review</a> 達人出版會的排版軟體</li>
+<li>c. <a href="http://www.jstorimer.com/products/working-with-tcp-sockets">Working with tcp-sockets</a> 用的排版軟體 <a href="https://github.com/fnando/kitabu">kitabu</a></li>
+<li>d. <a href="https://learn.thoughtbot.com/products/13-ruby-science">Ruby Science</a> 用的排版軟體 (thoughtbot 自己拼出來的)</li>
+<li>e. <a href="http://www.literatureandlatte.com/scrivener.php">Scrivener</a> 劇本寫作軟體</li>
+</ul>
+
 
 <p>個人覺得有用的是 c,d,e</p>
 

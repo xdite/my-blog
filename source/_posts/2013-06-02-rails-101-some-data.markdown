@@ -81,11 +81,11 @@ A:
 
 (3) 在這中間我有試過幾套軟體（不一定是在 101 這本書上）
 
-a. [Progit](https://github.com/progit/progit) 的排版軟體
-b. [review](https://github.com/kmuto/review) 達人出版會的排版軟體
-c. [Working with tcp-sockets](http://www.jstorimer.com/products/working-with-tcp-sockets) 用的排版軟體 [kitabu](https://github.com/fnando/kitabu)
-d. [Ruby Science](https://learn.thoughtbot.com/products/13-ruby-science) 用的排版軟體 (thoughtbot 自己拼出來的)
-e. [Scrivener](http://www.literatureandlatte.com/scrivener.php) 劇本寫作軟體
+* a. [Progit](https://github.com/progit/progit) 的排版軟體
+* b. [review](https://github.com/kmuto/review) 達人出版會的排版軟體
+* c. [Working with tcp-sockets](http://www.jstorimer.com/products/working-with-tcp-sockets) 用的排版軟體 [kitabu](https://github.com/fnando/kitabu)
+* d. [Ruby Science](https://learn.thoughtbot.com/products/13-ruby-science) 用的排版軟體 (thoughtbot 自己拼出來的)
+* e. [Scrivener](http://www.literatureandlatte.com/scrivener.php) 劇本寫作軟體
 
 個人覺得有用的是 c,d,e 
 
