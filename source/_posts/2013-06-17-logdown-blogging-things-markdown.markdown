@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+![](http://logdown.com/images/logo.png)
+
 [Logdown](http://logdown.com/) 是週末跟三位朋友 zhusee, tonilin, chitsaou, 24hr 做的一個 Hackathon 項目。這是一個新世代的 Blogging Platform using Markdown。
 
 身為 Dev Blogger，最讓我們困擾的一件事，就是難以使用 Wordpress 書寫排版技術文章。在找尋過許多替代方案後，我最後投入了[Octopress](http://blog.xdite.net/posts/2011/10/07/what-is-octopress/)的懷抱。
