@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Logdown-blogging-things-markdown"
+title: "Logdown - Blogging Things in Markdown"
 date: 2013-06-17 08:30
 comments: true
 categories: 
@@ -10,7 +10,9 @@ categories:
 
 身為 Dev Blogger，最讓我們困擾的一件事，就是難以使用 Wordpress 書寫排版技術文章。在找尋過許多替代方案後，我最後投入了[Octopress](http://blog.xdite.net/posts/2011/10/07/what-is-octopress/)的懷抱。
 
-只是 Octopress 並不是這個答案的終極解，因為 Octopress 還是有一些自身的小問題在：比如只能在線下使用 Markdown 編輯器寫作，再使用command line 編譯。有時候這變成一件很惱人的事，有個線上的 Web 編輯介面還是必要的。若要讓某些文章一開始就是草稿模式也不是很容易。
+只是 Octopress 並不是這個答案的終極解，因為 Octopress 還是有一些自身的小問題在：比如只能在線下使用 Markdown 編輯器寫作，再使用command line 編譯。有時候這變成一件很惱人的事，**有個線上的 Web 編輯介面**還是必要的。
+
+若要讓某些文章一開始就是草稿模式也不是很容易，等等…
 
 而一些 Non Geek （或者不是 Ruby 界使用者），在他們的電腦上安裝、運行 Octopress 也是不小的技術門檻。
 
