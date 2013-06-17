@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Logdown - Blogging Things in Markdown"
+title: "Logdown - Blogging Things with Markdown"
 date: 2013-06-17 08:30
 comments: true
 categories: 
