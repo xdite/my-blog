@@ -118,7 +118,7 @@ Post Load (1.2ms)  SELECT `posts`.* FROM `posts` ORDER BY id DESC LIMIT 50 OFFSE
 Asset logical path has no extension: README
 ```
 
-WTF，我從沒在之前的版本看過這個。在網路上搜尋了一下發現是這個 issue..:
+WTF，我從沒在之前的版本看過這個錯誤。在網路上搜尋了一下發現是這個 issue..:
 
 <https://github.com/sstephenson/sprockets/issues/347>
 

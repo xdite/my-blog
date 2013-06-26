@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-06-27T02:15:08+08:00</updated>
+  <updated>2013-06-27T02:16:58+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -150,7 +150,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>WTF，我從沒在之前的版本看過這個。在網路上搜尋了一下發現是這個 issue..:</p>
+<p>WTF，我從沒在之前的版本看過這個錯誤。在網路上搜尋了一下發現是這個 issue..:</p>
 
 <p><a href="https://github.com/sstephenson/sprockets/issues/347">https://github.com/sstephenson/sprockets/issues/347</a></p>
 
