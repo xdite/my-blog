@@ -64,7 +64,7 @@ class Account::PostController < AC
 end
 ```  
 
-正常的行為，生出來的 query 是這樣的：
+正常的行為，生出來的 query 是這樣的（撈出我本人的所有文章）：
 
 
 ```
@@ -75,7 +75,7 @@ Post Load (11.3ms)  SELECT `posts`.* FROM `posts` WHERE `posts`.`user_id` = 3 OR
 
 本來我改好程式，在 local 測一測看起來沒什麼問題，（ Rails 4 最大的改動通常是 update_attributes 會需要修，query 通常不太需要修）…也沒 raise error。還好我今晚是先 deploy 到 staging 去測。deploy 上去差一點噴茶....
 
-我的 Dashboard 竟然出現了全站文章 ……orz…..WTF…
+我個人的 Dashboard 竟然出現了（全站文章） ……orz…..WTF…
 
 在 local 重新測試才發現：
 

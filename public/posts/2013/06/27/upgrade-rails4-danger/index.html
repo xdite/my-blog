@@ -167,7 +167,7 @@
 
 <p></p>
 
-<p>正常的行為，生出來的 query 是這樣的：</p>
+<p>正常的行為，生出來的 query 是這樣的（撈出我本人的所有文章）：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">11</span><span class="o">.</span><span class="mi">3</span><span class="n">ms</span><span class="p">)</span>  <span class="no">SELECT</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">*</span> <span class="no">FROM</span> <span class="sb">`posts`</span> <span class="no">WHERE</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">`user_id</span><span class="sb">` = 3 ORDER BY id DESC LIMIT 50 OFFSET 0</span>
@@ -178,7 +178,7 @@
 
 <p>本來我改好程式，在 local 測一測看起來沒什麼問題，（ Rails 4 最大的改動通常是 update_attributes 會需要修，query 通常不太需要修）…也沒 raise error。還好我今晚是先 deploy 到 staging 去測。deploy 上去差一點噴茶&#8230;.</p>
 
-<p>我的 Dashboard 竟然出現了全站文章 ……orz…..WTF…</p>
+<p>我個人的 Dashboard 竟然出現了（全站文章） ……orz…..WTF…</p>
 
 <p>在 local 重新測試才發現：</p>
 
