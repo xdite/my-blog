@@ -18,7 +18,7 @@ TL; DR: Rails 4.0.0 有地雷，建議修完所有 depcrapted warning 再從 rc1
 
 該踩的雷我都中過了，也知道怎麼 patch 常見的地雷，閃過去….
 
-不過我還是中箭了…orz
+不過我膝蓋還是中了一箭了…orz
 
 ### 地雷一：強制 raise error
 
