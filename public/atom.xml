@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-06-17T14:09:00+08:00</updated>
+  <updated>2013-06-27T02:05:18+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -12,6 +12,167 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[升級 Rails 4.0.0 停看聽]]></title>
+    <link href="http://blog.xdite.net/posts/2013/06/27/upgrade-rails4-danger/"/>
+    <updated>2013-06-27T01:22:00+08:00</updated>
+    <id>http://blog.xdite.net/posts/2013/06/27/upgrade-rails4-danger</id>
+    <content type="html"><![CDATA[<p>TL; DR: Rails 4.0.0 有地雷，建議修完所有 depcrapted warning 再從 rc1, rc2 升級，不然會有大災難。</p>
+
+<p>上個禮拜跟同事做了個 Markdown Blog Service Provider : <a href="http://blog.logdown.com">Logdown</a>。介紹請看<a href="http://logdown.com/pages/about">這裡</a>。Logdown 是用 Rails 3.2.13 寫的。適逢昨日 <a href="http://weblog.rubyonrails.org/2013/6/25/Rails-4-0-final/">Rails 4.0.0 釋出</a>，於是手癢癢就想幫 Logdown 升級…</p>
+
+<p>上個月我曾經寫過兩篇文章：</p>
+
+<ul>
+<li><a href="http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/">Upgrade 到 Rails4 的一些感想</a></li>
+<li><a href="http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/">Rails 4: New Feature, Better Syntax</a></li>
+</ul>
+
+
+<p>該踩的雷我都中過了，也知道怎麼 patch 常見的地雷，閃過去….</p>
+
+<p>不過我還是中箭了…orz</p>
+
+<h3>地雷一：強制 raise error</h3>
+
+<p>Rails 4 改變最大的有幾個重點：</p>
+
+<ol>
+<li>拿掉 attr_protected，改用 strong parameters</li>
+<li>scope 改用 -> {}</li>
+<li>routes 建議大家棄用 match ，而用更精確的 get , post</li>
+</ol>
+
+
+<p>well, 在 4.0.0 版，如果你還在用 match 的話，Rails 除了 warning message 還會直接 raise error。網站會直接跑不起來，而不是像 beta 的向下相容。而且一些行為也會強制禁掉，如 Logdown 其實有兩個 <code>root :to</code>，其中一個跑 contraint 偵測是否有 user 而導到後台。</p>
+
+<p>Rails 4 是直接禁掉這樣的 syntax 讓你跑不起來。</p>
+
+<p>不過這個還算好的警告手段。起碼直接爛掉有點 annoying，修好就可以了&#8230;.</p>
+
+<h3>地雷二：改變行為</h3>
+
+<p>這件事我真的覺得最扯&#8230;.。但也可以預見未來可能有一些災難發生。</p>
+
+<p>Rails 4 beta 建議大家 scope 改用 -> {}。並且有警告 Message 通知你必須改變，但撈出來的 query 還是向下相容，也就是執行結果是正確的。</p>
+
+<p>Rails 4.0.0 版 建議大家 scope 改用 -> {}。並且有警告 Message 通知你必須改變，<strong>但撈出來的 query 行為改變，也就是執行結果是錯誤的。</strong></p>
+
+<p>這件事讓到底有多嚴重，我的 <code>post.rb</code> 是這樣設計的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">AR</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span><span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而在 Logdown 的 Dashboard 裡面，我的後台 index action 是這樣設計的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Account</span><span class="o">::</span><span class="no">PostController</span> <span class="o">&lt;</span> <span class="no">AC</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="vi">@posts</span> <span class="o">=</span> <span class="n">current_users</span><span class="o">.</span><span class="n">posts</span><span class="o">.</span><span class="n">recent</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>正常的行為，生出來的 query 是這樣的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">11</span><span class="o">.</span><span class="mi">3</span><span class="n">ms</span><span class="p">)</span>  <span class="no">SELECT</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">*</span> <span class="no">FROM</span> <span class="sb">`posts`</span> <span class="no">WHERE</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">`user_id</span><span class="sb">` = 3 ORDER BY id DESC LIMIT 50 OFFSET 0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>到這邊都沒什麼問題。</p>
+
+<p>本來我改好程式，在 local 測一測看起來沒什麼問題，（ Rails 4 最大的改動通常是 update_attributes 會需要修，query 通常不太需要修）…也沒 raise error。還好我今晚是先 deploy 到 staging 去測。deploy 上去差一點噴茶&#8230;.</p>
+
+<p>我的 Dashboard 竟然出現了全站文章 ……orz…..WTF…</p>
+
+<p>在 local 重新測試才發現：</p>
+
+<p>如果你沒把 scope 改成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">AR</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>那麼…在後台</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Account</span><span class="o">::</span><span class="no">PostController</span> <span class="o">&lt;</span> <span class="no">AC</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="vi">@posts</span> <span class="o">=</span> <span class="n">current_users</span><span class="o">.</span><span class="n">posts</span><span class="o">.</span><span class="n">recent</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>生出來的 query 會長這樣</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="mi">2</span><span class="n">ms</span><span class="p">)</span>  <span class="no">SELECT</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">*</span> <span class="no">FROM</span> <span class="sb">`posts`</span> <span class="no">ORDER</span> <span class="no">BY</span> <span class="nb">id</span> <span class="no">DESC</span> <span class="no">LIMIT</span> <span class="mi">50</span> <span class="no">OFFSET</span> <span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>齁齁，所有條件失效，撈全站文章給你。簡單的 query 都這樣，複雜的 query 我不敢想像。（ -> { } 的新預設寫法席卷了一大堆設計，而且一堆 plugin 還在用 舊 query … ）我已經可以預見這會產生多大的災難了&#8230;.</p>
+
+<p>重點是，你還不能回報這是 bug，畢竟人家都已經叫你換成 <code>-&gt; {}</code>，誰叫你不換勒？</p>
+
+<h3>地雷三：管太多…</h3>
+
+<p>我在 deploy 的時候，遇到 Asset compile 不過的狀況。sprockets 一直報錯：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Asset</span> <span class="n">logical</span> <span class="n">path</span> <span class="n">has</span> <span class="n">no</span> <span class="n">extension</span><span class="p">:</span> <span class="no">README</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>WTF，我從沒在之前的版本看過這個。在網路上搜尋了一下發現是這個 issue..:</p>
+
+<p><a href="https://github.com/sstephenson/sprockets/issues/347">https://github.com/sstephenson/sprockets/issues/347</a></p>
+
+<p>意思就是 sprockets 連你的 README 有沒有加 .txt 都要管啦 -_-。然後維護者不想修，叫大家自己去找 workround…</p>
+
+<p>所以如果你的 <code>app/assets/javascripts</code> <code>app/assets/stylesheets</code> 下如果有沒有副檔名的檔案，compile 就不會過。你會想說 not big deal，自己改成多加 .txt 或 .md 就好了…</p>
+
+<p>沒這麼簡單。一堆 3rd party 的 css / js ..不僅有 …..README…還有 LICENSE…還有 CHANGELOG….XDD</p>
+
+<p>齁齁齁，感覺很精彩了吧。沒關係，這都可以加 .txt。頂多是 CSS / JS 界的 repo 這陣子會被 Rails developer 群騷擾而已。更精彩的是 Makefile….這到底是要怎麼閃 XD</p>
+
+<p>( 剛剛網路上找 solution 看到一堆慘案 …)</p>
+
+<p>Bower 已經身亡，這裡是<a href="https://gist.github.com/afeld/5704079">解法</a></p>
+
+<h3>Summary</h3>
+
+<p>如果你是從 Rails 4.0.0beta1 或者是 Rails 4.0.0rc1 升級，務必停看聽…</p>
+
+<p>Rails 4.0.0 跟你想得很不一樣 …orz</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Logdown - Blogging Things with Markdown]]></title>
@@ -1461,96 +1622,6 @@ Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, 
     <updated>2012-12-06T23:04:00+08:00</updated>
     <id>http://blog.xdite.net/posts/2012/12/06/dhl-sucks-missing-package</id>
     <content type="html"><![CDATA[<p>我的包裹被 DHL 寄送過程中，被錯誤遞送，現已找回。故文章刪除。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[如何閱讀 Rails 原始碼]]></title>
-    <link href="http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode/"/>
-    <updated>2012-11-25T00:28:00+08:00</updated>
-    <id>http://blog.xdite.net/posts/2012/11/25/how-to-read-sourcecode</id>
-    <content type="html"><![CDATA[<p>開始有計畫整理一些在 <a href="http://rubyconfchina.org">RubyConf China</a> 大家線下問我的問題的答案。</p>
-
-<p>挑選出來暫定的第一篇是大會期間詢問度最高的：「如何閱讀 Rails 原始碼」。</p>
-
-<p>想要「閱讀 Rails 原始碼」的原因很多，不過多半的出發點都是想要能夠設計出更好的 Plugin (Gem)、或者是希望能在程式碼出錯時，能夠更快在 Rails 原始碼快速找到答案。</p>
-
-<p>但擺在眼前的事實是， Rails 的原始碼已經成長大到成幾萬行的怪獸，如何「看懂」或者是有效率的找到答案，已經變成是一個很大的難題。</p>
-
-<p>以下是我根據這幾年的經驗，能夠給各位的建議：</p>
-
-<h2>1. 從單純的部分切入，例如 Helper</h2>
-
-<p>最令大家頭疼的地方是，這麼多程式碼，要從哪部分開始讀起。</p>
-
-<p>如果你是初心者，想要跳進這個池子裡，想找點簡單的東西讀，我會建議你先從「Helper」的部分開始讀。「Helper」是整個 Rails 程式碼裡面最獨立的部分（不牽扯到 request 呼叫），而且結構相對單純。</p>
-
-<h2>2. 從 request 開始，到 rack，到 routing，到 controller，最後再到 model</h2>
-
-<p>我真正開始有系統的讀懂 Rails code，是從一門線上 <a href="http://owningrails.com">Owning Rails</a>開始的。這門課的宗旨是，就是教你有效掌握搞懂 Rails 的核心與結構。相當有趣的是，他並不是教你讀任何 Rails 代碼，而是實際一步步帶你造出一個「mini Rails」。而造完這個 「mini Rails」之後，學員也能夠開始神奇的開始擁有快速找 code 的能力。</p>
-
-<p>我在去年曾經寫過一篇 <a href="http://wp.xdite.net/?p=2407">Owning Rails masterclass</a> 介紹過這個課程。</p>
-
-<h4>第一天：造出自己的 mini Rails</h4>
-
-<p>帶你如何寫出精簡版 ActiveRecord、寫 rack app、用 rack app 改出精簡版 ActionController、自己 implement 出 before<em>, after</em>, around_ filter、自己 implement 出 view。然後最後再用你自己刻出來的這套 mini Rails 寫 web application。</p>
-
-<h4>第二天的課程</h4>
-
-<p>Refactor 昨天寫的 mini Rails，教你如何 trace Rails core。利用 Rails internal API 客製化出你想要的特殊 function、library。作業有 custom validator、custom finder、create responder、create form builder、使用 Railtie 客制 Engine、造 plugin。</p>
-
-<p>宥於這是付費課程的關係，我也無法公開提供各位更進一步的教材內容。但是我能夠告訴各位這們課程為什麼會這樣設計，讓你可以也依循著這個軌道去自我進修。</p>
-
-<h3>rack</h3>
-
-<p>一個 request 進來，首先通過的是層層的 rack middleware。所以必須要先理解什麼是 rack，rack 的運作原理是什麼。可以試著自己先寫一個 rack app 玩看看。</p>
-
-<p>如果想知道 Rails 裡面的 request 流程會經過哪些 middleware，被加過哪些工。可以在 Rails 專案裡面打 rake middleware，再去把 class 一個一個叫出來讀。</p>
-
-<h3>routing</h3>
-
-<p>request 通過 rack 層進來後，首先面對的是 dispatch 問題，Rails 透過 routes.rb 進行 dispatch。而如何 dispatch 到正確的 controller，中間靠的就是 regexp。</p>
-
-<h3>controller</h3>
-
-<p>開發者在 controller 會牽涉到兩個常用的相關機制：Filter 與 View Rendering。Filter 時怎麼運作的。method 應該是回傳「值」，怎麼做到自動回傳的是 render 出來的view。</p>
-
-<h3>model</h3>
-
-<p>ActiveRecord 的上一層就是一套 ActiveModel API。其實 Rails 不一定要靠 ActiveRecord，也可以透過實作一個 Class 加上部分機制做出自己的 ORM。其中 validation, finder 都是這方面的課題。</p>
-
-<h2>3. 搞懂 Rails 的啟動流程</h2>
-
-<p><a href="http://railscast-china.com">RailsCast China</a> 曾經 release 過一個很好的影片：<a href="http://railscasts-china.com/episodes/the-rails-initialization-process-by-kenshin54">The Rails Initialization Process By kenshin54</a></p>
-
-<p>講解了整個 Rails 啟動流程。你也可以讀由 Ruby on Rails 官方釋出的這篇<a href="http://guides.rubyonrails.org/initialization.html">官方教學啟動流程</a>去更加了解啟動過程中究竟會經過哪些檔案，如果要寫 plugin 可以 hook 在哪一些部分。</p>
-
-<h2>4. 實際簡單寫一個 Rails Plugin</h2>
-
-<p>最好的學習方法就是動手實作。在看過以上這一些資料之後，我建議你可以實際透過開發一個 Gem 去更加了解整個 Rails 內部的結構。</p>
-
-<p>目前 Rails Plugin 幾乎都是以 Engine Gem 的形式釋出。所以透過撰寫一個 Gem，可以了解到：</p>
-
-<ul>
-<li>如何將自己的 Library 與現有 API 整合</li>
-<li>如何將自己的 Library 掛 / 不掛進啟動 process 中。</li>
-<li>Engine 與 Railtie 的結構</li>
-<li>如果有相依檔案，如何撰寫 generator，把檔案放進去 project 裡面。</li>
-<li>如果有檔案操作和客製選項，如何透過 thor 這個工具去達到檔案修改的目的。</li>
-</ul>
-
-
-<p>算是一個相當好的鍛鍊。</p>
-
-<h2>5. 讀別人（熱門）的 Rails Plugin</h2>
-
-<p>有時候，想要實作某一些功能不得其法。最好的方式就是去讀有類似功能的 Gem，去看看其他作者怎麼做的。有時候會翻到他們用了不少你根本不知道的 Rails API。</p>
-
-<p>順著他們用這些 Rails API 的方法，可以更快的在 Rails 原始碼找到你要的答案…</p>
-
-<h2>小結</h2>
-
-<p>希望以上的方法能夠協助各位更快的上手讀通 Rails 的原始碼。有任何問題歡迎留言在底下討論。</p>
 ]]></content>
   </entry>
   

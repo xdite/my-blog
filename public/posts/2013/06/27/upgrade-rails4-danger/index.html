@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>升級 Rails 4.0.0 停看聽 - Blog.XDite.net</title>
+  <meta name="author" content="xdite">
+
+  
+  <meta name="description" content="          TL; DR: Rails 4.0.0 有地雷，建議修完所有 depcrapted warning 再從 rc1, rc2 升級，不然會有大災難。上個禮拜跟同事做了個 Markdown Blog Service Provider : Logdown。介紹請看這裡。Logdo...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:admins" content="577398551" />
+
+  
+  <link rel="canonical" href="http://blog.xdite.net/posts/2013/06/27/upgrade-rails4-danger/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/xxddite" rel="alternate" title="Blog.XDite.net" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+-->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/"><img src="/images/h1.png" alt="Blog.XDite.net"></a></h1>
+  
+    <h2>Ruby / Rails / Web Development</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/xxddite" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.xdite.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/talks"> Talks</a></li>
+  <li><a href="http://rails-101.logdown.com" target="_blank">Books</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">升級 Rails 4.0.0 停看聽</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-06-27T01:22:00+08:00" pubdate  data-updated="true" >Jun 27<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">
+  
+    <div class="FacebookLikeButton"><div class="fb-like" data-show-faces="false"></div></div>
+  
+  <p>TL; DR: Rails 4.0.0 有地雷，建議修完所有 depcrapted warning 再從 rc1, rc2 升級，不然會有大災難。</p>
+
+<p>上個禮拜跟同事做了個 Markdown Blog Service Provider : <a href="http://blog.logdown.com">Logdown</a>。介紹請看<a href="http://logdown.com/pages/about">這裡</a>。Logdown 是用 Rails 3.2.13 寫的。適逢昨日 <a href="http://weblog.rubyonrails.org/2013/6/25/Rails-4-0-final/">Rails 4.0.0 釋出</a>，於是手癢癢就想幫 Logdown 升級…</p>
+
+<p>上個月我曾經寫過兩篇文章：</p>
+
+<ul>
+<li><a href="http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/">Upgrade 到 Rails4 的一些感想</a></li>
+<li><a href="http://blog.xdite.net/posts/2013/05/04/rails4-new-feature/">Rails 4: New Feature, Better Syntax</a></li>
+</ul>
+
+
+<p>該踩的雷我都中過了，也知道怎麼 patch 常見的地雷，閃過去….</p>
+
+<p>不過我還是中箭了…orz</p>
+
+<h3>地雷一：強制 raise error</h3>
+
+<p>Rails 4 改變最大的有幾個重點：</p>
+
+<ol>
+<li>拿掉 attr_protected，改用 strong parameters</li>
+<li>scope 改用 -> {}</li>
+<li>routes 建議大家棄用 match ，而用更精確的 get , post</li>
+</ol>
+
+
+<p>well, 在 4.0.0 版，如果你還在用 match 的話，Rails 除了 warning message 還會直接 raise error。網站會直接跑不起來，而不是像 beta 的向下相容。而且一些行為也會強制禁掉，如 Logdown 其實有兩個 <code>root :to</code>，其中一個跑 contraint 偵測是否有 user 而導到後台。</p>
+
+<p>Rails 4 是直接禁掉這樣的 syntax 讓你跑不起來。</p>
+
+<p>不過這個還算好的警告手段。起碼直接爛掉有點 annoying，修好就可以了&#8230;.</p>
+
+<h3>地雷二：改變行為</h3>
+
+<p>這件事我真的覺得最扯&#8230;.。但也可以預見未來可能有一些災難發生。</p>
+
+<p>Rails 4 beta 建議大家 scope 改用 -> {}。並且有警告 Message 通知你必須改變，但撈出來的 query 還是向下相容，也就是執行結果是正確的。</p>
+
+<p>Rails 4.0.0 版 建議大家 scope 改用 -> {}。並且有警告 Message 通知你必須改變，<strong>但撈出來的 query 行為改變，也就是執行結果是錯誤的。</strong></p>
+
+<p>這件事讓到底有多嚴重，我的 <code>post.rb</code> 是這樣設計的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">AR</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span><span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而在 Logdown 的 Dashboard 裡面，我的後台 index action 是這樣設計的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Account</span><span class="o">::</span><span class="no">PostController</span> <span class="o">&lt;</span> <span class="no">AC</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="vi">@posts</span> <span class="o">=</span> <span class="n">current_users</span><span class="o">.</span><span class="n">posts</span><span class="o">.</span><span class="n">recent</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>正常的行為，生出來的 query 是這樣的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">11</span><span class="o">.</span><span class="mi">3</span><span class="n">ms</span><span class="p">)</span>  <span class="no">SELECT</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">*</span> <span class="no">FROM</span> <span class="sb">`posts`</span> <span class="no">WHERE</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">`user_id</span><span class="sb">` = 3 ORDER BY id DESC LIMIT 50 OFFSET 0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>到這邊都沒什麼問題。</p>
+
+<p>本來我改好程式，在 local 測一測看起來沒什麼問題，（ Rails 4 最大的改動通常是 update_attributes 會需要修，query 通常不太需要修）…也沒 raise error。還好我今晚是先 deploy 到 staging 去測。deploy 上去差一點噴茶&#8230;.</p>
+
+<p>我的 Dashboard 竟然出現了全站文章 ……orz…..WTF…</p>
+
+<p>在 local 重新測試才發現：</p>
+
+<p>如果你沒把 scope 改成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">AR</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:recent</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">order</span><span class="p">(</span><span class="s2">&quot;id DESC&quot;</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>那麼…在後台</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Account</span><span class="o">::</span><span class="no">PostController</span> <span class="o">&lt;</span> <span class="no">AC</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="vi">@posts</span> <span class="o">=</span> <span class="n">current_users</span><span class="o">.</span><span class="n">posts</span><span class="o">.</span><span class="n">recent</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>生出來的 query 會長這樣</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Post</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="mi">2</span><span class="n">ms</span><span class="p">)</span>  <span class="no">SELECT</span> <span class="sb">`posts`</span><span class="o">.</span><span class="n">*</span> <span class="no">FROM</span> <span class="sb">`posts`</span> <span class="no">ORDER</span> <span class="no">BY</span> <span class="nb">id</span> <span class="no">DESC</span> <span class="no">LIMIT</span> <span class="mi">50</span> <span class="no">OFFSET</span> <span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>齁齁，所有條件失效，撈全站文章給你。簡單的 query 都這樣，複雜的 query 我不敢想像。（ -> { } 的新預設寫法席卷了一大堆設計，而且一堆 plugin 還在用 舊 query … ）我已經可以預見這會產生多大的災難了&#8230;.</p>
+
+<p>重點是，你還不能回報這是 bug，畢竟人家都已經叫你換成 <code>-&gt; {}</code>，誰叫你不換勒？</p>
+
+<h3>地雷三：管太多…</h3>
+
+<p>我在 deploy 的時候，遇到 Asset compile 不過的狀況。sprockets 一直報錯：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Asset</span> <span class="n">logical</span> <span class="n">path</span> <span class="n">has</span> <span class="n">no</span> <span class="n">extension</span><span class="p">:</span> <span class="no">README</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>WTF，我從沒在之前的版本看過這個。在網路上搜尋了一下發現是這個 issue..:</p>
+
+<p><a href="https://github.com/sstephenson/sprockets/issues/347">https://github.com/sstephenson/sprockets/issues/347</a></p>
+
+<p>意思就是 sprockets 連你的 README 有沒有加 .txt 都要管啦 -_-。然後維護者不想修，叫大家自己去找 workround…</p>
+
+<p>所以如果你的 <code>app/assets/javascripts</code> <code>app/assets/stylesheets</code> 下如果有沒有副檔名的檔案，compile 就不會過。你會想說 not big deal，自己改成多加 .txt 或 .md 就好了…</p>
+
+<p>沒這麼簡單。一堆 3rd party 的 css / js ..不僅有 …..README…還有 LICENSE…還有 CHANGELOG….XDD</p>
+
+<p>齁齁齁，感覺很精彩了吧。沒關係，這都可以加 .txt。頂多是 CSS / JS 界的 repo 這陣子會被 Rails developer 群騷擾而已。更精彩的是 Makefile….這到底是要怎麼閃 XD</p>
+
+<p>( 剛剛網路上找 solution 看到一堆慘案 …)</p>
+
+<p>Bower 已經身亡，這裡是<a href="https://gist.github.com/afeld/5704079">解法</a></p>
+
+<h3>Summary</h3>
+
+<p>如果你是從 Rails 4.0.0beta1 或者是 Rails 4.0.0rc1 升級，務必停看聽…</p>
+
+<p>Rails 4.0.0 跟你想得很不一樣 …orz</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xdite</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-06-27T01:22:00+08:00" pubdate  data-updated="true" >Jun 27<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.xdite.net/posts/2013/06/27/upgrade-rails4-danger/" data-via="xdite" data-counturl="http://blog.xdite.net/posts/2013/06/27/upgrade-rails4-danger/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2013/06/27/upgrade-rails4-danger/">升級 Rails 4.0.0 停看聽</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2013/06/17/logdown-blogging-things-markdown/">Logdown - Blogging Things with Markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2013/06/02/rails-101-some-data/">[電子出版] Rails 101 的兩年來的一些數據</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2013/06/01/rails-101-in-rails4-and-ruby-2/">Rails 101 改版：支援 Rails 4 與 Ruby 2.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2013/05/20/jsdc-2013-slide/">Why F2E should learn Rails</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="popularthreads" class="dsq-widget">
+  <h2 class="dsq-widget-title">Popular Threads</h2>
+  <script type="text/javascript" src="http://xdite-wp-blog.disqus.com/popular_threads_widget.js?num_items=5"></script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - xdite -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    
+      var disqus_shortname = 'xdite-wp-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.xdite.net/posts/2013/06/27/upgrade-rails4-danger/';
+        var disqus_url = 'http://blog.xdite.net/posts/2013/06/27/upgrade-rails4-danger/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-537077-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
