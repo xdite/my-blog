@@ -4,7 +4,7 @@
   <title><![CDATA[Blog.XDite.net]]></title>
   <link href="http://blog.xdite.net/atom.xml" rel="self"/>
   <link href="http://blog.xdite.net/"/>
-  <updated>2013-06-27T02:09:02+08:00</updated>
+  <updated>2013-06-27T02:15:08+08:00</updated>
   <id>http://blog.xdite.net/</id>
   <author>
     <name><![CDATA[xdite]]></name>
@@ -32,7 +32,7 @@
 
 <p>該踩的雷我都中過了，也知道怎麼 patch 常見的地雷，閃過去….</p>
 
-<p>不過我膝蓋還是中了一箭了…orz</p>
+<p>不過我膝蓋還是中了好大一箭…orz</p>
 
 <h3>地雷一：強制 raise error</h3>
 
