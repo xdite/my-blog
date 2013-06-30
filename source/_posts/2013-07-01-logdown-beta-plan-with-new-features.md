@@ -73,7 +73,7 @@ categories:
 
 ### Octopress old syntax
 
-我們目前 porting 了 `codeblock` 與 `img` ，預計還會再支援下一個更重要的 `{% gist %}` 功能，敬請期待
+我們目前 porting 了 `codeblock` 與 `img` ，預計還會再支援下一個更重要的 `gist` 功能，敬請期待
 
 ### Latex Support 
 
