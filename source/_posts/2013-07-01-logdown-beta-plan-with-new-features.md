@@ -63,11 +63,10 @@ categories:
 
 {% codeblock %}
 
-``` css common.css.scss
+  ``` css common.css.scss
+    @import "reset";
 
-  @import "reset";
-
-```
+  ```
 {% endcodeblock %}
 
 ![octopress_code.png](https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/4Vy0B9xTmO9c5yipC3bs_octopress_code.png)
