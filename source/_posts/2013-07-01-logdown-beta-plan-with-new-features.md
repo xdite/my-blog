@@ -48,9 +48,9 @@ categories:
 
 ## 匯出功能
 
-如果哪一天你不喜歡 Logdown 想搬回 Ocotpress 了，我們也提供了全站打包下載功能，會把所有的文章打包匯出，郵寄到你的 email 裡面。
+如果哪一天你不喜歡 Logdown 想搬回 Octopress 了，我們也提供了全站打包下載功能，會把所有的文章打包匯出，郵寄到你的 email 裡面。
 
-目前的打包功能只有 Ocotopres Zip 匯出。我們預計在接下來的幾個禮拜測試與開發 Movable Type 的匯出。
+目前的打包功能只有 Octopres Zip 匯出。我們預計在接下來的幾個禮拜測試與開發 Movable Type 的匯出。
 
 ![blog_export.png](https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/y9qqzblpTQSxORrKdsRZ_blog_export.png)
 
