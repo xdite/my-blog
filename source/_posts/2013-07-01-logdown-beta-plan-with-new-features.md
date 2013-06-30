@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-真是一個刺激的 Hack 週末。自從 [Logdown](http://logdown.com) 在兩週前後推出，得到了不少好評，這股動力讓我們寫起 Feature 更加的賣力。
+真是一個刺激的 Hack 週末。自從 [Logdown](http://logdown.com) 在[兩週前推出](http://dev-xdworks.dev/posts/2013/06/17/logdown-blogging-things-markdown/)，得到了不少好評，這股動力讓我們寫起 Feature 更加的賣力。
 
 這個週末， [Logdown](http://logdown.com) 推出了更多功能以及 Beta Plan：
 
