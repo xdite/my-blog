@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  今天要在這裡推薦一部影集：HBO 拍攝的關於新聞從業界的影集 The Newsroom 「新聞急先鋒」。這部戲大概是在 6/24 左右才開始播的影集，原本是沒有去追的。直到幾天前有人作好了第一集開場的中文字幕，在 FB 流傳，因為氣勢過於震撼，所以才開始注意...">
+  <meta name="description" content="                  還記得年初才發生的 Github 被入侵事件 嗎？事件的起因是因為 Rails 內建的 mass assignment 機制，很容易被有心人利用這個漏洞入侵。原本的 attr_accessible / attr_protected 的設計並不足夠實務使用。在...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,142 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2012/08/12/strong-parameter-mass-assignment-solution/">Strong Parameter: Mass Assignment 機制的防彈衣</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-12T02:16:00+08:00" pubdate  data-updated="true" >Aug 12<span>th</span>, 2012</time>
+        
+         | <a href="/posts/2012/08/12/strong-parameter-mass-assignment-solution/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/08/12/strong-parameter-mass-assignment-solution/" data-show-faces="false"></div></div>
+    
+    <p>還記得年初才發生的 <a href="http://blog.xdite.net/posts/2012/03/05/github-hacked-rails-security/">Github 被入侵事件</a> 嗎？</p>
+
+<p>事件的起因是因為 Rails 內建的 mass assignment 機制，很容易被有心人利用這個漏洞入侵。</p>
+
+<p>原本的 attr_accessible / attr_protected 的設計並不足夠實務使用。在該事件發生後，Rails 核心團隊在 3.2.3 之後的版本，預設都開啟了 <code>config.whitelist_attributes = true</code> 的選項。</p>
+
+<p>也就是專案自動會對所有的 model 都自動開啟白名單模式，你必須手動對每一個 model 都加上 attr_accessible。這樣表單送值才會有辦法運作。</p>
+
+<p>這樣的舉動好處是：「夠安全」，能強迫開發者在設計表單時記得審核 model 該欄位是否適用於 mass-assign。</p>
+
+<p>但這樣的機制也引發開發者「不實用」「找麻煩」的議論。</p>
+
+<h3>問題 1: 新手容易踩中地雷</h3>
+
+<p>首先最麻煩的當然是，新手會被這一行設定整到。新手不知道此機制為何而來，出了問題也不知道如何關掉這個設定。更麻煩的是撰寫新手教學的人，必須又花上一大篇幅（就如同倒楣的我，想要幫 Rails 101 改版，結果內容無限追加）解釋 mass-assignment 的設計機制，為何重要，為何新手需要重視…etc.</p>
+
+<h3>問題 2: 不實用</h3>
+
+<p>手動一個一個加上 attr_accessible 真的很煩人，因為這也表示，若新增一個欄位，開發者也要手動去加上 attr_accessible，否則很可能在某些表單直接出現異常現象。</p>
+
+<p>而最麻煩的還是，其實 attr_accessible 不敷使用，因為一個系統通常存在不只一種角色，普通使用與 Admin 需要的 mass-assignment 範圍絕對不盡相同。</p>
+
+<p>雖然 Rails 在 3.1 加入了 <a href="http://enlightsolutions.com/articles/whats-new-in-edge-scoped-mass-assignment-in-rails-3-1">scoped mass assignment</a>。但這也只能算是 model 方面的解決手法。</p>
+
+<p>一旦系統內有更多其他流程需求，scoped mass assignment 的設計頓時就不夠解決問題了…</p>
+
+<h3>癥結點：欄位核准與否應該由 controller 管理，而非 model</h3>
+
+<p>大家戰了一陣子，終於收斂出一個結論。原來一切的癥結點在於之前的想法都錯了，欄位核准與否應該由 controller 決定。因為「流程需求」本來就應該作在 controller 裡面。wycats 當時也起草了一份<a href="https://gist.github.com/1974187">解法的 proposal</a>。日後打算以 plugin 方式釋出。</p>
+
+<h3>plugin：strong_parameter</h3>
+
+<p>現在 plugin 出來了。（其實出來很久了，只是我一直沒寫文章&#8230;) 就是 <a href="https://github.com/rails/strong_parameters/">strong_parameters</a> 。strong_parameters 的想法與 DHH <a href="https://gist.github.com/1975644">當時扔出來的想法</a> 相近。</p>
+
+<p>DHH 當時的作法</p>
+
+<div><script src='https://gist.github.com/1975644.js?file='></script>
+<noscript><pre><code>class PostsController &lt; ActionController::Base
+  def create
+    Post.create(post_params)
+  end
+  
+  def update
+    Post.find(params[:id]).update_attributes!(post_params)
+  end
+
+  private
+    def post_params
+      params[:post].slice(:title, :content)
+    end
+end</code></pre></noscript></div>
+
+
+<p>是使用 slice 去把真正需要的部分切出來，所以就算 hacker 打算送其他 parameter 也會被過濾掉(不會有 exception)。</p>
+
+<p>而 strong_parameters 的作法是必須過一段 permit，允許欄位。如果送不允許的欄位進來，會 throw exception。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PeopleController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">update</span>
+</span><span class='line'>    <span class="n">person</span><span class="o">.</span><span class="n">update_attributes!</span><span class="p">(</span><span class="n">person_params</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="ss">:back</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">person_params</span>
+</span><span class='line'>      <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:person</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:age</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安全多了，擴充性也比較大&#8230;</p>
+
+<h3>進階用法</h3>
+
+<p>當然，每一段 controller 都要來上這麼一段，有時候也挺煩人的。Railscast 也整理了一些<a href="http://railscasts.com/episodes/371-strong-parameters">進階招數</a>：</p>
+
+<ul>
+<li>Nested Attributes</li>
+<li>Orgngized to Class</li>
+</ul>
+
+
+<p>大家可以研究看看…</p>
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2514,154 +2650,6 @@ I think you should use an
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2012/05/12/the-startup-owners-manual-01/">The Startup Owner&#8217;s Manual 讀書心得（1）: 別再使用製造業思維搞 Startup</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-05-12T12:34:00+08:00" pubdate  data-updated="true" >May 12<span>th</span>, 2012</time>
-        
-         | <a href="/posts/2012/05/12/the-startup-owners-manual-01/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2012/05/12/the-startup-owners-manual-01/" data-show-faces="false"></div></div>
-    
-    <p>最近終於有時間坐下閱讀這本親自跑到美國帶回來的這本創業指南：<a href="http://www.amazon.com/The-Startup-Owners-Manual-Step-By-Step/dp/0984999302">The Startup Owner&#8217;s Manual: The Step-By-Step Guide for Building a Great Company</a>。這本書目前才僅僅看了 30 多頁，就讓我迫不及待的先寫下書的部分讀後整理，因為太過值回票價。</p>
-
-<p><img src="http://ecx.images-amazon.com/images/I/51t%2BbCeADNL._SL500_AA300_.jpg" alt="pic" /></p>
-
-<p>短短的 30 頁，卻花了快 3 個小時的時間閱讀，不是因為艱澀難懂，反而是因為這本書遍地都是許多真知洞見的見解與實例。一邊閱讀，眼前一邊湧上過去幾年的成功和失敗，很多時候我必須激動地停下閱讀，仔細反芻，才能繼續往下一章前進。</p>
-
-<p>很多過去讓我百思不解的疑惑，在這數小時激盪下，都一一撥雲見日。</p>
-
-<p>這本書第一章的標題是 The Path to Disaster: A Startup Is Not a Small Version of a Big Company。作者以一間 2000 年網路泡沫時代創立的大公司 Webvan ，從募集巨額資金/ IPO 不久後瞬間破產倒閉，當中所犯的種種錯誤，來解釋大部分的人在創辦企業時所犯的錯的致命程度。再藉機引出第二章：The Path to Epiphany: The Customer Development Model，作者對 Startup 的建立過程整理了自己的一套見解，他認為多數 Startup 必須要經過一段 Customer Development Model（有四個步驟），才能變成一家真正的 Company。</p>
-
-<h3>泡沫時代的 PChome 24hr : Webvan</h3>
-
-<p>Webvan 做的生意是 online ordering and same-day door-to-door grocery delivery 生意。若你不清楚這是什麼，把它想成 <a href="http://24h.pchome.com.tw/">PC home 24hr</a> 就對了。關於 Webvan 的失敗故事，網路上有不少篇的<a href="http://blog.caijing.com.cn/expert_article-151481-13870.shtml">紀錄文</a>。</p>
-
-<p>Webvan 的背景是讓人很羨慕的。在短短的時間內就募集了鉅量的資金，請到了很棒的 CEO。很多客戶也喜愛他們的服務。但是竟然在開業短短不到兩年的時間，就宣告破產倒閉了。到底發生什麼事？</p>
-
-<p>他們的問題不在於低落的執行能力，相反地 Webvan 一開始就打正規戰，使用了最普遍使用的 「New-product introduction model」方式擴展執行，並且徹底的往多數投資者所樂見的方向去：「先行者優勢」、「快速變大」。</p>
-
-<p>那為什麼還會失敗呢？而且還是這麼迅速的倒閉呢？因為 Webvan 略掉了一件相當重要的事？直接為這個公司帶來了死亡。</p>
-
-<h3>製造業的模式：New-product introduction model</h3>
-
-<p>在二十世紀，每個公司要在市場上推出一個新產品，都會使用一種固定的 product management model。這套模式很常被用在製造業上。</p>
-
-<h4>New-product introduction mode</h4>
-
-<p><code>Concept/ Seed</code> => <code>Product Development</code> => <code>Alpha/Beta Test</code> => <code>Launch / 1st Ship</code></p>
-
-<p>從一個簡單的想法作為出發點，然後進入產品開發階段，接著進行使用者測試，然後再推出市場。</p>
-
-<p>「New-product introduction model」很適合目前已經存在的「Company」所運行的模式，知道消費者長什麼樣子，spec 可以被容易的被列出寫下來，市場也被定義出來了，而且你可能也知道對手長什麼樣子。</p>
-
-<p>問題是，一般的「Startup」很少能符合這樣的標準。但是很多人還是堅持使用這種模式去進行產品開發、客戶尋找，甚至是對銷售計畫、上線、營收計畫制定時間表。然後大多數人都這樣掛掉了。</p>
-
-<p>這套模式到底哪裡有問題？又是怎樣讓 Webvan 爆掉的？</p>
-
-<h3>一去不回頭的瀑布模式</h3>
-
-<p>「New-product introduction model」的問題在於容易引發瀑布模式：</p>
-
-<p><code>Requirements</code> => <code>Design</code> => <code>Implementation</code> => <code>Verification</code> => <code>Maintenance</code></p>
-
-<p>整件事會開始變成這樣：從一個點子變成一本 Bussiness Plan。募到錢後開始招人，人都到位以後，作行銷 (Marketing) 的開始根據 Bussiness Plan 定義市場規模和首批客戶樣貌，舉辦幾場 focus group 對談，然後開始製作 MRD (market requirements document)，開始丟給 RD 團隊去作。</p>
-
-<h4>Product Development 階段</h4>
-
-<p>作行銷 (Marketing) 的繼續準備 sales demo、行銷材料，雇用公關公司。在這個階段，通常公司還會跑去雇用一個業務副總。</p>
-
-<p>同時，RD 團隊會集中火力在制定詳細規格，開發產品。他們的重點會擺在如何在一個定義好的有限集合內，降低工程上的風險。接著就是 18-24 個月的開發期。</p>
-
-<p>在 Webvan 的這個 case 中。就是去蓋自動化倉庫，買各式各樣的輸送設備。開發自己的儲存系統、倉庫、路線管理系統…etc.</p>
-
-<p>而行銷團隊這時候會開始準備圍繞著 Webvan 這個品牌的行銷以及促銷活動，第一批客戶的嘗試體驗，建立客戶忠實度，如何最大化回頭率和單次購買金額。</p>
-
-<h4>Alpha/Beta Test 階段</h4>
-
-<p>RD 團隊開始測試這套系統運作有沒有問題。行銷團隊忙著制定整套市場溝通策略（建立公司網站、建立業務 sales kit..etc.）。然後公關公司開始聯絡媒體、部落格…</p>
-
-<p>業務團隊開始跟第一批 beta 用戶（當初自願加入嘗試新產品計畫的用戶）簽約。業務主管開始絞盡腦汁的在研究如何達成當初根據 bussiness plan 定的營利計畫。</p>
-
-<h4>Launch / 1st Ship 階段</h4>
-
-<p>隨著產品開始商轉，公司朝向一個「big-bang」式的花錢模式。舉辦 press event，建花大錢建立全國性的業務組織、業務管道。董事會開始根據銷售執行率來衡量公司績效。</p>
-
-<p>這些都是正規軍作法，但無疑的，都很燒錢。特別是在建立銷售管道和繼續支撐行銷計畫。</p>
-
-<h3>花光錢死亡</h3>
-
-<p>故事的結局非常不新鮮如同大家當初預料的一樣：</p>
-
-<ul>
-<li>上線之後開始發現當初預先設想的流程不符合實際需求</li>
-<li>行銷計畫過於花錢</li>
-<li>忙著擴張市場卻一天到晚作賠本生意</li>
-<li>客戶群開始逐漸萎縮但公司視若無堵的繼續擴張計畫</li>
-</ul>
-
-
-<p>最後公司錢花完倒閉了。</p>
-
-<h3>The 9 Deadly Sins of New Product Introduction Model</h3>
-
-<p>作者從 Webvan 的故事中，整理歸納了九宗罪，點出 「New-product introduction model」 所隱含的致命風險。點出了一般 Startup 常犯的重大缺失。</p>
-
-<p>他點出了很重要的一點，其實大多數的 Startup，特別是網路業，不應該使用「New-product introduction model」去推出自己的產品。而是必須要用 Customer Development Model 去穩固打下基礎，從 Startup 轉型成 Company。</p>
-
-<p>「New-product introduction model」有非常大的機率，會讓一個 Startup 從車站一開始出發，終點就注定是地獄。</p>
-
-<p>這九宗罪是：</p>
-
-<ol>
-<li>Assuming &#8220;I Know What the Customer Wants&#8221;</li>
-<li>The &#8220;I Know What Features to Build&#8221; Flaw</li>
-<li>Focus on Launch Date</li>
-<li>Emphasis on Execution Instead of Hypotheses, Testing, Learning, and Iteration</li>
-<li>Traditional Business Plans Presume No Trial and No Errors</li>
-<li>Confusing Tradition Job Titles with What a Startup Needs to Accomplish</li>
-<li>Sales and Marketing Execute to a Plan</li>
-<li>Presumption of Success Leads to Premature Scaling</li>
-<li>Management by Crisis Leads to a Death Spiral</li>
-</ol>
-
-
-<p>我會在下一篇讀書心得中，仔細整理這九宗罪的詳細內容。這九宗罪又是如何搞垮一個 Startup 的。</p>
-
-<p><a href="http://blog.xdite.net/posts/2012/05/12/the-startup-owners-manual-01/">The Startup Owner’s Manual 讀書心得（1）: 別再使用製造業思維搞 Startup</a>
-<a href="http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/">The Startup Owner’s Manual 讀書心得（2）: New-product Introduction Model 致命的九宗罪</a></p>
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -2696,6 +2684,10 @@ I think you should use an
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/07/01/logdown-beta-plan-with-new-features/">Logdown Beta Plan 與 新功能 : Custom Doman, File Upload, Latex Support &#8230;</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2013/06/27/upgrade-rails4-danger/">升級 Rails 4.0.0 停看聽</a>
       </li>
     
@@ -2709,10 +2701,6 @@ I think you should use an
     
       <li class="post">
         <a href="/posts/2013/06/01/rails-101-in-rails4-and-ruby-2/">Rails 101 改版：支援 Rails 4 與 Ruby 2.0</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/05/20/jsdc-2013-slide/">Why F2E should learn Rails</a>
       </li>
     
   </ul>

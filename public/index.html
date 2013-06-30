@@ -9,7 +9,7 @@
   <meta name="author" content="xdite">
 
   
-  <meta name="description" content="                  TL; DR: Rails 4.0.0 有地雷，建議修完所有 depcrapted warning 再從 rc1, rc2 升級，不然會有大災難。上個禮拜跟同事做了個 Markdown Blog Service Provider : Logdown。介紹請看...">
+  <meta name="description" content="                  真是一個刺激的 Hack 週末。自從 Logdown 在兩週前後推出，得到了不少好評，這股動力讓我們寫起 Feature 更加的賣力。這個週末，我們推出了更多功能以及 Beta Plan：首先是Custom Domain ( Beta / Preinum r...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,143 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2013/07/01/logdown-beta-plan-with-new-features/">Logdown Beta Plan 與 新功能 : Custom Doman, File Upload, Latex Support &#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-07-01T01:45:00+08:00" pubdate  data-updated="true" >Jul 1<span>st</span>, 2013</time>
+        
+         | <a href="/posts/2013/07/01/logdown-beta-plan-with-new-features/#disqus_thread">Comments</a>
+        
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+    
+      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2013/07/01/logdown-beta-plan-with-new-features/" data-show-faces="false"></div></div>
+    
+    <p>真是一個刺激的 Hack 週末。自從 <a href="http://logdown.com">Logdown</a> 在兩週前後推出，得到了不少好評，這股動力讓我們寫起 Feature 更加的賣力。</p>
+
+<p>這個週末，我們推出了更多功能以及 Beta Plan：</p>
+
+<p>首先是</p>
+
+<h2>Custom Domain ( Beta / Preinum required )</h2>
+
+<p>大家期待已久的功能 Custom Domain 功能</p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/xPnFPKoRoCAUfiVCLsHN_custom_domain.png" alt="custom_domain.png" /></p>
+
+<h2>Octopres Import ( Beta required )</h2>
+
+<p>可以把 原先的 Octopress 文章壓縮打包成 zip 後，無痛匯入 Logdown 裡面。我們預計在接下來的幾個禮拜測試 Wordpress 與 Movable Type 的匯入</p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/wbO96xUlQQa0zHydnTKH_octopress_import.png" alt="octopress_import.png" /></p>
+
+<h2>Custom Handle &amp; Custom URL</h2>
+
+<p>支援原先的 Octopress URL</p>
+
+<p>綜合 Custom Domain / Octopres Import  / Custom Handle &amp; Custom URL 這三項。基本上把 Octopress 搬過來應該沒什麼問題了&#8230;</p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/vZwutL0lRhaBG4EjNJVU_custom_handle.png" alt="custom_handle.png" /></p>
+
+<h2>File Uploader ( Beta / Preinum required )</h2>
+
+<p>很多朋友一直在問的 File 上傳功能，我們在週末也完成了。目前 Logdown 支援 File drag &amp; drop upload, Flickr, Instagram, Facebook Photo, Picasa, Dropbox Upload!!!! （其實還有更多&#8230;）</p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/2W7wmLLKSMurz9uVNFLF_file_uploader.png" alt="file_uploader.png" /></p>
+
+<p>目前暫定 Beta 是 <code>100 mb</code>，Prenium Plan 會是 <code>10GB</code>。</p>
+
+<h2>單篇 Markdown 下載</h2>
+
+<p>如果只喜歡我們的 Editor 也沒關係，我們支援在 <a href="http://logdown.com">Logdown</a> 寫完再下載回家貼到 Octopress，但是如果你可以考慮 <code>搬家</code> 那就更好了。</p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/lCabxuufTrGGuZ8rAMnt_markdown_export.png" alt="markdown_export.png" /></p>
+
+<h2>匯出功能</h2>
+
+<p>如果哪一天你不喜歡 Logdown 想搬回 Ocotpress 了，我們也提供了全站打包下載功能，會把所有的文章打包匯出，郵寄到你的 email 裡面。</p>
+
+<p>目前的打包功能只有 Ocotopres Zip 匯出。我們預計在接下來的幾個禮拜測試與開發 Movable Type 的匯出。</p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/y9qqzblpTQSxORrKdsRZ_blog_export.png" alt="blog_export.png" /></p>
+
+<h2>更多 syntax ( Especially for Hacker and Scienist )</h2>
+
+<h3>Octopress Style Code Block &#8230;</h3>
+
+<p>是的，我們支援了 Octopress 特有的 code block 寫法，會有 Caption&#8230;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;div class='bogus-wrapper'>&lt;notextile>&lt;figure class='code'>&lt;figcaption>&lt;span>common.css.scss&lt;/span>&lt;/figcaption>&lt;div class="highlight">&lt;table>&lt;tr>&lt;td class="gutter">&lt;pre class="line-numbers">&lt;span class='line-number'>1&lt;/span>
+</span><span class='line'>&lt;/pre>&lt;/td>&lt;td class='code'>&lt;pre>&lt;code class='css'>&lt;span class='line'>  &lt;span class="k">@import&lt;/span> &lt;span class="s2">&quot;reset&quot;&lt;/span>&lt;span class="p">;&lt;/span>
+</span><span class='line'>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>&lt;/div>&lt;/figure>&lt;/notextile>&lt;/div></span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/4Vy0B9xTmO9c5yipC3bs_octopress_code.png" alt="octopress_code.png" /></p>
+
+<h3>Octopress old syntax</h3>
+
+<p>我們目前 porting 了 <code>codeblock</code> 與 <code>img</code> ，預計還會再支援下一個更重要的 &#8220; 功能，敬請期待</p>
+
+<h3>Latex Support</h3>
+
+<p>是的，我們喪心病狂的支援了 Latex 語法。你可以透過加入 <code>mathjax</code> 來顯示 Latex 語法。而且直接可以在預覽裡面看到結果！！！</p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/oPSZt3J2RGCPzteMwaP6_latex_support.png" alt="latex_support.png" /></p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/yKncEngfSbKHrPe86QVK_latex_support2.png" alt="latex_support2.png" /></p>
+
+<h2>後續計畫：Beta &amp; Preinum Plan</h2>
+
+<p>這兩週我們收到不少朋友的鼓勵與支持，所以我們很認真嚴肅的決定將繼續維護這個產品，而不只是一個 Hackathon 的 pet project。我本人的 blog 部落格也會在近期之內就搬到 Logdown 上。</p>
+
+<p><a href="http://logdown.com">Logdown</a> 之後將會有 Preinum 收費的計畫。我們預計的收費計畫將會是 49 USD / year。為了感謝這段期間參與測試的朋友，在八月底前升級 Beta Membership 在轉換為 Preinum 時，我們將只會收取 24.95 USD 的費用。</p>
+
+<p><img src="https://s3.amazonaws.com/logdown-production/user/1/blog/1/post/1815/HfPyJ5Q3RcGe4OOmT4br_beta.png" alt="beta.png" /></p>
+
+<p>以上宣布的這些 Advanced Feature，你可以在後台中找到<a href="http://logdown.com/account/settings/plan">升級頁面</a>，Upgrade 成 Beta 後進行使用。</p>
+
+<h2>追蹤我們</h2>
+
+<p>你可以透過這兩個管道取得 Logdown 的最新消息。我們也會在重大 Feature 推出時，寫信通知大家。</p>
+
+<ul>
+<li><a href="http://logdown.com">Logdown 官方部落格</a></li>
+<li><a href="http://twitter.com/logdowninc">Twitter:@logdowninc</a></li>
+<li>Support Email <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#108;&#x6f;&#x67;&#100;&#x6f;&#119;&#110;&#64;&#114;&#111;&#x63;&#111;&#100;&#x65;&#x76;&#46;&#x63;&#x6f;&#x6d;">&#108;&#x6f;&#103;&#x64;&#111;&#119;&#110;&#64;&#x72;&#x6f;&#x63;&#111;&#x64;&#101;&#118;&#x2e;&#99;&#111;&#x6d;</a></li>
+</ul>
+
+
+  </div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1337,68 +1474,6 @@ Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2013/05/04/upgrade-to-rails4/">Upgrade 到 Rails4 的一些感想</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-05-04T13:27:00+08:00" pubdate  data-updated="true" >May 4<span>th</span>, 2013</time>
-        
-         | <a href="/posts/2013/05/04/upgrade-to-rails4/#disqus_thread">Comments</a>
-        
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-    
-      <div class="FacebookLikeButton"><div class="fb-like" data-href="http://blog.xdite.net/posts/2013/05/04/upgrade-to-rails4/" data-show-faces="false"></div></div>
-    
-    <p><img src="http://www.upgradingtorails4.com/ipad_sized.jpg" alt="img" /></p>
-
-<p>Rails4 在前天的 <a href="http://www.railsconf.com/">RailsConf 2013</a> 釋出 <a href="http://weblog.rubyonrails.org/2013/5/1/Rails-4-0-release-candidate-1/">Rails 4.0 RC1</a> 了，這也表示大家應該可以進場了。</p>
-
-<p>上個月在 Rails 4.0 beta1 時為了練手感，把手上的一個中小 production 專案，也上了 rails4 branch。</p>
-
-<p>大概有幾個感想：</p>
-
-<ul>
-<li><p><a href="http://www.upgradingtorails4.com/">Upgrading to Rails4</a> 這本書強烈建議要買，才 $15 USD，可以節省你不少 debug 時間。</p></li>
-<li><p>升 Rails4 建議不只開 branch，也用 rvm 開一個 gemset 出來作，因為 gem dependency 變更蠻多的。</p></li>
-<li><p><a href="https://github.com/alindeman/rails4_upgrade">rails4_upgrade</a> 要裝。這個 gem 蠻好用的..可以幫你掃 dependency 問題。事實上 Rails3 升 Rails4 最討厭的是 gem dependency tree，因為 Rails 3 已經出太久了（幾乎快兩年了吧)，很多 Gemfile 都強綁定 3 ，所以升 Gemfile 時會出現很多問題&#8230;</p></li>
-<li><p>major gem，如 simple_form, devise, 幾乎都有 beta1 版，裝了就保證可以動。小的 gem 也幾乎都有 rails4 branch 可以 hotfix。(起碼我在 beta1 進場時遇到的問題就幾乎都有解，所以在 rc1 的狀況應該會更好)</p></li>
-<li><p>這次 Rails4 的改動，我個人的感想會是 Rails3 的 New Feature, Better syntax Version。如果平常 code 都寫的蠻漂亮（接口和封裝乾淨）的話，升級應該是沒有太痛才對。唯一讓人很煩的就是 gem dependency 解不完，還有牽扯到 scope 與 query 的部份幾乎都要重寫..:/ （目前是都還跳 warning 而已，但真要清 warning，如果 model 裡面 condition 很多，真的會清到手快斷&#8230;）</p></li>
-<li><p>有關於 New Feature 與 Better syntax 這個議題，我應該週末會寫一篇出來..</p></li>
-<li><p>Rails project 的本體內容物是沒有改動太大，但大家拿來 build gem 的 internal API 改不少，這也難怪 Jose Valim 這一兩天也同步釋出了 <a href="http://pragprog.com/book/jvrails2/crafting-rails-applications">Crafting Rails Applications (2nd edition): Expert Practices for Everyday Rails Development</a> 第二版的 beta。我這幾天改 gem 要升 Rails4 也是中了一堆 api 變更的地雷…</p></li>
-<li><p>會逼大家都改 gem 的原因是因為是，連 migration api 都改了，所以只要提供產生 migration 的 gem 通通會逼要升 Rails4，真是個好招 -_- （連我只有兩個 commit 的 AutoFacebook gem 也不能倖免。解法在<a href="https://github.com/xdite/auto-facebook/commit/2e21a3fd1884c6eec7856b849d811b1d9b168502">這裡</a> ）</p></li>
-<li><p>Obie Fernandez 前天也宣布了 Rails 聖經 <a href="https://leanpub.com/tr4w">The Rails 4 Way</a>開始 beta。值得注意的是他這次是使用 <a href="leanpub.com">Leanpub</a> 釋出書籍的 beta，而非走 <a href="http://www.informit.com/">Informit</a> 的 RoughCut 版本。</p></li>
-<li><p>為什麼我有時間測這些東西？好問題，我也不知道…明明最近就忙到快死了&#8230;orz</p></li>
-</ul>
-
-
-  </div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -1431,6 +1506,10 @@ Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/07/01/logdown-beta-plan-with-new-features/">Logdown Beta Plan 與 新功能 : Custom Doman, File Upload, Latex Support &#8230;</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2013/06/27/upgrade-rails4-danger/">升級 Rails 4.0.0 停看聽</a>
       </li>
     
@@ -1444,10 +1523,6 @@ Phusion Passenger (modrails), Mono Project, Prey Project, Pastie, Sucuri, Hak5, 
     
       <li class="post">
         <a href="/posts/2013/06/01/rails-101-in-rails4-and-ruby-2/">Rails 101 改版：支援 Rails 4 與 Ruby 2.0</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/05/20/jsdc-2013-slide/">Why F2E should learn Rails</a>
       </li>
     
   </ul>
